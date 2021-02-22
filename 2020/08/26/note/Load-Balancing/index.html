@@ -1,0 +1,773 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  <title>Load Balancing - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>麦奇</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/todo/">
+                <i class="iconfont icon-plan"></i>
+                代办
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Load Balancing">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Mikey
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-08-26 17:43" pubdate>
+        2020年8月26日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      51
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Load Balancing</h1>
+            
+            <div class="markdown-body">
+              <h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h1><blockquote>
+<p>负载均衡 建立在现有网络结构之上,它提供了一种廉价有效透明的方法扩展 网络设备 和 服务器 的带宽、增加 吞吐量 、加强网络数据处理能力、提高网络的灵活性和可用性。</p>
+</blockquote>
+<h2 id="四层负载均衡-vs-七层负载均衡"><a href="#四层负载均衡-vs-七层负载均衡" class="headerlink" title="四层负载均衡 vs 七层负载均衡"></a>四层负载均衡 vs 七层负载均衡</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/4-layer-vs-7-layer.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>四层负载均衡(目标地址和端口交换)<br>主要通过报文中的目标地址和端口,再加上负载均衡设备设置的服务器选择方式,决定最终选择的内部服务器。</p>
+<p>以常见的 TCP 为例,负载均衡设备在接收到第一个来自客户端的 SYN 请求时,即通过上述方式选择一个最佳的服务器,并对报文中目标 IP 地址进行修改(改为后端服务器 IP),直接转发给该服务器。TCP 的连接建立,即三次握手是客户端和服务器直接建立的,负载均衡设备只是起到一个类似路由器的转发动作。在某些部署情况下,为保证服务器回包可以正确返回给负载均衡设备,在转发报文的同时可能还会对报文原来的源地址进行修改。实现四层负载均衡的软件有:</p>
+<ul>
+<li>F5 :硬件负载均衡器,功能很好,但是成本很高。</li>
+<li>lvs :重量级的四层负载软件。</li>
+<li>nginx :轻量级的四层负载软件,带缓存功能,正则表达式较灵活。</li>
+<li>haproxy :模拟四层转发,较灵活。</li>
+</ul>
+<h1 id="七层负载均衡-内容交换"><a href="#七层负载均衡-内容交换" class="headerlink" title="七层负载均衡(内容交换)"></a>七层负载均衡(内容交换)</h1><blockquote>
+<p>所谓七层负载均衡,也称为“内容交换”,也就是主要通过报文中的真正有意义的应用层内容,再加上负载均衡设备设置的服务器选择方式,决定最终选择的内部服务器。<br>七层应用负载的好处,是使得整个网络更智能化。例如访问一个网站的用户流量,可以通过七层的方式,将对图片类的请求转发到特定的图片服务器并可以使用缓存技术;将对文字类的请求可<br>以转发到特定的文字服务器并可以使用压缩技术。</p>
+</blockquote>
+<p>实现七层负载均衡的软件有:</p>
+<ul>
+<li>haproxy :天生负载均衡技能,全面支持七层代理,会话保持,标记,路径转移;</li>
+<li>nginx :只在 http 协议和 mail 协议上功能比较好,性能与 haproxy 差不多;</li>
+<li>apache :功能较差</li>
+<li>Mysql proxy :功能尚可。</li>
+</ul>
+<h1 id="负载均衡算法-策略"><a href="#负载均衡算法-策略" class="headerlink" title="负载均衡算法/策略"></a>负载均衡算法/策略</h1><h2 id="轮循均衡-Round-Robin"><a href="#轮循均衡-Round-Robin" class="headerlink" title="轮循均衡(Round Robin)"></a>轮循均衡(Round Robin)</h2><blockquote>
+<p>每一次来自网络的请求轮流分配给内部中的服务器,从 1 至 N 然后重新开始。此种均衡算法适合于服务器组中的所有服务器都有相同的软硬件配置并且平均服务请求相对均衡的情况。</p>
+</blockquote>
+<h2 id="权重轮循均衡-Weighted-Round-Robin"><a href="#权重轮循均衡-Weighted-Round-Robin" class="headerlink" title="权重轮循均衡(Weighted Round Robin)"></a>权重轮循均衡(Weighted Round Robin)</h2><blockquote>
+<p>根据服务器的不同处理能力,给每个服务器分配不同的权值,使其能够接受相应权值数的服务请求。例如:服务器 A 的权值被设计成 1,B 的权值是 3,C 的权值是 6,则服务器 A、B、C 将分别接受到 10%、30%、60%的服务请求。此种均衡算法能确保高性能的服务器得到更多的使用率,避免低性能的服务器负载过重。</p>
+</blockquote>
+<h2 id="随机均衡-Random"><a href="#随机均衡-Random" class="headerlink" title="随机均衡(Random)"></a>随机均衡(Random)</h2><blockquote>
+<p>把来自网络的请求随机分配给内部中的多个服务器。</p>
+</blockquote>
+<h2 id="权重随机均衡-Weighted-Random"><a href="#权重随机均衡-Weighted-Random" class="headerlink" title="权重随机均衡(Weighted Random)"></a>权重随机均衡(Weighted Random)</h2><blockquote>
+<p>此种均衡算法类似于权重轮循算法,不过在处理请求分担时是个随机选择的过程。</p>
+</blockquote>
+<h2 id="响应速度均衡-Response-Time-探测时间"><a href="#响应速度均衡-Response-Time-探测时间" class="headerlink" title="响应速度均衡(Response Time 探测时间)"></a>响应速度均衡(Response Time 探测时间)</h2><blockquote>
+<p>负载均衡设备对内部各服务器发出一个探测请求(例如 Ping),然后根据内部中各服务器对探测请求的最快响应时间来决定哪一台服务器来响应客户端的服务请求。此种均衡算法能较好的反映服务器的当前运行状态,但这最快响应时间仅仅指的是负载均衡设备与服务器间的最快响应时间,而不是客户端与服务器间的最快响应时间。</p>
+</blockquote>
+<h2 id="最少连接数均衡-Least-Connection"><a href="#最少连接数均衡-Least-Connection" class="headerlink" title="最少连接数均衡(Least Connection)"></a>最少连接数均衡(Least Connection)</h2><blockquote>
+<p>最少连接数均衡算法对内部中需负载的每一台服务器都有一个数据记录,记录当前该服务器正在处理的连接数量,当有新的服务连接请求时,将把当前请求分配给连接数最少的服务器,使均衡更加符合实际情况,负载更加均衡。此种均衡算法适合长时处理的请求服务,如 FTP。</p>
+</blockquote>
+<h2 id="处理能力均衡-CPU、内存"><a href="#处理能力均衡-CPU、内存" class="headerlink" title="处理能力均衡(CPU、内存)"></a>处理能力均衡(CPU、内存)</h2><blockquote>
+<p>此种均衡算法将把服务请求分配给内部中处理负荷(根据服务器 CPU 型号、CPU 数量、内存大小及当前连接数等换算而成)最轻的服务器,由于考虑到了内部服务器的处理能力及当前网络运行状况,所以此种均衡算法相对来说更加精确,尤其适合运用到第七层(应用层)负载均衡的情况下。</p>
+</blockquote>
+<h2 id="DNS-响应均衡-Flash-DNS"><a href="#DNS-响应均衡-Flash-DNS" class="headerlink" title="DNS 响应均衡(Flash DNS)"></a>DNS 响应均衡(Flash DNS)</h2><blockquote>
+<p>在此均衡算法下,分处在不同地理位置的负载均衡设备收到同一个客户端的域名解析请求,并在同一时间内把此域名解析成各自相对应服务器的 IP 地址并返回给客户端,则客户端将以最先收到的域名解析 IP 地址来继续请求服务,而忽略其它的 IP 地址响应。在种均衡策略适合应用在全局负载均衡的情况下,对本地负载均衡是没有意义的。</p>
+</blockquote>
+<h2 id="哈希算法"><a href="#哈希算法" class="headerlink" title="哈希算法"></a>哈希算法</h2><blockquote>
+<p>一致性哈希一致性 Hash,相同参数的请求总是发到同一提供者。当某一台提供者挂时,原本发往该提供者的请求,基于虚拟节点,平摊到其它提供者,不会引起剧烈变动。</p>
+</blockquote>
+<h2 id="IP-地址散列-保证客户端服务器对应关系稳定"><a href="#IP-地址散列-保证客户端服务器对应关系稳定" class="headerlink" title="IP 地址散列(保证客户端服务器对应关系稳定)"></a>IP 地址散列(保证客户端服务器对应关系稳定)</h2><blockquote>
+<p>通过管理发送方 IP 和目的地 IP 地址的散列,将来自同一发送方的分组(或发送至同一目的地的分组)统一转发到相同服务器的算法。当客户端有一系列业务需要处理而必须和一个服务器反复通信时,该算法能够以流(会话)为单位,保证来自相同客户端的通信能够一直在同一服务器中进行处理。</p>
+</blockquote>
+<h2 id="URL-散列"><a href="#URL-散列" class="headerlink" title="URL 散列"></a>URL 散列</h2><blockquote>
+<p>通过管理客户端请求 URL 信息的散列,将发送至相同 URL 的请求转发至同一服务器的算法。</p>
+</blockquote>
+<h1 id="LVS"><a href="#LVS" class="headerlink" title="LVS"></a>LVS</h1><h2 id="LVS-原理"><a href="#LVS-原理" class="headerlink" title="LVS 原理"></a>LVS 原理</h2><h3 id="IPVS"><a href="#IPVS" class="headerlink" title="IPVS"></a>IPVS</h3><p>LVS 的 IP 负载均衡技术是通过 IPVS 模块来实现的,IPVS 是 LVS 集群系统的核心软件,它的主要作用是:安装在 Director Server 上,同时在 Director Server 上虚拟出一个 IP 地址,用户必须通过这个虚拟的 IP 地址访问服务器。这个虚拟 IP 一般称为 LVS 的 VIP,即 Virtual IP。访问的请求首先经过 VIP 到达负载调度器,然后由负载调度器从 Real Server 列表中选取一个服务节点响应用户的请求。 在用户的请求到达负载调度器后,调度器如何将请求发送到提供服务的 Real Server 节点,而 Real Server 节点如何返回数据给用户,是 IPVS 实现的重点技术。</p>
+<blockquote>
+<p>ipvs : 工作于内核空间,主要用于使用户定义的策略生效</p>
+</blockquote>
+<blockquote>
+<p>ipvsadm : 工作于用户空间,主要用于用户定义和管理集群服务的工具</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/lvs.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>ipvs 工作于内核空间的 INPUT 链上,当收到用户请求某集群服务时,经过 PREROUTING 链,经检查本机路由表,送往 INPUT 链;在进入 netfilter 的 INPUT 链时,ipvs 强行将请求报文通过ipvsadm 定义的集群服务策略的路径改为 FORWORD 链,将报文转发至后端真实提供服务的主机。</p>
+<p>LVS NAT 模式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/lvs-nat.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>1.客户端将请求发往前端的负载均衡器,请求报文源地址是 CIP(客户端 IP),后面统称为 CIP),目标地址为 VIP(负载均衡器前端地址,后面统称为 VIP)。<br>2.负载均衡器收到报文后,发现请求的是在规则里面存在的地址,那么它将客户端请求报文的目标地址改为了后端服务器的 RIP 地址并将报文根据算法发送出去。<br>3.报文送到 Real Server 后,由于报文的目标地址是自己,所以会响应该请求,并将响应报文返还给 LVS。<br>4.然后 lvs 将此报文的源地址修改为本机并发送给客户端。</p>
+<p>[注意]:在 NAT 模式中,Real Server 的网关必须指向 LVS,否则报文无法送达客户端</p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点:"></a>特点:</h4><p>1、NAT 技术将请求的报文和响应的报文都需要通过 LB 进行地址改写,因此网站访问量比较大的时候 LB 负载均衡调度器有比较大的瓶颈,一般要求最多之能 10-20 台节点<br>2、只需要在 LB 上配置一个公网 IP 地址就可以了。<br>3、每台内部的 realserver 服务器的网关地址必须是调度器 LB 的内网地址。<br>4、NAT 模式支持对 IP 地址和端口进行转换。即用户请求的端口和真实服务器的端口可以不一致。</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点:"></a>优点:</h4><p>集群中的物理服务器可以使用任何支持 TCP/IP 操作系统,只有负载均衡器需要一个合法的 IP 地址。</p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点:"></a>缺点:</h4><p>扩展性有限。当服务器节点(普通 PC 服务器)增长过多时,负载均衡器将成为整个系统的瓶颈,因为所有的请求包和应答包的流向都经过负载均衡器。当服务器节点过多时,大量的数据包都交汇在负载均衡器那,速度就会变慢!</p>
+<h2 id="LVS-DR-模式-局域网改写-mac-地址"><a href="#LVS-DR-模式-局域网改写-mac-地址" class="headerlink" title="LVS DR 模式(局域网改写 mac 地址)"></a>LVS DR 模式(局域网改写 mac 地址)</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/lvs-dr.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>1.客户端将请求发往前端的负载均衡器,请求报文源地址是 CIP,目标地址为 VIP。<br>2.负载均衡器收到报文后,发现请求的是在规则里面存在的地址,那么它将客户端请求报文的源MAC 地址改为自己 DIP 的 MAC 地址,目标 MAC 改为了 RIP 的 MAC 地址,并将此包发送给 RS。<br>3.RS 发现请求报文中的目的 MAC 是自己,就会将次报文接收下来,处理完请求报文后,将响应报文通过 lo 接口送给 eth0 网卡直接发送给客户端。<br>注意:需要设置 lo 接口的 VIP 不能响应本地网络内的 arp 请求。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h4><p>1、通过在调度器 LB 上修改数据包的目的 MAC 地址实现转发。注意源地址仍然是 CIP,目的地址仍然是 VIP 地址。<br>2、请求的报文经过调度器,而 RS 响应处理后的报文无需经过调度器 LB,因此并发访问量大时使用效率很高(和 NAT 模式比)<br>3、因为 DR 模式是通过 MAC 地址改写机制实现转发,因此所有 RS 节点和调度器 LB 只能在一个局域网里面<br>4、RS 主机需要绑定 VIP 地址在 LO 接口(掩码 32 位)上,并且需要配置 ARP 抑制。<br>5、RS 节点的默认网关不需要配置成 LB,而是直接配置为上级路由的网关,能让 RS 直接出网就可以。<br>6、由于 DR 模式的调度器仅做 MAC 地址的改写,所以调度器 LB 就不能改写目标端口,那么 RS服务器就得使用和 VIP 相同的端口提供服务。<br>7、直接对外的业务比如 WEB 等,RS 的 IP 最好是使用公网 IP。对外的服务,比如数据库等最好使用内网 IP。</p>
+<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点:"></a>优点:</h4><p>和 TUN(隧道模式)一样,负载均衡器也只是分发请求,应答包通过单独的路由方法返回给客户端。与 VS-TUN 相比,VS-DR 这种实现方式不需要隧道结构,因此可以使用大多数操作系统做为物理服务器。DR 模 式 的 效 率 很 高 , 但 是 配 置 稍 微 复 杂 一 点 , 因 此 对 于 访 问 量 不 是 特 别 大 的 公 司 可 以 用haproxy/nginx 取代。日 1000-2000W PV 或者并发请求 1 万一下都可以考虑用 haproxy/nginx。</p>
+<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点:"></a>缺点:</h4><p>所有 RS 节点和调度器 LB 只能在一个局域网里面</p>
+<h2 id="LVS-TUN-模式-IP-封装、跨网段"><a href="#LVS-TUN-模式-IP-封装、跨网段" class="headerlink" title="LVS TUN 模式(IP 封装、跨网段)"></a>LVS TUN 模式(IP 封装、跨网段)</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/lvs-tun.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>1.客户端将请求发往前端的负载均衡器,请求报文源地址是 CIP,目标地址为 VIP。<br>2.负载均衡器收到报文后,发现请求的是在规则里面存在的地址,那么它将在客户端请求报文的首部再封装一层 IP 报文,将源地址改为 DIP,目标地址改为 RIP,并将此包发送给 RS。<br>3.RS 收到请求报文后,会首先拆开第一层封装,然后发现里面还有一层 IP 首部的目标地址是自己lo 接口上的 VIP,所以会处理次请求报文,并将响应报文通过 lo 接口送给 eth0 网卡直接发送给客户端。</p>
+<p>注意:需要设置 lo 接口的 VIP 不能在共网上出现。</p>
+<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结:"></a>总结:</h4><p>1.TUNNEL 模式必须在所有的 realserver 机器上面绑定 VIP 的 IP 地址<br>2.TUNNEL 模式的 vip ——&gt;realserver 的包通信通过 TUNNEL 模式,不管是内网和外网都能通信,所以不需要 lvs vip 跟 realserver 在同一个网段内。<br>3.TUNNEL 模式 realserver 会把 packet 直接发给 client 不会给 lvs 了<br>4.TUNNEL 模式走的隧道模式,所以运维起来比较难,所以一般不用。</p>
+<h5 id="优点-2"><a href="#优点-2" class="headerlink" title="优点:"></a>优点:</h5><p>负载均衡器只负责将请求包分发给后端节点服务器,而 RS 将应答包直接发给用户。所以,减少了负载均衡器的大量数据流动,负载均衡器不再是系统的瓶颈,就能处理很巨大的请求量,这种方式,一台负载均衡器能够为很多 RS 进行分发。而且跑在公网上就能进行不同地域的分发。</p>
+<h5 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点:"></a>缺点:</h5><p>隧 道 模 式 的 RS 节 点 需 要 合 法 IP , 这 种 方 式 需 要 所 有 的 服 务 器 支 持 ” IP Tunneling ” (IPEncapsulation)协议,服务器可能只局限在部分 Linux 系统上。</p>
+<h1 id="LVS-FULLNAT-模式"><a href="#LVS-FULLNAT-模式" class="headerlink" title="LVS FULLNAT 模式"></a>LVS FULLNAT 模式</h1><p>无论是 DR 还是 NAT 模式,不可避免的都有一个问题:LVS 和 RS 必须在同一个 VLAN 下,否则LVS 无法作为 RS 的网关。这引发的两个问题是:<br>1、同一个 VLAN 的限制导致运维不方便,跨 VLAN 的 RS 无法接入。<br>2、LVS 的水平扩展受到制约。当 RS 水平扩容时,总有一天其上的单点 LVS 会成为瓶颈。</p>
+<p>Full-NAT 由此而生,解决的是 LVS 和 RS 跨 VLAN 的问题,而跨 VLAN 问题解决后,LVS 和 RS不再存在 VLAN 上的从属关系,可以做到多个 LVS 对应多个 RS,解决水平扩容的问题。<br>Full-NAT 相比 NAT 的主要改进是,在 SNAT/DNAT 的基础上,加上另一种转换,转换过程如下:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/lvs-full-nat.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>1.在包从 LVS 转到 RS 的过程中,源地址从客户端 IP 被替换成了 LVS 的内网 IP。内网 IP 之间可以通过多个交换机跨 VLAN 通信。目标地址从 VIP 修改为 RS IP.<br>2.当 RS 处理完接受到的包,处理完成后返回时,将目标地址修改为 LVS ip,原地址修改为 RSIP,最终将这个包返回给 LVS 的内网 IP,这一步也不受限于 VLAN。<br>3.LVS 收到包后,在 NAT 模式修改源地址的基础上,再把 RS 发来的包中的目标地址从 LVS 内网 IP 改为客户端的 IP,并将原地址修改为 VIP。</p>
+<p>Full-NAT 主要的思想是把网关和其下机器的通信,改为了普通的网络通信,从而解决了跨 VLAN 的问题。采用这种方式,LVS 和 RS 的部署在 VLAN 上将不再有任何限制,大大提高了运维部署的便利性。</p>
+<h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>FULL NAT 模式不需要 LBIP 和 realserver ip 在同一个网段;</li>
+<li>full nat 因为要更新 sorce ip 所以性能正常比 nat 模式下降 10%</li>
+</ol>
+<h1 id="Keepalive"><a href="#Keepalive" class="headerlink" title="Keepalive"></a>Keepalive</h1><p>keepalive 起初是为 LVS 设计的,专门用来监控 lvs 各个服务节点的状态,后来加入了 vrrp 的功能,因此除了 lvs,也可以作为其他服务(nginx,haproxy)的高可用软件。VRRP 是 virtualrouter redundancy protocal(虚拟路由器冗余协议)的缩写。VRRP 的出现就是为了解决静态路由出现的单点故障,它能够保证网络可以不间断的稳定的运行。所以 keepalive 一方面具有 LVScluster node healthcheck 功能,另一方面也具有 LVS director failover。</p>
+<h2 id="Nginx-反向代理负载均衡"><a href="#Nginx-反向代理负载均衡" class="headerlink" title="Nginx 反向代理负载均衡"></a>Nginx 反向代理负载均衡</h2><p>普通的负载均衡软件,如 LVS,其实现的功能只是对请求数据包的转发、传递,从负载均衡下的节点服务器来看,接收到的请求还是来自访问负载均衡器的客户端的真实用户;而反向代理就不一样了,反向代理服务器在接收访问用户请求后,会代理用户 重新发起请求代理下的节点服务器,最后把数据返回给客户端用户。在节点服务器看来,访问的节点服务器的客户端用户就是反向代理服务器,而非真实的网站访问用户。</p>
+<h2 id="upstream-module-和健康检测"><a href="#upstream-module-和健康检测" class="headerlink" title="upstream_module 和健康检测"></a>upstream_module 和健康检测</h2><p>ngx_http_upstream_module 是负载均衡模块,可以实现网站的负载均衡功能即节点的健康检查,upstream 模块允许 Nginx 定义一组或多组节点服务器组,使用时可通过 proxy_pass 代理方式把网站的请求发送到事先定义好的对应 Upstream 组 的名字上。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/nginx-table.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>proxy_pass 请求转发<br>proxy_pass 指令属于 ngx_http_proxy_module 模块,此模块可以将请求转发到另一台服务器,在实际的反向代理工作中,会通过 location 功能匹配指定的 URI,然后把接收到服务匹配 URI 的<br>请求通过 proyx_pass 抛给定义好的 upstream 节点池。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">location &#x2F;download&#x2F; &#123;<br>    proxy_pass http:&#x2F;&#x2F;download&#x2F;vedio&#x2F;;<br>&#125;<br>&#x2F;&#x2F;这是前端代理节点的设置<br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/proxy-model-param.png" srcset="/img/loading.gif" alt="avatar"></p>
+<h1 id="HAProxy"><a href="#HAProxy" class="headerlink" title="HAProxy"></a>HAProxy</h1>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/DevOps/">DevOps</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">负载均衡</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/09/06/algorithm/%E7%AE%97%E6%B3%95%E7%AF%87-%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">算法篇-一致性算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/26/design-pattern/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">设计模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     Copyright © 2017-2021 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> And <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> Core on Github Page 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        桂ICP备2020009931号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>桂公网安备2020009931号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

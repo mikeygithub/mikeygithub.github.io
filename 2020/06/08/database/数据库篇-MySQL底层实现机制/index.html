@@ -1,0 +1,806 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  <title>数据库篇-MySQL底层实现机制 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>麦奇</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/todo/">
+                <i class="iconfont icon-plan"></i>
+                代办
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据库篇-MySQL底层实现机制">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Mikey
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-08 22:45" pubdate>
+        2020年6月8日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      54
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据库篇-MySQL底层实现机制</h1>
+            
+            <div class="markdown-body">
+              <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ul>
+<li>数据库中最常见的慢查询优化方式是什么？</li>
+<li>为什么加索引能优化查询？</li>
+<li>你知道哪些数据结构可以提高查询速度？</li>
+<li>那这些数据结构既然都能优化查询速度，MySQL为什么选择B+TREE</li>
+<li></li>
+</ul>
+<h1 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>数据库存储引擎是数据库底层软件组织,数据库管理系统(DBMS)使用数据引擎进行创建、查询、更新和删除数据。不同的存储引擎提供不同的存储机制、索引技巧、锁定水平等功能,使用不同的存储引擎,还可以 获得特定的功能。现在许多不同的数据库管理系统都支持多种不同的数据引擎。存储引擎主要有: 1. MyIsam , 2. InnoDB, 3. Memory, 4. Archive, 5. Federated 。</p>
+<h2 id="InnoDB-B-树"><a href="#InnoDB-B-树" class="headerlink" title="InnoDB( B+树 )"></a>InnoDB( B+树 )</h2><p>InnoDB 底层存储结构为 B+树, B 树的每个节点对应 innodb 的一个 page,page 大小是固定的,一般设为 16k。其中非叶子节点只有键值,叶子节点包含完成数据。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/innodb.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>适用场景:<br>1)经常更新的表,适合处理多重并发的更新请求。<br>2)支持事务。<br>3)可以从灾难中恢复(通过 bin-log 日志等)。<br>4)外键约束。只有他支持外键。<br>5)支持自动增加列属性 auto_increment。</p>
+<h2 id="TokuDB-Fractal-Tree-节点带数据"><a href="#TokuDB-Fractal-Tree-节点带数据" class="headerlink" title="TokuDB( Fractal Tree-节点带数据 )"></a>TokuDB( Fractal Tree-节点带数据 )</h2><p>TokuDB 底层存储结构为 <code>Fractal Tree</code>,<code>Fractal Tree</code> 的结构与 B+树有些类似, 在 Fractal Tree中,每一个 child 指针除了需要指向一个 child 节点外,还会带有一个 Message Buffer ,这个Message Buffer 是一个 FIFO 的队列,用来缓存更新操作。</p>
+<p>例如,一次插入操作只需要落在某节点的 Message Buffer 就可以马上返回了,并不需要搜索到叶子节点。这些缓存的更新会在查询时或后台异步合并应用到对应的节点中。TokuDB 在线添加索引,不影响读写操作, 非常快的写入性能, Fractal-tree 在事务实现上有优势。 他主要适用于访问频率不高的数据或历史数据归档。</p>
+<h2 id="MyIASM"><a href="#MyIASM" class="headerlink" title="MyIASM"></a>MyIASM</h2><p>MyIASM 是 MySQL 默认的引擎,但是它没有提供对数据库事务的支持,也不支持行级锁和外键,因此当 INSERT(插入)或 UPDATE(更新)数据时即写操作需要锁定整个表,效率便会低一些。<br>ISAM 执行读取操作的速度很快,而且不占用大量的内存和存储资源。在设计之初就预想数据组织成有固定长度的记录,按顺序存储的。—ISAM 是一种静态索引结构。缺点是它不 支持事务处理。</p>
+<h2 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h2><p>Memory(也叫 HEAP)堆内存:使用存在内存中的内容来创建表。每个 MEMORY 表只实际对应一个磁盘文件。MEMORY 类型的表访问非常得快,因为它的数据是放在内存中的,并且默认使用HASH 索引。但是一旦服务关闭,表中的数据就会丢失掉。 Memory 同时支持散列索引和 B 树索引,B 树索引可以使用部分查询和通配查询,也可以使用&lt;,&gt;和&gt;=等操作符方便数据挖掘,散列索引相等的比较快但是对于范围的比较慢很多。</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><blockquote>
+<p>索引(Index)是帮助 MySQL 高效获取数据的数据结构。常见的查询算法,<code>顺序查找</code>,<code>二分查找</code>,<code>二叉排序树查找</code>,<code>哈希散列法</code>,<code>分块查找</code>,<code>平衡多路搜索树 B 树(B-tree)</code></p>
+</blockquote>
+<h2 id="常见索引原则有"><a href="#常见索引原则有" class="headerlink" title="常见索引原则有"></a>常见索引原则有</h2><ol>
+<li>选择唯一性索引</li>
+<li>唯一性索引的值是唯一的,可以更快速的通过该索引来确定某条记录。</li>
+<li>为经常需要排序、分组和联合操作的字段建立索引:<br>3 .为常作为查询条件的字段建立索引。<br>4 .限制索引的数目:<br>越多的索引,会使更新表变得很浪费时间。<br>尽量使用数据量少的索引</li>
+<li>如果索引的值很长,那么查询的速度会受到影响。<br>尽量使用前缀来索引</li>
+<li>如果索引字段的值很长,最好使用值的前缀来索引。<br>7 .删除不再使用或者很少使用的索引<br>8 . 最左前缀匹配原则,非常重要的原则。<br>10 . 尽量选择区分度高的列作为索引<br>区分度的公式是表示字段不重复的比例<br>11 . 索引列不能参与计算,保持列“干净”:带函数的查询不参与索引。<br>12 . 尽量的扩展索引,不要新建索引。</li>
+</ol>
+<h2 id="数据库三范式"><a href="#数据库三范式" class="headerlink" title="数据库三范式"></a>数据库三范式</h2><p>范式是具有最小冗余的表结构。范式具体如下:</p>
+<p>第一范式(1st NF -列都是不可再分)<br>第一范式的目标是确保每列的原子性:如果每列都是不可再分的最小数据单元(也称为最小的原子单元),则满足第一范式(1NF)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/1st-nf.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>首先满足第一范式,并且表中非主键列不存在对主键的部分依赖。 第二范式要求每个表只描述一件事情。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/2st-nf.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>第三范式(3rd NF- 不存在对非主键列的传递依赖)<br>第三范式定义是,满足第二范式,并且表中的列不存在对非主键列的传递依赖。除了主键订单编号外,顾客姓名依赖于非主键顾客编号。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/3st-nf.png" srcset="/img/loading.gif" alt="avatar"></p>
+<h2 id="数据库是事务"><a href="#数据库是事务" class="headerlink" title="数据库是事务"></a>数据库是事务</h2><blockquote>
+<p>事务(TRANSACTION)是作为单个逻辑工作单元执行的一系列操作,这些操作作为一个整体一起向系统提交,要么都执行、要么都不执行 。事务是一个不可分割的工作逻辑单元事务必须具备以下四个属性,简称 ACID 属性:</p>
+</blockquote>
+<h3 id="原子性-Atomicity"><a href="#原子性-Atomicity" class="headerlink" title="原子性( Atomicity )"></a>原子性( Atomicity )</h3><p>1.事务是一个完整的操作。事务的各步操作是不可分的(原子的);要么都执行,要么都不执行。</p>
+<h3 id="一致性-Consistency"><a href="#一致性-Consistency" class="headerlink" title="一致性( Consistency )"></a>一致性( Consistency )</h3><p>2.当事务完成时,数据必须处于一致状态</p>
+<p>隔离性( Isolation )</p>
+<p>3.对数据进行修改的所有并发事务是彼此隔离的,这表明事务必须是独立的,它不应以任何方式依赖于或影响其他事务。</p>
+<p>永久性( Durability )</p>
+<p>4.事务完成后,它对数据库的修改被永久保持,事务日志能够保持事务的永久性。</p>
+<h1 id="存储过程-特定功能的-SQL-语句集"><a href="#存储过程-特定功能的-SQL-语句集" class="headerlink" title="存储过程(特定功能的 SQL 语句集)"></a>存储过程(特定功能的 SQL 语句集)</h1><blockquote>
+<p>一组为了完成特定功能的 SQL 语句集,存储在数据库中,经过第一次编译后再次调用不需要再次编译,用户通过指定存储过程的名字并给出参数(如果该存储过程带有参数)来执行它。存储过程是数据库中的一个重要对象。</p>
+</blockquote>
+<p>存储过程优化思路:</p>
+<ol>
+<li>尽量利用一些 sql 语句来替代一些小循环,例如聚合函数,求平均函数等。</li>
+<li>中间结果存放于临时表,加索引。</li>
+<li>少使用游标。sql 是个集合语言,对于集合运算具有较高性能。而 cursors 是过程运算。比如对一个 100 万行的数据进行查询。游标需要读表 100 万次,而不使用游标则只需要少量几次读取。</li>
+<li>事务越短越好。sqlserver 支持并发操作。如果事务过多过长,或者隔离级别过高,都会造成并发操作的阻塞,死锁。导致查询极慢,cpu 占用率极地。</li>
+<li>使用 try-catch 处理错误异常。</li>
+<li>查找语句尽量不要放在循环内。</li>
+</ol>
+<h1 id="触发器-一段能自动执行的程序"><a href="#触发器-一段能自动执行的程序" class="headerlink" title="触发器(一段能自动执行的程序)"></a>触发器(一段能自动执行的程序)</h1><blockquote>
+<p>触发器是一段能自动执行的程序,是一种特殊的存储过程,触发器和普通的存储过程的区别是:<br>触发器是当对某一个表进行操作时触发。诸如:update、insert、delete 这些操作的时候,系统<br>会自动调用执行该表上对应的触发器。SQL Server 2005 中触发器可以分为两类:DML 触发器和<br>DDL 触发器,其中 DDL 触发器它们会影响多种数据定义语言语句而激发,这些语句有 create、alter、drop 语句。</p>
+</blockquote>
+<h1 id="数据库并发策略"><a href="#数据库并发策略" class="headerlink" title="数据库并发策略"></a>数据库并发策略</h1><p>并发控制一般采用三种方法,分别是乐观锁和悲观锁以及时间戳。</p>
+<h1 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h1><p>乐观锁认为一个用户读数据的时候,别人不会去写自己所读的数据;悲观锁就刚好相反,觉得自己读数据库的时候,别人可能刚好在写自己刚读的数据,其实就是持一种比较保守的态度;时间戳就是不加锁,通过时间戳来控制并发出现的问题。</p>
+<h1 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h1><p>悲观锁就是在读取数据的时候,为了不让别人修改自己读取的数据,就会先对自己读取的数据加锁,只有自己把数据读完了,才允许别人修改那部分数据,或者反过来说,就是自己修改某条数据的时候,不允许别人读取该数据,只有等自己的整个事务提交了,才释放自己加上的锁,才允许其他用户访问那部分数据。</p>
+<h1 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h1><p>时间戳就是在数据库表中单独加一列时间戳,比如“TimeStamp”,每次读出来的时候,把该字段也读出来,当写回去的时候,把该字段加 1,提交之前 ,跟数据库的该字段比较一次,如果比数据库的值大的话,就允许保存,否则不允许保存,这种处理方法虽然不使用数据库系统提供的锁机制,但是这种方法可以大大提高数据库处理的并发量,以上悲观锁所说的加“锁”,其实分为几种锁,分别是:排它锁(写锁)和共享锁(读锁)。</p>
+<h1 id="数据库锁"><a href="#数据库锁" class="headerlink" title="数据库锁"></a>数据库锁</h1><h2 id="行级锁"><a href="#行级锁" class="headerlink" title="行级锁"></a>行级锁</h2><p>行级锁是一种排他锁,防止其他事务修改此行;在使用以下语句时,Oracle 会自动应用行级锁:</p>
+<ol>
+<li>INSERT、UPDATE、DELETE、SELECT … FOR UPDATE [OF columns] [WAIT n | NOWAIT];</li>
+<li>SELECT … FOR UPDATE 语句允许用户一次锁定多条记录进行更新</li>
+<li>使用 COMMIT 或 ROLLBACK 语句释放锁。</li>
+</ol>
+<h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h2><blockquote>
+<p>表示对当前操作的整张表加锁,它实现简单,资源消耗较少,被大部分 MySQL 引擎支持。最常使用的 MYISAM 与 INNODB 都支持表级锁定。表级锁定分为表共享读锁(共享锁)与表独占写锁(排他锁)。</p>
+</blockquote>
+<h2 id="页级锁"><a href="#页级锁" class="headerlink" title="页级锁"></a>页级锁</h2><blockquote>
+<p>页级锁是 MySQL 中锁定粒度介于行级锁和表级锁中间的一种锁。表级锁速度快,但冲突多,行级冲突少,但速度慢。所以取了折衷的页级,一次锁定相邻的一组记录。BDB 支持页级锁</p>
+</blockquote>
+<p>1.基于 Redis 分布式锁</p>
+<ol>
+<li><p>获取锁的时候,使用 setnx(SETNX key val:当且仅当 key 不存在时,set 一个 key为 val 的字符串,返回 1;若 key 存在,则什么都不做,返回 0)加锁,锁的 value值为一个随机生成的 UUID,在释放锁的时候进行判断。并使用 expire 命令为锁添加一个超时时间,超过该时间则自动释放锁。</p>
+</li>
+<li><p>获取锁的时候调用 setnx,如果返回 0,则该锁正在被别人使用,返回 1 则成功获取锁。 还设置一个获取的超时时间,若超过这个时间则放弃获取锁。</p>
+</li>
+<li><p>释放锁的时候,通过 UUID 判断是不是该锁,若是该锁,则执行 delete 进行锁释放。</p>
+</li>
+</ol>
+<h2 id="分区分表"><a href="#分区分表" class="headerlink" title="分区分表"></a>分区分表</h2><p>分库分表有垂直切分和水平切分两种。</p>
+<h3 id="垂直切分-按照功能模块"><a href="#垂直切分-按照功能模块" class="headerlink" title="垂直切分 ( 按照功能模块 )"></a>垂直切分 ( 按照功能模块 )</h3><p>将表按照功能模块、关系密切程度划分出来,部署到不同的库上。例如,我们会建立定义数据库 workDB、商品数据库 payDB、用户数据库 userDB、日志数据库 logDB 等,分别用于存储项目数据定义表、商品定义表、用户数据表、日志数据表等。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/vertical-partitioning.png" srcset="/img/loading.gif" alt="avatar"></p>
+<h3 id="水平切分-按照规则划分存储"><a href="#水平切分-按照规则划分存储" class="headerlink" title="水平切分 ( 按照规则划分存储 )"></a>水平切分 ( 按照规则划分存储 )</h3><p>当一个表中的数据量过大时,我们可以把该表的数据按照某种规则,例如 userID 散列,进行划分,然后存储到多个结构相同的表,和不同的库上。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/horizontal-partitioning.png" srcset="/img/loading.gif" alt="avatar"></p>
+<h3 id="两阶段提交协议"><a href="#两阶段提交协议" class="headerlink" title="两阶段提交协议"></a>两阶段提交协议</h3><p>分布式事务是指会涉及到操作多个数据库的事务,在分布式系统中,各个节点之间在物理上相互独立,通过网络进行沟通和协调。</p>
+<p>XA 就是 X/Open DTP 定义的交易中间件与数据库之间的接口规范(即接口函数),交易中间件<br>用它来通知数据库事务的开始、结束以及提交、回滚等。 XA 接口函数由数据库厂商提供。<br>二阶段提交(Two-phaseCommit)是指,在计算机网络以及数据库领域内,为了使基于分布式系统<br>架构下的所有节点在进行事务提交时保持一致性而设计的一种算法(Algorithm)。通常,二阶段提<br>交也被称为是一种协议(Protocol))。在分布式系统中,每个节点虽然可以知晓自己的操作时成功<br>或者失败,却无法知道其他节点的操作的成功或失败。当一个事务跨越多个节点时,为了保持事<br>务的 ACID 特性,需要引入一个作为协调者的组件来统一掌控所有节点(称作参与者)的操作结果并<br>最终指示这些节点是否要把操作结果进行真正的提交(比如将更新后的数据写入磁盘等等)。因此,<br>二阶段提交的算法思路可以概括为:参与者将操作成败通知协调者,再由协调者根据所有参与者<br>的反馈情报决定各参与者是否要提交操作还是中止操作。</p>
+<ul>
+<li><p>准备阶段</p>
+<blockquote>
+<p>事务协调者(事务管理器)给每个参与者(资源管理器)发送 Prepare 消息,每个参与者要么直接返回<br>失败(如权限验证失败),要么在本地执行事务,写本地的 redo 和 undo 日志,但不提交,到达一<br>种“万事俱备,只欠东风”的状态。</p>
+</blockquote>
+</li>
+<li><p>提交阶段</p>
+<blockquote>
+<p>如果协调者收到了参与者的失败消息或者超时,直接给每个参与者发送回滚(Rollback)消息;否则,<br>发送提交(Commit)消息;参与者根据协调者的指令执行提交或者回滚操作,释放所有事务处理过<br>程中使用的锁资源。(注意:必须在最后阶段释放锁资源)</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>同步阻塞问题<br>1、 执行过程中,所有参与节点都是事务阻塞型的。</p>
+<p>单点故障<br>2、 由于协调者的重要性,一旦协调者发生故障。参与者会一直阻塞下去。</p>
+<p>数据不一致(脑裂问题)<br>3、 在二阶段提交的阶段二中,当协调者向参与者发送 commit 请求之后,发生了局部网络异常或者在发送 commit 请求过程中协调者发生了故障,导致只有一部分参与者接受到了commit 请求。于是整个分布式系统便出现了数据部一致性的现象(脑裂现象)。</p>
+<p>二阶段无法解决的问题(数据状态不确定)<br>4、 协调者再发出 commit 消息之后宕机,而唯一接收到这条消息的参与者同时也宕机了。那么即使协调者通过选举协议产生了新的协调者,这条事务的状态也是不确定的,没人知道事务是否被已经提交。</p>
+<p>三阶段提交协议</p>
+<p>三 阶 段 提 交 ( Three-phase commit ) , 也 叫 三 阶 段 提 交 协 议 ( Three-phase commit protocol),是二阶段提交(2PC)的改进版本。</p>
+<p>与两阶段提交不同的是,三阶段提交有两个改动点。</p>
+<p>1、引入超时机制。同时在协调者和参与者中都引入超时机制。<br>2、在第一阶段和第二阶段中插入一个准备阶段。保证了在最后提交阶段之前各参与节点的状态是一致的。也就是说,除了引入超时机制之外,3PC 把 2PC 的准备阶段再次一分为二,这样三阶段提交就有 CanCommit、PreCommit、DoCommit 三个阶段。</p>
+<h2 id="CanCommit-阶段"><a href="#CanCommit-阶段" class="headerlink" title="CanCommit 阶段"></a>CanCommit 阶段</h2><p>协调者向参与者发送 commit 请求,参与者如果可以提交就返回 Yes 响应,否则返回 No 响应。</p>
+<h2 id="PreCommit-阶段"><a href="#PreCommit-阶段" class="headerlink" title="PreCommit 阶段"></a>PreCommit 阶段</h2><p>协调者根据参与者的反应情况来决定是否可以继续进行,有以下两种可能。假如协调者从所有的参与者获得的反馈都是 Yes 响应,那么就会执行事务的预执行假如有任何一个参与者向协调者发送了 No 响应,或者等待超时之后,协调者都没有接到参与者的响应,那么就执行事务的中断。</p>
+<h2 id="doCommit-阶段"><a href="#doCommit-阶段" class="headerlink" title="doCommit 阶段"></a>doCommit 阶段</h2><p>该阶段进行真正的事务提交,主要包含 1.协调这发送提交请求 2.参与者提交事务 3.参与者响应反馈( 事务提交完之后,向协调者发送 Ack 响应。)4.协调者确定完成事务。</p>
+<h2 id="柔性事务"><a href="#柔性事务" class="headerlink" title="柔性事务"></a>柔性事务</h2><blockquote>
+<p>在电商领域等互联网场景下,传统的事务在数据库性能和处理能力上都暴露出了瓶颈。在分布式领域基于 CAP 理论以及 BASE 理论,有人就提出了 柔性事务 的概念。CAP(一致性、可用性、分区容忍性)理论大家都理解很多次了,这里不再叙述。说一下 BASE 理论,它是在 CAP 理论的基础之上的延伸。包括 基本可用(Basically Available)、柔性状态(Soft State)、最终一致性(Eventual Consistency)。</p>
+</blockquote>
+<p>通常所说的柔性事务分为:两阶段型、补偿型、异步确保型、最大努力通知型几种。</p>
+<p>两阶段型<br>1、 就是分布式事务两阶段提交,对应技术上的 XA、JTA/JTS。这是分布式环境下事务处理的</p>
+<p>典型模式。<br>补偿型<br>2、 TCC 型事务(Try/Confirm/Cancel)可以归为补偿型。</p>
+<p>WS-BusinessActivity 提供了一种基于补偿的 long-running 的事务处理模型。服务器 A 发起事务,服务器 B 参与事务,服务器 A 的事务如果执行顺利,那么事务 A 就先行提交,如果事务 B 也执行顺利,则事务 B 也提交,整个事务就算完成。但是如果事务 B 执行失败,事务 B 本身回滚,这时事务 A 已经被提交,所以需要执行一个补偿操作,将已经提交的事务 A 执行的操作作反操作,恢复到未执行前事务 A 的状态。这样的 SAGA 事务模型,是牺牲了一定的隔离性和一致性的,但是提高了 long-running 事务的可用性。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/soft-transcation.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>异步确保型<br>3、 通过将一系列同步的事务操作变为基于消息执行的异步操作, 避免了分布式事务中的同步阻塞操作的影响。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/async-sure.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>最大努力通知型(多次尝试)<br>4、 这是分布式事务中要求最低的一种, 也可以通过消息中间件实现, 与前面异步确保型操作不同的一点是, 在消息由 MQ Server 投递到消费者之后, 允许在达到最大重试次数之后正常结束事务。</p>
+<h1 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h1><p>CAP 原则又称 CAP 定理,指的是在一个分布式系统中, Consistency(一致性)、 Availability(可用性)、Partition tolerance(分区容错性),三者不可得兼。</p>
+<h2 id="一致性-C"><a href="#一致性-C" class="headerlink" title="一致性(C):"></a>一致性(C):</h2><p>1.在分布式系统中的所有数据备份,在同一时刻是否同样的值。(等同于所有节点访问同一份最新的数据副本)</p>
+<h2 id="可用性-A"><a href="#可用性-A" class="headerlink" title="可用性(A):"></a>可用性(A):</h2><p>2.在集群中一部分节点故障后,集群整体是否还能响应客户端的读写请求。(对数据更新具备高可用性)</p>
+<h2 id="分区容忍性-P"><a href="#分区容忍性-P" class="headerlink" title="分区容忍性(P) :"></a>分区容忍性(P) :</h2><p>3.以实际效果而言,分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性,就意味着发生了分区的情况,必须就当前操作在 C 和 A 之间做出选择。</p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ez411B7X2/">视频</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://my.oschina.net/u/585635/blog/4547089">Mysql Explain 详解</a></p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/25/linux/Ubuntu%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Ubuntu开发环境配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/05/30/java/JAVA-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91/">
+                        <span class="hidden-mobile">JAVA 多线程并发</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     Copyright © 2017-2021 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> And <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> Core on Github Page 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        桂ICP备2020009931号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>桂公网安备2020009931号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,687 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  <title>OS篇-微机原理学习总结 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>麦奇</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/todo/">
+                <i class="iconfont icon-plan"></i>
+                代办
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="OS篇-微机原理学习总结">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Mikey
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-22 16:22" pubdate>
+        2020年12月22日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">OS篇-微机原理学习总结</h1>
+            
+            <div class="markdown-body">
+              <h1 id="第1章-计算机基本知识-（1）"><a href="#第1章-计算机基本知识-（1）" class="headerlink" title="第1章 计算机基本知识 （1）"></a>第1章 计算机基本知识 （1）</h1><p>1.1 微型计算机组成 （1）<br>1.2 微型计算机中信息的表示及运算基础 （2）<br>1.2.1 二进制数的表示与运算 （3）<br>1.2.2 二-十进制（BCD）数的表示与运算 （5）<br>1.2.3 十六进制数的表示与运算 （6）<br>1.2.4 带符号二进制数的表示和运算 （7）<br>1.3.6 字符的编码表示 （9）<br>1.3 几种进制之间的相互转换 （10）<br>1.3.1 十进制整数到任意进制整数的转换 （10）<br>1.3.2 任意进制整数到十进制整数之间的转换 （11）<br>1.3.3 二进制数和十六进制数之间的相互转换 （12）<br>1.3.4 带符号二进制整数到十进制整数之间的转换 （12）</p>
+<h1 id="第2章-8086系统结构-（14）"><a href="#第2章-8086系统结构-（14）" class="headerlink" title="第2章 8086系统结构 （14）"></a>第2章 8086系统结构 （14）</h1><p>2.1 8086 CPU结构 （15）<br>2.1.1 8086 CPU的内部结构 （15）<br>2.1.2 8086 CPU的寄存器结构 （16）<br>2.1.3 8086 CPU的引脚及功能 （20）<br>2.2 8086系统的结构和配置 （23）<br>2.2.1 8086存储器结构 （23）<br>2.2.2 8086输入/输出结构 （27）<br>2.2.3 8086的最小模式和最大模式系统 （28）<br>2.3 8086 CPU内部时序 （30）</p>
+<h1 id="第3章-8086的指令系统-（35）"><a href="#第3章-8086的指令系统-（35）" class="headerlink" title="第3章 8086的指令系统 （35）"></a>第3章 8086的指令系统 （35）</h1><p>3.1 8086 指令的特点 （35）<br>3.2 8086的寻址方式 （36）<br>3.2.1 8086寻址方式的说明 （36）<br>3.2.2 寻址方式介绍 （37）<br>3.3 8086的指令格式及数据类型 （40）<br>3.4 8086的指令集 （42）<br>3.4.1 数据传送指令 （42）<br>3.4.2 算术运算指令 （46）<br>3.4.3 位操作指令 （53）<br>3.4.4 串处理指令 （57）<br>3.4.5 程序控制转移指令 （59）<br>3.4.6 处理器控制指令 （65）</p>
+<h1 id="第4章-8086汇编语言程序设计-（70）"><a href="#第4章-8086汇编语言程序设计-（70）" class="headerlink" title="第4章 8086汇编语言程序设计 （70）"></a>第4章 8086汇编语言程序设计 （70）</h1><p>4.1 8086汇编语言的语句 （70）<br>4.2 8086汇编语言中的伪指令 （72）<br>4.2.1 符号定义语句 （72）<br>4.2.2 变量定义语句 （72）<br>4.2.3 段定义语句 （74）<br>4.2.4 过程定义语句 （76）<br>4.2.5 结束语句 （77）<br>4.3 8086汇编语言中的运算符 （77）<br>4.3.1 常用运算符和操作符 （77）<br>4.3.2 运算符的优先级别 （80）<br>4.4 汇编语言程序设计 （80）<br>4.4.1 汇编语言程序设计基本步骤 （80）<br>4.4.2 汇编语言程序的基本结构 （81）<br>4.5 宏定义与宏调用 （87）<br>4.6 汇编语言程序设计与上机调试 （89）<br>4.6.1 汇编语言程序设计实例 （89）<br>4.6.2 DOS功能调用与子程序设计 （98）<br>4.6.3 汇编语言程序上机调试 （102）</p>
+<h1 id="第5章-存储器原理与接口-（103）"><a href="#第5章-存储器原理与接口-（103）" class="headerlink" title="第5章 存储器原理与接口 （103）"></a>第5章 存储器原理与接口 （103）</h1><p>5.1 存储器分类 （103）<br>5.2 多层存储结构概念 （105）<br>5.3 主存储器及存储控制 （107）<br>5.3.1 主存储器 （107）<br>5.3.2 主存储器的基本组成 （108）<br>5.4 8086系统的存储器组织 （111）<br>5.4.1 8086 CPU的存储器接口 （111）<br>5.4.2 存储器接口举例 （113）<br>5.5 现代内存芯片技术 （118）</p>
+<h1 id="第6章-微型计算机的输入-输出-（120）"><a href="#第6章-微型计算机的输入-输出-（120）" class="headerlink" title="第6章 微型计算机的输入/输出 （120）"></a>第6章 微型计算机的输入/输出 （120）</h1><p>6.1 CPU与外设通信的特点 （120）<br>6.1.1 I/O端口的寻址方式 （121）<br>6.1.2 I/O端口地址的形成 （121）<br>6.2 输入/输出方式 （122）<br>6.3 CPU与外设通信的接口 （123）<br>6.3.1 同步传输方式与接口 （123）<br>6.3.2 异步查询方式与接口 （124）<br>6.4 8086 CPU的输入/输出 （127）</p>
+<h1 id="第7章-可编程接口芯片-（129）"><a href="#第7章-可编程接口芯片-（129）" class="headerlink" title="第7章 可编程接口芯片 （129）"></a>第7章 可编程接口芯片 （129）</h1><p>7.1 可编程并行接口芯片8255A （130）<br>7.1.1 8255A的内部结构 （130）<br>7.1.2 8255A的引脚分配 （131）<br>7.1.3 8255A的工作方式及编程 （132）<br>7.1.4 8255A工作方式的功能 （135）<br>7.1.5 8255A应用举例 （141）<br>7.2 可编程定时/计数器接口芯片8253 （148）<br>7.2.1 8253的内部结构 （149）<br>7.2.2 8253的引脚分配 （150）<br>7.2.3 8253的编程 （151）<br>7.2.4 8253的工作方式 （153）<br>7.2.5 8253的工作方式小结 （160）<br>7.2.6 8253应用举例 （161）</p>
+<h1 id="第8章-串行输入-输出接口-（165）"><a href="#第8章-串行输入-输出接口-（165）" class="headerlink" title="第8章 串行输入/输出接口 （165）"></a>第8章 串行输入/输出接口 （165）</h1><p>8.1 串行通信接口 （166）<br>8.1.1 串行通信的实现 （166）<br>8.1.2 串行通信的基本概念 （171）<br>8.1.3 可编程串行通信接口芯片8251A简介 （174）<br>8.1.4 串行通信接口RS-232C （182）<br>8.2 USB总线简介 （188）<br>8.2.1 什么是USB （188）<br>8.2.2 USB工作原理 （192）<br>8.2.3 USB传输方式 （193）<br>8.2.4 USB设备列举 （194）<br>8.3 USB总线转接芯片——CH341简介 （195）</p>
+<h1 id="第9章-中断与中断管理-（199）"><a href="#第9章-中断与中断管理-（199）" class="headerlink" title="第9章 中断与中断管理 （199）"></a>第9章 中断与中断管理 （199）</h1><p>9.1 中断原理 （199）<br>9.1.1 从无条件传输、条件传输到中断传输 （200）<br>9.1.2 中断概念 （201）<br>9.1.3 中断应用 （201）<br>9.2 中断系统组成及其功能 （202）<br>9.2.1 与中断有关的触发器 （202）<br>9.2.2 中断条件 （203）<br>9.2.3 中断响应过程 （204）<br>9.3 中断源识别及中断优先权 （205）<br>9.3.1 中断源识别 （205）<br>9.3.2 中断优先权 （208）<br>9.4 8086中断系统 （209）<br>9.4.1 不可屏蔽中断 （210）<br>9.4.2 可屏蔽中断 （210）<br>9.4.3 软件中断 （211）<br>9.4.4 中断概念的再讨论 （213）<br>9.5 8086 CPU的中断管理 （213）<br>9.5.1 8086 CPU的中断处理顺序 （213）<br>9.5.2 8086 CPU的中断服务入口地址表 （213）<br>9.5.3 中断入口地址设置 （215）<br>9.6 可编程中断控制器8259A简介 （217）<br>9.6.1 8259A的内部结构及引脚分配 （217）<br>9.6.2 8259A的中断管理方式 （219）<br>9.6.3 8259A的编程与应用 （221）<br>9.7 IBM PC硬件中断 （226）<br>9.7.1 中断设置 （226）<br>9.7.2 计算机中断资源的使用 （226）<br>9.7.3 中断举例 （227）</p>
+<h1 id="第10章-D-A转换与A-D转换接口及其应用-（230）"><a href="#第10章-D-A转换与A-D转换接口及其应用-（230）" class="headerlink" title="第10章 D/A转换与A/D转换接口及其应用 （230）"></a>第10章 D/A转换与A/D转换接口及其应用 （230）</h1><p>10.1 从物理信号到电信号的转换 （231）<br>10.2 D/A转换器及其接口技术 （234）<br>10.2.1 D/A转换器及其接口概述 （234）<br>10.2.2 并行8位D/A转换芯片AD558及其接口 （235）<br>10.2.3 串行8位D/A转换器TLC5620 （236）<br>10.2.4 12位D/A转换器及接口 （239）<br>10.3 A/D转换器及其接口技术 （240）<br>10.3.1 A/D转换原理 （240）<br>10.3.2 A/D转换与微机接口技术的一般原理 （241）<br>10.3.3 A/D转换与微机接口电路 （241）<br>10.3.4 A/D转换芯片ADC0809 （244）<br>10.3.5 串行8位A/D转换器TLC0831 （247）<br>10.4 微机应用实例 （249）</p>
+<h1 id="第11章-80286微处理器-（253）"><a href="#第11章-80286微处理器-（253）" class="headerlink" title="第11章 80286微处理器 （253）"></a>第11章 80286微处理器 （253）</h1><p>11.1 80286微处理器基本原理概述 （254）<br>11.1.1 80286内部结构简介 （254）<br>11.1.2 80286芯片引脚功能 （257）<br>11.1.3 80286支持的数据类型 （258）<br>11.1.4 80286指令系统 （258）<br>11.1.5 80286的存储器管理 （260）<br>11.1.6 保护虚地址方式下存储器管理 （261）<br>11.2 80286的系统配置 （266）</p>
+<h1 id="第12章-80386微处理器-（268）"><a href="#第12章-80386微处理器-（268）" class="headerlink" title="第12章 80386微处理器 （268）"></a>第12章 80386微处理器 （268）</h1><p>12.1 80386系统结构 （268）<br>12.1.1 80386微处理器基本结构 （268）<br>12.1.2 80386的寄存器组成 （271）<br>12.1.3 80386的存储器管理 （273）<br>12.1.4 80386的保护机制 （278）<br>12.1.5 80386系统组成 （278）<br>12.2 80386的指令系统 （280）<br>12.2.1 80386的寻址方式 （280）<br>12.2.2 80386的指令系统 （280）<br>12.3 80386的存储器扩展 （283）<br>12.3.1 基本的存储器接口控制线 （284）<br>12.3.2 基本的存储器接口 （285）<br>12.3.3 高速缓冲存储器 （287）<br>12.3.4 Intel 82385高速缓存控制器 （291）<br>12.4 80386的输入/输出接口 （292）<br>12.4.1 8038的I/O系统 （292）<br>12.4.2 多功能接口芯片82380 （294）<br>12.5 80386的异常和中断及其处理 （297）<br>12.5.1 实模式下异常和中断的处理过程 （298）<br>12.5.2 保护虚地址方式下异常和中断的处理过程 （298）<br>12.6 精简指令集计算机（RISC）简介 （301）<br>12.6.1 RISC的基本原理 （301）<br>12.6.2 RISC的特色及其难点所在 （303）<br>12.6.3 RISC的关键技术 （304）<br>12.7 80x86典型微处理机介绍 （307）<br>12.7.1 80486 CPU （307）<br>12.7.2 Pentium系列微处理机 （312）</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8E%A5%E5%8F%A3%E6%8A%80%E6%9C%AF.ppt">微机原理与接口技术</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BE%AE%E6%9C%BA%E5%8E%9F%E7%90%86/">微机原理</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/23/datastructure/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据结构篇-平衡二叉树(AVL树)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/22/note/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">
+                        <span class="hidden-mobile">编译原理学习总结</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     Copyright © 2017-2021 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> And <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> Core on Github Page 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        桂ICP备2020009931号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>桂公网安备2020009931号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

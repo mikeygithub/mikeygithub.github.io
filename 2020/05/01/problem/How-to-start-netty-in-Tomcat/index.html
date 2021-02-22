@@ -1,0 +1,718 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  <title>如何让Netty服务随Tomcat启动 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>麦奇</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/todo/">
+                <i class="iconfont icon-plan"></i>
+                代办
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="如何让Netty服务随Tomcat启动">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Mikey
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-01 08:50" pubdate>
+        2020年5月1日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">如何让Netty服务随Tomcat启动</h1>
+            
+            <div class="markdown-body">
+              <h1 id="关于在Tomcat容器中启动Netty服务器的方法"><a href="#关于在Tomcat容器中启动Netty服务器的方法" class="headerlink" title="关于在Tomcat容器中启动Netty服务器的方法"></a>关于在Tomcat容器中启动Netty服务器的方法</h1><blockquote>
+<p>最近在一个web应用上重构一个即时通信功能的,考虑到负载和性能的原因,所以决定采用Netty来作为服务器端,但是如果在主线程中启动netty就会陷入阻塞状态,导致Tomcat无法启动．</p>
+</blockquote>
+<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><blockquote>
+<p>我们知道，netty在主线程启动会陷入阻塞，那么我们就可以开启一个新线程来启动netty服务器，让主线程启动Tomcat即可</p>
+</blockquote>
+<h1 id="相关代码"><a href="#相关代码" class="headerlink" title="相关代码"></a>相关代码</h1><details>
+    <summary>application-netty.xml</summary>
+
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span></span><br><span class="hljs-tag">	<span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="hljs-attr">xmlns:context</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/context&quot;</span></span><br><span class="hljs-tag">	<span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans   </span></span><br><span class="hljs-tag"><span class="hljs-string">        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd  </span></span><br><span class="hljs-tag"><span class="hljs-string">        http://www.springframework.org/schema/context   </span></span><br><span class="hljs-tag"><span class="hljs-string">        http://www.springframework.org/schema/context/spring-context-4.1.xsd&quot;</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- 扫描关于Netty Websocket的包 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">context:component-scan</span> <span class="hljs-attr">base-package</span>=<span class="hljs-string">&quot;com.gxwzu.websocket&quot;</span>/&gt;</span><br>    <span class="hljs-comment">&lt;!-- 把Netty的一些类服务器注册到Spring，方便处理和扩展 --&gt;</span><br>    <span class="hljs-comment">&lt;!-- 用于处理客户端连接请求 --&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;bossGroup&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;io.netty.channel.nio.NioEventLoopGroup&quot;</span>/&gt;</span><br>	<span class="hljs-comment">&lt;!-- 用于处理客户端I/O操作 --&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;workerGroup&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;io.netty.channel.nio.NioEventLoopGroup&quot;</span>/&gt;</span><br>	<span class="hljs-comment">&lt;!-- 服务器启动引导类 --&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;serverBootstrap&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;io.netty.bootstrap.ServerBootstrap&quot;</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;prototype&quot;</span>/&gt;</span><br>	<span class="hljs-comment">&lt;!-- 自定义的Netty Websocket服务器 --&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;webSocketServer&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.gxwzu.websocket.WebSocketServer&quot;</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;port&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;chat.server.port&#125;&quot;</span>/&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;childChannelHandler&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;webSocketChildChannelHandler&quot;</span> /&gt;</span><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+</details>
+
+<details>
+    <summary>WebSocketChildChannelHandler</summary>
+
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.gxwzu.websocket;<br><br><span class="hljs-keyword">import</span> io.netty.channel.ChannelHandler;<br><span class="hljs-keyword">import</span> io.netty.channel.ChannelInitializer;<br><span class="hljs-keyword">import</span> io.netty.channel.socket.SocketChannel;<br><span class="hljs-keyword">import</span> io.netty.handler.codec.http.HttpObjectAggregator;<br><span class="hljs-keyword">import</span> io.netty.handler.codec.http.HttpServerCodec;<br><span class="hljs-keyword">import</span> io.netty.handler.stream.ChunkedWriteHandler;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-keyword">import</span> javax.annotation.Resource;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@ProjectName</span> gdm</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> 麦奇</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Email</span> biaogejiushibiao@outlook.com</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 4/28/20 8:19 AM</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Version</span> 1.0</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span>: WebSocketChildChannelHandler</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span>:</span><br><span class="hljs-comment"> **/</span><br><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebSocketChildChannelHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ChannelInitializer</span>&lt;<span class="hljs-title">SocketChannel</span>&gt; </span>&#123;<br><br>    <span class="hljs-meta">@Resource(name = &quot;webSocketServerHandler&quot;)</span><br>    <span class="hljs-keyword">private</span> ChannelHandler webSocketServerHandler;<br><br>    <span class="hljs-meta">@Resource(name = &quot;httpRequestHandler&quot;)</span><br>    <span class="hljs-keyword">private</span> ChannelHandler httpRequestHandler;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initChannel</span><span class="hljs-params">(SocketChannel ch)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        ch.pipeline().addLast(<span class="hljs-string">&quot;http-codec&quot;</span>, <span class="hljs-keyword">new</span> HttpServerCodec()); <span class="hljs-comment">// HTTP编码解码器</span><br>        ch.pipeline().addLast(<span class="hljs-string">&quot;aggregator&quot;</span>, <span class="hljs-keyword">new</span> HttpObjectAggregator(<span class="hljs-number">65536</span>)); <span class="hljs-comment">// 把HTTP头、HTTP体拼成完整的HTTP请求</span><br>        ch.pipeline().addLast(<span class="hljs-string">&quot;http-chunked&quot;</span>, <span class="hljs-keyword">new</span> ChunkedWriteHandler()); <span class="hljs-comment">// 分块，方便大文件传输，不过实质上都是短的文本数据</span><br>        ch.pipeline().addLast(<span class="hljs-string">&quot;websocket-handler&quot;</span>,webSocketServerHandler);<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+</details>
+
+
+<details>
+    <summary>WebSocketServer</summary>
+
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">kage com.gxwzu.websocket;<br><br><span class="hljs-keyword">import</span> io.netty.bootstrap.ServerBootstrap;<br><span class="hljs-keyword">import</span> io.netty.channel.*;<br><span class="hljs-keyword">import</span> io.netty.channel.socket.nio.NioServerSocketChannel;<br><span class="hljs-keyword">import</span> io.netty.util.concurrent.Future;<br><span class="hljs-keyword">import</span> org.slf4j.Logger;<br><span class="hljs-keyword">import</span> org.slf4j.LoggerFactory;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@ProjectName</span> gdm</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> 麦奇</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Email</span> biaogejiushibiao@outlook.com</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 4/28/20 8:17 AM</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Version</span> 1.0</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span>: WebSocketServer</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span>:</span><br><span class="hljs-comment"> **/</span><br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebSocketServer</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span></span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Logger logger = LoggerFactory.getLogger(WebSocketServer.class);<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> EventLoopGroup bossGroup;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> EventLoopGroup workerGroup;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> ServerBootstrap serverBootstrap;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> port;<br><br>    <span class="hljs-keyword">private</span> ChannelHandler childChannelHandler;<br><br>    <span class="hljs-keyword">private</span> ChannelFuture serverChannelFuture;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">WebSocketServer</span><span class="hljs-params">()</span> </span>&#123;&#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        build();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 构建服务器</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">build</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">long</span> begin = System.currentTimeMillis();<br>            serverBootstrap.group(bossGroup, workerGroup) <span class="hljs-comment">//boss辅助客户端的tcp连接请求  worker负责与客户端之前的读写操作</span><br>                    .channel(NioServerSocketChannel.class) <span class="hljs-comment">//配置客户端的channel类型</span><br>                    .option(ChannelOption.SO_BACKLOG, <span class="hljs-number">1024</span>) <span class="hljs-comment">//配置TCP参数，握手字符串长度设置</span><br>                    .option(ChannelOption.TCP_NODELAY, <span class="hljs-keyword">true</span>) <span class="hljs-comment">//TCP_NODELAY算法，尽可能发送大块数据，减少充斥的小块数据</span><br>                    .childOption(ChannelOption.SO_KEEPALIVE, <span class="hljs-keyword">true</span>)<span class="hljs-comment">//开启心跳包活机制，就是客户端、服务端建立连接处于ESTABLISHED状态，超过2小时没有交流，机制会被启动</span><br>                    .childOption(ChannelOption.RCVBUF_ALLOCATOR, <span class="hljs-keyword">new</span> FixedRecvByteBufAllocator(<span class="hljs-number">592048</span>))<span class="hljs-comment">//配置固定长度接收缓存区分配器</span><br>                    .childHandler(childChannelHandler); <span class="hljs-comment">//绑定I/O事件的处理类,WebSocketChildChannelHandler中定义</span><br>            <span class="hljs-keyword">long</span> end = System.currentTimeMillis();<br><br>            logger.info(<span class="hljs-string">&quot;Netty Websocket服务器启动完成，耗时 &quot;</span> + (end - begin) + <span class="hljs-string">&quot; ms，已绑定端口 &quot;</span> + port + <span class="hljs-string">&quot; 阻塞式等候客户端连接&quot;</span>);<br><br>            serverChannelFuture = serverBootstrap.bind(port).sync();<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            logger.info(e.getMessage());<br>            bossGroup.shutdownGracefully();<br>            workerGroup.shutdownGracefully();<br>            e.printStackTrace();<br>        &#125;<br><br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 关闭资源</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">close</span><span class="hljs-params">()</span></span>&#123;<br>        serverChannelFuture.channel().close();<br>        Future&lt;?&gt; bossGroupFuture = bossGroup.shutdownGracefully();<br>        Future&lt;?&gt; workerGroupFuture = workerGroup.shutdownGracefully();<br><br>        <span class="hljs-keyword">try</span> &#123;<br>            bossGroupFuture.await();<br>            workerGroupFuture.await();<br>        &#125; <span class="hljs-keyword">catch</span> (InterruptedException ignore) &#123;<br>            ignore.printStackTrace();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> ChannelHandler <span class="hljs-title">getChildChannelHandler</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> childChannelHandler;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setChildChannelHandler</span><span class="hljs-params">(ChannelHandler childChannelHandler)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.childChannelHandler = childChannelHandler;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getPort</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> port;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setPort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> port)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.port = port;<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+</details>
+
+
+<details>
+    <summary>WebSocketChildChannelHandler</summary>
+
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">package</span> <span class="hljs-selector-tag">com</span><span class="hljs-selector-class">.gxwzu</span><span class="hljs-selector-class">.websocket</span>;<br><br><span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">io</span><span class="hljs-selector-class">.netty</span><span class="hljs-selector-class">.channel</span><span class="hljs-selector-class">.ChannelHandler</span>;<br><span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">io</span><span class="hljs-selector-class">.netty</span><span class="hljs-selector-class">.channel</span><span class="hljs-selector-class">.ChannelInitializer</span>;<br><span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">io</span><span class="hljs-selector-class">.netty</span><span class="hljs-selector-class">.channel</span><span class="hljs-selector-class">.socket</span><span class="hljs-selector-class">.SocketChannel</span>;<br><span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">io</span><span class="hljs-selector-class">.netty</span><span class="hljs-selector-class">.handler</span><span class="hljs-selector-class">.codec</span><span class="hljs-selector-class">.http</span><span class="hljs-selector-class">.HttpObjectAggregator</span>;<br><span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">io</span><span class="hljs-selector-class">.netty</span><span class="hljs-selector-class">.handler</span><span class="hljs-selector-class">.codec</span><span class="hljs-selector-class">.http</span><span class="hljs-selector-class">.HttpServerCodec</span>;<br><span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">io</span><span class="hljs-selector-class">.netty</span><span class="hljs-selector-class">.handler</span><span class="hljs-selector-class">.stream</span><span class="hljs-selector-class">.ChunkedWriteHandler</span>;<br><span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">org</span><span class="hljs-selector-class">.springframework</span><span class="hljs-selector-class">.stereotype</span><span class="hljs-selector-class">.Component</span>;<br><br><span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">javax</span><span class="hljs-selector-class">.annotation</span><span class="hljs-selector-class">.Resource</span>;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * @ProjectName gdm</span><br><span class="hljs-comment"> * @Author 麦奇</span><br><span class="hljs-comment"> * @Email biaogejiushibiao@outlook.com</span><br><span class="hljs-comment"> * @Date 4/28/20 8:19 AM</span><br><span class="hljs-comment"> * @Version 1.0</span><br><span class="hljs-comment"> * @Title: WebSocketChildChannelHandler</span><br><span class="hljs-comment"> * @Description:</span><br><span class="hljs-comment"> **/</span><br><br><span class="hljs-keyword">@Component</span><br>public class WebSocketChildChannelHandler extends ChannelInitializer&lt;SocketChannel&gt; &#123;<br><br>    <span class="hljs-keyword">@Resource</span>(name = <span class="hljs-string">&quot;webSocketServerHandler&quot;</span>)<br>    private ChannelHandler webSocketServerHandler;<br><br>    <span class="hljs-keyword">@Resource</span>(name = <span class="hljs-string">&quot;httpRequestHandler&quot;</span>)<br>    private ChannelHandler httpRequestHandler;<br><br>    <span class="hljs-keyword">@Override</span><br>    protected void initChannel(SocketChannel ch) throws Exception &#123;<br>        <span class="hljs-selector-tag">ch</span><span class="hljs-selector-class">.pipeline</span>()<span class="hljs-selector-class">.addLast</span>(&quot;<span class="hljs-selector-tag">http-codec</span>&quot;, <span class="hljs-selector-tag">new</span> <span class="hljs-selector-tag">HttpServerCodec</span>()); // <span class="hljs-selector-tag">HTTP</span>编码解码器<br>        <span class="hljs-selector-tag">ch</span><span class="hljs-selector-class">.pipeline</span>()<span class="hljs-selector-class">.addLast</span>(&quot;<span class="hljs-selector-tag">aggregator</span>&quot;, <span class="hljs-selector-tag">new</span> <span class="hljs-selector-tag">HttpObjectAggregator</span>(65536)); // 把<span class="hljs-selector-tag">HTTP</span>头、<span class="hljs-selector-tag">HTTP</span>体拼成完整的<span class="hljs-selector-tag">HTTP</span>请求<br>        <span class="hljs-selector-tag">ch</span><span class="hljs-selector-class">.pipeline</span>()<span class="hljs-selector-class">.addLast</span>(&quot;<span class="hljs-selector-tag">http-chunked</span>&quot;, <span class="hljs-selector-tag">new</span> <span class="hljs-selector-tag">ChunkedWriteHandler</span>()); // 分块，方便大文件传输，不过实质上都是短的文本数据<br>        <span class="hljs-selector-tag">ch</span><span class="hljs-selector-class">.pipeline</span>()<span class="hljs-selector-class">.addLast</span>(&quot;<span class="hljs-selector-tag">http-handler</span>&quot;, <span class="hljs-selector-tag">httpRequestHandler</span>);<br>        <span class="hljs-selector-tag">ch</span><span class="hljs-selector-class">.pipeline</span>()<span class="hljs-selector-class">.addLast</span>(&quot;<span class="hljs-selector-tag">websocket-handler</span>&quot;,<span class="hljs-selector-tag">webSocketServerHandler</span>);<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+</details>
+
+<details>
+    <summary>AppContext</summary>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs kotlin"><span class="hljs-keyword">package</span> com.gxwzu.websocket;<br><br><span class="hljs-keyword">import</span> org.slf4j.Logger;<br><span class="hljs-keyword">import</span> org.slf4j.LoggerFactory;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.<span class="hljs-keyword">annotation</span>.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.context.<span class="hljs-keyword">annotation</span>.Scope;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-keyword">import</span> javax.<span class="hljs-keyword">annotation</span>.PostConstruct;<br><span class="hljs-keyword">import</span> javax.<span class="hljs-keyword">annotation</span>.PreDestroy;<br><br><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@Scope()</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppContext</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Logger logger = LoggerFactory.getLogger(AppContext.<span class="hljs-keyword">class</span>);<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> WebSocketServer webSocketServer;<br><br>    <span class="hljs-keyword">private</span> Thread nettyThread;<br>    <br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 描述：Tomcat加载完ApplicationContext-main和netty文件后：</span><br><span class="hljs-comment">     *      1. 启动Netty WebSocket服务器；</span><br><span class="hljs-comment">     *      2. 加载用户数据；</span><br><span class="hljs-comment">     *      3. 加载用户交流群数据。</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostConstruct</span><br>    <span class="hljs-keyword">public</span> void <span class="hljs-keyword">init</span>() &#123;<br>        nettyThread = new Thread(webSocketServer);<br>        logger.info(<span class="hljs-string">&quot;开启独立线程，启动Netty WebSocket服务器...&quot;</span>);<br>        nettyThread.start();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 描述：Tomcat服务器关闭前需要手动关闭Netty Websocket相关资源，否则会造成内存泄漏。</span><br><span class="hljs-comment">     *      1. 释放Netty Websocket相关连接；</span><br><span class="hljs-comment">     *      2. 关闭Netty Websocket服务器线程。（强行关闭，是否有必要？）</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@SuppressWarnings(<span class="hljs-meta-string">&quot;deprecation&quot;</span>)</span><br>    <span class="hljs-meta">@PreDestroy</span><br>    <span class="hljs-keyword">public</span> void close() &#123;<br>        logger.info(<span class="hljs-string">&quot;正在释放Netty Websocket相关连接...&quot;</span>);<br>        webSocketServer.close();<br>        logger.info(<span class="hljs-string">&quot;正在关闭Netty Websocket服务器线程...&quot;</span>);<br>        nettyThread.stop();<br>        logger.info(<span class="hljs-string">&quot;系统成功关闭！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+</details>
+
+
+
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/albertfly/article/details/51526423">Tomcat 通过listener 启动netty 服务</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/netty/">netty</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/02/note/Lua-%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Lua 脚本学习</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/02/k8s/Minikube-Use-Tutorials/">
+                        <span class="hidden-mobile">Minikube 使用教程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     Copyright © 2017-2021 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> And <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> Core on Github Page 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        桂ICP备2020009931号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>桂公网安备2020009931号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

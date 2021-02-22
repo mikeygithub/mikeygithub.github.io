@@ -1,0 +1,997 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  <title>算法篇-极客大学算法 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>麦奇</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/todo/">
+                <i class="iconfont icon-plan"></i>
+                代办
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="算法篇-极客大学算法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Mikey
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-18 23:52" pubdate>
+        2020年12月18日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      47
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">算法篇-极客大学算法</h1>
+            
+            <div class="markdown-body">
+              <h1 id="第01课丨数据结构与算法总览"><a href="#第01课丨数据结构与算法总览" class="headerlink" title="第01课丨数据结构与算法总览"></a>第01课丨数据结构与算法总览</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/datasturts.png" srcset="/img/loading.gif" alt="数据结构脑图"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/suanfanaotu.png" srcset="/img/loading.gif" alt="算法脑图"></p>
+<h2 id="切题四件套"><a href="#切题四件套" class="headerlink" title="切题四件套"></a>切题四件套</h2><ul>
+<li>Clarification(清晰题目)</li>
+<li>Possible solutions(解决方法)<ul>
+<li>compare(time/space)(比较时间和空间)</li>
+<li>optimal(加强)</li>
+</ul>
+</li>
+<li>Coding(多写)</li>
+<li>Test cases(测试样例)</li>
+</ul>
+<blockquote>
+<p>用脑图的方式把知识的脉络串联起来，不管对于学习新知识还是巩固已有知识，都是一种很好的学习方式。同学们可以将目前自己所掌握的数据结构和算法知识绘制成脑图，在绘制过程中可以查阅资料，补充目前掌握欠缺的部分，找到自己薄弱的地方。后面再通过课程的学习和刻意练习，动态地将自己绘制的脑图逐步补充、完善，从而达到真正的融会贯通。</p>
+</blockquote>
+<h1 id="第02课丨训练准备和复杂度分析"><a href="#第02课丨训练准备和复杂度分析" class="headerlink" title="第02课丨训练准备和复杂度分析"></a>第02课丨训练准备和复杂度分析</h1><ul>
+<li><p><a target="_blank" rel="noopener" href="http://www.zhihu.com/question/21387264">如何理解算法时间复杂度的表示法</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Master_theorem_(analysis_of_algorithms)">Master theorem</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://zh.wikipedia.org/wiki/%E4%B8%BB%E5%AE%9A%E7%90%86">主定理</a></p>
+</li>
+</ul>
+<h1 id="第03课丨数组、链表、跳表"><a href="#第03课丨数组、链表、跳表" class="headerlink" title="第03课丨数组、链表、跳表"></a>第03课丨数组、链表、跳表</h1><p>· <a target="_blank" rel="noopener" href="http://developer.classpath.org/doc/java/util/ArrayList-source.html">Java 源码分析（ArrayList）</a></p>
+<p>· <a target="_blank" rel="noopener" href="http://www.geeksforgeeks.org/implementing-a-linked-list-in-java-using-class/">Linked List 的标准实现代码</a></p>
+<p>· [Linked List 示例代码](<a target="_blank" rel="noopener" href="http://www.cs.cmu.edu/~adamchik/15-121/lectures/Linked">http://www.cs.cmu.edu/~adamchik/15-121/lectures/Linked</a> Lists/code/LinkedList.java)</p>
+<p>· <a target="_blank" rel="noopener" href="http://developer.classpath.org/doc/java/util/LinkedList-source.html">Java 源码分析（LinkedList）</a></p>
+<p>· LRU Cache - Linked list：<a target="_blank" rel="noopener" href="http://leetcode-cn.com/problems/lru-cache"> LRU 缓存机制</a></p>
+<p>· Redis - Skip List：<a target="_blank" rel="noopener" href="http://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html">跳跃表</a>、<a target="_blank" rel="noopener" href="http://www.zhihu.com/question/20202931">为啥 Redis 使用跳表（Skip List）而不是使用 Red-Black？</a></p>
+<p>两数之和题目：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum/"> https://leetcode-cn.com/problems/two-sum/</a></p>
+<p>Array 实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/container-with-most-water/">https://leetcode-cn.com/problems/container-with-most-water/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/move-zeroes/">https://leetcode-cn.com/problems/move-zeroes/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode.com/problems/climbing-stairs/">https://leetcode.com/problems/climbing-stairs/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/3sum/">https://leetcode-cn.com/problems/3sum/ </a>(高频老题）</p>
+<p>Linked List 实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode.com/problems/reverse-linked-list/">https://leetcode.com/problems/reverse-linked-list/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode.com/problems/swap-nodes-in-pairs">https://leetcode.com/problems/swap-nodes-in-pairs</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode.com/problems/linked-list-cycle">https://leetcode.com/problems/linked-list-cycle</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode.com/problems/linked-list-cycle-ii">https://leetcode.com/problems/linked-list-cycle-ii</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode.com/problems/reverse-nodes-in-k-group/">https://leetcode.com/problems/reverse-nodes-in-k-group/</a></p>
+<p>课后作业</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/">https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/rotate-array/">https://leetcode-cn.com/problems/rotate-array/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-two-sorted-lists/">https://leetcode-cn.com/problems/merge-two-sorted-lists/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-sorted-array/">https://leetcode-cn.com/problems/merge-sorted-array/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum/">https://leetcode-cn.com/problems/two-sum/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/move-zeroes/">https://leetcode-cn.com/problems/move-zeroes/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/plus-one/">https://leetcode-cn.com/problems/plus-one/</a></p>
+<h1 id="第04课丨栈、队列、优先队列、双端队列"><a href="#第04课丨栈、队列、优先队列、双端队列" class="headerlink" title="第04课丨栈、队列、优先队列、双端队列"></a>第04课丨栈、队列、优先队列、双端队列</h1><p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="http://docs.oracle.com/javase/10/docs/api/java/util/PriorityQueue.html">Java 的 PriorityQueue 文档</a><br>· <a target="_blank" rel="noopener" href="http://developer.classpath.org/doc/java/util/Stack-source.html">Java 的 Stack 源码</a><br>· <a target="_blank" rel="noopener" href="http://fuseyism.com/classpath/doc/java/util/Queue-source.html">Java 的 Queue 源码</a><br>· <a target="_blank" rel="noopener" href="http://docs.python.org/2/library/heapq.html">Python 的 heapq</a><br>· <a target="_blank" rel="noopener" href="http://docs.python.org/2/library/collections.html">高性能的 container 库</a></p>
+<p>Array 实战题目<br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/container-with-most-water/">https://leetcode-cn.com/problems/container-with-most-water/</a><br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/move-zeroes/">https://leetcode-cn.com/problems/move-zeroes/</a><br> <a target="_blank" rel="noopener" href="https://leetcode.com/problems/climbing-stairs/">https://leetcode.com/problems/climbing-stairs/</a><br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/3sum/">https://leetcode-cn.com/problems/3sum/</a></p>
+<p>Linked List 实战题目<br> <a target="_blank" rel="noopener" href="https://leetcode.com/problems/reverse-linked-list/">https://leetcode.com/problems/reverse-linked-list/</a><br> <a target="_blank" rel="noopener" href="https://leetcode.com/problems/swap-nodes-in-pairs">https://leetcode.com/problems/swap-nodes-in-pairs</a><br> <a target="_blank" rel="noopener" href="https://leetcode.com/problems/linked-list-cycle">https://leetcode.com/problems/linked-list-cycle</a><br> <a target="_blank" rel="noopener" href="https://leetcode.com/problems/linked-list-cycle-ii">https://leetcode.com/problems/linked-list-cycle-ii</a><br> <a target="_blank" rel="noopener" href="https://leetcode.com/problems/reverse-nodes-in-k-group/">https://leetcode.com/problems/reverse-nodes-in-k-group/</a></p>
+<p>课后作业<br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/">https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/</a><br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/rotate-array/">https://leetcode-cn.com/problems/rotate-array/</a><br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-two-sorted-lists/">https://leetcode-cn.com/problems/merge-two-sorted-lists/</a><br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-sorted-array/">https://leetcode-cn.com/problems/merge-sorted-array/</a><br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/two-sum/">https://leetcode-cn.com/problems/two-sum/</a><br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/move-zeroes/">https://leetcode-cn.com/problems/move-zeroes/</a><br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/plus-one/">https://leetcode-cn.com/problems/plus-one/</a></p>
+<h1 id="第05课丨哈希表、映射、集合"><a href="#第05课丨哈希表、映射、集合" class="headerlink" title="第05课丨哈希表、映射、集合"></a>第05课丨哈希表、映射、集合</h1><p> Java Set 文档<br> Java Map 文档</p>
+<p>预习题目<br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-parentheses/">https://leetcode-cn.com/problems/valid-parentheses/</a><br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/min-stack/">https://leetcode-cn.com/problems/min-stack/</a></p>
+<p>实战题目<br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram">https://leetcode-cn.com/problems/largest-rectangle-in-histogram</a><br> <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sliding-window-maximum">https://leetcode-cn.com/problems/sliding-window-maximum</a></p>
+<p>课后作业<br>用 add first 或 add last 这套新的 API 改写 Deque 的代码<br>分析 Queue 和 Priority Queue 的源码<br><a target="_blank" rel="noopener" href="https://leetcode.com/problems/design-circular-deque">https://leetcode.com/problems/design-circular-deque</a><br><a target="_blank" rel="noopener" href="https://leetcode.com/problems/trapping-rain-water/">https://leetcode.com/problems/trapping-rain-water/</a></p>
+<h1 id="第06课丨树、二叉树、二叉搜索树"><a href="#第06课丨树、二叉树、二叉搜索树" class="headerlink" title="第06课丨树、二叉树、二叉搜索树"></a>第06课丨树、二叉树、二叉搜索树</h1><p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="https://visualgo.net/zh/bst">树的遍历 Demo</a></p>
+<p>实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-inorder-traversal/">https://leetcode-cn.com/problems/binary-tree-inorder-traversal/</a><br>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-preorder-traversal/">https://leetcode-cn.com/problems/binary-tree-preorder-traversal/</a><br>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/">https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/</a><br>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/description">https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/</a><br>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/">https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/</a></p>
+<h1 id="第07课丨泛型递归、树的递归"><a href="#第07课丨泛型递归、树的递归" class="headerlink" title="第07课丨泛型递归、树的递归"></a>第07课丨泛型递归、树的递归</h1><p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="http://shimo.im/docs/DjqqGCT3xqDYwPyY">递归代码模板</a></p>
+<p>实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/climbing-stairs/">https://leetcode-cn.com/problems/climbing-stairs/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/generate-parentheses/">https://leetcode-cn.com/problems/generate-parentheses/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/invert-binary-tree/description/">https://leetcode-cn.com/problems/invert-binary-tree/description/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/validate-binary-search-tree">https://leetcode-cn.com/problems/validate-binary-search-tree</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree">https://leetcode-cn.com/problems/maximum-depth-of-binary-tree</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-depth-of-binary-tree">https://leetcode-cn.com/problems/minimum-depth-of-binary-tree</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/">https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/</a></p>
+<p>每日一课</p>
+<p>· <a target="_blank" rel="noopener" href="https://time.geekbang.org/dailylesson/detail/100028406">如何优雅地计算斐波那契数列</a></p>
+<p>课后作业</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/">https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal">https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combinations/">https://leetcode-cn.com/problems/combinations/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations/">https://leetcode-cn.com/problems/permutations/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations-ii/">https://leetcode-cn.com/problems/permutations-ii/</a></p>
+<h1 id="第08课丨分治、回溯"><a href="#第08课丨分治、回溯" class="headerlink" title="第08课丨分治、回溯"></a>第08课丨分治、回溯</h1><p>预习题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/powx-n">Pow(x, n)</a> </p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets/">https://leetcode-cn.com/problems/subsets/</a></p>
+<p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/3xvghYh3JJPKwdvt">分治代码模板</a><br>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/generate-parentheses/">括号生成问题</a><br>· <a target="_blank" rel="noopener" href="http://www.matrix67.com/blog/archives/361">牛顿迭代法原理</a><br>· <a target="_blank" rel="noopener" href="http://www.voidcn.com/article/p-eudisdmk-zm.html">牛顿迭代法代码</a></p>
+<p>实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/majority-element/description/">多数元素</a>（简单、但是高频）</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/">https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-queens/">https://leetcode-cn.com/problems/n-queens/</a></p>
+<h1 id="第09课丨深度优先搜索和广度优先搜索"><a href="#第09课丨深度优先搜索和广度优先搜索" class="headerlink" title="第09课丨深度优先搜索和广度优先搜索"></a>第09课丨深度优先搜索和广度优先搜索</h1><p>· <a target="_blank" rel="noopener" href="http://shimo.im/docs/ddgwCccJQKxkrcTq">DFS 代码模板（递归写法、非递归写法）</a></p>
+<p>· <a target="_blank" rel="noopener" href="http://shimo.im/docs/P8TqKHGKt3ytkYYd">BFS 代码模板</a></p>
+<p>实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/#/description">柠檬水找零</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-genetic-mutation/#/description">https://leetcode-cn.com/problems/minimum-genetic-mutation/#/description</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/generate-parentheses/#/description">https://leetcode-cn.com/problems/generate-parentheses/#/description</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-largest-value-in-each-tree-row/#/description">https://leetcode-cn.com/problems/find-largest-value-in-each-tree-row/#/description</a></p>
+<p>课后作业</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-ladder/description/">https://leetcode-cn.com/problems/word-ladder/description/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-ladder-ii/description/">https://leetcode-cn.com/problems/word-ladder-ii/description/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-islands/">https://leetcode-cn.com/problems/number-of-islands/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minesweeper/description/">https://leetcode-cn.com/problems/minesweeper/description/</a></p>
+<h1 id="第10课丨贪心算法"><a href="#第10课丨贪心算法" class="headerlink" title="第10课丨贪心算法"></a>第10课丨贪心算法</h1><p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change/">coin change 题目</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">动态规划定义</a></p>
+<p>课后作业</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lemonade-change/description/">https://leetcode-cn.com/problems/lemonade-change/description/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/description/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/description/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/assign-cookies/description/">https://leetcode-cn.com/problems/assign-cookies/description/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/walking-robot-simulation/description/">https://leetcode-cn.com/problems/walking-robot-simulation/description/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jump-game/">https://leetcode-cn.com/problems/jump-game/</a>、</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jump-game-ii/">https://leetcode-cn.com/problems/jump-game-ii/</a></p>
+<h1 id="第11课丨二分查找"><a href="#第11课丨二分查找" class="headerlink" title="第11课丨二分查找"></a>第11课丨二分查找</h1><p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/hjQqRQkGgwd9g36J">二分查找代码模板</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://www.beyond3d.com/content/articles/8/">Fast InvSqrt() 扩展阅读</a></p>
+<p>实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sqrtx/">https://leetcode-cn.com/problems/sqrtx/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-perfect-square/">https://leetcode-cn.com/problems/valid-perfect-square/</a></p>
+<p>课后作业</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/">https://leetcode-cn.com/problems/search-in-rotated-sorted-array/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/search-a-2d-matrix/">https://leetcode-cn.com/problems/search-a-2d-matrix/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/">https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/</a></p>
+<p>· 使用二分查找，寻找一个半有序数组 [4, 5, 6, 7, 0, 1, 2] 中间无序的地方</p>
+<h1 id="第12课丨动态规划"><a href="#第12课丨动态规划" class="headerlink" title="第12课丨动态规划"></a>第12课丨动态规划</h1><p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="http://shimo.im/docs/DjqqGCT3xqDYwPyY/">递归代码模板</a></p>
+<p>· <a target="_blank" rel="noopener" href="http://shimo.im/docs/3xvghYh3JJPKwdvt/">分治代码模板</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Dynamic_programming">动态规划定义</a></p>
+<p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths/">不同路径题目</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths-ii/">不同路径 2 题目</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-common-subsequence/">最长公共子序列题目</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av53233912?from=search&seid=2847395688604491997">MIT 动态规划课程最短路径算法</a></p>
+<p>实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/climbing-stairs/description/">https://leetcode-cn.com/problems/climbing-stairs/description/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/triangle/description/">https://leetcode-cn.com/problems/triangle/description/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode.com/problems/triangle/discuss/38735/Python-easy-to-understand-solutions-(top-down-bottom-up)">https://leetcode.com/problems/triangle/discuss/38735/Python-easy-to-understand-solutions-(top-down-bottom-up)</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-subarray/">https://leetcode-cn.com/problems/maximum-subarray/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-product-subarray/description/">https://leetcode-cn.com/problems/maximum-product-subarray/description/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode.com/problems/coin-change/description/">https://leetcode-cn.com/problems/coin-change/description/</a></p>
+<p>实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/house-robber/">https://leetcode-cn.com/problems/house-robber/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/house-robber-ii/description/">https://leetcode-cn.com/problems/house-robber-ii/description/</a></p>
+<p>· <a href="#/description">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/#/description</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/yi-ge-fang-fa-tuan-mie-6-dao-gu-piao-wen-ti-by-l-3/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/yi-ge-fang-fa-tuan-mie-6-dao-gu-piao-wen-ti-by-l-3/</a></p>
+<p>高级 DP 实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/perfect-squares/">https://leetcode-cn.com/problems/perfect-squares/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/edit-distance/">https://leetcode-cn.com/problems/edit-distance/</a>（重点）</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jump-game/">https://leetcode-cn.com/problems/jump-game/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jump-game-ii/">https://leetcode-cn.com/problems/jump-game-ii/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths/">https://leetcode-cn.com/problems/unique-paths/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths-ii/">https://leetcode-cn.com/problems/unique-paths-ii/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths-iii/">https://leetcode-cn.com/problems/unique-paths-iii/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change/">https://leetcode-cn.com/problems/coin-change/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change-2/">https://leetcode-cn.com/problems/coin-change-2/</a></p>
+<p>课后作业</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-valid-parentheses/">https://leetcode-cn.com/problems/longest-valid-parentheses/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-path-sum/">https://leetcode-cn.com/problems/minimum-path-sum/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/edit-distance/">https://leetcode-cn.com/problems/edit-distance/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/decode-ways">https://leetcode-cn.com/problems/decode-ways</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximal-square/">https://leetcode-cn.com/problems/maximal-square/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/max-sum-of-rectangle-no-larger-than-k/">https://leetcode-cn.com/problems/max-sum-of-rectangle-no-larger-than-k/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/frog-jump/">https://leetcode-cn.com/problems/frog-jump/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/split-array-largest-sum">https://leetcode-cn.com/problems/split-array-largest-sum</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/student-attendance-record-ii/">https://leetcode-cn.com/problems/student-attendance-record-ii/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/task-scheduler/">https://leetcode-cn.com/problems/task-scheduler/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindromic-substrings/">https://leetcode-cn.com/problems/palindromic-substrings/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-window-substring/">https://leetcode-cn.com/problems/minimum-window-substring/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/burst-balloons/">https://leetcode-cn.com/problems/burst-balloons/</a></p>
+<h1 id="第13课丨字典树和并查集"><a href="#第13课丨字典树和并查集" class="headerlink" title="第13课丨字典树和并查集"></a>第13课丨字典树和并查集</h1><p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/">二叉树的层次遍历</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/solution/">实现 Trie</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/Pk6vPY3HJ9hKkh33">Tire 树代码模板</a></p>
+<p>实战题目 / 课后作业</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-search-ii/">单词搜索 II</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-islands/">岛屿数量</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/ydPCH33xDhK9YwWR">并查集代码模板</a></p>
+<p>实战题目 / 课后作业</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/friend-circles">https://leetcode-cn.com/problems/friend-circles</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-islands/">https://leetcode-cn.com/problems/number-of-islands/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/surrounded-regions/">https://leetcode-cn.com/problems/surrounded-regions/</a></p>
+<h1 id="第14课丨高级搜索"><a href="#第14课丨高级搜索" class="headerlink" title="第14课丨高级搜索"></a>第14课丨高级搜索</h1><p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="http://shimo.im/docs/ddgwCccJQKxkrcTq/">DFS 代码模板</a></p>
+<p>· <a target="_blank" rel="noopener" href="http://shimo.im/docs/P8TqKHGKt3ytkYYd/">BFS 代码模板</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://nikcheerla.github.io/deeplearningschool/2018/01/01/AlphaZero-Explained/">AlphaZero Explained</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Game_complexity">棋类复杂度</a></p>
+<p>实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/climbing-stairs/">https://leetcode-cn.com/problems/climbing-stairs/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/generate-parentheses/">https://leetcode-cn.com/problems/generate-parentheses/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-queens/">https://leetcode-cn.com/problems/n-queens</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-sudoku/description/">https://leetcode-cn.com/problems/valid-sudoku/description/</a></p>
+<p>· <a href="#/description">https://leetcode-cn.com/problems/sudoku-solver/#/description</a></p>
+<p>实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-ladder/">https://leetcode-cn.com/problems/word-ladder/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-genetic-mutation/">https://leetcode-cn.com/problems/minimum-genetic-mutation/</a></p>
+<p>课后作业</p>
+<p>· 总结双向 BFS 代码模版，请同学们提交在第 6 周学习总结中。</p>
+<p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/CXvjHyWhpQcxXjcw/">A* 代码模板</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://dataaspirant.com/2015/04/11/five-most-popular-similarity-measures-implementation-in-python/">相似度测量方法</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode.com/problems/shortest-path-in-binary-matrix/discuss/313347/A*-search-in-Python">二进制矩阵中的最短路径的 A* 解法</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://zxi.mytechroad.com/blog/searching/8-puzzles-bidirectional-astar-vs-bidirectional-bfs/">8 puzzles 解法比较</a></p>
+<p>实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shortest-path-in-binary-matrix/">https://leetcode-cn.com/problems/shortest-path-in-binary-matrix/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sliding-puzzle/">https://leetcode-cn.com/problems/sliding-puzzle/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sudoku-solver/">https://leetcode-cn.com/problems/sudoku-solver/</a></p>
+<h1 id="第15课丨红黑树和AVL树"><a href="#第15课丨红黑树和AVL树" class="headerlink" title="第15课丨红黑树和AVL树"></a>第15课丨红黑树和AVL树</h1><p>· <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree">平衡树</a></p>
+<h1 id="第16课丨位运算"><a href="#第16课丨位运算" class="headerlink" title="第16课丨位运算"></a>第16课丨位运算</h1><p>· <a target="_blank" rel="noopener" href="https://zh.wikihow.com/%E4%BB%8E%E5%8D%81%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E8%BF%9B%E5%88%B6">如何从十进制转换为二进制</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/rHTyt8hcpT6D9Tj8/">N 皇后位运算代码示例</a></p>
+<p>实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-1-bits/">https://leetcode-cn.com/problems/number-of-1-bits/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/power-of-two/">https://leetcode-cn.com/problems/power-of-two/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-bits/">https://leetcode-cn.com/problems/reverse-bits/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-queens/description/">https://leetcode-cn.com/problems/n-queens/description/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-queens-ii/description/">https://leetcode-cn.com/problems/n-queens-ii/description/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/counting-bits/description/">https://leetcode-cn.com/problems/counting-bits/description/</a></p>
+<h1 id="第17课丨布隆过滤器和LRU缓存"><a href="#第17课丨布隆过滤器和LRU缓存" class="headerlink" title="第17课丨布隆过滤器和LRU缓存"></a>第17课丨布隆过滤器和LRU缓存</h1><p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="https://www.cnblogs.com/cpselvis/p/6265825.html">布隆过滤器的原理和实现</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://blog.csdn.net/tianyaleixiaowu/article/details/74721877">使用布隆过滤器解决缓存击穿、垃圾邮件识别、集合判重</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/xKwrcwrDxRv3QpKG/">布隆过滤器 Python 代码示例</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/bloom-filters-introduction-and-python-implementation/">布隆过滤器 Python 实现示例</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://github.com/jhgg/pybloof">高性能布隆过滤器 Python 实现示例</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://github.com/lovasoa/bloomfilter/blob/master/src/main/java/BloomFilter.java">布隆过滤器 Java 实现示例 1</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://github.com/Baqend/Orestes-Bloomfilter">布隆过滤器 Java 实现示例 2</a></p>
+<p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="https://www.sqlpassion.at/archive/2018/01/06/understanding-the-meltdown-exploit-in-my-own-simple-words/">Understanding the Meltdown exploit</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cache_replacement_policies">替换算法总揽</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/tTxRkGwJpXG6WkGY/">LRU Cache Python 代码示例</a></p>
+<p>实战题目 / 课后作业</p>
+<p>· <a href="#/">https://leetcode-cn.com/problems/lru-cache/#/</a></p>
+<h1 id="第18课丨排序算法"><a href="#第18课丨排序算法" class="headerlink" title="第18课丨排序算法"></a>第18课丨排序算法</h1><p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="https://www.cnblogs.com/onepixel/p/7674659.html">十大经典排序算法</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/98KjvGwwGpTpYGKy/">快速排序代码示例</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/YqgG6vtdKwkXJkWx/">归并排序代码示例</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/6kRVHRphpgjHgCtx/">堆排序代码示例</a></p>
+<p>· 直播课回顾: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1sFuZ8GjDCXy5mPCNLZhHxw">https://pan.baidu.com/s/1sFuZ8GjDCXy5mPCNLZhHxw </a>提取码: 2rdy</p>
+<p>课后作业</p>
+<p>用自己熟悉的编程语言，手写各种初级排序代码，提交到第 7 周学习总结中。</p>
+<p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="https://www.cnblogs.com/onepixel/p/7674659.html">十大经典排序算法</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av25136272">9 种经典排序算法可视化动画</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av63851336">6 分钟看完 15 种排序算法动画展示</a></p>
+<p>实战题目</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/relative-sort-array/">https://leetcode-cn.com/problems/relative-sort-array/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-anagram/">https://leetcode-cn.com/problems/valid-anagram/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/design-a-leaderboard/">https://leetcode-cn.com/problems/design-a-leaderboard/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-intervals/">https://leetcode-cn.com/problems/merge-intervals/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-pairs/">https://leetcode-cn.com/problems/reverse-pairs/</a></p>
+<h1 id="第19课丨高级动态规划"><a href="#第19课丨高级动态规划" class="headerlink" title="第19课丨高级动态规划"></a>第19课丨高级动态规划</h1><p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/climbing-stairs/">爬楼梯</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths/">不同路径</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/house-robber/">打家劫舍</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-path-sum/">最小路径和</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/">股票买卖</a></p>
+<p>课后作业</p>
+<p>在第 8 周学习总结中，写出<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths-ii/">不同路径 2</a>这道题目的状态转移方程。</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/climbing-stairs/">爬楼梯</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/min-cost-climbing-stairs/">使用最小花费爬楼梯</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/edit-distance/">编辑距离</a></p>
+<p>课后作业</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-increasing-subsequence/">https://leetcode-cn.com/problems/longest-increasing-subsequence/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/decode-ways/">https://leetcode-cn.com/problems/decode-ways/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-valid-parentheses/">https://leetcode-cn.com/problems/longest-valid-parentheses/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximal-rectangle/">https://leetcode-cn.com/problems/maximal-rectangle/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/distinct-subsequences/">https://leetcode-cn.com/problems/distinct-subsequences/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/race-car/">https://leetcode-cn.com/problems/race-car/</a></p>
+<h1 id="第20课丨字符串算法"><a href="#第20课丨字符串算法" class="headerlink" title="第20课丨字符串算法"></a>第20课丨字符串算法</h1><p>参考链接</p>
+<p>· <a target="_blank" rel="noopener" href="https://lemire.me/blog/2017/07/07/are-your-strings-immutable/">不可变字符串</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/KkDKkpWxjjrJXdpY/">Atoi 代码示例</a></p>
+<p>字符串基础问题</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/to-lower-case/">https://leetcode-cn.com/problems/to-lower-case/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/length-of-last-word/">https://leetcode-cn.com/problems/length-of-last-word/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jewels-and-stones/">https://leetcode-cn.com/problems/jewels-and-stones/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/first-unique-character-in-a-string/">https://leetcode-cn.com/problems/first-unique-character-in-a-string/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/string-to-integer-atoi/">https://leetcode-cn.com/problems/string-to-integer-atoi/</a></p>
+<p>字符串操作问题</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-common-prefix/description/">https://leetcode-cn.com/problems/longest-common-prefix/description/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-string">https://leetcode-cn.com/problems/reverse-string</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-string-ii/">https://leetcode-cn.com/problems/reverse-string-ii/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-words-in-a-string/">https://leetcode-cn.com/problems/reverse-words-in-a-string/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/">https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-only-letters/">https://leetcode-cn.com/problems/reverse-only-letters/</a></p>
+<p>异位词问题</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-anagram/">https://leetcode-cn.com/problems/valid-anagram/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/group-anagrams/">https://leetcode-cn.com/problems/group-anagrams/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/">https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/</a></p>
+<p>回文串问题</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-palindrome/">https://leetcode-cn.com/problems/valid-palindrome/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-palindrome-ii/">https://leetcode-cn.com/problems/valid-palindrome-ii/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-substring/">https://leetcode-cn.com/problems/longest-palindromic-substring/</a></p>
+<p>最长子串、子序列问题</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-common-subsequence/">https://leetcode-cn.com/problems/longest-common-subsequence/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/edit-distance/">https://leetcode-cn.com/problems/edit-distance/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-substring/">https://leetcode-cn.com/problems/longest-palindromic-substring/</a></p>
+<p>字符串 +DP 问题</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/regular-expression-matching/">https://leetcode-cn.com/problems/regular-expression-matching/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/regular-expression-matching/solution/ji-yu-guan-fang-ti-jie-gen-xiang-xi-de-jiang-jie-b/">https://leetcode-cn.com/problems/regular-expression-matching/solution/ji-yu-guan-fang-ti-jie-gen-xiang-xi-de-jiang-jie-b/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/wildcard-matching/">https://leetcode-cn.com/problems/wildcard-matching/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/distinct-subsequences/">https://leetcode-cn.com/problems/distinct-subsequences/</a></p>
+<p>参考链接</p>
+<p>· <a href="http://xn--https-ni33a//www.ruanyifeng.com/blog/2013/05/boyer-moore_string_search_algorithm.html">Boyer-Moore 算法</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://blog.csdn.net/u012505432/article/details/52210975">Sunday 算法</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/dQDxQW8yXPXxh3Hg/">字符串匹配暴力法代码示例</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://shimo.im/docs/KXDdkT99TVtXvTXP/">Rabin-Karp 代码示例</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av11866460?from=search&seid=17425875345653862171">KMP 字符串匹配算法视频</a></p>
+<p>· <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html">字符串匹配的 KMP 算法</a></p>
+<p>课后作业</p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/first-unique-character-in-a-string/">https://leetcode-cn.com/problems/first-unique-character-in-a-string/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/string-to-integer-atoi/">https://leetcode-cn.com/problems/string-to-integer-atoi/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-string-ii/">https://leetcode-cn.com/problems/reverse-string-ii/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-words-in-a-string/">https://leetcode-cn.com/problems/reverse-words-in-a-string/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/">https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-only-letters/">https://leetcode-cn.com/problems/reverse-only-letters/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/">https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-substring/">https://leetcode-cn.com/problems/longest-palindromic-substring/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/isomorphic-strings/">https://leetcode-cn.com/problems/isomorphic-strings/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-palindrome-ii/">https://leetcode-cn.com/problems/valid-palindrome-ii/</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/wildcard-matching">https://leetcode-cn.com/problems/wildcard-matching</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-valid-parentheses">https://leetcode-cn.com/problems/longest-valid-parentheses</a></p>
+<p>· <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/distinct-subsequences/">https://leetcode-cn.com/problems/distinct-subsequences/</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/20/algorithm/%E7%AE%97%E6%B3%95%E7%AF%87-%E9%93%B6%E8%A1%8C%E5%AE%B6%E7%AE%97%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">算法篇-银行家算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/14/another/%E8%B5%84%E6%96%99%E7%AF%87-%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/">
+                        <span class="hidden-mobile">资料篇-学习资料</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     Copyright © 2017-2021 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> And <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> Core on Github Page 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        桂ICP备2020009931号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>桂公网安备2020009931号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

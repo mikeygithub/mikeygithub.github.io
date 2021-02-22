@@ -1,0 +1,809 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  <title>微务篇-微服务架构实战 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>麦奇</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/todo/">
+                <i class="iconfont icon-plan"></i>
+                代办
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="微务篇-微服务架构实战">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Mikey
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-05 14:32" pubdate>
+        2021年2月5日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">微务篇-微服务架构实战</h1>
+            
+            <div class="markdown-body">
+              <h1 id="常见的微服务组件"><a href="#常见的微服务组件" class="headerlink" title="常见的微服务组件"></a>常见的微服务组件</h1><ul>
+<li><p>服务注册</p>
+<blockquote>
+<p>服务注册是一个记录当前可用的微服务实例的网络信息数据库,是服务发现机制的主要核心,服务注册表包含查陶 API 、 管 理 API ,使用查询 API 获得可用服务的实例,使用管理 API实现注册、注销 。</p>
+</blockquote>
+</li>
+<li><p>服务发现</p>
+<blockquote>
+<p>服务调用方从服务注册中心找到自己需要调用的服务的地址。可以选择客户端服务发现,也可以选择服务端服务发现 。</p>
+</blockquote>
+</li>
+<li><p>负载均衡</p>
+<blockquote>
+<p>服务提供方一般以多实例的形式提供服务,负载均衡功能能够让服务调用方连接到合适的服务节点,并且节点选择的工作对服务调用方来说是透明的。可以选择服务端的负载均衡,也可以选择客户端的负载均衡。</p>
+</blockquote>
+</li>
+<li><p>服务网关</p>
+<blockquote>
+<p>服务网关是服务调用的唯一入口,可以在这个组件是实现用户鉴权、动态路由、灰度发布、AJB 测试、负载限流等功能。根据公司流量规模的大 小网关可以是 一个,也可以是多个 。</p>
+</blockquote>
+</li>
+<li><p>配置中 心</p>
+<blockquote>
+<p>将本地化的配置信息( Properties 、 XML 、 YAML 等〉注册到配置中心,实现程序包在开发、测试、生产环境 的无差别性,方便程序包的迁移。配置部分可以单独使用高可用的分布式配置中心,确保一个配置服务出现问题时,其他服务也能够提供配置服务。</p>
+</blockquote>
+</li>
+<li><p>API 管理</p>
+<blockquote>
+<p>以方便的形式编写及更新 API 文档,井以方便的形式供调用者查看和测试。通常 需要加入版本控制的概念,以确保服务的不同版本在升级过程中都能够提供服务。</p>
+</blockquote>
+</li>
+<li><p>集成框架</p>
+<blockquote>
+<p>微服务组件都以职责单一的程序包对外提供服务,集成框架以配置的形式将所有微服务组件集成到统一的界面框架下,让用户能够在统一的界面中使用系统。</p>
+</blockquote>
+</li>
+<li><p>分布式事务</p>
+<blockquote>
+<p>对于重要的业务,需要通过分布式事务技术 CTCC 、高可用消息服务、最大努力通知〉保证数据的一致性。根据业务的不同,适当地牺牲一些数据的一致性要求,确保数据的最终一致性。</p>
+</blockquote>
+</li>
+<li><p>调用链</p>
+<blockquote>
+<p>记录完成一个业务逻辑时调用到的微服务,并将这种串行或并行的调用关系展示出来 。在系统出锚时,可以方便地找到出错点。同时统计各个服务的调用次数,确保 比 较热的服务能够被分配更多的资源。</p>
+</blockquote>
+</li>
+<li><p>支撑平台</p>
+<blockquote>
+<p>系统微服务化后,系统变得更加碎片化,系统的部署、运维、监控等都比单体架构更加复杂,那么就需要将大部分的工作自动化。现在,可以通过 Docker 等工具来 中和这些微服务架构带来的弊端。例如,持续集成 、 蓝绿发布、健康检查、性能健康等。 可以 这么说,如果没有合适的支撑平台或工具,就不要使用微服务架构。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="常用的微服务框架"><a href="#常用的微服务框架" class="headerlink" title="常用的微服务框架"></a>常用的微服务框架</h1><p>各种语言都有自己的微服务框架 , 主要包括:</p>
+<ul>
+<li>主流微服务框架( Spring Cloud 、 Dubbo 〕:</li>
+<li>新锐微服务框架 Clstio )。</li>
+</ul>
+<h1 id="Spring-顶级项目"><a href="#Spring-顶级项目" class="headerlink" title="Spring 顶级项目"></a>Spring 顶级项目</h1><ul>
+<li>Spring I/O platform: 用于系统部署,是可集成的、构建现代化应用 的版本平台 , 具体来说当你使用 Maven Dependency 引 入 Spring jar 包时它就在工作了。</li>
+<li>Spring Boot : 旨在简化创建产品级的 Spring 应用和服务 , 简化了配置文件,使用嵌入式 Web 服务器,含有诸 多开箱即用 的微服务功能,可以和 Spring Cloud 联合部署。</li>
+<li>Spring Framework :即通常所说的 Spring 框架,是一个开源 的 Java/Java EE 全功能枝应用程序框架 ,其他 Spring 项目 如 Spring Boot 也依赖于 此框架 。</li>
+<li>Spring Cloud : 微服务工具包,为开发者提供了在分布式系统 的配置管理 、服务发现、断路器、智能路由、微代理、控制总线等开发工具包。</li>
+<li>Spring XD : 一种运行时环境(服务器软件 ,非开发框架),组合 Spring 技术,如 Springbatch 、 Spring Boot 、 Spring Data ,采集大数据并处理。</li>
+<li>Spring Data : 一个数据访问及操作 的工具包,封装了很 多种数据及数据库的访 问相 关技术,包括 JDBC 、 Redis 、 MongoDB 、 Neo4j 等。</li>
+<li>Spring Batch :批处理框架,或者说是批量任务执行管理器,功能包括任务调度、日志记录/跟踪等。</li>
+<li>Spring Security : 一个能够为基于 Spring 的 企业应用系统提供声 明式的安全访 问 控制解决方案的安全框架。</li>
+<li>Spring Integration : 面向企业应用集成( EAI尼SB )的编程框架,支持的通信方式包括HTTP, FTP 、 TCP几JDP, JMS 、 RabbitMQ 、 E-mail 等 。</li>
+<li>Spring Social : 一组工具包,一组连接社交服务 API ,如 Twi忧町、 Facebook、 Linkedln 、G1出ub 等,有几十个 。</li>
+<li>SpringAMQP :消息队列 操作的 工具包, 主要是封装了 RabbitMQ 的操作 。</li>
+<li>Spring HATEOAS : 一个用于支持实现超文本驱动的 阻ST Web 服务的开发库。</li>
+<li>Spring Mobile: Spring MVC 的扩展,用来简化手机上的 Web 应用开发。</li>
+<li>Spring for Android: Spring 框架的 一个扩展,其主要目 的在于简化 Android 本地应用的开发,提供 RestTemplate 来访问阻ST 服务 。</li>
+<li>Spring Web Flow :目标是成为 管理 Web 应用页面流程的 最佳方案,将页面跳转流程单独管理,并可配置。</li>
+<li>SpringLDAP : 一个用 于操作 LDAP 的 Java 工具包, 基于 Spring 的 JdbcTemplate 模式,简化 LDAP 访问。</li>
+<li>Spring Session: Session 管理 的开发工 具包,让你可以把 Session 保存到 Redis 等 ,进行集群化 S巳ssion 管理。</li>
+<li>Spring Web Servic巳S : 基于 Spring 的 Web 服务框架 ,提供 SOAP 服务开发 ,允许通过多种方式创建 Web 服务。</li>
+<li>Spring Shell : 提供交互式 的 Shell ,可以使用简单的基于 Spring 的编程模型来开发命令 ,比如 Spring Roo 命令。</li>
+<li>Spring Roo : 一种 Spring 开发的辅助工具,使用命令行操作来生成自动化项目,操作非常类似于 Rails 。</li>
+<li>Spring Scala: Scala 语言编程提供的 Spring 框架的封装(新的编程语言, Java 平 台的Scala 于 2003 年年底12004 年年初发布〉 。</li>
+<li>Spring BlazeDS Integration : 一个开发阳A 工具包,可以集成 Adobe Flex 、 B lazeDS 、Spring 及 Java 技术创建 RIA 。</li>
+<li>Spring Loaded :用于 实 现 Java 程序和 Web 应用的热部署 的开源 工具。</li>
+<li>Spring REST Shell :可以调用阻ST 服务 的命令行工具 ,使用命令行操作阻ST 服务 。</li>
+</ul>
+<h1 id="微服务设计原则"><a href="#微服务设计原则" class="headerlink" title="微服务设计原则"></a>微服务设计原则</h1><h1 id="Spring-Cloud-Netflix"><a href="#Spring-Cloud-Netflix" class="headerlink" title="Spring Cloud Netflix"></a>Spring Cloud Netflix</h1><ul>
+<li><p>Eureka :基于阻 ST 服务的分布式中间件,主要用于服务管理。</p>
+</li>
+<li><p>Hystrix : 容错框架,通过添加延迟阔值及容错的逻辑来帮助我们 控制分布式系统间组件的交互。</p>
+</li>
+<li><p>Feign :一个 REST 客户端,目的是简化 Web Servic巳 客户端的开发 。</p>
+</li>
+<li><p>Ribbon : 负载均衡框架,在微服务集群中为各个客户端的通信提供支持,它主要实现中间层应用程序的负载均衡 。</p>
+</li>
+<li><p>Zuul :为微服务集群提供过代理、过滤 、 路由等功能。除了 Spring Cloud Netflix 模块, Spring C loud 还包括以下几个重要的模块。</p>
+</li>
+<li><p>Spring Cloud Config :为分布式系统提供了配置服务器和配置客户端,通过对它们的配置,可以很好地管理集群 中的配置文件。</p>
+</li>
+<li><p>Spring Cloud Sleuth :服务跟踪框架 ,可以 与 Zipkin 、 Apache HTrace 和 ELK 等数据分析、服务跟踪系统进行整合,为服务跟踪 、 解决问题提供了便利 。</p>
+</li>
+<li><p>Spring Cloud S仕earn : 用于构建消息驱动微服务的框架,该框架在 Spring Boot 的基础上 , 整合了“ Spring Integration ,, 来连接消息、代理中 间 件。</p>
+</li>
+<li><p>Spring Cloud Bus :连接 RabbitMQ 、 Kafka 等消息代理的集群消息总线。</p>
+</li>
+</ul>
+<h1 id="微服务窑错"><a href="#微服务窑错" class="headerlink" title="微服务窑错"></a>微服务窑错</h1><p>服务雪崩效应是一种因服务提供者的不可用而导致服务调用者的不可用的现象,并将不可用逐渐放大的过程。举例来说,我们使用链式设计模式构建的微服务,当其他的服务出现问题时,就会出现连锁支应,导致整个服务链条不可用。</p>
+<p>造成服务不可用的原因包括:</p>
+<ul>
+<li>硬件故障;</li>
+<li>网络连接缓慢;</li>
+<li>程序 Bug;</li>
+<li>缓存击穿, 一般发生在缓存应用 重启,所有缓存被清空时,以及短时间内大量缓存失效时。大量的缓存不命中,使请求直击后端,造成服务提供者超负荷运行,引起服务不可用:</li>
+<li>用户大量请求。</li>
+</ul>
+<p>应对方案</p>
+<ul>
+<li><p>流量控制</p>
+<blockquote>
+<p>一般是使用 Nginx 进行流量控制,对流量大的应用采用分流和限制,这个功能也可以使用网关来完成 。</p>
+</blockquote>
+</li>
+<li><p>服务自动扩容</p>
+<blockquote>
+<p>取决于硬件的限制,也可以使用第三方的云服务以达到扩容的效果 。 如果微服务构建得比较成熟,则可以通过容器的动态扩容来完成服务的扩容 。</p>
+</blockquote>
+</li>
+<li><p>降级和资源隔离</p>
+</li>
+</ul>
+<blockquote>
+<p>资源隔离主要是对调用服务的线程池进行隔离,监控一般要细致到线程级别,当发现某个线程占用资源过高时,进行有效的处理来解决性能瓶颈 。</p>
+</blockquote>
+<p>我们根据具体业务将依赖服务分为强依赖和弱依赖 。 强依赖服务不可用会导致当前业务中止,而弱依赖服务的不可用不会导致当前业务的中止。</p>
+<p><code>不可用服务的调用快速失败 一般通过超时机制、熔断器和 ;培断后的降级方法来实现。</code></p>
+<h1 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h1><p><code>Servlet 的 生命周期有四 个阶段 : 加载并实例化、初始化、请求处理、销毁 。主要涉及 的方法有 in it 、 service 、 doGet 、 doPost 、 desto町 等。</code></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="">《微服务架构实战》</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/microservice-actual-combat">代码</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/10/os/OS%E7%AF%87-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E4%B8%8E%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">OS篇-计算机组成与系统结构</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/04/algorithm/%E7%AE%97%E6%B3%95%E7%AF%87-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/">
+                        <span class="hidden-mobile">算法篇-字符串匹配算法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     Copyright © 2017-2021 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> And <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> Core on Github Page 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        桂ICP备2020009931号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>桂公网安备2020009931号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

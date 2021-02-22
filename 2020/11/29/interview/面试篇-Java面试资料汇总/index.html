@@ -1,0 +1,898 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  <title>面试篇-Java面试资料汇总 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>麦奇</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/todo/">
+                <i class="iconfont icon-plan"></i>
+                代办
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="面试篇-Java面试资料汇总">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Mikey
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-29 10:55" pubdate>
+        2020年11月29日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      53
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">面试篇-Java面试资料汇总</h1>
+            
+            <div class="markdown-body">
+              <details>
+  <summary><span>2019年中国互联网企业100强名单</span></summary>
+  <br>
+
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text"><br><br>排名	中文名称	中文简称	主要品牌<br>1	阿里巴巴（中国）有限公司	阿里巴巴	淘宝、阿里云、高德<br>2	深圳市腾讯计算机系统有限责任公司	腾讯公司	微信、QQ、腾讯网<br>3	百度公司	百度	百度、爱奇艺<br>4	京东集团	京东	商城、物流、京东云<br>5	浙江蚂蚁小微金融服务集团股份有限公司	蚂蚁金服	支付宝、相互宝、芝麻信用蚂蚁森林<br>6	网易集团	网易	网易邮箱、网易严选、网易新闻<br>7	美团点评	美团	美团、大众点评、美团外卖、美团买菜<br>8	北京字节跳动科技有限公司	字节跳动	抖音、今日头条<br>9	三六零安全科技股份有限公司	三六零	360安全卫士、360浏览器<br>10	新浪公司	新浪公司	新浪网、微博<br>11	上海寻梦信息技术有限公司	拼多多	拼多多<br>12	搜狐公司	搜狐	搜狐媒体、搜狐视频<br>13	北京五八信息技术有限公司	58集团	58同城、赶集网、安居客<br>14	苏宁控股集团有限公司	苏宁控股	苏宁易购、PP视频<br>15	小米集团	小米集团	小米、米家、米兔<br>16	携程计算机技术（上海）有限公司	携程旅行网	携程旅行网、天巡<br>17	用友网络科技股份有限公司	用友网络	U8c、财务云、精智工业互联网平台<br>18	北京猎豹移动科技有限公司	猎豹移动	猎豹清理大师、AI智能服务机器人<br>19	北京车之家信息技术有限公司	汽车之家	汽车之家、二手车之家<br>20	湖南快乐阳光互动娱乐传媒有限公司	快乐阳光	芒果TV<br>21	唯品会（中国）有限公司	唯品会	唯品会<br>22	央视国际网络有限公司	央视网	央视网、中国IPTV、CCTV手机电视<br>23	三七文娱（广州）网络科技有限公司	三七互娱	37手游、极光网络、37游戏、37Games<br>24	北京昆仑万维科技股份有限公司	昆仑万维	GameArk、闲徕互娱、Grindr<br>25	浪潮集团有限公司	浪潮	浪潮云，天元数据网、爱城市网、一贷通<br>26	北京网聘咨询有限公司	智联招聘	智联招聘<br>27	新华网股份有限公司	新华网	学习进行时、国家相册、思客<br>28	人民网股份有限公司	人民网	中国共产党新闻网、强国论坛、两会进行时<br>29	同程旅游集团	同程旅游	同程旅游、艺龙旅行网<br>30	武汉斗鱼网络科技有限公司	斗鱼直播	斗鱼直播<br>31	广州华多网络科技有限公司	欢聚时代	多玩游戏网、YYLive<br>32	网宿科技股份有限公司	网宿科技	网宿云分发、网宿云、网宿网盾<br>33	咪咕文化科技有限公司	咪咕文化	咪咕视频、咪咕音乐、咪咕阅读<br>34	巨人网络集团股份有限公司	巨人网络	征途系列、仙侠世界系列<br>35	贵阳朗玛信息技术股份有限公司	朗玛信息	39互联网医院、39健康网、39健康智慧家庭<br>36	鹏博士电信传媒集团股份有限公司	鹏博士	鹏博士数据中心、鹏博士云网、长城宽带<br>37	上海钢银电子商务股份有限公司	钢银电商	钢银电商<br>38	东方明珠新媒体股份有限公司	东方明珠	百视通、东方购物、SITV<br>39	黑龙江龙采科技集团有限责任公司	龙采科技集团	龙采、资海、采云平台、龙采智慧云<br>40	深圳市迅雷网络技术有限公司	迅雷集团	迅雷X、迅雷影音、玩客云<br>41	易车控股有限公司	易车	易车网、易鑫集团<br>42	四三九九网络股份有限公司	4399	4399小游戏、4399休闲娱乐平台<br>43	上海米哈游网络科技股份有限公司	米哈游	米哈游<br>44	完美世界股份有限公司	完美世界	完美世界游戏、完美世界影视<br>45	竞技世界（北京）网络技术有限公司	竞技世界	JJ比赛<br>46	前锦网络信息技术（上海）有限公司	前程无忧	前程无忧、应届生求职网、51米多多<br>47	北京蜜莱坞网络科技有限公司	映客直播	映客APP、种子视频<br>48	无锡华云数据技术服务有限公司	华云数据集团	华云、CloudUltra®、H2CI™<br>49	上海波克城市网络科技股份有限公司	波克城市	波克城市、捕鱼达人、猫咪公寓<br>50	东软集团股份有限公司	东软集团	Neusoft东软<br>51	盛跃网络科技（上海）有限公司	盛趣游戏	盛趣游戏<br>52	科大讯飞股份有限公司	科大讯飞	讯飞输入法、讯飞翻译机、讯飞听见<br>53	优刻得科技股份有限公司	优刻得	UCloud、优铭云、安全屋<br>54	杭州顺网科技股份有限公司	顺网科技	网维大师、顺网云、顺网游戏<br>55	北京光环新网科技股份有限公司	光环新网	互联网数据中心服务、云计算及相关服务<br>56	汇通达网络股份有限公司	汇通达	超级老板APP、汇通达汇掌柜APP+微商城<br>57	深圳市房多多网络科技有限公司	房多多	房多多<br>58	福建网龙计算机网络信息技术有限公司	网龙网络公司	魔域、英魂之刃、101贝考<br>59	美图公司	美图	美图秀秀、美颜相机、美拍<br>60	汇量科技集团	汇量科技	Mobvista、Mintegral、GameAnalytics<br>61	广州多益网络股份有限公司	多益网络	多益网络、神武、梦想世界<br>62	深圳市创梦天地科技有限公司	创梦天地	乐逗游戏<br>63	深圳市梦网科技发展有限公司	梦网科技	富信RBM、IM云、物联云<br>64	上海二三四五网络控股集团股份有限公司	二三四五	2345网址导航、2345加速浏览器<br>65	北京搜房科技发展有限公司	房天下	房天下网、开发云、家居云<br>66	世纪龙信息网络有限责任公司	世纪龙（21CN）	天翼云盘、189邮箱、21CN门户<br>67	游族网络股份有限公司	游族网络	少年三国志、权力的游戏凛冬将至<br>68	河南锐之旗网络科技有限公司	锐之旗	锐之旗、云和数据<br>69	好未来教育科技集团	好未来	学而思网校<br>70	珍岛信息技术（上海）股份有限公司	珍岛	珍岛、T云、Trueland<br>71	杭州边锋网络技术有限公司	边锋网络	边锋游戏、游戏茶苑<br>72	金蝶软件（中国）有限公司	金蝶软件	金蝶、金蝶云<br>73	上海幻电信息科技有限公司	哔哩哔哩	哔哩哔哩<br>74	湖南竞网智赢网络技术有限公司	竞网	智营销综合服务、网络营销推广服务<br>75	北京中钢网信息股份有限公司	中钢网	中钢网、抢钢宝、现货通<br>76	湖南草花互动网络科技有限公司	草花互动	草花手游平台<br>77	北京密境和风科技有限公司	花椒直播	花椒直播<br>78	贝壳找房（北京）科技有限公司	贝壳找房	贝壳找房<br>79	二六三网络通信股份有限公司	二六三网络通信	263云通信、263企业邮箱、263企业直播<br>80	南京途牛科技有限公司	途牛	途牛旅游网、笛风云、途牛金服<br>81	东方财富信息股份有限公司	东方财富	东方财富网、天天基金网、股吧<br>82	拉卡拉支付股份有限公司	拉卡拉	拉卡拉支付、积分购<br>83	厦门吉比特网络技术股份有限公司	吉比特	《问道》、《问道手游》、《不思议迷宫》<br>84	福建乐游网络科技有限公司	乐游网络	6Y乐游网、乐游App<br>85	广州荔支网络技术有限公司	荔枝	荔枝APP<br>86	深圳市岚悦网络科技有限公司	中手游	中手游<br>87	满帮集团	满帮	货车帮、运满满<br>88	山东开创集团股份有限公司	开创集团	开创、开创云、众创社群、曹操送<br>89	厦门翔通动漫有限公司	翔通动漫	绿豆蛙、酷巴熊等动漫IP<br>90	第一视频通信传媒有限公司	第一视频集团	第一视频网、疯狂体育、中阿卫视<br>91	上海东方网股份有限公司	东方网	翱翔、东方头条、纵相<br>92	上海创蓝文化传播有限公司	创蓝253	短信、空号检测、国际短信<br>93	中至数据集团股份有限公司	中至数据集团	中至长尾广告、中至游戏<br>94	行吟信息科技（上海）有限公司	小红书	小红书APP、小红书之家<br>95	湖北盛天网络技术股份有限公司	盛天网络	易乐游网娱平台、战吧电竞平台<br>96	百合佳缘网络集团股份有限公司	百合佳缘集团	世纪佳缘网、百合网、百合情感<br>97	上海找钢网信息科技股份有限公司	找钢网	钢铁全产业链电商、找钢指数<br>98	厦门美柚信息科技有限公司	美柚	美柚、柚宝宝、柚子街<br>99	深圳市思贝克集团有限公司	思贝克	思贝克、SPEK<br>100	山东海看网络科技有限公司 [1] 	海看	海看IPTV、轻快融媒、海看健康<br></code></pre></div></td></tr></table></figure>
+
+</details>
+
+
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/pdf/labuladong%E7%9A%84%E7%AE%97%E6%B3%95%E5%B0%8F%E6%8A%84%E5%AE%98%E6%96%B9%E5%AE%8C%E6%95%B4%E7%89%88.pdf">labuladong的算法小抄官方完整版</a></p>
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/pdf/JavaGuide%E9%9D%A2%E8%AF%95%E7%AA%81%E5%87%BB%E7%89%88.pdf">JavaGuide面试突击版</a></p>
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/pdf/%E7%AC%AC%E4%BA%8C%E6%9C%9F%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E9%9D%A2%E8%AF%95%E9%A2%98%E9%99%84%E7%AD%94%E6%A1%88%E8%A7%A3%E6%9E%90.pdf">第二期字节跳动面试题附答案解析</a></p>
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/pdf/%E7%AC%AC%E4%B8%80%E6%9C%9F%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%86%85%E9%83%A8%E9%9D%A2%E8%AF%95%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.pdf">第一期阿里巴巴内部面试参考手册(P5-P7)</a></p>
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/pdf/SpringBoot%E9%9D%A2%E8%AF%95%E4%B8%93%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88.pdf">SpringBoot面试专题及答案.pdf</a></p>
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/pdf/MySQL55%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88.pdf">MySQL55题及答案</a></p>
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/pdf/SpringCloud%E9%9D%A2%E8%AF%95%E4%B8%93%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88.pdf">SpringCloud面试专题及答案.pdf</a></p>
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/pdf/redis%E9%9D%A2%E8%AF%95%E9%A2%98%E5%8F%8A%E7%AD%94%E6%A1%88%EF%BC%88%E4%B8%8A%EF%BC%89.pdf">redis面试题及答案(上)</a></p>
+<p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/pdf/1000%E9%81%93%E4%BA%92%E8%81%94%E7%BD%91Java%E5%B7%A5%E7%A8%8B%E5%B8%88%E9%9D%A2%E8%AF%95%E9%A2%98.pdf">1000道互联网Java工程师面试题</a></p>
+<h1 id="面试高频题目"><a href="#面试高频题目" class="headerlink" title="面试高频题目"></a>面试高频题目</h1><h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><ol>
+<li>Java 中的几种基本数据类型是什么？对应的包装类型是什么？各自占用多少字节呢？</li>
+<li><code>String</code> <code>、 StringBuffer</code> 和 <code>StringBuilder</code> 的区别是什么? <code>String</code> 为什么是不可变的?</li>
+<li>== 与 equals?hashCode 与 equals ?</li>
+<li>Java 反射？反射有什么缺点？你是怎么理解反射的（为什么框架需要反射）？</li>
+<li>谈谈对 Java 注解的理解，解决了什么问题？</li>
+<li>Java 泛型了解么？什么是类型擦除？介绍一下常用的通配符？</li>
+<li>内部类了解吗？匿名内部类了解吗？</li>
+<li>BIO,NIO,AIO 有什么区别?</li>
+</ol>
+<h3 id="Java-集合框架"><a href="#Java-集合框架" class="headerlink" title="Java 集合框架"></a>Java 集合框架</h3><ol>
+<li>说说 List,Set,Map 三者的区别？三者底层的数据结构？</li>
+<li>有哪些集合是线程不安全的？怎么解决呢？</li>
+<li>比较 HashSet、LinkedHashSet 和 TreeSet 三者的异同</li>
+<li>HashMap 和 Hashtable 的区别？HashMap 和 HashSet 区别？HashMap 和 TreeMap 区别？</li>
+<li>HashMap 的底层实现</li>
+<li>HashMap 的长度为什么是 2 的幂次方</li>
+<li>ConcurrentHashMap 和 Hashtable 的区别？</li>
+<li>ConcurrentHashMap 线程安全的具体实现方式/底层具体实现</li>
+</ol>
+<h3 id="jvm"><a href="#jvm" class="headerlink" title="jvm"></a>jvm</h3><ol>
+<li>jvm 内存结构</li>
+<li>jvm 调优参数</li>
+<li>什么是类加载？何时类加载？类加载流程？</li>
+<li>知道哪些类加载器。类加载器之间的关系？</li>
+<li>类加载器的双亲委派了解么？结合 Tomcat 说一下双亲委派（Tomcat 如何打破双亲委托机制？…）。</li>
+<li><strong>为什么需要双亲委派</strong></li>
+<li>Java 内存模型</li>
+<li>栈中存放什么数据，堆中呢？</li>
+<li>大对象放在哪个内存区域</li>
+<li>堆区如何分类</li>
+<li>垃圾回收有哪些算法</li>
+<li>GC 的全流程</li>
+<li>GC 中老年代用什么回收方法？</li>
+</ol>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><ol>
+<li>线程和进程的区别。</li>
+<li>什么是上下文切换?</li>
+<li>什么是线程死锁?如何避免死锁?</li>
+<li>乐观锁和悲观锁了解么？</li>
+<li>说说 <code>sleep()</code> 方法和 <code>wait()</code> 方法区别和共同点?</li>
+<li><strong>Java 线程池有哪些参数？阻塞队列有几种？拒绝策略有几种？新线程添加的流程?</strong></li>
+<li>实现 <code>Runnable</code> 接口和 <code>Callable</code> 接口的区别。</li>
+<li><strong>讲一下 JMM(Java 内存模型)。<code>volatile</code> 关键字解决了什么问题？说说 <code>synchronized</code> 关键字和 <code>volatile</code> 关键字的区别。</strong></li>
+<li><strong>AQS 原理了解么？AQS 组件有哪些？</strong></li>
+<li>用过 CountDownLatch 么？什么场景下用的？</li>
+</ol>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><ol>
+<li>OSI 与 TCP/IP 各层的结构与功能,都有哪些协议?为什么网络要分层？</li>
+<li><strong>计算机网络的一些常见状态码</strong></li>
+<li>ping 所使用的协议</li>
+<li><strong>TCP 的三次握手与四次挥手的内容？TCP 为什么连接是三次握手而断开是四次握手？</strong></li>
+<li>TCP 与 UDP 的区别及使用场景</li>
+<li>TCP 是如何保证传输的可靠性？</li>
+<li><strong>一次完整的 HTTP 请求所经的步骤</strong></li>
+<li>HTTP 协议了解么？HTTP 是基于 TCP 还是 UDP 的？</li>
+<li>HTTP 报文的内容简单说一下！HTTP 请求报文和响应报文中有哪些数据？</li>
+<li>HTTP 和 HTTPS 的区别了解么？</li>
+<li>HTTP 请求有哪些常见的状态码？</li>
+<li>HTTP 长连接和短连接了解么？</li>
+<li><strong>Cookie 和 Session 的关系</strong></li>
+<li>URI 和 URL 的区别是什么?</li>
+</ol>
+<h2 id="算法和数据结构"><a href="#算法和数据结构" class="headerlink" title="算法和数据结构"></a>算法和数据结构</h2><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><ol>
+<li>LRU 算法了解吗？你能实现一个吗？</li>
+<li>写排序算法（快排、堆排）</li>
+<li>使用数组实现一个栈</li>
+<li>使用数组实现一个队列</li>
+<li>实现一个链表、反转链表、</li>
+<li>……</li>
+</ol>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><ol>
+<li>数组 vs 链表</li>
+<li>栈的应用场景</li>
+<li>队列的分类、应用场景</li>
+<li>红黑树的特点、红黑树 vs 二叉查找树</li>
+<li>哈希表、哈希表应用场景</li>
+<li>布隆过滤器了解吗？</li>
+<li>……</li>
+</ol>
+<h2 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h2><h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h3><ol>
+<li>何为设计模式？有哪些常见的设计模式？</li>
+<li>单例模式了解么？说一下单例模式的使用场景。手写一个单例模式的实现。</li>
+<li>观察者模式了解么？说一下观察者模式的使用场景。</li>
+<li>工厂模式了解么？说一下工厂模式的使用场景。</li>
+<li>责任链模式了解么？哪些开源项目（Netty、MyBatis …）中用到了责任链模式？怎么用的？</li>
+<li>SOLID 原则了解么？简单谈谈自己对于单一职责原则和开闭原则的理解。</li>
+<li>阅读 Spring 源码的时候什么设计模式最让你影响深刻？能简单讲讲吗？</li>
+</ol>
+<h3 id="常见框架"><a href="#常见框架" class="headerlink" title="常见框架"></a>常见框架</h3><h4 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h4><ol>
+<li>什么是 Spring 框架?</li>
+<li>列举一些重要的 Spring 模块？</li>
+<li>谈谈自己对于 Spring IoC 和 AOP 的理解</li>
+<li>Spring Bean 的生命周期说一下</li>
+<li>Spring 中的 bean 的作用域有哪些?</li>
+<li>拦截器和过滤器了解么？</li>
+<li>Spring 动态代理默认用哪一种</li>
+<li>hibernate 和 mybatis 区别</li>
+<li>Spring Boot 和 Spring 的区别</li>
+<li>说出使用 Spring Boot 的主要优点</li>
+<li>什么是 Spring Boot Starter?</li>
+<li>介绍一下<code>@SpringBootApplication</code> 注解</li>
+<li>Spring Boot 的自动配置是如何实现的?</li>
+<li>Spring Boot 支持哪些嵌入式 web 容器？</li>
+</ol>
+<h4 id="Netty"><a href="#Netty" class="headerlink" title="Netty"></a>Netty</h4><ol>
+<li>BIO,NIO 和 AIO 有啥区别？</li>
+<li>Netty 是什么？为啥不直接用 NIO 呢?</li>
+<li>为什么要用 Netty？Netty 应用场景了解么？</li>
+<li>介绍一下 Netty 的核心组件？</li>
+<li>Bootstrap 和 ServerBootstrap 了解么？</li>
+<li>NioEventLoopGroup 默认的构造函数会起多少线程？</li>
+<li>Netty 线程模型了解么？</li>
+<li>什么是 TCP 粘包/拆包?有什么解决办法呢？</li>
+<li>Netty 长连接、心跳机制了解么？</li>
+</ol>
+<h3 id="权限认证"><a href="#权限认证" class="headerlink" title="权限认证"></a>权限认证</h3><ol>
+<li>认证 (Authentication) 和授权 (Authorization)的区别是什么？</li>
+<li>什么是 Cookie ? Cookie 的作用是什么?如何在服务端使用 Cookie ?</li>
+<li>Cookie 和 Session 有什么区别？如何使用 Session 进行身份验证？</li>
+<li>如果没有 Cookie 的话 Session 还能用吗？</li>
+<li>为什么 Cookie 无法防止 CSRF 攻击，而 token 可以？</li>
+<li>什么是 Token?什么是 JWT?如何基于 Token 进行身份验证？</li>
+<li>什么是 OAuth 2.0？</li>
+<li>什么是 SSO(单点登录)？</li>
+</ol>
+<h3 id="微服务-分布式"><a href="#微服务-分布式" class="headerlink" title="微服务/分布式"></a>微服务/分布式</h3><h4 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h4><p><strong>RPC 基础：</strong></p>
+<ol>
+<li>了解 RPC 吗？有哪些常见的 RPC 框架？</li>
+<li>如果让你自己设计 RPC 框架你会如何设计？</li>
+<li>服务之间的调用为啥不直接用 HTTP 而用 RPC？</li>
+</ol>
+<p><strong>Dubbo:</strong></p>
+<ol>
+<li>Dubbo 了解吗？</li>
+<li>Dubbo 的工作原理了解么？注册中心扮演了什么角色？注册中心挂了可以继续通信吗？</li>
+<li>Dubbo 的负载均衡策略了解么？</li>
+<li>Dubbo 的 spi 机制了解么？带来了啥好处？</li>
+</ol>
+<h4 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h4><ol>
+<li>为什么要用消息队列?</li>
+<li>对比一下常见的消息队列?</li>
+<li>如何保证消息不被重复消费?</li>
+<li>如何保证消息消费的顺序性?</li>
+</ol>
+<h4 id="分布式-ID"><a href="#分布式-ID" class="headerlink" title="分布式 ID"></a>分布式 ID</h4><ol>
+<li>何为 ID？</li>
+<li>何为分布式 ID？</li>
+<li>一个合格的分布式 ID 需要满足什么要求?</li>
+<li>分布式 ID 常见的生成方法有哪些？（数据库主键自增、数据库的号段模式、UUID、SNOWFLAKE 等等）</li>
+</ol>
+<h4 id="其他-网关、限流…"><a href="#其他-网关、限流…" class="headerlink" title="其他(网关、限流…)"></a>其他(网关、限流…)</h4><ol>
+<li>为什么要网关？</li>
+<li>为什么要用分布式锁？有哪些实现方式？</li>
+<li>限流的算法有哪些？</li>
+<li>什么是服务熔断？什么是服务降级？</li>
+<li>为什么要分布式 id ？分布式 id 生成策略有哪些？</li>
+<li>微服务下为什需要链路追踪系统？</li>
+</ol>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><h4 id="基础-1"><a href="#基础-1" class="headerlink" title="基础"></a>基础</h4><ol>
+<li>非关系型数据库和关系型数据库的区别？</li>
+<li><strong>事务的四大特性了解么?</strong></li>
+<li><strong>MySQL 事务隔离级别？默认是什么级别？</strong></li>
+<li><strong>乐观锁与悲观锁的区别?</strong></li>
+<li>MySQL 数据库两种存储引擎的区别?</li>
+</ol>
+<h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><ol>
+<li><strong>为什么索引能提高查询速度?</strong></li>
+<li>聚集索引和非聚集索引的区别？非聚集索引一定回表查询吗?</li>
+<li>索引这么多优点，为什么不对表中的每一个列创建一个索引呢？(使用索引一定能提高查询性能吗?)</li>
+<li><strong>索引底层的数据结构了解么？Hash 索引和 B+树索引优劣分析</strong></li>
+<li>B+树做索引比红黑树好在哪里？</li>
+<li><strong>最左前缀匹配原则了解么？</strong></li>
+<li>什么是覆盖索引</li>
+</ol>
+<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><ol>
+<li><strong>分布式缓存常见的技术选型方案有哪些？说一下 Redis 和 Memcached 的区别和共同点</strong></li>
+<li>说一下有缓存情况下查询数据和修改数据的流程。</li>
+<li><strong>Redis 有哪些数据结构？SDS 了解么？</strong></li>
+<li>Redis 内存满了怎么办？</li>
+<li>Redis 内存淘汰算法除了 LRU 还有哪些？</li>
+<li>Redis 给缓存数据设置过期时间有啥用？Redis 是如何判断数据是否过期的呢？</li>
+<li>Redis 事务了解么？(Redis 可以通过 <strong>MULTI，EXEC，DISCARD 和 WATCH</strong> 等命令来实现事务功能)</li>
+<li><strong>缓存穿透和缓存雪崩问题了解么？有哪些解决办法？</strong></li>
+<li>如何基于 Redis 实现分布式锁？</li>
+</ol>
+<h3 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h3><ol>
+<li>一条 SQL 语句在 MySQL 中如何执行的？</li>
+<li><strong>explain 命令了解么？</strong></li>
+<li>简单说一下 SQL 调优思路。</li>
+<li>简单说一下大表优化的思路。</li>
+<li>分库分表了解么？为什么要分库分表？有哪些常见的分库分表工具(<code>sharding-jdbc</code>、<code>TSharding</code>、<code>MyCAT</code>…)？</li>
+</ol>
+<h2 id="系统设计-场景题"><a href="#系统设计-场景题" class="headerlink" title="系统设计/场景题"></a>系统设计/场景题</h2><ol>
+<li>假如有 10 亿个数，只有一个重复，内存只能放下 5 亿个数，怎么找到这个重复的数字？</li>
+<li>如何设计一个秒杀系统（服务端、数据库、分布式）？分布式系统的设计？</li>
+<li>有一个服务器专门接收大量请求，怎么设计？</li>
+<li>如果让你自己设计 RPC 框架你会如何设计？</li>
+<li>怎么快速出现一个 stackoverflow 错误？</li>
+</ol>
+<h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><ol>
+<li>自我介绍。</li>
+<li>说说你的项目中的亮点有哪些。</li>
+<li>画一下你的项目的架构图。</li>
+<li>Restful 了解吗？简单说一下自己对它的认识，如果我要返回一个 boolean 类型的数据怎么办？</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%B5%84%E6%96%99/">资料</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/30/algorithm/%E7%AE%97%E6%B3%95%E7%AF%87-BFPRT%E7%AE%97%E6%B3%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">算法篇-BFPRT算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/29/interview/%E9%9D%A2%E8%AF%95%E7%AF%87-Spring%E6%A1%86%E6%9E%B6/">
+                        <span class="hidden-mobile">面试篇-Spring框架</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     Copyright © 2017-2021 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> And <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> Core on Github Page 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        桂ICP备2020009931号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>桂公网安备2020009931号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

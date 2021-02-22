@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  <title>Java程序死锁的排查方法 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>麦奇</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/todo/">
+                <i class="iconfont icon-plan"></i>
+                代办
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Java程序死锁的排查方法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Mikey
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-21 09:28" pubdate>
+        2020年12月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java程序死锁的排查方法</h1>
+            
+            <div class="markdown-body">
+              <h1 id="死锁成立条件"><a href="#死锁成立条件" class="headerlink" title="死锁成立条件"></a>死锁成立条件</h1><p>1、<code>互斥</code>：某种资源一次只允许一个进程访问，即该资源一旦分配给某个进程，其他进程就不能再访问，直到该进程访问结束。<br>2、<code>占有且等待</code>：一个进程本身占有资源（一种或多种），同时还有资源未得到满足，正在等待其他进程释放该资源。<br>3、<code>不可抢占</code>：别人已经占有了某项资源，你不能因为自己也需要该资源，就去把别人的资源抢过来。<br>4、<code>循环等待</code>：存在一个进程链，使得每个进程都占有下一个进程所需的至少一种资源。</p>
+<h1 id="如何排查死锁"><a href="#如何排查死锁" class="headerlink" title="如何排查死锁"></a>如何排查死锁</h1><ul>
+<li>jps 查看进程</li>
+<li>jstack 打印堆栈信息</li>
+<li>jconsole 可视化查看详情</li>
+</ul>
+<h1 id="简单排查示例"><a href="#简单排查示例" class="headerlink" title="简单排查示例"></a>简单排查示例</h1><details>
+  <summary><span>展开代码</span></summary>
+  <br>
+
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DeadLock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span></span>&#123;<br>    <span class="hljs-keyword">private</span> String lockA;<br>    <span class="hljs-keyword">private</span> String lockB;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DeadLock</span><span class="hljs-params">(String lockA, String lockB)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.lockA = lockA;<br>        <span class="hljs-keyword">this</span>.lockB = lockB;<br>    &#125;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">synchronized</span> (lockA)&#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                Thread.sleep(<span class="hljs-number">1000</span>);<br>            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>            <span class="hljs-keyword">synchronized</span> (lockB)&#123;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        String lockA=<span class="hljs-string">&quot;lockA&quot;</span>;<br>        String lockB=<span class="hljs-string">&quot;lockB&quot;</span>;<br>        <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> DeadLock(lockA,lockB),<span class="hljs-string">&quot;ThreadAA&quot;</span>).start();<br>        <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> DeadLock(lockB,lockA),<span class="hljs-string">&quot;ThreadBB&quot;</span>).start();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+</details>
+
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ikey@mikey:~/Downloads/sdkmoderation/algorithm$ jps<br>31408 Jps<br>30899 Launcher<br>30902 DeadLock<br>4235 Main<br>mikey@mikey:~/Downloads/sdkmoderation/algorithm$ jstack 30902<br>2020-12-21 22:39:40<br>Full thread dump Java HotSpot(TM) 64-Bit Server VM (25.221-b11 mixed mode):<br><br>&quot;Attach Listener&quot; #13 daemon prio=9 os_prio=0 tid=0x00007f60fc001000 nid=0x78e8 waiting on condition [0x0000000000000000]<br>   java.lang.Thread.State: RUNNABLE<br><br>&quot;DestroyJavaVM&quot; #12 prio=5 os_prio=0 tid=0x00007f613c00d800 nid=0x78b7 waiting on condition [0x0000000000000000]<br>   java.lang.Thread.State: RUNNABLE<br><br>&quot;ThreadBB&quot; #11 prio=5 os_prio=0 tid=0x00007f613c20e000 nid=0x78e2 waiting for monitor entry [0x00007f6126944000]<br>   java.lang.Thread.State: BLOCKED (on object monitor)<br>        at demo.DeadLock.run(DeadLock.java:22)<br>        - waiting to lock &lt;0x000000076d283280&gt; (a java.lang.String)<br>        - locked &lt;0x000000076d2832b8&gt; (a java.lang.String)<br>        at java.lang.Thread.run(Thread.java:748)<br><br>&quot;ThreadAA&quot; #10 prio=5 os_prio=0 tid=0x00007f613c20c800 nid=0x78e1 waiting for monitor entry [0x00007f6126a45000]<br>   java.lang.Thread.State: BLOCKED (on object monitor)<br>        at demo.DeadLock.run(DeadLock.java:22)<br>        - waiting to lock &lt;0x000000076d2832b8&gt; (a java.lang.String)<br>        - locked &lt;0x000000076d283280&gt; (a java.lang.String)<br>        at java.lang.Thread.run(Thread.java:748)<br><br>&quot;Service Thread&quot; #9 daemon prio=9 os_prio=0 tid=0x00007f613c207800 nid=0x78df runnable [0x0000000000000000]<br>   java.lang.Thread.State: RUNNABLE<br><br>&quot;C1 CompilerThread2&quot; #8 daemon prio=9 os_prio=0 tid=0x00007f613c204000 nid=0x78de waiting on condition [0x0000000000000000]<br>   java.lang.Thread.State: RUNNABLE<br><br>&quot;C2 CompilerThread1&quot; #7 daemon prio=9 os_prio=0 tid=0x00007f613c202000 nid=0x78dd waiting on condition [0x0000000000000000]<br>   java.lang.Thread.State: RUNNABLE<br><br>&quot;C2 CompilerThread0&quot; #6 daemon prio=9 os_prio=0 tid=0x00007f613c200800 nid=0x78dc waiting on condition [0x0000000000000000]<br>   java.lang.Thread.State: RUNNABLE<br><br>&quot;Monitor Ctrl-Break&quot; #5 daemon prio=5 os_prio=0 tid=0x00007f613c1fe000 nid=0x78db runnable [0x00007f6127262000]<br>   java.lang.Thread.State: RUNNABLE<br>        at java.net.SocketInputStream.socketRead0(Native Method)<br>        at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)<br>        at java.net.SocketInputStream.read(SocketInputStream.java:171)<br>        at java.net.SocketInputStream.read(SocketInputStream.java:141)<br>        at sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:284)<br>        at sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:326)<br>        at sun.nio.cs.StreamDecoder.read(StreamDecoder.java:178)<br>        - locked &lt;0x000000076d2fa148&gt; (a java.io.InputStreamReader)<br>        at java.io.InputStreamReader.read(InputStreamReader.java:184)<br>        at java.io.BufferedReader.fill(BufferedReader.java:161)<br>        at java.io.BufferedReader.readLine(BufferedReader.java:324)<br>        - locked &lt;0x000000076d2fa148&gt; (a java.io.InputStreamReader)<br>        at java.io.BufferedReader.readLine(BufferedReader.java:389)<br>        at com.intellij.rt.execution.application.AppMainV2$1.run(AppMainV2.java:47)<br><br>&quot;Signal Dispatcher&quot; #4 daemon prio=9 os_prio=0 tid=0x00007f613c183000 nid=0x78c6 runnable [0x0000000000000000]<br>   java.lang.Thread.State: RUNNABLE<br><br>&quot;Finalizer&quot; #3 daemon prio=8 os_prio=0 tid=0x00007f613c151000 nid=0x78c5 in Object.wait() [0x00007f61278f7000]<br>   java.lang.Thread.State: WAITING (on object monitor)<br>        at java.lang.Object.wait(Native Method)<br>        - waiting on &lt;0x000000076d188ed8&gt; (a java.lang.ref.ReferenceQueue$Lock)<br>        at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:144)<br>        - locked &lt;0x000000076d188ed8&gt; (a java.lang.ref.ReferenceQueue$Lock)<br>        at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:165)<br>        at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:216)<br><br>&quot;Reference Handler&quot; #2 daemon prio=10 os_prio=0 tid=0x00007f613c14c800 nid=0x78c4 in Object.wait() [0x00007f61279f8000]<br>   java.lang.Thread.State: WAITING (on object monitor)<br>        at java.lang.Object.wait(Native Method)<br>        - waiting on &lt;0x000000076d186c00&gt; (a java.lang.ref.Reference$Lock)<br>        at java.lang.Object.wait(Object.java:502)<br>        at java.lang.ref.Reference.tryHandlePending(Reference.java:191)<br>        - locked &lt;0x000000076d186c00&gt; (a java.lang.ref.Reference$Lock)<br>        at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:153)<br><br>&quot;VM Thread&quot; os_prio=0 tid=0x00007f613c143000 nid=0x78c1 runnable <br><br>&quot;GC task thread#0 (ParallelGC)&quot; os_prio=0 tid=0x00007f613c023800 nid=0x78bc runnable <br><br>&quot;GC task thread#1 (ParallelGC)&quot; os_prio=0 tid=0x00007f613c025000 nid=0x78bd runnable <br><br>&quot;GC task thread#2 (ParallelGC)&quot; os_prio=0 tid=0x00007f613c027000 nid=0x78be runnable <br><br>&quot;GC task thread#3 (ParallelGC)&quot; os_prio=0 tid=0x00007f613c028800 nid=0x78bf runnable <br><br>&quot;VM Periodic Task Thread&quot; os_prio=0 tid=0x00007f613c20a000 nid=0x78e0 waiting on condition <br><br>JNI global references: 12<br><br><br>Found one Java-level deadlock:<br>=============================<br>&quot;ThreadBB&quot;:<br>  waiting to lock monitor 0x00007f6104006528 (object 0x000000076d283280, a java.lang.String),<br>  which is held by &quot;ThreadAA&quot;<br>&quot;ThreadAA&quot;:<br>  waiting to lock monitor 0x00007f6104005088 (object 0x000000076d2832b8, a java.lang.String),<br>  which is held by &quot;ThreadBB&quot;<br><br>Java stack information for the threads listed above:<br>===================================================<br>&quot;ThreadBB&quot;:<br>        at demo.DeadLock.run(DeadLock.java:22)<br>        - waiting to lock &lt;0x000000076d283280&gt; (a java.lang.String)<br>        - locked &lt;0x000000076d2832b8&gt; (a java.lang.String)<br>        at java.lang.Thread.run(Thread.java:748)<br>&quot;ThreadAA&quot;:<br>        at demo.DeadLock.run(DeadLock.java:22)<br>        - waiting to lock &lt;0x000000076d2832b8&gt; (a java.lang.String)<br>        - locked &lt;0x000000076d283280&gt; (a java.lang.String)<br>        at java.lang.Thread.run(Thread.java:748)<br><br>Found 1 deadlock.<br><br></code></pre></div></td></tr></table></figure>
+
+
+<h1 id="参考相关资料"><a href="#参考相关资料" class="headerlink" title="参考相关资料"></a>参考相关资料</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuandengta/article/details/107189812">如何快速排查死锁？如何避免死锁？（值得收藏）</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%AD%BB%E9%94%81%E6%8E%92%E6%9F%A5/">死锁排查</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/21/network/HTTP%E5%92%8CHTTPS%E5%8D%8F%E8%AE%AE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">HTTP和HTTPS协议，看一篇就够了</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/20/algorithm/%E7%AE%97%E6%B3%95%E7%AF%87-%E6%9E%81%E5%AE%A2%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5/">
+                        <span class="hidden-mobile">算法篇-极客算法训练营总结</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     Copyright © 2017-2021 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> And <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> Core on Github Page 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        桂ICP备2020009931号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>桂公网安备2020009931号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,730 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  <title>机器学习-深度学习入门资料汇总 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>麦奇</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/todo/">
+                <i class="iconfont icon-plan"></i>
+                代办
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="机器学习-深度学习入门资料汇总">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Mikey
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-29 07:38" pubdate>
+        2020年12月29日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">机器学习-深度学习入门资料汇总</h1>
+            
+            <div class="markdown-body">
+              <h1 id="机器学习-深度学习入门资料汇总"><a href="#机器学习-深度学习入门资料汇总" class="headerlink" title="机器学习/深度学习入门资料汇总"></a>机器学习/深度学习入门资料汇总</h1><p>经常被同学和朋友询问机器学习或深度学习入门，有哪些不错的参考资料。老实讲，这个问题在网上随便一搜就是一大把的答案。我自己在最开始的时候也有同样的困惑，同样在搜索引擎和论坛里翻找答案。但大多数答案并不怎么让人满意：搜索结果要么星稀零散，只见树木不见森林；要么过于详尽，让人无从下手（很多资料作者自己都没看过）。<br>在这篇文章里，我把自己在学习过程中的参考资料进行了梳理。一方面，希望能给你一个相对系统的学习路线参考；另一方面，自己真实的实践经历，遇过坎，掉过坑，希望能给正准备入门的同学更多真实的借鉴。</p>
+<h2 id="入门视频"><a href="#入门视频" class="headerlink" title="入门视频"></a><strong>入门视频</strong></h2><h2 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a><strong>机器学习</strong></h2><p>很多人会推荐吴恩达在斯坦福的公开课CS229，但对于初学的同学来说，我觉得并不适合。虽然Andrew在课的最开始就说了，他的这门看更侧重于实践。但真实情况是，里面有太多的数学推导和证明。直接使用这门课来入门，对初学的同学来说，在信心上会是不小的打击。特别是很多从应用开发转到机器学习的同学，毕竟在平常的工作中，大学的数学知识在实际的开发中应用的并不多，估计很多现在都已经生疏了。<br>对于机器学习，我推荐吴恩达在Coursera开设的机器学习课程，课程免费，侧重于基本的原理和工程实现，对初学者相对友好。字幕中英可选。<br>课程链接：<a href="https://link.zhihu.com/?target=https://www.coursera.org/learn/machine-learning">https://www.coursera.org/learn/machine-learning</a></p>
+<h2 id="深度学习"><a href="#深度学习" class="headerlink" title="深度学习"></a><strong>深度学习</strong></h2><p>大家可能看过《一天搞懂深度学习》的PPT，作者是台湾大学的李宏毅老师。其实，李宏毅老师还有门深度学习的课程，视频也挂在网上。这门课主要针对初学者，而且，不需要有经典的机器学习基础（其实，深度学习入门，比经典的机器学习更容易）。课程的内容深入浅出，训练和预测样本都是各种数码宝贝和二次元卡通人物，绝对让你耳目一新。好像没有字幕，中文授课（台湾腔）。<br>课程链接：<a href="https://link.zhihu.com/?target=http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML17.html">http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML17.html</a></p>
+<p>在看李宏毅老师的视频时，Andrew的《深度学习工程师》项目还没开始。后来把Andrew的课程看完（一共五部分，目前只出了前四部分），觉得Andrew的课程同样很棒。两者对比，李宏毅老师的课，课时相对较短，内容相对全面（对无监督学习、对抗学习、强化学习都有介绍），课程偏重概念介绍，但涉及到数学的部分跳跃性较大，不容易跟上。Andrew的课学时相对较长（一共五个大的部分），内容相对集中（主要讲解监督学习，集中在DNN、CNN和RNN），但讲解和分析更加细致，学习曲线相对平坦。针对于初学者可以先看李宏毅老师的课程对深度学习有个整体的框架认识，然后看Andrew的课程把握更多的细节知识。Andrew的课程本来是Coursera的付费课程，目前跟网易云课堂合作，不用翻墙就可以看了。</p>
+<p>课程链接：<a href="https://link.zhihu.com/?target=https://mooc.study.163.com/smartSpec/detail/1001319001.htm">https://mooc.study.163.com/smartSpec/detail/1001319001.htm</a></p>
+<h2 id="入门书籍"><a href="#入门书籍" class="headerlink" title="入门书籍"></a><strong>入门书籍</strong></h2><h2 id="机器学习-1"><a href="#机器学习-1" class="headerlink" title="机器学习"></a><strong>机器学习</strong></h2><p><img src="https://pic2.zhimg.com/80/v2-819ca8d8c5dc407b7ccdc1d938de7abd_720w.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>机器学习的入门书籍，当仁不让的就是周志华老师的西瓜书《机器学习》了。这本书基本囊括了绝大多数经典的机器学习方法。但坦白的讲，这本书入门也不是那么轻松，大量篇幅的数学推导和证明。建议初学者可以在第一遍的时候跳过具体的数学推导，更侧重在知识框架和原理的学习和提炼，后面可以通过第二遍或第三遍来深入其中的数学原理。</p>
+<h2 id="深度学习-1"><a href="#深度学习-1" class="headerlink" title="深度学习"></a><strong>深度学习</strong></h2><p><img src="https://pic4.zhimg.com/80/v2-cc9539790c762bee6e621c2270156f63_720w.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>这一本称为目前深度学习领域的圣经，而作者们也确实做到了深入浅出，循序渐进。不是单纯的抛一个结论，而是逐步的深入，最终阐明原理。建议像《机器学习》一样使用：不要求第一遍就能全部吸收，可以先从框架和基本原理入手，跳过部分细节，后面再逐步深入。</p>
+<h2 id="数学基础"><a href="#数学基础" class="headerlink" title="数学基础"></a><strong>数学基础</strong></h2><p>看前面的视频和书籍，对于很多从事应用开发的同学来说，可能最大的障碍就是对数学的恐惧。这种感觉大概就像没经历过算法训练的同学面对算法面试一样。其实，恐惧只要能直面它，那就一定能够克服掉。就好比在LeetCode这样的OJ平台刷完200道左右的题目，再去面试算法一样。以前觉得是天大的障碍，现在回过头来，也不觉得有什么了不起。<br>我个人的经验是，通过前面的视频和书籍已经对机器学习和深度学习有了基本的系统框架和原理认识，同时，也积累了对数学知识进行系统复习的强烈欲望。这时候就可以有的放矢的复习大学知识了。数学知识的复习，我都是通过看网易公开课来完成的。</p>
+<h2 id="微积分"><a href="#微积分" class="headerlink" title="微积分"></a><strong>微积分</strong></h2><p>MIT《单变量微积分》：<a href="https://link.zhihu.com/?target=http://open.163.com/special/sp/singlevariablecalculus.html">http://open.163.com/special/sp/singlevariablecalculus.html</a><br>虽说是MIT的课程，但坦白的讲，老师的节奏真是比国内的课程还要慢，真正做到了通俗易懂。<br>网易公开课还有MIT的《多变量微积分》，但我没有看，我觉得复习完单变量微积分，也就基本够用了。</p>
+<h2 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a><strong>线性代数</strong></h2><p>MIT《线性代数》<br><a href="https://link.zhihu.com/?target=http://open.163.com/special/opencourse/daishu.html">http://open.163.com/special/opencourse/daishu.html</a><br>这门课就没有上面的《单变量微积分》那么Nice了，老师思路跳跃性很强，稍一走神就不知道讲到什么地方了 。但这门课有个很大的优点，就是从一开始就引入了向量空间的概念，而且贯穿始终。不像国内的课程，直到课程结束都以为线性代数只是求解方程组的另一种表达形式。</p>
+<h2 id="概率-统计"><a href="#概率-统计" class="headerlink" title="概率 / 统计"></a><strong>概率 / 统计</strong></h2><p>可汗学院《概率》<br><a href="https://link.zhihu.com/?target=http://open.163.com/special/Khan/probability.html">http://open.163.com/special/Khan/probability.html</a><br>可汗学院《统计学》<br><a href="https://link.zhihu.com/?target=http://open.163.com/special/Khan/khstatistics.html">http://open.163.com/special/Khan/khstatistics.html</a><br>老实讲，可汗的公开课真是太细致了，细致到觉得拖沓（可能是复习，而不是初学者的缘故）。建议根据自己的需要做适当的跳跃。同时，两门课有部分内容是完全重合的，可以直接跳过。</p>
+<h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a><strong>Python</strong></h2><p>有了前面的基础相信你已经跃跃欲试了，但别急，工欲善其事必先利其器。可能你已经有MATLAB、C/C++、Java的编程经验，但建议再入手一款新武器-Python。虽然前面的语言也可以用于机器学习和深度学习相关的研究和开发，但Python的使用范围更广，参考资料也更加丰富。<br>我的自己经验是，</p>
+<ul>
+<li>1-在网上找一篇Python入门的帖子，搭建环境，运行简单的例子（半天）</li>
+<li>2-找一本基础书籍，系统的熟悉下语言的基本特性和完整框架（1~2天）<br>ps：我之前有C/C++和Java的语音基础</li>
+<li>3-开始正常使用Python进行开发，遇到问题，求助搜索引擎（2个月以上）</li>
+<li>4-觉得自己对语言就基本的掌握后，可以根据选择进行进阶学习了<br>上面1~2天时间来系统的熟悉Python语言特性和语言框架的书籍我推荐，<br><strong>《Python基础教程》</strong><br>（这本书很厚，初期把目录扫完就可以了，后面当做字典来使用）</li>
+</ul>
+<p><img src="https://pic4.zhimg.com/80/v2-f4ee54c36f894001fac1c8d57b140b6f_720w.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>进阶阶段，推荐，<br><strong>《流畅的Python》</strong></p>
+<p><img src="https://pic1.zhimg.com/80/v2-fb8682201e717f46b43d5f5d90f6c9e8_720w.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="动手实践"><a href="#动手实践" class="headerlink" title="动手实践"></a><strong>动手实践</strong></h2><h2 id="初级"><a href="#初级" class="headerlink" title="初级"></a><strong>初级</strong></h2><p>好了现在我们终于可以动手实践了，<br><strong>《Python机器学习及实践：从零开始通往Kaggle竞赛之路》</strong></p>
+<p><img src="https://pic1.zhimg.com/80/v2-e302bfe1e1ee5a9941c384de597ec804_720w.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>这是很薄的一本书，但对于初学者实践来说却是非常棒的一本书。书中的大多数算法都是基于sk-learn来实现的。使用现成的Python库，而不用关心具体算法实现过程，可以快速体验机器学习算法的效果。同时，书的最后比较细致的介绍了Kaggle竞赛平台的使用，实战性更强。</p>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a><strong>进阶</strong></h2><p>《Python机器学习及实践：从零开始通往Kaggle竞赛之路》使用现成的Python库（工程中也大多是这样的）。但很多同学还是更希望能手工实现具体的算法，觉得这样基本功才扎实，那下面的这两本书就能很好的满足有这样想法的同学了。<br><strong>《机器学习实战》</strong></p>
+<p><img src="https://pic1.zhimg.com/80/v2-8d39e78b857c824ac67b98933216d6ec_720w.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>经典的机器学习算法手工实现，书中包含大量的代码实例。但这本书出本的比较早，深度学习内容基本没有涉猎。针对这种情况，就有了下面这本的推荐，</p>
+<p><strong>《TensorFlow Machine Learning Cookbook》</strong></p>
+<p><img src="https://pic2.zhimg.com/80/v2-cb356448772070bcd2e6d4f09a3a3e95_720w.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>这本书主要是基于TensorFlow的，手工编织网络。而且，书的内容就像它的名字一样，结构编排跟类似菜谱：开始前需要准备什么，开始后需要遵从哪些步骤，最后又会得到怎样的结果，条理非常清晰。目前这本书已经有了中文版。</p>
+<h2 id="领域应用"><a href="#领域应用" class="headerlink" title="领域应用"></a><strong>领域应用</strong></h2><p>虽然我们花费了很长的时间，投入了很多精力，但我们目前的阶段仍然像做大学作业，跟真实的工业场景相差很远。那机器学习和深度学习在实际的AI场景是如何应用的呢？带着这样的问题，我推荐两本书，<br><strong>《数学之美》</strong></p>
+<p><img src="https://pic4.zhimg.com/80/v2-5c43770febcefee82e0c1a5b1c3014cf_720w.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>吴军老师的经典之作。虽然这本书火的时候，AI都还没有现在这么火，但书中介绍的很多场景，使用的很多技术，基本都是来自我们学习的机器学习。</p>
+<p><strong>《统计自然语言处理》</strong></p>
+<p><img src="https://pic4.zhimg.com/80/v2-3ec8230e15b3e69083945a565c97b21f_720w.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>选择这边书是因为自己当前的工作跟自然语言处理相关。当然了，这也是自然语言处理领域非常经典的一本书，内容全面丰富。但学术的气息比较重，读起来又找到了当初读研看Paper的感觉。</p>
+<h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a><strong>杂项</strong></h2><p>比较正统的学习基本就算介绍完毕了。其实，除了上面的主线内容外，很多比较零散的资料，对于学习来说也还是很有裨益的。<br><strong>《莫烦视频》</strong><br>莫烦的个人主页有很多机器学习和深度学习相关的个人录制视频。以非常简洁的方式介绍了机器学习和深度学习相关的概念和框架，对初学者快速建立概念很有帮助(PS:92年的小鲜肉，真是不得了)。<br>地址：<a href="https://link.zhihu.com/?target=https://morvanzhou.github.io/about/">https://morvanzhou.github.io/about/</a></p>
+<p><strong>《深度学习简化版》</strong><br>形式跟莫凡的视频类似，是老外录制的。相比于莫烦的视频，内容更丰富多样，形式更新颖。通过YouTube播放，需要翻墙。<br>地址：<a href="https://link.zhihu.com/?target=https://www.youtube.com/watch?list=PLjJh1vlSEYgvGod9wWiydumYl8hOXixNu&v=b99UVkWzYTQ">https://www.youtube.com/watch?list=PLjJh1vlSEYgvGod9wWiydumYl8hOXixNu&amp;v=b99UVkWzYTQ</a></p>
+<p><strong>《AI技术内参》</strong><br>这是《极客时间》的一个付费专栏。主要推送AI相关的技术历史、当前行业信息和科研成果，从目前的使用情况来说，在品质上还是有保障的。</p>
+<p>** 加州理工的Yaser Abu-Mostafa教授出品的机器学习网络课程**</p>
+<p>课程名称：Machine Learning Course - CS 156<br>视频地址：<a href="https://link.zhihu.com/?target=https://www.youtube.com/watch?v=mbyG85GZ0PI&list=PLD63A284B7615313A">https://www.youtube.com/watch?v=mbyG85GZ0PI&amp;list=PLD63A284B7615313A</a></p>
+<p><strong>Geoffrey Hinton的课程</strong></p>
+<p>课程名称：Neural Networks for Machine Learning</p>
+<p>课程地址：<a href="https://link.zhihu.com/?target=https://www.coursera.org/learn/neural-networks">Neural Networks for Machine Learning | Coursera</a></p>
+<p>作为深度学习的根目录人物，我就不多夸赞Hinton的课了吧</p>
+<p><strong>吴恩达</strong></p>
+<p><a href="https://link.zhihu.com/?target=http://open.163.com/special/opencourse/machinelearning.html">斯坦福大学公开课 ：机器学习课程</a><br><a href="https://link.zhihu.com/?target=http://ufldl.stanford.edu/wiki/index.php/UFLDL%E6%95%99%E7%A8%8B">UFLDL教程 - Ufldl</a></p>
+<p>机器学习那个，我总会时不时看看视频，每次看都有收获。</p>
+<p><strong>Goodfellow</strong></p>
+<p><a href="https://link.zhihu.com/?target=http://www.deeplearningbook.org/">Deep Learning</a></p>
+<p>这应该是讲深度学习最好的书，没有之一，作者作为深度学习根目录人物的弟子，而且是GAN对抗网络的提出这，作者的功力直接决定了这本书的水平</p>
+<p><strong>CS224D</strong></p>
+<p><a href="https://link.zhihu.com/?target=http://cs224d.stanford.edu/">CS224d: Deep Learning for Natural Language Processing</a></p>
+<p>虽然讲的是NLP，但这个系列从基础神经网路讲起，讲到概率预研模型，降到word2vec，最后讲到RNN模型在NLP领域的应用，我对这个教程评价相当高</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/30/another/%E5%85%B6%E4%BB%96%E7%AF%87-2020-%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2020-年终总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/28/reference/Netty/">
+                        <span class="hidden-mobile">Netty</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     Copyright © 2017-2021 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> And <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> Core on Github Page 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        桂ICP备2020009931号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>桂公网安备2020009931号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

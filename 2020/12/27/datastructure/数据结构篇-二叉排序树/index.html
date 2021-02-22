@@ -1,0 +1,690 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  <title>数据结构篇-二叉排序树 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>麦奇</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/todo/">
+                <i class="iconfont icon-plan"></i>
+                代办
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据结构篇-二叉排序树">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Mikey
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-27 09:55" pubdate>
+        2020年12月27日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据结构篇-二叉排序树</h1>
+            
+            <div class="markdown-body">
+              <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><blockquote>
+<p>二茬排序树(二叉搜索树)满足以下性质的二叉树<br> 1.若根结点的左子树非空，则左子树上的所有结点关键字均小于根结点关键字。<br> 2.若根结点的右子树非空，则右子树上的所有结点关键字均大于根结点关键字。<br> 3.根结点的左右子树本身又是一颗二叉排序树。</p>
+</blockquote>
+<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><blockquote>
+<p>中序遍历得到一个递增序列，平均查找时间O(logN)</p>
+</blockquote>
+<h1 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h1><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cgo">BSTNode *CreateBST(KeyType A[],int n)		&#x2F;&#x2F;创建二叉排序树<br>&#x2F;&#x2F;返回BST树根结点指针<br>&#123;	BSTNode *bt&#x3D;NULL;				&#x2F;&#x2F;初始时bt为空树<br>	int i&#x3D;0;<br>	while (i&lt;n)<br>	&#123;	InsertBST(bt,A[i]);			&#x2F;&#x2F;将关键字A[i]插入二叉排序树bt中<br>		i++;<br>	&#125;<br>	return bt;						&#x2F;&#x2F;返回建立的二叉排序树的根指针<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h1 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h1><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cgo">bool InsertBST(BSTNode *&amp;bt,KeyType k)	<br>&#x2F;&#x2F;在二叉排序树bt中插入一个关键字为k的结点。插入成功返回真，否则返回假<br>&#123;	if (bt&#x3D;&#x3D;NULL)						&#x2F;&#x2F;原树为空，新插入的结点为根结点<br>	&#123;	bt&#x3D;(BSTNode *)malloc(sizeof(BSTNode));<br>		bt-&gt;key&#x3D;k; bt-&gt;lchild&#x3D;bt-&gt;rchild&#x3D;NULL;<br>		return true;<br>	&#125;<br>	else if (k&#x3D;&#x3D;bt-&gt;key) 				&#x2F;&#x2F;树中存在相同关键字的结点，返回假<br>		return false;<br>	else if (k&lt;bt-&gt;key) <br>		return InsertBST(bt-&gt;lchild,k);	&#x2F;&#x2F;插入到左子树中<br>	else<br>		return InsertBST(bt-&gt;rchild,k);	&#x2F;&#x2F;插入到右子树中<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h1 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h1><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cgo">BSTNode *SearchBST(BSTNode *bt,KeyType k)<br>&#123; <br>    if (bt&#x3D;&#x3D;NULL || bt-&gt;key&#x3D;&#x3D;k)      	&#x2F;&#x2F;递归终结条件<br>		return bt;<br>	if (k&lt;bt-&gt;key)<br>       	return SearchBST(bt-&gt;lchild,k);  &#x2F;&#x2F;在左子树中递归查找<br>    else<br>     	return SearchBST(bt-&gt;rchild,k);  &#x2F;&#x2F;在右子树中递归查找<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cgo">void Delete1(BSTNode *p,BSTNode *&amp;r)  &#x2F;&#x2F;当被删p结点有左右子树时的删除过程<br>&#123;<br>	BSTNode *q;<br>	if (r-&gt;rchild!&#x3D;NULL)<br>		Delete1(p,r-&gt;rchild);	&#x2F;&#x2F;递归找最右下结点r<br>	else						&#x2F;&#x2F;找到了最右下结点r<br>	&#123;	p-&gt;key&#x3D;r-&gt;key;			&#x2F;&#x2F;将*结点的值赋给结点p<br>		q&#x3D;r;					<br>		r&#x3D;r-&gt;lchild;			&#x2F;&#x2F;直接将其左子树的根结点放在被删结点的位置上<br>		free(q);				&#x2F;&#x2F;释放原结点r的空间<br>	&#125;<br>&#125;<br>void Delete(BSTNode *&amp;p)		&#x2F;&#x2F;从二叉排序树中删除p结点<br>&#123;<br>	BSTNode *q;<br>	if (p-&gt;rchild&#x3D;&#x3D;NULL)		&#x2F;&#x2F;p结点没有右子树的情况<br>	&#123;<br>		q&#x3D;p;<br>		p&#x3D;p-&gt;lchild;			&#x2F;&#x2F;直接将其右子树的根结点放在被删结点的位置上<br>		free(q);  <br>	&#125;<br>	else if (p-&gt;lchild&#x3D;&#x3D;NULL)	&#x2F;&#x2F;p结点没有左子树的情况<br>	&#123;<br>		q&#x3D;p;<br>		p&#x3D;p-&gt;rchild;			&#x2F;&#x2F;将p结点的右子树作为双亲结点的相应子树<br>		free(q);  <br>	&#125;<br>	else Delete1(p,p-&gt;lchild);	&#x2F;&#x2F;p结点既没有左子树又没有右子树的情况<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cgo">&#x2F;&#x2F;二叉排序树算法<br>#include &lt;stdio.h&gt;<br>#include &lt;malloc.h&gt;<br>typedef int KeyType;<br>typedef char InfoType[10];<br>typedef struct node<br>&#123;<br>	KeyType key;              		&#x2F;&#x2F;关键字项<br>	InfoType data;             		&#x2F;&#x2F;其他数据域<br>	struct node *lchild,*rchild;	&#x2F;&#x2F;左右孩子指针<br>&#125; BSTNode;           				&#x2F;&#x2F;二叉排序树结点类型<br>bool InsertBST(BSTNode *&amp;bt,KeyType k)	<br>&#x2F;&#x2F;在二叉排序树bt中插入一个关键字为k的结点。插入成功返回真，否则返回假<br>&#123;	if (bt&#x3D;&#x3D;NULL)						&#x2F;&#x2F;原树为空，新插入的结点为根结点<br>	&#123;	bt&#x3D;(BSTNode *)malloc(sizeof(BSTNode));<br>		bt-&gt;key&#x3D;k; bt-&gt;lchild&#x3D;bt-&gt;rchild&#x3D;NULL;<br>		return true;<br>	&#125;<br>	else if (k&#x3D;&#x3D;bt-&gt;key) 				&#x2F;&#x2F;树中存在相同关键字的结点，返回假<br>		return false;<br>	else if (k&lt;bt-&gt;key) <br>		return InsertBST(bt-&gt;lchild,k);	&#x2F;&#x2F;插入到左子树中<br>	else<br>		return InsertBST(bt-&gt;rchild,k);	&#x2F;&#x2F;插入到右子树中<br>&#125;<br><br>BSTNode *CreateBST(KeyType A[],int n)		&#x2F;&#x2F;创建二叉排序树<br>&#x2F;&#x2F;返回BST树根结点指针<br>&#123;	BSTNode *bt&#x3D;NULL;				&#x2F;&#x2F;初始时bt为空树<br>	int i&#x3D;0;<br>	while (i&lt;n)<br>	&#123;	InsertBST(bt,A[i]);			&#x2F;&#x2F;将关键字A[i]插入二叉排序树bt中<br>		i++;<br>	&#125;<br>	return bt;						&#x2F;&#x2F;返回建立的二叉排序树的根指针<br>&#125;<br><br>void DispBST(BSTNode *bt)		&#x2F;&#x2F;输出一棵排序二叉树<br>&#123;<br>	if (bt!&#x3D;NULL)<br>	&#123;	printf(&quot;%d&quot;,bt-&gt;key);<br>		if (bt-&gt;lchild!&#x3D;NULL || bt-&gt;rchild!&#x3D;NULL)<br>		&#123;	printf(&quot;(&quot;);						&#x2F;&#x2F;有孩子结点时才输出(<br>			DispBST(bt-&gt;lchild);				&#x2F;&#x2F;递归处理左子树<br>			if (bt-&gt;rchild!&#x3D;NULL) printf(&quot;,&quot;);	&#x2F;&#x2F;有右孩子结点时才输出,<br>			DispBST(bt-&gt;rchild);				&#x2F;&#x2F;递归处理右子树<br>			printf(&quot;)&quot;);						&#x2F;&#x2F;有孩子结点时才输出)<br>		&#125;<br>	&#125;<br>&#125;<br>BSTNode *SearchBST(BSTNode *bt,KeyType k)<br>&#123; <br>    if (bt&#x3D;&#x3D;NULL || bt-&gt;key&#x3D;&#x3D;k)      	&#x2F;&#x2F;递归终结条件<br>		return bt;<br>	if (k&lt;bt-&gt;key)<br>       	return SearchBST(bt-&gt;lchild,k);  &#x2F;&#x2F;在左子树中递归查找<br>    else<br>     	return SearchBST(bt-&gt;rchild,k);  &#x2F;&#x2F;在右子树中递归查找<br>&#125;<br>BSTNode *SearchBST1(BSTNode *bt,KeyType k,BSTNode *f1,BSTNode *&amp;f)	<br>&#x2F;*在bt中查找关键字为k的结点,若查找成功,该函数返回该结点的指针,<br>f返回其双亲结点;否则,该函数返回NULL。<br>其调用方法如下:<br>	         SearchBST(bt,x,NULL,f);<br>这里的第3个参数f1仅作中间参数,用于求f,初始设为NULL*&#x2F;<br>&#123; <br>	if (bt&#x3D;&#x3D;NULL)<br>	&#123;	<br>		f&#x3D;NULL;<br>		return(NULL);<br>	&#125;<br>	else if (k&#x3D;&#x3D;bt-&gt;key) <br>	&#123;	<br>		f&#x3D;f1;<br>		return(bt);<br>	&#125;<br>	else if (k&lt;bt-&gt;key)<br>       	return SearchBST1(bt-&gt;lchild,k,bt,f);  &#x2F;&#x2F;在左子树中递归查找<br>    else<br>     	return SearchBST1(bt-&gt;rchild,k,bt,f);  &#x2F;&#x2F;在右子树中递归查找<br>&#125;<br><br>void Delete1(BSTNode *p,BSTNode *&amp;r)  &#x2F;&#x2F;当被删p结点有左右子树时的删除过程<br>&#123;<br>	BSTNode *q;<br>	if (r-&gt;rchild!&#x3D;NULL)<br>		Delete1(p,r-&gt;rchild);	&#x2F;&#x2F;递归找最右下结点r<br>	else						&#x2F;&#x2F;找到了最右下结点r<br>	&#123;	p-&gt;key&#x3D;r-&gt;key;			&#x2F;&#x2F;将*结点的值赋给结点p<br>		q&#x3D;r;					<br>		r&#x3D;r-&gt;lchild;			&#x2F;&#x2F;直接将其左子树的根结点放在被删结点的位置上<br>		free(q);				&#x2F;&#x2F;释放原结点r的空间<br>	&#125;<br>&#125;<br>void Delete(BSTNode *&amp;p)		&#x2F;&#x2F;从二叉排序树中删除p结点<br>&#123;<br>	BSTNode *q;<br>	if (p-&gt;rchild&#x3D;&#x3D;NULL)		&#x2F;&#x2F;p结点没有右子树的情况<br>	&#123;<br>		q&#x3D;p;<br>		p&#x3D;p-&gt;lchild;			&#x2F;&#x2F;直接将其右子树的根结点放在被删结点的位置上<br>		free(q);  <br>	&#125;<br>	else if (p-&gt;lchild&#x3D;&#x3D;NULL)	&#x2F;&#x2F;p结点没有左子树的情况<br>	&#123;<br>		q&#x3D;p;<br>		p&#x3D;p-&gt;rchild;			&#x2F;&#x2F;将p结点的右子树作为双亲结点的相应子树<br>		free(q);  <br>	&#125;<br>	else Delete1(p,p-&gt;lchild);	&#x2F;&#x2F;p结点既没有左子树又没有右子树的情况<br>&#125;<br>int DeleteBST(BSTNode *&amp;bt,KeyType k)	&#x2F;&#x2F;在bt中删除关键字为k的结点<br>&#123;<br>	if (bt&#x3D;&#x3D;NULL) <br>		return 0;				&#x2F;&#x2F;空树删除失败<br>	else <br>	&#123;	<br>		if (k&lt;bt-&gt;key) <br>			return DeleteBST(bt-&gt;lchild,k);	&#x2F;&#x2F;递归在左子树中删除为k的结点<br>		else if (k&gt;bt-&gt;key) <br>			return DeleteBST(bt-&gt;rchild,k);	&#x2F;&#x2F;递归在右子树中删除为k的结点<br>		else <br>		&#123;<br>			Delete(bt);		&#x2F;&#x2F;调用Delete(bt)函数删除*bt结点<br>			return 1;<br>		&#125;<br>	&#125;<br>&#125;<br>void DestroyBST(BSTNode *&amp;bt)		&#x2F;&#x2F;销毁二叉排序树bt<br>&#123;<br>	if (bt!&#x3D;NULL)<br>	&#123;<br>		DestroyBST(bt-&gt;lchild);<br>		DestroyBST(bt-&gt;rchild);<br>		free(bt);<br>	&#125;<br>&#125;<br>&#x2F;*<br>int main()<br>&#123;<br>	BSTNode *bt,*p,*f;<br>	int n&#x3D;12,x&#x3D;46;<br>	KeyType a[]&#x3D;&#123;25,18,46,2,53,39,32,4,74,67,60,11&#125;;<br>	bt&#x3D;CreateBST(a,n);<br>	printf(&quot;BST:&quot;);DispBST(bt);printf(&quot;\n&quot;);<br>	printf(&quot;删除%d结点\n&quot;,x);<br>	if (SearchBST(bt,x)!&#x3D;NULL)<br>	&#123;<br>		DeleteBST(bt,x);<br>		printf(&quot;BST:&quot;);DispBST(bt);printf(&quot;\n&quot;);<br>	&#125;<br>	x&#x3D;18;<br>	p&#x3D;SearchBST1(bt,x,NULL,f);<br>	if (f!&#x3D;NULL)<br>		printf(&quot;%d的双亲是%d\n&quot;,x,f-&gt;key);<br>	DestroyBST(bt);<br>	return 1;<br>&#125;<br>*&#x2F;<br></code></pre></div></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91/">二叉排序树</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/27/datastructure/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87-B%E6%A0%91B%E5%8A%A0%E6%A0%91B%E5%BF%83%E6%A0%91/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据结构篇-B树B+树B*树</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/23/datastructure/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/">
+                        <span class="hidden-mobile">数据结构篇-平衡二叉树(AVL树)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     Copyright © 2017-2021 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> And <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> Core on Github Page 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        桂ICP备2020009931号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>桂公网安备2020009931号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
