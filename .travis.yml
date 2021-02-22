@@ -27,4 +27,4 @@ before_install:
   - chmod 600 ~/.ssh/id_rsa
   - echo -e "Host $SERVER_IP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 after_success:
-  - travis_wait rsync -az --delete ./public/ root@$SERVER_IP:/usr/share/nginx/html/
+#  - travis_wait rsync -az --delete ./public/ root@$SERVER_IP:/usr/share/nginx/html/
