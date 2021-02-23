@@ -9,23 +9,41 @@ tags: JVM
 
 # 01-JVM内存与垃圾回收篇概述
 
+Java Virtual Machine(JVM):
 
+>**Java virtual machine** (**JVM**) is a [virtual machine](https://en.wikipedia.org/wiki/Virtual_machine) that enables a computer to run [Java](https://en.wikipedia.org/wiki/Java_(software_platform)) programs as well as programs written in [other languages](https://en.wikipedia.org/wiki/List_of_JVM_languages) that are also compiled to [Java bytecode](https://en.wikipedia.org/wiki/Java_bytecode). The JVM is detailed by a [specification](https://en.wikipedia.org/wiki/Specification_(technical_standard)) that formally describes what is required in a JVM implementation. Having a specification ensures interoperability of Java programs across different implementations so that program authors using the [Java Development Kit](https://en.wikipedia.org/wiki/Java_Development_Kit) (JDK) need not worry about idiosyncrasies of the underlying hardware platform.
+
+Java Memary Model(JMM):
+
+> The **Java memory model** describes how [threads](https://en.wikipedia.org/wiki/Thread_(computer_science)) in the [Java programming language](https://en.wikipedia.org/wiki/Java_(programming_language)) interact through memory. Together with the description of single-threaded execution of code, the memory model provides the [semantics](https://en.wikipedia.org/wiki/Formal_semantics_of_programming_languages) of the Java programming language.
+
+Garbage Collection(GC):
+
+> Java garbage collection is the process by which Java programs perform automatic memory management. Java programs compile to bytecode that can be run on a Java Virtual Machine, or JVM for short. When Java programs run on the JVM, objects are created on the heap, which is a portion of memory dedicated to the program. Eventually, some objects will no longer be needed. The garbage collector finds these unused objects and deletes them to free up memory.
 
 # 02-如何看待Java上层技术与JVM
 
+<table>
+    <tr align="center" style="background:purple;"><td colspan="4">我们写的应用程序</td></tr>
+    <tr><td style="background:red">Spring</td><td style="background:yellow">Struts</td><td style="background:blue">MyBatis</td><td style="background:green">SpringMVC</td></tr>
+    <tr align="center"><td colspan="4" style="background:grey;">Java API</td></tr>
+    <tr align="center"><td colspan="4" style="background:pink;">JVM</td></tr>
+</table>
 
-
-# 03-为什么要学习JVM
-
-
-
-# 04-面向人群和课程特点
-
-
+```mermaid
+graph TB;
+A(汇编语言)-->B(机器指令)
+C(高级语言)-->D(汇编语言)
+D-->E(机器指令)
+B-->F(CPU)
+E-->F(CPU)
+```
 
 # 05-官方规范下载与参考书目
 
+- [The Java® Virtual Machine Specification](https://docs.oracle.com/javase/specs/jvms/se7/html/)
 
+- 《深入了解Java虚拟机》
 
 # 06-跨平台的语言Java和跨语言的平台JVM
 
@@ -1535,3 +1553,4 @@ tags: JVM
 
 [视频教程](https://www.bilibili.com/video/BV1PJ411n7xZ)
 [思维导图](https://www.processon.com/view/link/601a1df3637689536e17bade)
+
