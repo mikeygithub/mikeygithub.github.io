@@ -2,7 +2,7 @@
 title: Java篇-JVM详解
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/jvm.jpeg
 hide: false
-date: 2021-02-03 11:50:06
+date: 2021-02-024 11:50:06
 category: Java
 tags: JVM
 ---
@@ -23,15 +23,21 @@ Garbage Collection(GC):
 
 # 02-如何看待Java上层技术与JVM
 
-<table>
-    <tr align="center" style="background:purple;"><td colspan="4">我们写的应用程序</td></tr>
-    <tr><td style="background:red">Spring</td><td style="background:yellow">Struts</td><td style="background:blue">MyBatis</td><td style="background:green">SpringMVC</td></tr>
-    <tr align="center"><td colspan="4" style="background:grey;">Java API</td></tr>
-    <tr align="center"><td colspan="4" style="background:pink;">JVM</td></tr>
-</table>
 
 ```mermaid
 graph TB;
+A1(我们写的应用程序)-->B1(Spring)
+A1-->B2(Struts)
+A1-->B3(MyBatis)
+A1-->B4(SpringMVC)
+
+B1-->C1(Java API)
+B2-->C1
+B3-->C1
+B4-->C1
+
+C1-->D1(JVM)
+
 A(汇编语言)-->B(机器指令)
 C(高级语言)-->D(汇编语言)
 D-->E(机器指令)
@@ -47,19 +53,101 @@ E-->F(CPU)
 
 # 06-跨平台的语言Java和跨语言的平台JVM
 
+[TIOBE语言热度排行榜](https://www.tiobe.com/tiobe-index/)
 
+> Java是目前应用最为广泛的软件开发平台之一
+
+- 作为平台。Java虚拟机有着举足轻重的作用，Groovy、Scala、JRuby、Kotlin等都是Java平台的一部分。
+- 作为一种文化。Java几乎成为开源的代名词，第三方开源框架、JDK和JVM也有开源实现，如OpenJDK。
+- 作为一个社区。Java拥有全世界最多的技术拥护者和开源社区支持，生态丰富。
+
+```mermaid
+graph TB;
+
+A-1(Java应用程序)-->A1
+A1(字节码文件)-->B1(Spring)
+A1-->B2(WindowsJVM)
+A1-->B3(LinuxJVM)
+A1-->B4(MacJVM)
+```
+
+```mermaid
+graph TB;
+C1(Kotlin)-->D1(编译器)
+C2(Clojure)-->D2(编译器)
+C3(Groovy)-->D3(编译器)
+C4(Scala)-->D4(编译器)
+C5(Jython)-->D5(编译器)
+C6(JRuby)-->D6(编译器)
+C7(JavaScript)-->D7(编译器)
+
+D1-->E
+D2-->E
+D3-->E
+D4-->E
+D5-->E
+D6-->E
+D7-->E
+
+E(字节码文件)-->F(Java虚拟机)
+```
 
 # 07-字节码与多语言混合编程
 
-
+1. Java平台上的多语言混合编程正成为主流，通过特定领域的语言去解决特定领域的问题是当前软件开发应对日趋复杂的项目需求的一个方向。
+2. 试想一下，在一个项目之中，并行处理用Clojure语言编写，展示层使用JRuby/Rails，中间层则是Java，每个应用层都将使用不同的编程语言来完成，而且，接口对每一层的开发者都是透明的，各种语言之间的交互不存在任何困难，就像使用自己语言的原生API一样方便，因为它们最终都运行在一个虚拟机之上。
+3. 对这些运行于Java虚拟机之上、Java之外的语言，来自系统级的、底层的支持正在迅速增强，以JSR-292为核心的一系列项目和功能改进（如DaVinci Machine项目、Nashorn引擎、InvokeDynamic指令、java.lang.invoke包等），推动Java虚拟机从“Java语言的虚拟机”向 “多语言虚拟机”的方向发展。
 
 # 08-Java及JVM历史上的重大事件
 
-
+- 1990年，在Sun计算机公司中，由Patrick Naughton、MikeSheridan及James Gosling领导的小组Green Team，开发出的新的程序语言，命名为Oak，后期命名为Java
+- 1995年，Sun正式发布Java和HotJava产品，Java首次公开亮相。
+- 1996年1月23日Sun Microsystems发布了JDK 1.0。
+- 1998年，JDK1.2版本发布。同时，Sun发布了JSP/Servlet、EJB规范，以及将Java分成了J2EE、J2SE和J2ME。这表明了Java开始向企业、桌面应用和移动设备应用3大领域挺进。
+- 2000年，JDK1.3发布，Java HotSpot Virtual Machine正式发布，成为Java的默认虚拟机。
+- 2002年，JDK1.4发布，古老的Classic虚拟机退出历史舞台。
+- 2003年年底，Java平台的scala正式发布，同年Groovy也加入了Java阵营。
+- 2004年，JDK1.5发布。同时JDK1.5改名为JavaSE5.0。
+- 2006年，JDK6发布。同年，Java开源并建立了OpenJDK。顺理成章，Hotspot虚拟机也成为了OpenJDK中的默认虚拟机。
+- 2007年，Java平台迎来了新伙伴Clojure。
+- 2008年，oracle收购了BEA，得到了JRockit虚拟机。
+- 2009年，Twitter宣布把后台大部分程序从Ruby迁移到Scala，这是Java平台的又一次大规模应用。
+- 2010年，Oracle收购了Sun，获得Java商标和最真价值的HotSpot虚拟机。此时，Oracle拥有市场占用率最高的两款虚拟机HotSpot和JRockit，并计划在未来对它们进行整合：HotRockit。JCP组织管理Java语言
+- 2011年，JDK7发布。在JDK1.7u4中，正式启用了新的垃圾回收器G1。
+- **2017年，JDK9发布。将G1设置为默认GC，替代CMS**
+- 同年，IBM的J9开源，形成了现在的Open J9社区
+- 2018年，Android的Java侵权案判决，Google赔偿Oracle计88亿美元
+- 同年，Oracle宣告JavagE成为历史名词JDBC、JMS、Servlet赠予Eclipse基金会
+- **同年，JDK11发布，LTS版本的JDK，发布革命性的ZGC，调整JDK授权许可**
+- 2019年，JDK12发布，加入RedHat领导开发的Shenandoah GC
 
 # 09-虚拟机与Java虚拟机介绍
 
+### 虚拟机概念
 
+- 所谓虚拟机（Virtual Machine），就是一台虚拟的计算机。它是一款软件，用来执行一系列虚拟计算机指令。大体上，虚拟机可以分为系统虚拟机和程序虚拟机。
+
+  - 大名鼎鼎的Virtual Box，VMware就属于系统虚拟机，它们完全是对物理计算机硬件的仿真(模拟)，提供了一个可运行完整操作系统的软件平台。
+
+  - 程序虚拟机的典型代表就是Java虚拟机，它专门为执行单个计算机程序而设计，在Java虚拟机中执行的指令我们称为Java字节码指令。
+
+- 无论是系统虚拟机还是程序虚拟机，在上面运行的软件都被限制于虚拟机提供的资源中。
+
+### Java虚拟机
+
+1. Java虚拟机是一台执行Java字节码的虚拟计算机，它拥有独立的运行机制，其运行的Java字节码也未必由Java语言编译而成。
+2. JVM平台的各种语言可以共享Java虚拟机带来的跨平台性、优秀的垃圾回器，以及可靠的即时编译器。
+3. **Java技术的核心就是Java虚拟机**（JVM，Java Virtual Machine），因为所有的Java程序都运行在Java虚拟机内部。
+
+**作用：**
+
+Java虚拟机就是二进制字节码的运行环境，负责装载字节码到其内部，解释/编译为对应平台上的机器指令执行。每一条Java指令，Java虚拟机规范中都有详细定义，如怎么取操作数，怎么处理操作数，处理结果放在哪里。
+
+**特点：**
+
+1. 一次编译，到处运行
+2. 自动内存管理
+3. 自动垃圾回收功能
 
 # 10-JVM的位置
 

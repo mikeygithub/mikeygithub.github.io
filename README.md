@@ -24,17 +24,11 @@ hexo new post -path=/os/计算机操作系统 计算机操作系统
 可选便签：
 
 primary
-
 secondary
-
 success
-
 danger
-
 warning
-
 info
-
 light
 
 ## 友链添加
