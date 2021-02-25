@@ -35,7 +35,7 @@ light
 
 ```
   nickname:麦奇  
-  avatar:https://mikeygithub.github.iohttps://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/avatar.png    
+  avatar:https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/avatar.png    
   site:https://mikeygithub.github.io/      
   info:麦奇的博客    
 ```
