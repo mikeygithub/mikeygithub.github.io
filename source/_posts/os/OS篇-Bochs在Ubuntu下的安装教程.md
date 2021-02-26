@@ -1,6 +1,6 @@
 ---
 title: OS篇-Bochs在Ubuntu下的安装教程
-index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/lgban.gif'
+index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/bochs.png'
 hide: false
 date: 2021-02-26 11:19:41
 category: 操作系统
@@ -11,8 +11,7 @@ tags: Bochs
 
 # 环境准备
 
-- Ubuntu18.04
-- bochs-2.6.2
+[OS篇-Bochs在Ubuntu下的安装教程](https://mikeygithub.github.io/2021/02/26/os/OS%E7%AF%87-Bochs%E5%9C%A8Ubuntu%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B)
 
 # 安装软件
 
