@@ -1,0 +1,739 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  <title>OS篇-Bochs在Ubuntu下的安装教程 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>麦奇</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/todo/">
+                <i class="iconfont icon-plan"></i>
+                代办
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="OS篇-Bochs在Ubuntu下的安装教程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Mikey
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-26 11:19" pubdate>
+        2021年2月26日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      33
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">OS篇-Bochs在Ubuntu下的安装教程</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>最近在看《操作系统真相还原》这本书，打算跟着做一个微型操作系统，就有了这篇教程</p>
+</blockquote>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><ul>
+<li>Ubuntu18.04</li>
+<li>bochs-2.6.2</li>
+</ul>
+<h1 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h1><ul>
+<li><p>下载</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">wget https://udomain.dl.sourceforge.net/project/bochs/bochs/2.6.2/bochs-2.6.2.tar.gz<br></code></pre></div></td></tr></table></figure></li>
+<li><p>解压</p>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">tar -zxvf bochs-2.6.2.tar.gz<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>配置</p>
+</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">./configure \<br>--prefix=/your_path/bochs \<br>--enable-debugger\<br>--enable-disasm \<br>--enable-iodebug \<br>--enable-x86-debugger \<br>--with-x \<br>--with-x11<br></code></pre></div></td></tr></table></figure>
+<p>解释</p>
+<blockquote>
+<p>–prefix=/your_path/bochs 是用来指定 bochs 的安装目录,根据个人实际情况将 your_path 替换为自己待安装的路径。<br> –enable-debugger 打开 bochs 自己的调试器。<br> –enable-disasm 使 bochs 支持反汇编。<br> –enable-iodebug 启用 io 接口调试器。<br> –enable-x86-debugger 支持 x86 调试器。<br> –with-x 使用 x windows。<br> –with-x11 使用 x11 图形用户接口。  </p>
+</blockquote>
+<ul>
+<li>make install</li>
+</ul>
+<p>make install报错</p>
+<p><code>x.cc:37:10: fatal error: X11/Xlib.h: No such file or directory  #include &lt;X11/Xlib.h&gt;           ^~~~~~~~~~~~</code><br>还报错<br><code>x.cc:42:10: fatal error: X11/extensions/Xrandr.h: No such file or directory  #include &lt;X11/extensions/Xrandr.h&gt;           ^~~~~~~~~~~~~~~~~~~~~~~~~</code></p>
+<p>解决方法</p>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">sudo apt-get install libx11-dev ................. for X11/Xlib.h<br>sudo apt-get install mesa-common-dev........ for GL/glx.h<br>sudo apt-get install libglu1-mesa-dev ..... for GL/glu.h<br>sudo apt-get install libxrandr-dev ........... for X11/extensions/Xrandr.h<br>sudo apt-get install libxi-dev ................... for X11/extensions/XInput.h<br></code></pre></div></td></tr></table></figure>
+
+<h1 id="配置软件"><a href="#配置软件" class="headerlink" title="配置软件"></a>配置软件</h1><p>将安装目录下的配置文件<code>bochs/share/doc/bochs/bochsrc-sample.txt</code>复制到当前目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">mv /home/mikey/bochs/share/doc/bochs/bochsrc-sample.txt ./bochsrc<br></code></pre></div></td></tr></table></figure>
+
+<p>查看配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">[work@localhost bochs]$ cat bochsrc<br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">##############################################</span></span><br><span class="hljs-meta">#</span><span class="bash"> Configuration file <span class="hljs-keyword">for</span> Bochs</span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">##############################################</span></span><br><span class="hljs-meta">#</span><span class="bash"> 第一步,首先设置 Bochs 在运行过程中能够使用的内存,本例为 32MB。</span><br><span class="hljs-meta">#</span><span class="bash"> 关键字为:megs</span><br>megs: 32<br><span class="hljs-meta">#</span><span class="bash"> 第二步,设置对应真实机器的 BIOS 和 VGA BIOS。</span><br><span class="hljs-meta">#</span><span class="bash"> 对应两个关键字为:romimage 和 vgaromimage</span><br>romimage: file=/实际路径/bochs/share/bochs/BIOS-bochs-latest<br>vgaromimage: file=/实际路径/bochs/share/bochs/VGABIOS-lgpl-latest<br><span class="hljs-meta">#</span><span class="bash"> 第三步,设置 Bochs 所使用的磁盘,软盘的关键字为 floppy。</span><br><span class="hljs-meta">#</span><span class="bash"> 若只有一个软盘,则使用 floppya 即可,若有多个,则为 floppya,floppyb...</span><br><span class="hljs-meta">#</span><span class="bash">floppya: 1_44=a.img, status=inserted</span><br><span class="hljs-meta">#</span><span class="bash"> 第四步,选择启动盘符。</span><br><span class="hljs-meta">#</span><span class="bash">boot: floppy</span><br><span class="hljs-meta">#</span><span class="bash">默认从软盘启动,将其注释</span><br>boot: disk<br><span class="hljs-meta">#</span><span class="bash">改为从硬盘启动。我们的任何代码都将直接写在硬盘上,所以不会再有读写软盘的操作。</span><br><span class="hljs-meta">#</span><span class="bash"> 第五步,设置日志文件的输出。</span><br>log: bochs.out<br><span class="hljs-meta">#</span><span class="bash"> 第六步,开启或关闭某些功能。</span><br><span class="hljs-meta">#</span><span class="bash"> 下面是关闭鼠标,并打开键盘。</span><br>mouse: enabled=0<br>keyboard_mapping: enabled=1,<br>map=/实际路径/bochs/share/bochs/keymaps/x11-pc-us.map<br><span class="hljs-meta">#</span><span class="bash"> 硬盘设置</span><br>ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14<br><span class="hljs-meta">#</span><span class="bash"> 下面的是增加的 bochs 对 gdb 的支持,这样 gdb 便可以远程连接到此机器的 1234 端口调试了</span><br>gdbstub: enabled=1, port=1234, text_base=0, data_base=0, bss_base=0<br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">##################配置文件结束#####################</span></span><br></code></pre></div></td></tr></table></figure>
+
+<h1 id="测试开机"><a href="#测试开机" class="headerlink" title="测试开机"></a>测试开机</h1><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">mikey@mikey:~/bochs/bin$ ./bochs<br>========================================================================<br>                       Bochs x86 Emulator 2.6.2<br>                Built from SVN snapshot on May 26, 2013<br>                  Compiled on Feb 26 2021 at 11:34:31<br>========================================================================<br>00000000000i[     ] reading configuration from bochsrc<br>------------------------------<br>Bochs Configuration: Main Menu<br>------------------------------<br><br>This is the Bochs Configuration Interface, where you can describe the<br>machine that you want to simulate.  Bochs has already searched for a<br>configuration file (typically called bochsrc.txt) and loaded it if it<br>could be found.  When you are satisfied with the configuration, go<br>ahead and start the simulation.<br><br>You can also start bochs with the -q option to skip these menus.<br><br>1. Restore factory default configuration<br>2. Read options from...<br>3. Edit options<br>4. Save options to...<br>5. Restore the Bochs state from...<br>6. Begin simulation<br>7. Quit now<br><br>Please choose one: [6] 2<br><br>What is the configuration file name?<br>To cancel, type &#x27;none&#x27;. [bochsrc] <br>00000000000i[     ] reading configuration from bochsrc<br>------------------------------<br>Bochs Configuration: Main Menu<br>------------------------------<br><br>This is the Bochs Configuration Interface, where you can describe the<br>machine that you want to simulate.  Bochs has already searched for a<br>configuration file (typically called bochsrc.txt) and loaded it if it<br>could be found.  When you are satisfied with the configuration, go<br>ahead and start the simulation.<br><br>You can also start bochs with the -q option to skip these menus.<br><br>1. Restore factory default configuration<br>2. Read options from...<br>3. Edit options<br>4. Save options to...<br>5. Restore the Bochs state from...<br>6. Begin simulation<br>7. Quit now<br><br>Please choose one: [6] 6<br>00000000000i[     ] installing x module as the Bochs GUI<br>00000000000i[     ] Bochs x86 Emulator 2.6.2<br>00000000000i[     ]   Built from SVN snapshot on May 26, 2013<br>00000000000i[     ] Compiled on Feb 26 2021 at 11:34:31<br>00000000000i[     ] System configuration<br>00000000000i[     ]   processors: 1 (cores=1, HT threads=1)<br>00000000000i[     ]   A20 line support: yes<br>00000000000i[     ] IPS is set to 4000000<br>00000000000i[     ] CPU configuration<br>00000000000i[     ]   SMP support: no<br>00000000000i[     ]   level: 6<br>00000000000i[     ]   APIC support: xapic<br>00000000000i[     ]   FPU support: yes<br>00000000000i[     ]   MMX support: yes<br>00000000000i[     ]   3dnow! support: no<br>00000000000i[     ]   SEP support: yes<br>00000000000i[     ]   SSE support: sse2<br>00000000000i[     ]   XSAVE support: no <br>00000000000i[     ]   AES support: no<br>00000000000i[     ]   MOVBE support: no<br>00000000000i[     ]   ADX support: no<br>00000000000i[     ]   x86-64 support: no<br>00000000000i[     ]   MWAIT support: yes<br>00000000000i[     ] Optimization configuration<br>00000000000i[     ]   RepeatSpeedups support: no<br>00000000000i[     ]   Fast function calls: no<br>00000000000i[     ]   Handlers Chaining speedups: no<br>00000000000i[     ] Devices configuration<br>00000000000i[     ]   NE2000 support: no<br>00000000000i[     ]   PCI support: yes, enabled=yes<br>00000000000i[     ]   SB16 support: no<br>00000000000i[     ]   USB support: no<br>00000000000i[     ]   VGA extension support: vbe<br>00000000000i[MEM0 ] allocated memory at 0x7f7ad1cea010. after alignment, vector=0x7f7ad1ceb000<br>00000000000i[MEM0 ] 32.00MB<br>00000000000i[MEM0 ] mem block size = 0x00100000, blocks=32<br>00000000000i[MEM0 ] rom at 0xfffe0000/131072 (&#x27;/home/mikey/bochs/share/bochs/BIOS-bochs-latest&#x27;)<br>00000000000i[     ] init_dev of &#x27;pci&#x27; plugin device by virtual method<br>00000000000i[DEV  ] i440FX PMC present at device 0, function 0<br>00000000000i[     ] init_dev of &#x27;pci2isa&#x27; plugin device by virtual method<br>00000000000i[DEV  ] PIIX3 PCI-to-ISA bridge present at device 1, function 0<br>00000000000i[     ] init_dev of &#x27;cmos&#x27; plugin device by virtual method<br>00000000000i[CMOS ] Using local time for initial clock<br>00000000000i[CMOS ] Setting initial clock to: Fri Feb 26 11:58:08 2021 (time0=1614311888)<br>00000000000i[     ] init_dev of &#x27;dma&#x27; plugin device by virtual method<br>00000000000i[DMA  ] channel 4 used by cascade<br>00000000000i[     ] init_dev of &#x27;pic&#x27; plugin device by virtual method<br>00000000000i[     ] init_dev of &#x27;pit&#x27; plugin device by virtual method<br>00000000000i[     ] init_dev of &#x27;floppy&#x27; plugin device by virtual method<br>00000000000i[DMA  ] channel 2 used by Floppy Drive<br>00000000000i[     ] init_dev of &#x27;vga&#x27; plugin device by virtual method<br>00000000000i[MEM0 ] Register memory access handlers: 0x0000000a0000 - 0x0000000bffff<br>00000000000i[VGA  ] interval=200000<br>00000000000i[MEM0 ] Register memory access handlers: 0x0000e0000000 - 0x0000e0ffffff<br>00000000000i[BXVGA] VBE Bochs Display Extension Enabled<br>00000000000i[XGUI ] test_alloc_colors: 16 colors available out of 16 colors tried<br>00000000000i[XGUI ] font 8 wide x 16 high, display depth = 24<br>00000000000i[MEM0 ] rom at 0xc0000/41472 (&#x27;/home/mikey/bochs/share/bochs/VGABIOS-lgpl-latest&#x27;)<br>00000000000i[     ] init_dev of &#x27;acpi&#x27; plugin device by virtual method<br>00000000000i[DEV  ] ACPI Controller present at device 1, function 3<br>00000000000i[     ] init_dev of &#x27;ioapic&#x27; plugin device by virtual method<br>00000000000i[IOAP ] initializing I/O APIC<br>00000000000i[MEM0 ] Register memory access handlers: 0x0000fec00000 - 0x0000fec00fff<br>00000000000i[IOAP ] IOAPIC enabled (base address = 0xfec00000)<br>00000000000i[     ] init_dev of &#x27;keyboard&#x27; plugin device by virtual method<br>00000000000i[KBD  ] will paste characters every 400 keyboard ticks<br>00000000000i[     ] init_dev of &#x27;harddrv&#x27; plugin device by virtual method<br>00000000000i[HD   ] HD on ata0-0: &#x27;disk.img&#x27;, &#x27;flat&#x27; mode<br>00000000000p[HD   ] &gt;&gt;PANIC&lt;&lt; ata0-0: could not open hard drive image file &#x27;disk.img&#x27;<br>========================================================================<br>Bochs is exiting with the following message:<br>[HD   ] ata0-0: could not open hard drive image file &#x27;disk.img&#x27;<br>========================================================================<br>00000000000i[CTRL ] quit_sim called with exit code 1<br></code></pre></div></td></tr></table></figure>
+
+<p>因为还没有设置启动盘所以报错，但是可以看到GUI界面还是挺激动的是吧哈哈哈哈</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226120003077.png" srcset="/img/loading.gif" alt="测试开机"></p>
+<h1 id="创建启动盘"><a href="#创建启动盘" class="headerlink" title="创建启动盘"></a>创建启动盘</h1><p>使用<code>bin/bximage</code>进行创建</p>
+<blockquote>
+<p>-fd 创建软盘。<br>-hd 创建硬盘。<br>-mode 创建硬盘的类型,有 flat、sparse、growing 三种。<br>-size 指创建多大的硬盘,以 MB 为单位。<br>-q 以静默模式创建,创建过程中不会和用户交互</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">bin/bximage -hd -mode=&quot;flat&quot; -size=60 -q hd60M.img<br></code></pre></div></td></tr></table></figure>
+
+<p>这个命令串中最后一个 hd60M.img 是咱们创建的虚拟硬盘的名称。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226121421416.png" srcset="/img/loading.gif" alt="image-20210226121421416"></p>
+<p>修改配置文件</p>
+<p><img src="/home/mikey/Downloads/jsDeliver/resource/img/image-20210226122039438.png" srcset="/img/loading.gif"></p>
+<p>重新启动<code>./bochs -f bochsrc</code>查看效果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226122004018.png" srcset="/img/loading.gif" alt="image-20210226122004018"></p>
+<h1 id="编写MBR"><a href="#编写MBR" class="headerlink" title="编写MBR"></a>编写MBR</h1><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vim mbr.S<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">;主引导程序<br>;------------------------------------------------------------<br>SECTION MBR vstart=0x7c00<br>mov ax,cs<br>mov ds,ax<br>mov es,ax<br>mov ss,ax<br>mov fs,ax<br>mov sp,0x7c00<br>; 清屏利用 0x06 号功能,上卷全部行, 则可清屏 。<br>; -----------------------------------------------------------<br>;INT 0x10<br>;功能号:0x06<br>;功能描述:上卷窗口<br>;------------------------------------------------------<br>;输入:<br>;AH 功能号= 0x06<br>;AL = 上卷的行数(如果为 0,表示全部)<br>;BH = 上卷行属性<br>;(CL,CH) = 窗口左上角的(X,Y)位置<br>;(DL,DH) = 窗口右下角的(X,Y)位置<br>;无返回值:<br>mov ax, 0x600<br>mov bx, 0x700<br>mov cx, 0<br>; 左上角: (0, 0)<br>mov dx, 0x184f<br>; 右下角: (80,25),<br>; VGA 文本模式中,一行只能容纳 80 个字符,共 25 行 。<br>; 下标从 0 开始,所以 0x18=24,0x4f=79<br>int 0x10<br>; int 0x10<br>;;;;;;;;;<br>;下面这三行代码获取光标位置<br>;;;;;;;;;<br>;.get_cursor 获取当前光标位置,在光 标位置处打印字符 。<br>mov ah, 3<br>; 输入: 3 号子功能是获取光标位置,需要存入 ah 寄存器<br>mov bh, 0<br>; bh 寄存器存储的是待获取光标的页号<br>; 输出: ch=光标开始行,cl=光标结束行<br>; dh=光标所在行号,dl=光标所在列号<br>int 0x10<br>;;;;;;;;;<br>;获取光标位置结束<br>;;;;;;;;;;;;;;;;<br>;;;;;;;;;<br>;打印字符串<br>;;;;;;;;;;;<br>;还是用 10h 中断,不过这次调用 13 号子功能打印字符串<br>mov ax, message<br>mov bp, ax<br>; es:bp 为串首地址,es 此时同 cs 一致,<br>; 开头时已经为 sreg 初始化<br>; 光标位置要用到 dx 寄存器中内容,cx 中的光标位置可忽略<br>mov cx, 5<br>; cx 为串长度,不包括结束符 0 的字符个数<br>mov ax, 0x1301<br>;子功能号 13 显示字符及属性,要存入 ah 寄存器,<br>; al 设置写字符方式 ah=01: 显示字符串,光标跟随移动<br>mov bx, 0x2<br>; bh 存储要显示的页号,此处是第 0 页,<br>; bl 中是字符属性,属性黑底绿字(bl = 02h)<br>int 0x10<br>; 执行 BIOS 0x10 号中断<br>;;;;;;;;;<br>;打字字符串结束<br>;;;;;;;;;;;;;;;<br>; 使程序悬停在此<br>jmp $<br>message db <span class="hljs-string">&quot;1 MBR&quot;</span><br><span class="hljs-built_in">times</span> 510-($-$$) db 0<br>db 0x55,0xaa<br></code></pre></div></td></tr></table></figure>
+
+<p>编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">nasm -o mbr.bin mbr.S<br></code></pre></div></td></tr></table></figure>
+
+<p>查看其大小为512k</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">ls -lb mbr.bin<br></code></pre></div></td></tr></table></figure>
+
+<p>配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">dd if=/home/mikey/bochs/bin/mbr.bin of=/home/mikey/bochs/bin/hd60M.img bs=512 count=1 conv=notrunc<br></code></pre></div></td></tr></table></figure>
+
+<p>查看</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli"><span class="hljs-string">./bochs</span> -f bochsrc<br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226142846512.png" srcset="/img/loading.gif" alt="启动成功截图"></p>
+<p>即可完成一个简单MBR的编写</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="">《操作系统真相还原》</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lfri/p/11489223.html">Ubuntu 16.04LTS 安装和配置Bochs</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Bochs/">Bochs</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/24/java/Java%E7%AF%87-JVM%E8%AF%A6%E8%A7%A3/">
+                        <span class="hidden-mobile">Java篇-JVM详解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     Copyright © 2017-2021 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> And <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> Core on Github Page 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        桂ICP备2020009931号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>桂公网安备2020009931号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
