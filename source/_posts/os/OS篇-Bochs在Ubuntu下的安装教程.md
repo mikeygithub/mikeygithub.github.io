@@ -272,7 +272,7 @@ bin/bximage -hd -mode="flat" -size=60 -q hd60M.img
 
 修改配置文件
 
-![](/home/mikey/Downloads/jsDeliver/resource/img/image-20210226122039438.png)
+![](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226122039438.png)
 
 重新启动`./bochs -f bochsrc`查看效果
 
