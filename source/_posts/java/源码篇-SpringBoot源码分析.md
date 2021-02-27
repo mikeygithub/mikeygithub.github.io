@@ -9,7 +9,11 @@ tags: SpringBoot
 
 # 启动流程
 
->
+
+
+通过加载
+
+![QQ图片20210227235542](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/QQ图片20210227235542.png)
 
 # 自动装配
 
