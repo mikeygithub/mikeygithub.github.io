@@ -689,7 +689,7 @@ Spring 特点
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/07/07/k8s/k8s-%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/" target="_self">
+        <a href="/2020/07/07/devops/k8s-%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/k8s.jpeg" srcset="/img/loading.gif" alt="k8s 入门实践">
         </a>
       </div>
@@ -697,19 +697,30 @@ Spring 特点
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/07/07/k8s/k8s-%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/">k8s 入门实践</a>
+        <a href="/2020/07/07/devops/k8s-%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/">k8s 入门实践</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/07/07/k8s/k8s-%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/">
+        <a href="/2020/07/07/devops/k8s-%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5/">
           
           
             
           
-          环境准备
-至少2台 2核4G 的服务器 Cent OS 7.6 / 7.7 / 7.8
+          搭建服务
+virtualbox
+centos7.8
 
-服务器信息 CentOS Linux release 7.8.2003 (Core)12345678910111213141516171819202122232425Architecture:          x86_64CPU op-mode(s):        32-bit, 64-bitByte O
+
+    
+        centos7 cannot find a valid baseurl for repo
+    
+
+原因：无法解析添加DNS重启网卡即可
+vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
+修改
+noboot=yes
+重启网络
+service network restart
         </a>
       </p>
 
