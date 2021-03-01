@@ -6,38 +6,70 @@ category: DevOps
 tags: Kubernates
 ---
 
+# 搭建服务
+
+- [virtualbox](https://www.virtualbox.org/)
+- [centos7.8](http://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-Everything-2009.iso)
+
+
+<details>
+    <summary>
+        <span>centos7 cannot find a valid baseurl for repo</span>
+    </summary>
+
+原因：无法解析添加DNS重启网卡即可
+
+`vi /etc/sysconfig/network-scripts/ifcfg-enp0s3`
+
+修改
+
+`
+noboot=yes
+`
+
+重启网络
+
+`service network restart`
+
+</details>
+
+
+
+<details>
+    <summary>
+        <span>修改为静态IP</span>
+    </summary>
+```
+BOOTPROTO="static" # 使用静态IP地址，默认为dhcp 
+IPADDR="19.37.33.66" # 设置的静态IP地址
+NETMASK="255.255.255.0" # 子网掩码 
+GATEWAY="19.37.33.1" # 网关地址 
+DNS1="192.168.241.2" # DNS服务器（此设置没有用到，所以我的里面没有添加）
+ONBOOT=yes  #设置网卡启动方式为 开机启动 并且可以通过系统服务管理器 systemctl 控制网卡
+```
+
+重启网络
+
+`service network restart`
+
+</details>
+
+
+
+
+
+
 # 环境准备
 
 - 至少2台 2核4G 的服务器 Cent OS 7.6 / 7.7 / 7.8
 
 ### 服务器信息 CentOS Linux release 7.8.2003 (Core)
 
-````
+````shell
 Architecture:          x86_64
 CPU op-mode(s):        32-bit, 64-bit
 Byte Order:            Little Endian
 CPU(s):                4
-On-line CPU(s) list:   0-3
-Thread(s) per core:    2
-Core(s) per socket:    2
-Socket(s):             1
-NUMA node(s):          1
-Vendor ID:             GenuineIntel
-CPU family:            6
-Model:                 85
-Model name:            Intel(R) Xeon(R) Gold 6266C CPU @ 3.00GHz
-Stepping:              7
-CPU MHz:               3000.000
-BogoMIPS:              6000.00
-Hypervisor vendor:     KVM
-Virtualization type:   full
-L1d cache:             32K
-L1i cache:             32K
-L2 cache:              1024K
-L3 cache:              30976K
-NUMA node0 CPU(s):     0-3
-Flags:                 fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc eagerfpu pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single ssbd ibrs ibpb stibp ibrs_enhanced fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx avx512f avx512dq rdseed adx smap clflushopt clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 arat avx512_vnni md_clear spec_ctrl intel_stibp flush_l1d arch_capabilities
-
 ````
 
 
@@ -278,13 +310,13 @@ curl -sSL https://kuboard.cn/install-script/v1.18.x/init_master.sh | sh -s 1.18.
 
 <details>
     <summary>脚本代码</summary>
-    
-    
-    ````
-    #!/bin/bash
-    
-    # 只在 master 节点执行
-    
+
+​    
+​    ````
+​    #!/bin/bash
+​    
+​    # 只在 master 节点执行
+​    
     # 脚本出错时终止执行
     set -e
     
@@ -294,26 +326,27 @@ curl -sSL https://kuboard.cn/install-script/v1.18.x/init_master.sh | sh -s 1.18.
       echo 当前APISERVER_NAME=$APISERVER_NAME
       exit 1
     fi
-    
-    
-    # 查看完整配置选项 https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2
-    rm -f ./kubeadm-config.yaml
-    cat <<EOF > ./kubeadm-config.yaml
-    apiVersion: kubeadm.k8s.io/v1beta2
-    kind: ClusterConfiguration
-    kubernetesVersion: v${1}
-    imageRepository: registry.aliyuncs.com/k8sxio
-    controlPlaneEndpoint: "${APISERVER_NAME}:6443"
-    networking:
-      serviceSubnet: "10.96.0.0/16"
-      podSubnet: "${POD_SUBNET}"
-      dnsDomain: "cluster.local"
-    EOF
-    
-    # kubeadm init
-    # 根据您服务器网速的情况，您需要等候 3 - 10 分钟
-    kubeadm init --config=kubeadm-config.yaml --upload-certs
-    
+
+
+​    
+​    # 查看完整配置选项 https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2
+​    rm -f ./kubeadm-config.yaml
+​    cat <<EOF > ./kubeadm-config.yaml
+​    apiVersion: kubeadm.k8s.io/v1beta2
+​    kind: ClusterConfiguration
+​    kubernetesVersion: v${1}
+​    imageRepository: registry.aliyuncs.com/k8sxio
+​    controlPlaneEndpoint: "${APISERVER_NAME}:6443"
+​    networking:
+​      serviceSubnet: "10.96.0.0/16"
+​      podSubnet: "${POD_SUBNET}"
+​      dnsDomain: "cluster.local"
+​    EOF
+​    
+​    # kubeadm init
+​    # 根据您服务器网速的情况，您需要等候 3 - 10 分钟
+​    kubeadm init --config=kubeadm-config.yaml --upload-certs
+​    
     # 配置 kubectl
     rm -rf /root/.kube/
     mkdir /root/.kube/
@@ -325,9 +358,9 @@ curl -sSL https://kuboard.cn/install-script/v1.18.x/init_master.sh | sh -s 1.18.
     rm -f calico-3.13.1.yaml
     wget https://kuboard.cn/install-script/calico/calico-3.13.1.yaml
     kubectl apply -f calico-3.13.1.yaml
-
-    ````
     
+    ````
+
 </details>
 
 
@@ -380,7 +413,7 @@ mikey   NotReady   master   2m18s   v1.18.6   192.168.0.39   <none>        CentO
 kubeadm token create 命令的输出
 
 >kubeadm join apiserver.demo:6443 --token mpfjma.4vjjg8flqihor4vt     --discovery-token-ca-cert-hash sha256:6f7a8e40a810323672de5eee6f4d19aa2dbdb38411845a1bf5dd63485c43d303
- 
+
 `该 token 的有效时间为 2 个小时，2小时内，您可以使用此 token 初始化任意数量的 worker 节点`
 
 
@@ -400,18 +433,6 @@ kubeadm join apiserver.demo:6443 --token mpfjma.4vjjg8flqihor4vt     --discovery
 ````
 
 出现问题`kubeadm reset`进行重置
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # 参考资料

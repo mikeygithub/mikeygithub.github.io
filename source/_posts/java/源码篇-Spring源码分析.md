@@ -9,6 +9,29 @@ tags: Spring
 
 # 启动流程
 
+```
+spring
+├── aopalliance-1.0.jar
+├── commons-logging-1.2.jar
+├── spring-aop-5.2.3.RELEASE.jar
+├── spring-aspects-5.2.3.RELEASE.jar
+├── spring-beans-5.2.3.RELEASE.jar
+├── spring-context-5.2.3.RELEASE.jar
+├── spring-context-support-5.2.3.RELEASE.jar
+├── spring-core-5.2.3.RELEASE.jar
+├── spring-expression-5.2.3.RELEASE.jar
+├── spring-instrument-5.2.3.RELEASE.jar
+├── spring-jdbc-5.2.3.RELEASE.jar
+├── spring-jms-5.2.3.RELEASE.jar
+├── spring-messaging-5.2.3.RELEASE.jar
+├── spring-orm-5.2.3.RELEASE.jar
+├── spring-oxm-5.2.3.RELEASE.jar
+├── spring-test-5.2.3.RELEASE.jar
+└── spring-tx-5.2.3.RELEASE.jar
+```
+
+
+
 
 
 # 参考资料
