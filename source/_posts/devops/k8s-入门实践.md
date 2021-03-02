@@ -24,7 +24,7 @@ tags: Kubernates
 修改
 
 `
-noboot=yes
+onboot=yes
 `
 
 重启网络
