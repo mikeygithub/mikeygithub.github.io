@@ -1,5 +1,5 @@
 ---
-title: Tomcat组件架构
+title: Tomcat篇-组件架构
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/tomcat.jpg
 date: 2020-12-02 10:08:26
 category: 笔记

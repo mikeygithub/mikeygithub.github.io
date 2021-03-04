@@ -1,5 +1,5 @@
 ---
-title: Java 集合
+title: Java篇-Java集合
 date: 2020-05-29 10:17:33
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/java.jpeg
 category: Java

@@ -3,7 +3,7 @@ title: Netty
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/netty.png
 date: 2020-12-28 17:38:41
 category: 框架
-tags: Netty,转载
+tags: Netty
 ---
 
 转自[敖丙肝了一个月的Netty知识点](https://mp.weixin.qq.com/s/I9PGsWo7-ykGf2diKklGtA)

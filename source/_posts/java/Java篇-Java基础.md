@@ -1,5 +1,5 @@
 ---
-title: Java 基础
+title: Java篇-Java基础
 date: 2020-07-07 09:46:31
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/javaer-job-press.jpeg
 category: Java

@@ -1,5 +1,5 @@
 ---
-title: Java面试问题汇总
+title: Java篇-面试问题汇总
 date: 2020-05-31 09:17:01
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/total.jpeg
 category: Java

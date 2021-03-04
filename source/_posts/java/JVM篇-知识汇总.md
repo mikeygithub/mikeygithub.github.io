@@ -1,5 +1,5 @@
 ---
-title: JVM 知识汇总
+title: JVM篇-知识汇总
 date: 2020-05-19 17:19:15
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/jvm-1.jpg
 category: Java
