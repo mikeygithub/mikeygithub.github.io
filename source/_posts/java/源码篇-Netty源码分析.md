@@ -9,7 +9,7 @@ tags: netty
 
 # 核心概念
 
-![总体架构](/home/mikey/Downloads/jsDeliver/resource/img/components.png)
+![总体架构](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/components.png)
 
 # 框架特性
 
