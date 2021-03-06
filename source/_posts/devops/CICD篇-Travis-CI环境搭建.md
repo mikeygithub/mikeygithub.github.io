@@ -1,8 +1,8 @@
 ---
-title: Travis-CI搭建CD/CI环境
+title: CICD篇-Travis-CI环境搭建
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/travis-ci-logo.jpg
 date: 2020-12-06 10:30:26
-category: 笔记
+category: DevOps
 tags: CD/CI
 ---
 

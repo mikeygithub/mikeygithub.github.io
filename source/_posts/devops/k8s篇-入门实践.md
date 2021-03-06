@@ -1,5 +1,5 @@
 ---
-title: k8s 入门实践
+title: k8s篇-入门实践
 date: 2020-07-07 11:05:00
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/k8s.jpeg
 category: DevOps

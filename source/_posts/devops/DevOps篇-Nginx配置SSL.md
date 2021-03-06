@@ -1,5 +1,5 @@
 ---
-title: Nginx配置SSL
+title: DevOps篇-Nginx配置SSL
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/ssl-nginx.jpeg
 date: 2020-12-09 10:46:57
 category: SSL
