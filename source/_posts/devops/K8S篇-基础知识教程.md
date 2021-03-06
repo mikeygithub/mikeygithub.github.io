@@ -259,7 +259,7 @@ tomcat-deploy-1640611518-zhrsc  1/1         Running     0           3m
 
 运行kubectl describe deployments，可以清楚地看到Deployment控制的Pod的水平扩展过程，详见第2章的说明，这里不再赘述。
 
-Pod的管理对象，除了RC和Deployment，还包括ReplicaSet、DaemonSet、StatefulSet、Job等，分别用于不同的应用场景中，将在第2章中进行详细介绍。
+Pod的管理对象，除了RC和Deployment，还包括ReplicaSet、DaemonSet、StatefulSet、Job等，分别用于不同的应用场景中
 
 
 
