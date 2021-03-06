@@ -1,0 +1,797 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  <title>k8s篇-入门实践 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>麦奇</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/todo/">
+                <i class="iconfont icon-plan"></i>
+                代办
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="k8s篇-入门实践">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Mikey
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-07-07 11:05" pubdate>
+        2020年7月7日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      44
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">k8s篇-入门实践</h1>
+            
+            <div class="markdown-body">
+              <h1 id="搭建服务"><a href="#搭建服务" class="headerlink" title="搭建服务"></a>搭建服务</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.virtualbox.org/">virtualbox</a></li>
+<li><a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-Everything-2009.iso">centos7.8</a></li>
+</ul>
+<details>
+    <summary>
+        <span>centos7 cannot find a valid baseurl for repo</span>
+    </summary>
+
+<p>原因：无法解析添加DNS重启网卡即可</p>
+<p><code>vi /etc/sysconfig/network-scripts/ifcfg-enp0s3</code></p>
+<p>修改</p>
+<p><code>onboot=yes</code></p>
+<p>重启网络</p>
+<p><code>service network restart</code></p>
+</details>
+
+
+
+<details>
+    <summary>
+        <span>修改为静态IP</span>
+    </summary>
+<figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">BOOTPROTO</span>=<span class="hljs-string">&quot;static&quot;</span> <span class="hljs-comment"># 使用静态IP地址，默认为dhcp </span><br><span class="hljs-attr">IPADDR</span>=<span class="hljs-string">&quot;19.37.33.66&quot;</span> <span class="hljs-comment"># 设置的静态IP地址</span><br><span class="hljs-attr">NETMASK</span>=<span class="hljs-string">&quot;255.255.255.0&quot;</span> <span class="hljs-comment"># 子网掩码 </span><br><span class="hljs-attr">GATEWAY</span>=<span class="hljs-string">&quot;19.37.33.1&quot;</span> <span class="hljs-comment"># 网关地址 </span><br><span class="hljs-attr">DNS1</span>=<span class="hljs-string">&quot;192.168.241.2&quot;</span> <span class="hljs-comment"># DNS服务器（此设置没有用到，所以我的里面没有添加）</span><br><span class="hljs-attr">ONBOOT</span>=<span class="hljs-literal">yes</span>  <span class="hljs-comment">#设置网卡启动方式为 开机启动 并且可以通过系统服务管理器 systemctl 控制网卡</span><br></code></pre></div></td></tr></table></figure>
+
+<p>重启网络</p>
+<p><code>service network restart</code></p>
+</details>
+
+
+
+
+
+
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><ul>
+<li>至少2台 2核4G 的服务器 Cent OS 7.6 / 7.7 / 7.8</li>
+</ul>
+<h3 id="服务器信息-CentOS-Linux-release-7-8-2003-Core"><a href="#服务器信息-CentOS-Linux-release-7-8-2003-Core" class="headerlink" title="服务器信息 CentOS Linux release 7.8.2003 (Core)"></a>服务器信息 CentOS Linux release 7.8.2003 (Core)</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">Architecture:          x86_64<br>CPU op-mode(s):        32-bit, 64-bit<br>Byte Order:            Little Endian<br>CPU(s):                4<br></code></pre></div></td></tr></table></figure>
+
+
+<p>K8s</p>
+<ul>
+<li>kubelet</li>
+</ul>
+<p>Docker 镜像</p>
+<ul>
+<li>etcd</li>
+<li>kube-proxy</li>
+<li>kube-apiserver</li>
+<li>kube-controller-manager</li>
+<li>kube-scheduler</li>
+</ul>
+<h1 id="安装Kubernates"><a href="#安装Kubernates" class="headerlink" title="安装Kubernates"></a>安装Kubernates</h1><ul>
+<li><p>修改 hostname,不能使用localhost</p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dsconfig">如果您需要修改 <span class="hljs-string">hostname</span>，可执行如下指令：<br><span class="hljs-comment"># 修改 hostname</span><br><span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">your-new-host-name</span><br><span class="hljs-string"></span><span class="hljs-comment"># 查看修改结果</span><br><span class="hljs-string">hostnamectl</span> <span class="hljs-string">status</span><br><span class="hljs-string"></span><span class="hljs-comment"># 设置 hostname 解析</span><br><span class="hljs-string">echo</span> <span class="hljs-string">&quot;127.0.0.1   $(hostname)&quot;</span> &gt;&gt; /<span class="hljs-string">etc</span>/<span class="hljs-string">hosts</span><br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>检查网络</p>
+</li>
+</ul>
+<figure class="highlight pf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pf">[root@server-<span class="hljs-number">781</span>e6bf7-bce3-<span class="hljs-number">4</span>d09-adc8-<span class="hljs-number">2</span>a169fdb8719 ~]<span class="hljs-comment"># ip route show</span><br><span class="hljs-keyword">default</span> via <span class="hljs-number">192.168</span>.<span class="hljs-number">0.1</span> dev eth0 <span class="hljs-keyword">proto</span> dhcp metric <span class="hljs-number">100</span> <br><span class="hljs-number">169.254</span>.<span class="hljs-number">169.254</span> via <span class="hljs-number">192.168</span>.<span class="hljs-number">0.254</span> dev eth0 <span class="hljs-keyword">proto</span> dhcp metric <span class="hljs-number">100</span> <br><span class="hljs-number">172.17</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">16</span> dev docker0 <span class="hljs-keyword">proto</span> kernel scope link src <span class="hljs-number">172.17</span>.<span class="hljs-number">0.1</span> <br><span class="hljs-number">172.18</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">16</span> dev br-<span class="hljs-number">66</span>ad3449f59f <span class="hljs-keyword">proto</span> kernel scope link src <span class="hljs-number">172.18</span>.<span class="hljs-number">0.1</span> <br><span class="hljs-number">172.19</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">16</span> dev br-<span class="hljs-number">3</span>d8dbba954bf <span class="hljs-keyword">proto</span> kernel scope link src <span class="hljs-number">172.19</span>.<span class="hljs-number">0.1</span> <br><span class="hljs-number">192.168</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">24</span> dev eth0 <span class="hljs-keyword">proto</span> kernel scope link src <span class="hljs-number">192.168</span>.<span class="hljs-number">0.39</span> metric <span class="hljs-number">100</span> <br>[root@server-<span class="hljs-number">781</span>e6bf7-bce3-<span class="hljs-number">4</span>d09-adc8-<span class="hljs-number">2</span>a169fdb8719 ~]<span class="hljs-comment"># ip address</span><br><span class="hljs-number">1</span>: lo: <span class="hljs-variable">&lt;LOOPBACK,UP,LOWER_UP&gt;</span> mtu <span class="hljs-number">65536</span> qdisc noqueue <span class="hljs-keyword">state</span> UNKNOWN <span class="hljs-keyword">group</span> <span class="hljs-keyword">default</span> qlen <span class="hljs-number">1000</span><br>    link/loopback <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> brd <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span><br>    <span class="hljs-keyword">inet</span> <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>/<span class="hljs-number">8</span> scope host lo<br>       valid_lft forever preferred_lft forever<br>    <span class="hljs-keyword">inet6</span> ::<span class="hljs-number">1</span>/<span class="hljs-number">128</span> scope host <br>       valid_lft forever preferred_lft forever<br><span class="hljs-number">2</span>: eth0: <span class="hljs-variable">&lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span> mtu <span class="hljs-number">1500</span> qdisc mq <span class="hljs-keyword">state</span> UP <span class="hljs-keyword">group</span> <span class="hljs-keyword">default</span> qlen <span class="hljs-number">1000</span><br>    link/ether fa:<span class="hljs-number">16</span>:<span class="hljs-number">3</span>e:c1:b5:a5 brd ff:ff:ff:ff:ff:ff<br>    <span class="hljs-keyword">inet</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">0.39</span>/<span class="hljs-number">24</span> brd <span class="hljs-number">192.168</span>.<span class="hljs-number">0.255</span> scope <span class="hljs-keyword">global</span> noprefixroute dynamic eth0<br>       valid_lft <span class="hljs-number">53761</span>sec preferred_lft <span class="hljs-number">53761</span>sec<br>    <span class="hljs-keyword">inet6</span> fe80::f816:<span class="hljs-number">3</span>eff:fec1:b5a5/<span class="hljs-number">64</span> scope link <br>       valid_lft forever preferred_lft forever<br><span class="hljs-number">3</span>: docker0: <span class="hljs-variable">&lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt;</span> mtu <span class="hljs-number">1500</span> qdisc noqueue <span class="hljs-keyword">state</span> DOWN <span class="hljs-keyword">group</span> <span class="hljs-keyword">default</span> <br>    link/ether <span class="hljs-number">02</span>:<span class="hljs-number">42</span>:<span class="hljs-number">54</span>:bb:c6:<span class="hljs-number">75</span> brd ff:ff:ff:ff:ff:ff<br>    <span class="hljs-keyword">inet</span> <span class="hljs-number">172.17</span>.<span class="hljs-number">0.1</span>/<span class="hljs-number">16</span> scope <span class="hljs-keyword">global</span> docker0<br>       valid_lft forever preferred_lft forever<br>    <span class="hljs-keyword">inet6</span> fe80::<span class="hljs-number">42</span>:<span class="hljs-number">54</span>ff:febb:c675/<span class="hljs-number">64</span> scope link <br>       valid_lft forever preferred_lft forever<br><span class="hljs-number">4</span>: br-<span class="hljs-number">66</span>ad3449f59f: <span class="hljs-variable">&lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span> mtu <span class="hljs-number">1500</span> qdisc noqueue <span class="hljs-keyword">state</span> UP <span class="hljs-keyword">group</span> <span class="hljs-keyword">default</span> <br>    link/ether <span class="hljs-number">02</span>:<span class="hljs-number">42</span>:ee:d9:c2:<span class="hljs-number">68</span> brd ff:ff:ff:ff:ff:ff<br>    <span class="hljs-keyword">inet</span> <span class="hljs-number">172.18</span>.<span class="hljs-number">0.1</span>/<span class="hljs-number">16</span> brd <span class="hljs-number">172.18</span>.<span class="hljs-number">255.255</span> scope <span class="hljs-keyword">global</span> br-<span class="hljs-number">66</span>ad3449f59f<br>       valid_lft forever preferred_lft forever<br>    <span class="hljs-keyword">inet6</span> fe80::<span class="hljs-number">42</span>:eeff:fed9:c268/<span class="hljs-number">64</span> scope link <br>       valid_lft forever preferred_lft forever<br><span class="hljs-number">5</span>: br-<span class="hljs-number">3</span>d8dbba954bf: <span class="hljs-variable">&lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span> mtu <span class="hljs-number">1500</span> qdisc noqueue <span class="hljs-keyword">state</span> UP <span class="hljs-keyword">group</span> <span class="hljs-keyword">default</span> <br>    link/ether <span class="hljs-number">02</span>:<span class="hljs-number">42</span>:<span class="hljs-number">6</span>c:a5:<span class="hljs-number">67</span>:cc brd ff:ff:ff:ff:ff:ff<br>    <span class="hljs-keyword">inet</span> <span class="hljs-number">172.19</span>.<span class="hljs-number">0.1</span>/<span class="hljs-number">16</span> brd <span class="hljs-number">172.19</span>.<span class="hljs-number">255.255</span> scope <span class="hljs-keyword">global</span> br-<span class="hljs-number">3</span>d8dbba954bf<br>       valid_lft forever preferred_lft forever<br>    <span class="hljs-keyword">inet6</span> fe80::<span class="hljs-number">42</span>:<span class="hljs-number">6</span>cff:fea5:<span class="hljs-number">67</span>cc/<span class="hljs-number">64</span> scope link <br>       valid_lft forever preferred_lft forever<br><span class="hljs-number">9</span>: veth7dba01e@if8: <span class="hljs-variable">&lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span> mtu <span class="hljs-number">1500</span> qdisc noqueue master br-<span class="hljs-number">66</span>ad3449f59f <span class="hljs-keyword">state</span> UP <span class="hljs-keyword">group</span> <span class="hljs-keyword">default</span> <br>    link/ether aa:<span class="hljs-number">7</span>c:a6:ae:<span class="hljs-number">85</span>:<span class="hljs-number">2</span>c brd ff:ff:ff:ff:ff:ff link-netnsid <span class="hljs-number">0</span><br>    <span class="hljs-keyword">inet6</span> fe80::a87c:a6ff:feae:<span class="hljs-number">852</span>c/<span class="hljs-number">64</span> scope link <br>       valid_lft forever preferred_lft forever<br><span class="hljs-number">15</span>: veth9f52d5f@if14: <span class="hljs-variable">&lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;</span> mtu <span class="hljs-number">1500</span> qdisc noqueue master br-<span class="hljs-number">3</span>d8dbba954bf <span class="hljs-keyword">state</span> UP <span class="hljs-keyword">group</span> <span class="hljs-keyword">default</span> <br>    link/ether e2:bd:<span class="hljs-number">35</span>:<span class="hljs-number">53</span>:c6:<span class="hljs-number">0</span>c brd ff:ff:ff:ff:ff:ff link-netnsid <span class="hljs-number">1</span><br>    <span class="hljs-keyword">inet6</span> fe80::e0bd:<span class="hljs-number">35</span>ff:fe53:c60c/<span class="hljs-number">64</span> scope link <br>       valid_lft forever preferred_lft forever<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li><p>安装 Docker</p>
+</li>
+<li><p>安装 nfs-utils</p>
+</li>
+<li><p>安装 kubectl / kubeadm / kubelet</p>
+</li>
+</ul>
+<figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala"><span class="hljs-meta"># 在 master 节点和 worker 节点都要执行</span><br><span class="hljs-meta"># 最后一个参数 1.18.6 用于指定 kubenetes 版本，支持所有 1.18.x 版本的安装</span><br><span class="hljs-meta"># 腾讯云 docker hub 镜像</span><br><span class="hljs-meta"># export REGISTRY_MIRROR=&quot;https://mirror.ccs.tencentyun.com&quot;</span><br><span class="hljs-meta"># DaoCloud 镜像</span><br><span class="hljs-meta"># export REGISTRY_MIRROR=&quot;http://f1361db2.m.daocloud.io&quot;</span><br><span class="hljs-meta"># 华为云镜像</span><br><span class="hljs-meta"># export REGISTRY_MIRROR=&quot;https://05f073ad3c0010ea0f4bc00b7105ec20.mirror.swr.myhuaweicloud.com&quot;</span><br><span class="hljs-meta"># 阿里云 docker hub 镜像</span><br>export REGISTRY_MIRROR=https:<span class="hljs-comment">//registry.cn-hangzhou.aliyuncs.com</span><br>curl -sSL https:<span class="hljs-comment">//kuboard.cn/install-script/v1.18.x/install_kubelet.sh | sh -s 1.18.6</span><br></code></pre></div></td></tr></table></figure>
+
+
+<details>
+<summary>
+脚本内容
+</summary>
+
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk"><span class="hljs-comment">#!/bin/bash</span><br><br><span class="hljs-comment"># 在 master 节点和 worker 节点都要执行</span><br><br><span class="hljs-comment"># 安装 docker</span><br><span class="hljs-comment"># 参考文档如下</span><br><span class="hljs-comment"># https://docs.docker.com/install/linux/docker-ce/centos/ </span><br><span class="hljs-comment"># https://docs.docker.com/install/linux/linux-postinstall/</span><br><br><span class="hljs-comment"># 卸载旧版本</span><br>yum remove -y docker \<br>docker-client \<br>docker-client-latest \<br>docker-ce-cli \<br>docker-common \<br>docker-latest \<br>docker-latest-logrotate \<br>docker-logrotate \<br>docker-selinux \<br>docker-engine-selinux \<br>docker-engine<br><br><span class="hljs-comment"># 设置 yum repository</span><br>yum install -y yum-utils \<br>device-mapper-persistent-data \<br>lvm2<br>yum-config-manager --add-repo http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/docker-ce/</span>linux<span class="hljs-regexp">/centos/</span>docker-ce.repo<br><br><span class="hljs-comment"># 安装并启动 docker</span><br>yum install -y docker-ce-<span class="hljs-number">19.03</span>.<span class="hljs-number">8</span> docker-ce-cli-<span class="hljs-number">19.03</span>.<span class="hljs-number">8</span> containerd.io<br>systemctl enable docker<br>systemctl start docker<br><br><span class="hljs-comment"># 安装 nfs-utils</span><br><span class="hljs-comment"># 必须先安装 nfs-utils 才能挂载 nfs 网络存储</span><br>yum install -y nfs-utils<br>yum install -y wget<br><br><span class="hljs-comment"># 关闭 防火墙</span><br>systemctl stop firewalld<br>systemctl disable firewalld<br><br><span class="hljs-comment"># 关闭 SeLinux</span><br>setenforce <span class="hljs-number">0</span><br>sed -i <span class="hljs-string">&quot;s/SELINUX=enforcing/SELINUX=disabled/g&quot;</span> <span class="hljs-regexp">/etc/</span>selinux/config<br><br><span class="hljs-comment"># 关闭 swap</span><br>swapoff -a<br>yes | cp <span class="hljs-regexp">/etc/</span>fstab <span class="hljs-regexp">/etc/</span>fstab_bak<br>cat <span class="hljs-regexp">/etc/</span>fstab_bak |grep -v swap &gt; <span class="hljs-regexp">/etc/</span>fstab<br><br><span class="hljs-comment"># 修改 /etc/sysctl.conf</span><br><span class="hljs-comment"># 如果有配置，则修改</span><br>sed -i <span class="hljs-string">&quot;s#^net.ipv4.ip_forward.*#net.ipv4.ip_forward=1#g&quot;</span>  <span class="hljs-regexp">/etc/</span>sysctl.conf<br>sed -i <span class="hljs-string">&quot;s#^net.bridge.bridge-nf-call-ip6tables.*#net.bridge.bridge-nf-call-ip6tables=1#g&quot;</span>  <span class="hljs-regexp">/etc/</span>sysctl.conf<br>sed -i <span class="hljs-string">&quot;s#^net.bridge.bridge-nf-call-iptables.*#net.bridge.bridge-nf-call-iptables=1#g&quot;</span>  <span class="hljs-regexp">/etc/</span>sysctl.conf<br>sed -i <span class="hljs-string">&quot;s#^net.ipv6.conf.all.disable_ipv6.*#net.ipv6.conf.all.disable_ipv6=1#g&quot;</span>  <span class="hljs-regexp">/etc/</span>sysctl.conf<br>sed -i <span class="hljs-string">&quot;s#^net.ipv6.conf.default.disable_ipv6.*#net.ipv6.conf.default.disable_ipv6=1#g&quot;</span>  <span class="hljs-regexp">/etc/</span>sysctl.conf<br>sed -i <span class="hljs-string">&quot;s#^net.ipv6.conf.lo.disable_ipv6.*#net.ipv6.conf.lo.disable_ipv6=1#g&quot;</span>  <span class="hljs-regexp">/etc/</span>sysctl.conf<br>sed -i <span class="hljs-string">&quot;s#^net.ipv6.conf.all.forwarding.*#net.ipv6.conf.all.forwarding=1#g&quot;</span>  <span class="hljs-regexp">/etc/</span>sysctl.conf<br><span class="hljs-comment"># 可能没有，追加</span><br>echo <span class="hljs-string">&quot;net.ipv4.ip_forward = 1&quot;</span> &gt;&gt; <span class="hljs-regexp">/etc/</span>sysctl.conf<br>echo <span class="hljs-string">&quot;net.bridge.bridge-nf-call-ip6tables = 1&quot;</span> &gt;&gt; <span class="hljs-regexp">/etc/</span>sysctl.conf<br>echo <span class="hljs-string">&quot;net.bridge.bridge-nf-call-iptables = 1&quot;</span> &gt;&gt; <span class="hljs-regexp">/etc/</span>sysctl.conf<br>echo <span class="hljs-string">&quot;net.ipv6.conf.all.disable_ipv6 = 1&quot;</span> &gt;&gt; <span class="hljs-regexp">/etc/</span>sysctl.conf<br>echo <span class="hljs-string">&quot;net.ipv6.conf.default.disable_ipv6 = 1&quot;</span> &gt;&gt; <span class="hljs-regexp">/etc/</span>sysctl.conf<br>echo <span class="hljs-string">&quot;net.ipv6.conf.lo.disable_ipv6 = 1&quot;</span> &gt;&gt; <span class="hljs-regexp">/etc/</span>sysctl.conf<br>echo <span class="hljs-string">&quot;net.ipv6.conf.all.forwarding = 1&quot;</span>  &gt;&gt; <span class="hljs-regexp">/etc/</span>sysctl.conf<br><span class="hljs-comment"># 执行命令以应用</span><br>sysctl -p<br><br><span class="hljs-comment"># 配置K8S的yum源</span><br>cat &lt;&lt;EOF &gt; <span class="hljs-regexp">/etc/yum</span>.repos.d/kubernetes.repo<br>[kubernetes]<br>name=Kubernetes<br>baseurl=http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/kubernetes/yum</span><span class="hljs-regexp">/repos/</span>kubernetes-el7-x86_64<br>enabled=<span class="hljs-number">1</span><br>gpgcheck=<span class="hljs-number">0</span><br>repo_gpgcheck=<span class="hljs-number">0</span><br>gpgkey=http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/kubernetes/yum</span><span class="hljs-regexp">/doc/yum</span>-key.gpg<br>       http:<span class="hljs-regexp">//mi</span>rrors.aliyun.com<span class="hljs-regexp">/kubernetes/yum</span><span class="hljs-regexp">/doc/</span>rpm-package-key.gpg<br>EOF<br><br><span class="hljs-comment"># 卸载旧版本</span><br>yum remove -y kubelet kubeadm kubectl<br><br><span class="hljs-comment"># 安装kubelet、kubeadm、kubectl</span><br><span class="hljs-comment"># 将 $&#123;1&#125; 替换为 kubernetes 版本号，例如 1.17.2</span><br>yum install -y kubelet-<span class="hljs-variable">$&#123;1&#125;</span> kubeadm-<span class="hljs-variable">$&#123;1&#125;</span> kubectl-<span class="hljs-variable">$&#123;1&#125;</span><br><br><span class="hljs-comment"># 修改docker Cgroup Driver为systemd</span><br><span class="hljs-comment"># # 将/usr/lib/systemd/system/docker.service文件中的这一行 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock</span><br><span class="hljs-comment"># # 修改为 ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd</span><br><span class="hljs-comment"># 如果不修改，在添加 worker 节点时可能会碰到如下错误</span><br><span class="hljs-comment"># [WARNING IsDockerSystemdCheck]: detected &quot;cgroupfs&quot; as the Docker cgroup driver. The recommended driver is &quot;systemd&quot;. </span><br><span class="hljs-comment"># Please follow the guide at https://kubernetes.io/docs/setup/cri/</span><br>sed -i <span class="hljs-string">&quot;s#^ExecStart=/usr/bin/dockerd.*#ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd#g&quot;</span> <span class="hljs-regexp">/usr/</span>lib<span class="hljs-regexp">/systemd/</span>system/docker.service<br><br><span class="hljs-comment"># 设置 docker 镜像，提高 docker 镜像下载速度和稳定性</span><br><span class="hljs-comment"># 如果您访问 https://hub.docker.io 速度非常稳定，亦可以跳过这个步骤</span><br>curl -sSL https:<span class="hljs-regexp">//</span>kuboard.cn<span class="hljs-regexp">/install-script/</span>set_mirror.sh | sh -s <span class="hljs-variable">$&#123;REGISTRY_MIRROR&#125;</span><br><br><span class="hljs-comment"># 重启 docker，并启动 kubelet</span><br>systemctl daemon-reload<br>systemctl restart docker<br>systemctl enable kubelet &amp;&amp; systemctl start kubelet<br><br>docker version<br></code></pre></div></td></tr></table></figure>
+</details>
+
+
+<br>
+
+
+<ul>
+<li>初始化 master 节点</li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-comment"># 只在 master 节点执行</span><br><span class="hljs-comment"># 替换 x.x.x.x 为 master 节点实际 IP（请使用内网 IP）</span><br><span class="hljs-comment"># export 命令只在当前 shell 会话中有效，开启新的 shell 窗口后，如果要继续安装过程，请重新执行此处的 export 命令</span><br><span class="hljs-attribute">export</span> MASTER_IP=x.x.x.x<br><span class="hljs-comment"># 替换 apiserver.demo 为 您想要的 dnsName</span><br><span class="hljs-attribute">export</span> APISERVER_NAME=apiserver.demo<br><span class="hljs-comment"># Kubernetes 容器组所在的网段，该网段安装完成后，由 kubernetes 创建，事先并不存在于您的物理网络中</span><br><span class="hljs-attribute">export</span> POD_SUBNET=<span class="hljs-number">10.100.0.1</span>/<span class="hljs-number">16</span><br><span class="hljs-attribute">echo</span> <span class="hljs-string">&quot;$&#123;MASTER_IP&#125;    $&#123;APISERVER_NAME&#125;&quot;</span> &gt;&gt; /etc/hosts<br><span class="hljs-attribute">curl</span> -sSL https://kuboard.cn/install-script/v<span class="hljs-number">1</span>.<span class="hljs-number">18</span>.x/init_master.sh | sh -s <span class="hljs-number">1</span>.<span class="hljs-number">18</span>.<span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure>
+
+<details>
+    <summary>脚本代码</summary>
+
+<p>​<br>​    ````<br>​    #!/bin/bash<br>​<br>​    # 只在 master 节点执行<br>​<br>    # 脚本出错时终止执行<br>    set -e</p>
+<div class="hljs code-wrapper"><pre><code>if [ $&#123;#POD_SUBNET&#125; -eq 0 ] || [ $&#123;#APISERVER_NAME&#125; -eq 0 ]; then
+  echo -e &quot;\033[31;1m请确保您已经设置了环境变量 POD_SUBNET 和 APISERVER_NAME \033[0m&quot;
+  echo 当前POD_SUBNET=$POD_SUBNET
+  echo 当前APISERVER_NAME=$APISERVER_NAME
+  exit 1
+fi</code></pre></div>
+<p>​<br>​    # 查看完整配置选项 <a target="_blank" rel="noopener" href="https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2">https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2</a><br>​    rm -f ./kubeadm-config.yaml<br>​    cat &lt;<EOF > ./kubeadm-config.yaml<br>​    apiVersion: kubeadm.k8s.io/v1beta2<br>​    kind: ClusterConfiguration<br>​    kubernetesVersion: v${1}<br>​    imageRepository: registry.aliyuncs.com/k8sxio<br>​    controlPlaneEndpoint: “${APISERVER_NAME}:6443”<br>​    networking:<br>​      serviceSubnet: “10.96.0.0/16”<br>​      podSubnet: “${POD_SUBNET}”<br>​      dnsDomain: “cluster.local”<br>​    EOF<br>​<br>​    # kubeadm init<br>​    # 根据您服务器网速的情况，您需要等候 3 - 10 分钟<br>​    kubeadm init –config=kubeadm-config.yaml –upload-certs<br>​<br>    # 配置 kubectl<br>    rm -rf /root/.kube/<br>    mkdir /root/.kube/<br>    cp -i /etc/kubernetes/admin.conf /root/.kube/config</p>
+<div class="hljs code-wrapper"><pre><code># 安装 calico 网络插件
+# 参考文档 https://docs.projectcalico.org/v3.13/getting-started/kubernetes/self-managed-onprem/onpremises
+echo &quot;安装calico-3.13.1&quot;
+rm -f calico-3.13.1.yaml
+wget https://kuboard.cn/install-script/calico/calico-3.13.1.yaml
+kubectl apply -f calico-3.13.1.yaml
+
+<figure class="highlight gherkin"><table><tr><td class="gutter hljs"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gherkin"><br><span class="hljs-variable">&lt;/details&gt;</span><br><br><br><span class="hljs-variable">&lt;br&gt;</span><br><br><br>- 检查 master 初始化结果<br><br></code></pre></div></td></tr></table></figure></code></pre>
+<h1 id="只在-master-节点执行"><a href="#只在-master-节点执行" class="headerlink" title="只在 master 节点执行"></a>只在 master 节点执行</h1><h1 id="执行如下命令，等待-3-10-分钟，直到所有的容器组处于-Running-状态"><a href="#执行如下命令，等待-3-10-分钟，直到所有的容器组处于-Running-状态" class="headerlink" title="执行如下命令，等待 3-10 分钟，直到所有的容器组处于 Running 状态"></a>执行如下命令，等待 3-10 分钟，直到所有的容器组处于 Running 状态</h1><p>watch kubectl get pod -n kube-system -o wide</p>
+<h1 id="查看-master-节点初始化结果"><a href="#查看-master-节点初始化结果" class="headerlink" title="查看 master 节点初始化结果"></a>查看 master 节点初始化结果</h1><p>kubectl get nodes -o wide</p>
+<figure class="highlight http"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http"><br><br>成功<br><br></code></pre></div></td></tr></table></figure>
+<p>Every 2.0s: kubectl get pod -n kube-system -o wide                                                                                                                                                                                               Tue Jul 28 17:31:56 2020</p>
+<p>NAME                                       READY   STATUS     RESTARTS   AGE    IP             NODE     NOMINATED NODE   READINESS GATES<br>calico-kube-controllers-5b8b769fcd-dw2fq   0/1     Pending    0          99s    <none>         <none>   <none>           <none><br>calico-node-gcw6r                          0/1     Init:0/3   0          99s    192.168.0.39   mikey    <none>           <none><br>coredns-66db54ff7f-2f9qn                   0/1     Pending    0          99s    <none>         <none>   <none>           <none><br>coredns-66db54ff7f-csm5w                   0/1     Pending    0          99s    <none>         <none>   <none>           <none><br>etcd-mikey                                 1/1     Running    0          108s   192.168.0.39   mikey    <none>           <none><br>kube-apiserver-mikey                       1/1     Running    0          108s   192.168.0.39   mikey    <none>           <none><br>kube-controller-manager-mikey              1/1     Running    0          108s   192.168.0.39   mikey    <none>           <none><br>kube-proxy-xhmgq                           1/1     Running    0          99s    192.168.0.39   mikey    <none>           <none><br>kube-scheduler-mikey                       1/1     Running    0          108s   192.168.0.39   mikey    <none>           <none></p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs plain"><br></code></pre></div></td></tr></table></figure>
+<p>[root@server-781e6bf7-bce3-4d09-adc8-2a169fdb8719 ~]# kubectl get nodes -o wide<br>NAME    STATUS     ROLES    AGE     VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                KERNEL-VERSION                CONTAINER-RUNTIME<br>mikey   NotReady   master   2m18s   v1.18.6   192.168.0.39   <none>        CentOS Linux 7 (Core)   3.10.0-1062.12.1.el7.x86_64   docker://19.3.8</p>
+<figure class="highlight gauss"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gauss"><br>- 初始化 worker节点<br>&gt;获得 join命令参数在 master 节点上执行<br><br>```kubeadm <span class="hljs-built_in">token</span> <span class="hljs-keyword">create</span> --<span class="hljs-keyword">print</span>-join-command```<br>    <br>可获取kubeadm join 命令及参数，如下所示<br><br>kubeadm <span class="hljs-built_in">token</span> <span class="hljs-keyword">create</span> 命令的输出<br><br>&gt;kubeadm join apiserver.demo:<span class="hljs-number">6443</span> --<span class="hljs-built_in">token</span> mpfjma<span class="hljs-number">.4</span>vjjg8flqihor4vt     --discovery-<span class="hljs-built_in">token</span>-ca-cert-hash sha256:<span class="hljs-number">6</span>f7a8e40a810323672de5eee6f4d19aa2dbdb38411845a1bf5dd63485c43d303<br><br>`该 <span class="hljs-built_in">token</span> 的有效时间为 <span class="hljs-number">2</span> 个小时，<span class="hljs-number">2</span>小时内，您可以使用此 <span class="hljs-built_in">token</span> 初始化任意数量的 worker 节点`<br><br><br>- 初始化worker<br><br>针对所有的 worker 节点执行<br><br></code></pre></div></td></tr></table></figure>
+<h1 id="只在-worker-节点执行"><a href="#只在-worker-节点执行" class="headerlink" title="只在 worker 节点执行"></a>只在 worker 节点执行</h1><h1 id="替换-x-x-x-x-为-master-节点的内网-IP"><a href="#替换-x-x-x-x-为-master-节点的内网-IP" class="headerlink" title="替换 x.x.x.x 为 master 节点的内网 IP"></a>替换 x.x.x.x 为 master 节点的内网 IP</h1><p>export MASTER_IP=x.x.x.x</p>
+<h1 id="替换-apiserver-demo-为初始化-master-节点时所使用的-APISERVER-NAME"><a href="#替换-apiserver-demo-为初始化-master-节点时所使用的-APISERVER-NAME" class="headerlink" title="替换 apiserver.demo 为初始化 master 节点时所使用的 APISERVER_NAME"></a>替换 apiserver.demo 为初始化 master 节点时所使用的 APISERVER_NAME</h1><p>export APISERVER_NAME=apiserver.demo<br>echo “${MASTER_IP}    ${APISERVER_NAME}” &gt;&gt; /etc/hosts</p>
+<h1 id="替换为-master-节点上-kubeadm-token-create-命令的输出"><a href="#替换为-master-节点上-kubeadm-token-create-命令的输出" class="headerlink" title="替换为 master 节点上 kubeadm token create 命令的输出"></a>替换为 master 节点上 kubeadm token create 命令的输出</h1><p>kubeadm join apiserver.demo:6443 –token mpfjma.4vjjg8flqihor4vt     –discovery-token-ca-cert-hash sha256:031a838dcdb8a66e0a5ddb826a2ada6065d3f68d5ddfa97226270a0e56861160</p>
+<p>````</p>
+<p>出现问题<code>kubeadm reset</code>进行重置</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://kuboard.cn/install/install-k8s.html#%E6%96%87%E6%A1%A3%E7%89%B9%E7%82%B9">单节点安装</a></p>
+<p><a target="_blank" rel="noopener" href="https://kuboard.cn/learning/k8s-bg/what-is-k8s.html#%E5%9B%9E%E9%A1%BE">Kubernates 教学</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/DevOps/">DevOps</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Kubernates/">Kubernates</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/23/note/%E7%BD%91%E5%AE%89%E7%AF%87-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">网安篇-网络安全相关学习资料</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/07/java/Java%E7%AF%87-Java%E5%9F%BA%E7%A1%80/">
+                        <span class="hidden-mobile">Java篇-Java基础</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     Copyright © 2017-2021 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> And <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> Core on Github Page 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        桂ICP备2020009931号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+            
+            <span>桂公网安备2020009931号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
