@@ -93,7 +93,11 @@ cd kibana-7.10.2-linux-x86_64/
 
 华为云加速`wget https://mirrors.huaweicloud.com/kibana/7.9.3/kibana-7.9.3-linux-x86_64.tar.gz`
 
+# 简单入门
 
+# 代码实操
+
+# 详细介绍
 
 # 参考资料
 
