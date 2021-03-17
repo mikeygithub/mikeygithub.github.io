@@ -103,6 +103,14 @@ i18n.locale: "zh-CN"
 ./bin/kibana
 ```
 
+打开`http://localhost:5601/`，进入控制台即可对数据进行操作
+
+![image-20210318001633462](/home/mikey/Downloads/jsDeliver/resource/img/image-20210318001633462.png)
+
+
+
+
+
 华为云加速`wget https://mirrors.huaweicloud.com/kibana/7.9.3/kibana-7.9.3-linux-x86_64.tar.gz`
 
 # 简单入门
