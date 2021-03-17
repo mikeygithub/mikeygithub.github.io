@@ -88,12 +88,64 @@ curl ip:9200
 curl -L -O https://artifacts.elastic.co/downloads/kibana/kibana-7.10.2-linux-x86_64.tar.gz
 tar xzvf kibana-7.10.2-linux-x86_64.tar.gz
 cd kibana-7.10.2-linux-x86_64/
+```
+
+```jshelllanguage
+# 修改配置文件
+vim config/kibana.yml
+# 添加任何ip都可以访问
+server.host: "0.0.0.0"
+# 默认语言改为中文
+i18n.locale: "zh-CN"
+```
+启动
+```
 ./bin/kibana
 ```
 
 华为云加速`wget https://mirrors.huaweicloud.com/kibana/7.9.3/kibana-7.9.3-linux-x86_64.tar.gz`
 
 # 简单入门
+
+插入数据
+```
+curl -X PUT "localhost:9200/customer/doc/1?pretty&pretty" -H 'Content-Type: application/json' -d'
+{
+  "name": "John Doe"
+}
+'
+```
+
+查询数据
+
+```js
+curl -X GET "localhost:9200/customer/doc/1?pretty&pretty" -H 'Content-Type: application/json' -d'
+```
+
+修改数据
+```text
+curl -X POST "localhost:9200/customer/doc/1/_update?pretty&pretty" -H 'Content-Type: application/json' -d'
+{
+  "doc": { "name": "Jane Doe" }
+}
+'
+```
+
+
+删除数据
+```text
+curl -X DELETE "localhost:9200/customer/doc/2?pretty&pretty"
+```
+
+批处理
+```text
+curl -X POST "localhost:9200/customer/doc/_bulk?pretty&pretty" -H 'Content-Type: application/json' -d'
+{"index":{"_id":"1"}}
+{"name": "John Doe" }
+{"index":{"_id":"2"}}
+{"name": "Jane Doe" }
+'
+```
 
 # 代码实操
 
