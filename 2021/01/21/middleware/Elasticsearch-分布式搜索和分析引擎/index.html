@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      511 字
+      765 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      12
        分钟
     </span>
   
@@ -324,10 +324,32 @@
 <p>Kibana是一个开源分析和可视化平台，旨在与Elasticsearch合作。您可以使用Kibana来搜索、查看和交互存储在Elasticsearch索引中的数据。您可以轻松地执行高级数据分析，并在各种图表、表格和地图中可视化数据。</p>
 </blockquote>
 <p>下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -L -O https:&#x2F;&#x2F;artifacts.elastic.co&#x2F;downloads&#x2F;kibana&#x2F;kibana-7.10.2-linux-x86_64.tar.gz<br>tar xzvf kibana-7.10.2-linux-x86_64.tar.gz<br>cd kibana-7.10.2-linux-x86_64&#x2F;<br>.&#x2F;bin&#x2F;kibana<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -L -O https:&#x2F;&#x2F;artifacts.elastic.co&#x2F;downloads&#x2F;kibana&#x2F;kibana-7.10.2-linux-x86_64.tar.gz<br>tar xzvf kibana-7.10.2-linux-x86_64.tar.gz<br>cd kibana-7.10.2-linux-x86_64&#x2F;<br></code></pre></div></td></tr></table></figure>
 
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage"># 修改配置文件<br>vim config&#x2F;kibana.yml<br># 添加任何ip都可以访问<br>server.host: &quot;0.0.0.0&quot;<br># 默认语言改为中文<br>i18n.locale: &quot;zh-CN&quot;<br></code></pre></div></td></tr></table></figure>
+<p>启动</p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">.<span class="hljs-regexp">/bin/</span>kibana<br></code></pre></div></td></tr></table></figure>
+
+<p>打开<code>http://localhost:5601/</code>，进入控制台即可对数据进行操作</p>
+<p><img src="/home/mikey/Downloads/jsDeliver/resource/img/image-20210318001633462.png" srcset="/img/loading.gif" alt="image-20210318001633462"></p>
 <p>华为云加速<code>wget https://mirrors.huaweicloud.com/kibana/7.9.3/kibana-7.9.3-linux-x86_64.tar.gz</code></p>
-<h1 id="简单入门"><a href="#简单入门" class="headerlink" title="简单入门"></a>简单入门</h1><h1 id="代码实操"><a href="#代码实操" class="headerlink" title="代码实操"></a>代码实操</h1><h1 id="详细介绍"><a href="#详细介绍" class="headerlink" title="详细介绍"></a>详细介绍</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/index.html">官方文档</a></p>
+<h1 id="简单入门"><a href="#简单入门" class="headerlink" title="简单入门"></a>简单入门</h1><p>插入数据</p>
+<figure class="highlight sml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sml">curl -<span class="hljs-type">X</span> <span class="hljs-type">PUT</span> <span class="hljs-string">&quot;localhost:9200/customer/doc/1?pretty&amp;pretty&quot;</span> -<span class="hljs-type">H</span> <span class="hljs-symbol">&#x27;Content</span>-<span class="hljs-type">Type</span>: application/json&#x27; -d&#x27;<br>&#123;<br>  <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;John Doe&quot;</span><br>&#125;<br><span class="hljs-string">&#x27;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>查询数据</p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">curl -X GET <span class="hljs-string">&quot;localhost:9200/customer/doc/1?pretty&amp;pretty&quot;</span> -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> -d<span class="hljs-string">&#x27;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>修改数据</p>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -X POST &quot;localhost:9200/customer/doc/1/_update?pretty&amp;pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>  &quot;doc&quot;: &#123; &quot;name&quot;: &quot;Jane Doe&quot; &#125;<br>&#125;<br>&#x27;<br></code></pre></div></td></tr></table></figure>
+
+
+<p>删除数据</p>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -X DELETE &quot;localhost:9200/customer/doc/2?pretty&amp;pretty&quot;<br></code></pre></div></td></tr></table></figure>
+
+<p>批处理</p>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -X POST &quot;localhost:9200/customer/doc/_bulk?pretty&amp;pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;&quot;index&quot;:&#123;&quot;_id&quot;:&quot;1&quot;&#125;&#125;<br>&#123;&quot;name&quot;: &quot;John Doe&quot; &#125;<br>&#123;&quot;index&quot;:&#123;&quot;_id&quot;:&quot;2&quot;&#125;&#125;<br>&#123;&quot;name&quot;: &quot;Jane Doe&quot; &#125;<br>&#x27;<br></code></pre></div></td></tr></table></figure>
+
+<h1 id="代码实操"><a href="#代码实操" class="headerlink" title="代码实操"></a>代码实操</h1><h1 id="详细介绍"><a href="#详细介绍" class="headerlink" title="详细介绍"></a>详细介绍</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/index.html">官方文档</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d48c32423789">Elasticsearch简介与实战</a></p>
 
             </div>
