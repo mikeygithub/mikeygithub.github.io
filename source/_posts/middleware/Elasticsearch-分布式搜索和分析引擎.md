@@ -109,22 +109,74 @@ i18n.locale: "zh-CN"
 
 华为云加速`wget https://mirrors.huaweicloud.com/kibana/7.9.3/kibana-7.9.3-linux-x86_64.tar.gz`
 
-# 简单入门
+# 快速入门
+
+[quick start](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/getting-started-index.html)
+
+格式
+
+`curl -X<VERB> '<PROTOCOL>://<HOST>:<PORT>/<PATH>?<QUERY_STRING>' -d '<BODY>'`
+
+创建Mapping
+
+```http request
+PUT /post
+{
+  "settings":{
+    "number_of_shards":3,
+    "number_of_replicas":2
+  },
+  "mappings":{
+    "properties":{
+      "id":{"type":"long"},
+      "title":{"type":"text"},
+      "context":{"type":"text"}
+    }
+  }
+ 
+}
+```
 
 插入数据
 ```
-curl -X PUT "localhost:9200/customer/doc/1?pretty&pretty" -H 'Content-Type: application/json' -d'
+PUT /post/_doc/1
 {
-  "name": "John Doe"
+  "id":"1",
+  "title":"麦奇的文章",
+  "conttext":"按价格卡机是发动机案件发到付件阿里山的房间爱看书的积分"
 }
 '
 ```
 
 查询数据
 
+```http request
+GET /post/_doc/1
+```
+返回数据
+```json
+{
+  "_index" : "post",
+  "_type" : "_doc",
+  "_id" : "1",
+  "_version" : 1,
+  "_seq_no" : 0,
+  "_primary_term" : 1,
+  "found" : true,
+  "_source" : {
+    "id" : "1",
+    "title" : "麦奇的文章",
+    "conttext" : "按价格卡机是发动机案件发到付件阿里山的房间爱看书的积分"
+  }
+}
+```
+
+curl参考
 ```js
 curl -X GET "localhost:9200/customer/doc/1?pretty&pretty" -H 'Content-Type: application/json' -d'
 ```
+
+
 
 修改数据
 ```text
@@ -153,9 +205,68 @@ curl -X POST "localhost:9200/customer/doc/_bulk?pretty&pretty" -H 'Content-Type:
 
 # 代码实操
 
+依赖添加
+```xml
+<dependency>
+    <groupId>org.elasticsearch.client</groupId>
+    <artifactId>elasticsearch-rest-client</artifactId>
+    <version>7.11.2</version>
+</dependency>
+```
+在使用前先创建其对应的[Mapping](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/mapping.html)
+```http request
 
+```
 
+初始化
+```java
+RestClient restClient = RestClient.builder(new HttpHost("localhost", 9200, "http")).build();
+```
 
+简单查询操作
+
+```java
+public class Elasticsearch {
+    public static void main(String[] args) throws Exception{
+        RestClient restClient = RestClient.builder(new HttpHost("localhost", 9200, "http")).build();
+        Response response = restClient.performRequest(new Request("GET", "/customer/_doc/1"));
+        RequestLine requestLine = response.getRequestLine();
+        HttpHost host = response.getHost();
+        int statusCode = response.getStatusLine().getStatusCode();
+        Header[] headers = response.getHeaders();
+        String responseBody = EntityUtils.toString(response.getEntity());
+        System.out.println(responseBody.toString());
+    }
+}
+```
+
+异步调用
+
+```java
+    @Test
+    public void get() throws Exception{
+        RestClient restClient = RestClient.builder(new HttpHost("localhost", 9200, "http")).build();
+        Request request = new Request(
+                "GET",
+                "/customer/_doc/1");
+        Cancellable cancellable = restClient.performRequestAsync(request,
+                new ResponseListener() {
+                    @Override
+                    public void onSuccess(Response response) {
+                        try {
+                            System.out.println("请求成功："+ EntityUtils.toString(response.getEntity()).toString());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Exception exception) {
+                        System.out.println("请求异常："+exception.getStackTrace());
+                    }
+                });
+    }
+```
 
 # 详细介绍
 
@@ -168,3 +279,5 @@ curl -X POST "localhost:9200/customer/doc/_bulk?pretty&pretty" -H 'Content-Type:
 [官方文档](https://www.elastic.co/guide/index.html)
 
 [Elasticsearch简介与实战](https://www.jianshu.com/p/d48c32423789)
+
+[倒排索引](https://www.elastic.co/guide/cn/elasticsearch/guide/current/inverted-index.html)
