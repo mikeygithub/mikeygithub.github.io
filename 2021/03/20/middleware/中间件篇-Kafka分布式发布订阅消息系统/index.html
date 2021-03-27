@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
-  <title>Kafka学习笔记 - 麦奇</title>
+  <title>中间件篇-Kafka分布式发布订阅消息系统 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -214,7 +214,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Kafka学习笔记">
+            <span class="h2" id="subtitle" title="中间件篇-Kafka分布式发布订阅消息系统">
               
             </span>
 
@@ -229,8 +229,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-08-12 23:02" pubdate>
-        2020年8月12日 晚上
+      <time datetime="2021-03-20 23:02" pubdate>
+        2021年3月20日 晚上
       </time>
     </span>
   
@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      940 字
+      1.8k 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      27
        分钟
     </span>
   
@@ -289,7 +289,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Kafka学习笔记</h1>
+            <h1 style="display: none">中间件篇-Kafka分布式发布订阅消息系统</h1>
             
             <div class="markdown-body">
               <h1 id="Kafka-概念"><a href="#Kafka-概念" class="headerlink" title="Kafka 概念"></a>Kafka 概念</h1><p>Kafka 是一种高吞吐量、分布式、基于发布/订阅的消息系统,最初由 LinkedIn 公司开发,使用Scala 语言编写,目前是 Apache 的开源项目。</p>
@@ -325,7 +325,54 @@
 <h2 id="压缩-GZIP-或-Snappy"><a href="#压缩-GZIP-或-Snappy" class="headerlink" title="压缩( GZIP 或 Snappy )"></a>压缩( GZIP 或 Snappy )</h2><p>Producer 端可以通过 GZIP 或 Snappy 格式对消息集合进行压缩。Producer 端进行压缩之后,在Consumer 端需进行解压。压缩的好处就是减少传输的数据量,减轻对网络传输的压力,在对大数据处理上,瓶颈往往体现在网络上而不是 CPU(压缩和解压会耗掉部分 CPU 资源)。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/kafka-gzip.png" srcset="/img/loading.gif" alt="avatar"></p>
 <h2 id="Consumer-Group"><a href="#Consumer-Group" class="headerlink" title="Consumer Group"></a>Consumer Group</h2><p>同一 Consumer Group 中的多个 Consumer 实例,不同时消费同一个 partition,等效于队列模式。partition 内消息是有序的,Consumer 通过 pull 方式消费消息。Kafka 不删除已消费的消息对于 partition,顺序读写磁盘数据,以时间复杂度 O(1)方式提供消息持久化能力。</p>
+<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><p>1.下载Kafka</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">wget https://mirrors.bfsu.edu.cn/apache/kafka/2.7.0/kafka_2.13-2.7.0.tgz<br></code></pre></div></td></tr></table></figure>
 
+<p>2.进行解压</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tar -zxvf kafka_2.13-2.7.0.tgz<br></code></pre></div></td></tr></table></figure>
+
+<p>3.启动zk</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">bin/zookeeper-server-start.sh config/zookeeper.properties<br></code></pre></div></td></tr></table></figure>
+
+<p>4.启动kafka</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">bin/kafka-server-start.sh config/server.properties<br></code></pre></div></td></tr></table></figure>
+
+<p>5.创建Topic</p>
+<p><a target="_blank" rel="noopener" href="http://kafka.apache.org/quickstart#quickstart_createtopic">STEP 3: CREATE A TOPIC TO STORE YOUR EVENTS</a></p>
+<p>Kafka is a distributed <em>event streaming platform</em> that lets you read, write, store, and process <a target="_blank" rel="noopener" href="http://kafka.apache.org/documentation/#messages"><em>events</em></a> (also called <em>records</em> or <em>messages</em> in the documentation) across many machines.</p>
+<p>Example events are payment transactions, geolocation updates from mobile phones, shipping orders, sensor measurements from IoT devices or medical equipment, and much more. These events are organized and stored in <a target="_blank" rel="noopener" href="http://kafka.apache.org/documentation/#intro_concepts_and_terms"><em>topics</em></a>. Very simplified, a topic is similar to a folder in a filesystem, and the events are the files in that folder.</p>
+<p>So before you can write your first events, you must create a topic. Open another terminal session and run:</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ bin/kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092<br></code></pre></div></td></tr></table></figure>
+
+<p>All of Kafka’s command line tools have additional options: run the <code>kafka-topics.sh</code> command without any arguments to display usage information. For example, it can also show you <a target="_blank" rel="noopener" href="http://kafka.apache.org/documentation/#intro_concepts_and_terms">details such as the partition count</a> of the new topic:</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ bin/kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092<br>Topic:quickstart-events  PartitionCount:1    ReplicationFactor:1 Configs:<br>    Topic: quickstart-events Partition: 0    Leader: 0   Replicas: 0 Isr: 0<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="STEP-4-WRITE-SOME-EVENTS-INTO-THE-TOPIC"><a href="#STEP-4-WRITE-SOME-EVENTS-INTO-THE-TOPIC" class="headerlink" title="STEP 4: WRITE SOME EVENTS INTO THE TOPIC"></a><a target="_blank" rel="noopener" href="http://kafka.apache.org/quickstart#quickstart_send">STEP 4: WRITE SOME EVENTS INTO THE TOPIC</a></h4><p>A Kafka client communicates with the Kafka brokers via the network for writing (or reading) events. Once received, the brokers will store the events in a durable and fault-tolerant manner for as long as you need—even forever.</p>
+<p>Run the console producer client to write a few events into your topic. By default, each line you enter will result in a separate event being written to the topic.</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092<br>This is my first event<br>This is my second event<br></code></pre></div></td></tr></table></figure>
+
+<p>You can stop the producer client with <code>Ctrl-C</code> at any time.</p>
+<h4 id="STEP-5-READ-THE-EVENTS"><a href="#STEP-5-READ-THE-EVENTS" class="headerlink" title="STEP 5: READ THE EVENTS"></a><a target="_blank" rel="noopener" href="http://kafka.apache.org/quickstart#quickstart_consume">STEP 5: READ THE EVENTS</a></h4><p>Open another terminal session and run the console consumer client to read the events you just created:</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092<br>This is my first event<br>This is my second event<br></code></pre></div></td></tr></table></figure>
+
+<p>You can stop the consumer client with <code>Ctrl-C</code> at any time.</p>
+<p>Feel free to experiment: for example, switch back to your producer terminal (previous step) to write additional events, and see how the events immediately show up in your consumer terminal.</p>
+<p>Because events are durably stored in Kafka, they can be read as many times and by as many consumers as you want. You can easily verify this by opening yet another terminal session and re-running the previous command again.</p>
+<h4 id="STEP-6-IMPORT-EXPORT-YOUR-DATA-AS-STREAMS-OF-EVENTS-WITH-KAFKA-CONNECT"><a href="#STEP-6-IMPORT-EXPORT-YOUR-DATA-AS-STREAMS-OF-EVENTS-WITH-KAFKA-CONNECT" class="headerlink" title="STEP 6: IMPORT/EXPORT YOUR DATA AS STREAMS OF EVENTS WITH KAFKA CONNECT"></a><a target="_blank" rel="noopener" href="http://kafka.apache.org/quickstart#quickstart_kafkaconnect">STEP 6: IMPORT/EXPORT YOUR DATA AS STREAMS OF EVENTS WITH KAFKA CONNECT</a></h4><p>You probably have lots of data in existing systems like relational databases or traditional messaging systems, along with many applications that already use these systems. <a target="_blank" rel="noopener" href="http://kafka.apache.org/documentation/#connect">Kafka Connect</a> allows you to continuously ingest data from external systems into Kafka, and vice versa. It is thus very easy to integrate existing systems with Kafka. To make this process even easier, there are hundreds of such connectors readily available.</p>
+<p>Take a look at the <a target="_blank" rel="noopener" href="http://kafka.apache.org/documentation/#connect">Kafka Connect section</a> learn more about how to continuously import/export your data into and out of Kafka.</p>
+<h4 id="STEP-7-PROCESS-YOUR-EVENTS-WITH-KAFKA-STREAMS"><a href="#STEP-7-PROCESS-YOUR-EVENTS-WITH-KAFKA-STREAMS" class="headerlink" title="STEP 7: PROCESS YOUR EVENTS WITH KAFKA STREAMS"></a><a target="_blank" rel="noopener" href="http://kafka.apache.org/quickstart#quickstart_kafkastreams">STEP 7: PROCESS YOUR EVENTS WITH KAFKA STREAMS</a></h4><p>Once your data is stored in Kafka as events, you can process the data with the <a target="_blank" rel="noopener" href="http://kafka.apache.org/documentation/streams">Kafka Streams</a> client library for Java/Scala. It allows you to implement mission-critical real-time applications and microservices, where the input and/or output data is stored in Kafka topics. Kafka Streams combines the simplicity of writing and deploying standard Java and Scala applications on the client side with the benefits of Kafka’s server-side cluster technology to make these applications highly scalable, elastic, fault-tolerant, and distributed. The library supports exactly-once processing, stateful operations and aggregations, windowing, joins, processing based on event-time, and much more.</p>
+<p>To give you a first taste, here’s how one would implement the popular <code>WordCount</code> algorithm:</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">KStream&lt;String, String&gt; textLines = builder.stream(<span class="hljs-string">&quot;quickstart-events&quot;</span>);<br><br>KTable&lt;String, Long&gt; wordCounts = textLines<br>            .flatMapValues(line -&gt; Arrays.asList(line.toLowerCase().split(<span class="hljs-string">&quot; &quot;</span>)))<br>            .groupBy((keyIgnored, word) -&gt; word)<br>            .count();<br><br>wordCounts.toStream().to(<span class="hljs-string">&quot;output-topic&quot;</span>), Produced.with(Serdes.String(), Serdes.Long()));<br></code></pre></div></td></tr></table></figure>
+
+<p>The <a target="_blank" rel="noopener" href="http://kafka.apache.org/25/documentation/streams/quickstart">Kafka Streams demo</a> and the <a target="_blank" rel="noopener" href="http://kafka.apache.org/25/documentation/streams/tutorial">app development tutorial</a> demonstrate how to code and run such a streaming application from start to finish.</p>
+<h4 id="STEP-8-TERMINATE-THE-KAFKA-ENVIRONMENT"><a href="#STEP-8-TERMINATE-THE-KAFKA-ENVIRONMENT" class="headerlink" title="STEP 8: TERMINATE THE KAFKA ENVIRONMENT"></a><a target="_blank" rel="noopener" href="http://kafka.apache.org/quickstart#quickstart_kafkaterminate">STEP 8: TERMINATE THE KAFKA ENVIRONMENT</a></h4><p>Now that you reached the end of the quickstart, feel free to tear down the Kafka environment—or continue playing around.</p>
+<ol>
+<li>Stop the producer and consumer clients with <code>Ctrl-C</code>, if you haven’t done so already.</li>
+<li>Stop the Kafka broker with <code>Ctrl-C</code>.</li>
+<li>Lastly, stop the ZooKeeper server with <code>Ctrl-C</code>.</li>
+</ol>
+<p>If you also want to delete any data of your local Kafka environment including any events you have created along the way, run the command:</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ rm -rf /tmp/kafka-logs /tmp/zookeeper<br></code></pre></div></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -355,9 +402,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/18/middleware/RabbitMQ/">
+                      <a href="/2021/03/28/middleware/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87-AeroSpike%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%82%A8%E6%95%B0%E6%8D%AE%E5%BA%93/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">RabbitMQ</span>
+                        <span class="hidden-mobile">中间件篇-AeroSpike随机存储数据库</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -365,8 +412,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/12/middleware/Zookeeper/">
-                        <span class="hidden-mobile">Zookeeper</span>
+                      <a href="/2021/03/12/middleware/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87-Zookeeper%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E5%8D%8F%E8%B0%83/">
+                        <span class="hidden-mobile">中间件篇-Zookeeper分布式系统协调</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
