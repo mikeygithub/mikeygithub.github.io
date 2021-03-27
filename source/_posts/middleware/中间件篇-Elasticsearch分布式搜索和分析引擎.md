@@ -1,5 +1,5 @@
 ---
-title: Elasticsearch-分布式搜索和分析引擎
+title: 中间件篇-Elasticsearch分布式搜索和分析引擎
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/elasticsearch.jpg
 hide: false
 date: 2021-01-21 22:36:59

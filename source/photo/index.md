@@ -110,6 +110,33 @@ lazyload: true
         <ul>
         <li>
           <div class="bullet blue"></div>
+          <div class="date">20年月日</div>
+          <div class="desc">
+            <h3>春意满园</h3>
+            <h4>梨花盛开</h4>
+            <img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/photo/WeChat Image_20210327235237.jpg">
+            </div>
+        </li>
+        <li>
+          <div class="bullet blue"></div>
+          <div class="date">2021年03月20日</div>
+          <div class="desc">
+            <h3>POC演练</h3>
+            <h4>很累很累，已经是凌晨一点钟，但是也能学到很多东西</h4>
+            <img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/photo/WeChat Image_20210327234952.jpg">
+            </div>
+        </li>
+        <li>
+          <div class="bullet blue"></div>
+          <div class="date">2021年03月15日</div>
+          <div class="desc">
+            <h3>正式入职</h3>
+            <h4>同事、导师都很优秀，自己接触的东西太少，要抓紧时间向他们学习</h4>
+            <img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/photo/WeChat Image_20210327234617.jpg">
+            </div>
+        </li>
+        <li>
+          <div class="bullet blue"></div>
           <div class="date">2021年03月13日</div>
           <div class="desc">
             <h3>阿里访客中心</h3>
