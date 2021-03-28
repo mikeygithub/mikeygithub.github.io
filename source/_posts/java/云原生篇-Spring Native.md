@@ -1,6 +1,6 @@
 ---
 title: 云原生篇-Spring Native
-index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/native.png'
+index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-native.png'
 hide: false
 date: 2021-03-28 12:29:35
 category: 云原生
