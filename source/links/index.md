@@ -116,6 +116,19 @@ comment: 'utterances'
             </div>
           </a>
         </div>
+        <div class="card col-lg-4 col-md-6 col-sm-12">
+          <a href="https://runine.cn/" class="card-body hover-with-bg" target="_blank" rel="noopener">
+            <div class="card-content">
+                <div class="link-avatar my-auto">
+                  <img src="https://runine.cn/images/avatar.png" srcset="https://runine.cn/images/avatar.png" alt="歪果不求仁">
+                </div>
+              <div class="link-text">
+                <div class="link-title">歪果不求仁</div>
+                <div class="link-intro">优质软件资源分享。</div>
+              </div>
+            </div>
+          </a>
+        </div>        
     </div>
 </body>
 <p class="note note-primary">学习</p>
@@ -231,5 +244,31 @@ comment: 'utterances'
             </div>
           </a>
         </div>
+        <div class="card col-lg-4 col-md-6 col-sm-12">
+          <a href="mfcb.net" class="card-body hover-with-bg" target="_blank" rel="noopener">
+            <div class="card-content">
+              <div class="link-avatar my-auto">
+                <img src="http://media.mfcb.net/wp-content/uploads/2020/05/logo.png" srcset="http://media.mfcb.net/wp-content/uploads/2020/05/logo.png" alt="魔方城堡">
+              </div>
+              <div class="link-text">
+                <div class="link-title">魔方城堡</div>
+                 <div class="link-intro">收集各种音乐</div>
+                 </div>
+                </div>
+             </a>
+         </div>
+        <div class="card col-lg-4 col-md-6 col-sm-12">
+          <a href="http://pan.naifei.cc/new" class="card-body hover-with-bg" target="_blank" rel="noopener">
+            <div class="card-content">
+              <div class="link-avatar my-auto">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" srcset="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="魔方城堡">
+              </div>
+              <div class="link-text">
+                <div class="link-title">网盘下载</div>
+                 <div class="link-intro">网盘高速下载</div>
+                 </div>
+                </div>
+             </a>
+         </div>         
     </div>
 </body>

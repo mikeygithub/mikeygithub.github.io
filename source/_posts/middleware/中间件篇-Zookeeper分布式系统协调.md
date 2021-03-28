@@ -8,8 +8,9 @@ tags: zookeeper
 
 # Zookeeper 概念
 
-Zookeeper 是一个分布式协调服务,可用于服务发现,分布式锁,分布式领导选举,配置管理等。
-Zookeeper 提供了一个类似于 Linux 文件系统的树形结构(可认为是轻量级的内存文件系统,但只适合存少量信息,完全不适合存储大量文件或者大文件),同时提供了对于每个节点的监控与通知机制。
+ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services. All of these kinds of services are used in some form or another by distributed applications. Each time they are implemented there is a lot of work that goes into fixing the bugs and race conditions that are inevitable. Because of the difficulty of implementing these kinds of services, applications initially usually skimp on them ,which make them brittle in the presence of change and difficult to manage. Even when done correctly, different implementations of these services lead to management complexity when the applications are deployed.
+
+ZooKeeper aims at distilling the essence of these different services into a very simple interface to a centralized coordination service. The service itself is distributed and highly reliable. Consensus, group management, and presence protocols will be implemented by the service so that the applications do not need to implement them on their own. Application specific uses of these will consist of a mixture of specific components of Zoo Keeper and application specific conventions.
 
 # Zookeeper 角色
 
@@ -47,6 +48,7 @@ Zab 协议有两种模式 - 恢复模式(选主)、广播模式(同步)
 Zab 协议有两种模式,它们分别是恢复模式(选主)和广播模式(同步)。当服务启动或者在领导者崩溃后,Zab 就进入了恢复模式,当领导者被选举出来,且大多数 Server 完成了和 leader 的状态同步以后,恢复模式就结束了。状态同步保证了 leader 和 Server 具有相同的系统状态。
 
 ## ZAB 协议 4 阶段
+
 ### Leader election (选举阶段 - 选出准 Leader )
 
 1.Leader election(选举阶段):节点在一开始都处于选举阶段,只要有一个节点得到超半数节点的票数,它就可以当选准 leader。只有到达 广播阶段(broadcast) 准 leader 才会成为真正的 leader。这一阶段的目的是就是为了选出一个准 leader,然后进入下一个阶段。
@@ -127,3 +129,7 @@ ZAB 提交事务并不像 2PC 一样需要全部 follower 都 ACK,只需要得�
 3. PERSISTENT_SEQUENTIAL:持久化顺序编号目录节点。
 
 4. EPHEMERAL_SEQUENTIAL:暂时化顺序编号目录节点。
+
+# 参考资料
+
+[官方文档]()

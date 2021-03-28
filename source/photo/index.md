@@ -110,7 +110,7 @@ lazyload: true
         <ul>
         <li>
           <div class="bullet blue"></div>
-          <div class="date">20年月日</div>
+          <div class="date">2021年03月23日</div>
           <div class="desc">
             <h3>春意满园</h3>
             <h4>梨花盛开</h4>

@@ -180,7 +180,7 @@ kafka-server-stop.sh
 kafka-console-producer.sh     
 kafka-streams-application-reset.sh
 kafka-consumer-groups.sh      
-kafka-topics.sh
+kafka-topics.sh -------------------topic相关
 kafka-consumer-perf-test.sh   
 kafka-verifiable-consumer.sh
 kafka-delegation-tokens.sh    
@@ -212,26 +212,874 @@ Kafka 实现了`零拷贝`原理来快速移动数据，避免了内核之间的
 - 消息压缩；
 - 分批发送。
 
-# 简单Demo
+# Producer Example
+
+1.新建项目添加Maven依赖
+
+```xml
+<dependency>
+  <groupId>org.apache.kafka</groupId>
+  <artifactId>kafka_2.9.2</artifactId>
+  <version>0.8.1.1</version>
+  <scope>compile</scope>
+  <exclusions>
+    <exclusion>
+      <artifactId>jmxri</artifactId>
+      <groupId>com.sun.jmx</groupId>
+    </exclusion>
+    <exclusion>
+      <artifactId>jms</artifactId>
+      <groupId>javax.jms</groupId>
+    </exclusion>
+    <exclusion>
+      <artifactId>jmxtools</artifactId>
+      <groupId>com.sun.jdmk</groupId>
+    </exclusion>
+  </exclusions>
+</dependency>
+```
+
+2.设置配置
+
+```java
+Properties props = new Properties();
+props.put("metadata.broker.list", "broker1:9092,broker2:9092");
+props.put("serializer.class", "kafka.serializer.StringEncoder");
+props.put("partitioner.class", "example.producer.SimplePartitioner");
+props.put("request.required.acks", "1");
+ProducerConfig config = new ProducerConfig(props);
+```
+
+# Stream Example
+
+<details>
+    <summary>
+        <span>1.生成项目</span>
+    </summary>
+
+```bash
+        mvn archetype:generate \
+            -DarchetypeGroupId=org.apache.kafka \
+            -DarchetypeArtifactId=streams-quickstart-java \
+            -DarchetypeVersion=2.5.0 \
+            -DgroupId=streams.examples \
+            -DartifactId=streams.examples \
+            -Dversion=0.1 \
+            -Dpackage=myapps
+```
+
+</details>
 
 
 
+<details>
+    <summary>
+        <span>2.创建topic</span>
+    </summary>
+
+```bash
+bin/kafka-topics.sh --create \
+    --bootstrap-server localhost:9092 \
+    --replication-factor 1 \
+    --partitions 1 \
+    --topic streams-plaintext-input
+    
+bin/kafka-topics.sh --create \
+    --bootstrap-server localhost:9092 \
+    --replication-factor 1 \
+    --partitions 1 \
+    --topic streams-wordcount-output \
+    --config cleanup.policy=compact
+```
+
+</details>
 
 
+<details>
+    <summary>
+        <span>3.应用代码</span>
+    </summary>
+
+```java
+package myapps;
+
+import org.apache.kafka.common.serialization.Serdes;
+import org.apache.kafka.common.utils.Bytes;
+import org.apache.kafka.streams.KafkaStreams;
+import org.apache.kafka.streams.StreamsBuilder;
+import org.apache.kafka.streams.StreamsConfig;
+import org.apache.kafka.streams.Topology;
+import org.apache.kafka.streams.kstream.KeyValueMapper;
+import org.apache.kafka.streams.kstream.Materialized;
+import org.apache.kafka.streams.kstream.Produced;
+import org.apache.kafka.streams.kstream.ValueMapper;
+import org.apache.kafka.streams.state.KeyValueStore;
+
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.Properties;
+import java.util.concurrent.CountDownLatch;
+
+/**
+ * In this example, we implement a simple WordCount program using the high-level Streams DSL
+ * that reads from a source topic "streams-plaintext-input", where the values of messages represent lines of text,
+ * split each text line into words and then compute the word occurence histogram, write the continuous updated histogram
+ * into a topic "streams-wordcount-output" where each record is an updated count of a single word.
+ */
+public class WordCount {
+
+    public static void main(String[] args) throws Exception {
+        Properties props = new Properties();
+        props.put(StreamsConfig.APPLICATION_ID_CONFIG, "streams-wordcount");
+        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+
+        final StreamsBuilder builder = new StreamsBuilder();
+
+        builder.<String, String>stream("streams-plaintext-input")
+               .flatMapValues(value -> Arrays.asList(value.toLowerCase(Locale.getDefault()).split("\\W+")))
+               .groupBy((key, value) -> value)
+               .count(Materialized.<String, Long, KeyValueStore<Bytes, byte[]>>as("counts-store"))
+               .toStream()
+               .to("streams-wordcount-output", Produced.with(Serdes.String(), Serdes.Long()));
+
+        final Topology topology = builder.build();
+        final KafkaStreams streams = new KafkaStreams(topology, props);
+        final CountDownLatch latch = new CountDownLatch(1);
+
+        // attach shutdown handler to catch control-c
+        Runtime.getRuntime().addShutdownHook(new Thread("streams-shutdown-hook") {
+            @Override
+            public void run() {
+                streams.close();
+                latch.countDown();
+            }
+        });
+
+        try {
+            streams.start();
+            latch.await();
+        } catch (Throwable e) {
+            System.exit(1);
+        }
+        System.exit(0);
+    }
+}
+```
+
+
+</details>
 
 
 [参考资料](http://kafka.apache.org/25/documentation/streams/developer-guide/)
 
+# Simple Example
+
+<details>
+    <summary>
+        <span>1.配置类</span>
+    </summary>
+
+```java
+public class KafkaProperties {
+    public static final String TOPIC = "topic1";
+    public static final String KAFKA_SERVER_URL = "localhost";
+    public static final int KAFKA_SERVER_PORT = 9092;
+
+    private KafkaProperties() {}
+}
+```
+
+</details>
+
+
+
+<details>
+    <summary>
+        <span>2.消费者</span>
+    </summary>
+
+```java
+package example;
+import kafka.utils.ShutdownableThread;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+
+import java.time.Duration;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Properties;
+import java.util.concurrent.CountDownLatch;
+
+/**
+ * 消费者
+ */
+public class Consumer extends ShutdownableThread {
+    private final KafkaConsumer<Integer, String> consumer;
+    private final String topic;
+    private final String groupId;
+    private final int numMessageToConsume;
+    private int messageRemaining;
+    private final CountDownLatch latch;
+
+    /**
+     * @param topic               主题
+     * @param groupId             　分组
+     * @param instanceId          　实例id
+     * @param readCommitted       是否读提交
+     * @param numMessageToConsume 消费数量
+     * @param latch               同步屏障
+     */
+    public Consumer(final String topic, final String groupId, final Optional<String> instanceId, final boolean readCommitted, final int numMessageToConsume, final CountDownLatch latch) {
+        super("KafkaConsumerExample", false);
+        this.groupId = groupId;
+        Properties props = new Properties();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaProperties.KAFKA_SERVER_URL + ":" + KafkaProperties.KAFKA_SERVER_PORT);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+        instanceId.ifPresent(id -> props.put(ConsumerConfig.GROUP_INSTANCE_ID_CONFIG, id));
+        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
+        props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
+        props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "30000");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.IntegerDeserializer");
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        if (readCommitted) {
+            props.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
+        }
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+
+        consumer = new KafkaConsumer<>(props);
+        this.topic = topic;
+        this.numMessageToConsume = numMessageToConsume;
+        this.messageRemaining = numMessageToConsume;
+        this.latch = latch;
+    }
+
+    KafkaConsumer<Integer, String> get() {
+        return consumer;
+    }
+
+    /**
+     * 处理消费的数据
+     */
+    @Override
+    public void doWork() {
+        consumer.subscribe(Collections.singletonList(this.topic));
+        ConsumerRecords<Integer, String> records = consumer.poll(Duration.ofSeconds(1));
+        for (ConsumerRecord<Integer, String> record : records) {
+            System.out.println(groupId + " received message : from partition " + record.partition() + ", (" + record.key() + ", " + record.value() + ") at offset " + record.offset());
+        }
+        messageRemaining -= records.count();
+        if (messageRemaining <= 0) {
+            System.out.println(groupId + " finished reading " + numMessageToConsume + " messages");
+            latch.countDown();
+        }
+    }
+}
+```
+
+
+</details>
+
+
+
+<details>
+    <summary>
+        <span>3.消费者</span>
+    </summary>
+
+```java
+package example;
+
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements. See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import org.apache.kafka.clients.producer.Callback;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.serialization.IntegerSerializer;
+import org.apache.kafka.common.serialization.StringSerializer;
+
+import java.util.Properties;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+
+public class Producer extends Thread {
+    private final KafkaProducer<Integer, String> producer;
+    private final String topic;
+    private final Boolean isAsync;
+    private int numRecords;
+    private final CountDownLatch latch;
+
+    public Producer(final String topic,
+                    final Boolean isAsync,
+                    final String transactionalId,
+                    final boolean enableIdempotency,
+                    final int numRecords,
+                    final int transactionTimeoutMs,
+                    final CountDownLatch latch) {
+        Properties props = new Properties();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaProperties.KAFKA_SERVER_URL + ":" + KafkaProperties.KAFKA_SERVER_PORT);
+        props.put(ProducerConfig.CLIENT_ID_CONFIG, "DemoProducer");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class.getName());
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        if (transactionTimeoutMs > 0) {
+            props.put(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG, transactionTimeoutMs);
+        }
+        if (transactionalId != null) {
+            props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, transactionalId);
+        }
+        props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, enableIdempotency);
+
+        producer = new KafkaProducer<>(props);
+        this.topic = topic;
+        this.isAsync = isAsync;
+        this.numRecords = numRecords;
+        this.latch = latch;
+    }
+
+    KafkaProducer<Integer, String> get() {
+        return producer;
+    }
+
+    @Override
+    public void run() {
+        int messageKey = 0;
+        int recordsSent = 0;
+        while (recordsSent < numRecords) {
+            String messageStr = "Message_" + messageKey;
+            long startTime = System.currentTimeMillis();
+            if (isAsync) { // Send asynchronously
+                producer.send(new ProducerRecord<>(topic,
+                        messageKey,
+                        messageStr), new DemoCallBack(startTime, messageKey, messageStr));
+            } else { // Send synchronously
+                try {
+                    producer.send(new ProducerRecord<>(topic,
+                            messageKey,
+                            messageStr)).get();
+                    System.out.println("Sent message: (" + messageKey + ", " + messageStr + ")");
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
+            messageKey += 2;
+            recordsSent += 1;
+        }
+        System.out.println("Producer sent " + numRecords + " records successfully");
+        latch.countDown();
+    }
+}
+
+class DemoCallBack implements Callback {
+
+    private final long startTime;
+    private final int key;
+    private final String message;
+
+    public DemoCallBack(long startTime, int key, String message) {
+        this.startTime = startTime;
+        this.key = key;
+        this.message = message;
+    }
+
+    /**
+     * A callback method the user can implement to provide asynchronous handling of request completion. This method will
+     * be called when the record sent to the server has been acknowledged. When exception is not null in the callback,
+     * metadata will contain the special -1 value for all fields except for topicPartition, which will be valid.
+     *
+     * @param metadata  The metadata for the record that was sent (i.e. the partition and offset). An empty metadata
+     *                  with -1 value for all fields except for topicPartition will be returned if an error occurred.
+     * @param exception The exception thrown during processing of this record. Null if no error occurred.
+     */
+    public void onCompletion(RecordMetadata metadata, Exception exception) {
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        if (metadata != null) {
+            System.out.println(
+                    "message(" + key + ", " + message + ") sent to partition(" + metadata.partition() +
+                            "), " +
+                            "offset(" + metadata.offset() + ") in " + elapsedTime + " ms");
+        } else {
+            exception.printStackTrace();
+        }
+    }
+}
+```
+
+</details>
+
+<details>
+    <summary>
+        <span>4.消息处理器</span>
+    </summary>
+
+```java
+package example;
+
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements. See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.OffsetAndMetadata;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.KafkaException;
+import org.apache.kafka.common.TopicPartition;
+import org.apache.kafka.common.errors.FencedInstanceIdException;
+import org.apache.kafka.common.errors.ProducerFencedException;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicLong;
+
+/**
+ * A demo class for how to write a customized EOS app. It takes a consume-process-produce loop.
+ * Important configurations and APIs are commented.
+ */
+public class ExactlyOnceMessageProcessor extends Thread {
+
+    private static final boolean READ_COMMITTED = true;
+
+    private final String inputTopic;
+    private final String outputTopic;
+    private final String transactionalId;
+    private final String groupInstanceId;
+
+    private final KafkaProducer<Integer, String> producer;
+    private final KafkaConsumer<Integer, String> consumer;
+
+    private final CountDownLatch latch;
+
+    public ExactlyOnceMessageProcessor(final String inputTopic,
+                                       final String outputTopic,
+                                       final int instanceIdx,
+                                       final CountDownLatch latch) {
+        this.inputTopic = inputTopic;
+        this.outputTopic = outputTopic;
+        this.transactionalId = "Processor-" + instanceIdx;
+        // It is recommended to have a relatively short txn timeout in order to clear pending offsets faster.
+        final int transactionTimeoutMs = 10000;
+        // A unique transactional.id must be provided in order to properly use EOS.
+        producer = new Producer(outputTopic, true, transactionalId, true, -1, transactionTimeoutMs, null).get();
+        // Consumer must be in read_committed mode, which means it won't be able to read uncommitted data.
+        // Consumer could optionally configure groupInstanceId to avoid unnecessary rebalances.
+        this.groupInstanceId = "Txn-consumer-" + instanceIdx;
+        consumer = new Consumer(inputTopic, "Eos-consumer",
+                Optional.of(groupInstanceId), READ_COMMITTED, -1, null).get();
+        this.latch = latch;
+    }
+
+    @Override
+    public void run() {
+        // Init transactions call should always happen first in order to clear zombie transactions from previous generation.
+        producer.initTransactions();
+
+        final AtomicLong messageRemaining = new AtomicLong(Long.MAX_VALUE);
+
+        consumer.subscribe(Collections.singleton(inputTopic), new ConsumerRebalanceListener() {
+            @Override
+            public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
+                printWithTxnId("Revoked partition assignment to kick-off rebalancing: " + partitions);
+            }
+
+            @Override
+            public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
+                printWithTxnId("Received partition assignment after rebalancing: " + partitions);
+                messageRemaining.set(messagesRemaining(consumer));
+            }
+        });
+
+        int messageProcessed = 0;
+        while (messageRemaining.get() > 0) {
+            try {
+                ConsumerRecords<Integer, String> records = consumer.poll(Duration.ofMillis(200));
+                if (records.count() > 0) {
+                    // Begin a new transaction session.
+                    producer.beginTransaction();
+                    for (ConsumerRecord<Integer, String> record : records) {
+                        // Process the record and send to downstream.
+                        ProducerRecord<Integer, String> customizedRecord = transform(record);
+                        producer.send(customizedRecord);
+                    }
+
+                    Map<TopicPartition, OffsetAndMetadata> offsets = consumerOffsets();
+
+                    // Checkpoint the progress by sending offsets to group coordinator broker.
+                    // Note that this API is only available for broker >= 2.5.
+                    producer.sendOffsetsToTransaction(offsets, consumer.groupMetadata());
+
+                    // Finish the transaction. All sent records should be visible for consumption now.
+                    producer.commitTransaction();
+                    messageProcessed += records.count();
+                }
+            } catch (ProducerFencedException e) {
+                throw new KafkaException(String.format("The transactional.id %s has been claimed by another process", transactionalId));
+            } catch (FencedInstanceIdException e) {
+                throw new KafkaException(String.format("The group.instance.id %s has been claimed by another process", groupInstanceId));
+            } catch (KafkaException e) {
+                // If we have not been fenced, try to abort the transaction and continue. This will raise immediately
+                // if the producer has hit a fatal error.
+                producer.abortTransaction();
+
+                // The consumer fetch position needs to be restored to the committed offset
+                // before the transaction started.
+                resetToLastCommittedPositions(consumer);
+            }
+
+            messageRemaining.set(messagesRemaining(consumer));
+            printWithTxnId("Message remaining: " + messageRemaining);
+        }
+
+        printWithTxnId("Finished processing " + messageProcessed + " records");
+        latch.countDown();
+    }
+
+    private Map<TopicPartition, OffsetAndMetadata> consumerOffsets() {
+        Map<TopicPartition, OffsetAndMetadata> offsets = new HashMap<>();
+        for (TopicPartition topicPartition : consumer.assignment()) {
+            offsets.put(topicPartition, new OffsetAndMetadata(consumer.position(topicPartition), null));
+        }
+        return offsets;
+    }
+
+    private void printWithTxnId(final String message) {
+        System.out.println(transactionalId + ": " + message);
+    }
+
+    private ProducerRecord<Integer, String> transform(final ConsumerRecord<Integer, String> record) {
+        printWithTxnId("Transformed record (" + record.key() + "," + record.value() + ")");
+        return new ProducerRecord<>(outputTopic, record.key() / 2, "Transformed_" + record.value());
+    }
+
+    private long messagesRemaining(final KafkaConsumer<Integer, String> consumer) {
+        final Map<TopicPartition, Long> fullEndOffsets = consumer.endOffsets(new ArrayList<>(consumer.assignment()));
+        // If we couldn't detect any end offset, that means we are still not able to fetch offsets.
+        if (fullEndOffsets.isEmpty()) {
+            return Long.MAX_VALUE;
+        }
+
+        return consumer.assignment().stream().mapToLong(partition -> {
+            long currentPosition = consumer.position(partition);
+            printWithTxnId("Processing partition " + partition + " with full offsets " + fullEndOffsets);
+            if (fullEndOffsets.containsKey(partition)) {
+                return fullEndOffsets.get(partition) - currentPosition;
+            }
+            return 0;
+        }).sum();
+    }
+
+    private static void resetToLastCommittedPositions(KafkaConsumer<Integer, String> consumer) {
+        final Map<TopicPartition, OffsetAndMetadata> committed = consumer.committed(consumer.assignment());
+        consumer.assignment().forEach(tp -> {
+            OffsetAndMetadata offsetAndMetadata = committed.get(tp);
+            if (offsetAndMetadata != null)
+                consumer.seek(tp, offsetAndMetadata.offset());
+            else
+                consumer.seekToBeginning(Collections.singleton(tp));
+        });
+    }
+}
+```
+
+</details>
+
+
+<details>
+    <summary>
+        <span>5.启动生产者</span>
+    </summary>
+
+```
+import org.apache.kafka.common.errors.TimeoutException;
+
+import java.util.Optional;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+public class KafkaConsumerProducerDemo {
+    public static void main(String[] args) throws InterruptedException {
+        boolean isAsync = args.length == 0 || !args[0].trim().equalsIgnoreCase("sync");
+        CountDownLatch latch = new CountDownLatch(2);
+        Producer producerThread = new Producer(KafkaProperties.TOPIC, isAsync, null, false, 10000, -1, latch);
+        producerThread.start();
+
+        Consumer consumerThread = new Consumer(KafkaProperties.TOPIC, "DemoConsumer", Optional.empty(), false, 10000, latch);
+        consumerThread.start();
+
+        if (!latch.await(5, TimeUnit.MINUTES)) {
+            throw new TimeoutException("Timeout after 5 minutes waiting for demo producer and consumer to finish");
+        }
+
+        consumerThread.shutdown();
+        System.out.println("All finished!");
+    }
+}
+```
+
+
+</details>
+
+
+<details>
+    <summary>
+        <span>6.启动消费者</span>
+    </summary>
+
+
+```java
+package example;
+
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements. See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import org.apache.kafka.clients.admin.Admin;
+import org.apache.kafka.clients.admin.NewTopic;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.common.errors.TimeoutException;
+import org.apache.kafka.common.errors.TopicExistsException;
+import org.apache.kafka.common.errors.UnknownTopicOrPartitionException;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.Properties;
+import java.util.Set;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * This exactly once demo driver takes 3 arguments:
+ *   - partition: number of partitions for input/output topic
+ *   - instances: number of instances
+ *   - records: number of records
+ * An example argument list would be `6 3 50000`.
+ *
+ * If you are using Intellij, the above arguments should be put in the configuration's `Program Arguments`.
+ * Also recommended to set an output log file by `Edit Configuration -> Logs -> Save console
+ * output to file` to record all the log output together.
+ *
+ * The driver could be decomposed as following stages:
+ *
+ * 1. Cleanup any topic whose name conflicts with input and output topic, so that we have a clean-start.
+ *
+ * 2. Set up a producer in a separate thread to pre-populate a set of records with even number keys into
+ *    the input topic. The driver will block for the record generation to finish, so the producer
+ *    must be in synchronous sending mode.
+ *
+ * 3. Set up transactional instances in separate threads which does a consume-process-produce loop,
+ *    tailing data from input topic (See {@link ExactlyOnceMessageProcessor}). Each EOS instance will
+ *    drain all the records from either given partitions or auto assigned partitions by actively
+ *    comparing log end offset with committed offset. Each record will be processed exactly once
+ *    as dividing the key by 2, and extend the value message. The driver will block for all the record
+ *    processing to finish. The transformed record shall be written to the output topic, with
+ *    transactional guarantee.
+ *
+ * 4. Set up a read committed consumer in a separate thread to verify we have all records within
+ *    the output topic, while the message ordering on partition level is maintained.
+ *    The driver will block for the consumption of all committed records.
+ *
+ * From this demo, you could see that all the records from pre-population are processed exactly once,
+ * with strong partition level ordering guarantee.
+ *
+ * Note: please start the kafka broker and zookeeper in local first. The broker version must be >= 2.5
+ * in order to run, otherwise the app could throw
+ * {@link org.apache.kafka.common.errors.UnsupportedVersionException}.
+ */
+public class KafkaExactlyOnceDemo {
+
+    private static final String INPUT_TOPIC = "input-topic";
+    private static final String OUTPUT_TOPIC = "output-topic";
+
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+        if (args.length != 3) {
+            throw new IllegalArgumentException("Should accept 3 parameters: " +
+                    "[number of partitions], [number of instances], [number of records]");
+        }
+
+        int numPartitions = Integer.parseInt(args[0]);
+        int numInstances = Integer.parseInt(args[1]);
+        int numRecords = Integer.parseInt(args[2]);
+
+        /* Stage 1: topic cleanup and recreation */
+        recreateTopics(numPartitions);
+
+        CountDownLatch prePopulateLatch = new CountDownLatch(1);
+
+        /* Stage 2: pre-populate records */
+        Producer producerThread = new Producer(INPUT_TOPIC, false, null, true, numRecords, -1, prePopulateLatch);
+        producerThread.start();
+
+        if (!prePopulateLatch.await(5, TimeUnit.MINUTES)) {
+            throw new TimeoutException("Timeout after 5 minutes waiting for data pre-population");
+        }
+
+        CountDownLatch transactionalCopyLatch = new CountDownLatch(numInstances);
+
+        /* Stage 3: transactionally process all messages */
+        for (int instanceIdx = 0; instanceIdx < numInstances; instanceIdx++) {
+            ExactlyOnceMessageProcessor messageProcessor = new ExactlyOnceMessageProcessor(
+                    INPUT_TOPIC, OUTPUT_TOPIC, instanceIdx, transactionalCopyLatch);
+            messageProcessor.start();
+        }
+
+        if (!transactionalCopyLatch.await(5, TimeUnit.MINUTES)) {
+            throw new TimeoutException("Timeout after 5 minutes waiting for transactionally message copy");
+        }
+
+        CountDownLatch consumeLatch = new CountDownLatch(1);
+
+        /* Stage 4: consume all processed messages to verify exactly once */
+        Consumer consumerThread = new Consumer(OUTPUT_TOPIC, "Verify-consumer", Optional.empty(), true, numRecords, consumeLatch);
+        consumerThread.start();
+
+        if (!consumeLatch.await(5, TimeUnit.MINUTES)) {
+            throw new TimeoutException("Timeout after 5 minutes waiting for output data consumption");
+        }
+
+        consumerThread.shutdown();
+        System.out.println("All finished!");
+    }
+
+    private static void recreateTopics(final int numPartitions)
+            throws ExecutionException, InterruptedException {
+        Properties props = new Properties();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
+                KafkaProperties.KAFKA_SERVER_URL + ":" + KafkaProperties.KAFKA_SERVER_PORT);
+
+        Admin adminClient = Admin.create(props);
+
+        List<String> topicsToDelete = Arrays.asList(INPUT_TOPIC, OUTPUT_TOPIC);
+
+        deleteTopic(adminClient, topicsToDelete);
+
+        // Check topic existence in a retry loop
+        while (true) {
+            System.out.println("Making sure the topics are deleted successfully: " + topicsToDelete);
+
+            Set<String> listedTopics = adminClient.listTopics().names().get();
+            System.out.println("Current list of topics: " + listedTopics);
+
+            boolean hasTopicInfo = false;
+            for (String listedTopic : listedTopics) {
+                if (topicsToDelete.contains(listedTopic)) {
+                    hasTopicInfo = true;
+                    break;
+                }
+            }
+            if (!hasTopicInfo) {
+                break;
+            }
+            Thread.sleep(1000);
+        }
+
+        // Create topics in a retry loop
+        while (true) {
+            final short replicationFactor = 1;
+            final List<NewTopic> newTopics = Arrays.asList(
+                    new NewTopic(INPUT_TOPIC, numPartitions, replicationFactor),
+                    new NewTopic(OUTPUT_TOPIC, numPartitions, replicationFactor));
+            try {
+                adminClient.createTopics(newTopics).all().get();
+                System.out.println("Created new topics: " + newTopics);
+                break;
+            } catch (ExecutionException e) {
+                if (!(e.getCause() instanceof TopicExistsException)) {
+                    throw e;
+                }
+                System.out.println("Metadata of the old topics are not cleared yet...");
+
+                deleteTopic(adminClient, topicsToDelete);
+
+                Thread.sleep(1000);
+            }
+        }
+    }
+
+    private static void deleteTopic(final Admin adminClient, final List<String> topicsToDelete)
+            throws InterruptedException, ExecutionException {
+        try {
+            adminClient.deleteTopics(topicsToDelete).all().get();
+        } catch (ExecutionException e) {
+            if (!(e.getCause() instanceof UnknownTopicOrPartitionException)) {
+                throw e;
+            }
+            System.out.println("Encountered exception during topic deletion: " + e.getCause());
+        }
+        System.out.println("Deleted old topics: " + topicsToDelete);
+    }
+}
+```
+
+
+</details>
+
+
 # 集群配置
 
-
-
-
-
-
+TODO
 
 # 参考资料
 
 [官方文档-快速开始](http://kafka.apache.org/quickstart)
 
 [真的，关于 Kafka 入门看这一篇就够了](https://baijiahao.baidu.com/s?id=1651919282506404758&wfr=spider&for=pc)
+
+[Kafka Github地址](https://github.com/apache/kafka)
+
+[DEVELOPER GUIDE FOR KAFKA STREAMS](http://kafka.apache.org/25/documentation/streams/developer-guide/)
