@@ -132,7 +132,7 @@ lazyload: true
           <div class="desc">
             <h3>正式入职</h3>
             <h4>同事、导师都很优秀，自己接触的东西太少，要抓紧时间向他们学习</h4>
-            <img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/photo/WeChat Image_20210327234617.jpg">
+            <img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/photo/xiaodun.jpg">
             </div>
         </li>
         <li>
