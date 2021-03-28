@@ -7,6 +7,7 @@ date: 2021-02-09 23:20:01
 {
     "listmaxheight": "513px",
     "music": [
+    {"title": "给你们","author":"张宇","url":"https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/music/张宇 - 给你们.mp3","pic": "https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/music.png"},
     {"title": "白月光与朱砂痣","author":"大籽","url":"https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/music/大籽 - 白月光与朱砂痣.mp3","pic": "https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/music.png"},
     {"title": "踏山河","author":"是七叔呢","url":"https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/music/踏山河 - 是七叔呢.mp3","pic": "https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/music.png"},
     {"title": "错位时空","author":"韩可可","url":"https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/music/韩可可 - 错位时空.mp3","pic": "https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/music.png"},

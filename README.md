@@ -19,6 +19,11 @@
 hexo new post -path=/os/计算机操作系统 计算机操作系统
 ```
 
+文章置顶
+```text
+sticky: 100
+```
+
 <p class="note note-primary">标签</p>
 
 可选便签：

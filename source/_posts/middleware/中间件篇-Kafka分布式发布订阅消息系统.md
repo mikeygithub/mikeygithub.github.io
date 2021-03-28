@@ -85,80 +85,60 @@ tar -zxvf kafka_2.13-2.7.0.tgz
 3.启动zk
 
 ```bash
-bin/zookeeper-server-start.sh config/zookeeper.properties
+./bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
 4.启动kafka
 
 ```bash
-bin/kafka-server-start.sh config/server.properties
+./bin/kafka-server-start.sh config/server.properties
 ```
 
 5.创建Topic
 
-[STEP 3: CREATE A TOPIC TO STORE YOUR EVENTS](http://kafka.apache.org/quickstart#quickstart_createtopic)
-
-Kafka is a distributed *event streaming platform* that lets you read, write, store, and process [*events*](http://kafka.apache.org/documentation/#messages) (also called *records* or *messages* in the documentation) across many machines.
-
-Example events are payment transactions, geolocation updates from mobile phones, shipping orders, sensor measurements from IoT devices or medical equipment, and much more. These events are organized and stored in [*topics*](http://kafka.apache.org/documentation/#intro_concepts_and_terms). Very simplified, a topic is similar to a folder in a filesystem, and the events are the files in that folder.
-
-So before you can write your first events, you must create a topic. Open another terminal session and run:
-
 ```bash
-$ bin/kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
+./bin/kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092
 ```
 
-All of Kafka's command line tools have additional options: run the `kafka-topics.sh` command without any arguments to display usage information. For example, it can also show you [details such as the partition count](http://kafka.apache.org/documentation/#intro_concepts_and_terms) of the new topic:
+6.查看创建的Topic
 
 ```bash
-$ bin/kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092
-Topic:quickstart-events  PartitionCount:1    ReplicationFactor:1 Configs:
-    Topic: quickstart-events Partition: 0    Leader: 0   Replicas: 0 Isr: 0
+./bin/kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092
+Topic: quickstart-events	PartitionCount: 1	ReplicationFactor: 1	Configs: segment.bytes=1073741824
+	Topic: quickstart-events	Partition: 0	Leader: 0	Replicas: 0	Isr: 0
 ```
 
-#### [STEP 4: WRITE SOME EVENTS INTO THE TOPIC](http://kafka.apache.org/quickstart#quickstart_send)
-
-A Kafka client communicates with the Kafka brokers via the network for writing (or reading) events. Once received, the brokers will store the events in a durable and fault-tolerant manner for as long as you need—even forever.
-
-Run the console producer client to write a few events into your topic. By default, each line you enter will result in a separate event being written to the topic.
+7.写入事件
 
 ```bash
-$ bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092
+./bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092
 This is my first event
 This is my second event
 ```
 
-You can stop the producer client with `Ctrl-C` at any time.
+写入完成后按住 `Ctrl-C` 完成操作.
 
-#### [STEP 5: READ THE EVENTS](http://kafka.apache.org/quickstart#quickstart_consume)
+8.获取事件
 
 Open another terminal session and run the console consumer client to read the events you just created:
 
 ```bash
-$ bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
+./bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
 This is my first event
 This is my second event
 ```
 
-You can stop the consumer client with `Ctrl-C` at any time.
+读取完成后按住 `Ctrl-C` 完成操作.
 
-Feel free to experiment: for example, switch back to your producer terminal (previous step) to write additional events, and see how the events immediately show up in your consumer terminal.
+9.使用KAFKA CONNECT将数据导入/导出为事件流
 
-Because events are durably stored in Kafka, they can be read as many times and by as many consumers as you want. You can easily verify this by opening yet another terminal session and re-running the previous command again.
+> 您可能在现有系统（如关系数据库或传统消息传递系统）中拥有大量数据，以及许多已经使用这些系统的应用程序。[卡夫卡连接](http://kafka.apache.org/documentation/#连接)允许您不断地从外部系统摄取数据到Kafka，反之亦然。因此，很容易将现有系统与卡夫卡结合起来。为了使这个过程更容易，有数百个这样的连接器随时可用。
 
-#### [STEP 6: IMPORT/EXPORT YOUR DATA AS STREAMS OF EVENTS WITH KAFKA CONNECT](http://kafka.apache.org/quickstart#quickstart_kafkaconnect)
+ [Kafka Connect section](http://kafka.apache.org/documentation/#connect) 
 
-You probably have lots of data in existing systems like relational databases or traditional messaging systems, along with many applications that already use these systems. [Kafka Connect](http://kafka.apache.org/documentation/#connect) allows you to continuously ingest data from external systems into Kafka, and vice versa. It is thus very easy to integrate existing systems with Kafka. To make this process even easier, there are hundreds of such connectors readily available.
+10.用卡夫卡流处理事件
 
-Take a look at the [Kafka Connect section](http://kafka.apache.org/documentation/#connect) learn more about how to continuously import/export your data into and out of Kafka.
-
-#### [STEP 7: PROCESS YOUR EVENTS WITH KAFKA STREAMS](http://kafka.apache.org/quickstart#quickstart_kafkastreams)
-
-Once your data is stored in Kafka as events, you can process the data with the [Kafka Streams](http://kafka.apache.org/documentation/streams) client library for Java/Scala. It allows you to implement mission-critical real-time applications and microservices, where the input and/or output data is stored in Kafka topics. Kafka Streams combines the simplicity of writing and deploying standard Java and Scala applications on the client side with the benefits of Kafka's server-side cluster technology to make these applications highly scalable, elastic, fault-tolerant, and distributed. The library supports exactly-once processing, stateful operations and aggregations, windowing, joins, processing based on event-time, and much more.
-
-To give you a first taste, here's how one would implement the popular `WordCount` algorithm:
-
-```bash
+```java
 KStream<String, String> textLines = builder.stream("quickstart-events");
 
 KTable<String, Long> wordCounts = textLines
@@ -169,18 +149,89 @@ KTable<String, Long> wordCounts = textLines
 wordCounts.toStream().to("output-topic"), Produced.with(Serdes.String(), Serdes.Long()));
 ```
 
-The [Kafka Streams demo](http://kafka.apache.org/25/documentation/streams/quickstart) and the [app development tutorial](http://kafka.apache.org/25/documentation/streams/tutorial) demonstrate how to code and run such a streaming application from start to finish.
+ [Kafka Streams demo](http://kafka.apache.org/25/documentation/streams/quickstart) 
 
-#### [STEP 8: TERMINATE THE KAFKA ENVIRONMENT](http://kafka.apache.org/quickstart#quickstart_kafkaterminate)
+[app development tutorial](http://kafka.apache.org/25/documentation/streams/tutorial)  
 
-Now that you reached the end of the quickstart, feel free to tear down the Kafka environment—or continue playing around.
-
-1. Stop the producer and consumer clients with `Ctrl-C`, if you haven't done so already.
-2. Stop the Kafka broker with `Ctrl-C`.
-3. Lastly, stop the ZooKeeper server with `Ctrl-C`.
-
-If you also want to delete any data of your local Kafka environment including any events you have created along the way, run the command:
+11.清理环境
+如果还希望删除本地Kafka环境的任何数据，包括沿途创建的任何事件，请运行以下命令：
 
 ```bash
-$ rm -rf /tmp/kafka-logs /tmp/zookeeper
+rm -rf /tmp/kafka-logs /tmp/zookeeper
 ```
+
+# 脚本详解
+
+```text
+connect-distributed.sh        
+kafka-preferred-replica-election.sh
+connect-mirror-maker.sh       
+kafka-producer-perf-test.sh
+connect-standalone.sh         
+kafka-reassign-partitions.sh
+kafka-acls.sh                 
+kafka-replica-verification.sh
+kafka-broker-api-versions.sh  
+kafka-run-class.sh
+kafka-configs.sh              
+kafka-server-start.sh
+kafka-console-consumer.sh     
+kafka-server-stop.sh
+kafka-console-producer.sh     
+kafka-streams-application-reset.sh
+kafka-consumer-groups.sh      
+kafka-topics.sh
+kafka-consumer-perf-test.sh   
+kafka-verifiable-consumer.sh
+kafka-delegation-tokens.sh    
+kafka-verifiable-producer.sh
+kafka-delete-records.sh       
+trogdor.sh
+kafka-dump-log.sh
+kafka-features.sh             
+zookeeper-security-migration.sh
+kafka-leader-election.sh      
+zookeeper-server-start.sh
+kafka-log-dirs.sh             
+zookeeper-server-stop.sh
+kafka-mirror-maker.sh         
+zookeeper-shell.sh      
+windows windows下的脚本
+```
+
+# Kafka 为何如此之快
+
+Kafka 实现了`零拷贝`原理来快速移动数据，避免了内核之间的切换。Kafka 可以将数据记录分批发送，从生产者到文件系统（Kafka 主题日志）到消费者，可以端到端的查看这些批次的数据。
+
+批处理能够进行更有效的数据压缩并减少 I/O 延迟，Kafka 采取顺序写入磁盘的方式，避免了随机磁盘寻址的浪费，更多关于磁盘寻址的了解，请参阅 程序员需要了解的硬核知识之磁盘 。
+
+总结一下其实就是四个要点
+
+- 顺序读写；
+- 零拷贝；
+- 消息压缩；
+- 分批发送。
+
+# 简单Demo
+
+
+
+
+
+
+
+[参考资料](http://kafka.apache.org/25/documentation/streams/developer-guide/)
+
+# 集群配置
+
+
+
+
+
+
+
+# 参考资料
+
+[官方文档-快速开始](http://kafka.apache.org/quickstart)
+
+[真的，关于 Kafka 入门看这一篇就够了](https://baijiahao.baidu.com/s?id=1651919282506404758&wfr=spider&for=pc)
