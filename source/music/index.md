@@ -7,6 +7,8 @@ date: 2021-02-09 23:20:01
 {
     "listmaxheight": "513px",
     "music": [
+    {"title": "后来的我们","author":"五月天","url":"https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/music/后来的我们-五月天.mp3","pic": "https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/music.png"},
+    {"title": "玫瑰少年","author":"五月天","url":"https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/music/玫瑰少年-五月天.mp3","pic": "https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/music.png"},
     {"title": "像鱼","author":"王贰浪","url":"https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/music/王贰浪 - 像鱼.flac","pic": "https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/music.png"},
     {"title": "给你们","author":"张宇","url":"https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/music/张宇 - 给你们.mp3","pic": "https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/music.png"},
     {"title": "白月光与朱砂痣","author":"大籽","url":"https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/music/大籽 - 白月光与朱砂痣.mp3","pic": "https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/music.png"},

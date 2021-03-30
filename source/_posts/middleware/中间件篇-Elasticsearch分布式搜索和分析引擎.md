@@ -11,6 +11,62 @@ tags: 搜索引擎
 
 >Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。 作为 Elastic Stack 的核心。其底层是基于Lucene
 
+# 基础概念
+
+## 1、索引
+
+ElasticSearch将数据存储在一个或多个索引（index）中，这里的索引就像SQL领域的数据库，例如：MySQL里的一个database。
+
+ElasticSearch内部使用Apache Lucenu将数据写入索引或从索引中读取数据。需要注意的是，ElasticSearch中的索引可能有一个或多个Lucene索引构成，具体由索引分片（shard）、复制（replica）机制及其配置决定。
+
+## 2、文档
+
+文档（document）是ElasticSearch中的主要实体。对于所有使用ElasticSearch的场景，最终都会归结到对文档的搜索之上。
+
+文档由字段构成，每个字段包含字段和一个或多个字段值（这种情况下，该字段被称为是多值的，即文档中有多个同名字段）。文档之间可能有各自不同的字段集合，文档没有固定的结构或模式。
+
+从客户端的视角来看，文档就是一个json对象。
+
+## 3、类型
+
+ElasticSearch中每个文档都有自己的类型（type）定义。一个索引中允许存储多种类型的文档，并为不同文档类型提供不同的映射。
+
+类型就像SQL数据库中的一个数据表。
+
+## 4、映射
+
+所有文档在写入索引前都将被分析，而映射则存储着所有分析链所需要的全部信息。例如，如何将输入文本分割为词条，哪些词条应该被过滤掉，或哪些附加处理有必要被调用（例如处理HTML标签）等。
+
+## 5、节点
+
+单个的ElasticSearch服务实例被称为节点（node）。大多数情况下，一个ElasticSearch节点就能够满足我们大多数的需求，但是考虑到容错性和数据快速膨胀，我们需要搭建ElasticSearch集群。
+
+ElasticSearch节点可以按用途分为3类。
+
+- `数据（data）节点：`用来存放数据，提供数据的搜索能力。
+- `主（master）节点：`作为监控节点负责控制其他节点的工作。
+- `部落（tribe）节点：`负责串联起多个集群，使得我们在多个集群上执行几乎所有可以在单集群ElasticSearch上执行的功能。
+
+## 6、集群
+
+多个协同工作的ElasticSearch节点的集合被称为集群（cluster）。
+
+ElasticSearch的分布式属性使得我们可以轻松处理超过单机负载能力的数据量。同时，集群也是一种无间断提供服务的一种解决方案，即便当某些节点因为宕机或执行管理任务（例如升级）不可用时，ElasticSearch几乎是无缝继承了集群功能。
+
+## 7、分片
+
+ElasticSearch集群允许系统存储的数据总量超过单机容量，为了实现这个功能，ES将数据散布到多个物理的Lucene索引上去，这些Lucene索引被称为分片（shard)，散布这些分片的过程叫做分片处理（sharding）。ElasticSearch会自动完成分片工作，对用户来说分片更像是一个大的索引。
+
+当然，除了ElasticSearch自动进行分片处理外，用户为具体的应用进行参数调优也至关重要，因为分片的数量在索引创建时就被配置好了，之后无法改变，除非创建一个新索引并重新索引全部数据。
+
+## 8、副本
+
+分片处理允许用户推送超过单机容量的数据至ElasticSearch集群。副本（replica）则解决了访问压力过大时单机无法处理所有请求的问题。
+
+实现方法很简单，为每个分片创建冗余的副本，处理查询时可以把这些副本当做最初的主分片（primary shard）使用。
+
+如果主分片所在的主机宕机了，ElasticSearch会自动从该分片的副本中选出一个当做新的主分片，不会中断索引和搜索服务，并且可以在任意时间节点添加或删除副本，可随时调整副本的数量。
+
 # 快速开始
 
 [下载软件](https://www.elastic.co/downloads/elasticsearch)
@@ -111,13 +167,22 @@ i18n.locale: "zh-CN"
 
 # 快速入门
 
-[quick start](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/getting-started-index.html)
+[QUICK START](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/getting-started-index.html)
 
-格式
+## 请求格式
 
 `curl -X<VERB> '<PROTOCOL>://<HOST>:<PORT>/<PATH>?<QUERY_STRING>' -d '<BODY>'`
 
-创建Mapping
+| `VERB`         | 适当的 HTTP *方法* 或 *谓词* : `GET`、 `POST`、 `PUT`、 `HEAD` 或者 `DELETE`。 |
+| -------------- | ------------------------------------------------------------ |
+| `PROTOCOL`     | `http` 或者 `https`（如果你在 Elasticsearch 前面有一个 `https` 代理） |
+| `HOST`         | Elasticsearch 集群中任意节点的主机名，或者用 `localhost` 代表本地机器上的节点。 |
+| `PORT`         | 运行 Elasticsearch HTTP 服务的端口号，默认是 `9200` 。       |
+| `PATH`         | API 的终端路径（例如 `_count` 将返回集群中文档数量）。Path 可能包含多个组件，例如：`_cluster/stats` 和 `_nodes/stats/jvm` 。 |
+| `QUERY_STRING` | 任意可选的查询字符串参数 (例如 `?pretty` 将格式化地输出 JSON 返回值，使其更容易阅读) |
+| `BODY`         | 一个 JSON 格式的请求体 (如果请求需要的话)                    |
+
+## 创建Mapping
 
 ```http request
 PUT /post
@@ -137,7 +202,18 @@ PUT /post
 }
 ```
 
-插入数据
+## 插入数据
+
+格式
+
+```js
+PUT /{index}/{type}/{id}
+{
+  "field": "value",
+  ...
+}
+```
+实例
 ```
 PUT /post/_doc/1
 {
@@ -148,7 +224,7 @@ PUT /post/_doc/1
 '
 ```
 
-查询数据
+## 查询数据
 
 ```http request
 GET /post/_doc/1
@@ -176,9 +252,123 @@ curl参考
 curl -X GET "localhost:9200/customer/doc/1?pretty&pretty" -H 'Content-Type: application/json' -d'
 ```
 
+## 过滤查询
 
+ 查询last_name=Leo的记录
 
-修改数据
+```http
+GET /employee/_search?q=last_name:Leo
+```
+
+表达式查询
+
+```http
+curl -X GET "localhost:9200/megacorp/employee/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+    "query" : {
+        "match" : {
+            "last_name" : "Smith"
+        }
+    }
+}
+'
+```
+
+过滤查询
+
+```http
+curl -X GET "localhost:9200/megacorp/employee/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+    "query" : {
+        "bool": {
+            "must": {
+                "match" : {
+                    "last_name" : "smith" 
+                }
+            },
+            "filter": {
+                "range" : {
+                    "age" : { "gt" : 30 } 
+                }
+            }
+        }
+    }
+}
+'
+```
+
+全文搜索
+
+```http
+curl -X GET "localhost:9200/megacorp/employee/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+    "query" : {
+        "match" : {
+            "about" : "rock climbing"
+        }
+    }
+}
+'
+```
+
+精确查询
+
+```http
+curl -X GET "localhost:9200/megacorp/employee/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+    "query" : {
+        "match_phrase" : {
+            "about" : "rock climbing"
+        }
+    }
+}'
+```
+
+高亮搜索
+
+```http
+curl -X GET "localhost:9200/megacorp/employee/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+    "query" : {
+        "match_phrase" : {
+            "about" : "rock climbing"
+        }
+    },
+    "highlight": {
+        "fields" : {
+            "about" : {}
+        }
+    }
+}'
+```
+
+## 统计查询
+
+```http
+curl -X GET "localhost:9200/megacorp/employee/_search?pretty" -H 'Content-Type: application/json' -d'
+{
+  "aggs": {
+    "all_interests": {
+      "terms": { "field": "interests" }
+    }
+  }
+}'
+```
+
+## 修改数据
+
+```http
+PUT /blog/_doc/123
+{
+  "title": "My first blog entry update",
+  "text":  "I am starting to get the hang of this...",
+  "date":  "2014/01/02",
+  "remark": "hhhhhhhhhhhhhhhhhh"
+}
+```
+
+CURL
+
 ```text
 curl -X POST "localhost:9200/customer/doc/1/_update?pretty&pretty" -H 'Content-Type: application/json' -d'
 {
@@ -187,8 +377,14 @@ curl -X POST "localhost:9200/customer/doc/1/_update?pretty&pretty" -H 'Content-T
 '
 ```
 
+## 删除数据
 
-删除数据
+```http
+DELETE /blog/_doc/123
+```
+
+CURL
+
 ```text
 curl -X DELETE "localhost:9200/customer/doc/2?pretty&pretty"
 ```
@@ -215,7 +411,22 @@ curl -X POST "localhost:9200/customer/doc/_bulk?pretty&pretty" -H 'Content-Type:
 ```
 在使用前先创建其对应的[Mapping](https://www.elastic.co/guide/en/elasticsearch/reference/7.x/mapping.html)
 ```http request
-
+PUT /consumer
+{
+  "settings":{
+    "number_of_shards":3,
+    "number_of_replicas":2
+  },
+  "mappings":{
+    "properties":{
+      "first_name":{"type":"text"},
+      "last_name":{"type":"text"},
+      "age":{"type":"long"},
+      "about":{"type": "text"},
+      "interests":{"type": "text"}
+    }
+  }
+}
 ```
 
 初始化
@@ -270,8 +481,28 @@ public class Elasticsearch {
 
 # 详细介绍
 
+**Index Versus Index Versus Index**
+
+你也许已经注意到 *索引* 这个词在 Elasticsearch 语境中有多种含义， 这里有必要做一些说明：
+
+索引（名词）：
+
+如前所述，一个 *索引* 类似于传统关系数据库中的一个 *数据库* ，是一个存储关系型文档的地方。 *索引* (*index*) 的复数词为 *indices* 或 *indexes* 。
+
+索引（动词）：
+
+*索引一个文档* 就是存储一个文档到一个 *索引* （名词）中以便被检索和查询。这非常类似于 SQL 语句中的 `INSERT` 关键词，除了文档已存在时，新文档会替换旧文档情况之外。
+
+倒排索引：
+
+关系型数据库通过增加一个 *索引* 比如一个 B树（B-tree）索引 到指定的列上，以便提升数据检索速度。Elasticsearch 和 Lucene 使用了一个叫做 *倒排索引* 的结构来达到相同的目的。
+
+\+ 默认的，一个文档中的每一个属性都是 *被索引* 的（有一个倒排索引）和可搜索的。一个没有倒排索引的属性是不能被搜索到的。
 
 
+
+
+[Elasticsearch: 权威指南](https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html)
 
 
 # 参考资料
