@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      17 字
+      742 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      13
        分钟
     </span>
   
@@ -292,7 +292,118 @@
             <h1 style="display: none">云原生篇-Spring Native</h1>
             
             <div class="markdown-body">
-              <h1 id="什么事云原生"><a href="#什么事云原生" class="headerlink" title="什么事云原生"></a>什么事云原生</h1><h1 id="Spring-Native"><a href="#Spring-Native" class="headerlink" title="Spring Native"></a>Spring Native</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://spring.io/blog/2021/03/11/announcing-spring-native-beta">Announcing Spring Native Beta!</a><br><a target="_blank" rel="noopener" href="https://jishuin.proginn.com/p/763bfbd4d072">译版</a></p>
+              <h1 id="什么是云原生"><a href="#什么是云原生" class="headerlink" title="什么是云原生"></a>什么是云原生</h1><blockquote>
+<p>想要知道云原生(Cloud Native)那你得先知道什么是云，云一般指 的是一个提供资源的平台，云计算的本质是按需分配资源和弹性计算。目前云原生并没有确切的定义。我个人的理解为云原生是构建一套技术方法理论，适合云平台部署和运行而设计的应用。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/definition">巨硬的定义</a></p>
+<blockquote>
+<p>Cloud-native technologies empower organizations to build and run scalable applications in modern, dynamic environments such as public, private, and hybrid clouds. Containers, service meshes, microservices, immutable infrastructure, and declarative APIs exemplify this approach.</p>
+</blockquote>
+<blockquote>
+<p>These techniques enable loosely coupled systems that are resilient, manageable, and observable. Combined with robust automation, they allow engineers to make high-impact changes frequently and predictably with minimal toil.</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img//cloud-native-foundational-pillars.png" srcset="/img/loading.gif" alt="云原生"></p>
+<h1 id="云原生与十二要素"><a href="#云原生与十二要素" class="headerlink" title="云原生与十二要素"></a>云原生与十二要素</h1><p>The following table highlights the Twelve-Factor methodology:</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">Factor</th>
+<th align="left">Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">Code Base</td>
+<td align="left">A single code base for each microservice, stored in its own repository. Tracked with version control, it can deploy to multiple environments (QA, Staging, Production).</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Dependencies</td>
+<td align="left">Each microservice isolates and packages its own dependencies, embracing changes without impacting the entire system.</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Configurations</td>
+<td align="left">Configuration information is moved out of the microservice and externalized through a configuration management tool outside of the code. The same deployment can propagate across environments with the correct configuration applied.</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Backing Services</td>
+<td align="left">Ancillary resources (data stores, caches, message brokers) should be exposed via an addressable URL. Doing so decouples the resource from the application, enabling it to be interchangeable.</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">Build, Release, Run</td>
+<td align="left">Each release must enforce a strict separation across the build, release, and run stages. Each should be tagged with a unique ID and support the ability to roll back. Modern CI/CD systems help fulfill this principle.</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">Processes</td>
+<td align="left">Each microservice should execute in its own process, isolated from other running services. Externalize required state to a backing service such as a distributed cache or data store.</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">Port Binding</td>
+<td align="left">Each microservice should be self-contained with its interfaces and functionality exposed on its own port. Doing so provides isolation from other microservices.</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">Concurrency</td>
+<td align="left">Services scale out across a large number of small identical processes (copies) as opposed to scaling-up a single large instance on the most powerful machine available.</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">Disposability</td>
+<td align="left">Service instances should be disposable, favoring fast startups to increase scalability opportunities and graceful shutdowns to leave the system in a correct state. Docker containers along with an orchestrator inherently satisfy this requirement.</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left">Dev/Prod Parity</td>
+<td align="left">Keep environments across the application lifecycle as similar as possible, avoiding costly shortcuts. Here, the adoption of containers can greatly contribute by promoting the same execution environment.</td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left">Logging</td>
+<td align="left">Treat logs generated by microservices as event streams. Process them with an event aggregator and propagate the data to data-mining/log management tools like Azure Monitor or Splunk and eventually long-term archival.</td>
+</tr>
+<tr>
+<td align="left">12</td>
+<td align="left">Admin Processes</td>
+<td align="left">Run administrative/management tasks as one-off processes. Tasks can include data cleanup and pulling analytics for a report. Tools executing these tasks should be invoked from the production environment, but separately from the application.</td>
+</tr>
+</tbody></table>
+<p>In the book, <a target="_blank" rel="noopener" href="https://content.pivotal.io/blog/beyond-the-twelve-factor-app">Beyond the Twelve-Factor App</a>, author Kevin Hoffman details each of the original 12 factors (written in 2011). Additionally, he discusses three additional factors that reflect today’s modern cloud application design.</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">New Factor</th>
+<th align="left">Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">13</td>
+<td align="left">API First</td>
+<td align="left">Make everything a service. Assume your code will be consumed by a front-end client, gateway, or another service.</td>
+</tr>
+<tr>
+<td align="left">14</td>
+<td align="left">Telemetry</td>
+<td align="left">On a workstation, you have deep visibility into your application and its behavior. In the cloud, you don’t. Make sure your design includes the collection of monitoring, domain-specific, and health/system data.</td>
+</tr>
+<tr>
+<td align="left">15</td>
+<td align="left">Authentication/ Authorization</td>
+<td align="left">Implement identity from the start. Consider <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/role-based-access-control/overview">RBAC (role-based access control)</a> features available in public clouds.</td>
+</tr>
+</tbody></table>
+<p>  We’ll refer to many of the 12+ factors in this chapter and throughout the book.</p>
+<h1 id="Spring-Native"><a href="#Spring-Native" class="headerlink" title="Spring Native"></a>Spring Native</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/definition">Defining cloud native</a></p>
+<p><a target="_blank" rel="noopener" href="https://spring.io/blog/2021/03/11/announcing-spring-native-beta">Announcing Spring Native Beta!</a>  </p>
+<p><a target="_blank" rel="noopener" href="https://jishuin.proginn.com/p/763bfbd4d072">译版</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/150190166">什么是云原生？这回终于有人讲明白了</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/xpFP8uclTKJQhhFqDyjZ">架构新纪元（二）：什么是云原生？</a></p>
 
             </div>
             <hr>
