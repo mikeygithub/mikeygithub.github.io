@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      34 字
+      1.4k 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      18
        分钟
     </span>
   
@@ -292,9 +292,49 @@
             <h1 style="display: none">中间件篇-AeroSpike随机存储数据库</h1>
             
             <div class="markdown-body">
-              <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
-<p>Aerospike是一个分布式，高可用的 K-V类型的Nosql数据库。提供类似传统数据库的ACID操作。</p>
+              <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ol>
+<li>Aerospike 是一个分布式、可扩展的数据库，其架构有三个关键目标:</li>
+</ol>
+<ul>
+<li>为 web 规模的应用程序创建一个灵活的、可扩展的平台</li>
+<li>提供传统数据库所期望的健壮性和可靠性(如 ACID)</li>
+<li>以最少的人工参与提供操作效率</li>
+</ul>
+<ol>
+<li>T级别大数据高并发的结构化数据存储解决方案，读写操作达微妙级，99%的响应可在1毫秒内实现，99.9%的响应可在5毫秒内实现。</li>
+<li>采用混合架构，索引存储在 RAM 中，而数据存储在闪存/固态硬盘(SSD) 上，自动感知集群，可以随意增加节点线性扩容，无需分片，无需人工干预（性能与节点成正比上升），支持多语言集成；与redis相比不太会遇到性能瓶颈<br>大部分的源代码是用 c 语言编写的，符合 ANSI C99标准。</li>
+</ol>
+<h4 id="为什么要用AS"><a href="#为什么要用AS" class="headerlink" title="为什么要用AS"></a>为什么要用AS</h4><p>K-V类型的数据库必须要提的就是redis，redis数据完全存储在内存虽然保证了查询性能，但是成本太高。AS最大的卖点就是可以存储在SSD上，并且保证和redis相同的查询性能。<br>AS内部在访问SSD屏蔽了文件系统层级，直接访问地址，保证了数据的读取速度。 AS同时支持二级索引与聚合，支持简单的sql操作，相比于其他nosql数据库，有一定优势。</p>
+<h4 id="Namespaces-库"><a href="#Namespaces-库" class="headerlink" title="Namespaces(库)"></a>Namespaces(库)</h4><p>AS数据存储的最高层级，类比于传统的数据库的库层级，一个namespace包含记录（records），索引（indexes ）及策略（policies）。<br>其中策略决定namespace的行为，包括：<br>1.数据的存储位置是内存还是SSD。<br>2.一条记录存储的副本个数。<br>3.过期时间（TTL）：不同redis的针对key设置TTL，AS可以在库的层级进行全局设置，并且支持对于已存在的数据进行TTL的设置。</p>
+<h4 id="Set-表"><a href="#Set-表" class="headerlink" title="Set(表)"></a>Set(表)</h4><p>存储于namespace，是一个逻辑分区，类比于传统数据库的表。set的存储策略继承自namespace，也可以为set设置单独的存储策略</p>
+<h4 id="Records-行"><a href="#Records-行" class="headerlink" title="Records(行)"></a>Records(行)</h4><p>类比于传统数据库的行，包含key，Bins（value）,和Metadata（元数据）。key全局唯一，作为K-V数据库一般也是通过key去查询。Bins相当于列，存储具体的数据。元数据存储一些基本信息，例如TTL等。</p>
+<h4 id="Key"><a href="#Key" class="headerlink" title="Key"></a>Key</h4><p>提到key，有一个和key伴生的概念是摘要（Digests），当key被存入数据库，key与set信息一起被哈希化成一个160位的摘要。数据库中，摘要为所有操作定位记录。key主要用于应用程序访问，而摘要主要用于数据库内部查找记录.</p>
+<h4 id="Metadata"><a href="#Metadata" class="headerlink" title="Metadata"></a>Metadata</h4><p>每一条记录包含以下几条元数据<br>1.generation（代）：表示记录被修改的次数。该数字在程序度数据时返回，用来确认正在写入的数据从最后一次读开始未被修改过。</p>
+<p>2.time-to-live（TTL）：AS会自动根据记录的TTL使其过期。每次在对象上执行写操作TTL就会增加。3.10.1版本以上，可以通过设置策略，使更新记录时不刷新TTL。</p>
+<p>3.last-update-time （LUT）：上次更新时间，这是一个数据库内部的元数据，不会返回给客户端。</p>
+<h4 id="Bins"><a href="#Bins" class="headerlink" title="Bins"></a>Bins</h4><p>在一条记录里，数据被存储在一个或多个bins里，bins由名称和值组成。bins不需要指定数据类型，数据类型有bins中的值决定。动态的数据类型提供了很好的灵活性。AS中每条记录可以由完全不同的bins组成。记录无模式，你可以记录的任何生命周期增加或删除bins。</p>
+<p>在一个库中bins的名称最多包含32k，这是由内部字符串优化所致。（相比于HBase支持几百万列还是有一定差距，如果想直接将HBase表迁移到AS可能需要重新设计存储结构）</p>
+<h1 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h1><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 下载</span><br>wget https://www.aerospike.com/artifacts/aerospike-server-community/4.3.0.10/aerospike-server-community-4.3.0.10-el7.tgz<br><span class="hljs-meta">#</span><span class="bash"> 解压</span><br>tar -zxvf aerospike-server-community-4.3.0.10-el7.tgz<br><span class="hljs-meta">#</span><span class="bash"> 进入目录</span><br>cd cd aerospike-server-community-4.3.0.10-el7<br><span class="hljs-meta">#</span><span class="bash"> 安装</span><br>./asinstall<br><span class="hljs-meta">#</span><span class="bash"> 启动服务</span><br>service aerospike start<br><span class="hljs-meta">#</span><span class="bash"> 查看状态</span><br>service aerospike status<br><span class="hljs-meta">#</span><span class="bash"> 停止服务</span><br>service aerospike stop<br><span class="hljs-meta">#</span><span class="bash"> 配置文件</span><br>vim /etc/aerospike/aerospike.conf<br></code></pre></div></td></tr></table></figure>
+
+
+<p>安装AS工具</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 下载</span><br>wget https://www.aerospike.com/artifacts/aerospike-tools/3.16.0/aerospike-tools-3.16.0-el7.tgz<br><span class="hljs-meta">#</span><span class="bash"> 解压</span><br>tar zxvf aerospike-tools-3.16.0-el7<br><span class="hljs-meta">#</span><span class="bash"> 进入目录</span><br>cd aerospike-tools-3.16.0-el7<br><span class="hljs-meta">#</span><span class="bash"> 查看安装</span><br>yum list installed | grep aerospike-tools<br></code></pre></div></td></tr></table></figure>
+
+<p>简单查询</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 进入aql</span><br>aql<br><span class="hljs-meta">#</span><span class="bash"> 查看namespaces</span><br>show namespaces<br><span class="hljs-meta">#</span><span class="bash"> 查询<span class="hljs-built_in">test</span>命名空间下数据</span><br>select * from test<br><span class="hljs-meta">#</span><span class="bash"> 插入数据</span><br>insert into test(pk,id,name,age) values(&#x27;key1&#x27;,&#x27;101&#x27;,&#x27;AAA&#x27;,&#x27;21&#x27;);<br>insert into test(pk,id,name,age) values(&#x27;key2&#x27;,&#x27;102&#x27;,&#x27;BBB&#x27;,&#x27;18&#x27;);<br><span class="hljs-meta">#</span><span class="bash"> 删除数据</span><br>delete from test where pk=&#x27;key2&#x27;<br></code></pre></div></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.aerospike.com/download/server/5.5.0.7/">下载地址</a><br><a target="_blank" rel="noopener" href="https://www.aerospike.com/docs/operations/install/index.html">安装教程</a><br><a target="_blank" rel="noopener" href="https://www.aerospike.com/docs/operations/install/linux/other/">参考资料</a></p>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><blockquote>
+<p>条件：数据库已成功运行</p>
 </blockquote>
+<p>导入客户端依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.aerospike<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>aerospike-client<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>简单测试</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> com.aerospike.client.AerospikeClient;<br><span class="hljs-keyword">import</span> com.aerospike.client.policy.WritePolicy;<br><span class="hljs-keyword">import</span> com.aerospike.client.Bin;<br><span class="hljs-keyword">import</span> com.aerospike.client.Key;<br><span class="hljs-keyword">import</span> com.aerospike.client.Record;<br><span class="hljs-keyword">import</span> com.aerospike.client.Value;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">putRecordGetRecord</span> <span class="hljs-params">()</span> </span>&#123;<br>        AerospikeClient client = <span class="hljs-keyword">new</span> AerospikeClient(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">3000</span>);<br><br>        Key key = <span class="hljs-keyword">new</span> Key(<span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;demo&quot;</span>, <span class="hljs-string">&quot;putgetkey&quot;</span>);<br>        Bin bin1 = <span class="hljs-keyword">new</span> Bin(<span class="hljs-string">&quot;bin1&quot;</span>, <span class="hljs-string">&quot;value1&quot;</span>);<br>        Bin bin2 = <span class="hljs-keyword">new</span> Bin(<span class="hljs-string">&quot;bin2&quot;</span>, <span class="hljs-string">&quot;value2&quot;</span>);<br><br>        <span class="hljs-comment">// Write a record</span><br>        client.put(<span class="hljs-keyword">null</span>, key, bin1, bin2);<br><br>        <span class="hljs-comment">// Read a record</span><br>        Record record = client.get(<span class="hljs-keyword">null</span>, key);<br>        client.close();   <br>        System.out.println(<span class="hljs-string">&quot;Record values are:&quot;</span>);<br>        System.out.println(record);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a target="_blank" rel="noopener" href="https://github.com/aerospike/aerospike-dev-notebooks.docker">aerospike-dev-notebooks</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.developer.aerospike.com/">https://www.developer.aerospike.com/</a></p>
 
             </div>
             <hr>
