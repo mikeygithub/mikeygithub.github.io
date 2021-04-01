@@ -60,6 +60,7 @@ cd apache-zookeeper-3.6.2-bin/bin
 
 再运行`org.apache.dubbo.demo.consumer.Application`
 
+`确保使用JDK1.8其他版本容易出问题`
 
 # 详细介绍
 
@@ -206,10 +207,10 @@ dubbo-demo-xml-provider/src/
     <dubbo:registry id="registry1" address="zookeeper://127.0.0.1:2181"/>
 
     <dubbo:protocol name="dubbo" port="-1"/>
-
+    <!--注入bean-->
     <bean id="demoService" class="org.apache.dubbo.demo.provider.DemoServiceImpl"/>
     <bean id="greetingService" class="org.apache.dubbo.demo.provider.GreetingServiceImpl"/>
-
+    <!--暴露接口服务-->
     <dubbo:service interface="org.apache.dubbo.demo.DemoService" timeout="3000" ref="demoService" registry="registry1"/>
     <dubbo:service version="1.0.0" group="greeting" timeout="5000" interface="org.apache.dubbo.demo.GreetingService" ref="greetingService"/>
 
@@ -355,6 +356,124 @@ public class Application {
         }
     }
 }
+```
+
+# Dubbo Admin
+
+目前的管理控制台已经发布 0.1 版本，结构上采取了前后端分离的方式，前端使用 Vue 和 Vuetify 分别作为 Javascript 框架和UI框架，后端采用 Spring Boot 框架。既可以按照标准的 Maven 方式进行打包，部署，也可以采用前后端分离的部署方式，方便开发，功能上，目前具备了服务查询，服务治理(包括 Dubbo 2.7 中新增的治理规则)以及服务测试三部分内容。
+
+### Maven方式部署
+
+- 安装
+
+```sh
+git clone https://github.com/apache/dubbo-admin.git
+cd dubbo-admin
+mvn clean package
+cd dubbo-admin-distribution/target
+java -jar dubbo-admin-0.1.jar
+```
+
+- 访问
+
+http://localhost:8080
+
+### 前后端分离部署
+
+- 前端
+
+```sh
+cd dubbo-admin-ui 
+npm install 
+npm run dev 
+```
+
+- 后端
+
+```sh
+cd dubbo-admin-server
+mvn clean package 
+cd target
+java -jar dubbo-admin-server-0.1.jar
+```
+
+- 访问
+
+http://localhost:8081
+
+- 前后端分离模式下，前端的修改可以实时生效
+
+### 配置: [1](https://dubbo.apache.org/zh/docs/v2.7/admin/ops/introduction/#fn:1)
+
+配置文件为：
+
+```sh
+dubbo-admin-server/src/main/resources/application.properties
+```
+
+主要的配置有：
+
+```fallback
+admin.config-center=zookeeper://127.0.0.1:2181
+admin.registry.address=zookeeper://127.0.0.1:2181
+admin.metadata-report.address=zookeeper://127.0.0.1:2181
+```
+
+三个配置项分别指定了配置中心，注册中心和元数据中心的地址，关于这三个中心的详细说明，可以参考[这里](https://dubbo.apache.org/zh/docs/v2.7/user/configuration/config-center)。
+
+也可以和 Dubbo 2.7 一样，在配置中心指定元数据和注册中心的地址，以 zookeeper 为例，配置的路径和内容如下:
+
+```fallback
+# /dubbo/config/dubbo/dubbo.properties
+dubbo.registry.address=zookeeper://127.0.0.1:2181
+dubbo.metadata-report.address=zookeeper://127.0.0.1:2181
+```
+
+配置中心里的地址会覆盖掉本地 `application.properties` 的配置
+
+其他配置请访问 github 中的文档:
+
+```sh
+https://github.com/apache/dubbo-admin
+```
+
+## Docker 方式运行
+
+Start a Apache Dubbo Admin
+```sh
+docker run -p 8080:8080 apache/dubbo-admin
+```
+It will use all default configuration and connect to zookeeper://127.0.0.1:2181
+
+... via docker stack deploy or docker-compose
+Example stack.yml:
+```sh
+version: '3'
+
+services:
+  zookeeper:
+    image: zookeeper
+    ports:
+      - 2181:2181
+  admin:
+    image: apache/dubbo-admin
+    depends_on:
+      - zookeeper
+    ports:
+      - 8080
+    environment:
+      - admin.registry.address=zookeeper://zookeeper:2181
+      - admin.config-center=zookeeper://zookeeper:2181
+      - admin.metadata-report.address=zookeeper://zookeeper:2181
+```
+Try in PWD
+```sh
+Environment variables
+admin.registry.address
+
+admin.config-center
+
+admin.metadata-report.address
 ```
 
 # 参考资料
