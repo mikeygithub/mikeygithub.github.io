@@ -102,3 +102,130 @@ Sentinel 的主要工作机制如下：
 - 对主流框架提供适配或者显示的 API，来定义需要保护的资源，并提供设施对资源进行实时统计和调用链路分析。
 - 根据预设的规则，结合对资源的实时统计信息，对流量进行控制。同时，Sentinel 提供开放的接口，方便您定义及改变规则。
 - Sentinel 提供实时的监控系统，方便您快速了解目前系统的状态。
+
+
+# 快速开始
+
+### 1. 引入 Sentinel 依赖
+
+如果您的应用使用了 Maven，则在 `pom.xml` 文件中加入以下代码即可：
+
+```xml
+<dependency>
+    <groupId>com.alibaba.csp</groupId>
+    <artifactId>sentinel-core</artifactId>
+    <version>1.8.0</version>
+</dependency>
+```
+
+如果您未使用依赖管理工具，请到 [Maven Center Repository](https://mvnrepository.com/artifact/com.alibaba.csp/sentinel-core) 直接下载 JAR 包。
+
+### 2. 定义资源
+
+**资源** 是 Sentinel 中的核心概念之一。最常用的资源是我们代码中的 Java 方法。 当然，您也可以更灵活的定义你的资源，例如，把需要控制流量的代码用 Sentinel API `SphU.entry("HelloWorld")` 和 `entry.exit()` 包围起来即可。在下面的例子中，我们将 `System.out.println("hello world");` 作为资源（被保护的逻辑），用 API 包装起来。参考代码如下:
+
+```java
+public static void main(String[] args) {
+    // 配置规则.
+    initFlowRules();
+
+    while (true) {
+        // 1.5.0 版本开始可以直接利用 try-with-resources 特性
+        try (Entry entry = SphU.entry("HelloWorld")) {
+            // 被保护的逻辑
+            System.out.println("hello world");
+	} catch (BlockException ex) {
+            // 处理被流控的逻辑
+	    System.out.println("blocked!");
+	}
+    }
+}
+```
+
+完成以上两步后，代码端的改造就完成了。
+
+您也可以通过我们提供的 [注解支持模块](https://sentinelguard.io/zh-cn/docs/annotation-support.html)，来定义我们的资源，类似于下面的代码：
+
+```java
+@SentinelResource("HelloWorld")
+public void helloWorld() {
+    // 资源中的逻辑
+    System.out.println("hello world");
+}
+```
+
+这样，`helloWorld()` 方法就成了我们的一个资源。注意注解支持模块需要配合 Spring AOP 或者 AspectJ 一起使用。
+
+### 3. 定义规则
+
+接下来，通过流控规则来指定允许该资源通过的请求次数，例如下面的代码定义了资源 `HelloWorld` 每秒最多只能通过 20 个请求。
+
+```java
+private static void initFlowRules(){
+    List<FlowRule> rules = new ArrayList<>();
+    FlowRule rule = new FlowRule();
+    rule.setResource("HelloWorld");
+    rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
+    // Set limit QPS to 20.
+    rule.setCount(20);
+    rules.add(rule);
+    FlowRuleManager.loadRules(rules);
+}
+```
+
+完成上面 3 步，Sentinel 就能够正常工作了。更多的信息可以参考 [使用文档](https://sentinelguard.io/zh-cn/docs/basic-api-resource-rule.html)。
+
+### 4. 检查效果
+
+Demo 运行之后，我们可以在日志 `~/logs/csp/${appName}-metrics.log.xxx` 里看到下面的输出:
+
+```
+|--timestamp-|------date time----|--resource-|p |block|s |e|rt
+1529998904000|2018-06-26 15:41:44|hello world|20|0    |20|0|0
+1529998905000|2018-06-26 15:41:45|hello world|20|5579 |20|0|728
+1529998906000|2018-06-26 15:41:46|hello world|20|15698|20|0|0
+1529998907000|2018-06-26 15:41:47|hello world|20|19262|20|0|0
+1529998908000|2018-06-26 15:41:48|hello world|20|19502|20|0|0
+1529998909000|2018-06-26 15:41:49|hello world|20|18386|20|0|0
+```
+
+其中 `p` 代表通过的请求, `block` 代表被阻止的请求, `s` 代表成功执行完成的请求个数, `e` 代表用户自定义的异常, `rt` 代表平均响应时长。
+
+可以看到，这个程序每秒稳定输出 "hello world" 20 次，和规则中预先设定的阈值是一样的。
+
+更详细的说明可以参考: [如何使用](https://sentinelguard.io/zh-cn/docs/basic-api-resource-rule.html)
+
+更多的例子可以参考: [Sentinel Demo 集锦](https://github.com/alibaba/Sentinel/tree/master/sentinel-demo)
+
+### 5. 启动 Sentinel 控制台
+
+Sentinel 开源控制台支持实时监控和规则管理。接入控制台的步骤如下：
+
+（1）下载控制台 jar 包并在本地启动：可以参见 [此处文档](https://sentinelguard.io/zh-cn/docs/dashboard.html)。
+
+（2）客户端接入控制台，需要：
+
+- 客户端需要引入 Transport 模块来与 Sentinel 控制台进行通信。您可以通过 `pom.xml` 引入 JAR 包:
+
+```xml
+<dependency>
+    <groupId>com.alibaba.csp</groupId>
+    <artifactId>sentinel-transport-simple-http</artifactId>
+    <version>1.8.0</version>
+</dependency>
+```
+
+- 启动时加入 JVM 参数 `-Dcsp.sentinel.dashboard.server=consoleIp:port` 指定控制台地址和端口。更多的参数参见 [启动参数文档](https://sentinelguard.io/zh-cn/docs/startup-configuration.html)。
+- 确保应用端有访问量
+
+完成以上步骤后即可在 Sentinel 控制台上看到对应的应用，机器列表页面可以看到对应的机器：
+
+![machine-discovery](https://user-images.githubusercontent.com/9434884/50627838-5cd92800-0f70-11e9-891e-31430adcbbf4.png)
+
+详细介绍和使用文档可参考：[Sentinel 控制台文档](https://sentinelguard.io/zh-cn/docs/dashboard.html)。
+
+[快速开始](https://sentinelguard.io/zh-cn/docs/quick-start.html)
+
+# 参考资料
+
+[官方文档](https://sentinelguard.io/zh-cn/docs/quick-start.html)
