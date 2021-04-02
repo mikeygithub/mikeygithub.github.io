@@ -1,7 +1,7 @@
 ---
 title: 中间件篇-Zookeeper分布式系统协调
 date: 2021-03-12 22:42:02
-index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/zookeeper.jpeg
+index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/zookeeper-feature-image.png
 category: 中间件
 tags: zookeeper
 ---
