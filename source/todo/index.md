@@ -10,17 +10,21 @@ date: 2020-01-02 22:02:44
 
 # 2021-03-28
 
-{% cb Kafka%}
-{% cb ES%}
-{% cb Aerospike%}
-{% cb ZK%}
-{% cb Dubbo%}
+{% cb 单机部署天策 %}
+
+# 2021-03-28
+
+{% cb Kafka,true %}
+{% cb ES,true %}
+{% cb Aerospike,true %}
+{% cb ZK,true %}
+{% cb Dubbo,true %}
 {% cb Cassandra%}
 
 
 # 2021-02-28
 
-{% cb 源码分析%}
+{% cb 源码分析,true %}
 
 # 2021-02-15
 
@@ -61,7 +65,7 @@ date: 2020-01-02 22:02:44
 
 {% cb grpc 学习笔记, true %}
 {% cb Go-kit 学习笔记 %}
-{% cb Iris 学习笔记 %}
+{% cb Iris 学习笔记,true  %}
 {% cb Gin 学习笔记 %}
 
 # 2018-05-05
