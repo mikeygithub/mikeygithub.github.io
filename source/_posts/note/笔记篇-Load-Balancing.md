@@ -1,5 +1,5 @@
 ---
-title: Load Balancing
+title: 笔记篇-Load-Balancing
 date: 2020-08-26 17:43:41
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/loadblance.jpeg
 category: DevOps

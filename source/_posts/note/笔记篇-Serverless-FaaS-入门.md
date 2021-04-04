@@ -1,5 +1,5 @@
 ---
-title: Serverless-FaaS 入门
+title: 笔记篇-Serverless-FaaS入门
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/servlerless-faas-logo.png
 date: 2020-12-10 10:48:02
 category: Serverless
