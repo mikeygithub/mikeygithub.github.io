@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
-  <title>分布式缓存 - 麦奇</title>
+  <title>笔记篇-GRPC学习笔记 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -214,7 +214,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="分布式缓存">
+            <span class="h2" id="subtitle" title="笔记篇-GRPC学习笔记">
               
             </span>
 
@@ -229,8 +229,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-09-07 00:05" pubdate>
-        2020年9月7日 凌晨
+      <time datetime="2019-08-04 18:56" pubdate>
+        2019年8月4日 晚上
       </time>
     </span>
   
@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      849 字
+      494 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      7
        分钟
     </span>
   
@@ -289,20 +289,56 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">分布式缓存</h1>
+            <h1 style="display: none">笔记篇-GRPC学习笔记</h1>
             
             <div class="markdown-body">
-              <h1 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h1><p>缓存雪崩我们可以简单的理解为:由于原有缓存失效,新缓存未到期间所有原本应该访问缓存的请求都去查询数据库了,而对数据库 CPU 和内存造成巨大压力,严重的会造成数据库宕机。从而形成一系列连锁反应,造成整个系统崩溃。一般有三种处理办法:</p>
+              <h1 id="Grpc介绍"><a href="#Grpc介绍" class="headerlink" title="Grpc介绍"></a>Grpc介绍</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/grpc-1.png" srcset="/img/loading.gif" alt="grpc特点"></p>
+<p>在gRPC中，客户端应用程序可以直接在其他计算机上的服务器应用程序上调用方法，就好像它是本地对象一样，从而使您更轻松地创建分布式应用程序和服务。在许多RPC系统中，gRPC都基于定义服务的思想，即指定可以使用其参数和返回类型远程调用的方法。在服务器端，服务器实现此接口并运行gRPC服务器以处理客户端调用。在客户端，客户端具有一个存根（在某些语言中简称为客户端），提供与服务器相同的方法。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/landing-2.svg" srcset="/img/loading.gif" alt="概念图"></p>
+<p>从Google内部的服务器到您自己的台式机，gRPC客户端和服务器可以在各种环境中运行并相互通信，并且可以使用gRPC支持的任何语言编写。因此，例如，您可以使用Go，Python或Ruby的客户端轻松地用Java创建gRPC服务器。此外，最新的Google API的接口将具有gRPC版本，可让您轻松地在应用程序中内置Google功能。</p>
+<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><p>必备条件</p>
+<ul>
+<li><p><strong><a target="_blank" rel="noopener" href="https://golang.org/">Go</a></strong>, any one of the <strong>three latest major</strong> <a target="_blank" rel="noopener" href="https://golang.org/doc/devel/release.html">releases of Go</a>.</p>
+<p>For installation instructions, see Go’s <a target="_blank" rel="noopener" href="https://golang.org/doc/install">Getting Started</a> guide.</p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://developers.google.com/protocol-buffers">Protocol buffer</a> compiler</strong>, <code>protoc</code>, <a target="_blank" rel="noopener" href="https://developers.google.com/protocol-buffers/docs/proto3">version 3</a>.</p>
+<p>For installation instructions, see <a target="_blank" rel="noopener" href="https://grpc.io/docs/protoc-installation/">Protocol Buffer Compiler Installation</a>.</p>
+</li>
+<li><p><strong>Go plugins</strong> for the protocol compiler:</p>
 <ol>
-<li>一般并发量不是特别多的时候,使用最多的解决方案是加锁排队。</li>
-<li>给每一个缓存数据增加相应的缓存标记,记录缓存的是否失效,如果缓存标记失效,则更新数据缓存。</li>
-<li>为 key 设置不同的缓存失效时间。</li>
+<li><p>Install the protocol compiler plugins for Go using the following commands:</p>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ <span class="hljs-built_in">export</span> GO111MODULE=on  <span class="hljs-comment"># Enable module mode</span><br>$ go get google.golang.org/protobuf/cmd/protoc-gen-go \<br>         google.golang.org/grpc/cmd/protoc-gen-go-grpc<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>Update your <code>PATH</code> so that the <code>protoc</code> compiler can find the plugins:</p>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ <span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PATH</span>:<span class="hljs-subst">$(go env GOPATH)</span>/bin&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+</li>
 </ol>
-<h1 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h1><p>缓存穿透是指用户查询数据,在数据库没有,自然在缓存中也不会有。这样就导致用户查询的时候,在缓存中找不到,每次都要去数据库再查询一遍,然后返回空(相当于进行了两次无用的查询)。这样请求就绕过缓存直接查数据库,这也是经常提的缓存命中率问题。<br>有很多种方法可以有效地解决缓存穿透问题,最常见的则是采用布隆过滤器,将所有可能存在的数据哈希到一个足够大的 bitmap 中,一个一定不存在的数据会被这个 bitmap 拦截掉,从而避免了对底层存储系统的查询压力。另外也有一个更为简单粗暴的方法,如果一个查询返回的数据为空(不管是数据不存在,还是系统故障),我们仍然把这个空结果进行缓存,但它的过期时间会很短,最长不超过五分钟。通过这个直接设置的默认值存放到缓存,这样第二次到缓冲中获取就有值了,而不会继续访问数据库。</p>
-<h1 id="缓存预热"><a href="#缓存预热" class="headerlink" title="缓存预热"></a>缓存预热</h1><p>缓存预热就是系统上线后,将相关的缓存数据直接加载到缓存系统。这样就可以避免在用户请求的时候,先查询数据库,然后再将数据缓存的问题!用户直接查询事先被预热的缓存数据!</p>
-<h1 id="缓存更新"><a href="#缓存更新" class="headerlink" title="缓存更新"></a>缓存更新</h1><p>缓存更新除了缓存服务器自带的缓存失效策略之外(Redis 默认的有 6 中策略可供选择),我们还可以根据具体的业务需求进行自定义的缓存淘汰,常见的策略有两种:</p>
-<p>(1)定时去清理过期的缓存;<br>(2)当有用户请求过来时,再判断这个请求所用到的缓存是否过期,过期的话就去底层系统得到新数据并更新缓存。</p>
-<h1 id="缓存降级"><a href="#缓存降级" class="headerlink" title="缓存降级"></a>缓存降级</h1><p>当访问量剧增、服务出现问题(如响应时间慢或不响应)或非核心服务影响到核心流程的性能时,仍然需要保证服务还是可用的,即使是有损服务。系统可以根据一些关键数据进行自动降级,也可以配置开关实现人工降级。降级的最终目的是保证核心服务可用,即使是有损的。而且有些服务是无法降级的(如加入购物车、结算)。</p>
+</li>
+</ul>
+<h3 id="Get-the-example-code"><a href="#Get-the-example-code" class="headerlink" title="Get the example code"></a>Get the example code</h3><p>The example code is part of the <a target="_blank" rel="noopener" href="https://github.com/grpc/grpc-go">grpc-go</a> repo.</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/grpc/grpc-go/archive/v1.34.0.zip">Download the repo as a zip file</a> and unzip it, or clone the repo:</p>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ git <span class="hljs-built_in">clone</span> -b v1.34.0 https://github.com/grpc/grpc-go<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>Change to the quick start example directory:</p>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ <span class="hljs-built_in">cd</span> grpc-go/examples/helloworld<br></code></pre></div></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="Run-the-example"><a href="#Run-the-example" class="headerlink" title="Run the example"></a>Run the example</h3><p>From the <code>examples/helloworld</code> directory:</p>
+<ol>
+<li><p>Compile and execute the server code:</p>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ go run greeter_server/main.go<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>From a different terminal, compile and execute the client code to see the client output:</p>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ go run greeter_client/main.go<br>Greeting: Hello world<br></code></pre></div></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p><a target="_blank" rel="noopener" href="https://grpc.io/docs/">官方文档</a></p>
 
             </div>
             <hr>
@@ -312,7 +348,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+                      <a class="hover-with-bg" href="/categories/RPC/">RPC</a>
                     
                   </div>
                 
@@ -320,7 +356,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98/">分布式缓存</a>
+                      <a class="hover-with-bg" href="/tags/grpc/">grpc</a>
                     
                   </div>
                 
@@ -333,9 +369,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/10/17/interview/%E9%9D%A2%E8%AF%95%E7%AF%87-%E9%9D%A2%E8%AF%95%E9%9D%A2%E7%BB%8F/">
+                      <a href="/2020/03/16/blockchain/Hyperledger-Caliper/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">面试篇-面试面经</span>
+                        <span class="hidden-mobile">Hyperledger Caliper 测试框架</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -343,8 +379,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/09/06/algorithm/%E7%AE%97%E6%B3%95%E7%AF%87-%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">
-                        <span class="hidden-mobile">算法篇-加密算法</span>
+                      <a href="/2019/08/03/golang/Go-kit-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">Go-kit 学习笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
-  <title>Lua 脚本学习 - 麦奇</title>
+  <title>笔记篇-Knife4j Tutorials - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -214,7 +214,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Lua 脚本学习">
+            <span class="h2" id="subtitle" title="笔记篇-Knife4j Tutorials">
               
             </span>
 
@@ -229,8 +229,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-05-02 23:32" pubdate>
-        2020年5月2日 晚上
+      <time datetime="2020-03-21 01:42" pubdate>
+        2020年3月21日 凌晨
       </time>
     </span>
   
@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      916 字
+      830 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      10
        分钟
     </span>
   
@@ -289,87 +289,45 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Lua 脚本学习</h1>
+            <h1 style="display: none">笔记篇-Knife4j Tutorials</h1>
             
             <div class="markdown-body">
-              <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
-<p>Lua is free software distributed in source code. It may be used for any purpose, including commercial purposes, at absolutely no cost.<br>Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。</p>
+              <h2 id="knife4j简介"><a href="#knife4j简介" class="headerlink" title="knife4j简介"></a>knife4j简介</h2><p>前身:swagger-bootstrap-ui</p>
+<h3 id="swagger简介"><a href="#swagger简介" class="headerlink" title="swagger简介"></a>swagger简介</h3><blockquote>
+<p>Swagger是一个API接口管理工具，支持在线测试接口数据，根据配置自动生成API文档，结合spring mvc而提供界面化方法文档的一个开源框架。</p>
 </blockquote>
-<p>Lua 是巴西里约热内卢天主教大学（Pontifical Catholic University of Rio de Janeiro）里的一个研究小组于 1993 年开发的，该小组成员有：<code>Roberto Ierusalimschy</code>、<code>Waldemar Celes</code> 和 <code>Luiz Henrique de Figueiredo</code>。</p>
-<h2 id="设计目的"><a href="#设计目的" class="headerlink" title="设计目的"></a>设计目的</h2><p>其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。</p>
-<h2 id="Lua-特性"><a href="#Lua-特性" class="headerlink" title="Lua 特性"></a>Lua 特性</h2><ul>
-<li>轻量级: 它用标准C语言编写并以源代码形式开放，编译后仅仅一百余K，可以很方便的嵌入别的程序里。</li>
-<li>可扩展: Lua提供了非常易于使用的扩展接口和机制：由宿主语言(通常是C或C++)提供这些功能，Lua可以使用它们，就像是本来就内置的功能一样。</li>
+<p>Swagger主要的项目<br>Swagger是一组开源项目，主要项目如下：</p>
+<ul>
+<li>Swagger-tools:提供各种与Swagger进行集成和交互的工具。例如模式检验、Swagger 1.2文档转换成Swagger 2.0文档等功能。</li>
+<li>Swagger-core: 用于Java/Scala的的Swagger实现。与JAX-RS(Jersey、Resteasy、CXF…)、Servlets和Play框架进行集成。</li>
+<li>Swagger-js: 用于JavaScript的Swagger实现。</li>
+<li>Swagger-node-express: Swagger模块，用于node.js的Express web应用框架。</li>
+<li>Swagger-ui：一个无依赖的HTML、JS和CSS集合，可以为Swagger兼容API动态生成优雅文档。</li>
+<li>Swagger-codegen：一个模板驱动引擎，通过分析用户Swagger资源声明以各种语言生成客户端代码。</li>
+<li>Swagger-editor：可让使用者在浏览器里以YAML格式编辑Swagger API规范并实时预览文档。可以生成有效的Swagger JSON描述，并用于所有Swagger工具（代码生成、文档等等）中。</li>
 </ul>
-<h2 id="其它特性"><a href="#其它特性" class="headerlink" title="其它特性:"></a>其它特性:</h2><ul>
-<li>支持面向过程(procedure-oriented)编程和函数式编程(functional programming)；</li>
-<li>自动内存管理；只提供了一种通用类型的表（table），用它可以实现数组，哈希表，集合，对象；</li>
-<li>语言内置模式匹配；闭包(closure)；函数也可以看做一个值；提供多线程（协同进程，并非操作系统所支持的线程）支持；</li>
-<li>通过闭包和table可以很方便地支持面向对象编程所需要的一些关键机制，比如数据抽象，虚函数，继承和重载等。</li>
-</ul>
-<h1 id="Lua-应用场景"><a href="#Lua-应用场景" class="headerlink" title="Lua 应用场景"></a>Lua 应用场景</h1><ul>
-<li>游戏开发</li>
-<li>独立应用脚本</li>
-<li>Web 应用脚本</li>
-<li>扩展和数据库插件如：MySQL Proxy 和 MySQL WorkBench</li>
-<li>安全系统，如入侵检测系统</li>
-</ul>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz<br>tar zxf lua-5.3.5.tar.gz<br><span class="hljs-built_in">cd</span> lua-5.3.5<br>make linux <span class="hljs-built_in">test</span><br></code></pre></div></td></tr></table></figure>
-<p>编译出错<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/complie-error.png" srcset="/img/loading.gif" alt="avatar"><br>解决方法<br><code>sudo apt-get install libreadline7 libreadline-dev</code><br>重新编译<br><code>make linux test</code><br>创建软连接<br><code>sudo ln -s /home/mikey/DATA/DevTools/lua-5.3.5/src/lua /usr/bin/lua</code><br>测试  </p>
-<div class="hljs code-wrapper"><pre><code>mikey@localhost: lua
-Lua 5.3.5  Copyright (C) 1994-2018 Lua.org, PUC-Rio
-&gt; print(&quot;Hello Mikey&quot;)
-Hello Mikey
-&gt; ```  
+<h3 id="Swagger-Bootstrap-UI简介"><a href="#Swagger-Bootstrap-UI简介" class="headerlink" title="Swagger-Bootstrap-UI简介"></a>Swagger-Bootstrap-UI简介</h3><blockquote>
+<p>Swagger-Bootstrap-UI是springfox-swagger的增强UI实现，为Java开发者在使用Swagger的时候，能拥有一份简洁、强大的接口文档体验。</p>
+</blockquote>
+<h2 id="knife4j特点"><a href="#knife4j特点" class="headerlink" title="knife4j特点"></a>knife4j特点</h2><p>文档说明：根据Swagger的规范说明，详细列出接口文档的说明，包括接口地址、类型、请求示例、请求参数、响应示例、响应参数、响应码等信息，使用swagger-bootstrap-ui能根据该文档说明，对该接口的使用情况一目了然。</p>
+<p>在线调试：提供在线接口联调的强大功能，自动解析当前接口参数,同时包含表单验证，调用参数可返回接口响应内容、headers、Curl请求命令实例、响应时间、响应状态码等信息，帮助开发者在线调试，而不必通过其他测试工具测试接口是否正确,简介、强大。</p>
+<h2 id="knife4j使用"><a href="#knife4j使用" class="headerlink" title="knife4j使用"></a>knife4j使用</h2><p>1.创建springboot项目</p>
+<p>2.添加依赖</p>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">&lt;dependencies&gt;<br>    &lt;dependency&gt;<br>        &lt;groupId&gt;com.github.xiaoymin&lt;/groupId&gt;<br>        &lt;artifactId&gt;knife4j-spring-boot-starter&lt;/artifactId&gt;<br>        &lt;!--在引用时请在maven中央仓库搜索最新版本号--&gt;<br>        &lt;version&gt;2.0.2&lt;/version&gt;<br>    &lt;/dependency&gt;<br>&lt;/dependencies&gt;<br></code></pre></div></td></tr></table></figure>
 
-# Lua 数据库访问
-
-Lua 数据库的操作库：LuaSQL。开源，支持的数据库有：ODBC, ADO, Oracle, MySQL, SQLite 和 PostgreSQL。  
-
-LuaSQL 可以使用 LuaRocks 来安装可以根据需要安装你需要的数据库驱动。  
-
-LuaRocks 安装方法：
-
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">$ wget http:<span class="hljs-regexp">//</span>luarocks.org<span class="hljs-regexp">/releases/</span>luarocks-<span class="hljs-number">2.2</span>.<span class="hljs-number">1</span>.tar.gz<br>$ tar zxpf luarocks-<span class="hljs-number">2.2</span>.<span class="hljs-number">1</span>.tar.gz<br>$ cd luarocks-<span class="hljs-number">2.2</span>.<span class="hljs-number">1</span><br>$ ./configure; sudo make bootstrap<br>$ sudo luarocks install luasocket<br>$ lua<br>Lua <span class="hljs-number">5.3</span>.<span class="hljs-number">0</span> Copyright (C) <span class="hljs-number">1994</span>-<span class="hljs-number">2015</span> Lua.org, PUC-Rio<br>&gt; require <span class="hljs-string">&quot;socket&quot;</span><br>Window 下安装 LuaRocks：`https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/keplerproject/</span>luarocks<span class="hljs-regexp">/wiki/</span>Installation-instructions-<span class="hljs-keyword">for</span>-Windows`<br></code></pre></div></td></tr></table></figure>
-
-
-安装不同数据库驱动：
-<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">luarocks <span class="hljs-keyword">install</span> luasql-sqlite3<br>luarocks <span class="hljs-keyword">install</span> luasql-postgres<br>luarocks <span class="hljs-keyword">install</span> luasql-mysql<br>luarocks <span class="hljs-keyword">install</span> luasql-sqlite<br>luarocks <span class="hljs-keyword">install</span> luasql-odbc<br><span class="hljs-string">``</span><span class="hljs-string">``</span>  <br>你也可以使用源码安装方式，Lua Github 源码地址：<span class="hljs-string">`https://github.com/keplerproject/luasql`</span><br><br>Lua 连接MySql 数据库：<br><br></code></pre></div></td></tr></table></figure>
-实例
-require &quot;luasql.mysql&quot;
-
---创建环境对象
-env = luasql.mysql()
-
---连接数据库
-conn = env:connect(&quot;数据库名&quot;,&quot;用户名&quot;,&quot;密码&quot;,&quot;IP地址&quot;,端口)
-
---设置数据库的编码格式
-conn:execute&quot;SET NAMES UTF8&quot;
-
---执行数据库操作
-cur = conn:execute(&quot;select * from role&quot;)
-
-row = cur:fetch(&#123;&#125;,&quot;a&quot;)
-
---文件对象的创建
-file = io.open(&quot;role.txt&quot;,&quot;w+&quot;);
-
-while row do
-    var = string.format(&quot;%d %s\n&quot;, row.id, row.name)
-
-    print(var)
-
-    file:write(var)
-
-    row = cur:fetch(row,&quot;a&quot;)
-end
-
-
-file:close()  --关闭文件对象
-conn:close()  --关闭数据库连接
-env:close()   --关闭数据库环境</code></pre>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.runoob.com/lua/lua-tutorial.html">菜鸟教程</a><br><a target="_blank" rel="noopener" href="https://www.runoob.com/manual/lua53doc/">官方手册</a></p>
+<p>3.配置类</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableSwagger2</span><br><span class="hljs-meta">@EnableKnife4j</span><br><span class="hljs-meta">@Import(BeanValidatorPluginsConfiguration.class)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SwaggerConfiguration</span> </span>&#123;<br> <br>    <span class="hljs-meta">@Bean(value = &quot;defaultApi2&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">defaultApi2</span><span class="hljs-params">()</span> </span>&#123;<br>        Docket docket=<span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2)<br>                .apiInfo(apiInfo())<br>                <span class="hljs-comment">//分组名称</span><br>                .groupName(<span class="hljs-string">&quot;2.X版本&quot;</span>)<br>                .select()<br>                <span class="hljs-comment">//这里指定Controller扫描包路径</span><br>                .apis(RequestHandlerSelectors.basePackage(<span class="hljs-string">&quot;com.swagger.bootstrap.ui.demo.new2&quot;</span>))<br>                .paths(PathSelectors.any())<br>                .build();<br>        <span class="hljs-keyword">return</span> docket;<br>    &#125;<br>    <br>　　<span class="hljs-function"><span class="hljs-keyword">private</span> ApiInfo <span class="hljs-title">apiInfo</span><span class="hljs-params">()</span> </span>&#123;<br>   　　 <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ApiInfoBuilder()<br>      　　  .title(<span class="hljs-string">&quot;大学生专业学科竞赛项目过程管理系统&quot;</span>)<br>        　　.description(<span class="hljs-string">&quot;大学生专业学科竞赛项目过程管理系统t文档&quot;</span>)<br>        　　.termsOfServiceUrl(<span class="hljs-string">&quot;&quot;</span>)<br>        　　.version(<span class="hljs-string">&quot;3.0.0&quot;</span>)<br>        　　.build();<br>　　&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>注解说明</p>
+<p><code>@EnableSwagger2</code></p>
+<p>该注解是Springfox-swagger框架提供的使用Swagger注解，该注解必须加</p>
+<p><code>@EnableKnife4j</code></p>
+<p>该注解是knife4j提供的增强注解,Ui提供了例如动态参数、参数过滤、接口排序等增强功能,如果你想使用这些增强功能就必须加该注解，否则可以不用加</p>
+<p>4.访问</p>
+<p>在浏览器输入地址：<code>http://[you_host]:[you_port]/doc.html</code></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/knife4j-1.jpg" srcset="/img/loading.gif" alt="avatar"></p>
+<h2 id="knife4j资料"><a href="#knife4j资料" class="headerlink" title="knife4j资料"></a>knife4j资料</h2><p><a target="_blank" rel="noopener" href="https://doc.xiaominfo.com/guide/useful.html">文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/xiaoym/swagger-bootstrap-ui-demo">示例</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fby698/p/11581845.html">博文</a></p>
 
             </div>
             <hr>
@@ -379,7 +337,7 @@ env:close()   --关闭数据库环境</code></pre>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                      <a class="hover-with-bg" href="/categories/%E5%BC%80%E5%8F%91%E7%BB%84%E4%BB%B6/">开发组件</a>
                     
                   </div>
                 
@@ -387,7 +345,7 @@ env:close()   --关闭数据库环境</code></pre>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/lua/">lua</a>
+                      <a class="hover-with-bg" href="/tags/%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/">接口文档</a>
                     
                   </div>
                 
@@ -400,9 +358,9 @@ env:close()   --关闭数据库环境</code></pre>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/05/19/java/JVM%E7%AF%87-%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB/">
+                      <a href="/2020/03/21/devops/k8s%E7%AF%87-%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JVM篇-知识汇总</span>
+                        <span class="hidden-mobile">k8s篇-安装教程</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -410,8 +368,8 @@ env:close()   --关闭数据库环境</code></pre>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/05/01/problem/How-to-start-netty-in-Tomcat/">
-                        <span class="hidden-mobile">如何让Netty服务随Tomcat启动</span>
+                      <a href="/2020/03/20/blockchain/Hyperledger-Caliper-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">
+                        <span class="hidden-mobile">Hyperledger Caliper 性能测试工具配置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
