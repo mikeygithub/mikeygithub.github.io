@@ -1519,8 +1519,8 @@ localhost:9200/nba/_search
 {
 	"query":{
 		"multi_match":{ // 选定多个字段所以使用multi_match
-			"query": "shooter",
-			"fields": ["title","name"]  // 指定字段
+			"query": "shooter",// 值
+			"fields": ["title","name"]  // 指定查询的字段
 		}
 	}
 }
@@ -1957,8 +1957,8 @@ localhost:9200/nba/_search
 #####  6.2.2 exsit query 在特定的字段中查找非空值的文档 GET/POST请求
 
 - 请求
-```java
-
+```shell
+curl -X GET localhost:9200/nba
 ```
 
 - 请求体
@@ -2371,8 +2371,8 @@ localhost:9200/nba/_search
 #####  6.2.5 regexp query 正则表达式查询 GET/POST请求
 
 - 请求
-```java
-
+```shell
+curl -X GET localhost:9200/nba/_search
 ```
 
 - 请求体
@@ -2666,6 +2666,13 @@ localhost:9200/nba/_search
   "size": 3
 }
 ```
+>gt: greater than 大于
+gte: greater than or equal 大于等于
+lt: less than 小于
+lte: less than or equal 小于等于
+
+
+
 
 - 响应
 ```json
