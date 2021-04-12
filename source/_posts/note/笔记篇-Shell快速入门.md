@@ -1,5 +1,5 @@
 ---
-title: 笔记篇-Shell快速入门.md
+title: 笔记篇-Shell快速入门
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/linux-shell.jpeg'
 hide: false
 date: 2021-04-07 21:28:53
