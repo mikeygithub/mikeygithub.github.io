@@ -9,7 +9,7 @@ tags: Guava
 
 # 简介
 
->Guava是一种基于开源的Java库，其中包含谷歌正在由他们很多项目使用的很多核心库。这个库是为了方便编码，并减少编码错误。这个库提供用于集合，缓存，支持原语，并发性，常见注解，字符串处理，I/O和验证的实用方法。//原文出自【易百教程】，商业转载请联系作者获得授权，非商业请保留原文链接：https://www.yiibai.com/guava/
+>Guava是一种基于开源的Java库，其中包含谷歌正在由他们很多项目使用的很多核心库。这个库是为了方便编码，并减少编码错误。这个库提供用于集合，缓存，支持原语，并发性，常见注解，字符串处理，I/O和验证的实用方法。
  
 # 特点
 
@@ -17,9 +17,21 @@ tags: Guava
 - 高效 - 可靠，快速和有效的扩展JAVA标准库
 - 优化 -Guava库经过高度的优化。
 
+# 入门
 
+```xml
+<dependency>
+  <groupId>com.google.guava</groupId>
+  <artifactId>guava</artifactId>
+  <version>30.1.1-jre</version>
+  <!-- or, for Android: -->
+  <version>30.1.1-android</version>
+</dependency>
+```
 
 
 # 参考
 
-[Guava教程](https://www.yiibai.com/guava/)
+[官方文档](https://github.com/google/guava/wiki)
+
+[github guava 地址](https://github.com/google/guava)
