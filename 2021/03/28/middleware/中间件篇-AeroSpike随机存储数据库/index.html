@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      3.3k 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18
+      54
        分钟
     </span>
   
@@ -321,12 +321,210 @@
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 下载</span><br>wget https://www.aerospike.com/artifacts/aerospike-tools/3.16.0/aerospike-tools-3.16.0-el7.tgz<br><span class="hljs-meta">#</span><span class="bash"> 解压</span><br>tar zxvf aerospike-tools-3.16.0-el7<br><span class="hljs-meta">#</span><span class="bash"> 进入目录</span><br>cd aerospike-tools-3.16.0-el7<br><span class="hljs-meta">#</span><span class="bash"> 查看安装</span><br>yum list installed | grep aerospike-tools<br></code></pre></div></td></tr></table></figure>
 
 <p>简单查询</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 进入aql</span><br>aql<br><span class="hljs-meta">#</span><span class="bash"> 查看namespaces</span><br>show namespaces<br><span class="hljs-meta">#</span><span class="bash"> 查询<span class="hljs-built_in">test</span>命名空间下数据</span><br>select * from test<br><span class="hljs-meta">#</span><span class="bash"> 插入数据</span><br>insert into test(pk,id,name,age) values(&#x27;key1&#x27;,&#x27;101&#x27;,&#x27;AAA&#x27;,&#x27;21&#x27;);<br>insert into test(pk,id,name,age) values(&#x27;key2&#x27;,&#x27;102&#x27;,&#x27;BBB&#x27;,&#x27;18&#x27;);<br><span class="hljs-meta">#</span><span class="bash"> 删除数据</span><br>delete from test where pk=&#x27;key2&#x27;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 进入aql</span><br>aql<br><span class="hljs-meta">#</span><span class="bash"> 查看namespaces</span><br>show namespaces<br><span class="hljs-meta">#</span><span class="bash"> 查询<span class="hljs-built_in">test</span>命名空间下数据</span><br>select * from test<br><span class="hljs-meta">#</span><span class="bash"> 插入数据</span><br>insert into test(pk,id,name,age) values(&#x27;key1&#x27;,&#x27;101&#x27;,&#x27;AAA&#x27;,&#x27;21&#x27;);<br>insert into test(pk,id,name,age) values(&#x27;key2&#x27;,&#x27;102&#x27;,&#x27;BBB&#x27;,&#x27;18&#x27;);<br><span class="hljs-meta">#</span><span class="bash"> 删除数据</span><br>delete from test where pk=&#x27;key2&#x27;<br><span class="hljs-meta">#</span><span class="bash"> 查询数据</span><br>格式 SELECT * FROM &lt;ns&gt;[.&lt;set&gt;] WHERE PK = &lt;key&gt;<br></code></pre></div></td></tr></table></figure>
 
+<h1 id="AQL操作"><a href="#AQL操作" class="headerlink" title="AQL操作"></a>AQL操作</h1><p>COMMANDS<br>  DDL<br>      CREATE INDEX <index> ON <ns>[.<set>] (<bin>) NUMERIC|STRING|GEO2DSPHERE<br>      CREATE LIST/MAPKEYS/MAPVALUES INDEX <index> ON <ns>[.<set>] (<bin>) NUMERIC|STRING|GEO2DSPHERE<br>      DROP INDEX <ns>[.<set>] <index><br>      Examples:</p>
+<div class="hljs code-wrapper"><pre><code>      CREATE INDEX idx_foo ON test.demo (foo) NUMERIC
+      DROP INDEX test.demo idx_foo</code></pre></div>
+<p>  MANAGE UDFS<br>      REGISTER MODULE ‘<filepath>‘<br>      REMOVE MODULE <filename></p>
+<div class="hljs code-wrapper"><pre><code>      &lt;filepath&gt; is file path to the UDF module(in single quotes).
+      &lt;filename&gt; is file name of the UDF module.
+
+  Examples:
+
+      REGISTER MODULE &#39;~/test.lua&#39; 
+      REMOVE MODULE test.lua</code></pre></div>
+<p>  USER ADMINISTRATION<br>      CREATE USER <user> PASSWORD <password> ROLE[S] <role1>,<role2>…<br>          pre-defined roles: read|read-write|read-write-udf|sys-admin|user-admin<br>      DROP USER <user><br>      SET PASSWORD <password> [FOR <user>]<br>      GRANT ROLE[S] <role1>,<role2>… TO <user><br>      REVOKE ROLE[S] <role1>,<role2>… FROM <user><br>      CREATE ROLE <role> PRIVILEGE[S] &lt;priv1[.ns1[.set1]]&gt;,&lt;priv2[.ns2[.set2]]&gt;…<br>          priv: read|read-write|read-write-udf|sys-admin|user-admin|data-admin<br>          ns:   namespace.  Applies to all namespaces if not set.<br>          set:  set name.  Applie to all sets within namespace if not set.<br>                sys-admin, user-admin and data-admin can’t be qualified with namespace or set.<br>      DROP ROLE <role><br>      GRANT PRIVILEGE[S] &lt;priv1[.ns1[.set1]]&gt;,&lt;priv2[.ns2[.set2]]&gt;… TO <role><br>      REVOKE PRIVILEGE[S] &lt;priv1[.ns1[.set1]]&gt;,&lt;priv2[.ns2[.set2]]&gt;… FROM <role></p>
+<p>  DML<br>      INSERT INTO <ns>[.<set>] (PK, <bins>) VALUES (<key>, <values>)<br>      DELETE FROM <ns>[.<set>] WHERE PK = <key><br>      TRUNCATE <ns>[.<set>] [upto <LUT>] </p>
+<div class="hljs code-wrapper"><pre><code>      &lt;ns&gt; is the namespace for the record.
+      &lt;set&gt; is the set name for the record.
+      &lt;key&gt; is the record&#39;s primary key.
+      &lt;bins&gt; is a comma-separated list of bin names.
+      &lt;values&gt; is comma-separated list of bin values, which may include type cast expressions. Set to NULL (case insensitive &amp; w/o quotes) to delete the bin.
+      &lt;LUT&gt; is last update time upto which set or namespace needs to be truncated. LUT is either nanosecond since Unix epoch like 1513687224599000000 or in date string in format like &quot;Dec 19 2017 12:40:00&quot;.
+
+    Type Cast Expression Formats:
+
+        CAST(&lt;Value&gt; AS &lt;TypeName&gt;)
+        &lt;TypeName&gt;(&lt;Value&gt;)
+
+    Supported AQL Types:
+
+          Bin Value Type                    Equivalent Type Name(s)
+       ===============================================================
+        Integer                           DECIMAL, INT, NUMERIC
+        Floating Point                    FLOAT, REAL
+        Aerospike CDT (List, Map, etc.)   JSON
+        Aerospike List                    LIST
+        Aerospike Map                     MAP
+        GeoJSON                           GEOJSON
+        String                            CHAR, STRING, TEXT, VARCHAR
+       ===============================================================
+
+    [Note:  Type names and keywords are case insensitive.]
+
+  Examples:
+
+      INSERT INTO test.demo (PK, foo, bar) VALUES (&#39;key1&#39;, 123, &#39;abc&#39;)
+      INSERT INTO test.demo (PK, foo, bar) VALUES (&#39;key1&#39;, CAST(&#39;123&#39; AS INT), JSON(&#39;&#123;&quot;a&quot;: 1.2, &quot;b&quot;: [1, 2, 3]&#125;&#39;))
+      INSERT INTO test.demo (PK, foo, bar) VALUES (&#39;key1&#39;, LIST(&#39;[1, 2, 3]&#39;), MAP(&#39;&#123;&quot;a&quot;: 1, &quot;b&quot;: 2&#125;&#39;))
+      INSERT INTO test.demo (PK, gj) VALUES (&#39;key1&#39;, GEOJSON(&#39;&#123;&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [123.4, -456.7]&#125;&#39;))
+      DELETE FROM test.demo WHERE PK = &#39;key1&#39;</code></pre></div>
+<p>  INVOKING UDFS<br>      EXECUTE <module>.<function>(<args>) ON <ns>[.<set>]<br>      EXECUTE <module>.<function>(<args>) ON <ns>[.<set>] WHERE PK = <key><br>      EXECUTE <module>.<function>(<args>) ON <ns>[.<set>] WHERE <bin> = <value><br>      EXECUTE <module>.<function>(<args>) ON <ns>[.<set>] WHERE <bin> BETWEEN <lower> AND <upper></p>
+<div class="hljs code-wrapper"><pre><code>      &lt;module&gt; is UDF module containing the function to invoke.
+      &lt;function&gt; is UDF to invoke.
+      &lt;args&gt; is a comma-separated list of argument values for the UDF.
+      &lt;ns&gt; is the namespace for the records to be queried.
+      &lt;set&gt; is the set name for the record to be queried.
+      &lt;key&gt; is the record&#39;s primary key.
+      &lt;bin&gt; is the name of a bin.
+      &lt;value&gt; is the value of a bin.
+      &lt;lower&gt; is the lower bound for a numeric range query.
+      &lt;upper&gt; is the lower bound for a numeric range query.
+
+  Examples:
+
+      EXECUTE myudfs.udf1(2) ON test.demo
+      EXECUTE myudfs.udf1(2) ON test.demo WHERE PK = &#39;key1&#39;</code></pre></div>
+<p>  OPERATE<br>      OPERATE &lt;op(<bin>, params…)&gt;[with_policy(<map policy>),] [&lt;op(<bin>, params…)&gt; with_policy (<map policy>) …] ON <ns>[.<set>] where PK=<key></p>
+<div class="hljs code-wrapper"><pre><code>      &lt;op&gt; name of operation to perform.
+      &lt;bin&gt; is the name of a bin.
+      &lt;params&gt; parameters for operation.
+      &lt;map policy&gt; map operation policy.
+      &lt;ns&gt; is the namespace for the records to be queried.
+      &lt;set&gt; is the set name for the record to be queried.
+      &lt;key&gt; is the record&#39;s primary key.
+
+  OP
+      LIST_APPEND (&lt;bin&gt;, &lt;val&gt;)         
+      LIST_INSERT (&lt;bin&gt;, &lt;index&gt;, &lt;val&gt;)
+      LIST_SET    (&lt;bin&gt;, &lt;index&gt;, &lt;val&gt;)
+      LIST_GET    (&lt;bin&gt;, &lt;index&gt;)       
+      LIST_POP    (&lt;bin&gt;, &lt;index&gt;)       
+      LIST_REMOVE (&lt;bin&gt;, &lt;index&gt;)       
+      LIST_APPEND_ITEMS (&lt;bin&gt;, &lt;list of vals&gt;)         
+      LIST_INSERT_ITEMS (&lt;bin&gt;, &lt;index&gt;, &lt;list of vals&gt;)
+      LIST_GET_RANGE    (&lt;bin&gt;, &lt;startindex&gt;[, &lt;count&gt;])
+      LIST_POP_RANGE    (&lt;bin&gt;, &lt;startindex&gt;[, &lt;count&gt;])
+      LIST_REMOVE_RANGE (&lt;bin&gt;, &lt;startindex&gt;[, &lt;count&gt;])
+      LIST_TRIM         (&lt;bin&gt;, &lt;startindex&gt;[, &lt;count&gt;])
+      LIST_INCREMENT    (&lt;bin&gt;, &lt;index&gt;, &lt;numeric val&gt;) 
+      LIST_CLEAR        (&lt;bin&gt;) 
+      LIST_SIZE         (&lt;bin&gt;) 
+      MAP_PUT             (&lt;bin&gt;, &lt;key&gt;, &lt;val&gt;) [with_policy (&lt;map policy&gt;)]
+      MAP_PUT_ITEMS       (&lt;bin&gt;, &lt;map&gt;)  [with_policy (&lt;map policy&gt;)]
+      MAP_INCREMENT       (&lt;bin&gt;, &lt;key&gt;, &lt;numeric val&gt;) [with_policy (&lt;map policy&gt;)]
+      MAP_DECREMENT       (&lt;bin&gt;, &lt;key&gt;, &lt;numeric val&gt;) [with_policy (&lt;map policy&gt;)]
+      MAP_GET_BY_KEY      (&lt;bin&gt;, &lt;key&gt;)  
+      MAP_REMOVE_BY_KEY   (&lt;bin&gt;, &lt;key&gt;)  
+      MAP_GET_BY_VALUE    (&lt;bin&gt;, &lt;value&gt;)
+      MAP_REMOVE_BY_VALUE (&lt;bin&gt;, &lt;value&gt;)
+      MAP_GET_BY_INDEX    (&lt;bin&gt;, &lt;index&gt;)
+      MAP_REMOVE_BY_INDEX (&lt;bin&gt;, &lt;index&gt;)
+      MAP_GET_BY_RANK     (&lt;bin&gt;, &lt;rank&gt;) 
+      MAP_REMOVE_BY_RANK  (&lt;bin&gt;, &lt;rank&gt;) 
+      MAP_REMOVE_BY_KEY_LIST    (&lt;bin&gt;, &lt;list of keys&gt;)         
+      MAP_REMOVE_BY_VALUE_LIST  (&lt;bin&gt;, &lt;list of vals&gt;)         
+      MAP_GET_BY_KEY_RANGE      (&lt;bin&gt;, &lt;startkey&gt;, &lt;endkey&gt;)   
+      MAP_REMOVEBY_RANGE        (&lt;bin&gt;, &lt;startkey&gt;, &lt;endkey&gt;)   
+      MAP_GET_BY_VALUE_RANGE    (&lt;bin&gt;, &lt;startval&gt;, &lt;endval&gt;)   
+      MAP_REMOVE_BY_VALUE_RANGE (&lt;bin&gt;, &lt;startval&gt;, &lt;endval&gt;)   
+      MAP_GET_BY_INDEX_RANGE    (&lt;bin&gt;, &lt;startindex&gt;[, &lt;count&gt;])
+      MAP_REMOVE_BY_INDEX_RANGE (&lt;bin&gt;, &lt;startindex&gt;[, &lt;count&gt;])
+      MAP_GET_BY_RANK_RANGE     (&lt;bin&gt;, &lt;startrank&gt; [, &lt;count&gt;])
+      MAP_REMOVE_BY_RANK_RANGE  (&lt;bin&gt;, &lt;startrank&gt; [, &lt;count&gt;])
+      MAP_CLEAR     (&lt;bin&gt;) 
+      MAP_SET_TYPE  (&lt;bin&gt;, &lt;map type&gt;) 
+      MAP_SIZE      (&lt;bin&gt;) 
+      TOUCH   ()            
+      READ    (&lt;bin&gt;)       
+      WRITE   (&lt;bin&gt;, &lt;val&gt;)
+      PREPEND (&lt;bin&gt;, &lt;val&gt;)
+      APPEND  (&lt;bin&gt;, &lt;val&gt;)
+      INCR    (&lt;bin&gt;, &lt;numeric val&gt;)
+
+  Examples:
+
+      OPERATE LIST_APPEND(listbin, 1), LIST_APPEND(listbin2, 10) ON test.demo where PK = &#39;key1&#39;
+      OPERATE LIST_POP_RANGE(listbin, 1, 10) ON test.demo where PK = &#39;key1&#39;</code></pre></div>
+<p>  QUERY<br>      SELECT <bins> FROM <ns>[.<set>]<br>      SELECT <bins> FROM <ns>[.<set>] WHERE <bin> = <value><br>      SELECT <bins> FROM <ns>[.<set>] WHERE <bin> BETWEEN <lower> AND <upper><br>      SELECT <bins> FROM <ns>[.<set>] WHERE PK = <key><br>      SELECT <bins> FROM <ns>[.<set>] IN <indextype> WHERE <bin> = <value><br>      SELECT <bins> FROM <ns>[.<set>] IN <indextype> WHERE <bin> BETWEEN <lower> AND <upper><br>      SELECT <bins> FROM <ns>[.<set>] IN <indextype> WHERE <bin> CONTAINS <GeoJSONPoint><br>      SELECT <bins> FROM <ns>[.<set>] IN <indextype> WHERE <bin> WITHIN <GeoJSONPolygon></p>
+<div class="hljs code-wrapper"><pre><code>      &lt;ns&gt; is the namespace for the records to be queried.
+      &lt;set&gt; is the set name for the record to be queried.
+      &lt;key&gt; is the record&#39;s primary key.
+      &lt;bin&gt; is the name of a bin.
+      &lt;value&gt; is the value of a bin.
+      &lt;indextype&gt; is the type of a index user wants to query. (LIST/MAPKEYS/MAPVALUES)
+      &lt;bins&gt; can be either a wildcard (*) or a comma-separated list of bin names.
+      &lt;lower&gt; is the lower bound for a numeric range query.
+      &lt;upper&gt; is the lower bound for a numeric range query.
+
+  Examples:
+
+      SELECT * FROM test.demo
+      SELECT * FROM test.demo WHERE PK = &#39;key1&#39;
+      SELECT foo, bar FROM test.demo WHERE PK = &#39;key1&#39;
+      SELECT foo, bar FROM test.demo WHERE foo = 123
+      SELECT foo, bar FROM test.demo WHERE foo BETWEEN 0 AND 999
+      SELECT * FROM test.demo WHERE gj CONTAINS CAST(&#39;&#123;&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [0.0, 0.0]&#125;&#39; AS GEOJSON)</code></pre></div>
+<p>  AGGREGATION<br>      AGGREGATE <module>.<function>(<args>) ON <ns>[.<set>]<br>      AGGREGATE <module>.<function>(<args>) ON <ns>[.<set>] WHERE <bin> = <value><br>      AGGREGATE <module>.<function>(<args>) ON <ns>[.<set>] WHERE <bin> BETWEEN <lower> AND <upper></p>
+<div class="hljs code-wrapper"><pre><code>      &lt;module&gt; is UDF module containing the function to invoke.
+      &lt;function&gt; is UDF to invoke.
+      &lt;args&gt; is a comma-separated list of argument values for the UDF.
+      &lt;ns&gt; is the namespace for the records to be queried.
+      &lt;set&gt; is the set name for the record to be queried.
+      &lt;key&gt; is the record&#39;s primary key.
+      &lt;bin&gt; is the name of a bin.
+      &lt;value&gt; is the value of a bin.
+      &lt;lower&gt; is the lower bound for a numeric range query.
+      &lt;upper&gt; is the lower bound for a numeric range query.
+
+  Examples:
+
+      AGGREGATE myudfs.udf2(2) ON test.demo WHERE foo = 123
+      AGGREGATE myudfs.udf2(2) ON test.demo WHERE foo BETWEEN 0 AND 999</code></pre></div>
+<p>  EXPLAIN<br>      EXPLAIN SELECT * FROM <ns>[.<set>] WHERE PK = <key></p>
+<div class="hljs code-wrapper"><pre><code>      &lt;ns&gt; is the namespace for the records to be queried.
+      &lt;set&gt; is the set name for the record to be queried.
+      &lt;key&gt; is the record&#39;s primary key.
+
+  Examples:
+
+      EXPLAIN SELECT * FROM test.demo WHERE PK = &#39;key1&#39;</code></pre></div>
+<p>  INFO<br>      SHOW NAMESPACES | SETS | BINS | INDEXES<br>      SHOW SCANS | QUERIES<br>      STAT NAMESPACE <ns> | INDEX <ns> <indexname><br>      STAT SYSTEM<br>      ASINFO <ASInfoCommand></p>
+<p>  JOB MANAGEMENT<br>      KILL_QUERY <transaction_id><br>      KILL_SCAN <scan_id></p>
+<p>  USER ADMINISTRATION<br>      SHOW USER [<user>]<br>      SHOW USERS<br>      SHOW ROLE <role><br>      SHOW ROLES</p>
+<p>  MANAGE UDFS<br>      SHOW MODULES<br>      DESC MODULE <filename></p>
+<div class="hljs code-wrapper"><pre><code>      &lt;filepath&gt; is file path to the UDF module(in single quotes).
+      &lt;filename&gt; is file name of the UDF module.
+
+  Examples:
+
+      SHOW MODULES
+      DESC MODULE test.lua</code></pre></div>
+<p>  RUN <filepath></p>
+<p>  SYSTEM <bash command></p>
+<p>  SETTINGS<br>        ECHO                          (true | false, default false)<br>        VERBOSE                       (true | false, default false)<br>        OUTPUT                        (TABLE | JSON | MUTE | RAW, default TABLE)<br>        OUTPUT_TYPES                  (true | false, default true)<br>        TIMEOUT                       (time in ms, default: 1000)<br>        LUA_USERPATH                  <path>, default : /opt/aerospike/usr/udf/lua<br>        USE_SMD                       (true | false, default false)<br>        RECORD_TTL                    (time in sec, default: 0)<br>        RECORD_PRINT_METADATA         (true | false, default false, prints record metadata)<br>        REPLICA_ANY                   (true | false, default false)<br>        KEY_SEND                      (true | false, default false)<br>        DURABLE_DELETE                (true | false, default false)<br>        FAIL_ON_CLUSTER_CHANGE        (true | false, default true, policy applies to scans)<br>        SCAN_PRIORITY                 priority of scan (LOW, MEDIUM, HIGH, AUTO), default : AUTO<br>        NO_BINS                       (true | false, default false, No bins as part of scan and query result)<br>        LINEARIZE_READ                (true | false, default false, Make read linearizable, applicable only for namespace with strong_consistency enabled.)</p>
+<div class="hljs code-wrapper"><pre><code>  To get the value of a setting, run:
+
+      aql&gt; GET &lt;setting&gt;
+
+  To set the value of a setting, run:
+
+      aql&gt; SET &lt;setting&gt; &lt;value&gt;
+
+  To reset the value of a setting back to default, run:
+
+      aql&gt; RESET &lt;setting&gt;
+
+
+OTHER
+    HELP
+    QUIT|EXIT|Q</code></pre></div>
 <p><a target="_blank" rel="noopener" href="https://www.aerospike.com/download/server/5.5.0.7/">下载地址</a><br><a target="_blank" rel="noopener" href="https://www.aerospike.com/docs/operations/install/index.html">安装教程</a><br><a target="_blank" rel="noopener" href="https://www.aerospike.com/docs/operations/install/linux/other/">参考资料</a></p>
 <h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><blockquote>
 <p>条件：数据库已成功运行</p>
 </blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/aerospike-examples/aerospike-sample-applications">aerospike-sample-applications</a></p>
 <p>导入客户端依赖</p>
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.aerospike<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>aerospike-client<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
 
@@ -335,6 +533,7 @@
 
 <h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a target="_blank" rel="noopener" href="https://github.com/aerospike/aerospike-dev-notebooks.docker">aerospike-dev-notebooks</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.developer.aerospike.com/">https://www.developer.aerospike.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/aerospike-examples/aerospike-sample-applications">aerospike-sample-applications</a></p>
 
             </div>
             <hr>
