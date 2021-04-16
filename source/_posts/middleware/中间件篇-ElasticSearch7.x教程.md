@@ -16,10 +16,10 @@ tags: Elasticsearch
 - 一种type就像一类表，比如user表，order表
 
 #### 1.3 映射 mapping
--  mapping定义了每个字段的类型等信息。相当于关系型数据库中的表结
+-  mapping定义了每个字段的类型等信息。相当于关系型数据库中的表结
 
 #### 1.4 文档 document
-- 一个document相当于关系型数据库中的一⾏行行记录
+- 一个document相当于关系型数据库中的一⾏行行记录
 
 #### 1.5 字段 field
 - 相当于关系型数据库表的字段
@@ -31,7 +31,7 @@ tags: Elasticsearch
 - 集群的节点，一台机器 或者一个进程
 
 #### 1.8 分片和副本 node
-- 副本是分片的副本。分⽚有主分片(primary Shard)和副本分片(replica Shard)之分。Index数据在物理理上被分布在多个主分片中，每个主分片只存放部分数据。每个主分⽚可以有多个副本，叫副本分片，是主分片的复制。
+- 副本是分片的副本。分⽚有主分片(primary Shard)和副本分片(replica Shard)之分。Index数据在物理理上被分布在多个主分片中，每个主分片只存放部分数据。每个主分⽚可以有多个副本，叫副本分片，是主分片的复制。
 
 #### 1.9 核心数据类型
 
@@ -41,7 +41,7 @@ tags: Elasticsearch
 1. 用于全文索引，该类型的字段将通过分词器 进⾏分词
 
 - keyword
-1. 不分词，只能搜索该字段的完整的值
+1. 不分词，只能搜索该字段的完整的值
 
 ##### 1.9.2 数值型
 
@@ -54,7 +54,7 @@ tags: Elasticsearch
 ##### 1.9.3 二进制
 
 - binary
-1. 该类型的字段把值当做经过 base64 编码的字符串，默认不存储，且不可搜索
+1. 该类型的字段把值当做经过 base64 编码的字符串，默认不存储，且不可搜索
 
 ##### 1.9.4 范围类型
 
@@ -71,11 +71,13 @@ tags: Elasticsearch
 3. "2022-01-01" "2022/01/01 12:10:30" 这种字符串格式
 ### 二、索引基本操作
 
+`基于Kibana进行操作`
+
 #### 2.1 创建索引 PUT请求
 
 - 请求
 ```java
-localhost:9200/nba
+PUT /person
 ```
 
 - 响应
@@ -83,7 +85,7 @@ localhost:9200/nba
 {
     "acknowledged": true,
     "shards_acknowledged": true,
-    "index": "nba"
+    "index": "person"
 }
 ```
 
@@ -91,36 +93,50 @@ localhost:9200/nba
 
 - 请求
 ```java
-localhost:9200/nba
+PUT /person
 ```
 
 - 响应
+<details>
+  <summary><span>点击展开</span></summary>
+
 ```json
 {
-    "nba": {
-        "aliases": {},  // 别名
-        "mappings": {}, // 表结构
-        "settings": {   // 索引设置
-            "index": {  // 创建时间
-                "creation_date": "1573278626713",
-                "number_of_shards": "1",    // 分片数量
-                "number_of_replicas": "1",  // 副本数量
-                "uuid": "eeQmIsZ8Tl-GJ-xpFuOirg",   // UUID 索引的唯一ID
-                "version": {
-                    "created": "7020199"
-                },
-                "provided_name": "nba"
+  "person" : {//索引
+    "aliases" : { },//别名
+    "mappings" : { },//表结构
+    "settings" : {//设置
+      "index" : {//不知道什么鬼
+        "routing" : {
+          "allocation" : {
+            "include" : {
+              "_tier_preference" : "data_content"
             }
+          }
+        },
+        "number_of_shards" : "1",//分片
+        "provided_name" : "person",//名字
+        "creation_date" : "1618297457022",//创建时间
+        "number_of_replicas" : "1",//副本
+        "uuid" : "tAkSyPwhT1y-YIXd8aPnrQ",//唯一id
+        "version" : {//版本
+          "created" : "7120099"
         }
+      }
     }
+  }
 }
 ```
+
+</details>
+
+
 
 #### 2.4 删除索引 DELETE请求
 
 - 请求
 ```java
-localhost:9200/nba
+DELETE /person
 ```
 
 - 响应
@@ -134,44 +150,59 @@ localhost:9200/nba
 
 - 请求
 ```java
-localhost:9200/cba,nba
+GET /person,animal
 ```
 
--响应
+- 响应
+
 ```json
 {
-    "cba": {
-        "aliases": {},
-        "mappings": {},
-        "settings": {
-            "index": {
-                "creation_date": "1573281458107",
-                "number_of_shards": "1",
-                "number_of_replicas": "1",
-                "uuid": "ikxZrzk2TVqQn7zRi2_glw",
-                "version": {
-                    "created": "7020199"
-                },
-                "provided_name": "cba"
+  "animal" : {
+    "aliases" : { },
+    "mappings" : { },
+    "settings" : {
+      "index" : {
+        "routing" : {
+          "allocation" : {
+            "include" : {
+              "_tier_preference" : "data_content"
             }
+          }
+        },
+        "number_of_shards" : "1",
+        "provided_name" : "animal",
+        "creation_date" : "1618297759538",
+        "number_of_replicas" : "1",
+        "uuid" : "xvlEQJznT_GszJp21OJl4g",
+        "version" : {
+          "created" : "7120099"
         }
-    },
-    "nba": {
-        "aliases": {},
-        "mappings": {},
-        "settings": {
-            "index": {
-                "creation_date": "1573281355145",
-                "number_of_shards": "1",
-                "number_of_replicas": "1",
-                "uuid": "hkhv1WKSQqWil3P9UXt3Aw",
-                "version": {
-                    "created": "7020199"
-                },
-                "provided_name": "nba"
-            }
-        }
+      }
     }
+  },
+  "person" : {
+    "aliases" : { },
+    "mappings" : { },
+    "settings" : {
+      "index" : {
+        "routing" : {
+          "allocation" : {
+            "include" : {
+              "_tier_preference" : "data_content"
+            }
+          }
+        },
+        "number_of_shards" : "1",
+        "provided_name" : "person",
+        "creation_date" : "1618297742637",
+        "number_of_replicas" : "1",
+        "uuid" : "oZslJJlaRaiOwVktJZEwYw",
+        "version" : {
+          "created" : "7120099"
+        }
+      }
+    }
+  }
 }
 ```
 
@@ -179,83 +210,45 @@ localhost:9200/cba,nba
 
 - 请求
 ```java
-localhost:9200/_all
+GET _all
 ```
 
--响应
-```json
-}
-    }
-    "cba": {
-        "aliases": {},
-        "mappings": {},
-        "settings": {
-            "index": {
-                "creation_date": "1573281458107",
-                "number_of_shards": "1",
-                "number_of_replicas": "1",
-                "uuid": "ikxZrzk2TVqQn7zRi2_glw",
-                "version": {
-                    "created": "7020199"
-                },
-                "provided_name": "cba"
-            }
-        }
-    },
-    "nba": {
-        "aliases": {},
-        "mappings": {},
-        "settings": {
-            "index": {
-                "creation_date": "1573281355145",
-                "number_of_shards": "1",
-                "number_of_replicas": "1",
-                "uuid": "hkhv1WKSQqWil3P9UXt3Aw",
-                "version": {
-                    "created": "7020199"
-                },
-                "provided_name": "nba"
-            }
-        }
-    }
-```
 #### 2.7 使用_cat获取全部索引 GET请求
 
 - 请求
 ```java
-localhost:9200/_cat/indices?v
+GET /_cat/indices?v
 ```
 
--响应
-```text
-health status index                uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-green  open   .kibana_task_manager YA0slSRkRJqrE_jF0aOlFA   1   0          2            0     45.5kb         45.5kb
-yellow open   cba                  ikxZrzk2TVqQn7zRi2_glw   1   1          0            0       230b           230b
-yellow open   nba                  hkhv1WKSQqWil3P9UXt3Aw   1   1          0            0       283b           283b
-green  open   .kibana_1            579wwXgCQJKJU1Ge7cJVXw   1   0          4            1       24kb           24kb
+- 响应
 
+```text
+yellow open   person                          oZslJJlaRaiOwVktJZEwYw   1   1          0            0       208b           208b
+yellow open   animal                          xvlEQJznT_GszJp21OJl4g   1   1          0            0       208b           208b
 ```
 
 #### 2.8 判断索引是否存在 HEAD请求
 
 - 请求
 ```java
-localhost:9200/nba
+HEAD /person
 ```
 
--响应
+- 响应
+
 ```text
-状态码"200"则为存在，不存在则为"404"
+200 - OK
 ```
 
 #### 2.9 关闭索引 不删除 POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_close
+POST /person/_close
 ```
 
--响应
+- 响应
+
 ```json
 {
     "acknowledged": true,
@@ -267,10 +260,11 @@ localhost:9200/nba/_close
 
 - 请求
 ```java
-localhost:9200/nba/_open
+POST /person/_open
 ```
 
--响应
+- 响应
+
 ```json
 {
     "acknowledged": true,
@@ -280,40 +274,37 @@ localhost:9200/nba/_open
 
 ### 三、映射的介绍与使用
 
-- type: text 可分词
+- type: text 可分词`(划重点)`
 - type: keyword 不可分词
 
 #### 3.1 创建Mapping PUT请求
 
 - 请求
 ```java
-localhost:9200/nba/_mapping
-```
-
-- 请求体
-```json
+PUT /person/_mapping
 {
-	"properties":{	//字段的信息
+  	"properties":{
 		"name":{
 			"type":"text"
 		},
-		"team_name":{
+		"sex":{
+			"type":"keyword"
+		},
+		"idcard":{
+			"type":"keyword"
+		},
+		"birthday":{
+			"type":"keyword"
+		},
+		"desc":{
 			"type":"text"
-		},
-		"position":{
-			"type":"keyword"
-		},
-		"play_year":{
-			"type":"keyword"
-		},
-		"jerse_no":{
-			"type":"keyword"
 		}
 	}
 }
 ```
 
--响应
+- 响应
+
 ```json
 {
     "acknowledged": true
@@ -324,33 +315,33 @@ localhost:9200/nba/_mapping
 
 - 请求
 ```java
-localhost:9200/nba/_mapping
+GET /person/_mapping
 ```
 
 - 响应
 ```json
 {
-    "nba": {
-        "mappings": {
-            "properties": {
-                "jerse_no": {
-                    "type": "keyword"
-                },
-                "name": {
-                    "type": "text"
-                },
-                "play_year": {
-                    "type": "keyword"
-                },
-                "position": {
-                    "type": "keyword"
-                },
-                "team_name": {
-                    "type": "text"
-                }
-            }
+  "person" : {
+    "mappings" : {
+      "properties" : {
+        "birthday" : {
+          "type" : "keyword"
+        },
+        "desc" : {
+          "type" : "text"
+        },
+        "idcard" : {
+          "type" : "keyword"
+        },
+        "name" : {
+          "type" : "text"
+        },
+        "sex" : {
+          "type" : "keyword"
         }
+      }
     }
+  }
 }
 ```
 
@@ -358,36 +349,36 @@ localhost:9200/nba/_mapping
 
 - 请求
 ```java
-localhost:9200/nba,cba/_mapping
+GET /person,animal/_mapping
 ```
 
 - 响应
 ```json
 {
-    "nba": {
-        "mappings": {
-            "properties": {
-                "jerse_no": {
-                    "type": "keyword"
-                },
-                "name": {
-                    "type": "text"
-                },
-                "play_year": {
-                    "type": "keyword"
-                },
-                "position": {
-                    "type": "keyword"
-                },
-                "team_name": {
-                    "type": "text"
-                }
-            }
+  "person" : {
+    "mappings" : {
+      "properties" : {
+        "birthday" : {
+          "type" : "keyword"
+        },
+        "desc" : {
+          "type" : "text"
+        },
+        "idcard" : {
+          "type" : "keyword"
+        },
+        "name" : {
+          "type" : "text"
+        },
+        "sex" : {
+          "type" : "keyword"
         }
-    },
-    "cba": {
-        "mappings": {}
+      }
     }
+  },
+  "animal" : {
+    "mappings" : { }
+  }
 }
 ```
 
@@ -395,36 +386,36 @@ localhost:9200/nba,cba/_mapping
 
 - 请求
 ```java
-localhost:9200/_mapping
+GET /_mapping
 ```
 
 - 响应
 ```json
 {
-    "nba": {
-        "mappings": {
-            "properties": {
-                "jerse_no": {
-                    "type": "keyword"
-                },
-                "name": {
-                    "type": "text"
-                },
-                "play_year": {
-                    "type": "keyword"
-                },
-                "position": {
-                    "type": "keyword"
-                },
-                "team_name": {
-                    "type": "text"
-                }
-            }
+  "animal" : {
+    "mappings" : { }
+  },
+  "person" : {
+    "mappings" : {
+      "properties" : {
+        "birthday" : {
+          "type" : "keyword"
+        },
+        "desc" : {
+          "type" : "text"
+        },
+        "idcard" : {
+          "type" : "keyword"
+        },
+        "name" : {
+          "type" : "text"
+        },
+        "sex" : {
+          "type" : "keyword"
         }
-    },
-    "cba": {
-        "mappings": {}
+      }
     }
+  }
 }
 ```
 
@@ -432,69 +423,35 @@ localhost:9200/_mapping
 
 - 请求
 ```java
-localhost:9200/_all/_mapping
-```
-
-- 响应
-```json
-{
-    "nba": {
-        "mappings": {
-            "properties": {
-                "jerse_no": {
-                    "type": "keyword"
-                },
-                "name": {
-                    "type": "text"
-                },
-                "play_year": {
-                    "type": "keyword"
-                },
-                "position": {
-                    "type": "keyword"
-                },
-                "team_name": {
-                    "type": "text"
-                }
-            }
-        }
-    },
-    "cba": {
-        "mappings": {}
-    }
-}
+GET /_all/_mapping
 ```
 
 #### 3.6 增加Mapping字段 POST请求
 
-- Mapping 只可增加字段不可修改字段
+- Mapping 只可增加字段`不可修改字段`
 
 - 请求
-```java
-localhost:9200/nba/_mapping
-```
-
-- 请求体
 ```json
+POST /person/_mapping
 {
-	"properties":{
+  	"properties":{
 		"name":{
 			"type":"text"
 		},
-		"team_name":{
+		"sex":{
+			"type":"keyword"
+		},
+		"idcard":{
+			"type":"keyword"
+		},
+		"birthday":{
+			"type":"keyword"
+		},
+		"desc":{
 			"type":"text"
 		},
-		"position":{
-			"type":"keyword"
-		},
-		"play_year":{
-			"type":"keyword"
-		},
-		"jerse_no":{
-			"type":"keyword"
-		},
-		"country":{  // 增加的国家字段
-			"type":"keyword"
+		"hobby":{
+		  "type":"text"
 		}
 	}
 }
@@ -513,74 +470,68 @@ localhost:9200/nba/_mapping
 
 - 请求
 ```java
-localhost:9200/nba/_doc/1
-```
-
-- 请求体
-```json
+PUT /person/_doc/1
 {
-	"name":"哈登",
-	"team_name":"火箭",
-	"position":"得分后卫",
-	"play_year":"10",
-	"jerse_no":"13"
+  "name":"麦奇",
+  "sex":"男",
+  "idcard":"123456789",
+  "birthday":"1999/02/20",
+  "desc":"麦奇",
+  "hobby":"Downhill,table tennis,program design"
 }
 ```
 
 - 响应
 ```json
 {
-    "_index": "nba",
-    "_type": "_doc",
-    "_id": "1", //文档的ID
-    "_version": 1,
-    "result": "created", // 响应结果
-    "_shards": {
-        "total": 2,
-        "successful": 1,
-        "failed": 0
-    },
-    "_seq_no": 0,
-    "_primary_term": 1
+  "_index" : "person",
+  "_type" : "_doc",
+  "_id" : "1",
+  "_version" : 1,
+  "result" : "created",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 0,
+  "_primary_term" : 3
 }
 ```
 
 #### 4.2 新增文档 自动生成ID POST请求
 
-- 注意: 不指定IP只能使用POST请求
+- 注意: 不指定IP只能使用`POST`请求
 - 注意: 自动生成ID开关要打开,关闭状态无法自动创建ID
 
 - 请求
 ```java
-localhost:9200/nba/_doc
-```
-
-- 请求体
-```json
+POST /person/_doc
 {
-	"name":"库里",
-	"team_name":"勇士",
-	"position":"组织后卫",
-	"play_year":"10",
-	"jerse_no":"30"
+  "name":"里奥",
+  "sex":"男",
+  "idcard":"343232323",
+  "birthday":"1998/02/20",
+  "desc":"一个充满智慧的乌龟",
+  "hobby":"program design,双节棍,高科技产品"
 }
 ```
 
 - 响应
 ```json
 {
-    "_index": "nba",
-    "_type": "_doc",
-    "_id": "7PkGT24BeuZ7t7g8CXe-", // 自动生成ID
-    "_version": 1,
-    "result": "created",
-    "_shards": {
-        "total": 2,
-        "successful": 1,
-        "failed": 0
-    },
-    "_seq_no": 3,
-    "_primary_term": 1
+  "_index" : "person",
+  "_type" : "_doc",
+  "_id" : "khRPyngBRjMpykU9O0ps",// 自动生成ID
+  "_version" : 1,
+  "result" : "created",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 1,
+  "_primary_term" : 3
 }
 ```
 
@@ -588,39 +539,36 @@ localhost:9200/nba/_doc
 
 - 查看auto_create_index开关状态，请求http://localhost:9200/_cluster/settings
 
-- 注意:当索引不存在并且auto_create_index为true的时候，新增文档时会⾃动创建索引，若为false是不能自动创建索引
+- 注意:当索引不存在并且auto_create_index为true的时候，新增文档时会⾃动创建索引，若为false是不能自动创建索引
 
 - 请求
 ```java
-localhost:9200/wnba/_doc/1
-```
-
-- 请求体
-```json
+POST /china_person/_doc/1
 {
-	"name":"周琦",
-	"team_name":"波兰国家队",
-	"position":"中锋",
-	"play_year":"3",
-	"jerse_no":"9"
+  "name":"杨虎三",
+  "sex":"男",
+  "idcard":"765432345",
+  "birthday":"1998/02/20",
+  "desc":"一个中国人",
+  "hobby":"吃、喝、玩、乐"
 }
 ```
 
 - 响应
 ```json
 {
-    "_index": "wnba", // 自动创建的索引
-    "_type": "_doc",
-    "_id": "1",
-    "_version": 1,
-    "result": "created",
-    "_shards": {
-        "total": 2,
-        "successful": 1,
-        "failed": 0
-    },
-    "_seq_no": 0,
-    "_primary_term": 1
+  "_index" : "china_person",// 自动创建的索引
+  "_type" : "_doc",
+  "_id" : "1",
+  "_version" : 1,
+  "result" : "created",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 0,
+  "_primary_term" : 1
 }
 ```
 
@@ -628,76 +576,87 @@ localhost:9200/wnba/_doc/1
 
 - 请求
 ```java
-localhost:9200/wnba
+localhost:9200/wperson
 ```
 
 - 响应
 ```json
 {
-    "wnba": {
-        "aliases": {},
-        "mappings": {
-            "properties": {
-                "jerse_no": {
-                    "type": "text",
-                    "fields": {
-                        "keyword": {
-                            "type": "keyword",
-                            "ignore_above": 256
-                        }
-                    }
-                },
-                "name": {
-                    "type": "text",
-                    "fields": {
-                        "keyword": {
-                            "type": "keyword",
-                            "ignore_above": 256
-                        }
-                    }
-                },
-                "play_year": {
-                    "type": "text",
-                    "fields": {
-                        "keyword": {
-                            "type": "keyword",
-                            "ignore_above": 256
-                        }
-                    }
-                },
-                "position": {
-                    "type": "text",
-                    "fields": {
-                        "keyword": {
-                            "type": "keyword",
-                            "ignore_above": 256
-                        }
-                    }
-                },
-                "team_name": {
-                    "type": "text",
-                    "fields": {
-                        "keyword": {
-                            "type": "keyword",
-                            "ignore_above": 256
-                        }
-                    }
-                }
-            }
+  "china_person" : {
+    "aliases" : { },
+    "mappings" : {
+      "properties" : {
+        "birthday" : {
+          "type" : "date",
+          "format" : "yyyy/MM/dd HH:mm:ss||yyyy/MM/dd||epoch_millis"
         },
-        "settings": {
-            "index": {
-                "creation_date": "1573284418718",
-                "number_of_shards": "1",
-                "number_of_replicas": "1",
-                "uuid": "fKs9KZ11R3-_zgKi8WFQTQ",
-                "version": {
-                    "created": "7020199"
-                },
-                "provided_name": "wnba"
+        "desc" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
             }
+          }
+        },
+        "hobby" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        },
+        "idcard" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        },
+        "name" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        },
+        "sex" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
         }
+      }
+    },
+    "settings" : {
+      "index" : {
+        "routing" : {
+          "allocation" : {
+            "include" : {
+              "_tier_preference" : "data_content"
+            }
+          }
+        },
+        "number_of_shards" : "1",
+        "provided_name" : "china_person",
+        "creation_date" : "1618541251930",
+        "number_of_replicas" : "1",
+        "uuid" : "eRdkAL-FQMyPqfef4W9ZbA",
+        "version" : {
+          "created" : "7120099"
+        }
+      }
     }
+  }
 }
 ```
 
@@ -708,41 +667,42 @@ localhost:9200/wnba
 
 - 请求
 ```java
-localhost:9200/nba/_doc/1?op_type=create
+localhost:9200/person/_doc/1?op_type=create
 ```
 
 - 请求体
 ```json
+POST /person/_doc/2?op_type=create
 {
-	"name":"周琦",
-	"team_name":"波兰国家队",
-	"position":"中锋",
-	"play_year":"3",
-	"jerse_no":"9"
+  "name":"杨虎三",
+  "sex":"男",
+  "idcard":"765432345",
+  "birthday":"1998/02/20",
+  "desc":"一个中国人",
+  "hobby":"吃、喝、玩、乐"
 }
 ```
 
 - 响应
 ```json
 {
-    "error": {
-        "root_cause": [
-            {
-                "type": "version_conflict_engine_exception",
-                // 文档已经存在
-                "reason": "[1]: version conflict, document already exists (current version [5])",
-                "index_uuid": "hkhv1WKSQqWil3P9UXt3Aw",
-                "shard": "0",
-                "index": "nba"
-            }
-        ],
-        "type": "version_conflict_engine_exception",
-        "reason": "[1]: version conflict, document already exists (current version [5])",
-        "index_uuid": "hkhv1WKSQqWil3P9UXt3Aw",
-        "shard": "0",
-        "index": "nba"
-    },
-    "status": 409
+  "error" : {
+    "root_cause" : [
+      {
+        "type" : "version_conflict_engine_exception",
+        "reason" : "[2]: version conflict, document already exists (current version [1])",// 文档已经存在
+        "index_uuid" : "oZslJJlaRaiOwVktJZEwYw",
+        "shard" : "0",
+        "index" : "person"
+      }
+    ],
+    "type" : "version_conflict_engine_exception",
+    "reason" : "[2]: version conflict, document already exists (current version [1])",
+    "index_uuid" : "oZslJJlaRaiOwVktJZEwYw",
+    "shard" : "0",
+    "index" : "person"
+  },
+  "status" : 409
 }
 ```
 
@@ -750,133 +710,146 @@ localhost:9200/nba/_doc/1?op_type=create
 
 - 请求
 ```java
-localhost:9200/nba/_doc/1
+GET /person/_doc/1
 ```
 
 - 响应
 ```json
 {
-	"_index": "nba",
-	"_type": "_doc",
-	"_id": "1",
-	"_version": 5,
-	"_seq_no": 5,
-	"_primary_term": 1,
-	"found": true,
-	"_source": {
-		"name": "哈登",
-		"team_name": "火箭",
-		"position": "得分后卫",
-		"play_year": "10",
-		"jerse_no": "13"
-	}
+  "_index" : "person",
+  "_type" : "_doc",
+  "_id" : "1",
+  "_version" : 1,
+  "_seq_no" : 0,
+  "_primary_term" : 3,
+  "found" : true,
+  "_source" : {
+    "name" : "麦奇",
+    "sex" : "男",
+    "idcard" : "123456789",
+    "birthday" : "1999/02/20",
+    "desc" : "麦奇",
+    "hobby" : "Downhill,table tennis,program design"
+  }
 }
 ```
 #### 4.7 查看多条文档 第一种方式 GET/POST请求
 
 - 请求
 ```java
-localhost:9200/_mget
-```
-
-- 请求体
-```json
+GET /_mget
 {
-	"docs" : [ // 指定标签
+	"docs" : [//  指定标签
 		{
-			"_index" : "nba", // 指定索引
+			"_index" : "person", // 指定索引
 			"_type" : "_doc", // 默认类型
-			"_id" : "1"       // 指定ID
+			"_id" : "1"      // 对应id
 		},
 		{
-			"_index" : "nba",
+			"_index" : "person",
 			"_type" : "_doc",
 			"_id" : "2"
 		}
 	]
 }
-
 ```
 
 - 响应
 ```json
 {
-	"docs": [
-		{
-			"_index": "nba",
-			"_type": "_doc",
-			"_id": "1",
-			"_version": 5,
-			"_seq_no": 5,
-			"_primary_term": 1,
-			"found": true,
-			"_source": {
-				"name": "哈登",
-				"team_name": "火箭",
-				"position": "得分后卫",
-				"play_year": "10",
-				"jerse_no": "13"
-			}
-		},
-		{
-			"_index": "nba",
-			"_type": "_doc",
-			"_id": "2",
-			"found": false
-		}
-	]
+  "docs" : [
+    {
+      "_index" : "person",
+      "_type" : "_doc",
+      "_id" : "1",
+      "_version" : 1,
+      "_seq_no" : 0,
+      "_primary_term" : 3,
+      "found" : true,
+      "_source" : {
+        "name" : "麦奇",
+        "sex" : "男",
+        "idcard" : "123456789",
+        "birthday" : "1999/02/20",
+        "desc" : "麦奇",
+        "hobby" : "Downhill,table tennis,program design"
+      }
+    },
+    {
+      "_index" : "person",
+      "_type" : "_doc",
+      "_id" : "2",
+      "_version" : 1,
+      "_seq_no" : 2,
+      "_primary_term" : 4,
+      "found" : true,
+      "_source" : {
+        "name" : "杨虎三",
+        "sex" : "男",
+        "idcard" : "765432345",
+        "birthday" : "1998/02/20",
+        "desc" : "一个中国人",
+        "hobby" : "吃、喝、玩、乐"
+      }
+    }
+  ]
 }
 ```
 #### 4.8 查看多条文档 第二种方式 GET/POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_mget // 先指定索引
-```
-
-- 请求体
-```json
+GET /person/_mget //指定索引
 {
-	"docs" : [
-		{
-			"_type" : "_doc",
-			"_id" : "1"
-		},
-		{
-			"_type" : "_doc",
-			"_id" : "2"
-		}
-	]
+  "docs":[{
+    "_type": "_doc",
+    "_id": "1"
+  },{
+    "_type": "_doc",
+    "_id": "2"
+  }]
 }
 ```
 
 - 响应
 ```json
 {
-	"docs": [
-		{
-			"_index": "nba",
-			"_type": "_doc",
-			"_id": "1",
-			"_version": 5,
-			"_seq_no": 5,
-			"_primary_term": 1,
-			"found": true,
-			"_source": {
-				"name": "哈登",
-				"team_name": "火箭",
-				"position": "得分后卫",
-				"play_year": "10",
-				"jerse_no": "13"
-			}
-		},
-		{
-			"_index": "nba",
-			"_type": "_doc",
-			"_id": "2",
-			"found": false
-		}
-	]
+  "docs" : [
+    {
+      "_index" : "person",
+      "_type" : "_doc",
+      "_id" : "1",
+      "_version" : 1,
+      "_seq_no" : 0,
+      "_primary_term" : 3,
+      "found" : true,
+      "_source" : {
+        "name" : "麦奇",
+        "sex" : "男",
+        "idcard" : "123456789",
+        "birthday" : "1999/02/20",
+        "desc" : "麦奇",
+        "hobby" : "Downhill,table tennis,program design"
+      }
+    },
+    {
+      "_index" : "person",
+      "_type" : "_doc",
+      "_id" : "2",
+      "_version" : 1,
+      "_seq_no" : 2,
+      "_primary_term" : 4,
+      "found" : true,
+      "_source" : {
+        "name" : "杨虎三",
+        "sex" : "男",
+        "idcard" : "765432345",
+        "birthday" : "1998/02/20",
+        "desc" : "一个中国人",
+        "hobby" : "吃、喝、玩、乐"
+      }
+    }
+  ]
 }
 ```
 
@@ -884,11 +857,7 @@ localhost:9200/nba/_mget // 先指定索引
 
 - 请求
 ```java
-localhost:9200/nba/_doc/_mget    //指定索引、类型
-```
-
-- 请求体
-```json
+GET /person/_doc/_mget    //指定索引、类型
 {
 	"docs" : [
 		{
@@ -904,30 +873,42 @@ localhost:9200/nba/_doc/_mget    //指定索引、类型
 - 响应
 ```json
 {
-	"docs": [
-		{
-			"_index": "nba",
-			"_type": "_doc",
-			"_id": "1",
-			"_version": 5,
-			"_seq_no": 5,
-			"_primary_term": 1,
-			"found": true,
-			"_source": {
-				"name": "哈登",
-				"team_name": "火箭",
-				"position": "得分后卫",
-				"play_year": "10",
-				"jerse_no": "13"
-			}
-		},
-		{
-			"_index": "nba",
-			"_type": "_doc",
-			"_id": "2",
-			"found": false
-		}
-	]
+  "docs" : [
+    {
+      "_index" : "person",
+      "_type" : "_doc",
+      "_id" : "1",
+      "_version" : 1,
+      "_seq_no" : 0,
+      "_primary_term" : 3,
+      "found" : true,
+      "_source" : {
+        "name" : "麦奇",
+        "sex" : "男",
+        "idcard" : "123456789",
+        "birthday" : "1999/02/20",
+        "desc" : "麦奇",
+        "hobby" : "Downhill,table tennis,program design"
+      }
+    },
+    {
+      "_index" : "person",
+      "_type" : "_doc",
+      "_id" : "2",
+      "_version" : 1,
+      "_seq_no" : 2,
+      "_primary_term" : 4,
+      "found" : true,
+      "_source" : {
+        "name" : "杨虎三",
+        "sex" : "男",
+        "idcard" : "765432345",
+        "birthday" : "1998/02/20",
+        "desc" : "一个中国人",
+        "hobby" : "吃、喝、玩、乐"
+      }
+    }
+  ]
 }
 ```
 
@@ -935,97 +916,57 @@ localhost:9200/nba/_doc/_mget    //指定索引、类型
 
 - 请求
 ```java
-localhost:9200/nba/_doc/_mget
-```
-
-- 请求体
-```json
+GET /person/_doc/_mget
 {
 	"ids":["1","2"]
 }
 ```
 
-- 响应
-```json
-{
-	"docs": [
-		{
-			"_index": "nba",
-			"_type": "_doc",
-			"_id": "1",
-			"_version": 5,
-			"_seq_no": 5,
-			"_primary_term": 1,
-			"found": true,
-			"_source": {
-				"name": "哈登",
-				"team_name": "火箭",
-				"position": "得分后卫",
-				"play_year": "10",
-				"jerse_no": "13"
-			}
-		},
-		{
-			"_index": "nba",
-			"_type": "_doc",
-			"_id": "2",
-			"found": false
-		}
-	]
-}
-```
-
+- 响应 同上
 #### 4.11 修改文档 POST请求
 
 - 根据提供的文档片段更新数据
 
 - 请求
 ```java
-localhost:9200/nba/_update/1
-```
-
-- 请求体
-```json
+POST /person/_update/2
 {
-	"doc": { // doc标签必须存在
-			"name": "哈登",
-			"team_name": "火箭",
-			"position": "双能卫",
-			"play_year": "10",
-			"jerse_no": "13"
-	}
+  "doc": {// doc标签必须存在
+  	"name":"杨虎三",
+  	"sex":"男",
+  	"idcard":"765432345",
+  	"birthday":"1998/02/20",
+  	"desc":"实习生小白",
+  	"hobby":"coding"
+  }
 }
 ```
 
 - 响应
 ```json
 {
-    "_index": "nba",
-    "_type": "_doc",
-    "_id": "1",
-    "_version": 7,
-    "result": "updated",
-    "_shards": {
-        "total": 2,
-        "successful": 1,
-        "failed": 0
-    },
-    "_seq_no": 7,
-    "_primary_term": 1
+  "_index" : "person",
+  "_type" : "_doc",
+  "_id" : "2",
+  "_version" : 2,
+  "result" : "updated",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 3,
+  "_primary_term" : 4
 }
 ```
 #### 4.12 向_source增加字段 POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_update/1
-```
-
-- 请求体
-```json
+POST /person/_update/1
 {
-    // script:标签 ctx:上下文 ._source = _source
-    // 语义:通过上下文拿到 _source字段,新增age为18
+   // script:标签 ctx:上下文 ._source = _source
+   // 语义:通过上下文拿到 _source字段,新增age为18
 	"script": "ctx._source.age = 18"
 }
 ```
@@ -1033,29 +974,25 @@ localhost:9200/nba/_update/1
 - 响应
 ```json
 {
-    "_index": "nba",
-    "_type": "_doc",
-    "_id": "1",
-    "_version": 8,
-    "result": "updated",
-    "_shards": {
-        "total": 2,
-        "successful": 1,
-        "failed": 0
-    },
-    "_seq_no": 8,
-    "_primary_term": 1
+  "_index" : "person",
+  "_type" : "_doc",
+  "_id" : "1",
+  "_version" : 2,
+  "result" : "updated",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 4,
+  "_primary_term" : 4
 }
 ```
 #### 4.13 向_source删除字段 POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_update/1
-```
-
-- 请求体
-```json
+POST /person/_update/1
 {
     // json格式无法出现多个" 所以需要转义符
 	"script": "ctx._source.remove(\"age\")"
@@ -1065,29 +1002,25 @@ localhost:9200/nba/_update/1
 - 响应
 ```json
 {
-    "_index": "nba",
-    "_type": "_doc",
-    "_id": "1",
-    "_version": 9,
-    "result": "updated",
-    "_shards": {
-        "total": 2,
-        "successful": 1,
-        "failed": 0
-    },
-    "_seq_no": 9,
-    "_primary_term": 1
+  "_index" : "person",
+  "_type" : "_doc",
+  "_id" : "1",
+  "_version" : 3,
+  "result" : "updated",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 5,
+  "_primary_term" : 4
 }
 ```
 #### 4.14 更新指定文档的字段 POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_update/1
-```
-
-- 请求体
-```json
+POST /person/_update/1
 {
 	"script": {
         // 先获取ID为1的数据，之后进行age+4
@@ -1107,57 +1040,53 @@ localhost:9200/nba/_update/1
 - 响应
 ```json
 {
-    "_index": "nba",
-    "_type": "_doc",
-    "_id": "1",
-    "_version": 11,
-    "result": "updated",
-    "_shards": {
-        "total": 2,
-        "successful": 1,
-        "failed": 0
-    },
-    "_seq_no": 11,
-    "_primary_term": 1
+  "_index" : "person",
+  "_type" : "_doc",
+  "_id" : "1",
+  "_version" : 5,
+  "result" : "updated",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 7,
+  "_primary_term" : 4
 }
 ```
 - 查询更新结果
 
-- 请求
 ```java
-localhost:9200/nba/_doc/1
+GET /person/_doc/1
 ```
 - 响应
 ```json
 {
-    "_index": "nba",
-    "_type": "_doc",
-    "_id": "1",
-    "_version": 11,
-    "_seq_no": 11,
-    "_primary_term": 1,
-    "found": true,
-    "_source": {
-        "name": "大胡子",
-        "team_name": "火箭",
-        "position": "双能卫",
-        "play_year": "10",
-        "jerse_no": "13",
-        "age": 22
-    }
+  "_index" : "person",
+  "_type" : "_doc",
+  "_id" : "1",
+  "_version" : 6,
+  "_seq_no" : 8,
+  "_primary_term" : 4,
+  "found" : true,
+  "_source" : {
+    "name" : "麦奇",
+    "sex" : "男",
+    "idcard" : "123456789",
+    "birthday" : "1999/02/20",
+    "desc" : "麦奇",
+    "hobby" : "Downhill,table tennis,program design",
+    "age" : 22
+  }
 }
 ```
 
 #### 4.15 upsert介绍
-- upsert 当指定的⽂文档不不存在时，upsert参数包含的内容将会被插⼊入到索引中，作为⼀一个新⽂文档；如果指定的⽂文档存在，ElasticSearch引擎将会执⾏行行指定的更更新逻辑
+- upsert 当指定的⽂文档不不存在时，upsert参数包含的内容将会被插⼊入到索引中，作为⼀一个新⽂文档；如果指定的⽂文档存在，ElasticSearch引擎将会执⾏行行指定的更更新逻辑
 
 - 请求
 ```java
-localhost:9200/nba/_update/3
-```
-
-- 请求体
-```json
+POST /person/_update/3
 {
 	"script": {
 		"source": "ctx._source.allstar += params.allstar",
@@ -1169,46 +1098,44 @@ localhost:9200/nba/_update/3
 		"allstar": 1
 	}
 }
-
 ```
 
 - 响应
 ```json
 {
-    "_index": "nba",
-    "_type": "_doc",
-    "_id": "3",
-    "_version": 1,
-    "result": "created",
-    "_shards": {
-        "total": 2,
-        "successful": 1,
-        "failed": 0
-    },
-    "_seq_no": 12,
-    "_primary_term": 1
+  "_index" : "person",
+  "_type" : "_doc",
+  "_id" : "3",
+  "_version" : 1,
+  "result" : "created",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 9,
+  "_primary_term" : 4
 }
 ```
 - 查询更新结果upsert结果
 
-- 请求
 ```java
-localhost:9200/nba/_doc/3
+GET /person/_doc/3
 ```
 
 - 响应
 ```json
 {
-    "_index": "nba",
-    "_type": "_doc",
-    "_id": "3",
-    "_version": 1,
-    "_seq_no": 12,
-    "_primary_term": 1,
-    "found": true,
-    "_source": {
-        "allstar": 1
-    }
+  "_index" : "person",
+  "_type" : "_doc",
+  "_id" : "3",
+  "_version" : 1,
+  "_seq_no" : 9,
+  "_primary_term" : 4,
+  "found" : true,
+  "_source" : {
+    "allstar" : 1
+  }
 }
 ```
 
@@ -1216,90 +1143,86 @@ localhost:9200/nba/_doc/3
 
 - 请求
 ```java
-localhost:9200/nba/_doc/3
+DELETE /person/_doc/3
 ```
 
 - 响应
 ```json
 {
-    "_index": "nba",
-    "_type": "_doc",
-    "_id": "3",
-    "_version": 2,
-    "result": "deleted",
-    "_shards": {
-        "total": 2,
-        "successful": 1,
-        "failed": 0
-    },
-    "_seq_no": 13,
-    "_primary_term": 1
+  "_index" : "person",
+  "_type" : "_doc",
+  "_id" : "3",
+  "_version" : 2,
+  "result" : "deleted",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 10,
+  "_primary_term" : 4
 }
 ```
 
 ### 五、文档的搜索
-- term(词条)查询和full text(全⽂文)查询
+- term(词条)查询和full text(全⽂)查询
 
-- 词条查询：词条查询不会分析查询条件，只有当词条和查询字符串完全匹配时，才匹配搜索
+- 词条查询：词条查询不会分析查询条件，只有当词条和查询字符串完全匹配时，才匹配搜索
 
-- 全⽂查询：ElasticSearch引擎会先分析查询字符串，将其拆分成多个分词，只要已分析的字段中包含词条的任意⼀个，或全部包含，就匹配查询条件，返回该⽂档；如果不包含任意一个分词，表示没有任何文档匹配查询条件
+- 全⽂查询：ElasticSearch引擎会先分析查询字符串，将其拆分成多个分词，只要已分析的字段中包含词条的任意⼀个，或全部包含，就匹配查询条件，返回该⽂档；如果不包含任意一个分词，表示没有任何文档匹配查询条件
 
-#### 5.1 单条trem查询 GET/POST请求
+#### 5.1 单条term查询 GET/POST请求
 
 - term 关键字查询，精确查询
-
-- 例如Sql的where条件
-
+- 例如SQL的where条件
+- ES会对其插入的数据进行分词，当为text类型的字段时，分词后使用term查询可能查询不出，可采用精确查询。
 - 请求
-```java
-localhost:9200/nba/_search
-```
-
-- 请求体
 ```json
+GET /person/_search
 {
-    // 语义: 查询词条球号为23
-	"query":{   // 查询
-	    "term":{    // 词条
-	    	"jerse_no":"23" // 字段名称
-		}
-	}
+  //查询idcard为765432345的人
+  "query": {
+    "term": {//词条
+      "idcard": "765432345"//字段名称
+    }
+  }
 }
 ```
 
 - 响应
 ```json
 {
-	"took": 2,
-	"timed_out": false,
-	"_shards": {
-		"total": 1,
-		"successful": 1,
-		"skipped": 0,
-		"failed": 0
-	},
-	"hits": {
-		"total": {
-			"value": 1,
-			"relation": "eq"
-		},
-		"max_score": 0.9808292,
-		"hits": [
-			{
-				"_index": "nba",
-				"_type": "_doc",
-				"_id": "3",
-				"_score": 0.9808292,
-				"_source": {
-					"name": "詹姆斯",
-					"team_name": "湖人",
-					"position": "小前锋",
-					"play_year": "15",
-					"jerse_no": "23"
-				}
-			}
-		]
-	}
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1,
+      "relation" : "eq"
+    },
+    "max_score" : 1.6739764,
+    "hits" : [
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "2",
+        "_score" : 1.6739764,
+        "_source" : {
+          "name" : "杨虎三",
+          "sex" : "男",
+          "idcard" : "765432345",
+          "birthday" : "1998/02/20",
+          "desc" : "实习生小白",
+          "hobby" : "coding"
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -1307,66 +1230,64 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
-```
-
-- 请求体
-```json
+GET /person/_search
 {
-	"query":{
-		"terms":{ // 这里使用terms
-			"jerse_no": ["23","13"]
-		}
-	}
+  "query": {
+    "terms": {
+      "idcard": ["343232323","765432345"]
+    }
+  }
 }
 ```
 
 - 响应
 ```json
 {
-	"took": 0, // 消耗时间
-	"timed_out": false, // 是否超时
-	"_shards": { // 分片
-		"total": 1, // 分片总体 1
-		"successful": 1, // 成功 1
-		"skipped": 0,
-		"failed": 0
-	},
-	"hits": { // 命中
-		"total": { // 查询总数
-			"value": 2, // 2条
-			"relation": "eq"
-		},
-		"max_score": 1.0, // 最大分数 返回结果按照分数最大排序
-		"hits": [
-			{
-				"_index": "nba",
-				"_type": "_doc",
-				"_id": "1",
-				"_score": 1.0,
-				"_source": {
-					"name": "哈登",
-					"team_name": "火箭",
-					"position": "得分后卫",
-					"play_year": "10",
-					"jerse_no": "13"
-				}
-			},
-			{
-				"_index": "nba",
-				"_type": "_doc",
-				"_id": "3",
-				"_score": 1.0,
-				"_source": {
-					"name": "詹姆斯",
-					"team_name": "湖人",
-					"position": "小前锋",
-					"play_year": "15",
-					"jerse_no": "23"
-				}
-			}
-		]
-	}
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 2,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "khRPyngBRjMpykU9O0ps",
+        "_score" : 1.0,
+        "_source" : {
+          "name" : "里奥",
+          "sex" : "男",
+          "idcard" : "343232323",
+          "birthday" : "1998/02/20",
+          "desc" : "一个充满智慧的乌龟",
+          "hobby" : "program design,双节棍,高科技产品"
+        }
+      },
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "2",
+        "_score" : 1.0,
+        "_source" : {
+          "name" : "杨虎三",
+          "sex" : "男",
+          "idcard" : "765432345",
+          "birthday" : "1998/02/20",
+          "desc" : "实习生小白",
+          "hobby" : "coding"
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -1376,11 +1297,7 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
-```
-
-- 请求体
-```json
+GET /person/_search
 {
 	"query":{
 		"match_all":{} // 查询全部文档，默认显示10条记录
@@ -1393,77 +1310,77 @@ localhost:9200/nba/_search
 - 响应
 ```json
 {
-	"took": 0,
-	"timed_out": false,
-	"_shards": {
-		"total": 1,
-		"successful": 1,
-		"skipped": 0,
-		"failed": 0
-	},
-	"hits": {
-		"total": {
-			"value": 3,
-			"relation": "eq"
-		},
-		"max_score": 1.0,
-		"hits": [
-			{
-				"_index": "nba",
-				"_type": "_doc",
-				"_id": "1",
-				"_score": 1.0,
-				"_source": {
-					"name": "哈登",
-					"team_name": "火箭",
-					"position": "得分后卫",
-					"play_year": "10",
-					"jerse_no": "13"
-				}
-			},
-			{
-				"_index": "nba",
-				"_type": "_doc",
-				"_id": "2",
-				"_score": 1.0,
-				"_source": {
-					"name": "库里",
-					"team_name": "勇士",
-					"position": "控球后卫",
-					"play_year": "10",
-					"jerse_no": "30"
-				}
-			},
-			{
-				"_index": "nba",
-				"_type": "_doc",
-				"_id": "3",
-				"_score": 1.0,
-				"_source": {
-					"name": "詹姆斯",
-					"team_name": "湖人",
-					"position": "小前锋",
-					"play_year": "15",
-					"jerse_no": "23"
-				}
-			}
-		]
-	}
+  "took" : 0,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 3,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "khRPyngBRjMpykU9O0ps",
+        "_score" : 1.0,
+        "_source" : {
+          "name" : "里奥",
+          "sex" : "男",
+          "idcard" : "343232323",
+          "birthday" : "1998/02/20",
+          "desc" : "一个充满智慧的乌龟",
+          "hobby" : "program design,双节棍,高科技产品"
+        }
+      },
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "2",
+        "_score" : 1.0,
+        "_source" : {
+          "name" : "杨虎三",
+          "sex" : "男",
+          "idcard" : "765432345",
+          "birthday" : "1998/02/20",
+          "desc" : "实习生小白",
+          "hobby" : "coding"
+        }
+      },
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "1",
+        "_score" : 1.0,
+        "_source" : {
+          "name" : "麦奇",
+          "sex" : "男",
+          "idcard" : "123456789",
+          "birthday" : "1999/02/20",
+          "desc" : "麦奇",
+          "hobby" : "Downhill,table tennis,program design",
+          "age" : 26
+        }
+      }
+    ]
+  }
 }
 ```
 ####  5.3 match查询 GET/POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_search
-```
-
-- 请求体
-```json
+GET /person/_search
 {
 	"query":{
 		"match":{ // 这里使用match
-			"name": "库小里" //name:字段 会进行分词匹配
+			"name": "麦小奇" //name:字段 会进行分词匹配
 		}
 	},
 	"from": 0,
@@ -1474,36 +1391,38 @@ localhost:9200/nba/_search
 - 响应
 ```json
 {
-	"took": 1,
-	"timed_out": false,
-	"_shards": {
-		"total": 1,
-		"successful": 1,
-		"skipped": 0,
-		"failed": 0
-	},
-	"hits": {
-		"total": {
-			"value": 1,
-			"relation": "eq"
-		},
-		"max_score": 2.0834165,
-		"hits": [
-			{
-				"_index": "nba",
-				"_type": "_doc",
-				"_id": "2",
-				"_score": 2.0834165,
-				"_source": {
-					"name": "库里",
-					"team_name": "勇士",
-					"position": "控球后卫",
-					"play_year": "10",
-					"jerse_no": "30"
-				}
-			}
-		]
-	}
+  "took" : 14,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1,
+      "relation" : "eq"
+    },
+    "max_score" : 0.7703978,
+    "hits" : [
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "1",
+        "_score" : 0.7703978,
+        "_source" : {
+          "name" : "麦奇",
+          "sex" : "男",
+          "idcard" : "123456789",
+          "birthday" : "1999/02/20",
+          "desc" : "麦奇",
+          "hobby" : "Downhill,table tennis,program design",
+          "age" : 26
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -1511,16 +1430,12 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
-```
-
-- 请求体
-```json
+GET /person/_search
 {
 	"query":{
 		"multi_match":{ // 选定多个字段所以使用multi_match
-			"query": "shooter",// 值
-			"fields": ["title","name"]  // 指定查询的字段
+			"query": "麦奇", // 值
+			"fields": ["name","desc"]  // 指定查询的字段
 		}
 	}
 }
@@ -1529,37 +1444,53 @@ localhost:9200/nba/_search
 - 响应
 ```json
 {
-    "took": 1,
-    "timed_out": false,
-    "_shards": {
-        "total": 1,
-        "successful": 1,
-        "skipped": 0,
-        "failed": 0
+  "took" : 12,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 2,
+      "relation" : "eq"
     },
-    "hits": {
-        "total": {
-            "value": 1,
-            "relation": "eq"
-        },
-        "max_score": 0.18232156,
-        "hits": [
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "2",
-                "_score": 0.18232156,
-                "_source": {
-                    "name": "库里",
-                    "team_name": "勇士",
-                    "position": "控球后卫",
-                    "play_year": 10,
-                    "jerse_no": "30",
-                    "title": "the best shooter"
-                }
-            }
-        ]
-    }
+    "max_score" : 1.987459,
+    "hits" : [
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "1",
+        "_score" : 1.987459,
+        "_source" : {
+          "name" : "麦奇",
+          "sex" : "男",
+          "idcard" : "123456789",
+          "birthday" : "1999/02/20",
+          "desc" : "麦奇",
+          "hobby" : "Downhill,table tennis,program design",
+          "age" : 26
+        }
+      },
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "_create",
+        "_score" : 1.3365866,
+        "_source" : {
+          "name" : "麦兜",
+          "sex" : "男",
+          "idcard" : "54343423",
+          "birthday" : "1993/02/20",
+          "desc" : "麦奇的好朋友",
+          "hobby" : "哈哈哈哈哈",
+          "age" : 26
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -1569,15 +1500,11 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
-```
-
-- 请求体
-```json
+GET /person/_search
 {
 	"query":{
 		"match_phrase":{
-			"position": "得分后卫"
+			"name": "麦奇"
 		}
 	}
 }
@@ -1586,36 +1513,38 @@ localhost:9200/nba/_search
 - 响应
 ```json
 {
-	"took": 3,
-	"timed_out": false,
-	"_shards": {
-		"total": 1,
-		"successful": 1,
-		"skipped": 0,
-		"failed": 0
-	},
-	"hits": {
-		"total": {
-			"value": 1,
-			"relation": "eq"
-		},
-		"max_score": 3.277387,
-		"hits": [
-			{
-				"_index": "nba",
-				"_type": "_doc",
-				"_id": "1",
-				"_score": 3.277387,
-				"_source": {
-					"name": "哈登",
-					"team_name": "火箭",
-					"position": "得分后卫",
-					"play_year": "10",
-					"jerse_no": "13"
-				}
-			}
-		]
-	}
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1,
+      "relation" : "eq"
+    },
+    "max_score" : 1.987459,
+    "hits" : [
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "1",
+        "_score" : 1.987459,
+        "_source" : {
+          "name" : "麦奇",
+          "sex" : "男",
+          "idcard" : "123456789",
+          "birthday" : "1999/02/20",
+          "desc" : "麦奇",
+          "hobby" : "Downhill,table tennis,program design",
+          "age" : 26
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -1625,15 +1554,11 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
-```
-
-- 请求体
-```json
+GET /person/_search
 {
 	"query":{
 		"match_phrase_prefix":{
-			"title": "the" // 指定了前缀
+			"name": "麦" // 指定了前缀
 		}
 	}
 }
@@ -1642,37 +1567,53 @@ localhost:9200/nba/_search
 - 响应
 ```json
 {
-    "took": 1,
-    "timed_out": false,
-    "_shards": {
-        "total": 1,
-        "successful": 1,
-        "skipped": 0,
-        "failed": 0
+  "took" : 13,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 2,
+      "relation" : "eq"
     },
-    "hits": {
-        "total": {
-            "value": 1,
-            "relation": "eq"
-        },
-        "max_score": 0.2876821,
-        "hits": [
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "2",
-                "_score": 0.2876821,
-                "_source": {
-                    "name": "库里",
-                    "team_name": "勇士",
-                    "position": "控球后卫",
-                    "play_year": 10,
-                    "jerse_no": "30",
-                    "title": "the best shooter"
-                }
-            }
-        ]
-    }
+    "max_score" : 0.72615415,
+    "hits" : [
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "_create",
+        "_score" : 0.72615415,
+        "_source" : {
+          "name" : "麦兜",
+          "sex" : "男",
+          "idcard" : "54343423",
+          "birthday" : "1993/02/20",
+          "desc" : "麦奇的好朋友",
+          "hobby" : "哈哈哈哈哈",
+          "age" : 26
+        }
+      },
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "1",
+        "_score" : 0.72615415,
+        "_source" : {
+          "name" : "麦奇",
+          "sex" : "男",
+          "idcard" : "123456789",
+          "birthday" : "1999/02/20",
+          "desc" : "麦奇",
+          "hobby" : "Downhill,table tennis,program design",
+          "age" : 26
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -1688,9 +1629,9 @@ localhost:9200/nba/_search
 ```json
 // 必须有一个索引叫book
 {"index": {"_index": "book", "_type": "_doc", "_id": 1}}
-{"name": "权力的游戏"}
+{"name": "Java编程思想"}
 {"index": {"_index": "book", "_type": "_doc", "_id": 2}}
-{"name": "疯狂的石头"}
+{"name": "设计模式"}
  // 结尾必须有换行
 ```
 
@@ -1714,123 +1655,35 @@ curl -X POST "localhost:9200/_bulk" -H 'Content-Type: application/json' --data-b
 
 - 单词级别查询
 
-1. 这些查询通常⽤用于结构化的数据，⽐比如：number, date, keyword等，而不是对text。
+1. 这些查询通常⽤用于结构化的数据，⽐比如：number, date, keyword等，而不是对text。
 2. 也就是说，全⽂本查询之前要先对⽂本内容进⾏分词，⽽单词级别的查询直接在相应字段的反向索引中精确查找，单词级别的查询⼀般⽤于数值、⽇期等类型的字段上
+3. 去找个[网站](http://www.yyyweb.com/demo/inner-show/json-generator.html)生成数据导入
 
-- 准备索引 进行批量导入,数据在player中
 ```json
- {
- 	"mappings":{
- 		"properties":{
- 			"birthDay":{
- 				"type":"date"
+[
+  '{{repeat(20, 30)}}',
+{
+          name : '{{firstName()}} {{surname()}}',
+          sex : '{{random("女", "男")}}',
+          idcard : '{{objectId()}}',
+          birthday : '{{date(new Date(2014, 0, 1), new Date(), "YYYY-MM-ddThh:mm:ss Z")}}',
+          desc : '{{lorem(1, "paragraphs")}}',
+          hobby : '{{lorem(1, "words")}}',
+          age : '{{integer(20, 40)}}'
+}]
+```
 
- 			},
- 			"birthDayStr": {
- 				"type":"keyword"
 
- 			},
- 			"age":{
- 				"type":"integer"
-
- 			},
- 			"code": {
- 				"type":"text"
-
- 			},
- 			"country":{
- 				"type":"text"
-
- 			},
- 			"countryEn": {
- 				"type":"text"
-
- 			},
- 			"displayAffiliation":{
- 				"type":"text"
-
- 			},
- 			"displayName": {
- 				"type":"text"
-
- 			},
- 			"displayNameEn":{
- 				"type":"text"
-
- 			},
- 			"draft": {
- 				"type":"long"
-
- 			},
- 			"heightValue":{
- 				"type":"float"
-
- 			},
- 			"jerseyNo": {
- 				"type":"text"
-
- 			},
- 			"playYear":{
- 				"type":"long"
- 			},
- 			"playerId": {
- 				"type":"keyword"
-
- 			},
- 			"position":{
- 				"type":"text"
-
- 			},
- 			"schoolType": {
- 				"type":"text"
-
- 			},
- 			"teamCity":{
- 				"type":"text"
-
- 			},
- 			"teamCityEn": {
- 				"type":"text"
-
- 			},
- 			"teamConference": {
- 				"type":"keyword"
-
- 			},
- 			"teamConferenceEn":{
- 				"type":"keyword"
-
- 			},
- 			"teamName": {
- 				"type":"keyword"
-
- 			},
- 			"teamNameEn":{
- 				"type":"keyword"
-
- 			},
- 			"weight": {
- 				"type":"text"
- 			}
- 		}
- 	}
- }
- ```
 
 #####  6.2.1 term query 精准匹配查询 GET/POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_search
-```
-
-- 请求体
-```json
+GET /person/_search
 {
-    // 语义:精确查找球衣23号数据并分页
   "query": {
     "term": {
-      "jerseyNo": 23
+      "idcard": 343232323
     }
   },
   "from": 0,
@@ -1841,116 +1694,37 @@ localhost:9200/nba/_search
 - 响应
 ```json
 {
-    "took": 0,
-    "timed_out": false,
-    "_shards": {
-        "total": 1,
-        "successful": 1,
-        "skipped": 0,
-        "failed": 0
+  "took" : 9,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 1,
+      "relation" : "eq"
     },
-    "hits": {
-        "total": {
-            "value": 11,
-            "relation": "eq"
-        },
-        "max_score": 3.6167762,
-        "hits": [
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "73",
-                "_score": 3.6167762,
-                "_source": {
-                    "countryEn": "United States",
-                    "teamName": "雄鹿",
-                    "birthDay": 792392400000,
-                    "country": "美国",
-                    "teamCityEn": "Milwaukee",
-                    "code": "sterling_brown",
-                    "displayAffiliation": "Southern Methodist/United States",
-                    "displayName": "斯特林 布朗",
-                    "schoolType": "College",
-                    "teamConference": "东部",
-                    "teamConferenceEn": "Eastern",
-                    "weight": "105.2 公斤",
-                    "teamCity": "密尔沃基",
-                    "playYear": 2,
-                    "jerseyNo": "23",
-                    "teamNameEn": "Bucks",
-                    "draft": 2017,
-                    "displayNameEn": "Sterling Brown",
-                    "heightValue": 1.98,
-                    "birthDayStr": "1995-02-10",
-                    "position": "后卫",
-                    "age": 24,
-                    "playerId": "1628425"
-                }
-            },
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "78",
-                "_score": 3.6167762,
-                "_source": {
-                    "countryEn": "United States",
-                    "teamName": "独行侠",
-                    "birthDay": 721544400000,
-                    "country": "美国",
-                    "teamCityEn": "Dallas",
-                    "code": "trey_burke",
-                    "displayAffiliation": "Michigan/United States",
-                    "displayName": "特雷 伯克",
-                    "schoolType": "College",
-                    "teamConference": "西部",
-                    "teamConferenceEn": "Western",
-                    "weight": "79.4 公斤",
-                    "teamCity": "达拉斯",
-                    "playYear": 6,
-                    "jerseyNo": "23",
-                    "teamNameEn": "Mavericks",
-                    "draft": 2013,
-                    "displayNameEn": "Trey Burke",
-                    "heightValue": 1.85,
-                    "birthDayStr": "1992-11-12",
-                    "position": "后卫",
-                    "age": 27,
-                    "playerId": "203504"
-                }
-            },
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "167",
-                "_score": 3.6167762,
-                "_source": {
-                    "countryEn": "United States",
-                    "teamName": "雷霆",
-                    "birthDay": 895377600000,
-                    "country": "美国",
-                    "teamCityEn": "Oklahoma City",
-                    "code": "terrance_ferguson",
-                    "displayAffiliation": "United States",
-                    "displayName": "特伦斯 弗格森",
-                    "schoolType": "",
-                    "teamConference": "西部",
-                    "teamConferenceEn": "Western",
-                    "weight": "86.2 公斤",
-                    "teamCity": "俄克拉荷马城",
-                    "playYear": 2,
-                    "jerseyNo": "23",
-                    "teamNameEn": "Thunder",
-                    "draft": 2017,
-                    "displayNameEn": "Terrance Ferguson",
-                    "heightValue": 2.01,
-                    "birthDayStr": "1998-05-17",
-                    "position": "后卫-前锋",
-                    "age": 21,
-                    "playerId": "1628390"
-                }
-            }
-        ]
-    }
+    "max_score" : 1.2039728,
+    "hits" : [
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "khRPyngBRjMpykU9O0ps",
+        "_score" : 1.2039728,
+        "_source" : {
+          "name" : "里奥",
+          "sex" : "男",
+          "idcard" : "343232323",
+          "birthday" : "1998/02/20",
+          "desc" : "一个充满智慧的乌龟",
+          "hobby" : "program design,双节棍,高科技产品"
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -1958,16 +1732,11 @@ localhost:9200/nba/_search
 
 - 请求
 ```shell
-curl -X GET localhost:9200/nba
-```
-
-- 请求体
-```json
+GET /person/_search
 {
-    // 语义:查找teamNameEn 不为空的数据
   "query": {
     "exists": {
-      "field": "teamNameEn"
+      "field": "age"//查询存在age的记录
     }
   },
   "from": 0,
@@ -1978,701 +1747,77 @@ curl -X GET localhost:9200/nba
 - 响应
 ```json
 {
-    "took": 0,
-    "timed_out": false,
-    "_shards": {
-        "total": 1,
-        "successful": 1,
-        "skipped": 0,
-        "failed": 0
+  "took" : 6,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 2,
+      "relation" : "eq"
     },
-    "hits": {
-        "total": {
-            "value": 566,
-            "relation": "eq"
-        },
-        "max_score": 1.0,
-        "hits": [
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "1",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "United States",
-                    "teamName": "老鹰",
-                    "birthDay": 831182400000,
-                    "country": "美国",
-                    "teamCityEn": "Atlanta",
-                    "code": "jaylen_adams",
-                    "displayAffiliation": "United States",
-                    "displayName": "杰伦 亚当斯",
-                    "schoolType": "College",
-                    "teamConference": "东部",
-                    "teamConferenceEn": "Eastern",
-                    "weight": "86.2 公斤",
-                    "teamCity": "亚特兰大",
-                    "playYear": 1,
-                    "jerseyNo": "10",
-                    "teamNameEn": "Hawks",
-                    "draft": 2018,
-                    "displayNameEn": "Jaylen Adams",
-                    "heightValue": 1.88,
-                    "birthDayStr": "1996-05-04",
-                    "position": "后卫",
-                    "age": 23,
-                    "playerId": "1629121"
-                }
-            },
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "2",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "New Zealand",
-                    "teamName": "雷霆",
-                    "birthDay": 743140800000,
-                    "country": "新西兰",
-                    "teamCityEn": "Oklahoma City",
-                    "code": "steven_adams",
-                    "displayAffiliation": "Pittsburgh/New Zealand",
-                    "displayName": "斯蒂文 亚当斯",
-                    "schoolType": "College",
-                    "teamConference": "西部",
-                    "teamConferenceEn": "Western",
-                    "weight": "120.2 公斤",
-                    "teamCity": "俄克拉荷马城",
-                    "playYear": 6,
-                    "jerseyNo": "12",
-                    "teamNameEn": "Thunder",
-                    "draft": 2013,
-                    "displayNameEn": "Steven Adams",
-                    "heightValue": 2.13,
-                    "birthDayStr": "1993-07-20",
-                    "position": "中锋",
-                    "age": 26,
-                    "playerId": "203500"
-                }
-            },
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "3",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "United States",
-                    "teamName": "热火",
-                    "birthDay": 869198400000,
-                    "country": "美国",
-                    "teamCityEn": "Miami",
-                    "code": "bam_adebayo",
-                    "displayAffiliation": "Kentucky/United States",
-                    "displayName": "巴姆 阿德巴约",
-                    "schoolType": "College",
-                    "teamConference": "东部",
-                    "teamConferenceEn": "Eastern",
-                    "weight": "115.7 公斤",
-                    "teamCity": "迈阿密",
-                    "playYear": 2,
-                    "jerseyNo": "13",
-                    "teamNameEn": "Heat",
-                    "draft": 2017,
-                    "displayNameEn": "Bam Adebayo",
-                    "heightValue": 2.08,
-                    "birthDayStr": "1997-07-18",
-                    "position": "中锋-前锋",
-                    "age": 22,
-                    "playerId": "1628389"
-                }
-            }
-        ]
-    }
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "1",
+        "_score" : 1.0,
+        "_source" : {
+          "name" : "麦奇",
+          "sex" : "男",
+          "idcard" : "123456789",
+          "birthday" : "1999/02/20",
+          "desc" : "麦奇",
+          "hobby" : "Downhill,table tennis,program design",
+          "age" : 26
+        }
+      },
+      {
+        "_index" : "person",
+        "_type" : "_doc",
+        "_id" : "_create",
+        "_score" : 1.0,
+        "_source" : {
+          "name" : "Julie Peters",
+          "sex" : "男",
+          "idcard" : "6079270de8b8f59c77eb3cd2",
+          "birthday" : "2021-01-26T05:17:20 -08:00",
+          "hobby" : "quis",
+          "age" : 29
+        }
+      }
+    ]
+  }
 }
+
 ```
 
 #####  6.2.3 prefix query 查找包含带有指定前缀term的文档 GET/POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_search
+GET /person/_search
 ```
 
 - 请求体
 ```json
 {
-    // 语义:查找teamNameEn 不为空的数据 teamNameEn必须为text类型
-    // 使用前缀类型必须为keyword,不能为text
+  // 语义:查找teamNameEn 不为空的数据 teamNameEn必须为text类型
+  // 使用前缀类型必须为keyword,不能为text
   "query": {
     "prefix": {
-      "teamNameEn": "Rock"
+      "name": "麦"
     }
   },
   "from": 0,
   "size": 3
 }
 ```
-
-- 响应
-```json
-{
-    "took": 4,
-    "timed_out": false,
-    "_shards": {
-        "total": 1,
-        "successful": 1,
-        "skipped": 0,
-        "failed": 0
-    },
-    "hits": {
-        "total": {
-            "value": 21,
-            "relation": "eq"
-        },
-        "max_score": 1.0,
-        "hits": [
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "86",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "Switzerland",
-                    "teamName": "火箭",
-                    "birthDay": 769233600000,
-                    "country": "瑞士",
-                    "teamCityEn": "Houston",
-                    "code": "clint_capela",
-                    "displayAffiliation": "Switzerland/Switzerland",
-                    "displayName": "克林特 卡佩拉",
-                    "schoolType": "",
-                    "teamConference": "西部",
-                    "teamConferenceEn": "Western",
-                    "weight": "108.9 公斤",
-                    "teamCity": "休斯顿",
-                    "playYear": 5,
-                    "jerseyNo": "15",
-                    "teamNameEn": "Rockets",
-                    "draft": 2014,
-                    "displayNameEn": "Clint Capela",
-                    "heightValue": 2.08,
-                    "birthDayStr": "1994-05-18",
-                    "position": "中锋",
-                    "age": 25,
-                    "playerId": "203991"
-                }
-            },
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "99",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "United States",
-                    "teamName": "火箭",
-                    "birthDay": 816930000000,
-                    "country": "美国",
-                    "teamCityEn": "Houston",
-                    "code": "chris_chiozza",
-                    "displayAffiliation": "University of Florida/United States",
-                    "displayName": "克里斯 Chiozza",
-                    "schoolType": "",
-                    "teamConference": "西部",
-                    "teamConferenceEn": "Western",
-                    "weight": "79.4 公斤",
-                    "teamCity": "休斯顿",
-                    "playYear": 1,
-                    "jerseyNo": "2",
-                    "teamNameEn": "Rockets",
-                    "draft": 2018,
-                    "displayNameEn": "Chris Chiozza",
-                    "heightValue": 1.83,
-                    "birthDayStr": "1995-11-21",
-                    "position": "后卫",
-                    "age": 24,
-                    "playerId": "1629185"
-                }
-            },
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "101",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "United States",
-                    "teamName": "火箭",
-                    "birthDay": 784962000000,
-                    "country": "美国",
-                    "teamCityEn": "Houston",
-                    "code": "gary_clark",
-                    "displayAffiliation": "University of Cincinnati/United States",
-                    "displayName": "加里 克拉克",
-                    "schoolType": "",
-                    "teamConference": "西部",
-                    "teamConferenceEn": "Western",
-                    "weight": "102.1 公斤",
-                    "teamCity": "休斯顿",
-                    "playYear": 1,
-                    "jerseyNo": "6",
-                    "teamNameEn": "Rockets",
-                    "draft": 2018,
-                    "displayNameEn": "Gary Clark",
-                    "heightValue": 2.03,
-                    "birthDayStr": "1994-11-16",
-                    "position": "前锋",
-                    "age": 25,
-                    "playerId": "1629109"
-                }
-            }
-        ]
-    }
-}
-```
-
-#####  6.2.4 wildcard query 支持通配符查询 GET/POST请求
-
--  *表示任意字符，?表示任意单个字符,类似SQL模糊查询
-
-- 请求
-```java
-localhost:9200/nba/_search
-```
-
-- 请求体
-```json
-{
-    // 语义: 查询teamNameEn为Ro*s *为模糊搜索
-  "query": {
-    "wildcard": {
-      "teamNameEn": "Ro*s"
-    }
-  },
-  "from": 0,
-  "size": 3
-}
-```
-
-- 响应
-```json
-{
-    "took": 1,
-    "timed_out": false,
-    "_shards": {
-        "total": 1,
-        "successful": 1,
-        "skipped": 0,
-        "failed": 0
-    },
-    "hits": {
-        "total": {
-            "value": 21,
-            "relation": "eq"
-        },
-        "max_score": 1.0,
-        "hits": [
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "86",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "Switzerland",
-                    "teamName": "火箭",
-                    "birthDay": 769233600000,
-                    "country": "瑞士",
-                    "teamCityEn": "Houston",
-                    "code": "clint_capela",
-                    "displayAffiliation": "Switzerland/Switzerland",
-                    "displayName": "克林特 卡佩拉",
-                    "schoolType": "",
-                    "teamConference": "西部",
-                    "teamConferenceEn": "Western",
-                    "weight": "108.9 公斤",
-                    "teamCity": "休斯顿",
-                    "playYear": 5,
-                    "jerseyNo": "15",
-                    "teamNameEn": "Rockets",
-                    "draft": 2014,
-                    "displayNameEn": "Clint Capela",
-                    "heightValue": 2.08,
-                    "birthDayStr": "1994-05-18",
-                    "position": "中锋",
-                    "age": 25,
-                    "playerId": "203991"
-                }
-            },
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "99",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "United States",
-                    "teamName": "火箭",
-                    "birthDay": 816930000000,
-                    "country": "美国",
-                    "teamCityEn": "Houston",
-                    "code": "chris_chiozza",
-                    "displayAffiliation": "University of Florida/United States",
-                    "displayName": "克里斯 Chiozza",
-                    "schoolType": "",
-                    "teamConference": "西部",
-                    "teamConferenceEn": "Western",
-                    "weight": "79.4 公斤",
-                    "teamCity": "休斯顿",
-                    "playYear": 1,
-                    "jerseyNo": "2",
-                    "teamNameEn": "Rockets",
-                    "draft": 2018,
-                    "displayNameEn": "Chris Chiozza",
-                    "heightValue": 1.83,
-                    "birthDayStr": "1995-11-21",
-                    "position": "后卫",
-                    "age": 24,
-                    "playerId": "1629185"
-                }
-            },
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "101",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "United States",
-                    "teamName": "火箭",
-                    "birthDay": 784962000000,
-                    "country": "美国",
-                    "teamCityEn": "Houston",
-                    "code": "gary_clark",
-                    "displayAffiliation": "University of Cincinnati/United States",
-                    "displayName": "加里 克拉克",
-                    "schoolType": "",
-                    "teamConference": "西部",
-                    "teamConferenceEn": "Western",
-                    "weight": "102.1 公斤",
-                    "teamCity": "休斯顿",
-                    "playYear": 1,
-                    "jerseyNo": "6",
-                    "teamNameEn": "Rockets",
-                    "draft": 2018,
-                    "displayNameEn": "Gary Clark",
-                    "heightValue": 2.03,
-                    "birthDayStr": "1994-11-16",
-                    "position": "前锋",
-                    "age": 25,
-                    "playerId": "1629109"
-                }
-            }
-        ]
-    }
-}
-```
-
-#####  6.2.5 regexp query 正则表达式查询 GET/POST请求
-
-- 请求
-```shell
-curl -X GET localhost:9200/nba/_search
-```
-
-- 请求体
-```json
-{
-    // 语义: 查询teamNameEn 为Ro.*s  .表示任意 *为多个
-  "query": {
-    "regexp": {
-      "teamNameEn": "Ro.*s"
-    }
-  },
-  "from": 0,
-  "size": 3
-}
-```
-
-- 响应
-```json
-{
-    "took": 0,
-    "timed_out": false,
-    "_shards": {
-        "total": 1,
-        "successful": 1,
-        "skipped": 0,
-        "failed": 0
-    },
-    "hits": {
-        "total": {
-            "value": 21,
-            "relation": "eq"
-        },
-        "max_score": 1.0,
-        "hits": [
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "86",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "Switzerland",
-                    "teamName": "火箭",
-                    "birthDay": 769233600000,
-                    "country": "瑞士",
-                    "teamCityEn": "Houston",
-                    "code": "clint_capela",
-                    "displayAffiliation": "Switzerland/Switzerland",
-                    "displayName": "克林特 卡佩拉",
-                    "schoolType": "",
-                    "teamConference": "西部",
-                    "teamConferenceEn": "Western",
-                    "weight": "108.9 公斤",
-                    "teamCity": "休斯顿",
-                    "playYear": 5,
-                    "jerseyNo": "15",
-                    "teamNameEn": "Rockets",
-                    "draft": 2014,
-                    "displayNameEn": "Clint Capela",
-                    "heightValue": 2.08,
-                    "birthDayStr": "1994-05-18",
-                    "position": "中锋",
-                    "age": 25,
-                    "playerId": "203991"
-                }
-            },
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "99",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "United States",
-                    "teamName": "火箭",
-                    "birthDay": 816930000000,
-                    "country": "美国",
-                    "teamCityEn": "Houston",
-                    "code": "chris_chiozza",
-                    "displayAffiliation": "University of Florida/United States",
-                    "displayName": "克里斯 Chiozza",
-                    "schoolType": "",
-                    "teamConference": "西部",
-                    "teamConferenceEn": "Western",
-                    "weight": "79.4 公斤",
-                    "teamCity": "休斯顿",
-                    "playYear": 1,
-                    "jerseyNo": "2",
-                    "teamNameEn": "Rockets",
-                    "draft": 2018,
-                    "displayNameEn": "Chris Chiozza",
-                    "heightValue": 1.83,
-                    "birthDayStr": "1995-11-21",
-                    "position": "后卫",
-                    "age": 24,
-                    "playerId": "1629185"
-                }
-            },
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "101",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "United States",
-                    "teamName": "火箭",
-                    "birthDay": 784962000000,
-                    "country": "美国",
-                    "teamCityEn": "Houston",
-                    "code": "gary_clark",
-                    "displayAffiliation": "University of Cincinnati/United States",
-                    "displayName": "加里 克拉克",
-                    "schoolType": "",
-                    "teamConference": "西部",
-                    "teamConferenceEn": "Western",
-                    "weight": "102.1 公斤",
-                    "teamCity": "休斯顿",
-                    "playYear": 1,
-                    "jerseyNo": "6",
-                    "teamNameEn": "Rockets",
-                    "draft": 2018,
-                    "displayNameEn": "Gary Clark",
-                    "heightValue": 2.03,
-                    "birthDayStr": "1994-11-16",
-                    "position": "前锋",
-                    "age": 25,
-                    "playerId": "1629109"
-                }
-            }
-        ]
-    }
-}
-```
-
-#####  6.2.6 ids query 通过id批量查询 GET/POST请求
-
-- 请求
-```java
-localhost:9200/nba/_search
-```
-
-- 请求体
-```json
-{
-  "query": {
-    "ids": {
-      "values": [1,2,3]
-    }
-  },
-  "from": 0,
-  "size": 3
-}
-```
-
-- 响应
-```json
-{
-    "took": 2,
-    "timed_out": false,
-    "_shards": {
-        "total": 1,
-        "successful": 1,
-        "skipped": 0,
-        "failed": 0
-    },
-    "hits": {
-        "total": {
-            "value": 3,
-            "relation": "eq"
-        },
-        "max_score": 1.0,
-        "hits": [
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "1",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "United States",
-                    "teamName": "老鹰",
-                    "birthDay": 831182400000,
-                    "country": "美国",
-                    "teamCityEn": "Atlanta",
-                    "code": "jaylen_adams",
-                    "displayAffiliation": "United States",
-                    "displayName": "杰伦 亚当斯",
-                    "schoolType": "College",
-                    "teamConference": "东部",
-                    "teamConferenceEn": "Eastern",
-                    "weight": "86.2 公斤",
-                    "teamCity": "亚特兰大",
-                    "playYear": 1,
-                    "jerseyNo": "10",
-                    "teamNameEn": "Hawks",
-                    "draft": 2018,
-                    "displayNameEn": "Jaylen Adams",
-                    "heightValue": 1.88,
-                    "birthDayStr": "1996-05-04",
-                    "position": "后卫",
-                    "age": 23,
-                    "playerId": "1629121"
-                }
-            },
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "2",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "New Zealand",
-                    "teamName": "雷霆",
-                    "birthDay": 743140800000,
-                    "country": "新西兰",
-                    "teamCityEn": "Oklahoma City",
-                    "code": "steven_adams",
-                    "displayAffiliation": "Pittsburgh/New Zealand",
-                    "displayName": "斯蒂文 亚当斯",
-                    "schoolType": "College",
-                    "teamConference": "西部",
-                    "teamConferenceEn": "Western",
-                    "weight": "120.2 公斤",
-                    "teamCity": "俄克拉荷马城",
-                    "playYear": 6,
-                    "jerseyNo": "12",
-                    "teamNameEn": "Thunder",
-                    "draft": 2013,
-                    "displayNameEn": "Steven Adams",
-                    "heightValue": 2.13,
-                    "birthDayStr": "1993-07-20",
-                    "position": "中锋",
-                    "age": 26,
-                    "playerId": "203500"
-                }
-            },
-            {
-                "_index": "nba",
-                "_type": "_doc",
-                "_id": "3",
-                "_score": 1.0,
-                "_source": {
-                    "countryEn": "United States",
-                    "teamName": "热火",
-                    "birthDay": 869198400000,
-                    "country": "美国",
-                    "teamCityEn": "Miami",
-                    "code": "bam_adebayo",
-                    "displayAffiliation": "Kentucky/United States",
-                    "displayName": "巴姆 阿德巴约",
-                    "schoolType": "College",
-                    "teamConference": "东部",
-                    "teamConferenceEn": "Eastern",
-                    "weight": "115.7 公斤",
-                    "teamCity": "迈阿密",
-                    "playYear": 2,
-                    "jerseyNo": "13",
-                    "teamNameEn": "Heat",
-                    "draft": 2017,
-                    "displayNameEn": "Bam Adebayo",
-                    "heightValue": 2.08,
-                    "birthDayStr": "1997-07-18",
-                    "position": "中锋-前锋",
-                    "age": 22,
-                    "playerId": "1628389"
-                }
-            }
-        ]
-    }
-}
-```
-
-####  6.3 范围查询
-
-##### 6.3.1 第一种范围查询 GET/POST请求
-
-- 请求
-```java
-localhost:9200/nba/_search
-```
-
-- 请求体
-```json
-{
-    // 语义: 查找在nba打了2年年到10年以内的球员
-  "query": {
-    "range": {
-      "playYear":{ //playYear 是Long类型 不要写成字符串
-      	"gte": 2,
-      	"lte" : 10
-      }
-    }
-  },
-  "from": 0,
-  "size": 3
-}
-```
->gt: greater than 大于
-gte: greater than or equal 大于等于
-lt: less than 小于
-lte: less than or equal 小于等于
-
-
-
 
 - 响应
 ```json
@@ -2687,121 +1832,132 @@ lte: less than or equal 小于等于
   },
   "hits" : {
     "total" : {
-      "value" : 77,
+      "value" : 2,
       "relation" : "eq"
     },
     "max_score" : 1.0,
     "hits" : [
       {
-        "_index" : "nba",
+        "_index" : "person",
         "_type" : "_doc",
-        "_id" : "3",
+        "_id" : "1",
         "_score" : 1.0,
         "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "热火",
-          "birthDay" : 869198400000,
-          "country" : "美国",
-          "teamCityEn" : "Miami",
-          "code" : "bam_adebayo",
-          "displayAffiliation" : "Kentucky/United States",
-          "displayName" : "巴姆 阿德巴约",
-          "schoolType" : "College",
-          "teamConference" : "东部",
-          "teamConferenceEn" : "Eastern",
-          "weight" : "115.7 公斤",
-          "teamCity" : "迈阿密",
-          "playYear" : 2,
-          "jerseyNo" : "13",
-          "teamNameEn" : "Heat",
-          "draft" : 2017,
-          "displayNameEn" : "Bam Adebayo",
-          "heightValue" : 2.08,
-          "birthDayStr" : "1997-07-18",
-          "position" : "中锋-前锋",
-          "age" : 22,
-          "playerId" : "1628389"
+          "name" : "麦奇",
+          "sex" : "男",
+          "idcard" : "123456789",
+          "birthday" : "1999/02/20",
+          "desc" : "麦奇",
+          "hobby" : "Downhill,table tennis,program design",
+          "age" : 26
         }
       },
       {
-        "_index" : "nba",
+        "_index" : "person",
         "_type" : "_doc",
-        "_id" : "9",
+        "_id" : "_create",
         "_score" : 1.0,
         "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "篮网",
-          "birthDay" : 893131200000,
-          "country" : "美国",
-          "teamCityEn" : "Brooklyn",
-          "code" : "jarrett_allen",
-          "displayAffiliation" : "Texas/United States",
-          "displayName" : "贾瑞特 艾伦",
-          "schoolType" : "College",
-          "teamConference" : "东部",
-          "teamConferenceEn" : "Eastern",
-          "weight" : "107.5 公斤",
-          "teamCity" : "布鲁克林",
-          "playYear" : 2,
-          "jerseyNo" : "31",
-          "teamNameEn" : "Nets",
-          "draft" : 2017,
-          "displayNameEn" : "Jarrett Allen",
-          "heightValue" : 2.11,
-          "birthDayStr" : "1998-04-21",
-          "position" : "中锋",
-          "age" : 21,
-          "playerId" : "1628386"
-        }
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "10",
-        "_score" : 1.0,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "尼克斯",
-          "birthDay" : 727074000000,
-          "country" : "美国",
-          "teamCityEn" : "New York",
-          "code" : "kadeem_allen",
-          "displayAffiliation" : "Arizona/United States",
-          "displayName" : "卡迪姆 艾伦",
-          "schoolType" : "College",
-          "teamConference" : "东部",
-          "teamConferenceEn" : "Eastern",
-          "weight" : "90.7 公斤",
-          "teamCity" : "纽约",
-          "playYear" : 2,
-          "jerseyNo" : "0",
-          "teamNameEn" : "Knicks",
-          "draft" : 2017,
-          "displayNameEn" : "Kadeem Allen",
-          "heightValue" : 1.9,
-          "birthDayStr" : "1993-01-15",
-          "position" : "后卫",
-          "age" : 26,
-          "playerId" : "1628443"
+          "name" : "麦兜",
+          "sex" : "男",
+          "idcard" : "54343423",
+          "birthday" : "1993/02/20",
+          "desc" : "麦奇的好朋友",
+          "hobby" : "哈哈哈哈哈",
+          "age" : 26
         }
       }
     ]
   }
 }
-
 ```
+
+#####  6.2.4 wildcard query 支持通配符查询 GET/POST请求
+
+-  *表示任意字符，?表示任意单个字符,类似SQL模糊查询
+
+- 请求
+```java
+GET /person/_search
+{
+  // 语义: 查询name为Ro*s *为模糊搜索
+  "query": {
+    "wildcard": {
+      "name": "Ro*s"
+    }
+  },
+  "from": 0,
+  "size": 3
+}
+```
+
+#####  6.2.5 regexp query 正则表达式查询 GET/POST请求
+
+- 请求
+```shell
+GET /person/_search
+{
+  // 语义: 查询name 为Ro.*s  .表示任意 *为多个
+  "query": {
+    "regexp": {
+      "name": "Ro.*s"
+    }
+  },
+  "from": 0,
+  "size": 3
+}
+```
+
+#####  6.2.6 ids query 通过id批量查询 GET/POST请求
+
+- 请求
+```json
+GET /person/_search
+{
+  "query": {
+    "ids": {
+      "values": [1,2,3]
+    }
+  },
+  "from": 0,
+  "size": 3
+}
+```
+
+####  6.3 范围查询
+
+##### 6.3.1 第一种范围查询 GET/POST请求
+
+- 请求
+```java
+GET /person/_search
+{
+  // 语义: 查找在person打了2年年到10年以内的球员
+  "query": {
+    "range": {
+      "playYear":{ //playYear 是Long类型 不要写成字符串
+      	"gte": 2,
+      	"lte" : 10
+      }
+    }
+  },
+  "from": 0,
+  "size": 3
+}
+```
+
+>gt: greater than 大于
+>gte: greater than or equal 大于等于
+>lt: less than 小于
+>lte: less than or equal 小于等于
 
 ##### 6.3.2 第二种范围查询 GET/POST请求
 
 - 请求
 ```java
-
-```
-
-- 请求体
-```json
+GET /person/_search
 {
-    // 语义: 查找1980年年到1999年年出⽣生的球员
+    // 语义: 查找1980年年到1999年年出⽣生的球员
   "query": {
     "range": {
       "birthDay":{
@@ -2816,150 +1972,29 @@ lte: less than or equal 小于等于
 }
 ```
 
-- 响应
-```json
-{
-  "took" : 1,
-  "timed_out" : false,
-  "_shards" : {
-    "total" : 1,
-    "successful" : 1,
-    "skipped" : 0,
-    "failed" : 0
-  },
-  "hits" : {
-    "total" : {
-      "value" : 521,
-      "relation" : "eq"
-    },
-    "max_score" : 1.0,
-    "hits" : [
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "1",
-        "_score" : 1.0,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "老鹰",
-          "birthDay" : 831182400000,
-          "country" : "美国",
-          "teamCityEn" : "Atlanta",
-          "code" : "jaylen_adams",
-          "displayAffiliation" : "United States",
-          "displayName" : "杰伦 亚当斯",
-          "schoolType" : "College",
-          "teamConference" : "东部",
-          "teamConferenceEn" : "Eastern",
-          "weight" : "86.2 公斤",
-          "teamCity" : "亚特兰大",
-          "playYear" : 1,
-          "jerseyNo" : "10",
-          "teamNameEn" : "Hawks",
-          "draft" : 2018,
-          "displayNameEn" : "Jaylen Adams",
-          "heightValue" : 1.88,
-          "birthDayStr" : "1996-05-04",
-          "position" : "后卫",
-          "age" : 23,
-          "playerId" : "1629121"
-        }
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "2",
-        "_score" : 1.0,
-        "_source" : {
-          "countryEn" : "New Zealand",
-          "teamName" : "雷霆",
-          "birthDay" : 743140800000,
-          "country" : "新西兰",
-          "teamCityEn" : "Oklahoma City",
-          "code" : "steven_adams",
-          "displayAffiliation" : "Pittsburgh/New Zealand",
-          "displayName" : "斯蒂文 亚当斯",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "120.2 公斤",
-          "teamCity" : "俄克拉荷马城",
-          "playYear" : 6,
-          "jerseyNo" : "12",
-          "teamNameEn" : "Thunder",
-          "draft" : 2013,
-          "displayNameEn" : "Steven Adams",
-          "heightValue" : 2.13,
-          "birthDayStr" : "1993-07-20",
-          "position" : "中锋",
-          "age" : 26,
-          "playerId" : "203500"
-        }
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "3",
-        "_score" : 1.0,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "热火",
-          "birthDay" : 869198400000,
-          "country" : "美国",
-          "teamCityEn" : "Miami",
-          "code" : "bam_adebayo",
-          "displayAffiliation" : "Kentucky/United States",
-          "displayName" : "巴姆 阿德巴约",
-          "schoolType" : "College",
-          "teamConference" : "东部",
-          "teamConferenceEn" : "Eastern",
-          "weight" : "115.7 公斤",
-          "teamCity" : "迈阿密",
-          "playYear" : 2,
-          "jerseyNo" : "13",
-          "teamNameEn" : "Heat",
-          "draft" : 2017,
-          "displayNameEn" : "Bam Adebayo",
-          "heightValue" : 2.08,
-          "birthDayStr" : "1997-07-18",
-          "position" : "中锋-前锋",
-          "age" : 22,
-          "playerId" : "1628389"
-        }
-      }
-    ]
-  }
-}
-
-```
-
 #### 6.4 布尔查询
 
-|   type   |  description    |
-| ---- | ---- |
-|   must   |   必须出现在匹配文档中   |
-|   filter   |   必须出现在文档中，但是不打分   |
-|   must_not   |   不能出现在文档中   |
-|   should   |   应该出现在文档中   |
+| type     | description                  |
+| -------- | ---------------------------- |
+| must     | 必须出现在匹配文档中         |
+| filter   | 必须出现在文档中，但是不打分 |
+| must_not | 不能出现在文档中             |
+| should   | 应该出现在文档中             |
 
 
 ##### 6.4.1 must查询 GET/POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_search
-```
-
-- 请求体
-```json
+GET /person/_search
 {
-    // 语义: 查询名字叫做james的球员
+  // 语义: 查询名字叫做james的人
   "query": {
     "bool": { // 布尔查询
       "must":[ //匹配查询方式
         {
           "match": { // 全文搜索
-            "displayNameEn": "james"
+            "name": "james"
           }
         }
       ]
@@ -2968,142 +2003,21 @@ localhost:9200/nba/_search
   "from": 0,
   "size": 3
 }
-```
-
-- 响应
-```json
-{
-  "took" : 0,
-  "timed_out" : false,
-  "_shards" : {
-    "total" : 1,
-    "successful" : 1,
-    "skipped" : 0,
-    "failed" : 0
-  },
-  "hits" : {
-    "total" : {
-      "value" : 5,
-      "relation" : "eq"
-    },
-    "max_score" : 4.699642,
-    "hits" : [
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "214",
-        "_score" : 4.699642,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "火箭",
-          "birthDay" : 620107200000,
-          "country" : "美国",
-          "teamCityEn" : "Houston",
-          "code" : "james_harden",
-          "displayAffiliation" : "Arizona State/United States",
-          "displayName" : "詹姆斯 哈登",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "99.8 公斤",
-          "teamCity" : "休斯顿",
-          "playYear" : 10,
-          "jerseyNo" : "13",
-          "teamNameEn" : "Rockets",
-          "draft" : 2009,
-          "displayNameEn" : "James Harden",
-          "heightValue" : 1.96,
-          "birthDayStr" : "1989-08-26",
-          "position" : "后卫",
-          "age" : 30,
-          "playerId" : "201935"
-        }
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "266",
-        "_score" : 4.699642,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "国王",
-          "birthDay" : 854082000000,
-          "country" : "美国",
-          "teamCityEn" : "Sacramento",
-          "code" : "justin_james",
-          "displayAffiliation" : "United States",
-          "displayName" : "贾斯汀 詹姆斯",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "86.2 公斤",
-          "teamCity" : "萨克拉门托",
-          "playYear" : 0,
-          "jerseyNo" : "",
-          "teamNameEn" : "Kings",
-          "draft" : 2019,
-          "displayNameEn" : "Justin James",
-          "heightValue" : 2.01,
-          "birthDayStr" : "1997-01-24",
-          "position" : "后卫-前锋",
-          "age" : 22,
-          "playerId" : "1629713"
-        }
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "267",
-        "_score" : 4.699642,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "湖人",
-          "birthDay" : 473230800000,
-          "country" : "美国",
-          "teamCityEn" : "Los Angeles",
-          "code" : "lebron_james",
-          "displayAffiliation" : "No College/United States",
-          "displayName" : "勒布朗 詹姆斯",
-          "schoolType" : "High School",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "113.4 公斤",
-          "teamCity" : "洛杉矶",
-          "playYear" : 16,
-          "jerseyNo" : "23",
-          "teamNameEn" : "Lakers",
-          "draft" : 2003,
-          "displayNameEn" : "LeBron James",
-          "heightValue" : 2.03,
-          "birthDayStr" : "1984-12-30",
-          "position" : "前锋",
-          "age" : 35,
-          "playerId" : "2544"
-        }
-      }
-    ]
-  }
-}
-
 ```
 
 ##### 6.4.2 filter查询 GET/POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_search
-```
-
-- 请求体
-```json
+GET /person/_search
 {
-    // 语义: 查询名字叫做james的球员 不包含打分
+  // 语义: 查询名字叫做james的球员 不包含打分
   "query": {
     "bool": {
       "filter":[
         {
           "match": {
-            "displayNameEn": "james"
+            "name": "james"
           }
         }
       ]
@@ -3114,134 +2028,17 @@ localhost:9200/nba/_search
 }
 ```
 
-- 响应
-```json
-{
-  "took" : 0,
-  "timed_out" : false,
-  "_shards" : {
-    "total" : 1,
-    "successful" : 1,
-    "skipped" : 0,
-    "failed" : 0
-  },
-  "hits" : {
-    "total" : {
-      "value" : 5,
-      "relation" : "eq"
-    },
-    "max_score" : 0.0,
-    "hits" : [
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "158",
-        "_score" : 0.0, // 不包含打分
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "76人",
-          "birthDay" : 646804800000,
-          "country" : "美国",
-          "teamCityEn" : "Philadelphia",
-          "code" : "james_ennis iii",
-          "displayAffiliation" : "Cal State-Long Beach/United States",
-          "displayName" : "詹姆斯 恩尼斯三世",
-          "schoolType" : "College",
-          "teamConference" : "东部",
-          "teamConferenceEn" : "Eastern",
-          "weight" : "95.3 公斤",
-          "teamCity" : "费城",
-          "playYear" : 5,
-          "jerseyNo" : "11",
-          "teamNameEn" : "76ers",
-          "draft" : 2013,
-          "displayNameEn" : "James Ennis III",
-          "heightValue" : 2.01,
-          "birthDayStr" : "1990-07-01",
-          "position" : "前锋",
-          "age" : 29,
-          "playerId" : "203516"
-        }
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "214",
-        "_score" : 0.0,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "火箭",
-          "birthDay" : 620107200000,
-          "country" : "美国",
-          "teamCityEn" : "Houston",
-          "code" : "james_harden",
-          "displayAffiliation" : "Arizona State/United States",
-          "displayName" : "詹姆斯 哈登",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "99.8 公斤",
-          "teamCity" : "休斯顿",
-          "playYear" : 10,
-          "jerseyNo" : "13",
-          "teamNameEn" : "Rockets",
-          "draft" : 2009,
-          "displayNameEn" : "James Harden",
-          "heightValue" : 1.96,
-          "birthDayStr" : "1989-08-26",
-          "position" : "后卫",
-          "age" : 30,
-          "playerId" : "201935"
-        }
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "266",
-        "_score" : 0.0,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "国王",
-          "birthDay" : 854082000000,
-          "country" : "美国",
-          "teamCityEn" : "Sacramento",
-          "code" : "justin_james",
-          "displayAffiliation" : "United States",
-          "displayName" : "贾斯汀 詹姆斯",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "86.2 公斤",
-          "teamCity" : "萨克拉门托",
-          "playYear" : 0,
-          "jerseyNo" : "",
-          "teamNameEn" : "Kings",
-          "draft" : 2019,
-          "displayNameEn" : "Justin James",
-          "heightValue" : 2.01,
-          "birthDayStr" : "1997-01-24",
-          "position" : "后卫-前锋",
-          "age" : 22,
-          "playerId" : "1629713"
-        }
-      }
-    ]
-  }
-}
-
-```
-
 ##### 6.4.3 must_not查询 GET/POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
 ```json
 {
-    // 语义: 查询名字叫做james的球员,一定不在东部的
+    // 语义: 查询名字叫做james的人,一定不在东部的
   "query": {
     "bool": {
       "filter":[
@@ -3267,128 +2064,11 @@ localhost:9200/nba/_search
 }
 ```
 
-- 响应
-```json
-{
-  "took" : 0,
-  "timed_out" : false,
-  "_shards" : {
-    "total" : 1,
-    "successful" : 1,
-    "skipped" : 0,
-    "failed" : 0
-  },
-  "hits" : {
-    "total" : {
-      "value" : 5,
-      "relation" : "eq"
-    },
-    "max_score" : 0.0,
-    "hits" : [
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "158",
-        "_score" : 0.0,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "76人",
-          "birthDay" : 646804800000,
-          "country" : "美国",
-          "teamCityEn" : "Philadelphia",
-          "code" : "james_ennis iii",
-          "displayAffiliation" : "Cal State-Long Beach/United States",
-          "displayName" : "詹姆斯 恩尼斯三世",
-          "schoolType" : "College",
-          "teamConference" : "东部",
-          "teamConferenceEn" : "Eastern",
-          "weight" : "95.3 公斤",
-          "teamCity" : "费城",
-          "playYear" : 5,
-          "jerseyNo" : "11",
-          "teamNameEn" : "76ers",
-          "draft" : 2013,
-          "displayNameEn" : "James Ennis III",
-          "heightValue" : 2.01,
-          "birthDayStr" : "1990-07-01",
-          "position" : "前锋",
-          "age" : 29,
-          "playerId" : "203516"
-        }
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "214",
-        "_score" : 0.0,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "火箭",
-          "birthDay" : 620107200000,
-          "country" : "美国",
-          "teamCityEn" : "Houston",
-          "code" : "james_harden",
-          "displayAffiliation" : "Arizona State/United States",
-          "displayName" : "詹姆斯 哈登",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "99.8 公斤",
-          "teamCity" : "休斯顿",
-          "playYear" : 10,
-          "jerseyNo" : "13",
-          "teamNameEn" : "Rockets",
-          "draft" : 2009,
-          "displayNameEn" : "James Harden",
-          "heightValue" : 1.96,
-          "birthDayStr" : "1989-08-26",
-          "position" : "后卫",
-          "age" : 30,
-          "playerId" : "201935"
-        }
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "266",
-        "_score" : 0.0,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "国王",
-          "birthDay" : 854082000000,
-          "country" : "美国",
-          "teamCityEn" : "Sacramento",
-          "code" : "justin_james",
-          "displayAffiliation" : "United States",
-          "displayName" : "贾斯汀 詹姆斯",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "86.2 公斤",
-          "teamCity" : "萨克拉门托",
-          "playYear" : 0,
-          "jerseyNo" : "",
-          "teamNameEn" : "Kings",
-          "draft" : 2019,
-          "displayNameEn" : "Justin James",
-          "heightValue" : 2.01,
-          "birthDayStr" : "1997-01-24",
-          "position" : "后卫-前锋",
-          "age" : 22,
-          "playerId" : "1629713"
-        }
-      }
-    ]
-  }
-}
-
-```
-
 ##### 6.4.4 should 第一种 查询 GET/POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -3428,122 +2108,6 @@ localhost:9200/nba/_search
   },
   "from": 0,
   "size": 3
-}
-```
-
-- 响应
-```json
-{
-  "took" : 0,
-  "timed_out" : false,
-  "_shards" : {
-    "total" : 1,
-    "successful" : 1,
-    "skipped" : 0,
-    "failed" : 0
-  },
-  "hits" : {
-    "total" : {
-      "value" : 5,
-      "relation" : "eq"
-    },
-    "max_score" : 1.0,
-    "hits" : [
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "267",
-        "_score" : 1.0,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "湖人",
-          "birthDay" : 473230800000,
-          "country" : "美国",
-          "teamCityEn" : "Los Angeles",
-          "code" : "lebron_james",
-          "displayAffiliation" : "No College/United States",
-          "displayName" : "勒布朗 詹姆斯",
-          "schoolType" : "High School",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "113.4 公斤",
-          "teamCity" : "洛杉矶",
-          "playYear" : 16,
-          "jerseyNo" : "23",
-          "teamNameEn" : "Lakers",
-          "draft" : 2003,
-          "displayNameEn" : "LeBron James",
-          "heightValue" : 2.03,
-          "birthDayStr" : "1984-12-30",
-          "position" : "前锋",
-          "age" : 35,
-          "playerId" : "2544"
-        }
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "158",
-        "_score" : 0.0,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "76人",
-          "birthDay" : 646804800000,
-          "country" : "美国",
-          "teamCityEn" : "Philadelphia",
-          "code" : "james_ennis iii",
-          "displayAffiliation" : "Cal State-Long Beach/United States",
-          "displayName" : "詹姆斯 恩尼斯三世",
-          "schoolType" : "College",
-          "teamConference" : "东部",
-          "teamConferenceEn" : "Eastern",
-          "weight" : "95.3 公斤",
-          "teamCity" : "费城",
-          "playYear" : 5,
-          "jerseyNo" : "11",
-          "teamNameEn" : "76ers",
-          "draft" : 2013,
-          "displayNameEn" : "James Ennis III",
-          "heightValue" : 2.01,
-          "birthDayStr" : "1990-07-01",
-          "position" : "前锋",
-          "age" : 29,
-          "playerId" : "203516"
-        }
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "214",
-        "_score" : 0.0,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "火箭",
-          "birthDay" : 620107200000,
-          "country" : "美国",
-          "teamCityEn" : "Houston",
-          "code" : "james_harden",
-          "displayAffiliation" : "Arizona State/United States",
-          "displayName" : "詹姆斯 哈登",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "99.8 公斤",
-          "teamCity" : "休斯顿",
-          "playYear" : 10,
-          "jerseyNo" : "13",
-          "teamNameEn" : "Rockets",
-          "draft" : 2009,
-          "displayNameEn" : "James Harden",
-          "heightValue" : 1.96,
-          "birthDayStr" : "1989-08-26",
-          "position" : "后卫",
-          "age" : 30,
-          "playerId" : "201935"
-        }
-      }
-    ]
-  }
 }
 ```
 
@@ -3614,7 +2178,7 @@ localhost:9200/nba/_search
     "max_score" : 1.0,
     "hits" : [
       {
-        "_index" : "nba",
+        "_index" : "person",
         "_type" : "_doc",
         "_id" : "267",
         "_score" : 1.0,
@@ -3655,7 +2219,7 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -3679,137 +2243,11 @@ localhost:9200/nba/_search
 }
 ```
 
-- 响应
-```json
-{
-  "took" : 0,
-  "timed_out" : false,
-  "_shards" : {
-    "total" : 1,
-    "successful" : 1,
-    "skipped" : 0,
-    "failed" : 0
-  },
-  "hits" : {
-    "total" : {
-      "value" : 21,
-      "relation" : "eq"
-    },
-    "max_score" : null,
-    "hits" : [
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "395",
-        "_score" : null,
-        "_source" : {
-          "countryEn" : "Brazil",
-          "teamName" : "火箭",
-          "birthDay" : 400737600000,
-          "country" : "巴西",
-          "teamCityEn" : "Houston",
-          "code" : "nene_hilario",
-          "displayAffiliation" : "Brazil",
-          "displayName" : "内内",
-          "schoolType" : "",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "113.4 公斤",
-          "teamCity" : "休斯顿",
-          "playYear" : 17,
-          "jerseyNo" : "42",
-          "teamNameEn" : "Rockets",
-          "draft" : 2002,
-          "displayNameEn" : "Nene",
-          "heightValue" : 2.11,
-          "birthDayStr" : "1982-09-13",
-          "position" : "中锋-前锋",
-          "age" : 37,
-          "playerId" : "2403"
-        },
-        "sort" : [
-          17
-        ]
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "425",
-        "_score" : null,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "火箭",
-          "birthDay" : 484200000000,
-          "country" : "美国",
-          "teamCityEn" : "Houston",
-          "code" : "chris_paul",
-          "displayAffiliation" : "Wake Forest/United States",
-          "displayName" : "克里斯 保罗",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "79.4 公斤",
-          "teamCity" : "休斯顿",
-          "playYear" : 14,
-          "jerseyNo" : "3",
-          "teamNameEn" : "Rockets",
-          "draft" : 2005,
-          "displayNameEn" : "Chris Paul",
-          "heightValue" : 1.83,
-          "birthDayStr" : "1985-05-06",
-          "position" : "后卫",
-          "age" : 34,
-          "playerId" : "101108"
-        },
-        "sort" : [
-          14
-        ]
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "206",
-        "_score" : null,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "火箭",
-          "birthDay" : 507099600000,
-          "country" : "美国",
-          "teamCityEn" : "Houston",
-          "code" : "gerald_green",
-          "displayAffiliation" : "No College/United States",
-          "displayName" : "杰拉德 格林",
-          "schoolType" : "High School",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "93.0 公斤",
-          "teamCity" : "休斯顿",
-          "playYear" : 12,
-          "jerseyNo" : "14",
-          "teamNameEn" : "Rockets",
-          "draft" : 2005,
-          "displayNameEn" : "Gerald Green",
-          "heightValue" : 2.01,
-          "birthDayStr" : "1986-01-26",
-          "position" : "后卫-前锋",
-          "age" : 33,
-          "playerId" : "101123"
-        },
-        "sort" : [
-          12
-        ]
-      }
-    ]
-  }
-}
-
-```
-
 ##### 6.5.2 第一种排序查询 GET/POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -3838,143 +2276,16 @@ localhost:9200/nba/_search
 }
 ```
 
-- 响应
-```json
-{
-  "took" : 0,
-  "timed_out" : false,
-  "_shards" : {
-    "total" : 1,
-    "successful" : 1,
-    "skipped" : 0,
-    "failed" : 0
-  },
-  "hits" : {
-    "total" : {
-      "value" : 21,
-      "relation" : "eq"
-    },
-    "max_score" : null,
-    "hits" : [
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "395",
-        "_score" : null,
-        "_source" : {
-          "countryEn" : "Brazil",
-          "teamName" : "火箭",
-          "birthDay" : 400737600000,
-          "country" : "巴西",
-          "teamCityEn" : "Houston",
-          "code" : "nene_hilario",
-          "displayAffiliation" : "Brazil",
-          "displayName" : "内内",
-          "schoolType" : "",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "113.4 公斤",
-          "teamCity" : "休斯顿",
-          "playYear" : 17,
-          "jerseyNo" : "42",
-          "teamNameEn" : "Rockets",
-          "draft" : 2002,
-          "displayNameEn" : "Nene",
-          "heightValue" : 2.11,
-          "birthDayStr" : "1982-09-13",
-          "position" : "中锋-前锋",
-          "age" : 37,
-          "playerId" : "2403"
-        },
-        "sort" : [
-          17,
-          2.11
-        ]
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "425",
-        "_score" : null,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "火箭",
-          "birthDay" : 484200000000,
-          "country" : "美国",
-          "teamCityEn" : "Houston",
-          "code" : "chris_paul",
-          "displayAffiliation" : "Wake Forest/United States",
-          "displayName" : "克里斯 保罗",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "79.4 公斤",
-          "teamCity" : "休斯顿",
-          "playYear" : 14,
-          "jerseyNo" : "3",
-          "teamNameEn" : "Rockets",
-          "draft" : 2005,
-          "displayNameEn" : "Chris Paul",
-          "heightValue" : 1.83,
-          "birthDayStr" : "1985-05-06",
-          "position" : "后卫",
-          "age" : 34,
-          "playerId" : "101108"
-        },
-        "sort" : [
-          14,
-          1.83
-        ]
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "206",
-        "_score" : null,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "火箭",
-          "birthDay" : 507099600000,
-          "country" : "美国",
-          "teamCityEn" : "Houston",
-          "code" : "gerald_green",
-          "displayAffiliation" : "No College/United States",
-          "displayName" : "杰拉德 格林",
-          "schoolType" : "High School",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "93.0 公斤",
-          "teamCity" : "休斯顿",
-          "playYear" : 12,
-          "jerseyNo" : "14",
-          "teamNameEn" : "Rockets",
-          "draft" : 2005,
-          "displayNameEn" : "Gerald Green",
-          "heightValue" : 2.01,
-          "birthDayStr" : "1986-01-26",
-          "position" : "后卫-前锋",
-          "age" : 33,
-          "playerId" : "101123"
-        },
-        "sort" : [
-          12,
-          2.01
-        ]
-      }
-    ]
-  }
-}
-```
 
 #### 6.6 聚合查询指标聚合
 
-- ES聚合分析是什么
+- ES聚合分析是什么
 
 1. 聚合分析是数据库中重要的功能特性，完成对⼀个查询的数据集中数据的聚合计算，如：找出某字段（或计算表达式的结果）的最⼤值、最⼩值，计算和、平均值等。ES作为搜索引擎兼数据库，同样提供了强⼤的聚合分析能力。
 
 2. 对⼀个数据集求最大、最小、和、平均值等指标的聚合，在ES中称为**指标聚合**
 
-3. 而关系型数据库中除了有聚合函数外，还可以对查询出的数据行分组group by，再在组上进行指标聚合。在ES中称为**桶聚合**
+3. 而关系型数据库中除了有聚合函数外，还可以对查询出的数据行分组group by，再在组上进行指标聚合。在ES中称为**桶聚合**
 
 ##### 6.6.1 max min sum avg 指标聚合查询 GET/POST
 
@@ -3982,7 +2293,7 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -4038,7 +2349,7 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -4094,7 +2405,7 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_count
+localhost:9200/person/_count
 ```
 
 - 请求体
@@ -4127,7 +2438,7 @@ localhost:9200/nba/_count
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -4184,7 +2495,7 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -4245,13 +2556,13 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
 ```json
 {
-    // 查出火箭队球员的年龄Extend stats
+    // 查出火箭队球员的年龄Extend stats
   "query": {
     "term": {
       "teamNameEn": "Rockets"
@@ -4313,13 +2624,13 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
 ```json
 {
-    // 语义: 查出火箭的球员的年龄占比
+    // 语义: 查出火箭的球员的年龄占比
   "query": {
     "term": {
       "teamNameEn": "Rockets"
@@ -4384,7 +2695,7 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -4525,7 +2836,7 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -4611,7 +2922,7 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -4686,7 +2997,7 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -4774,7 +3085,7 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -4856,7 +3167,7 @@ localhost:9200/nba/_search
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -4951,17 +3262,17 @@ localhost:9200/nba/_search
 
 ##### 6.7.6 date histogram aggregation 时间范围分组聚合查询 GET/POST
 
-- 按天、月、年等进行聚合统计。可按 year (1y), quarter (1q), month (1M), week (1w), day (1d), hour (1h), minute (1m), second (1s) 间隔聚合
+- 按天、月、年等进行聚合统计。可按 year (1y), quarter (1q), month (1M), week (1w), day (1d), hour (1h), minute (1m), second (1s) 间隔聚合
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
 ```json
 {
-    // 语义: 球员按出⽣生年年分组
+    // 语义: 球员按出⽣生年年分组
   "aggs": {
     "birthday_aggs": {
       "date_histogram": {
@@ -4975,164 +3286,16 @@ localhost:9200/nba/_search
 }
 ```
 
-- 响应
-```json
-{
-  "took" : 1,
-  "timed_out" : false,
-  "_shards" : {
-    "total" : 1,
-    "successful" : 1,
-    "skipped" : 0,
-    "failed" : 0
-  },
-  "hits" : {
-    "total" : {
-      "value" : 566,
-      "relation" : "eq"
-    },
-    "max_score" : null,
-    "hits" : [ ]
-  },
-  "aggregations" : {
-    "birthday_aggs" : {
-      "buckets" : [
-        {
-          "key_as_string" : "1977",
-          "key" : 220924800000,
-          "doc_count" : 1
-        },
-        {
-          "key_as_string" : "1978",
-          "key" : 252460800000,
-          "doc_count" : 1
-        },
-        {
-          "key_as_string" : "1979",
-          "key" : 283996800000,
-          "doc_count" : 0
-        },
-        {
-          "key_as_string" : "1980",
-          "key" : 315532800000,
-          "doc_count" : 3
-        },
-        {
-          "key_as_string" : "1981",
-          "key" : 347155200000,
-          "doc_count" : 2
-        },
-        {
-          "key_as_string" : "1982",
-          "key" : 378691200000,
-          "doc_count" : 3
-        },
-        {
-          "key_as_string" : "1983",
-          "key" : 410227200000,
-          "doc_count" : 2
-        },
-        {
-          "key_as_string" : "1984",
-          "key" : 441763200000,
-          "doc_count" : 8
-        },
-        {
-          "key_as_string" : "1985",
-          "key" : 473385600000,
-          "doc_count" : 15
-        },
-        {
-          "key_as_string" : "1986",
-          "key" : 504921600000,
-          "doc_count" : 19
-        },
-        {
-          "key_as_string" : "1987",
-          "key" : 536457600000,
-          "doc_count" : 16
-        },
-        {
-          "key_as_string" : "1988",
-          "key" : 567993600000,
-          "doc_count" : 27
-        },
-        {
-          "key_as_string" : "1989",
-          "key" : 599616000000,
-          "doc_count" : 24
-        },
-        {
-          "key_as_string" : "1990",
-          "key" : 631152000000,
-          "doc_count" : 35
-        },
-        {
-          "key_as_string" : "1991",
-          "key" : 662688000000,
-          "doc_count" : 31
-        },
-        {
-          "key_as_string" : "1992",
-          "key" : 694224000000,
-          "doc_count" : 36
-        },
-        {
-          "key_as_string" : "1993",
-          "key" : 725846400000,
-          "doc_count" : 46
-        },
-        {
-          "key_as_string" : "1994",
-          "key" : 757382400000,
-          "doc_count" : 45
-        },
-        {
-          "key_as_string" : "1995",
-          "key" : 788918400000,
-          "doc_count" : 57
-        },
-        {
-          "key_as_string" : "1996",
-          "key" : 820454400000,
-          "doc_count" : 56
-        },
-        {
-          "key_as_string" : "1997",
-          "key" : 852076800000,
-          "doc_count" : 57
-        },
-        {
-          "key_as_string" : "1998",
-          "key" : 883612800000,
-          "doc_count" : 39
-        },
-        {
-          "key_as_string" : "1999",
-          "key" : 915148800000,
-          "doc_count" : 28
-        },
-        {
-          "key_as_string" : "2000",
-          "key" : 946684800000,
-          "doc_count" : 15
-        }
-      ]
-    }
-  }
-}
-
-```
 
 #### 6.8 query_string 查询
 
-- query_string 查询，如果熟悉lucene的查询语法，我们可以直接⽤用lucene查询语法写⼀一个查询串进行查询，ES中接到请求后，通过查询解析器 ,解析查询串生成对应的查询。
+- query_string 查询，如果熟悉lucene的查询语法，我们可以直接⽤用lucene查询语法写⼀一个查询串进行查询，ES中接到请求后，通过查询解析器 ,解析查询串生成对应的查询。
 
 ##### 6.8.1 query_string AND OR 单字段查询 GET/POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -5150,128 +3313,12 @@ localhost:9200/nba/_search
 }
 ```
 
-- 响应
-```json
-{
-  "took" : 0,
-  "timed_out" : false,
-  "_shards" : {
-    "total" : 1,
-    "successful" : 1,
-    "skipped" : 0,
-    "failed" : 0
-  },
-  "hits" : {
-    "total" : {
-      "value" : 7,
-      "relation" : "eq"
-    },
-    "max_score" : 5.4989905,
-    "hits" : [
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "123",
-        "_score" : 5.4989905,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "独行侠",
-          "birthDay" : 651384000000,
-          "country" : "美国",
-          "teamCityEn" : "Dallas",
-          "code" : "seth_curry",
-          "displayAffiliation" : "Duke/United States",
-          "displayName" : "賽斯 库里",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "83.9 公斤",
-          "teamCity" : "达拉斯",
-          "playYear" : 6,
-          "jerseyNo" : "30",
-          "teamNameEn" : "Mavericks",
-          "draft" : 2013,
-          "displayNameEn" : "Seth Curry",
-          "heightValue" : 1.88,
-          "birthDayStr" : "1990-08-23",
-          "position" : "后卫",
-          "age" : 29,
-          "playerId" : "203552"
-        }
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "124",
-        "_score" : 5.4989905,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "勇士",
-          "birthDay" : 574318800000,
-          "country" : "美国",
-          "teamCityEn" : "Golden State",
-          "code" : "stephen_curry",
-          "displayAffiliation" : "Davidson/United States",
-          "displayName" : "斯蒂芬 库里",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "86.2 公斤",
-          "teamCity" : "金州",
-          "playYear" : 10,
-          "jerseyNo" : "30",
-          "teamNameEn" : "Warriors",
-          "draft" : 2009,
-          "displayNameEn" : "Stephen Curry",
-          "heightValue" : 1.9,
-          "birthDayStr" : "1988-03-14",
-          "position" : "后卫",
-          "age" : 31,
-          "playerId" : "201939"
-        }
-      },
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "214",
-        "_score" : 4.699642,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "火箭",
-          "birthDay" : 620107200000,
-          "country" : "美国",
-          "teamCityEn" : "Houston",
-          "code" : "james_harden",
-          "displayAffiliation" : "Arizona State/United States",
-          "displayName" : "詹姆斯 哈登",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "99.8 公斤",
-          "teamCity" : "休斯顿",
-          "playYear" : 10,
-          "jerseyNo" : "13",
-          "teamNameEn" : "Rockets",
-          "draft" : 2009,
-          "displayNameEn" : "James Harden",
-          "heightValue" : 1.96,
-          "birthDayStr" : "1989-08-26",
-          "position" : "后卫",
-          "age" : 30,
-          "playerId" : "201935"
-        }
-      }
-    ]
-  }
-}
-
-```
 
 ##### 6.8.2 query_string AND OR 多字段查询 GET/POST请求
 
 - 请求
 ```java
-localhost:9200/nba/_search
+localhost:9200/person/_search
 ```
 
 - 请求体
@@ -5291,72 +3338,18 @@ localhost:9200/nba/_search
 }
 ```
 
-- 响应
-```json
-{
-  "took" : 0,
-  "timed_out" : false,
-  "_shards" : {
-    "total" : 1,
-    "successful" : 1,
-    "skipped" : 0,
-    "failed" : 0
-  },
-  "hits" : {
-    "total" : {
-      "value" : 1,
-      "relation" : "eq"
-    },
-    "max_score" : 7.9719486,
-    "hits" : [
-      {
-        "_index" : "nba",
-        "_type" : "_doc",
-        "_id" : "214",
-        "_score" : 7.9719486,
-        "_source" : {
-          "countryEn" : "United States",
-          "teamName" : "火箭",
-          "birthDay" : 620107200000,
-          "country" : "美国",
-          "teamCityEn" : "Houston",
-          "code" : "james_harden",
-          "displayAffiliation" : "Arizona State/United States",
-          "displayName" : "詹姆斯 哈登",
-          "schoolType" : "College",
-          "teamConference" : "西部",
-          "teamConferenceEn" : "Western",
-          "weight" : "99.8 公斤",
-          "teamCity" : "休斯顿",
-          "playYear" : 10,
-          "jerseyNo" : "13",
-          "teamNameEn" : "Rockets",
-          "draft" : 2009,
-          "displayNameEn" : "James Harden",
-          "heightValue" : 1.96,
-          "birthDayStr" : "1989-08-26",
-          "position" : "后卫",
-          "age" : 30,
-          "playerId" : "201935"
-        }
-      }
-    ]
-  }
-}
-
-```
 
 ### 七、ElasticSerach 高级搜索
 
 #### 7.1 索引别名的使用
 
-- 在开发中，随着业务需求的迭代，较老的业务逻辑就要面临更新甚至是重构，而对于es来说，为了了适应新的业务逻辑，可能就要对原有的索引做一些修改，比如对某些字段做调整，甚至是重建索引。而做这些操作的时候，可能会对业务造成影响，甚至是停机调整等问题。由此，es提供了索引别名来解决这些问题。 索引别名就像一个快捷方式或是软连接，可以指向一个或多个索引，也可以给任意一个需要索引名的API来使⽤用。别名的应用为程序提供了极大地灵活性
+- 在开发中，随着业务需求的迭代，较老的业务逻辑就要面临更新甚至是重构，而对于es来说，为了了适应新的业务逻辑，可能就要对原有的索引做一些修改，比如对某些字段做调整，甚至是重建索引。而做这些操作的时候，可能会对业务造成影响，甚至是停机调整等问题。由此，es提供了索引别名来解决这些问题。 索引别名就像一个快捷方式或是软连接，可以指向一个或多个索引，也可以给任意一个需要索引名的API来使⽤用。别名的应用为程序提供了极大地灵活性
 
 ##### 7.1.1 查询别名 GET请求
 
 - 请求
 ```java
-localhost:9200/nba/_alias // 查询nba别名
+localhost:9200/person/_alias // 查询person别名
 localhost:9200/_aliases  // 查询所有别名
 ```
 
@@ -5364,7 +3357,7 @@ localhost:9200/_aliases  // 查询所有别名
 ```json
 {
   // 语义: 查看所有别名
-    "nba": {
+    "person": {
         "aliases": {}
     },
     ".kibana_task_manager": {
@@ -5389,12 +3382,12 @@ localhost:9200/_aliases
 - 请求体
 ```json
 {
-    // 语义: nba 新建别名nba_v1.0
+    // 语义: person 新建别名person_v1.0
   "actions": [
     {
       "add": {
-        "index": "nba",
-        "alias": "nba_v1.0"
+        "index": "person",
+        "alias": "person_v1.0"
       }
     }
   ]
@@ -5418,12 +3411,12 @@ localhost:9200/_aliases
 - 请求体
 ```json
 {
-  // 语义: 删除nba的nba_v1.0别名
+  // 语义: 删除person的person_v1.0别名
   "actions": [
     {
       "remove": {
-        "index": "nba",
-        "alias": "nba_v1.0"
+        "index": "person",
+        "alias": "person_v1.0"
       }
     }
   ]
@@ -5446,18 +3439,18 @@ localhost:9200/_aliases
 - 请求体
 ```json
 {
-  // 先删除nba_v1.0 别名 在新增 nba_v2.0别名,即是重命名
+  // 先删除person_v1.0 别名 在新增 person_v2.0别名,即是重命名
   "actions": [
     {
       "remove": {
-        "index": "nba",
-        "alias": "nba_v1.0"
+        "index": "person",
+        "alias": "person_v1.0"
       }
     },
     {
       "add": {
-        "index": "nba",
-        "alias": "nba_v2.0"
+        "index": "person",
+        "alias": "person_v2.0"
       }
     }
   ]
@@ -5474,15 +3467,15 @@ localhost:9200/_aliases
 
 - 请求
 ```java
-localhost:9200/nba_v2.0
+localhost:9200/person_v2.0
 ```
 
 - 响应
 ```json
 {
-    "nba": {
+    "person": {
         "aliases": {
-            "nba_v2.0": {}
+            "person_v2.0": {}
         },
         "mappings": {
             "properties": {
@@ -5566,7 +3559,7 @@ localhost:9200/nba_v2.0
                 "version": {
                     "created": "7020199"
                 },
-                "provided_name": "nba"
+                "provided_name": "person"
             }
         }
     }
@@ -5579,13 +3572,13 @@ localhost:9200/nba_v2.0
 
 - 请求
 ```java
-localhost:9200/nba_v2.0/_doc/566
+localhost:9200/person_v2.0/_doc/566
 ```
 
 - 请求体
 ```json
 {
-  // 语义: 通过别名nba_v2.0 修改id为566的球员
+  // 语义: 通过别名person_v2.0 修改id为566的球员
     "countryEn": "Croatia",
     "teamName": "快船",
     "birthDay": 858661200000,
@@ -5616,7 +3609,7 @@ localhost:9200/nba_v2.0/_doc/566
 - 响应
 ```json
 {
-    "_index": "nba",
+    "_index": "person",
     "_type": "_doc",
     "_id": "566",
     "_version": 2,
@@ -5633,11 +3626,11 @@ localhost:9200/nba_v2.0/_doc/566
 
 #### 7.2 如何重建索引
 
-- Elasticsearch是⼀一个实时的分布式搜索引擎，为用户提供搜索服务，当我们决定存储某种数据时，在创建索引的时候需要将数据结构完整确定下来，于此同时索引的设定和很多固定配置将用不能改变。当需要改变数据结构时，就需要重新建立索引，为此，Elastic团队提供了很多辅助工具帮助开发人员进行重建索引
+- Elasticsearch是⼀一个实时的分布式搜索引擎，为用户提供搜索服务，当我们决定存储某种数据时，在创建索引的时候需要将数据结构完整确定下来，于此同时索引的设定和很多固定配置将用不能改变。当需要改变数据结构时，就需要重新建立索引，为此，Elastic团队提供了很多辅助工具帮助开发人员进行重建索引
 
 - 步骤
 
-1. nba取一个别名nba_latest, nba_latest作为对外使用
+1. person取一个别名person_latest, person_latest作为对外使用
 
 - POST 请求
 ```java
@@ -5650,8 +3643,8 @@ localhost:9200/_aliases
   "actions": [
     {
       "add": {
-        "index": "nba",
-        "alias": "nba_latest"
+        "index": "person",
+        "alias": "person_latest"
       }
     }
   ]
@@ -5666,12 +3659,12 @@ localhost:9200/_aliases
 
 ```
 
-2. 新增一个索引nba_20220101，结构复制于nba索引，根据业务要求修改字段
+2. 新增一个索引person_20220101，结构复制于person索引，根据业务要求修改字段
 
 
 - PUT 请求
 ```java
-localhost:9200/nba_20220101
+localhost:9200/person_20220101
 ```
 
 - 请求体
@@ -5758,11 +3751,11 @@ localhost:9200/nba_20220101
 {
     "acknowledged": true,
     "shards_acknowledged": true,
-    "index": "nba_20220101"
+    "index": "person_20220101"
 }
 ```
 
-3. 将nba数据同步到nba_20220101
+3. 将person数据同步到person_20220101
 
 - POST 请求
 ```java
@@ -5774,10 +3767,10 @@ localhost:9200/_reindex?wait_for_completion=false  // 异步请求 直接返回
 ```json
 {
   "source": {
-    "index": "nba"
+    "index": "person"
   },
   "dest": {
-    "index": "nba_20220101"
+    "index": "person_20220101"
   }
 }
 ```
@@ -5806,7 +3799,7 @@ localhost:9200/_reindex?wait_for_completion=false  // 异步请求 直接返回
 
 ```
 
-4. 给nba_20220101添加别名nba_latest，删除nba别名nba_latest
+4. 给person_20220101添加别名person_latest，删除person别名person_latest
 
 - POST请求
 ```java
@@ -5819,8 +3812,8 @@ localhost:9200/_aliases
   "actions": [
     {
       "add": {
-        "index": "nba_20220101",
-        "alias": "nba_latest"
+        "index": "person_20220101",
+        "alias": "person_latest"
       }
     }
   ]
@@ -5835,11 +3828,11 @@ localhost:9200/_aliases
 
 ```
 
-5. 删除nba索引
+5. 删除person索引
 
 - DELETE请求
 ```java
-localhost:9200/nba
+localhost:9200/person
 ```
 
 - 响应
@@ -5851,9 +3844,9 @@ localhost:9200/nba
 
 #### 7.3 refresh操作
 
-- 理想的搜索
+- 理想的搜索
 
-1. 新的数据一添加到索引中立马就能搜索到，但是真实情况不是这样的
+1. 新的数据一添加到索引中立马就能搜索到，但是真实情况不是这样的
 
 2. 我们使⽤用链式命令请求，先添加⼀一个⽂文档，再⽴立刻搜索
 
@@ -5874,7 +3867,7 @@ application/json'	-d '{ "displayName": "杨超越" }'
 
 curl	-X GET localhost:9200/star/_doc/_search?pretty
 ```
-4. 修改默认更更新时间(默认时间是1s)
+4. 修改默认更更新时间(默认时间是1s)
 
 
 - PUT 请求
@@ -5929,13 +3922,13 @@ localhost:9200/star/_settings
 
 - 请求
 ```java
-localhost:9200/nba_latest/_search
+localhost:9200/person_latest/_search
 ```
 
 - 请求体
 ```json
 {
-  // 语义: 查找NBA james球员，对james做高亮显示
+  // 语义: 查找person james球员，对james做高亮显示
   "query": {
     "match": {
       "displayNameEn": "james"
@@ -5989,7 +3982,7 @@ localhost:9200/nba_latest/_search
     "max_score" : 4.699642,
     "hits" : [
       {
-        "_index" : "nba_20220101",
+        "_index" : "person_20220101",
         "_type" : "_doc",
         "_id" : "214",
         "_score" : 4.699642,
@@ -6026,7 +4019,7 @@ localhost:9200/nba_latest/_search
         }
       },
       {
-        "_index" : "nba_20220101",
+        "_index" : "person_20220101",
         "_type" : "_doc",
         "_id" : "266",
         "_score" : 4.699642,
@@ -6070,9 +4063,9 @@ localhost:9200/nba_latest/_search
 
 #### 7.5 查询建议
 
-- 查询建议是什么
+- 查询建议是什么
 
-1. 查询建议，是为了给用户提供更好的搜索体验。包括：词条检查，自动补全
+1. 查询建议，是为了给用户提供更好的搜索体验。包括：词条检查，自动补全
 
 
 - Suggester
@@ -6082,21 +4075,21 @@ localhost:9200/nba_latest/_search
 3. Completion suggester
 
 
-|   text   |   指定搜索文本   |
-| ---- | ---- |
-|   field   |   获取建议词的搜索字段   |
-|   analyzer   |   指定分词器   |
-|   size   |   每个词返回的最大建议词数   |
-|   sort   |   如何对建议词进行排序，可用选项:score:先按评分排序、再按文档频率排、term顺序；frequency:先按文档频率排，再按评分、term顺序排。   |
-|   suggest_mode   |   建议模式，控制提供建议词的方式：missing:仅在搜索的词项在索引中不存在时才提供建议词，默认值；popular:仅建议文档频率比搜索词项高的词；always：总是提供匹配的建议词   |
+| text         | 指定搜索文本                                                 |
+| ------------ | ------------------------------------------------------------ |
+| field        | 获取建议词的搜索字段                                         |
+| analyzer     | 指定分词器                                                   |
+| size         | 每个词返回的最大建议词数                                     |
+| sort         | 如何对建议词进行排序，可用选项:score:先按评分排序、再按文档频率排、term顺序；frequency:先按文档频率排，再按评分、term顺序排。 |
+| suggest_mode | 建议模式，控制提供建议词的方式：missing:仅在搜索的词项在索引中不存在时才提供建议词，默认值；popular:仅建议文档频率比搜索词项高的词；always：总是提供匹配的建议词 |
 
 ##### 7.5.1 term suggester
 
--  term 词条建议器 ，对给输入的文本进行分词，为每个分词提供词项建议
+-  term 词条建议器 ，对给输入的文本进行分词，为每个分词提供词项建议
 
 - 请求
 ```java
-localhost:9200/nba_latest/_search
+localhost:9200/person_latest/_search
 ```
 
 - 请求体
@@ -6114,79 +4107,13 @@ localhost:9200/nba_latest/_search
 }
 ```
 
-- 响应
-```json
-{
-  "took" : 3,
-  "timed_out" : false,
-  "_shards" : {
-    "total" : 1,
-    "successful" : 1,
-    "skipped" : 0,
-    "failed" : 0
-  },
-  "hits" : {
-    "total" : {
-      "value" : 0,
-      "relation" : "eq"
-    },
-    "max_score" : null,
-    "hits" : [ ]
-  },
-  "suggest" : {
-    "my-suggest" : [
-      {
-        "text" : "jamse",
-        "offset" : 0,
-        "length" : 5,
-        "options" : [
-          {
-            "text" : "james",
-            "score" : 0.8,
-            "freq" : 5
-          },
-          {
-            "text" : "jamal",
-            "score" : 0.6,
-            "freq" : 2
-          },
-          {
-            "text" : "jake",
-            "score" : 0.5,
-            "freq" : 1
-          },
-          {
-            "text" : "jose",
-            "score" : 0.5,
-            "freq" : 1
-          }
-        ]
-      },
-      {
-        "text" : "hardne",
-        "offset" : 6,
-        "length" : 6,
-        "options" : [
-          {
-            "text" : "harden",
-            "score" : 0.8333333,
-            "freq" : 1
-          }
-        ]
-      }
-    ]
-  }
-}
-
-```
-
 ##### 7.5.2 phrase suggester
 
--  phrase 短语建议，在term的基础上，会考量多个term之间的关系，比如是否同时出现在索引的原文⾥里，相邻程度，以及词频等
+-  phrase 短语建议，在term的基础上，会考量多个term之间的关系，比如是否同时出现在索引的原文⾥里，相邻程度，以及词频等
 
 - 请求
 ```java
-localhost:9200/nba_latest/_search
+localhost:9200/person_latest/_search
 ```
 
 - 请求体
@@ -6203,67 +4130,13 @@ localhost:9200/nba_latest/_search
 }
 ```
 
-- 响应
-```json
-{
-  "took" : 26,
-  "timed_out" : false,
-  "_shards" : {
-    "total" : 1,
-    "successful" : 1,
-    "skipped" : 0,
-    "failed" : 0
-  },
-  "hits" : {
-    "total" : {
-      "value" : 0,
-      "relation" : "eq"
-    },
-    "max_score" : null,
-    "hits" : [ ]
-  },
-  "suggest" : {
-    "my-suggest" : [
-      {
-        "text" : "jamse hardne",
-        "offset" : 0,
-        "length" : 12,
-        "options" : [
-          {
-            "text" : "james hardne",
-            "score" : 0.0025682184
-          },
-          {
-            "text" : "jamal hardne",
-            "score" : 0.0016773979
-          },
-          {
-            "text" : "jamse harden",
-            "score" : 0.0016222595
-          },
-          {
-            "text" : "jake hardne",
-            "score" : 0.001299489
-          },
-          {
-            "text" : "jose hardne",
-            "score" : 0.001299489
-          }
-        ]
-      }
-    ]
-  }
-}
-
-```
-
 ##### 7.5.3 completion suggester
 
 - Completion 完成建议
 
 - 请求
 ```java
-localhost:9200/nba_latest/_search
+localhost:9200/person_latest/_search
 ```
 
 - 请求体
@@ -6280,10 +4153,10 @@ localhost:9200/nba_latest/_search
 }
 ```
 
-### 八、NBA中国官网实战
+### 八、person中国官网实战
 
 - 官方网站
-` https://china.nba.com/playerindex/ `
+` https://china.person.com/playerindex/ `
 
 #### 8.1 项目搭建
 
@@ -6383,10 +4256,10 @@ public class BeanUtils {
 ```java
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.frame.common.entity.NbaPlayer;
+import com.frame.common.entity.personPlayer;
 import com.frame.common.utils.BeanUtils;
-import com.frame.elasticsearch.mapper.NbaPlayerMapper;
-import com.frame.elasticsearch.service.NbaPlayerService;
+import com.frame.elasticsearch.mapper.personPlayerMapper;
+import com.frame.elasticsearch.service.personPlayerService;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetRequest;
@@ -6414,10 +4287,10 @@ import java.util.Map;
  * @since 2019-11-10
  */
 @Service
-public class NbaPlayerServiceImpl implements NbaPlayerService {
+public class personPlayerServiceImpl implements personPlayerService {
 
     /* ES索引 */
-    private final String NBA_INDEX = "nba_latest";
+    private final String person_INDEX = "person_latest";
 
     @Autowired
     private RestHighLevelClient restHighLevelClient;
@@ -6426,9 +4299,9 @@ public class NbaPlayerServiceImpl implements NbaPlayerService {
      * 添加一条文档
      */
     @Override
-    public boolean addPlayer(NbaPlayer player, String id) throws IOException {
+    public boolean addPlayer(personPlayer player, String id) throws IOException {
         // 获取 IndexRequest
-        IndexRequest request = new IndexRequest(NBA_INDEX)
+        IndexRequest request = new IndexRequest(person_INDEX)
                 .id(id)
                 .source(BeanUtils.beanToMap(player));
         // 获取 IndexResponse
@@ -6443,7 +4316,7 @@ public class NbaPlayerServiceImpl implements NbaPlayerService {
     @Override
     public Map<String, Object> getPlayer(String id) throws IOException {
         // 获取 GetRequest
-        GetRequest getRequest = new GetRequest(NBA_INDEX, id);
+        GetRequest getRequest = new GetRequest(person_INDEX, id);
         // 获取 GetResponse
         GetResponse getResponse = restHighLevelClient.get(getRequest, RequestOptions.DEFAULT);
         // 返回结果
@@ -6454,10 +4327,10 @@ public class NbaPlayerServiceImpl implements NbaPlayerService {
      * 更新一条文档
      */
     @Override
-    public boolean updatePlayer(NbaPlayer nbaPlayer, String id) throws IOException {
+    public boolean updatePlayer(personPlayer personPlayer, String id) throws IOException {
         // 获取 UpdateRequest
-        UpdateRequest updateRequest = new UpdateRequest(NBA_INDEX, id)
-                .doc(BeanUtils.beanToMap(nbaPlayer));
+        UpdateRequest updateRequest = new UpdateRequest(person_INDEX, id)
+                .doc(BeanUtils.beanToMap(personPlayer));
         // 获取 UpdateResponse
         UpdateResponse update = restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
         System.out.println(JSON.toJSONString(update));
@@ -6470,7 +4343,7 @@ public class NbaPlayerServiceImpl implements NbaPlayerService {
     @Override
     public boolean deletePlayer(String id) throws IOException {
         // 获取 DeleteRequest
-        DeleteRequest deleteRequest = new DeleteRequest(NBA_INDEX, id).id(id);
+        DeleteRequest deleteRequest = new DeleteRequest(person_INDEX, id).id(id);
         // 获取 DeleteResponse
         DeleteResponse delete = restHighLevelClient.delete(deleteRequest, RequestOptions.DEFAULT);
         System.out.println(delete);
@@ -6484,7 +4357,7 @@ public class NbaPlayerServiceImpl implements NbaPlayerService {
     @Override
     public boolean deleteAllPlayer() throws IOException {
         // 获取 deleteByQueryRequest
-        DeleteByQueryRequest deleteByQueryRequest = new DeleteByQueryRequest(NBA_INDEX);
+        DeleteByQueryRequest deleteByQueryRequest = new DeleteByQueryRequest(person_INDEX);
         // 获取 BulkByScrollResponse
         BulkByScrollResponse bulkByScrollResponse = restHighLevelClient.deleteByQuery(
                 deleteByQueryRequest,
@@ -6498,8 +4371,8 @@ public class NbaPlayerServiceImpl implements NbaPlayerService {
 - CRUD 测试类
 
 ```java
-import com.frame.common.entity.NbaPlayer;
-import com.frame.elasticsearch.service.NbaPlayerService;
+import com.frame.common.entity.personPlayer;
+import com.frame.elasticsearch.service.personPlayerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6511,42 +4384,42 @@ import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class NbaPlayerServiceImplTest {
+public class personPlayerServiceImplTest {
 
     @Autowired
-    NbaPlayerService nbaPlayerService;
+    personPlayerService personPlayerService;
 
     @Test
     public void addPlayer() throws IOException {
-        NbaPlayer nbaPlayer = new NbaPlayer()
+        personPlayer personPlayer = new personPlayer()
                 .setId(999)
                 .setDisplayName("苍井空");
-        boolean result = nbaPlayerService.addPlayer(nbaPlayer, "999");
+        boolean result = personPlayerService.addPlayer(personPlayer, "999");
     }
 
     @Test
     public void getPlayer() throws IOException {
-        Map<String, Object> player = nbaPlayerService.getPlayer("999");
+        Map<String, Object> player = personPlayerService.getPlayer("999");
         System.out.println(player);
     }
 
 
     @Test
     public void updatePlayer() throws IOException {
-        NbaPlayer nbaPlayer = new NbaPlayer()
+        personPlayer personPlayer = new personPlayer()
                 .setId(999)
                 .setDisplayName("小泽玛利亚");
-        boolean result = nbaPlayerService.updatePlayer(nbaPlayer, "999");
+        boolean result = personPlayerService.updatePlayer(personPlayer, "999");
     }
 
     @Test
     public void deletePlayer() throws IOException {
-        boolean result = nbaPlayerService.deletePlayer("999");
+        boolean result = personPlayerService.deletePlayer("999");
     }
 
     @Test
     public void deleteAllPlayer() throws IOException {
-        boolean result = nbaPlayerService.deleteAllPlayer();
+        boolean result = personPlayerService.deleteAllPlayer();
     }
 }
 ```
@@ -6642,7 +4515,7 @@ public enum ResultEnum {
     @GetMapping("/import")
     public Result importAllPlayer() {
         try {
-            nbaPlayerService.importAllPlayer();
+            personPlayerService.importAllPlayer();
             return Result.success("数据导入成功");
         } catch (IOException e) {
             log.error("ElasticSearch导入数据失败");
@@ -6662,8 +4535,8 @@ public enum ResultEnum {
     @Transactional
     public boolean importAllPlayer() throws IOException {
         // 查询所有数据,这里使用MybatisPlus不作解释
-        List<NbaPlayer> nbaPlayers = list();
-        for (NbaPlayer e : nbaPlayers) {
+        List<personPlayer> personPlayers = list();
+        for (personPlayer e : personPlayers) {
             // 此处调用的增加文档方法
             addPlayer(e, String.valueOf(e.getId()));
         }
@@ -6683,14 +4556,14 @@ public enum ResultEnum {
                               @RequestParam("val") String val,
                               @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
                               @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit) {
-        List<NbaPlayer> nbaPlayers = null;
+        List<personPlayer> personPlayers = null;
         try {
-            nbaPlayers = nbaPlayerService.searchTerm(key, val, page, limit);
+            personPlayers = personPlayerService.searchTerm(key, val, page, limit);
         } catch (IOException e) {
             log.error("searchMatch失败,参数[key={}]][val={}]]", key, val);
             e.printStackTrace();
         }
-        return Result.success(nbaPlayers);
+        return Result.success(personPlayers);
     }
 ```
 
@@ -6701,9 +4574,9 @@ public enum ResultEnum {
      * 通过姓名查找球员
      */
     @Override
-    public List<NbaPlayer> searchMatch(String key, String val, Integer page, Integer limit) throws IOException {
+    public List<personPlayer> searchMatch(String key, String val, Integer page, Integer limit) throws IOException {
         // 获取 SearchRequest
-        SearchRequest searchRequest = new SearchRequest(NBA_INDEX);
+        SearchRequest searchRequest = new SearchRequest(person_INDEX);
         // 创建 SearchSourceBuilder 用于查询语句
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder
@@ -6721,7 +4594,7 @@ public enum ResultEnum {
         SearchHit[] hits = searchResponse.getHits().getHits();
         // 进行对象转换并返回
         return Stream.of(hits)
-                .map(e -> JSON.parseObject(e.getSourceAsString(), NbaPlayer.class))
+                .map(e -> JSON.parseObject(e.getSourceAsString(), personPlayer.class))
                 .collect(Collectors.toList());
     }
 ```
@@ -6739,19 +4612,19 @@ public enum ResultEnum {
                              @RequestParam(value = "teamName", required = false) String teamName,
                              @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
                              @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit) {
-        List<NbaPlayer> nbaPlayers = null;
+        List<personPlayer> personPlayers = null;
         try {
             // 路由选择国家 或者 球队
             if (StringUtils.isNotBlank(country)) {
-                nbaPlayers = nbaPlayerService.searchTerm("country", country, page, limit);
+                personPlayers = personPlayerService.searchTerm("country", country, page, limit);
             } else {
-                nbaPlayers = nbaPlayerService.searchTerm("teamName", teamName, page, limit);
+                personPlayers = personPlayerService.searchTerm("teamName", teamName, page, limit);
             }
         } catch (IOException e) {
             log.error("searchTerm失败,参数[country={}]][teamName={}]]", country, teamName);
             e.printStackTrace();
         }
-        return CollectionUtils.isNotEmpty(nbaPlayers) ? Result.success(nbaPlayers) : Result.success();
+        return CollectionUtils.isNotEmpty(personPlayers) ? Result.success(personPlayers) : Result.success();
     }
 ```
 
@@ -6762,9 +4635,9 @@ public enum ResultEnum {
      * 通过国家或者球队查询球员
      */
     @Override
-    public List<NbaPlayer> searchTerm(String key, String val, Integer page, Integer limit) throws IOException {
+    public List<personPlayer> searchTerm(String key, String val, Integer page, Integer limit) throws IOException {
         // 获取 SearchRequest
-        SearchRequest searchRequest = new SearchRequest(NBA_INDEX);
+        SearchRequest searchRequest = new SearchRequest(person_INDEX);
         // 创建 SearchSourceBuilder 用于查询语句
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder
@@ -6782,7 +4655,7 @@ public enum ResultEnum {
         SearchHit[] hits = searchResponse.getHits().getHits();
         // 进行对象转换并返回
         return Stream.of(hits)
-                .map(e -> JSON.parseObject(e.getSourceAsString(), NbaPlayer.class))
+                .map(e -> JSON.parseObject(e.getSourceAsString(), personPlayer.class))
                 .collect(Collectors.toList());
     }
 ```
@@ -6800,14 +4673,14 @@ public enum ResultEnum {
                                @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
 
                                @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit) {
-        List<NbaPlayer> nbaPlayers = null;
+        List<personPlayer> personPlayers = null;
         try {
-            nbaPlayers = nbaPlayerService.searchPrefix(prefix, page, limit);
+            personPlayers = personPlayerService.searchPrefix(prefix, page, limit);
         } catch (IOException e) {
             log.error("searchPrefix失败,参数[prefix={}]]", prefix);
             e.printStackTrace();
         }
-        return CollectionUtils.isNotEmpty(nbaPlayers) ? Result.success(nbaPlayers) : Result.success();
+        return CollectionUtils.isNotEmpty(personPlayers) ? Result.success(personPlayers) : Result.success();
     }
 ```
 
@@ -6818,9 +4691,9 @@ public enum ResultEnum {
      * 通过姓名字母查找球员
      */
     @Override
-    public List<NbaPlayer> searchPrefix(String prefix, Integer page, Integer limit) throws IOException {
+    public List<personPlayer> searchPrefix(String prefix, Integer page, Integer limit) throws IOException {
         // 获取 SearchRequest
-        SearchRequest searchRequest = new SearchRequest(NBA_INDEX);
+        SearchRequest searchRequest = new SearchRequest(person_INDEX);
         // 创建 SearchSourceBuilder 用于查询语句
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder
@@ -6838,7 +4711,7 @@ public enum ResultEnum {
         SearchHit[] hits = searchResponse.getHits().getHits();
         // 进行对象转换并返回
         return Stream.of(hits)
-                .map(e -> JSON.parseObject(e.getSourceAsString(), NbaPlayer.class))
+                .map(e -> JSON.parseObject(e.getSourceAsString(), personPlayer.class))
                 .collect(Collectors.toList());
     }
 ```
