@@ -4,12 +4,11 @@ date: 2020-03-16 13:49:45
 layout: about
 ---
 
-### 个人简历
+<!--### 个人简历-->
 
 <!--<details>-->
   <!--<summary><span>查看简历</span></summary>-->
-<a href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/pdf/杨彪-个人简历-后端开发.pdf">点击查看简历</a>
-  <!--<br>感谢您花时间阅读我的简历，期待能有机会和你共事。-->
+<!--<a href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/pdf/杨彪-个人简历-后端开发.pdf">点击查看简历</a>-->
 <!--</details>-->
 
 
