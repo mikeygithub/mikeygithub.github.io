@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      126 字
+      213 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      2
        分钟
     </span>
   
@@ -295,10 +295,20 @@
               <h1 id="背景简介"><a href="#背景简介" class="headerlink" title="背景简介"></a>背景简介</h1><blockquote>
 <p>我们知道在企业级产品开发的流程中CI、CD能极大的提高我们的开发测试的效率。本篇文章将从真实企业环境出发，介绍CI、CD平台的设计与实现</p>
 </blockquote>
-<h1 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h1><p>首先我们需要结合企业的实际环境来设定，如项目组件数量是否庞大、是否有自己机房、</p>
-<blockquote>
-<p>目前其主要的CI、CD产品有Jenkins、Travis-CI、Gitlab CI等，其中</p>
+<h1 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h1><blockquote>
+<p>首先我们需要结合企业的实际环境来设定，如项目组件数量是否庞大、组件之间的通信方式是什么、是否有自己机房等等。<br>目前其主要的CI、CD产品有Jenkins、Travis-CI、Gitlab CI等，其中Jenkins作为业界的标准，在设计中我们也采用他来进行搭建。</p>
 </blockquote>
+<p>在CICD的流程中主要分为</p>
+<pre><code class=" mermaid">graph LR;
+
+A(提交代码)--触发--&gt;B(依赖扫描)
+B--&gt;C(打包项目)
+C--&gt;D(编译构建)--&gt;E(部署应用)--&gt;启动成功
+
+</code></pre>
+
+
+
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1>
             </div>
             <hr>
