@@ -9,9 +9,14 @@ tags: Debug
 
 # 背景
 
-> Java的字节码是运行在JVM上的，在日常的开发工程中可能需要用到远程DeBug
+> ，在日常的开发工程中可能需要用到远程DeBug
+# 原理
 
-# 服务端配置
+> Java的字节码是运行在JVM上的
+
+# 配置
+
+对服务端的JVM配置参数
 
 ```
 Jdk1.7之前: -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n
@@ -20,13 +25,13 @@ jdk1.7之后: -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
 
 
 
-![image-20210429125006909](https://i.loli.net/2021/04/29/D1AzFu7TsnZikcO.png)
+![添加远程调试](https://i.loli.net/2021/04/29/D1AzFu7TsnZikcO.png)
 
 
 
 下一步配置IP端口和选择模块
 
-![image-20210429132836694](https://i.loli.net/2021/04/29/ckGgqCvnxBPLZdM.png)
+![配置地址端口](https://i.loli.net/2021/04/29/ckGgqCvnxBPLZdM.png)
 
 
 
