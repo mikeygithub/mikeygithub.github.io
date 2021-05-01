@@ -62,6 +62,7 @@ tags: Ubuntu
 - [SimpleScreenRecorder]()
 - [Tweaks]()
 - [WPS]()
+- [Ubuntu触控板支持多指手势和滑动切换应用](https://codechina.csdn.net/mirrors/iberianpig/fusuma?utm_source=csdn_github_accelerator)
 
 
 ### 社交软件
