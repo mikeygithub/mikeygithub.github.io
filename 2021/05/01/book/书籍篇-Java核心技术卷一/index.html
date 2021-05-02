@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.2k 字
+      2.4k 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      22
+      25
        分钟
     </span>
   
@@ -336,7 +336,17 @@
 <p>与变量应该有一-个能够反映其含义的名字一样， 类也应该如此(在标准类库中，也存在<br>着一些含义不明确的例子，如: Date类实际上是-一个用于描述时间的类)。<br>命名类名的良好习惯是采用一个名词(Order)、前面有形容词修饰的名词(RushOrder)<br>或动名词(有“-ing”后缀)修饰名词(例如，BillingAddress)。 对于方法来说，习惯是访问<br>器方法用小写get 开头(getSalary), 更改器方法用小写的set开头(setSalary)。</p>
 <p>7.优先使用不可变的类</p>
 <p>LocalDate类以及java.time 包中的其他类是不可变的一没 有方法能修改对象的状态。<br>类似plusDays的方法并不是更改对象，而是返回状态已修改的新对象。<br>更改对象的问题在于，如果多个线程试图同时更新-一个对象，就会发生并发更改。其结<br>果是不可预料的。如果类是不可变的，就可以安全地在多个线程间共享其对象。<br>因此，要尽可能让类是不可变的，这是-一个很好的想法。对于表示值的类，如一个字符<br>串或-一个时间点，这尤其容易。计算会生成新值，而不是更新原来的值。<br>当然，并不是所有类都应当是不可变的。如果员工加薪时让raiseSalary方法返回一个新<br>的Employee对象，这会很奇怪。</p>
-<h1 id="第5章-继承"><a href="#第5章-继承" class="headerlink" title="第5章 继承"></a>第5章 继承</h1><h2 id="类、超类和子类"><a href="#类、超类和子类" class="headerlink" title="类、超类和子类"></a>类、超类和子类</h2><h2 id="参数数量可变的方法"><a href="#参数数量可变的方法" class="headerlink" title="参数数量可变的方法"></a>参数数量可变的方法</h2><h2 id="Object-所有类的超类"><a href="#Object-所有类的超类" class="headerlink" title="Object:所有类的超类"></a>Object:所有类的超类</h2><h2 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h2><h2 id="泛型数组列表"><a href="#泛型数组列表" class="headerlink" title="泛型数组列表"></a>泛型数组列表</h2><h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h2 id="对象包装器与自动装箱"><a href="#对象包装器与自动装箱" class="headerlink" title="对象包装器与自动装箱"></a>对象包装器与自动装箱</h2><h2 id="继承的设计技巧"><a href="#继承的设计技巧" class="headerlink" title="继承的设计技巧"></a>继承的设计技巧</h2>
+<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><p>反射库( reflection library)提供了一个非常丰富且精心设计的工具集，以便编写能够动态操纵Java代码的程序。这项功能被大量地应用于JavaBeans中，它是Java组件的体系结构(有关JavaBeans的详细内容在卷II中阐述)。使用反射，Java可以支持Visual Basic用户习惯使用的工具。特别是在设计或运行中添加新类时，能够快速地应用开发工具动态地查询新添加类的能力。</p>
+<p>能够分析类能力的程序称为反射( reflective)。反射机制的功能极其强大，在下面可以看 到，反射机制可以用来:</p>
+<ul>
+<li>在运行时分析类的能力。</li>
+<li>在运行时查看对象，例如，编写一个toString方法供所有类使用。</li>
+<li>实现通用的数组操作代码。</li>
+<li>利用Method对象，这个对象很像C++中的函数指针。</li>
+</ul>
+<p>反射是一种功能强大且复杂的机制。使用它的主要人员是工具构造者，而不是应用程序员。</p>
+<p>TODO:反射</p>
+<h1 id="第5章-继承"><a href="#第5章-继承" class="headerlink" title="第5章 继承"></a>第5章 继承</h1><h2 id="类、超类和子类"><a href="#类、超类和子类" class="headerlink" title="类、超类和子类"></a>类、超类和子类</h2><h2 id="参数数量可变的方法"><a href="#参数数量可变的方法" class="headerlink" title="参数数量可变的方法"></a>参数数量可变的方法</h2><h2 id="Object-所有类的超类"><a href="#Object-所有类的超类" class="headerlink" title="Object:所有类的超类"></a>Object:所有类的超类</h2><h2 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h2><h2 id="泛型数组列表"><a href="#泛型数组列表" class="headerlink" title="泛型数组列表"></a>泛型数组列表</h2><h2 id="反射-1"><a href="#反射-1" class="headerlink" title="反射"></a>反射</h2><h2 id="对象包装器与自动装箱"><a href="#对象包装器与自动装箱" class="headerlink" title="对象包装器与自动装箱"></a>对象包装器与自动装箱</h2><h2 id="继承的设计技巧"><a href="#继承的设计技巧" class="headerlink" title="继承的设计技巧"></a>继承的设计技巧</h2>
             </div>
             <hr>
             <div>
