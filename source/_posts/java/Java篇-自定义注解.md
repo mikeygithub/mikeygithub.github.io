@@ -112,6 +112,111 @@ public class Main {
 }
 ```
 
+# 简单案例
+
+>打印日志注解的实现
+
+1.定义注解
+```java
+package com.example.annotation.annotation;
+
+import java.lang.annotation.*;
+
+@Target(ElementType.METHOD)//作用于方法
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface Log {
+    //注解属性
+    String name()  default "";;
+    String prot() default "";;
+    String value() default "默认值";
+}
+```
+2.定义切面和解析
+```java
+package com.example.annotation.aop;
+
+import com.example.annotation.annotation.Log;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
+
+/**
+ * 切面
+ */
+@Aspect // 注解声明一个切面
+@Component // 受spring管理的容器
+public class LogAspect {
+    @Pointcut("@annotation(com.example.annotation.annotation.Log)") // 注解声明切点，注解的全限定名
+    public void annotationPointcut() {
+    };
+
+    /**
+     * befor
+     * @param joinPoint
+     */
+    @Before("annotationPointcut()")
+    public void before(JoinPoint joinPoint){
+        MethodSignature methodSignature = (MethodSignature)joinPoint.getSignature();
+        Method method = methodSignature.getMethod();
+        String name = method.getName();
+        //获取方法上的注解
+        Log annotation = method.getAnnotation(Log.class);
+        System.out.println(name+"方法执行之前执行");
+        System.out.println("name:"+annotation.name());
+    }
+
+    /**
+     * after
+     * @param joinPoint
+     */
+    @After("annotationPointcut()")
+    public void after(JoinPoint joinPoint) {
+        MethodSignature methodSignature = (MethodSignature)joinPoint.getSignature();
+        Method method = methodSignature.getMethod();
+        String name = method.getName();
+        //获取方法上的注解
+        Log annotation = method.getAnnotation(Log.class);
+        System.out.println(name+"方法执行之后执行");
+        System.out.println("name:"+annotation.name());
+    }
+}
+```
+3.使用注解
+```java
+@RestController
+public class Controller {
+
+    @Log(name = "测试日志注解")
+    @RequestMapping("/")
+    public String logAnnoMethod(){
+        System.out.println("Controller logAnnoMethod Method body execute...");
+        return "success";
+    }
+}
+```
+4.测试使用
+```java
+@SpringBootApplication
+@Configuration //注册被spring管理
+@EnableAspectJAutoProxy //注解开启对aspectJ的支持
+public class AnnotationApplication {
+  public static void main(String[] args) {
+    SpringApplication.run(AnnotationApplication.class, args);
+  }
+}
+```
+
+5.使用效果
+
+![打印日志](https://i.loli.net/2021/05/03/I9fQXR4DCdtlsW8.png)
+
 # 参考资料
 
 [Java自定义注解](https://www.cnblogs.com/liangweiping/p/3837332.html)
