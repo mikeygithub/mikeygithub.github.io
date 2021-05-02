@@ -1,5 +1,5 @@
 ---
-title: Centos安装图形化界面
+title: Linux篇-Centos安装图形化界面
 date: 2018-07-05 14:50:45
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/centos.jpeg
 category: Linux

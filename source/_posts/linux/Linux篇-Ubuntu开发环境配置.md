@@ -1,5 +1,5 @@
 ---
-title: Ubuntu开发环境配置
+title: Linux篇-Ubuntu开发环境配置
 date: 2020-06-25 08:50:28
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/ubuntu.jpg
 category: Linux
