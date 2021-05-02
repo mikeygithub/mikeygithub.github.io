@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      414 字
+      2.2k 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      22
        分钟
     </span>
   
@@ -310,8 +310,33 @@
 <p>面向对象程序设计（简称 OOP ）是当今主流 程序设计范型 ，它已经取代了 70 代的“结构化”过程 程序设计开发技术 Java 是完全面向对象的 ，必须熟悉 OOP 才能 够编写 Java 程序<br>面向对象的程序是由对象组成的 每个对象包含对用户公开的特定功能部分和隐藏的 现部分。程序中的很多对象来自标准库，还有一些是自定义的 究竟是自己构造对象，还 从外界购买对象完全取决于开发项目的预算和时间 但是，从根本上说，只要对象能够满足 要求，就不必关心其功能的具体实现过程 在OOP 中，不必关心对象的具体实现，只要能 够满足用户 的需求即可</p>
 </blockquote>
 <p><img src="https://i.loli.net/2021/05/02/l6AvfHe2hODYB5K.png" srcset="/img/loading.gif" alt="面向过程与面向对象的程序设计对比"></p>
-<p>p30(wps47)</p>
-
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>要想使用 OOP 定要清楚对象的 个主要特性：</p>
+<ul>
+<li>对象的行为（behavior ）一一－可以对对象施加哪些操作，或可以对对象施加哪些方法？</li>
+<li>对象的状态（ state ）一一一当施加那些方法时，对象如何响应？</li>
+<li>对象标识（ identity 一一如何辨别具有相同行为与状态的不同对象？<br>同一个类的所有对象实例，由于支持相同的行为而具有家族式的相似性 对象的行为是 用可调用的方法定义的</li>
+</ul>
+<h2 id="对象析构与-finalize-方法"><a href="#对象析构与-finalize-方法" class="headerlink" title="对象析构与 finalize 方法"></a>对象析构与 finalize 方法</h2><p>有些面向对象的程序设计语言，特别是C++，有显式的析构器方法，其中放置- -些当对<br>象不再使用时需要执行的清理代码。在析构器中，最常见的操作是回收分配给对象的存储空<br>间。由于Java有自动的垃圾回收器，不需要人工回收内存，所以Java不支持析构器。<br>当然，某些对象使用了内存之外的其他资源，例如，文件或使用了系统资源的另一个对<br>象的句柄。在这种情况下，当资源不再需要时，将其回收和再利用将显得十分重要。<br>可以为任何一个类添加finalize方法。finalize方法将在垃圾回收器清除对象之前调用。<br>在实际应用中，不要依赖于使用finalize方法回收任何短缺的资源，这是因为很难知道这个<br>方法什么时候才能够调用。</p>
+<h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><p>Java允许使用包( package)将类组织起来。借助于包可以方便地组织自己的代码，并将 自已的代码与别人提供的代码库分开管理。<br>标准的Java类库分布在多个包中，包括java.lang、java.util 和java.net等。标准的Java 包具有一个层次结构。如同硬盘的目录嵌套- -样， 也可以使用嵌套层次组织包。所有标准的<br>Java包都处于java和javax包层次中。</p>
+<p>使用包的主要原因是确保类名的唯一-性。假如两个程序员不约而同地建立了Employee类。只要将这些类放置在不同的包中，就不会产生冲突。事实上，为了保证包名的绝对<br>唯一性，Sun公司建议将公司的因特网域名(这显然是独–无二的)以逆序的形式作为包 名，并且对于不同的项目使用不同的子包。例如，horstmann.com 是本书作者之一注册 的城名。逆序形式为com.horstmann。这个包还可以被进一步 地划分成子包，如com.horstmann.corejava。 </p>
+<p>从编译器的角度来看，嵌套的包之间没有任何关系。例如, java.util包与java.utiljar包<br>毫无关系。每一个都拥有独立的类集合。</p>
+<h2 id="类的设计技巧"><a href="#类的设计技巧" class="headerlink" title="类的设计技巧"></a>类的设计技巧</h2><p>1.一定要保证数据私有</p>
+<p>这是最重要的;绝对不要破坏封装性。有时候，需要编写-个访问器 方法或更改器方法，<br>但是最好还是保持实例域的私有性。很多惨痛的经验告诉我们，数据的表示形式很可能会改<br>变，但它们的使用方式却不会经常发生变化。当数据保持私有时，它们的表示形式的变化不<br>会对类的使用者产生影响，即使出现bug也易于检测。.</p>
+<p>2.一定要对数据初始化</p>
+<p>Java不对局部变量进行初始化,但是会对对象的实例域进行初始化。最好不要依赖于系<br>统的默认值，而是应该显式地初始化所有的数据，具体的初始化方式可以是提供默认值，也<br>可以是在所有构造器中设置默认值。</p>
+<p>3.不要在类中使用过多的基本类型</p>
+<p>就是说，用其他的类代替多个相关的基本类型的使用。这样会使类更加易于理解且易于<br>修改。例如，用一个称为Address的新的类替换- -个Customer类中以下的实例域:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> String street;<br><span class="hljs-keyword">private</span> String city;<br><span class="hljs-keyword">private</span> String state;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> zip;<br></code></pre></div></td></tr></table></figure>
+<p>这样，可以很容易处理地址的变化，例如，需要增加对国际地址的处理。</p>
+<p>4.不是所有的域都需要独立的域访问器和域更改器</p>
+<p>或许，需要获得或设置雇员的薪金。而一旦构造了雇员对象，就应该禁止更改雇用日<br>期，并且在对象中，常常包含一些不希望别人获得或设置的实例域，例如，在Address类中，<br>存放州缩写的数组。</p>
+<p>5.将职责过多的类进行分解:</p>
+<p>这样说似乎有点含糊不清，究竟多少算是“过多”?每个人的看法不同。但是，如果明<br>显地可以将一个复杂的类分解成两个更为简单的类，就应该将其分解(但另一方面，也不要<br>走极端。设计10个类，每个类只有一个方法，显然有些矫枉过正了)。</p>
+<p>6.类名和方法名要能够体现它们的职责</p>
+<p>与变量应该有一-个能够反映其含义的名字一样， 类也应该如此(在标准类库中，也存在<br>着一些含义不明确的例子，如: Date类实际上是-一个用于描述时间的类)。<br>命名类名的良好习惯是采用一个名词(Order)、前面有形容词修饰的名词(RushOrder)<br>或动名词(有“-ing”后缀)修饰名词(例如，BillingAddress)。 对于方法来说，习惯是访问<br>器方法用小写get 开头(getSalary), 更改器方法用小写的set开头(setSalary)。</p>
+<p>7.优先使用不可变的类</p>
+<p>LocalDate类以及java.time 包中的其他类是不可变的一没 有方法能修改对象的状态。<br>类似plusDays的方法并不是更改对象，而是返回状态已修改的新对象。<br>更改对象的问题在于，如果多个线程试图同时更新-一个对象，就会发生并发更改。其结<br>果是不可预料的。如果类是不可变的，就可以安全地在多个线程间共享其对象。<br>因此，要尽可能让类是不可变的，这是-一个很好的想法。对于表示值的类，如一个字符<br>串或-一个时间点，这尤其容易。计算会生成新值，而不是更新原来的值。<br>当然，并不是所有类都应当是不可变的。如果员工加薪时让raiseSalary方法返回一个新<br>的Employee对象，这会很奇怪。</p>
+<h1 id="第5章-继承"><a href="#第5章-继承" class="headerlink" title="第5章 继承"></a>第5章 继承</h1><h2 id="类、超类和子类"><a href="#类、超类和子类" class="headerlink" title="类、超类和子类"></a>类、超类和子类</h2><h2 id="参数数量可变的方法"><a href="#参数数量可变的方法" class="headerlink" title="参数数量可变的方法"></a>参数数量可变的方法</h2><h2 id="Object-所有类的超类"><a href="#Object-所有类的超类" class="headerlink" title="Object:所有类的超类"></a>Object:所有类的超类</h2><h2 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h2><h2 id="泛型数组列表"><a href="#泛型数组列表" class="headerlink" title="泛型数组列表"></a>泛型数组列表</h2><h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h2 id="对象包装器与自动装箱"><a href="#对象包装器与自动装箱" class="headerlink" title="对象包装器与自动装箱"></a>对象包装器与自动装箱</h2><h2 id="继承的设计技巧"><a href="#继承的设计技巧" class="headerlink" title="继承的设计技巧"></a>继承的设计技巧</h2>
             </div>
             <hr>
             <div>

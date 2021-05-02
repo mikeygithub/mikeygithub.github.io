@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
-  <title>Unix/Linux编程实践教程-学习笔记 - 麦奇</title>
+  <title>Linux篇-Centos安装图形化界面 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -214,7 +214,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Unix/Linux编程实践教程-学习笔记">
+            <span class="h2" id="subtitle" title="Linux篇-Centos安装图形化界面">
               
             </span>
 
@@ -229,8 +229,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-12-14 19:32" pubdate>
-        2020年12月14日 晚上
+      <time datetime="2018-07-05 14:50" pubdate>
+        2018年7月5日 下午
       </time>
     </span>
   
@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      17 字
+      313 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      3
        分钟
     </span>
   
@@ -289,12 +289,34 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Unix/Linux编程实践教程-学习笔记</h1>
+            <h1 style="display: none">Linux篇-Centos安装图形化界面</h1>
             
             <div class="markdown-body">
-              <h1 id="什么是-Linux"><a href="#什么是-Linux" class="headerlink" title="什么是 Linux"></a>什么是 Linux</h1><p class="note note-primary">
-Linux是由linus开发的一款基于unix的系统，
-</p>
+              <blockquote>
+<p>最近有重新来捣鼓捣鼓Linux了，这次撸的版本是centos7.4的，虽然说是不要桌面，但是感觉初学者还是安装一下比较好balalalala。。。。。。。。。废话不说的直接进入正题：</p>
+</blockquote>
+<h1 id="安装X"><a href="#安装X" class="headerlink" title="安装X"></a>安装X</h1><blockquote>
+<p>首先安装X(X Window System),如果不是root用户请先切换到root用户才能操作，命令为：</p>
+</blockquote>
+<p><code>su root</code> </p>
+<p>命令为</p>
+<p><code>yum groupinstall &quot;X Window System&quot;</code></p>
+<p>回车，安装时间可能会比较长，安装完出现complete！提示，如果出现要确认其他信息则一路输入输入 “y”回车</p>
+<p>查看已装软件及可装软件：</p>
+<p><code>yum grouplist</code></p>
+<p>由于本屌已经安装好了所以就在已经安装的分组的啦</p>
+<h1 id="安装图形界面软件GNOME-GNOME-Desktop"><a href="#安装图形界面软件GNOME-GNOME-Desktop" class="headerlink" title="安装图形界面软件GNOME(GNOME Desktop)"></a>安装图形界面软件GNOME(GNOME Desktop)</h1><blockquote>
+<p>这里需要特别注意！！！！一定要注意 名称必须对应 不同版本的centOS的软件名可能不同 其他Linux系统类似否则会出现No packages in any requested group available to install or update 的错误。</p>
+</blockquote>
+<p><code>yum groupinstall &quot;GNOME Desktop&quot;</code></p>
+<p> 回车，出现提示一路输入”y”确认</p>
+<p>这次的安装会更慢，内心等待，安装完会出现complete！提示。</p>
+<h1 id="进入图形化界面"><a href="#进入图形化界面" class="headerlink" title="进入图形化界面"></a>进入图形化界面</h1><p>输入</p>
+<p><code>startX</code></p>
+<p>速度可能比较慢，可尝试重启</p>
+<p><code>reboot</code></p>
+<p>完成.</p>
+
             </div>
             <hr>
             <div>
@@ -311,7 +333,7 @@ Linux是由linus开发的一款基于unix的系统，
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/tags/centos/">centos</a>
                     
                   </div>
                 
@@ -324,9 +346,9 @@ Linux是由linus开发的一款基于unix的系统，
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/12/14/another/%E8%B5%84%E6%96%99%E7%AF%87-%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/">
+                      <a href="/2019/05/18/golang/Golang-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">资料篇-学习资料</span>
+                        <span class="hidden-mobile">Golang 学习笔记一</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -334,8 +356,8 @@ Linux是由linus开发的一款基于unix的系统，
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/12/11/note/%E7%AC%94%E8%AE%B0%E7%AF%87-%E4%BA%91%E5%BC%80%E5%8F%91/">
-                        <span class="hidden-mobile">笔记篇-Cloud Development Platform</span>
+                      <a href="/2018/07/03/linux/Linux%E7%AF%87-%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/">
+                        <span class="hidden-mobile">Linux篇-命令汇总</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
