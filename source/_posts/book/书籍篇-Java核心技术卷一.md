@@ -1,6 +1,6 @@
 ---
 title: 读书笔记篇-Java核心技术卷一
-index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/javahxjs.jpeg'
+index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/javahxjs.png'
 hide: false
 date: 2021-05-01 16:12:25
 category: 读书笔记
@@ -300,3 +300,159 @@ action,与action2表示的是相同的概念吗?如果是相同的概念，就�
 但每个类可以像下面这样实现多个接口: .
 `class Employee extends Person implements Comparable // OK`
 有些程序设计语言允许一个类有多个超类，例如C++。我们将此特性称为多重继承( multiple inheritance)。而Java的设计者选择了不支持多继承，其主要原因是多继承会让语言本身变得非常复杂(如同C++),效率也会降低(如同Eiffel)。 实际上，接口可以提供多重继承的大多数好处，同时还能避免多重继承的复杂性和低效性。
+
+## 接口与回调
+回调( callback)是一-种常见的程序设计模式。在这种模式中，可以指出某个特定事件发 生时应该采取的动作。例如，可以指出在按下鼠标或选择某个菜单项时应该采取什么行动。
+
+在java.swing包中有一个Timer类，可以使用它在到达给定的时间间隔时发出通告。例如，假如程序中有一个时钟，就可以请求每秒钟获得一个通告， 以便更新时钟的表盘。
+在构造定时器时，需要设置--个时间间隔，并告之定时器，当到达时间间隔时需要做些什么操作。
+
+如何告之定时器做什么呢?在很多程序设计语言中，可以提供一个函数名， 定时器周期性地调用它。但是，在Java标准类库中的类采用的是面向对象方法。它将某个类的对象传递给定时器，然后，定时器调用这个对象的方法。由于对象可以携带一些附加的信息， 所以传递一个对象比传递一个函数要灵活得多。
+当然，定时器需要知道调用哪一个方法，并要求传递的对象所属的类实现了java.awt.event包的ActionListener 接口。
+
+## lambda 表达式
+
+lambda 表达式是 个可传递的代码块，可以在以后执行 次或多次
+
+![常用函数式接口](https://i.loli.net/2021/05/03/Qrm4Vn71JAElfMx.png)
+
+![基本类型的函数式接口](/Users/mikey/Library/Application Support/typora-user-images/image-20210503170120244.png)
+
+## 内部类
+
+内部类( inner class)是定义在另-一个类中的类。为什么需要使用内部类呢?其主要原因有以下三点:
+
+- 内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。
+- 内部类可以对同一个包中的其他类隐藏起来。
+- 当想要定义一个回调函数且不想编写大量代码时，使用匿名(anonymous) 内部类比较便捷。
+  这个比较复杂的内容分几部分介绍。
+  - 给出一个简单的内部类，它将访问外围类的实例域。
+  - 给出内部类的特殊语法规则。
+  - 领略一下内部类的内部，探讨一下如何将其转换成常规类。
+  - 讨论局部内部类，它可以访问外围作用域中的局部变量。
+  - 介绍匿名内部类，说明在Java有lambda表达式之前用于实现回调的基
+    本方法。
+
+## 局部类
+
+> 局部类不能用public 或private访问说明符进行声明。它的作用域被限定在声明这个局部类的块中。
+> 局部类有- 个优势 ，即对外部世界可以完全地隐藏起来。即使TalkingClock类中的其他代码也不能访问它。除start方法之外，没有任何方法知道TimePrinter类的存在。
+
+由外 部方法访问变量
+
+> 与其他内部类相比较，局部类还有一个优点。它们不仅能够访问包含它们的外部类，还可以访问局部变量。不过，那些局部变量必须事实上为final。这说明，它们- -旦赋值就绝不会改变。
+
+## 匿名内部类
+
+将局部内部类的使用再深入一步 假如只创建这个类的 个对象，就不必命名了 这种类被称为匿名内部类（ nonymous inner class )
+
+```java
+pub1ic void start(int interval, boolean beep){
+	ActionListener 1istener = new ActionListener()
+  {
+		pub1ic void actionPerformed(ActionEvent event)
+    {
+			System.out.print1n("At the tone, the time is " + new Date0);
+			if (beep) Too1kit.getDefaultTookit0.beep0);
+    }
+	};
+		Timer t = new Timer(interval, 1istener);
+		t.start();
+}
+```
+
+含义是：创建一个实现 ActionListener 接口的类的新对象，需要实现的方法 ctionPerformed 定义在括号｛｝内
+
+通常的语法格式为:
+
+```java
+new SuperType(construction parametrs)
+{
+  imner class methods and data
+}
+```
+
+其中, SuperType 可以是ActionListener这样的接口，于是内部类就要实现这个接口。SuperType也可以是-个类， 于是内部类就要扩展它。
+
+由于构造器的名字必须与类名相同，而匿名类没有类名，所以，匿名类不能有构造器。
+取而代之的是，将构造器参数传递给超类( superclass)构造器。尤其是在内部类实现接口的时候，不能有任何构造参数。不仅如此，还要像下面这样提供组括号:
+
+```java
+new ItetfaceType{
+	methods and data
+}
+```
+
+请仔细研究-下， 看看构造一个类的新对象 与构造-个扩 展了那个类的匿名内部类的对象之间有什么差别。
+
+```java
+Person queen = new Person("Mary);
+// a Person object
+Person count = new Person("Dracula") { . .. };
+// an olbject of an inner class extending Person
+```
+
+如果构造参数的闭小括号后面跟一个开大括号, 正在定义的就是匿名内部类。
+
+## 静态内部类
+
+有时候，使用内部类只是为了把- -个类隐藏在另外- -个类的内部，并不需要内部类引用外围类对象。为此，可以将内部类声明为static, 以便取消产生的引用。
+下面是一个使用静态内部类的典型例子。考虑-下计算数组中最小值和最大值的问题。当然，可以编写两个方法，一个方法用于计算最小值，另一个方法用于计算最大值。在调用这两个方法的时候，数组被遍历两次。如果只遍历数组一次，并能够同时计算出最小值和最
+大值，那么就可以大大地提高效率了。
+
+
+
+```java
+double min = Double.POSITIVE;
+double max = Double.NEATIVE;
+for (double v : values){
+	if (v<min)min = v;
+	if (v>max)max = v;
+}
+```
+然而，这个方法必须返回两个数值，为此，可以定义-个包含两个值的类Pair:
+```java
+class Pair{
+private double first;
+private double second;
+public Pair(double f, double s){
+	first=f; 
+	second=s;
+}
+public double getFirst { return first; }
+public double getSecond() { return second; }
+}
+```
+minmax方法可以返回一个Pair类型的对象。
+```java
+class ArrayA1g{
+	public static Pair minax(double[] vales){
+		return ner Pair(min, max);
+  }
+}
+```
+这个方法的调用者可以使用getFirst和getSecond方法获得答案:
+```java
+Pair p = AryAg,inax();
+Syste.out.printin("min.，+ p.getFirst0);
+Systev.out.printn.("nax= ' + p.getSecond0);
+```
+当然，Pair 是一个十分大众化的名字。在大型项目中，除了定义包含一对字符串的Pair类之外，其他程序员也很可能使用这个名字。这样就会产生名字冲突。解决这个问题的办法是将Pair定义为ArrayAlg的内部公有类。此后，通过ArrayAlg.Pair访问它:
+```java
+rraylgPair p = Arayaygrginax(); .
+```
+
+## 代理
+
+>利用代理可以在运行时创建一个实 了一组给定接口的新类 这种功能只有在编译时无法确定需要实现哪个接口 时才有必要使用。
+
+代理类是在程序运行过程中创建的 然而，一旦被创建，就变成了常规类，与虚拟机中的任何其他类没有什么区别所有的代理类都拓展基于Proxy类。
+
+# 第七章 异常、断言和日志
+
+
+
+
+
+
+
