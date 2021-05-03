@@ -14,21 +14,21 @@ Java 语言中的类、方法、变量、参数和包等都可以被标注。和
 
 # 元注解
 
-- @Retention - 标识这个注解怎么保存，是只在代码中，还是编入class文件中，或者是在运行时可以通过反射访问。
+- `@Retention` - 标识这个注解怎么保存，是只在代码中，还是编入class文件中，或者是在运行时可以通过反射访问。
 
-- @Documented - 标记这些注解是否包含在用户文档中。
+- `@Documented` - 标记这些注解是否包含在用户文档中。
 
-- @Target - 标记这个注解应该是哪种 Java 成员。
+- `@Target` - 标记这个注解应该是哪种 Java 成员。
 
-- @Inherited - 标记这个注解是继承于哪个注解类(默认 注解并没有继承于任何子类)
+- `@Inherited` - 标记这个注解是继承于哪个注解类(默认 注解并没有继承于任何子类)
 
   从 Java 7 开始，额外添加了 3 个注解:
   
-- @SafeVarargs - Java 7 开始支持，忽略任何使用参数为泛型变量的方法或构造函数调用产生的警告。
+- `@SafeVarargs` - Java 7 开始支持，忽略任何使用参数为泛型变量的方法或构造函数调用产生的警告。
 
-- @FunctionalInterface - Java 8 开始支持，标识一个匿名函数或函数式接口。
+- `@FunctionalInterface` - Java 8 开始支持，标识一个匿名函数或函数式接口。
 
-- @Repeatable - Java 8 开始支持，标识某注解可以在同一个声明上使用多次。
+- `@Repeatable` - Java 8 开始支持，标识某注解可以在同一个声明上使用多次。
 
 ![img](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/28123151-d471f82eb2bc4812b46cc5ff3e9e6b82.jpg)
 

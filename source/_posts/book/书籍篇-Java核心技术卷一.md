@@ -1,5 +1,5 @@
 ---
-title: 读书笔记篇-Java核心技术卷
+title: 读书笔记篇-Java核心技术卷一
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/javahxjs.jpeg'
 hide: false
 date: 2021-05-01 16:12:25
@@ -10,7 +10,7 @@ tags: Java核心技术
 
 # 书籍地址
 
-链接[https://pan.baidu.com/s/1fwgY32mqQGy6v0WrdswJiQ](https://pan.baidu.com/s/1fwgY32mqQGy6v0WrdswJiQ)  密码: svse
+链接 [https://pan.baidu.com/s/1fwgY32mqQGy6v0WrdswJiQ](https://pan.baidu.com/s/1fwgY32mqQGy6v0WrdswJiQ)  密码: svse
 
 # 第一章 Java 程序设计概述
 
@@ -124,6 +124,87 @@ LocalDate类以及java.time 包中的其他类是不可变的一没 有方法能
 当然，并不是所有类都应当是不可变的。如果员工加薪时让raiseSalary方法返回一个新
 的Employee对象，这会很奇怪。
 
+# 第5章 继承
+
+## 类、超类和子类
+
+关键字`extends`表明正在构造的新类派生于一个已存在的类。已存在的类称为超类( superclass)、基类(base class)或父类( parent class);新类称为子类( subclass)、派生类(derived class)或孩子类(child cass)。超类和子类是Java程序员最常用的两个术语，而了解 其他语言的程序员可能更加偏爱使用父类和孩子类，这些都是继承时使用的术语。
+
+## 多态
+
+有一个用来判断是否应该设计为继承 关系的简单规则，这就是“is-a" 规则，它 表明子类的每个对象也是超类的对象。例Employee 继承层次 如，每个经理都是雇员，因此，将Manager类设计为Employee类的子类是显而易见的，反之不然，并不是每一- 名雇员都是经理。 “is-a” 规则的另- -种表述法是置换法则。它表明程序中出现超类对象的任何地方都可以用子类对象置换。
+```mermaid
+graph BT;
+a(executive)-->b(Manager);
+b-->c(Employee);
+e(secretary)-->b
+f(programmer)-->b
+```
+例如，可以将-一个子类的对象赋给超类变量。
+```java
+Employee e;
+e= new Employee(...); //1 Employee object expected
+e= new Manager(...); // OK，Manager can bhe used as well
+```
+在Java程序设计语言中，对象变量是多态的。一个Employee变量既可以引用一个 Employee类对象，也可以引用一个Employee类的任何-个子类的对象(例如，Manager. Executive、Secretary 等)。
+
+## 参数数量可变的方法
+
+用户自己也可以定义可变参数的方法，并将参数指定为任意类型 ，甚至是基本类型下面是 个简单的示例：其功能为计算若干个数值的最大值
+
+```java
+pub1ic static double max(double... values){
+    double largest=Double.NEGATIVE_INFINITY;
+    for(double v:values)if(v>largest)largest=v;
+    return largest;
+}
+```
+
+## Object:所有类的超类
+
+Object类是Java中所有类的始祖，在Java中每个类都是由它扩展而来的。但是并不需要这样写:
+```java
+public class Employee extends 0bject
+```
+如果没有明确地指出超类，Object 就被认为是这个类的超类。由于在Java中，每个类都是由Object类扩展而来的，所以，熟悉这个类提供的所有服务十分重要。
+可以使用Object 类型的变量引用任何类型的对象:
+```java
+Object obj = new Employee("Harry Hacker", 3000;
+```
+当然，Object类型的变量只能用于作为各种值的通用持有者。要想对其中的内容进行具体的操作，还需要清楚对象的原始类型，并进行相应的类型转换:
+```java
+Employee e = (Employee) obj;
+```
+在Java中，只有基本类型( primitive types)不是对象，例如，数值、字符和布尔类型的值都不是对象。所有的数组类型，不管是对象数组还是基本类型的数组都扩展了Object 类。
+
+## 枚举类
+
+下面是一个典型的例子:
+```java
+public enum Size { SMALL, MEDIUM, LARGE, EXTRA_ LARGE };
+```
+实际上，这个声明定义的类型是-个类，它刚好有4个实例，在此尽量不要构造新对象。因此，在比较两个枚举类型的值时，永远不需要调用equals,而直接使用“==”就可以了。
+如果需要的话，可以在枚举类型中添加一-些构造器、方法和域。当然，构造器只是在构 造枚举常量的时候被调用。下面是一个示例:
+```java
+public enum Size {
+    SMALL("S"), MEDIUM("M"), LARGE("L"), EXTRALRE("X");
+    private String abbreviation;
+
+    private Size(String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
+
+    public String getAbbreviation() {
+        return abbreviation;
+    }
+}
+```
+所有的枚举类型都是Enum类的子类。它们继承了这个类的许多方法。其中最有用的一个是toString,这个方法能够返回枚举常量名。例如，Size.SMALL.toString( )将返回字符串 SMALL
+
+## 泛型数组列表
+
+ArrayList 是一个采用类型参数（ type parameter ）的泛型类（ generic class ）。为了指定数组列表保存的元素对象类型，需要用一对尖括号将类名括起来加在后面，例如， ArrayList<Employee>
+
 ## 反射
 
 反射库( reflection library)提供了一个非常丰富且精心设计的工具集，以便编写能够动态操纵Java代码的程序。这项功能被大量地应用于JavaBeans中，它是Java组件的体系结构(有关JavaBeans的详细内容在卷II中阐述)。使用反射，Java可以支持Visual Basic用户习惯使用的工具。特别是在设计或运行中添加新类时，能够快速地应用开发工具动态地查询新添加类的能力。
@@ -137,22 +218,85 @@ LocalDate类以及java.time 包中的其他类是不可变的一没 有方法能
 
 反射是一种功能强大且复杂的机制。使用它的主要人员是工具构造者，而不是应用程序员。
 
-TODO:反射
+>在java.lang.reflect包中有三个类Field、Method 和Constructor分别用于描述类的域、方
+法和构造器。这三个类都有-个叫做getName的方法，用来返回项目的名称。Field 类有一
+个getType方法，用来返回描述域所属类型的Class对象。Method和Constructor类有能够
+报告参数类型的方法，Method类还有一个可以报告返回类型的方法。这三个类还有一个叫
+做getModifiers的方法，它将返回一个整型数值，用不同的位开关描述public和static这样
+的修饰符使用状况。另外，还可以利用java.lang.reflect包中的Modifier类的静态方法分析
+getModifiers返回的整型数值。例如，可以使用Modifier类中的isPublic、 isPrivate 或isFinal
+判断方法或构造器是否是public、private 或final。我们需要做的全部工作就是调用Modifier
+类的相应方法，并对返回的整型数值进行分析，另外，还可以利用Modifier.toString方法将
+修饰符打印出来。
 
-# 第5章 继承
-
-## 类、超类和子类
-
-## 参数数量可变的方法
-
-## Object:所有类的超类
-
-## 枚举类
-
-## 泛型数组列表
-
-## 反射
+>Class类中的getFields、getMethods 和getConstructors方法将分别返回类提供的
+public域、方法和构造器数组，其中包括超类的公有成员。Class 类的getDeclareFields、
+getDeclareMethods和getDeclaredConstructors方法将分别返回类中声明的全部域、方法和构
+造器，其中包括私有和受保护成员，但不包括超类的成员。
 
 ## 对象包装器与自动装箱
 
+有时，需要将int这样的基本类型转换为对象。所有的基本类型都有-一个与之对应的类。 例如，Integer 类对应基本类型int。通常，这些类称为包装器( wrapper)。这些对象包装器类拥有很明显的名字: Integer 、Long、Float、Double、Short、Byte、Character、Void和Boolean (前6个类派生于公共的超类Number)。对象包装器类是不可变的，即一旦构造了 包装器，就不.
+允许更改包装在其中的值。同时，对象包装器类还是final,因此不能定义它们的子类。
+假设想定义一个整型数组列表。而尖括号中的类型参数不允许是基本类型，也就是说，
+不允许写成ArrayList<int>。这里就用到了Integer 对象包装器类。我们可以声明一个Integer
+对象的数组列表。
+```java
+ArrayList<Integer> list = new Arraylist<>();
+```
+
+注释: 自动装箱规范要求boolean、 byte、char≤ 127,介于-128 ~ 127 之间的short和int被包装到固定的对象中。例如，如果在前面的例子中将a和b初始化为100，对它们进行比较的结果一定成立。
+
 ## 继承的设计技巧
+
+1.将公共操作和域放在超类
+这就是为什么将姓名域放在Person类中，而没有将它放在Employee和Student类中的原因。
+2.不要使用受保护的域
+有些程序员认为，将大多数的实例域定义为protected 是-一个不错的主意，只有这样，子
+类才能够在需要的时候直接访问它们。然而，protected 机制并不能够带来更好的保护，其原
+
+3.使用继承实现“is-a” 关系
+使用继承很容易达到节省代码的目的，但有时候也被人们滥用了。例如，假设需要定义
+一个钟点工类。钟点工的信息包含姓名和雇佣日期，但是没有薪水。他们按小时计薪，并且
+不会因为拖延时间而获得加薪。这似乎在诱导人们由Employee派生出子类Contractor,然后
+再增加一个hourlyWage域。
+
+4.除非所有继承的方法都有意义，否则不要使用继承假设想编写-一个Holiday类。毫无疑问，每个假日也是一日，并且一日可以用Gregorian Calendar类的实例表示，因此可以使用继承。
+
+5.在覆盖方法时，不要改变预期的行为
+置换原则不仅应用于语法，而且也可以应用于行为，这似乎更加重要。在覆盖-一个方法
+的时候，不应该毫无原由地改变行为的内涵。就这一- 点而言，编译器不会提供任何帮助，即
+编译器不会检查重新定义的方法是否有意义。例如，可以重定义Holiday类中add方法“修
+正”原方法的问题，或什么也不做，或抛出一个异常，或继续到下一一个假日。
+
+6.使用多态，而非类型信息
+无论什么时候，对于下面这种形式的代码
+```java
+if(x is of type 1)
+action1(x);
+else if (x is of type 2)
+action2(x);
+```
+都应该考虑使用多态性。
+action,与action2表示的是相同的概念吗?如果是相同的概念，就应该为这个概念定义一
+个方法，并将其放置在两个类的超类或接口中，然后，就可以调用
+`x.action();`
+以便使用多态性提供的动态分派机制执行相应的动作。
+使用多态方法或接口编写的代码比使用对多种类型进行检测的代码更加易于维护和扩展。
+
+7.不要过多地使用反射
+反射机制使得人们可以通过在运行时查看域和方法，让人们编写出更具有通用性的程序。
+这种功能对于编写系统程序来说极其实用，但是通常不适于编写应用程序。反射是很脆弱的，
+即编译器很难帮助人们发现程序中的错误，因此只有在运行时才发现错误并导致异常。
+
+# 第六章 接口、 lambda 表达式与内部类
+
+接口 interface 技术，这种技术主要用来描述类具有什么功能，而并不给出每个功能的具体实现
+
+## 接口与抽象类
+
+使用抽象类表示通用属性存在这样一-个问题: 每个类只能扩展于一个类。假设Employee类已经扩展于-个类，例如Person,它就不能再像下面这样扩展第二个类了:
+`class Employee extends Person, Comparable // Error`
+但每个类可以像下面这样实现多个接口: .
+`class Employee extends Person implements Comparable // OK`
+有些程序设计语言允许一个类有多个超类，例如C++。我们将此特性称为多重继承( multiple inheritance)。而Java的设计者选择了不支持多继承，其主要原因是多继承会让语言本身变得非常复杂(如同C++),效率也会降低(如同Eiffel)。 实际上，接口可以提供多重继承的大多数好处，同时还能避免多重继承的复杂性和低效性。
