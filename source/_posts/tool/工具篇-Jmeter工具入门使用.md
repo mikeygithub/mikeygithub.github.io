@@ -70,6 +70,26 @@ nohup ./jmeter -n -t /root/apache-jmeter-5.4.1/线程组-10线程一直压测.jm
 
 通过获取的数据进行瓶颈分析，针对性进行优化。
 
+# CSV数据
+
+> jmeter支持从csv文件中读取数据到我们需要发送到请求当中
+
+![数据准备](https://i.loli.net/2021/05/04/s13qOTHR2IjC85a.png)
+
+配置使用
+
+![配置](/Users/mikey/Library/Application Support/typora-user-images/image-20210504163732056.png)
+
+在请求中通过`${variableName}`进行获取使用
+
+![使用](https://i.loli.net/2021/05/04/bldfMnGY3hI2Twv.png)
+
+验证结果
+
+![验证结果](https://i.loli.net/2021/05/04/jEDSKqaPOWVCu2B.png)
+
+
+
 # 资料
 
 [grafana官网](https://grafana.com/)

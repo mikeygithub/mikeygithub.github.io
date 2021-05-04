@@ -59,7 +59,8 @@ wget https://github.com/prometheus/mysqld_exporter/releases/download/v0.13.0-rc.
 wget https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-amd64.tar.gz
 # 下载grafana
 wget https://dl.grafana.com/oss/release/grafana-7.5.5.linux-amd64.tar.gz
-
+# 下载alertmanager
+wget https://github.com/prometheus/alertmanager/releases/download/v0.21.0/alertmanager-0.21.0.linux-amd64.tar.gz
 ```
 
 # 配置
@@ -135,7 +136,7 @@ nohup ./grafana_server  &
 
 你可以添加自定义的面板也可以导入其他人的、通过其id或网址导入[dashboards](https://grafana.com/grafana/dashboards)
 
-
+![数据面板](https://i.loli.net/2021/05/04/UmEgxIJq37PYBVp.png)
 
 # 资料
 
