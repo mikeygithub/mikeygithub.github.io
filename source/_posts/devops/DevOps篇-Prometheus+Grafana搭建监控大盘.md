@@ -100,17 +100,15 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['127.0.0.1:8080']
+#数据库
   - job_name: 'mysql_export'
     static_configs:
       - targets: ['127.0.0.1:9104']
+#主机
   - job_name: 'node_export'
     static_configs:
       - targets: ['127.0.0.1:9100']
 ```
-
-
-
-
 
 mysql-exporter需要在当前目录下新建一个my.cnf配置文件
 
@@ -120,19 +118,22 @@ user=root
 password=123456
 ```
 
-
-
-
-
 # 启动
 
-
-
+```shell
+# 启动主机数据采集
 nohup ./node_exporter  &
+# 启动普罗米修斯
+nohup ./prometheus  &
+# 启动数据库数据采集
+nohup ./mysqld_exporter  &
+# 启动grafana
+nohup ./grafana_server  &
+```
 
+# 面板
 
-
-![image-20210504003102865](https://i.loli.net/2021/05/04/1G4nkDSJ9ihUF3Q.png)
+你可以添加自定义的面板也可以导入其他人的、通过其id或网址导入[dashboards](https://grafana.com/grafana/dashboards)
 
 
 

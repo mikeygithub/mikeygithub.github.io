@@ -38,17 +38,39 @@ nohup java -jar jmeter-0.0.1-SNAPSHOT.jar > jmeter.log &
 
 2.搭建监控大盘
 
-参考：
+参考：[DevOps篇-Prometheus+Grafana搭建监控大盘](https://mikeygithub.github.io/2021/05/03/devops/DevOps%E7%AF%87-Prometheus+Grafana%E6%90%AD%E5%BB%BA%E7%9B%91%E6%8E%A7%E5%A4%A7%E7%9B%98/)
+
+![image-20210504003102865](https://i.loli.net/2021/05/04/1G4nkDSJ9ihUF3Q.png)
+
+配置TPS面板
+
+![添加TPS监控](/Users/mikey/Library/Application Support/typora-user-images/image-20210504150708411.png)
+
+配置RT面板
+
+![RT监控面板](https://i.loli.net/2021/05/04/wIWN8gi1LnbFTKq.png)
 
 3.配置压测脚本
 
+![image-20210504151141683](https://i.loli.net/2021/05/04/TiXVsqSE1NtIPrc.png)
 
+可以通过工资电脑进行压测也可将压测脚步导出到压测服务器进行压测
 
+```shell
+nohup ./jmeter -n -t /root/apache-jmeter-5.4.1/线程组-10线程一直压测.jmx -l results.jtl -e -o /root/jmeter_results &
+```
 
+压测数据（当前的服务器是阿里云的学生机部署了很多应用测出来的效果不理想）
+
+![数据展示](https://i.loli.net/2021/05/04/GXaI3ODy2v1uzZe.png)
+
+当压测到后台开始报错时就可停止了，此时的数据已经没有意义
 
 ![后台报错](https://i.loli.net/2021/05/04/xljQbKDYofS3ZN7.png)
 
-# 自动
+通过获取的数据进行瓶颈分析，针对性进行优化。
 
 # 资料
 
+[grafana官网](https://grafana.com/)
+[prometheus官网](https://prometheus.io/)
