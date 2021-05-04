@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
-  <title>Mermaid使用教程 - 麦奇</title>
+  <title>工具篇-Jmeter工具入门使用 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -214,7 +214,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Mermaid使用教程">
+            <span class="h2" id="subtitle" title="工具篇-Jmeter工具入门使用">
               
             </span>
 
@@ -229,8 +229,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-12-07 20:38" pubdate>
-        2020年12月7日 晚上
+      <time datetime="2021-05-03 18:24" pubdate>
+        2021年5月3日 晚上
       </time>
     </span>
   
@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      749 字
+      445 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      5
        分钟
     </span>
   
@@ -289,164 +289,25 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Mermaid使用教程</h1>
+            <h1 style="display: none">工具篇-Jmeter工具入门使用</h1>
             
             <div class="markdown-body">
-              <h1 id="Mermaid简介"><a href="#Mermaid简介" class="headerlink" title="Mermaid简介"></a>Mermaid简介</h1><p>mermaid 美人鱼, 是一个类似 markdown，用文本语法来描述文档图形(流程图、 时序图、甘特图)的工具，您可以在文档中嵌入一段 mermaid 文本来生成 SVG 形式的图形 比如插入下面的代码</p>
-<p>编写代码</p>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">graph TD<br>    Start --&gt; Stop<br></code></pre></div></td></tr></table></figure>
+              <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
+<p>Apache JMeter是Apache组织开发的基于Java的压力测试工具。用于对软件做压力测试，它最初被设计用于Web应用测试，但后来扩展到其他测试领域。 它可以用于测试静态和动态资源，例如静态文件、Java 小服务程序、CGI 脚本、Java 对象、数据库、FTP 服务器， 等等。JMeter 可以用于对服务器、网络或对象模拟巨大的负载，来自不同压力类别下测试它们的强度和分析整体性能。另外，JMeter能够对应用程序做功能/回归测试，通过创建带有断言的脚本来验证你的程序返回了你期望的结果。为了最大限度的灵活性，JMeter允许使用正则表达式创建断言。</p>
+</blockquote>
+<blockquote>
+<p>Apache jmeter 可以用于对静态的和动态的资源（文件，Servlet，Perl脚本，java 对象，数据库和查询，FTP服务器等等）的性能进行测试。它可以用于对服务器、网络或对象模拟繁重的负载来测试它们的强度或分析不同压力类型下的整体性能。你可以使用它做性能的图形分析或在大并发负载测试你的服务器/脚本/对象。</p>
+</blockquote>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 下载</span><br>wget https://mirrors.bfsu.edu.cn/apache//jmeter/binaries/apache-jmeter-5.4.1.tgz<br><span class="hljs-meta">#</span><span class="bash"> 解压</span><br>tar -zxvf apache-jmeter-5.4.1.tgz<br><span class="hljs-meta">#</span><span class="bash"> 启动</span><br>./apache-jmeter-5.4.1/bin/start.sh<br></code></pre></div></td></tr></table></figure>
 
-<p>生成图示</p>
-<pre><code class=" mermaid">graph TD
-    Start --&gt; Stop
-</code></pre>
+<h1 id="压测"><a href="#压测" class="headerlink" title="压测"></a>压测</h1><p>1.第一步是先将你要压测的应用跑起来</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 上传应用到服务器</span><br>scp jmeter-0.0.1-SNAPSHOT.jar root@47.106.210.183:/root/<br><span class="hljs-meta">#</span><span class="bash"> 启动应用</span><br>nohup java -jar jmeter-0.0.1-SNAPSHOT.jar &gt; jmeter.log &amp;<br></code></pre></div></td></tr></table></figure>
 
-
-
-<p>编写代码</p>
-<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">graph TD<br>    B((开始)) <span class="hljs-comment">--&gt;C&#123;判断&#125;</span><br>    C <span class="hljs-comment">--  a=1 --&gt;D[执行语句1]</span><br>    C <span class="hljs-comment">--  a=2  --&gt;E[执行语句2]</span><br>    C <span class="hljs-comment">--  a=3 --&gt;F[执行语句3]</span><br>    C <span class="hljs-comment">-- a=4  --&gt;G[执行语句4]</span><br>    D<span class="hljs-comment">--&gt; AA((结束))</span><br>    E<span class="hljs-comment">--&gt; AA</span><br>    F<span class="hljs-comment">--&gt; AA</span><br>   G<span class="hljs-comment">--&gt; AA      </span><br></code></pre></div></td></tr></table></figure>
-<p>生成对应图：</p>
-<pre><code class=" mermaid">graph TD
-    B((开始)) --&gt;C&#123;判断&#125;
-    C --  a&#x3D;1 --&gt;D[执行语句1]
-    C --  a&#x3D;2  --&gt;E[执行语句2]
-    C --  a&#x3D;3 --&gt;F[执行语句3]
-    C -- a&#x3D;4  --&gt;G[执行语句4]
-    D--&gt; AA((结束))
-    E--&gt; AA
-    F--&gt; AA
-   G--&gt; AA      
-</code></pre>
-
-
-<h1 id="使用教程"><a href="#使用教程" class="headerlink" title="使用教程"></a>使用教程</h1><h2 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h2><table>
-    <tr>
-        <th>格式</th>
-        <th>描述</th>
-    </tr>
-    <tr>
-        <td>TB</td>
-        <td>从上到下</td>
-    </tr>
-    <tr>
-        <td>TD</td>
-        <td>自顶向下/从上至下相同</td>
-    </tr>    
-    <tr>
-        <td>BT</td>
-        <td>从下至上</td>
-    </tr>
-    <tr>
-        <td>RL</td>
-        <td>从右至左</td>
-    </tr>
-    <tr>
-        <td>LR</td>
-        <td>从左至右</td>
-    </tr>
-</table>
-
-<p>代码</p>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">graph LR<br>    A--&gt;|text|B<br></code></pre></div></td></tr></table></figure>
-<p>图示</p>
-<pre><code class=" mermaid">graph LR
-    A--&gt;|text|B
-</code></pre>
-<h2 id="顺序图"><a href="#顺序图" class="headerlink" title="顺序图"></a>顺序图</h2><p>代码</p>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">sequenceDiagram<br>    autonumber<br>    Alice-&gt;&gt;John: Hello John, how are you?<br>    loop Healthcheck<br>        John-&gt;&gt;John: Fight against hypochondria<br>    end<br>    Note right of John: Rational thoughts!<br>    John--&gt;&gt;Alice: Great!<br>    John-&gt;&gt;Bob: How about you?<br>    Bob--&gt;&gt;John: Jolly good!<br></code></pre></div></td></tr></table></figure>
-<p>图像</p>
-<pre><code class=" mermaid">sequenceDiagram
-    autonumber
-    Alice-&gt;&gt;John: Hello John, how are you?
-    loop Healthcheck
-        John-&gt;&gt;John: Fight against hypochondria
-    end
-    Note right of John: Rational thoughts!
-    John--&gt;&gt;Alice: Great!
-    John-&gt;&gt;Bob: How about you?
-    Bob--&gt;&gt;John: Jolly good!
-</code></pre>
-
-<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p>代码</p>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">classDiagram<br>classA &lt;|-- classB : implements<br>classC *-- classD : composition<br>classE o-- classF : association<br></code></pre></div></td></tr></table></figure>
-<p>图示</p>
-<pre><code class=" mermaid">classDiagram
-classA &lt;|-- classB : implements
-classC *-- classD : composition
-classE o-- classF : association
-</code></pre>
-<h2 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h2><p>代码</p>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">stateDiagram-v2<br>    [*] --&gt; Still<br>    Still --&gt; [*]<br><br>    Still --&gt; Moving<br>    Moving --&gt; Still<br>    Moving --&gt; Crash<br>    Crash --&gt; [*]<br></code></pre></div></td></tr></table></figure>
-<p>图示</p>
-<pre><code class=" mermaid">stateDiagram-v2
-    [*] --&gt; Still
-    Still --&gt; [*]
-
-    Still --&gt; Moving
-    Moving --&gt; Still
-    Moving --&gt; Crash
-    Crash --&gt; [*]
-</code></pre>
-
-<h2 id="实体关系图"><a href="#实体关系图" class="headerlink" title="实体关系图"></a>实体关系图</h2><p>代码</p>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">erDiagram<br>    CUSTOMER ||--o&#123; ORDER : places<br>    CUSTOMER &#123;<br>        string name<br>        string custNumber<br>        string sector<br>    &#125;<br>    ORDER ||--|&#123; LINE-ITEM : contains<br>    ORDER &#123;<br>        int orderNumber<br>        string deliveryAddress<br>    &#125;<br>    LINE-ITEM &#123;<br>        string productCode<br>        int quantity<br>        float pricePerUnit<br>    &#125;<br></code></pre></div></td></tr></table></figure>
-<p>图示</p>
-<pre><code class=" mermaid">erDiagram
-    CUSTOMER ||--o&#123; ORDER : places
-    CUSTOMER &#123;
-        string name
-        string custNumber
-        string sector
-    &#125;
-    ORDER ||--|&#123; LINE-ITEM : contains
-    ORDER &#123;
-        int orderNumber
-        string deliveryAddress
-    &#125;
-    LINE-ITEM &#123;
-        string productCode
-        int quantity
-        float pricePerUnit
-    &#125;
-</code></pre>
-<h2 id="用户旅程"><a href="#用户旅程" class="headerlink" title="用户旅程"></a>用户旅程</h2><p>代码</p>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">journey<br>    title My working day<br>    section Go to work<br>      Make tea: 5: Me<br>      Go upstairs: 3: Me<br>      Do work: 1: Me, Cat<br>    section Go home<br>      Go downstairs: 5: Me<br>      Sit down: 5: Me<br></code></pre></div></td></tr></table></figure>
-<p>图示</p>
-<pre><code class=" mermaid">journey
-    title My working day
-    section Go to work
-      Make tea: 5: Me
-      Go upstairs: 3: Me
-      Do work: 1: Me, Cat
-    section Go home
-      Go downstairs: 5: Me
-      Sit down: 5: Me
-</code></pre>
-<h2 id="甘特"><a href="#甘特" class="headerlink" title="甘特"></a>甘特</h2><p>代码</p>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">gantt<br>    title A Gantt Diagram<br>    dateFormat  YYYY-MM-DD<br>    section Section<br>    A task           :a1, 2014-01-01, 30d<br>    Another task     :after a1  , 20d<br>    section Another<br>    Task in sec      :2014-01-12  , 12d<br>    another task      : 24d<br></code></pre></div></td></tr></table></figure>
-<p>图示</p>
-<pre><code class=" mermaid">gantt
-    title A Gantt Diagram
-    dateFormat  YYYY-MM-DD
-    section Section
-    A task           :a1, 2014-01-01, 30d
-    Another task     :after a1  , 20d
-    section Another
-    Task in sec      :2014-01-12  , 12d
-    another task      : 24d
-</code></pre>
-<h2 id="饼形图"><a href="#饼形图" class="headerlink" title="饼形图"></a>饼形图</h2><p>代码</p>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">pie<br>    title Key elements in Product X<br>    &quot;Calcium&quot; : 42.96<br>    &quot;Potassium&quot; : 50.05<br>    &quot;Magnesium&quot; : 10.01<br>    &quot;Iron&quot; :  5<br></code></pre></div></td></tr></table></figure>
-<p>图示</p>
-<pre><code class=" mermaid">pie
-    title Key elements in Product X
-    &quot;Calcium&quot; : 42.96
-    &quot;Potassium&quot; : 50.05
-    &quot;Magnesium&quot; : 10.01
-    &quot;Iron&quot; :  5
-</code></pre>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://mermaid-js.github.io/mermaid/#/">官方文档</a></p>
-
+<p>2.搭建监控大盘</p>
+<p>参考：</p>
+<p>3.配置压测脚本</p>
+<p><img src="https://i.loli.net/2021/05/04/xljQbKDYofS3ZN7.png" srcset="/img/loading.gif" alt="后台报错"></p>
+<h1 id="自动"><a href="#自动" class="headerlink" title="自动"></a>自动</h1><h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1>
             </div>
             <hr>
             <div>
@@ -463,7 +324,7 @@ classE o-- classF : association
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Mermaid/">Mermaid</a>
+                      <a class="hover-with-bg" href="/tags/Jmeter/">Jmeter</a>
                     
                   </div>
                 
@@ -476,9 +337,9 @@ classE o-- classF : association
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/12/09/devops/DevOps%E7%AF%87-Nginx%E9%85%8D%E7%BD%AESSL/">
+                      <a href="/2021/05/03/devops/DevOps%E7%AF%87-Prometheus+Grafana%E6%90%AD%E5%BB%BA%E7%9B%91%E6%8E%A7%E5%A4%A7%E7%9B%98/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">DevOps篇-Nginx配置SSL</span>
+                        <span class="hidden-mobile">DevOps篇-Prometheus+Grafana搭建监控大盘</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -486,8 +347,8 @@ classE o-- classF : association
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/12/07/network/%E7%BD%91%E7%BB%9C%E7%AF%87-ARP%E5%9C%B0%E5%9D%80%E8%A7%A3%E6%9E%90%E5%8D%8F%E8%AE%AE/">
-                        <span class="hidden-mobile">网络篇-ARP地址解析协议</span>
+                      <a href="/2021/05/01/java/%E5%AD%A6%E4%B9%A0%E7%AF%87-2021%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF%E8%A7%84%E5%88%92/">
+                        <span class="hidden-mobile">学习篇-2021学习路线规划</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
