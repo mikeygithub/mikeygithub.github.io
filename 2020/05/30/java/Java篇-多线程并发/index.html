@@ -879,7 +879,8 @@
 <li>tryReleaseShared(int):共享方式。尝试释放资源,如果释放后允许唤醒后续等待结点返回true,否则返回 false。</li>
 </ol>
 <h3 id="同步器的实现是-ABS-核心-state-资源状态计数"><a href="#同步器的实现是-ABS-核心-state-资源状态计数" class="headerlink" title="同步器的实现是 ABS 核心( state 资源状态计数)"></a>同步器的实现是 ABS 核心( state 资源状态计数)</h3><p>同步器的实现是 ABS 核心,以 ReentrantLock 为例,state 初始化为 0,表示未锁定状态。A 线程<br>lock()时,会调用 tryAcquire()独占该锁并将 state+1。此后,其他线程再 tryAcquire()时就会失<br>败,直到 A 线程 unlock()到 state=0(即释放锁)为止,其它线程才有机会获取该锁。当然,释放<br>锁之前,A 线程自己是可以重复获取此锁的(state 会累加),这就是可重入的概念。但要注意,<br>获取多少次就要释放多么次,这样才能保证 state 是能回到零态的。<br>以 CountDownLatch 以例,任务分为 N 个子线程去执行,state 也初始化为 N(注意 N 要与<br>线程个数一致)。这 N 个子线程是并行执行的,每个子线程执行完后 countDown()一次,state<br>会 CAS 减 1。等到所有子线程都执行完后(即 state=0),会 unpark()主调用线程,然后主调用线程<br>就会从 await()函数返回,继续后余动作。</p>
-<h3 id="ReentrantReadWriteLock-实现独占和共享两种方式"><a href="#ReentrantReadWriteLock-实现独占和共享两种方式" class="headerlink" title="ReentrantReadWriteLock 实现独占和共享两种方式"></a>ReentrantReadWriteLock 实现独占和共享两种方式</h3><p>一般来说,自定义同步器要么是独占方法,要么是共享方式,他们也只需实现 tryAcquire-tryRelease、tryAcquireShared-tryReleaseShared 中的一种即可。但 AQS 也支持自定义同步器同时实现独占和共享两种方式,如 ReentrantReadWriteLock。</p>
+<h3 id="ReentrantReadWriteLock-实现独占和共享两种方式"><a href="#ReentrantReadWriteLock-实现独占和共享两种方式" class="headerlink" title="ReentrantReadWriteLock 实现独占和共享两种方式"></a>ReentrantReadWriteLock 实现独占和共享两种方式</h3><p>一般来说,自定义同步器要么是独占方法,要么是共享方式,他们也只需实现 tryAcquire-tryRelease、tryAcquireShared-tryReleaseShared 中的一种即可。但 AQS 也支持自定义同步器同时实现独占和共享两种方式,如 ReentrantReadWriteLock。<br><br/></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
 
             </div>
             <hr>

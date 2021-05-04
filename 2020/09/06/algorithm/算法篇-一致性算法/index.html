@@ -346,7 +346,8 @@
 <li>现在服务节点和对象都已经通过同一个 hash 算法映射到 hash 数值空间中了,首先确定对象<br>hash 值在环上的位置,从此位置沿环顺时针“行走”,第一台遇到的服务器就是其应该定位<br>到的服务器。</li>
 </ol>
 <p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/con-hash.png" srcset="/img/loading.gif" alt="avatar"><br>考察 cache 的变动<br>5.<br>通过 hash 然后求余的方法带来的最大问题就在于不能满足单调性,当 cache 有所变动时,<br>cache 会失效。<br>5.1 移除 cache:考虑假设 cache B 挂掉了,根据上面讲到的映射方法,这时受影响的将仅是<br>那些沿 cache B 逆时针遍历直到下一个 cache ( cache C )之间的对象。<br>5.2 添加 cache:再考虑添加一台新的 cache D 的情况,这时受影响的将仅是那些沿 cache<br>D 逆时针遍历直到下一个 cache 之间的对象,将这些对象重新映射到 cache D 上即可。<br>虚拟节点<br>hash 算法并不是保证绝对的平衡,如果 cache 较少的话,对象并不能被均匀的映射到 cache 上,<br>为了解决这种情况, consistent hashing 引入了“虚拟节点”的概念,它可以如下定义:<br>虚拟节点( virtual node )是实际节点在 hash 空间的复制品( replica ),一实际个节点对应了<br>若干个“虚拟节点”,这个对应个数也成为“复制个数”,“虚拟节点”在 hash 空间中以 hash<br>值排列。<br>仍以仅部署 cache A 和 cache C 的情况为例。现在我们引入虚拟节点,并设置“复制个数”为 2 ,<br>这就意味着一共会存在 4 个“虚拟节点”, cache A1, cache A2 代表了 cache A; cache C1,<br>cache C2 代表了 cache C 。此时,对象到“虚拟节点”的映射关系为:<br>objec1-&gt;cache A2 ; objec2-&gt;cache A1 ; objec3-&gt;cache C1 ; objec4-&gt;cache C2 ;<br>因此对象 object1 和 object2 都被映射到了 cache A 上,而 object3 和 object4 映射到了 cache<br>C 上;平衡性有了很大提高。<br>引入“虚拟节点”后,映射关系就从 { 对象 -&gt; 节点 } 转换到了 { 对象 -&gt; 虚拟节点 } 。查询物体所<br>在 cache 时的映射关系如下图 所示。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hash-cache.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hash-cache.png" srcset="/img/loading.gif" alt="avatar"><br/></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
