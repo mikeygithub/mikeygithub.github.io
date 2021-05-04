@@ -132,7 +132,7 @@ nohup ./node_exporter  &
 
 
 
-![image-20210504003102865](/Users/mikey/Library/Application Support/typora-user-images/image-20210504003102865.png)
+![image-20210504003102865](https://i.loli.net/2021/05/04/1G4nkDSJ9ihUF3Q.png)
 
 
 
