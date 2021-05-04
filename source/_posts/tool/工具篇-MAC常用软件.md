@@ -51,4 +51,7 @@ dingtalk
 
 # 参考资料
 
-https://www.macwk.com/
+https://www.macwk.com/<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

@@ -1243,4 +1243,7 @@ group.initial.rebalance.delay.ms=0
 
 [Kafka Github地址](https://github.com/apache/kafka)
 
-[DEVELOPER GUIDE FOR KAFKA STREAMS](http://kafka.apache.org/25/documentation/streams/developer-guide/)
+[DEVELOPER GUIDE FOR KAFKA STREAMS](http://kafka.apache.org/25/documentation/streams/developer-guide/)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

@@ -229,3 +229,7 @@ Sentinel 开源控制台支持实时监控和规则管理。接入控制台的�
 # 参考资料
 
 [官方文档](https://sentinelguard.io/zh-cn/docs/quick-start.html)
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

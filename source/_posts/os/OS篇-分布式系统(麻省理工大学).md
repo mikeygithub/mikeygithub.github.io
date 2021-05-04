@@ -51,3 +51,7 @@ tags: 分布式系统
 # 相关资料
 
 [麻省理工学院-分布式系统 || Distributed Systems (中字幕)MIT2020年](https://www.bilibili.com/video/BV1rp4y1k7nL/?spm_id_from=333.788.recommend_more_video.17)
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

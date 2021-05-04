@@ -395,3 +395,7 @@ protected List<String> getCandidateConfigurations(AnnotationMetadata metadata, A
 
 [非常详细的SpringBoot-自动装配原理](https://www.cnblogs.com/hhcode520/p/9450933.html)
 
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

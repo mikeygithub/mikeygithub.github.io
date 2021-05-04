@@ -2847,4 +2847,7 @@ FAT技术
 
 [计算机操作系统(第4版)汤小丹]()
 
-[《《操作系统真象还原》》]()
+[《《操作系统真象还原》》]()<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

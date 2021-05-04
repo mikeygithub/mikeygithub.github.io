@@ -78,4 +78,7 @@ tags: Ubuntu
 - JDK
 - Golang
 - Docker
-- Nodejs
+- Nodejs<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

@@ -112,3 +112,7 @@ public class SwaggerConfiguration {
 
 [博文](https://www.cnblogs.com/fby698/p/11581845.html)
 
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

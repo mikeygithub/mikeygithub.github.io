@@ -50,3 +50,7 @@ git checkout <your Caliper version>
 
 *Note*: 
 >If you are running your custom benchmark, then change this directory path (and other related configurations) accordingly in the examples.
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

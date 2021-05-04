@@ -471,3 +471,7 @@ docker run --name some-postgres \
 
 # Hyperledger Iroha 相关资料
 [官方文档](https://iroha.readthedocs.io/en/latest/)
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

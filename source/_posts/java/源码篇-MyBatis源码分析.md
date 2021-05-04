@@ -520,4 +520,7 @@ public List<Object> handleResultSets(Statement stmt) throws SQLException {
 
 [Mybatis架构与原理](https://www.jianshu.com/p/15781ec742f2)
 
-[MyBatis架构设计及源代码分析系列(一):MyBatis架构](https://www.cnblogs.com/mengheng/p/3739610.html)
+[MyBatis架构设计及源代码分析系列(一):MyBatis架构](https://www.cnblogs.com/mengheng/p/3739610.html)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

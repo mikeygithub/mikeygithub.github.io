@@ -136,3 +136,7 @@ env:close()   --关闭数据库环境
 
 [菜鸟教程](https://www.runoob.com/lua/lua-tutorial.html)
 [官方手册](https://www.runoob.com/manual/lua53doc/)
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

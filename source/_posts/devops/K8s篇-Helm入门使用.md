@@ -92,4 +92,7 @@ helm repo update
 # 参考资料
 
 [快速开始](https://helm.sh/zh/docs/intro/quickstart/)
-[安装教程](https://www.orchome.com/1910)
+[安装教程](https://www.orchome.com/1910)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

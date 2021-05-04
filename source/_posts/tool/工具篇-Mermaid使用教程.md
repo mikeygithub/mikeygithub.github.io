@@ -271,4 +271,7 @@ pie
 ```
 # 参考资料
 
-[官方文档](https://mermaid-js.github.io/mermaid/#/)
+[官方文档](https://mermaid-js.github.io/mermaid/#/)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

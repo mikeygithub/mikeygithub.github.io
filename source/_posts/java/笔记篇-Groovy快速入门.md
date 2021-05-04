@@ -28,4 +28,7 @@ Groovy扩展了java.lang.Object。
 
 [Groovy官方网站](http://www.groovy-lang.org/)
 
-[W3c教程](https://www.w3cschool.cn/groovy/groovy_overview.html)
+[W3c教程](https://www.w3cschool.cn/groovy/groovy_overview.html)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

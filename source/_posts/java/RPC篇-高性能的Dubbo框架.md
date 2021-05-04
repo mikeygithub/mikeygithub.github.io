@@ -479,3 +479,7 @@ admin.metadata-report.address
 # 参考资料
 
 [官方文档](http://dubbo.apache.org/zh/docs/v2.7/)
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

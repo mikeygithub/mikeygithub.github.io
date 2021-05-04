@@ -99,4 +99,7 @@ public enum HttpRequestMethod {
 
 # 参考
 
-[Java 枚举(enum) 详解7种常见的用法](https://blog.csdn.net/qq_39949109/article/details/80432477)
+[Java 枚举(enum) 详解7种常见的用法](https://blog.csdn.net/qq_39949109/article/details/80432477)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

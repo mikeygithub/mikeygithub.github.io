@@ -384,4 +384,7 @@ Linux                                                                           
 
 [select、poll、epoll之间的区别(搜狗面试)](https://www.cnblogs.com/aspirant/p/9166944.html)
 
-[select、poll、epoll的原理与区别](https://blog.csdn.net/nanxiaotao/article/details/90612404)
+[select、poll、epoll的原理与区别](https://blog.csdn.net/nanxiaotao/article/details/90612404)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

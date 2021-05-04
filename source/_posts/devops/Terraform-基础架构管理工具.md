@@ -32,4 +32,7 @@ TODO
 
 [官方文档](https://www.terraform.io/docs/index.html)
 
-[相关博客](https://www.cnblogs.com/sparkdev/p/10052310.html)
+[相关博客](https://www.cnblogs.com/sparkdev/p/10052310.html)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

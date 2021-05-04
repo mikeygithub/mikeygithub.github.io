@@ -18,3 +18,7 @@ Ansible 是一个模型驱动的配置管理器，支持多节点发布、远程
 # 快速开始
 
  
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

@@ -64,4 +64,7 @@ In the book, [Beyond the Twelve-Factor App](https://content.pivotal.io/blog/beyo
 
 [什么是云原生？这回终于有人讲明白了](https://zhuanlan.zhihu.com/p/150190166)
 
-[架构新纪元（二）：什么是云原生？](https://www.infoq.cn/article/xpFP8uclTKJQhhFqDyjZ)
+[架构新纪元（二）：什么是云原生？](https://www.infoq.cn/article/xpFP8uclTKJQhhFqDyjZ)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

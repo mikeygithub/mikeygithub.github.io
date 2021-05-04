@@ -48,3 +48,7 @@ tags: centos
 
 完成.
 
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

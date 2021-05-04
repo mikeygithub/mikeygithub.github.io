@@ -141,4 +141,7 @@ nohup ./grafana_server  &
 # 资料
 
 [grafana官网](https://grafana.com/)
-[prometheus官网](https://prometheus.io/)
+[prometheus官网](https://prometheus.io/)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

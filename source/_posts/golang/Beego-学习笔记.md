@@ -732,4 +732,7 @@ beego.AddNamespace(ns)
 
 # 相关资料
 
-[Beego官网](https://beego.me/)
+[Beego官网](https://beego.me/)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

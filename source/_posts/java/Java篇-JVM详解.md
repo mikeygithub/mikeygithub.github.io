@@ -6700,3 +6700,7 @@ AliGC是阿里巴巴JVM团队基于G1算法，面向大堆（LargeHeap）应用�
 [视频教程](https://www.bilibili.com/video/BV1PJ411n7xZ)
 [思维导图](https://www.processon.com/view/link/601a1df3637689536e17bade)
 
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

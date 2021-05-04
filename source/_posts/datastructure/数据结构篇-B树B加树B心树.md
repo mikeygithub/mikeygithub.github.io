@@ -155,4 +155,7 @@ typedef struct node
 
 # 参考资料
 
-[浅谈mysql中的Btree,b+-tree,b*tree](https://blog.csdn.net/weixin_43778491/article/details/84893581?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)
+[浅谈mysql中的Btree,b+-tree,b*tree](https://blog.csdn.net/weixin_43778491/article/details/84893581?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.control)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

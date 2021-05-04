@@ -78,3 +78,7 @@ export PATH=/home/mikey/DATA/DevTools/flutter/bin:{PATH}:{PATH}:${ANDROID_HOME}/
 [安装教程](https://flutter.dev/docs/get-started/install/linux)
 
 [flutter实战](https://book.flutterchina.club/)
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

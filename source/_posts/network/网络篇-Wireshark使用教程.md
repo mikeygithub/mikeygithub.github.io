@@ -56,4 +56,7 @@ sudo setcap cap_net_raw,cap_net_admin+eip /usr/bin/dumpcap
 
 [Wireshark User’s Guide](https://www.wireshark.org/docs/wsug_html_chunked/)
 
-[wireshark抓包新手使用教程](https://www.cnblogs.com/mq0036/p/11187138.html)
+[wireshark抓包新手使用教程](https://www.cnblogs.com/mq0036/p/11187138.html)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

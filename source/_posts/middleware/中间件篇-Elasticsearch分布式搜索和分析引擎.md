@@ -511,4 +511,7 @@ public class Elasticsearch {
 
 [Elasticsearch简介与实战](https://www.jianshu.com/p/d48c32423789)
 
-[倒排索引](https://www.elastic.co/guide/cn/elasticsearch/guide/current/inverted-index.html)
+[倒排索引](https://www.elastic.co/guide/cn/elasticsearch/guide/current/inverted-index.html)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

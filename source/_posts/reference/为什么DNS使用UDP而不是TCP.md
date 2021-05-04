@@ -82,4 +82,7 @@ DNS没有字段来标识报文ID，比如1、2、3，所以默认只有一个报
 - 使用TCP传输是由于可以传输大于512字节报文。
 - 使用签名是保证数据来源的可靠性。
 - 使用TCP传输，同样是可以传输证书链、签名。
-- 使用UDP同样可以传输远远大于576字节的数据，只要应用程序可以标识数据ID。 
+- 使用UDP同样可以传输远远大于576字节的数据，只要应用程序可以标识数据ID。 <br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

@@ -23,4 +23,7 @@ tags: Istio
 
 [Istio官网](https://istio.io/)
 
-[Istio是啥？一文带你彻底了解](http://www.uml.org.cn/wfw/201909063.asp)
+[Istio是啥？一文带你彻底了解](http://www.uml.org.cn/wfw/201909063.asp)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

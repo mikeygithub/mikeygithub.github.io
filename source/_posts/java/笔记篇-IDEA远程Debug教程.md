@@ -39,3 +39,7 @@ jdk1.7之后: -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
 
 [Intellij IDEA远程debug教程实战和要点总结](https://blog.csdn.net/qq_37192800/article/details/80761643)
 
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

@@ -96,4 +96,7 @@ RabbitMQ 最初起源于金融系统,用于在分布式系统中存储转发消�
 
  3.topic 交换器:topic 交换器通过模式匹配分配消息的路由键属性,将路由键和某个模式进行匹配,此时队列需要绑定到一个模式上。它将路由键和绑定键的字符串切分成单词,这些单词之间用点隔开。它同样也会识别两个通配符:符号“#”和符号“”。#匹配 0 个或多个单词,匹配不多不少一个单词。
 
-  ![avatar](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/topic-exchange.png)
+  ![avatar](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/topic-exchange.png)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

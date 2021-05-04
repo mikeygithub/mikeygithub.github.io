@@ -55,4 +55,7 @@ sudo apt install python
 
 [官网](https://www.python.org/)
 
-[菜鸟教程](https://www.runoob.com/python/python-tutorial.html)
+[菜鸟教程](https://www.runoob.com/python/python-tutorial.html)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

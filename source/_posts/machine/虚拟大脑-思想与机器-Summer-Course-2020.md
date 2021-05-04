@@ -63,4 +63,7 @@ tags: 虚拟大脑
 
 # related data
 
-[video course](https://www.bilibili.com/video/BV1Dz4y1U7PF)
+[video course](https://www.bilibili.com/video/BV1Dz4y1U7PF)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

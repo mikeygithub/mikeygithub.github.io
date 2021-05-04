@@ -79,4 +79,7 @@ Object对象占用：16字节，如果有压缩的话，padding是4，如果没�
 >JDK1.7:Method Area (接口)　->　Perm Generation(实现)
 >JDK1.8:Method Area (接口)　->　MetaSpace(实现)
 
-[Java虚拟机规范](https://docs.oracle.com/javase/specs/jvms/se6/html/VMSpecTOC.doc.html)
+[Java虚拟机规范](https://docs.oracle.com/javase/specs/jvms/se6/html/VMSpecTOC.doc.html)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

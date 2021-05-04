@@ -597,4 +597,7 @@ Annotation与Label类似，也使用key/value键值对的形式进行定义。�
 
 [kubernetes教程](https://www.orchome.com/732)
 
-[kuboard](https://kuboard.cn/learning/)
+[kuboard](https://kuboard.cn/learning/)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

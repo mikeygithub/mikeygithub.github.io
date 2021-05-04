@@ -24,4 +24,7 @@ tags: go-kit
 
 [官网文档](https://gokit.io/)
 
-[参考博文](https://learnku.com/go/t/36923)
+[参考博文](https://learnku.com/go/t/36923)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

@@ -1496,3 +1496,7 @@ lock()时,会调用 tryAcquire()独占该锁并将 state+1。此后,其他线程
 ### ReentrantReadWriteLock 实现独占和共享两种方式
 
 一般来说,自定义同步器要么是独占方法,要么是共享方式,他们也只需实现 tryAcquire-tryRelease、tryAcquireShared-tryReleaseShared 中的一种即可。但 AQS 也支持自定义同步器同时实现独占和共享两种方式,如 ReentrantReadWriteLock。
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

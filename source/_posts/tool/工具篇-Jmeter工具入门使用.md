@@ -93,4 +93,7 @@ nohup ./jmeter -n -t /root/apache-jmeter-5.4.1/线程组-10线程一直压测.jm
 # 资料
 
 [grafana官网](https://grafana.com/)
-[prometheus官网](https://prometheus.io/)
+[prometheus官网](https://prometheus.io/)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

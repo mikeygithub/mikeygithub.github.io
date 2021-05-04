@@ -378,4 +378,7 @@ tags: 资料
 1. 自我介绍。
 2. 说说你的项目中的亮点有哪些。
 3. 画一下你的项目的架构图。
-4. Restful 了解吗？简单说一下自己对它的认识，如果我要返回一个 boolean 类型的数据怎么办？
+4. Restful 了解吗？简单说一下自己对它的认识，如果我要返回一个 boolean 类型的数据怎么办？<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

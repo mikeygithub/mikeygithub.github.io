@@ -35,4 +35,7 @@ MongoDB 将数据存储为一个文档,数据结构由键值(key=>value)对组�
 
 - GridFS 是 MongoDB 中的一个内置功能,可以用于存放大量小文件。
 
-- MongoDB 允许在服务端执行脚本,可以用 Javascript 编写某个函数,直接在服务端执行,也可以把函数的定义存储在服务端,下次直接调用即可。
+- MongoDB 允许在服务端执行脚本,可以用 Javascript 编写某个函数,直接在服务端执行,也可以把函数的定义存储在服务端,下次直接调用即可。<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

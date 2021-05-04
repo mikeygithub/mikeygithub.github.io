@@ -510,3 +510,7 @@ zcat [gzip] (1) – compress or expand files
 
 【附】只有 root 用户才能够查看其它用户的配额。
 
+<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

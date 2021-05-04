@@ -30,4 +30,7 @@ C-->D(编译构建)-->E(部署应用)-->启动成功
 
 
 
-# 参考资料
+# 参考资料<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

@@ -308,4 +308,7 @@ MBR 位于整个硬盘最开始的块，EBR 位于每个子扩展分区，各子
 
 # 参考资料
 
-[《操作系统真相还原》](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/pdf/操作系统真象还原.pdf)
+[《操作系统真相还原》](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/pdf/操作系统真象还原.pdf)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

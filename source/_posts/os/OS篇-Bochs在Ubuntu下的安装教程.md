@@ -391,4 +391,7 @@ dd if=/home/mikey/bochs/bin/mbr.bin of=/home/mikey/bochs/bin/hd60M.img bs=512 co
 
 [《操作系统真相还原》]()
 
-[Ubuntu 16.04LTS 安装和配置Bochs](https://www.cnblogs.com/lfri/p/11489223.html)
+[Ubuntu 16.04LTS 安装和配置Bochs](https://www.cnblogs.com/lfri/p/11489223.html)<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

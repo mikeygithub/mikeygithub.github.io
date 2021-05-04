@@ -3398,4 +3398,7 @@ public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise)
 
 ## 最后
 
-至此整个 Netty 的源码应该了解的都差不多了，大家没事就可以拿出来读一下巩固一遍，脑海里再过一遍，这整个体系就在脑海中建立起来了，基本上稳了。
+至此整个 Netty 的源码应该了解的都差不多了，大家没事就可以拿出来读一下巩固一遍，脑海里再过一遍，这整个体系就在脑海中建立起来了，基本上稳了。<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)

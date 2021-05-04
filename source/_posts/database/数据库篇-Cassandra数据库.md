@@ -208,4 +208,7 @@ MemTable:如果 memtable 有目标分区数据,这个数据会被读出来并且
 
 
 
-# 参考资料
+# 参考资料<br/>
+
+
+![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
