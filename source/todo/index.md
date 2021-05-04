@@ -10,7 +10,7 @@ date: 2020-01-02 22:02:44
 
 # 2021-05-01
 
-https://mikeygithub.github.io/2021/03/28/java/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%AF%87-Spring%20Native/
+{% cb 云原生篇 %}
 
 # 2021-04-28
 
