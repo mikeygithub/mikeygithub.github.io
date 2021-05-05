@@ -1,4 +1,5 @@
 ---
+index_img: /images/uploads/blog.jpg
 title: 博客篇-Hexo+Travis-Ci+NetlifyCMS+Github-Page搭建博客
 date: 2021-05-05 17:44:48
 updated: 2021-05-05 17:44:48
