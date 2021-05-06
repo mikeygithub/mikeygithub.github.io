@@ -44,7 +44,7 @@ nohup java -jar jmeter-0.0.1-SNAPSHOT.jar > jmeter.log &
 
 配置TPS面板
 
-![添加TPS监控](/Users/mikey/Library/Application Support/typora-user-images/image-20210504150708411.png)
+![添加TPS监控](https://i.loli.net/2021/05/06/XnSkxvTtDABsI8q.png)
 
 配置RT面板
 
