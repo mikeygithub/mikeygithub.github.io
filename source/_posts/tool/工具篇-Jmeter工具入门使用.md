@@ -78,7 +78,7 @@ nohup ./jmeter -n -t /root/apache-jmeter-5.4.1/线程组-10线程一直压测.jm
 
 配置使用
 
-![配置](/Users/mikey/Library/Application Support/typora-user-images/image-20210504163732056.png)
+![配置](https://i.loli.net/2021/05/07/rJhLjcu3B6d5NVp.png)
 
 在请求中通过`${variableName}`进行获取使用
 
