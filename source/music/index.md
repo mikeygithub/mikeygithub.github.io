@@ -3,6 +3,11 @@ title: 音乐
 date: 2021-02-09 23:20:01
 ---
 
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+    <link rel="stylesheet" class="aplayer-secondary-style-marker" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+  </head>
+
 {% aplayerlist %}
 {
     "listmaxheight": "513px",

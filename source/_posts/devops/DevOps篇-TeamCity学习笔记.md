@@ -24,13 +24,13 @@ tags: teamcity
 
 - 设置账号秘密
 
-![设置账号密码](/home/mikey/Downloads/jsDeliver/resource/img/image-20210509172618620.png)
+![设置账号密码](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210509172618620.png)
 
 - 新建项目
 
-![新建项目](/home/mikey/Downloads/jsDeliver/resource/img/teamcity-new-project.png)
+![新建项目](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/teamcity-new-project.png)
 
-![输入项目地址和访问用户名秘密](/home/mikey/Downloads/jsDeliver/resource/img/teamcity-new-project-1.png)
+![输入项目地址和访问用户名秘密](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/img/teamcity-new-project-1.png)
 
 
 
