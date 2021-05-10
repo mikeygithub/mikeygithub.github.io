@@ -31,7 +31,9 @@ jobs:
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-
+      - name: Checkout branch
+        run: |
+          git checkout src
       - name: Install dependencies
         run: |
           npm install hexo-cli -g
