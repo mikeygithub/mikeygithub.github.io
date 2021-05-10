@@ -38,6 +38,8 @@ jobs:
           git clone "https://${{ secrets.GH_REF }}" deploy_git
           mv ./deploy_git/.git ./public/
           cd ./public
+          git config --global user.email "biaogejiushibiao@outlook.com"
+          git config --global user.name "mikeygithub"
           git add .
           git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
           git push origin master
