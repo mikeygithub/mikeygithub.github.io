@@ -312,7 +312,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：几秒前
+                  本文最后更新于：5 分钟前
                 
               </p>
             
@@ -329,7 +329,7 @@
 <figure class="highlight properties"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs properties"><span class="hljs-meta">management.endpoints.web.exposure.include</span>=<span class="hljs-string">*</span><br><span class="hljs-comment"># 或者</span><br><span class="hljs-meta">management.endpoints.web.exposure.include</span>=<span class="hljs-string">prometheus</span><br></code></pre></div></td></tr></table></figure>
 
 <p>启动<code>Springboot</code>后，可以通过下面URL看能不能正确获取到监控数据：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle">localhost:<span class="hljs-number">8080</span><span class="hljs-regexp">/actuator/</span>prometheus<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">localhost:<span class="hljs-number">8080</span><span class="hljs-regexp">/actuator/</span>prometheus<br></code></pre></div></td></tr></table></figure>
 
 <p>获取数据成功，说明<code>Springboot</code>能正常提供监控数据。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 下载prometheus</span><br>wget https://github.com/prometheus/prometheus/releases/download/v2.26.0/prometheus-2.26.0.linux-amd64.tar.gz<br><span class="hljs-meta">#</span><span class="bash"> 下载mysqld_exporter</span><br>wget https://github.com/prometheus/mysqld_exporter/releases/download/v0.13.0-rc.0/mysqld_exporter-0.13.0-rc.0.linux-amd64.tar.gz<br><span class="hljs-meta">#</span><span class="bash"> 下载node_exporter</span><br>wget https://github.com/prometheus/node_exporter/releases/download/v1.1.2/node_exporter-1.1.2.linux-amd64.tar.gz<br><span class="hljs-meta">#</span><span class="bash"> 下载grafana</span><br>wget https://dl.grafana.com/oss/release/grafana-7.5.5.linux-amd64.tar.gz<br><span class="hljs-meta">#</span><span class="bash"> 下载alertmanager</span><br>wget https://github.com/prometheus/alertmanager/releases/download/v0.21.0/alertmanager-0.21.0.linux-amd64.tar.gz<br></code></pre></div></td></tr></table></figure>

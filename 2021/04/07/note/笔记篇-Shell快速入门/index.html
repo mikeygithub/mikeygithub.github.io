@@ -312,7 +312,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：几秒前
+                  本文最后更新于：5 分钟前
                 
               </p>
             
@@ -949,7 +949,7 @@
 </tr>
 </tbody></table>
 <p>实例演示：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-attribute">num1</span>=100<br><span class="hljs-attribute">num2</span>=100<br><span class="hljs-keyword">if</span> test $[num1] -eq $[num2]<br>then<br>    echo <span class="hljs-string">&#x27;两个数相等！&#x27;</span><br><span class="hljs-keyword">else</span><br>    echo <span class="hljs-string">&#x27;两个数不相等！&#x27;</span><br>fi<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">num1=100<br>num2=100<br><span class="hljs-keyword">if</span> <span class="hljs-built_in">test</span> $[num1] -eq $[num2]<br><span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;两个数相等！&#x27;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;两个数不相等！&#x27;</span><br><span class="hljs-keyword">fi</span><br></code></pre></div></td></tr></table></figure>
 
 <p>输出结果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs plain">两个数相等！<br></code></pre></div></td></tr></table></figure>
@@ -1046,7 +1046,7 @@
 <figure class="highlight jboss-cli"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">if</span> condition<br>then<br>    <span class="hljs-keyword">command</span>1 <br>    <span class="hljs-keyword">command</span>2<br>    <span class="hljs-string">...</span><br>    <span class="hljs-keyword">command</span>N <br>fi<br></code></pre></div></td></tr></table></figure>
 
 <p>写成一行（适用于终端命令提示符）：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">if</span> [ $(ps -ef | grep -c <span class="hljs-string">&quot;ssh&quot;</span>) -gt <span class="hljs-number">1</span> ]; then echo <span class="hljs-string">&quot;true&quot;</span>; fi<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> [ $(ps -ef | grep -c <span class="hljs-string">&quot;ssh&quot;</span>) -gt 1 ]; <span class="hljs-keyword">then</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;true&quot;</span>; <span class="hljs-keyword">fi</span><br></code></pre></div></td></tr></table></figure>
 
 <p>末尾的fi就是if倒过来拼写，后面还会遇到类似的。</p>
 <h3 id="if-else-1"><a href="#if-else-1" class="headerlink" title="if else"></a>if else</h3><p>if else 语法格式：</p>
@@ -1081,7 +1081,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">for str in &#x27;This is a string&#x27;<br>do<br>    echo $str<br>done<br></code></pre></div></td></tr></table></figure>
 
 <p>输出结果：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livecodeserver">This is <span class="hljs-keyword">a</span> <span class="hljs-keyword">string</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript">This <span class="hljs-keyword">is</span> a <span class="hljs-built_in">string</span><br></code></pre></div></td></tr></table></figure>
 
 <hr>
 <h2 id="while-语句"><a href="#while-语句" class="headerlink" title="while 语句"></a>while 语句</h2><p>while循环用于不断执行一系列命令，也用于从输入文件中读取数据；命令通常为测试条件。其格式为：</p>
@@ -1097,7 +1097,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">echo &#x27;按下 &lt;CTRL-D&gt; 退出&#x27;<br>echo -n &#x27;输入你最喜欢的电影名: &#x27;<br>while read FILM<br>do<br>    echo &quot;是的！$FILM 是一部好电影&quot;<br>done<br></code></pre></div></td></tr></table></figure>
 
 <p>运行脚本，输出类似下面：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs makefile">按下 &lt;CTRL-D&gt; 退出<br><span class="hljs-section">输入你最喜欢的电影名: W3Cschool在线教程</span><br>是的！W3Cschool在线教程 是一部好电影<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml">按下 <span class="hljs-tag">&lt;<span class="hljs-name">CTRL-D</span>&gt;</span> 退出<br>输入你最喜欢的电影名: W3Cschool在线教程<br>是的！W3Cschool在线教程 是一部好电影<br></code></pre></div></td></tr></table></figure>
 
 <h3 id="无限循环"><a href="#无限循环" class="headerlink" title="无限循环"></a>无限循环</h3><p>无限循环语法格式：</p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">while :<br>do<br>    command<br>done<br></code></pre></div></td></tr></table></figure>

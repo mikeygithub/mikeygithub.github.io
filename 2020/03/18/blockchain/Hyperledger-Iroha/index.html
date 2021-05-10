@@ -312,7 +312,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：几秒前
+                  本文最后更新于：5 分钟前
                 
               </p>
             
@@ -393,7 +393,7 @@
 <p>3.2。启动Iroha </p>
 <p>3.2.1。创建一个Docker网络<br>要进行操作，Iroha需要一个PostgreSQL数据库。让我们从创建Docker网络开始，以便Postgres和Iroha的容器可以在同一虚拟网络上运行并成功通信。在本指南中，我们将其称为iroha-network，但您可以使用任何名称。在您的终端中输入以下命令：</p>
 <p>泊坞窗网络创建iroha-network<br>3.2.2。启动PostgreSQL容器<br>现在，我们需要PostgreSQL在容器中运行，将其附加到之前创建的网络，并公开用于通信的端口：</p>
-<figure class="highlight livescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs livescript">docker--name some-postgres<span class="hljs-string">\</span> <br>-e POSTGRES_USER = postgres<span class="hljs-string">\</span> <br>-e POSTGRES_PASSWORD = mysecretpassword <span class="hljs-string">\</span> <br>-p <span class="hljs-number">5432</span>：<span class="hljs-number">5432</span> <span class="hljs-string">\</span> <br>--network =iroha-network<span class="hljs-string">\</span> <br>-d postgres：<span class="hljs-number">9.5</span> <span class="hljs-string">\</span> <br>-c <span class="hljs-string">&#x27;max_prepared_transactions = 100&#x27;</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight haml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haml">docker--name some-postgres\ <br>-<span class="ruby">e POSTGRES_USER = postgres\ </span><br><span class="ruby">-e POSTGRES_PASSWORD = mysecretpassword \ </span><br><span class="ruby">-p <span class="hljs-number">5432</span>：<span class="hljs-number">5432</span> \ </span><br><span class="ruby">--network =iroha-network\ </span><br><span class="ruby">-d postgres：<span class="hljs-number">9.5</span> \ </span><br><span class="ruby">-c <span class="hljs-string">&#x27;max_prepared_transactions = 100&#x27;</span></span><br></code></pre></div></td></tr></table></figure>
 
 <p>注意</p>
 <p>如果已经在主机系统上的默认端口（5432）上运行了Postgres，则应选择另一个将被占用的空闲端口。例如5433：-p 5433:5432</p>
