@@ -45,10 +45,10 @@ jobs:
           git clone "https://${{ secrets.GH_REF }}" deploy_git
           mv ./deploy_git/.git ./public/
           cd ./public
+          git remote rm origin
           git config user.name "mikeygithub"
           git config user.email "biaogejiushibiao@outlook.com"
           git add .
           git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
           echo "finish commit"
-          git remote add origin https://github.com/mikeygithub/mikeygithub.github.io.git
           git push --force --quiet "https://${{ secrets.GH_TOKEN }}@${{ secrets.GH_REF }}" master:master
