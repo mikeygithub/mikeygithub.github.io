@@ -50,4 +50,5 @@ jobs:
           git add .
           git commit -m "GitHub Actions Auto Builder at $(date +'%Y-%m-%d %H:%M:%S')"
           echo "finish commit"
+          git remote add origin https://github.com/mikeygithub/mikeygithub.github.io.git
           git push --force --quiet "https://${{ secrets.GH_TOKEN }}@${{ secrets.GH_REF }}" master:master
