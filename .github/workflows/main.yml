@@ -1,10 +1,6 @@
 name: BLOG-CICD
-on:
-  push:
-    branches: [ src ]
-  pull_request:
-    branches: [ src ]
-  workflow_dispatch:
+on: 
+  repository_dispatch
 jobs:
   blog-cicd:
     name: Hexo build & deploy
