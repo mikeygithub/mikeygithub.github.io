@@ -262,7 +262,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      141 字
+      145 字
     </span>
   
 
@@ -319,8 +319,12 @@
               </p>
             
             <div class="markdown-body">
-              <p>触发 travis-ci 函数</p>
-<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">function travis_trigger() &#123;<br>     #travi-ci用户名<br>     local org=$1 &amp;&amp; shift<br>  	 #仓库名<br>     local repo=$1 &amp;&amp; shift<br>  	 #访问token 通过travis-ci 输入 travis --org token 得出<br>     local TRAVIS_TOKEN=$1 &amp;&amp; shift<br>  	 #分支<br>     local branch=$&#123;1:-master&#125; &amp;&amp; shift<br>		 #请求体<br>     body=<span class="hljs-string">&quot;&#123;</span><br><span class="hljs-string">             \&quot;request\&quot;: &#123;</span><br><span class="hljs-string">               \&quot;branch\&quot;: \&quot;$&#123;branch&#125;\&quot;</span><br><span class="hljs-string">              &#125;</span><br><span class="hljs-string">           &#125;&quot;</span><br>		 #curl请求<br>     curl -s -X POST \<br>          -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \<br>          -H <span class="hljs-string">&quot;Accept: application/json&quot;</span> \<br>          -H <span class="hljs-string">&quot;Travis-API-Version: 3&quot;</span> \<br>          -H <span class="hljs-string">&quot;Authorization: token $TRAVIS_TOKEN&quot;</span> \<br>          -d <span class="hljs-string">&quot;$body&quot;</span> \<br>          <span class="hljs-string">&quot;https://api.travis-ci.org/repo/$&#123;org&#125;%2F$&#123;repo&#125;/requests&quot;</span><br> &#125;<br></code></pre></div></td></tr></table></figure>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1620795900841-f981678f-4466-4572-9cc3-fd48e57c28e2.png#clientId=u585915fc-6a51-4&from=paste&height=948&id=u0ef39350&margin=%5Bobject%20Object%5D&name=image.png&originHeight=948&originWidth=1896&originalType=binary&size=398050&status=done&style=none&taskId=u0c33a9e4-ef5e-4dbb-a810-5e9e7010125&width=1896" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="准备条件"><a href="#准备条件" class="headerlink" title="准备条件"></a>准备条件</h1><p>​</p>
+<p>​</p>
+<p>​</p>
+<p>触发 travis-ci 函数</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">function travis_trigger() &#123;<br>     #travi-ci用户名<br>     local org=$1 &amp;&amp; shift<br>  	 #仓库名<br>     local repo=$1 &amp;&amp; shift<br>  	 #访问token 通过travis-ci 输入 travis --org token 得出<br>     local TRAVIS_TOKEN=$1 &amp;&amp; shift<br>  	 #分支<br>     local branch=$&#123;1:-master&#125; &amp;&amp; shift<br>		 #请求体<br>     body=<span class="hljs-string">&quot;&#123;\&quot;request\&quot;: &#123;</span><br><span class="hljs-string">               \&quot;branch\&quot;: \&quot;$&#123;branch&#125;\&quot;</span><br><span class="hljs-string">              &#125;</span><br><span class="hljs-string">           &#125;&quot;</span><br>		 #curl请求<br>     curl -s -X POST \<br>          -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \<br>          -H <span class="hljs-string">&quot;Accept: application/json&quot;</span> \<br>          -H <span class="hljs-string">&quot;Travis-API-Version: 3&quot;</span> \<br>          -H <span class="hljs-string">&quot;Authorization: token $TRAVIS_TOKEN&quot;</span> \<br>          -d <span class="hljs-string">&quot;$body&quot;</span> \<br>          <span class="hljs-string">&quot;https://api.travis-ci.org/repo/$&#123;org&#125;%2F$&#123;repo&#125;/requests&quot;</span><br> &#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>使用测试<br>​</p>
 <p>发布</p>
@@ -333,9 +337,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/teamcity/">teamcity</a>
-                    
-                      <a class="hover-with-bg" href="/categories/teamcity/devops/">devops</a>
+                      <a class="hover-with-bg" href="/categories/Hexo/">Hexo</a>
                     
                   </div>
                 
@@ -343,7 +345,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/teamcity/">teamcity</a>
+                      <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a>
                     
                   </div>
                 
