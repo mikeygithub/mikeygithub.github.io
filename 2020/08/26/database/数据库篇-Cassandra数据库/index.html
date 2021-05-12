@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
+  
   <title>数据库篇-Cassandra数据库 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -59,11 +60,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -184,7 +185,8 @@
           
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-briefcase"></i>
                 其他
               </a>
@@ -212,13 +214,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -227,7 +229,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -300,11 +302,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -333,7 +335,7 @@
 <p>Cassandra 一致 Hash 和虚拟节点</p>
 <h2 id="一致性-Hash-多米诺-down-机"><a href="#一致性-Hash-多米诺-down-机" class="headerlink" title="一致性 Hash(多米诺 down 机)"></a>一致性 Hash(多米诺 down 机)</h2><p>为每个节点分配一个 token,根据这个 token 值来决定节点在集群中的位置以及这个节点所存储的数据范围。</p>
 <h2 id="虚拟节点-down-机多节点托管"><a href="#虚拟节点-down-机多节点托管" class="headerlink" title="虚拟节点(down 机多节点托管)"></a>虚拟节点(down 机多节点托管)</h2><p>由于这种方式会造成数据分布不均的问题,在 Cassandra1.2 以后采用了虚拟节点的思想:不需要为每个节点分配 token,把圆环分成更多部分,让每个节点负责多个部分的数据,这样一个节点移除后,它所负责的多个 token 会托管给多个节点处理,这种思想解决了数据分布不均的问题。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/Cassandra-node.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/Cassandra-node.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>如图所示,上面部分是标准一致性哈希,每个节点负责圆环中连续的一段,如果 Node2 突然down 掉,Node2 负责的数据托管给 Node1,即 Node1 负责 EFAB 四段,如果 Node1 里面有<br>很多热点用户产生的数据导致 Node1 已经有点撑不住了,恰巧 B 也是热点用户产生的数据,这样一来 Node1 可能会接着 down 机,Node1down 机,Node6 还 hold 住吗?<br>下面部分是虚拟节点实现,每个节点不再负责连续部分,且圆环被分为更多的部分。如果 Node2突然 down 掉,Node2 负责的数据不全是托管给 Node1,而是托管给多个节点。而且也保持了一<br>致性哈希的特点。</p>
 <h1 id="Gossip-协议"><a href="#Gossip-协议" class="headerlink" title="Gossip 协议"></a>Gossip 协议</h1><p>Gossip 算法如其名,灵感来自办公室八卦,只要一个人八卦一下,在有限的时间内所有的人都会知道该八卦的信息,这种方式也与病毒传播类似,因此 Gossip 有众多的别名“闲话算法”、“疫情传播算法”、“病毒感染算法”、“谣言传播算法”。 Gossip 的特点:在一个有界网络中,每个节点都随机地与其他节点通信,经过一番杂乱无章的通信,最终所有节点的状态都会达成一致。因为 Gossip 不要求节点知道所有其他节点,因此又具有去中心化的特点,节点之间完全对等,不需要任何的中心节点。实际上 Gossip 可以用于众多能接受“最终一致性”的领域:失败检测、路由同步、Pub/Sub、动态负载均衡。</p>
 <h2 id="Gossip-节点的通信方式及收敛性"><a href="#Gossip-节点的通信方式及收敛性" class="headerlink" title="Gossip 节点的通信方式及收敛性"></a>Gossip 节点的通信方式及收敛性</h2><p>Gossip 两个节点( A 、 B )之间存在三种通信方式( push 、 pull 、 push&amp;pull )</p>
@@ -347,17 +349,17 @@
 <figure class="highlight n1ql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs n1ql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">KEYSPACE</span> Excelsior <span class="hljs-keyword">WITH</span> REPLICATION = &#123; <span class="hljs-string">&#x27;class&#x27;</span> :<span class="hljs-string">&#x27;SimpleStrategy&#x27;</span>,<span class="hljs-string">&#x27;replication_factor&#x27;</span> : <span class="hljs-number">3</span> &#125;;<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">KEYSPACE</span> Excalibur <span class="hljs-keyword">WITH</span> REPLICATION = &#123;<span class="hljs-string">&#x27;class&#x27;</span> :<span class="hljs-string">&#x27;NetworkTopologyStrategy&#x27;</span>,<span class="hljs-string">&#x27;dc1&#x27;</span> : <span class="hljs-number">3</span>, <span class="hljs-string">&#x27;dc2&#x27;</span> : <span class="hljs-number">2</span>&#125;;<br></code></pre></div></td></tr></table></figure>
 
 <h1 id="数据写请求和协调者"><a href="#数据写请求和协调者" class="headerlink" title="数据写请求和协调者"></a>数据写请求和协调者</h1><h3 id="协调者-coordinator"><a href="#协调者-coordinator" class="headerlink" title="协调者(coordinator)"></a>协调者(coordinator)</h3><p>协调者(coordinator)将 write 请求发送到拥有对应 row 的所有 replica 节点,只要节点可用便获取并执行写请求。写一致性级别(write consistency level)确定要有多少个 replica 节点必须返回成功的确认信息。成功意味着数据被正确写入了 commit log 和 memtable。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/cassandra-coordinator.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/cassandra-coordinator.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>其中 dc1、dc2 这些数据中心名称要与 snitch 中配置的名称一致.上面的拓扑策略表示在 dc1 配置3 个副本,在 dc2 配置 2 个副本</p>
 <h2 id="数据读请求和后台修复"><a href="#数据读请求和后台修复" class="headerlink" title="数据读请求和后台修复"></a>数据读请求和后台修复</h2><ol>
 <li>协调者首先与一致性级别确定的所有 replica 联系,被联系的节点返回请求的数据。</li>
 <li>若多个节点被联系,则来自各 replica 的 row 会在内存中作比较,若不一致,则协调者使用含最新数据的 replica 向 client 返回结果。那么比较操作过程中只需要传递时间戳就可以,因为要比较的只是哪个副本数据是最新的。</li>
 <li>协调者在后台联系和比较来自其余拥有对应 row 的 replica 的数据,若不一致,会向过时的replica 发写请求用最新的数据进行更新 read repair。</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/cassandra-coordinator-2.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/cassandra-coordinator-2.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="数据存储-CommitLog、MemTable、SSTable"><a href="#数据存储-CommitLog、MemTable、SSTable" class="headerlink" title="数据存储( CommitLog、MemTable、SSTable )"></a>数据存储( CommitLog、MemTable、SSTable )</h1><p>写请求分别到 CommitLog 和 MemTable, 并且 MemTable 的数据会刷写到磁盘 SSTable 上. 除了写数据,还有索引也会保存到磁盘上.先将数据写到磁盘中的 commitlog,同时追加到中内存中的数据结构 memtable 。这个时候就会返回客户端状态,memtable内容超出指定容量后会被放进将被刷入磁盘的队列<br>(memtable_flush_queue_size 配置队列长度)。若将被刷入磁盘的数据超出了队列长度,将内存数据刷进磁盘中的 SSTable,之后 commit log 被清空。<br>SSTable 文件构成(BloomFilter、index、data、static)<br>SSTable 文件有 fileer(判断数据 key 是否存在,这里使用了 BloomFilter 提高效率),index(寻找对应 column 值所在 data 文件位置)文件,data(存储真实数据)文件,static(存储和统计column 和 row 大小)文件。</p>
 <h2 id="二级索引-对要索引的-value-摘要-生成-RowKey"><a href="#二级索引-对要索引的-value-摘要-生成-RowKey" class="headerlink" title="二级索引(对要索引的 value 摘要,生成 RowKey)"></a>二级索引(对要索引的 value 摘要,生成 RowKey)</h2><p>在 Cassandra 中,数据都是以 Key-value 的形式保存的。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/cassandra-columfamily.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/cassandra-columfamily.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>KeysIndex 所创建的二级索引也被保存在一张 ColumnFamily 中。在插入数据时,对需要进行索引的 value 进行摘要,生成独一无二的 key,将其作为 RowKey 保存在索引的 ColumnFamily 中;同时在 RowKey 上添加一个 Column,将插入数据的 RowKey 作为 name 域的值,value 域则赋空值,timestamp 域则赋为插入数据的时间戳。</p>
 <p>如果有相同的 value 被索引了,则会在索引 ColumnFamily 中相同的 RowKey 后再添加新的Column。如果有新的 value 被索引,则会在索引 ColumnFamily 中添加新的 RowKey 以及对应新的 Column。</p>
 <p>当对 value 进行查询时,只需计算该 value 的 RowKey,在索引 ColumnFamily 中的查找该RowKey,对其 Columns 进行遍历就能得到该 value 所有数据的 RowKey。</p>
@@ -382,9 +384,9 @@
 <li>根据 compression offset map 找到数据位置</li>
 <li>从磁盘的 SSTable 中取出数据</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/cassandra-row-cache.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/cassandra-row-cache.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>行缓存和键缓存请求流程图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/cassandra-key-cache.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/cassandra-key-cache.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>MemTable:如果 memtable 有目标分区数据,这个数据会被读出来并且和从 SSTables 中读出来的数据进行合并。SSTable 的数据访问如下面所示的步骤。Row Cache ( SSTables 中频繁被访问的数据)在 Cassandra2.2+,它们被存储在堆外内存,使用全新的实现避免造成垃圾回收对 JVM 造成压力。存在在 row cache 的子集数据可以在特定的一段时间内配置一定大小的内存。row cache 使用LRU(least-recently-userd)进行回收在申请内存。存储在 row cache 中的数据是 SSTables 中频繁被访问的数据。存储到 row cache 中后,数据就可以被后续的查询访问。row cache 不是写更新。如果写某行了,这行的缓存就会失效,并且不会被继续缓存,直到这行被读到。类似的,如果一个 partition 更新了,整个 partition 的 cache 都会被移除,但目标的数据在 row cache 中找不到,就会去检查 Bloom filter。</p>
 <h2 id="Bloom-Filter-查找数据可能对应的-SSTable"><a href="#Bloom-Filter-查找数据可能对应的-SSTable" class="headerlink" title="Bloom Filter (查找数据可能对应的 SSTable )"></a>Bloom Filter (查找数据可能对应的 SSTable )</h2><blockquote>
 <p>首先,Cassandra 检查 Bloom filter 去发现哪个 SSTables 中有可能有请求的分区数据。Bloomfilter 是存储在堆外内存。每个 SSTable 都有一个关联的 Bloom filter。一个 Bloom filter 可以建立一个 SSTable 没有包含的特定的分区数据。同样也可以找到分区数据存在 SSTable 中的可能性。它可以加速查找 partition key 的查找过程。然而,因为 Bloom filter 是一个概率函数,所以可能会得到错误的结果,并不是所有的 SSTables 都可以被 Bloom filter 识别出是否有数据。如果Bloom filter 不能够查找到 SSTable,Cassandra 会检查 partition key cache。Bloom filter 大小增长很适宜,每 10 亿数据 1~2GB。在极端情况下,可以一个分区一行。都可以很轻松的将数十亿的 entries 存储在单个机器上。Bloom filter 是可以调节的,如果你愿意用内存来换取性能。</p>
@@ -398,7 +400,7 @@
 <h2 id="Partition-Index-磁盘中"><a href="#Partition-Index-磁盘中" class="headerlink" title="Partition Index (磁盘中)"></a>Partition Index (磁盘中)</h2><blockquote>
 <p>partition index 驻扎在磁盘中,索引所有 partition keys 和偏移量的映射。如果 partitionsummary 已经查到 partition keys 的范围,现在的检索就是根据这个范围值来检索目标 partitionkey。需要进行单次检索和顺序读。根据找到的信息。然后去 compression offset map 中去找磁盘中有这个数据的块。如果 partition index 必须要被检索,则需要检索两次磁盘去找到目标数据。Compression offset map (磁盘中)compression offset map 存储磁盘数据准确位置的指针。存储在堆外内存,可以被 partition keycache 或者 partition index 访问。一旦 compression offset map 识别出来磁盘中的数据位置,就会从正确的 SStable(s)中取出数据。查询就会收到结果集。</p>
 </blockquote>
-<h1 id="代码操作"><a href="#代码操作" class="headerlink" title="代码操作"></a>代码操作</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料<br/></h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
+<h1 id="代码操作"><a href="#代码操作" class="headerlink" title="代码操作"></a>代码操作</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料<br/></h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
@@ -422,10 +424,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -452,11 +458,13 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
+    Fluid.utils.loadComments('#comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -502,9 +510,9 @@
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-md">
+  <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
-      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
     </div>
   </div>
 
@@ -569,7 +577,7 @@
           >
             
               <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
             
             <span>桂公网安备2020009931号</span>
           </a>
@@ -582,17 +590,15 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
@@ -601,7 +607,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -609,7 +614,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -656,11 +661,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -730,7 +736,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

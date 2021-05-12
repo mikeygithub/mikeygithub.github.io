@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
+  
   <title>算法篇-BFPRT算法 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -59,11 +60,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -184,7 +185,8 @@
           
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-briefcase"></i>
                 其他
               </a>
@@ -212,13 +214,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -227,7 +229,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -260,7 +262,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      2.3k 字
     </span>
   
 
@@ -270,7 +272,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      34
+      32
        分钟
     </span>
   
@@ -300,11 +302,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -354,7 +356,7 @@
   <br>
 
 
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cgo">#include &lt;iostream&gt;<br>using namespace std;<br> <br>&#x2F;&#x2F; 插入排序  <br>void insertSort(int R[], int low, int high) &#123;<br>	int i, j, tmp;<br>	for (i &#x3D; low + 1; i &lt;&#x3D; high; ++i) &#123;<br>		tmp &#x3D; R[i];<br>		j &#x3D; i - 1;<br>		while (j &gt;&#x3D; low &amp;&amp; R[j] &gt; tmp) &#123;<br>			R[j + 1] &#x3D; R[j];<br>			--j;<br>		&#125;<br>		R[j + 1] &#x3D; tmp;<br>	&#125;<br>&#125;<br> <br>&#x2F;&#x2F; 递归寻找中位数的中位数  <br>int FindMid(int R[], int low, int high) &#123;<br>	&#x2F;&#x2F; 只有一个元素<br>	if (low &#x3D;&#x3D; high) &#123;<br>		return R[low];<br>	&#125;<br>	int i, k;<br>	&#x2F;&#x2F; 将序列划分为5个元素一组，分别求取中位数<br>	for (i &#x3D; low; i + 4 &lt;&#x3D; high; i +&#x3D; 5) &#123;<br>		insertSort(R, i, i + 4);<br>		k &#x3D; i - low;<br>		&#x2F;&#x2F; 将中位数交换到前面<br>		swap(R[low + k &#x2F; 5], R[i + 2]);<br>	&#125;<br>	int n &#x3D; high - i + 1;<br>	&#x2F;&#x2F; 最后一组不足5个元素<br>	if (n &gt; 0) &#123;<br>		insertSort(R, i, high);<br>		k &#x3D; i - low;<br>		swap(R[low + k &#x2F; 5], R[i + n &#x2F; 2]);<br>	&#125;<br>	k &#x3D; k &#x2F; 5;<br>	&#x2F;&#x2F; 只有一个中位数<br>	if (k &#x3D;&#x3D; 0) &#123;<br>		return R[low];<br>	&#125;<br>	return FindMid(R, low, low + k);<br>&#125;<br> <br>&#x2F;&#x2F; 寻找中位数的所在位置  <br>int FindId(int R[], int low, int high, int median) &#123;<br>	for (int i &#x3D; low; i &lt;&#x3D; high; ++i) &#123;<br>		if (median &#x3D;&#x3D; R[i]) &#123;<br>			return i;<br>		&#125;<br>	&#125;<br>	return -1;<br>&#125;<br> <br>&#x2F;&#x2F;进行划分过程  <br>int Partion(int R[], int low, int high, int index) &#123;<br>	if (low &lt;&#x3D; high) &#123;<br>		&#x2F;&#x2F; 将中位数与第1个元素交换<br>		swap(R[index], R[low]);<br>		int tmp &#x3D; R[low];<br>		int i &#x3D; low, j &#x3D; high;<br>		&#x2F;&#x2F; 将小于中位数的元素交换到中位数的左边，大于中位数的元素交换到中位数的右边<br>		while (i !&#x3D; j) &#123;<br>			while (j &gt; i&amp;&amp;R[j] &gt;&#x3D; tmp) &#123;<br>				--j;<br>			&#125;<br>			R[i] &#x3D; R[j];<br>			while (i &lt; j&amp;&amp;R[i] &lt;&#x3D; tmp) &#123;<br>				++i;<br>			&#125;<br>			R[j] &#x3D; R[i];<br>		&#125;<br>		R[i] &#x3D; tmp;<br>		return i;<br>	&#125;<br>	return -1;<br>&#125;<br> <br>int BFPTR(int R[], int low, int high, int K)&#123;<br>	&#x2F;&#x2F; 中位数<br>	int median &#x3D; FindMid(R, low, high);<br>	&#x2F;&#x2F; 中位数下标<br>	int index &#x3D; FindId(R, low, high, median);<br>	&#x2F;&#x2F; 划分，得到中位数新的下标<br>	int newIndex &#x3D; Partion(R, low, high, index);<br>	&#x2F;&#x2F; 中位数在当前序列[low..high]中的位置<br>	int rank &#x3D; newIndex - low + 1;<br>	if (rank &#x3D;&#x3D; K) &#123;<br>		&#x2F;&#x2F; 中位数是第K小元素<br>		&#x2F;&#x2F; 左边的K个元素（包括中位数）为Top-K<br>		&#x2F;&#x2F; 返回中位数下标<br>		return newIndex;<br>	&#125;<br>	else if (rank &gt; K) &#123;<br>		return BFPTR(R, low, newIndex - 1, K);<br>	&#125;<br>	return BFPTR(R, newIndex + 1, high, K - rank);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cgo">#include &lt;iostream&gt;<br>using namespace std;<br> <br>// 插入排序  <br>void insertSort(int R[], int low, int high) &#123;<br>	int i, j, tmp;<br>	for (i = low + 1; i &lt;= high; ++i) &#123;<br>		tmp = R[i];<br>		j = i - 1;<br>		while (j &gt;= low &amp;&amp; R[j] &gt; tmp) &#123;<br>			R[j + 1] = R[j];<br>			--j;<br>		&#125;<br>		R[j + 1] = tmp;<br>	&#125;<br>&#125;<br> <br>// 递归寻找中位数的中位数  <br>int FindMid(int R[], int low, int high) &#123;<br>	// 只有一个元素<br>	if (low == high) &#123;<br>		return R[low];<br>	&#125;<br>	int i, k;<br>	// 将序列划分为5个元素一组，分别求取中位数<br>	for (i = low; i + 4 &lt;= high; i += 5) &#123;<br>		insertSort(R, i, i + 4);<br>		k = i - low;<br>		// 将中位数交换到前面<br>		swap(R[low + k / 5], R[i + 2]);<br>	&#125;<br>	int n = high - i + 1;<br>	// 最后一组不足5个元素<br>	if (n &gt; 0) &#123;<br>		insertSort(R, i, high);<br>		k = i - low;<br>		swap(R[low + k / 5], R[i + n / 2]);<br>	&#125;<br>	k = k / 5;<br>	// 只有一个中位数<br>	if (k == 0) &#123;<br>		return R[low];<br>	&#125;<br>	return FindMid(R, low, low + k);<br>&#125;<br> <br>// 寻找中位数的所在位置  <br>int FindId(int R[], int low, int high, int median) &#123;<br>	for (int i = low; i &lt;= high; ++i) &#123;<br>		if (median == R[i]) &#123;<br>			return i;<br>		&#125;<br>	&#125;<br>	return -1;<br>&#125;<br> <br>//进行划分过程  <br>int Partion(int R[], int low, int high, int index) &#123;<br>	if (low &lt;= high) &#123;<br>		// 将中位数与第1个元素交换<br>		swap(R[index], R[low]);<br>		int tmp = R[low];<br>		int i = low, j = high;<br>		// 将小于中位数的元素交换到中位数的左边，大于中位数的元素交换到中位数的右边<br>		while (i != j) &#123;<br>			while (j &gt; i&amp;&amp;R[j] &gt;= tmp) &#123;<br>				--j;<br>			&#125;<br>			R[i] = R[j];<br>			while (i &lt; j&amp;&amp;R[i] &lt;= tmp) &#123;<br>				++i;<br>			&#125;<br>			R[j] = R[i];<br>		&#125;<br>		R[i] = tmp;<br>		return i;<br>	&#125;<br>	return -1;<br>&#125;<br> <br>int BFPTR(int R[], int low, int high, int K)&#123;<br>	// 中位数<br>	int median = FindMid(R, low, high);<br>	// 中位数下标<br>	int index = FindId(R, low, high, median);<br>	// 划分，得到中位数新的下标<br>	int newIndex = Partion(R, low, high, index);<br>	// 中位数在当前序列[low..high]中的位置<br>	int rank = newIndex - low + 1;<br>	if (rank == K) &#123;<br>		// 中位数是第K小元素<br>		// 左边的K个元素（包括中位数）为Top-K<br>		// 返回中位数下标<br>		return newIndex;<br>	&#125;<br>	else if (rank &gt; K) &#123;<br>		return BFPTR(R, low, newIndex - 1, K);<br>	&#125;<br>	return BFPTR(R, newIndex + 1, high, K - rank);<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
 </details>
@@ -365,7 +367,7 @@
   <summary><span>代码测试</span></summary>
   <br>
 
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cgo">int main(int argc, char** argv)<br>&#123;<br>    const int N &#x3D; 12;<br>    int i;<br>    int R[] &#x3D; &#123; 12, 1, 8, 10, 6, 2, 5, 9, 11, 3, 4, 7 &#125;;<br>    cout &lt;&lt; &quot;原始数据：&quot;;<br>    for (i &#x3D; 0; i &lt; N; ++i)<br>    &#123;<br>        cout &lt;&lt; R[i] &lt;&lt; &quot; &quot;;<br>    &#125;<br>    cout &lt;&lt; endl &lt;&lt; endl;<br>    int K, index;<br>    int R1[N];<br>    for (int t &#x3D; 1; t &lt;&#x3D; 12; ++t)<br>    &#123;<br>        K &#x3D; t;<br>        for (i &#x3D; 0; i &lt; N; ++i)<br>        &#123;<br>            R1[i] &#x3D; R[i];<br>        &#125;<br>        index &#x3D; BFPTR(R1, 0, N - 1, K);<br>        cout &lt;&lt; &quot;处理后的数据：&quot;;<br>        for (i &#x3D; 0; i &lt; N; ++i)<br>        &#123;<br>            cout &lt;&lt; R1[i] &lt;&lt; &quot; &quot;;<br>        &#125;<br>        cout &lt;&lt; endl;<br>        cout &lt;&lt; &quot;第&quot; &lt;&lt; K &lt;&lt; &quot;小元素：&quot; &lt;&lt; R1[index] &lt;&lt; endl;<br>        cout &lt;&lt; &quot;Top-&quot; &lt;&lt; K &lt;&lt; &quot; 的数据：&quot;;<br>        &#x2F;&#x2F; 对Top-K元素进行排序，方便查看<br>        insertSort(R1, index - K + 1, index);<br>        for (i &#x3D; index - K + 1; i &lt;&#x3D; index; ++i)<br>        &#123;<br>            cout &lt;&lt; R1[i] &lt;&lt; &quot; &quot;;<br>        &#125;<br>        cout &lt;&lt; endl &lt;&lt; endl;<br>    &#125;<br>    return 0;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cgo">int main(int argc, char** argv)<br>&#123;<br>    const int N = 12;<br>    int i;<br>    int R[] = &#123; 12, 1, 8, 10, 6, 2, 5, 9, 11, 3, 4, 7 &#125;;<br>    cout &lt;&lt; &quot;原始数据：&quot;;<br>    for (i = 0; i &lt; N; ++i)<br>    &#123;<br>        cout &lt;&lt; R[i] &lt;&lt; &quot; &quot;;<br>    &#125;<br>    cout &lt;&lt; endl &lt;&lt; endl;<br>    int K, index;<br>    int R1[N];<br>    for (int t = 1; t &lt;= 12; ++t)<br>    &#123;<br>        K = t;<br>        for (i = 0; i &lt; N; ++i)<br>        &#123;<br>            R1[i] = R[i];<br>        &#125;<br>        index = BFPTR(R1, 0, N - 1, K);<br>        cout &lt;&lt; &quot;处理后的数据：&quot;;<br>        for (i = 0; i &lt; N; ++i)<br>        &#123;<br>            cout &lt;&lt; R1[i] &lt;&lt; &quot; &quot;;<br>        &#125;<br>        cout &lt;&lt; endl;<br>        cout &lt;&lt; &quot;第&quot; &lt;&lt; K &lt;&lt; &quot;小元素：&quot; &lt;&lt; R1[index] &lt;&lt; endl;<br>        cout &lt;&lt; &quot;Top-&quot; &lt;&lt; K &lt;&lt; &quot; 的数据：&quot;;<br>        // 对Top-K元素进行排序，方便查看<br>        insertSort(R1, index - K + 1, index);<br>        for (i = index - K + 1; i &lt;= index; ++i)<br>        &#123;<br>            cout &lt;&lt; R1[i] &lt;&lt; &quot; &quot;;<br>        &#125;<br>        cout &lt;&lt; endl &lt;&lt; endl;<br>    &#125;<br>    return 0;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>运行如下：</p>
 <figure class="highlight tap"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tap">原始数据：12<span class="hljs-number"> 1 </span>8<span class="hljs-number"> 10 </span>6<span class="hljs-number"> 2 </span>5<span class="hljs-number"> 9 </span>11<span class="hljs-number"> 3 </span>4 7<br> <br>处理后的数据：1<span class="hljs-number"> 2 </span>3<span class="hljs-number"> 4 </span>6<span class="hljs-number"> 5 </span>7<span class="hljs-number"> 12 </span>9<span class="hljs-number"> 11 </span>10 8<br>第1小元素：1<br>Top-1 的数据：1<br> <br>处理后的数据：1<span class="hljs-number"> 2 </span>3<span class="hljs-number"> 4 </span>6<span class="hljs-number"> 5 </span>7<span class="hljs-number"> 12 </span>9<span class="hljs-number"> 11 </span>10 8<br>第2小元素：2<br>Top-2 的数据：1 2<br> <br>处理后的数据：1<span class="hljs-number"> 2 </span>3<span class="hljs-number"> 4 </span>6<span class="hljs-number"> 5 </span>7<span class="hljs-number"> 12 </span>9<span class="hljs-number"> 11 </span>10 8<br>第3小元素：3<br>Top-3 的数据：1<span class="hljs-number"> 2 </span>3<br> <br>处理后的数据：3<span class="hljs-number"> 2 </span>1<span class="hljs-number"> 4 </span>6<span class="hljs-number"> 5 </span>7<span class="hljs-number"> 12 </span>9<span class="hljs-number"> 11 </span>10 8<br>第4小元素：4<br>Top-4 的数据：1<span class="hljs-number"> 2 </span>3 4<br> <br>处理后的数据：3<span class="hljs-number"> 2 </span>1<span class="hljs-number"> 4 </span>5<span class="hljs-number"> 6 </span>7<span class="hljs-number"> 12 </span>9<span class="hljs-number"> 11 </span>10 8<br>第5小元素：5<br>Top-5 的数据：1<span class="hljs-number"> 2 </span>3<span class="hljs-number"> 4 </span>5<br> <br>处理后的数据：3<span class="hljs-number"> 2 </span>1<span class="hljs-number"> 4 </span>5<span class="hljs-number"> 6 </span>7<span class="hljs-number"> 12 </span>9<span class="hljs-number"> 11 </span>10 8<br>第6小元素：6<br>Top-6 的数据：1<span class="hljs-number"> 2 </span>3<span class="hljs-number"> 4 </span>5 6<br> <br>处理后的数据：1<span class="hljs-number"> 5 </span>4<span class="hljs-number"> 6 </span>3<span class="hljs-number"> 2 </span>7<span class="hljs-number"> 12 </span>9<span class="hljs-number"> 11 </span>10 8<br>第7小元素：7<br>Top-7 的数据：1<span class="hljs-number"> 2 </span>3<span class="hljs-number"> 4 </span>5<span class="hljs-number"> 6 </span>7<br> <br>处理后的数据：1<span class="hljs-number"> 5 </span>4<span class="hljs-number"> 6 </span>3<span class="hljs-number"> 2 </span>7<span class="hljs-number"> 8 </span>9<span class="hljs-number"> 10 </span>11 12<br>第8小元素：8<br>Top-8 的数据：1<span class="hljs-number"> 2 </span>3<span class="hljs-number"> 4 </span>5<span class="hljs-number"> 6 </span>7 8<br> <br>处理后的数据：1<span class="hljs-number"> 5 </span>4<span class="hljs-number"> 6 </span>3<span class="hljs-number"> 2 </span>7<span class="hljs-number"> 8 </span>9<span class="hljs-number"> 10 </span>11 12<br>第9小元素：9<br>Top-9 的数据：1<span class="hljs-number"> 2 </span>3<span class="hljs-number"> 4 </span>5<span class="hljs-number"> 6 </span>7<span class="hljs-number"> 8 </span>9<br> <br>处理后的数据：1<span class="hljs-number"> 5 </span>4<span class="hljs-number"> 6 </span>3<span class="hljs-number"> 2 </span>7<span class="hljs-number"> 8 </span>9<span class="hljs-number"> 10 </span>11 12<br>第10小元素：10<br>Top-10 的数据：1<span class="hljs-number"> 2 </span>3<span class="hljs-number"> 4 </span>5<span class="hljs-number"> 6 </span>7<span class="hljs-number"> 8 </span>9 10<br> <br>处理后的数据：1<span class="hljs-number"> 5 </span>4<span class="hljs-number"> 6 </span>3<span class="hljs-number"> 2 </span>7<span class="hljs-number"> 8 </span>9<span class="hljs-number"> 10 </span>11 12<br>第11小元素：11<br>Top-11 的数据：1<span class="hljs-number"> 2 </span>3<span class="hljs-number"> 4 </span>5<span class="hljs-number"> 6 </span>7<span class="hljs-number"> 8 </span>9<span class="hljs-number"> 10 </span>11<br> <br>处理后的数据：1<span class="hljs-number"> 5 </span>4<span class="hljs-number"> 6 </span>3<span class="hljs-number"> 2 </span>7<span class="hljs-number"> 8 </span>9<span class="hljs-number"> 10 </span>11 12<br>第12小元素：12<br>Top-12 的数据：1<span class="hljs-number"> 2 </span>3<span class="hljs-number"> 4 </span>5<span class="hljs-number"> 6 </span>7<span class="hljs-number"> 8 </span>9<span class="hljs-number"> 10 </span>11 12<br></code></pre></div></td></tr></table></figure>
@@ -394,7 +396,7 @@
 
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
@@ -418,10 +420,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -448,11 +454,13 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
+    Fluid.utils.loadComments('#comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -498,9 +506,9 @@
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-md">
+  <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
-      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
     </div>
   </div>
 
@@ -565,7 +573,7 @@
           >
             
               <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
             
             <span>桂公网安备2020009931号</span>
           </a>
@@ -578,17 +586,15 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
@@ -597,7 +603,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -605,7 +610,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -652,11 +657,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -726,7 +732,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

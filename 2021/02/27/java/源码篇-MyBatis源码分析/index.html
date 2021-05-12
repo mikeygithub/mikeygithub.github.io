@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
+  
   <title>源码篇-MyBatis源码分析 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -59,11 +60,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -184,7 +185,8 @@
           
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-briefcase"></i>
                 其他
               </a>
@@ -212,13 +214,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -227,7 +229,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -300,11 +302,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -348,7 +350,7 @@
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> MapperMethodInvoker <span class="hljs-title">cachedInvoker</span><span class="hljs-params">(Method method)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;<br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-comment">// A workaround for https://bugs.openjdk.java.net/browse/JDK-8161372</span><br>    <span class="hljs-comment">// It should be removed once the fix is backported to Java 8 or</span><br>    <span class="hljs-comment">// MyBatis drops Java 8 support. See gh-1929</span><br>    MapperMethodInvoker invoker = methodCache.get(method);<br>    <span class="hljs-keyword">if</span> (invoker != <span class="hljs-keyword">null</span>) &#123;<br>      <span class="hljs-keyword">return</span> invoker;<br>    &#125;<br>    <span class="hljs-keyword">return</span> methodCache.computeIfAbsent(method, m -&gt; &#123;<br>      <span class="hljs-keyword">if</span> (m.isDefault()) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>          <span class="hljs-keyword">if</span> (privateLookupInMethod == <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> DefaultMethodInvoker(getMethodHandleJava8(method));<br>          &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> DefaultMethodInvoker(getMethodHandleJava9(method));<br>          &#125;<br>        &#125; <span class="hljs-keyword">catch</span> (IllegalAccessException | InstantiationException | InvocationTargetException<br>            | NoSuchMethodException e) &#123;<br>          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(e);<br>        &#125;<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> PlainMethodInvoker(<span class="hljs-keyword">new</span> MapperMethod(mapperInterface, method, sqlSession.getConfiguration()));<br>      &#125;<br>    &#125;);<br>  &#125; <span class="hljs-keyword">catch</span> (RuntimeException re) &#123;<br>    Throwable cause = re.getCause();<br>    <span class="hljs-keyword">throw</span> cause == <span class="hljs-keyword">null</span> ? re : cause;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>构建Statement对象</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> MappedStatement <span class="hljs-title">resolveMappedStatement</span><span class="hljs-params">(Class&lt;?&gt; mapperInterface, String methodName,</span></span><br><span class="hljs-function"><span class="hljs-params">    Class&lt;?&gt; declaringClass, Configuration configuration)</span> </span>&#123;<br>    <span class="hljs-comment">//看见没有这里进行接口全类名和方法名的拼接了</span><br>  String statementId = mapperInterface.getName() + <span class="hljs-string">&quot;.&quot;</span> + methodName;<br>  <span class="hljs-keyword">if</span> (configuration.hasStatement(statementId)) &#123;<span class="hljs-comment">//如果已经存在</span><br>      <span class="hljs-comment">//返回其Statement对象</span><br>    <span class="hljs-keyword">return</span> configuration.getMappedStatement(statementId);<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mapperInterface.equals(declaringClass)) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>  &#125;<br>  <span class="hljs-keyword">for</span> (Class&lt;?&gt; superInterface : mapperInterface.getInterfaces()) &#123;<span class="hljs-comment">//进行遍历</span><br>    <span class="hljs-keyword">if</span> (declaringClass.isAssignableFrom(superInterface)) &#123;<br>      MappedStatement ms = resolveMappedStatement(superInterface, methodName,<br>          declaringClass, configuration);<br>      <span class="hljs-keyword">if</span> (ms != <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-keyword">return</span> ms;<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> MappedStatement <span class="hljs-title">resolveMappedStatement</span><span class="hljs-params">(Class&lt;?&gt; mapperInterface, String methodName,</span></span><br><span class="hljs-params"><span class="hljs-function">    Class&lt;?&gt; declaringClass, Configuration configuration)</span> </span>&#123;<br>    <span class="hljs-comment">//看见没有这里进行接口全类名和方法名的拼接了</span><br>  String statementId = mapperInterface.getName() + <span class="hljs-string">&quot;.&quot;</span> + methodName;<br>  <span class="hljs-keyword">if</span> (configuration.hasStatement(statementId)) &#123;<span class="hljs-comment">//如果已经存在</span><br>      <span class="hljs-comment">//返回其Statement对象</span><br>    <span class="hljs-keyword">return</span> configuration.getMappedStatement(statementId);<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (mapperInterface.equals(declaringClass)) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>  &#125;<br>  <span class="hljs-keyword">for</span> (Class&lt;?&gt; superInterface : mapperInterface.getInterfaces()) &#123;<span class="hljs-comment">//进行遍历</span><br>    <span class="hljs-keyword">if</span> (declaringClass.isAssignableFrom(superInterface)) &#123;<br>      MappedStatement ms = resolveMappedStatement(superInterface, methodName,<br>          declaringClass, configuration);<br>      <span class="hljs-keyword">if</span> (ms != <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-keyword">return</span> ms;<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>对其参数进行解析</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ParamNameResolver</span><span class="hljs-params">(Configuration config, Method method)</span> </span>&#123;<br>  <span class="hljs-keyword">this</span>.useActualParamName = config.isUseActualParamName();<br>  <span class="hljs-keyword">final</span> Class&lt;?&gt;[] paramTypes = method.getParameterTypes();<br>  <span class="hljs-keyword">final</span> Annotation[][] paramAnnotations = method.getParameterAnnotations();<br>  <span class="hljs-keyword">final</span> SortedMap&lt;Integer, String&gt; map = <span class="hljs-keyword">new</span> TreeMap&lt;&gt;();<br>  <span class="hljs-keyword">int</span> paramCount = paramAnnotations.length;<br>  <span class="hljs-comment">// get names from @Param annotations</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> paramIndex = <span class="hljs-number">0</span>; paramIndex &lt; paramCount; paramIndex++) &#123;<br>    <span class="hljs-keyword">if</span> (isSpecialParameter(paramTypes[paramIndex])) &#123;<br>      <span class="hljs-comment">// skip special parameters</span><br>      <span class="hljs-keyword">continue</span>;<br>    &#125;<br>    String name = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">for</span> (Annotation annotation : paramAnnotations[paramIndex]) &#123;<br>      <span class="hljs-keyword">if</span> (annotation <span class="hljs-keyword">instanceof</span> Param) &#123;<br>        hasParamAnnotation = <span class="hljs-keyword">true</span>;<br>        name = ((Param) annotation).value();<br>        <span class="hljs-keyword">break</span>;<br>      &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (name == <span class="hljs-keyword">null</span>) &#123;<br>      <span class="hljs-comment">// @Param was not specified.</span><br>      <span class="hljs-keyword">if</span> (useActualParamName) &#123;<br>        name = getActualParamName(method, paramIndex);<br>      &#125;<br>      <span class="hljs-keyword">if</span> (name == <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-comment">// use the parameter index as the name (&quot;0&quot;, &quot;1&quot;, ...)</span><br>        <span class="hljs-comment">// gcode issue #71</span><br>        name = String.valueOf(map.size());<br>      &#125;<br>    &#125;<br>    map.put(paramIndex, name);<br>  &#125;<br>  names = Collections.unmodifiableSortedMap(map);<br>&#125;<br></code></pre></div></td></tr></table></figure>
@@ -376,7 +378,7 @@
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/">官网文档</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/15781ec742f2">Mybatis架构与原理</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mengheng/p/3739610.html">MyBatis架构设计及源代码分析系列(一):MyBatis架构</a><br/></p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
@@ -400,10 +402,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -430,11 +436,13 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
+    Fluid.utils.loadComments('#comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -480,9 +488,9 @@
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-md">
+  <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
-      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
     </div>
   </div>
 
@@ -547,7 +555,7 @@
           >
             
               <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
             
             <span>桂公网安备2020009931号</span>
           </a>
@@ -560,17 +568,15 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
@@ -579,7 +585,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -587,7 +592,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -634,11 +639,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -708,7 +714,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

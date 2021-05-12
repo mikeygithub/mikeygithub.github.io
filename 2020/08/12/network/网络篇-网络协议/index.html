@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
+  
   <title>网络篇-网络协议 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -59,11 +60,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -184,7 +185,8 @@
           
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-briefcase"></i>
                 其他
               </a>
@@ -212,13 +214,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -227,7 +229,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -300,11 +302,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -324,9 +326,9 @@
 <p>5.会话层:通过传输层(端口号:传输端口与接收端口)建立数据传输的通路。主要在你的系统之间发起会话或或者接受会话请求(设备之间需要互相认识可以是 IP 也可以是 MAC 或者是主机名)</p>
 <p>6.表示层:主要是进行对接收的数据进行解释、加密与解密、压缩与解压缩等(也就是把计算机能够识别的东西转换成人能够能识别的东西(如图片、声音等))</p>
 <p>7.应用层 主要是一些终端的应用,比如说 FTP(各种文件下载),WEB(IE 浏览),QQ 之类的(你就把它理解成我们在电脑屏幕上可以看到的东西.就 是终端应用)。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/seven-network-protocol.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/seven-network-protocol.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="TCP-IP-原理"><a href="#TCP-IP-原理" class="headerlink" title="TCP/IP 原理"></a>TCP/IP 原理</h1><p>TCP/IP 协议不是 TCP 和 IP 这两个协议的合称,而是指因特网整个 TCP/IP 协议族。从协议分层模型方面来讲,TCP/IP 由四个层次组成:网络接口层、网络层、传输层、应用层。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/tcp-ip.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/tcp-ip.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>1.网络访问层(Network Access Layer)</p>
 <blockquote>
 <p>网络访问层(Network Access Layer)在 TCP/IP 参考模型中并没有详细描述,只是指出主机必须使用某种协议与网络相连。</p>
@@ -364,9 +366,9 @@
 <li>选项:最常见的可选字段是最长报文大小,又称为 MSS(Maximum Segment Size) 。每个连接方通常都在通信的第一个报文段(为建立连接而设置 SYN 标志的那个段)中指明这个选项,它指明本端所能接收的最大长度的报文段。选项长度不一定是 32 位字的整数倍,所以要加填充位,使得报头长度成为整字数。</li>
 <li>数据: TCP 报文段中的数据部分是可选的。在一个连接建立和一个连接终止时,双方交换的报文段仅有 TCP 首部。如果一方没有数据要发送,也使用没有任何数据的首部来确认收到的数据。在处理超时的许多情况中,也会发送不带任何数据的报文段。</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/three-hand.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/three-hand.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h1><p>第一次握手:主机 A 发送位码为 syn=1,随机产生 seq number=1234567 的数据包到服务器,主机 B由 SYN=1 知道,A 要求建立联机;<br>第二次握手: 主 机 B 收 到 请 求 后 要 确 认 联 机 信 息 , 向 A 发 送 ack number=( 主 机 A 的seq+1),syn=1,ack=1,随机产生 seq=7654321 的包<br>第三次握手:主机 A 收到后检查 ack number 是否正确,即第一次发送的 seq number+1,以及位码ack 是否为 1,若正确,主机 A 会再发送 ack number=(主机 B 的 seq+1),ack=1,主机 B 收到后确认seq 值与 ack=1 则连接建立成功。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/three-hand-1.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/three-hand-1.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h1><p>TCP 建立连接要进行三次握手,而断开连接要进行四次。这是由于 TCP 的半关闭造成的。因为 TCP 连接是全双工的(即数据可在两个方向上同时传递)所以进行关闭时每个方向上都要单独进行关闭。这个单方向的关闭就叫半关闭。当一方完成它的数据发送任务,就发送一个 FIN 来向另一方通告将要终止这个方向的连接。</p>
 <ol>
 <li>关闭客户端到服务器的连接:首先客户端 A 发送一个 FIN,用来关闭客户到服务器的数据传送,然后等待服务器的确认。其中终止标志位 FIN=1,序列号 seq=u</li>
@@ -374,7 +376,7 @@
 <li>关闭服务器到客户端的连接:也是发送一个 FIN 给客户端。</li>
 <li>客户段收到 FIN 后,并发回一个 ACK 报文确认,并将确认序号 seq 设置为收到序号加 1。首先进行关闭的一方将执行主动关闭,而另一方执行被动关闭。</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/four-hand.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/four-hand.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>主机 A 发送 FIN 后,进入终止等待状态, 服务器 B 收到主机 A 连接释放报文段后,就立即给主机 A 发送确认,然后服务器 B 就进入 close-wait 状态,此时 TCP 服务器进程就通知高层应用进程,因而从 A 到 B 的连接就释放了。此时是“半关闭”状态。即 A 不可以发送给B,但是 B 可以发送给 A。此时,若 B 没有数据报要发送给 A 了,其应用进程就通知 TCP 释放连接,然后发送给 A 连接释放报文段,并等待确认。A 发送确认后,进入 time-wait,注意,此时 TCP 连接还没有释放掉,然后经过时间等待计时器设置的 2MSL 后,A 才进入到close 状态。</p>
 <h1 id="HTTP-原理"><a href="#HTTP-原理" class="headerlink" title="HTTP 原理"></a>HTTP 原理</h1><p>HTTP 是一个无状态的协议。无状态是指客户机(Web 浏览器)和服务器之间不需要建立持久的连接,这意味着当一个客户端向服务器端发出请求,然后服务器返回响应(response),连接就被关闭了,在服务器端不保留连接的有关信息.HTTP 遵循请求(Request)/应答(Response)模型。客户机(浏览器)向服务器发送请求,服务器处理请求并返回适当的应答。所有 HTTP 连接都被构造成一套请求和应答。</p>
 <h1 id="传输流程"><a href="#传输流程" class="headerlink" title="传输流程"></a>传输流程</h1><p>1 :地址解析</p>
@@ -386,7 +388,7 @@
 <p>4 :客户机发送请求命<br>4)客户机发送请求命令:建立连接后,客户机发送一个请求给服务器,请求方式的格式为:统一资源标识符(URL)、协议版本号,后边是 MIME 信息包括请求修饰符、客户机信息和可内容。</p>
 <p>5 :服务器响应服务器接到请求后,给予相应的响应信息,其格式为一个状态行,包括信息的协议版本号、一个成功或错误的代码,后边是 MIME 信息包括服务器信息、实体信息和可能的内容。</p>
 <p>6 :服务器关闭 TCP 连接服务器关闭 TCP 连接:一般情况下,一旦 Web 服务器向浏览器发送了请求数据,它就要关闭 TCP 连接,然后如果浏览器或者服务器在其头信息加入了这行代码 Connection:keep-alive,TCP 连接在发送后将仍然保持打开状态,于是,浏览器可以继续通过相同的连接发送请求。保持连接节省了为每个请求建立新连接所需的时间,还节约了网络带宽。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/tcp-layer.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/tcp-layer.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <table border="1px" class="reference"><caption>HTTP状态码列表</caption>
 <tbody>
 <tr>
@@ -622,14 +624,14 @@
 <li>Client 在收到服务器返回的证书后,判断签发这个证书的公共签发机构,并使用这个机构的公共秘钥确认签名是否有效,客户端还会确保证书中列出的域名就是它正在连接的域名。数据加密和传输</li>
 <li>如果确认证书有效,那么生成对称秘钥并使用服务器的公共秘钥进行加密。然后发送给服务器,服务器使用它的私钥对它进行解密,这样两台计算机可以开始进行对称加密进行通信。</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/https.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/https.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="CDN-原理"><a href="#CDN-原理" class="headerlink" title="CDN 原理"></a>CDN 原理</h1><p>CND 一般包含分发服务系统、负载均衡系统和管理系统</p>
 <h2 id="分发服务系统"><a href="#分发服务系统" class="headerlink" title="分发服务系统"></a>分发服务系统</h2><p>其基本的工作单元就是各个 Cache 服务器。负责直接响应用户请求,将内容快速分发到用户;同时还负责内容更新,保证和源站内容的同步。</p>
 <p>根据内容类型和服务种类的不同,分发服务系统分为多个子服务系统,如:网页加速服务、流媒体加速服务、应用加速服务等。每个子服务系统都是一个分布式的服务集群,由功能类似、地域接近的分布部署的 Cache 集群组成。在承担内容同步、更新和响应用户请求之外,分发服务系统还需要向上层的管理调度系统反馈各个Cache 设备的健康状况、响应情况、内容缓存状况等,以便管理调度系统能够根据设定的策略决定由哪个 Cache 设备来响应用户的请求。</p>
 <h1 id="负载均衡系统"><a href="#负载均衡系统" class="headerlink" title="负载均衡系统:"></a>负载均衡系统:</h1><p>负载均衡系统是整个 CDN 系统的中枢。负责对所有的用户请求进行调度,确定提供给用户的最终访问地址。<br>使用分级实现。最基本的两极调度体系包括全局负载均衡(GSLB)和本地负载均衡(SLB)。<br>GSLB 根据用户地址和用户请求的内容,主要根据就近性原则,确定向用户服务的节点。一般通过 DNS解析或者应用层重定向(Http 3XX 重定向)的方式实现。<br>SLB 主要负责节点内部的负载均衡。当用户请求从 GSLB 调度到 SLB 时,SLB 会根据节点内各个Cache 设备的工作状况和内容分布情况等对用户请求重定向。SLB 的实现有四层调度(LVS)、七层调度(Nginx)和链路负载调度等。</p>
 <h1 id="管理系统"><a href="#管理系统" class="headerlink" title="管理系统:"></a>管理系统:</h1><p>分为运营管理和网络管理子系统。<br>网络管理系统实现对 CDN 系统的设备管理、拓扑管理、链路监控和故障管理,为管理员提供对全网资源的可视化的集中管理,通常用 web 方式实现。<br>运营管理是对 CDN 系统的业务管理,负责处理业务层面的与外界系统交互所必须的一些收集、整理、交付工作。包括用户管理、产品管理、计费管理、统计分析等。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/system.png" srcset="/img/loading.gif" alt="avatar"><br><br/></p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/system.png" srcset="/img/loading.gif" lazyload alt="avatar"><br><br/></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
@@ -653,10 +655,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -683,11 +689,13 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
+    Fluid.utils.loadComments('#comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -733,9 +741,9 @@
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-md">
+  <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
-      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
     </div>
   </div>
 
@@ -800,7 +808,7 @@
           >
             
               <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
             
             <span>桂公网安备2020009931号</span>
           </a>
@@ -813,17 +821,15 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
@@ -832,7 +838,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -840,7 +845,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -887,11 +892,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -961,7 +967,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

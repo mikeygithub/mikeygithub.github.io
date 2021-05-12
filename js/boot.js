@@ -3,22 +3,22 @@
 Fluid.boot = {};
 
 Fluid.boot.registerEvents = function() {
+  Fluid.events.billboard();
   Fluid.events.registerNavbarEvent();
   Fluid.events.registerParallaxEvent();
   Fluid.events.registerScrollDownArrowEvent();
   Fluid.events.registerScrollTopArrowEvent();
+  Fluid.events.registerImageLoadedEvent();
 };
 
-Fluid.boot.refresh = function() {
+Fluid.boot.initPlugins = function() {
+  CONFIG.anchorjs.enable && Fluid.plugins.initAnchor();
   CONFIG.toc.enable && Fluid.plugins.initTocBot();
-  CONFIG.image_zoom && Fluid.plugins.wrapImageWithFancyBox();
-  CONFIG.anchorjs.enable && Fluid.plugins.registerAnchor();
-  CONFIG.copy_btn && Fluid.plugins.registerCopyCode();
+  CONFIG.image_zoom.enable && Fluid.plugins.initFancyBox();
+  CONFIG.copy_btn && Fluid.plugins.initCopyCode();
 };
 
 document.addEventListener('DOMContentLoaded', function() {
   Fluid.boot.registerEvents();
-  Fluid.boot.refresh();
-
-  window.NProgress && window.NProgress.inc();
+  Fluid.boot.initPlugins();
 });

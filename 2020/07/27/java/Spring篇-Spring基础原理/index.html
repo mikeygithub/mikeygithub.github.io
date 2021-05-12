@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
+  
   <title>Spring篇-Spring基础原理 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -59,11 +60,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -184,7 +185,8 @@
           
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-briefcase"></i>
                 其他
               </a>
@@ -212,13 +214,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -227,7 +229,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -300,11 +302,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -342,25 +344,25 @@
 </blockquote>
 </li>
 </ul>
-<h1 id="Spring-核心组件"><a href="#Spring-核心组件" class="headerlink" title="Spring 核心组件"></a>Spring 核心组件</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-core.png" srcset="/img/loading.gif" alt="avatar"></p>
-<h1 id="Spring-常用模块"><a href="#Spring-常用模块" class="headerlink" title="Spring 常用模块"></a>Spring 常用模块</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-model.png" srcset="/img/loading.gif" alt="avatar"></p>
-<h1 id="Spring-主要包"><a href="#Spring-主要包" class="headerlink" title="Spring 主要包"></a>Spring 主要包</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-package.png" srcset="/img/loading.gif" alt="avatar"></p>
+<h1 id="Spring-核心组件"><a href="#Spring-核心组件" class="headerlink" title="Spring 核心组件"></a>Spring 核心组件</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-core.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
+<h1 id="Spring-常用模块"><a href="#Spring-常用模块" class="headerlink" title="Spring 常用模块"></a>Spring 常用模块</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-model.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
+<h1 id="Spring-主要包"><a href="#Spring-主要包" class="headerlink" title="Spring 主要包"></a>Spring 主要包</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-package.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="Spring-常用注解"><a href="#Spring-常用注解" class="headerlink" title="Spring 常用注解"></a>Spring 常用注解</h1><blockquote>
 <p>bean 注入与装配的的方式有很多种,可以通过 xml,get set 方式,构造函数或者注解等。简单易用的方式就是使用 Spring 的注解了,Spring 提供了大量的注解方式。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-annotation.png" srcset="/img/loading.gif" alt="avatar"></p>
-<h1 id="Spring-第三方结合"><a href="#Spring-第三方结合" class="headerlink" title="Spring 第三方结合"></a>Spring 第三方结合</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-another.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-annotation.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
+<h1 id="Spring-第三方结合"><a href="#Spring-第三方结合" class="headerlink" title="Spring 第三方结合"></a>Spring 第三方结合</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-another.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="Spring-IOC-原理"><a href="#Spring-IOC-原理" class="headerlink" title="Spring IOC 原理"></a>Spring IOC 原理</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><blockquote>
 <p>Spring 通过一个配置文件描述 Bean 及 Bean 之间的依赖关系,利用 Java 语言的反射功能实例化<br> Bean 并建立 Bean 之间的依赖关系。 Spring 的 IoC 容器在完成这些底层工作的基础上,还提供<br> 了 Bean 实例缓存、生命周期管理、 Bean 实例代理、事件发布、资源装载等高级服务。</p>
 </blockquote>
 <h2 id="Spring-容器高层视图"><a href="#Spring-容器高层视图" class="headerlink" title="Spring 容器高层视图"></a>Spring 容器高层视图</h2><blockquote>
 <p>Spring 启动时读取应用程序提供的 Bean 配置信息,并在 Spring 容器中生成一份相应的 Bean 配<br>置注册表,然后根据这张注册表实例化 Bean,装配好 Bean 之间的依赖关系,为上层应用提供准<br>备就绪的运行环境。其中 Bean 缓存池为 HashMap 实现</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-ioc.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-ioc.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="IOC-容器实现"><a href="#IOC-容器实现" class="headerlink" title="IOC 容器实现"></a>IOC 容器实现</h1><h2 id="BeanFactory-框架基础设施"><a href="#BeanFactory-框架基础设施" class="headerlink" title="BeanFactory- 框架基础设施"></a>BeanFactory- 框架基础设施</h2><blockquote>
 <p>BeanFactory 是 Spring 框架的基础设施,面向 Spring 本身;ApplicationContext 面向使用<br>Spring 框架的开发者,几乎所有的应用场合我们都直接使用 ApplicationContext 而非底层<br>的 BeanFactory。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-ioc-beanfactory.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-ioc-beanfactory.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h3 id="1-BeanDefinitionRegistry-注册表"><a href="#1-BeanDefinitionRegistry-注册表" class="headerlink" title="1.BeanDefinitionRegistry 注册表"></a>1.BeanDefinitionRegistry 注册表</h3><p>Spring 配置文件中每一个节点元素在 Spring 容器里都通过一个 BeanDefinition 对象表示,<br>它 描 述 了 Bean 的 配 置 信 息 。 而 BeanDefinitionRegistry 接 口 提 供 了 向 容 器 手 工 注 册<br>BeanDefinition 对象的方法。</p>
 <h3 id="2-BeanFactory-顶层接口"><a href="#2-BeanFactory-顶层接口" class="headerlink" title="2.BeanFactory 顶层接口"></a>2.BeanFactory 顶层接口</h3><p>位于类结构树的顶端 ,它最主要的方法就是 getBean(String beanName),该方法从容器中<br>返回特定名称的 Bean,BeanFactory 的功能通过其他的接口得到不断扩展:</p>
 <h3 id="3-ListableBeanFactory"><a href="#3-ListableBeanFactory" class="headerlink" title="3.ListableBeanFactory"></a>3.ListableBeanFactory</h3><p>该接口定义了访问容器中 Bean 基本信息的若干方法,如查看 Bean 的个数、获取某一类型<br>Bean 的配置名、查看容器中是否包括某一 Bean 等方法;</p>
@@ -370,7 +372,7 @@
 <p>7.定义了允许在运行期间向容器注册单实例 Bean 的方法;对于单实例( singleton)的 Bean<br>来说,BeanFactory 会缓存 Bean 实例,所以第二次使用 getBean() 获取 Bean 时将直接从<br>IoC 容器的缓存中获取 Bean 实例。Spring 在 DefaultSingletonBeanRegistry 类中提供了一<br>个用于缓存单实例 Bean 的缓存器,它是一个用 HashMap 实现的缓存器,单实例的 Bean 以<br>beanName 为键保存在这个 HashMap 中。<br>依赖日志框框</p>
 <p>8.在初始化 BeanFactory 时,必须为其提供一种日志框架,比如使用 Log4J, 即在类路径下提供 Log4J 配置文件,这样启动 Spring 容器才不会报错。</p>
 <h2 id="ApplicationContext-面向开发应用"><a href="#ApplicationContext-面向开发应用" class="headerlink" title="ApplicationContext 面向开发应用"></a>ApplicationContext 面向开发应用</h2><p>ApplicationContext 由 BeanFactory 派 生 而 来 , 提 供 了 更 多 面 向 实 际 应 用 的 功 能 。<br>ApplicationContext 继承了 HierarchicalBeanFactory 和 ListableBeanFactory 接口,在此基础上,还通过多个其他的接口扩展了 BeanFactory 的功能:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/beanfactory.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/beanfactory.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <ol>
 <li>ClassPathXmlApplicationContext:默认从类路径加载配置文件</li>
 <li>FileSystemXmlApplicationContext:默认从文件系统中装载配置文件</li>
@@ -383,7 +385,7 @@
 <h1 id="WebApplication-体系架构"><a href="#WebApplication-体系架构" class="headerlink" title="WebApplication 体系架构"></a>WebApplication 体系架构</h1><blockquote>
 <p>WebApplicationContext 是专门为 Web 应用准备的,它允许从相对于 Web 根目录的<br>路 径 中 装 载 配 置 文 件 完 成 初 始 化 工 作 。 从 WebApplicationContext 中 可 以 获 得<br>ServletContext 的引用,整个 Web 应用上下文对象将作为属性放置到 ServletContext<br>中,以便 Web 应用环境可以访问 Spring 应用上下文。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-web.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-web.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="Spring-Bean-作用域"><a href="#Spring-Bean-作用域" class="headerlink" title="Spring Bean 作用域"></a>Spring Bean 作用域</h1><p>Spring 3 中为 Bean 定义了 5 中作用域,分别为 <code>singleton(单例)</code>、<code>prototype(原型)</code>、<code>request</code>、<code>session</code> 和 <code>global session</code>,5 种作用域说明如下:</p>
 <h3 id="singleton-单例模式-多线程下不安全"><a href="#singleton-单例模式-多线程下不安全" class="headerlink" title="singleton :单例模式(多线程下不安全)"></a>singleton :单例模式(多线程下不安全)</h3><p>1.singleton:单例模式,Spring IoC 容器中只会存在一个共享的 Bean 实例,无论有多少个Bean 引用它,始终指向同一对象。该模式在多线程下是不安全的。Singleton 作用域是Spring 中的缺省作用域,也可以显示的将 Bean 定义为 singleton 模式,配置为:<br><code>&lt;bean id=&quot;userDao&quot; class=&quot;com.ioc.UserDaoImpl&quot; scope=&quot;singleton&quot;/&gt;</code></p>
 <h3 id="prototype-原型模式每次使用时创建"><a href="#prototype-原型模式每次使用时创建" class="headerlink" title="prototype: 原型模式每次使用时创建"></a>prototype: 原型模式每次使用时创建</h3><p>2.prototype:原型模式,每次通过 Spring 容器获取 prototype 定义的 bean 时,容器都将创建一个新的 Bean 实例,每个 Bean 实例都有自己的属性和状态,而 singleton 全局只有一个对象。根据经验,对有状态的 bean 使用 prototype 作用域,而对无状态的 bean 使用 singleton作用域。</p>
@@ -402,7 +404,7 @@
 <h3 id="destroy-method-自配置清理"><a href="#destroy-method-自配置清理" class="headerlink" title="destroy-method 自配置清理"></a>destroy-method 自配置清理</h3><ol start="10">
 <li>最后,如果这个 Bean 的 Spring 配置中配置了 destroy-method 属性,会自动调用其配置的销毁方法。</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-live.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-live.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <ol start="11">
 <li>bean 标签有两个重要的属性(init-method 和 destroy-method)。用它们你可以自己定制初始化和注销方法。它们也有相应的注解(@PostConstruct 和@PreDestroy)。</li>
 </ol>
@@ -416,7 +418,7 @@
 <h2 id="静态工厂注入"><a href="#静态工厂注入" class="headerlink" title="静态工厂注入"></a>静态工厂注入</h2><blockquote>
 <p>静态工厂顾名思义,就是通过调用静态工厂的方法来获取自己需要的对象,为了让 spring 管理所有对象,我们不能直接通过”工程类.静态方法()”来获取对象,而是依然通过 spring 注入的形式获取:</p>
 </blockquote>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DaoFactory</span> </span>&#123; <span class="hljs-comment">//静态工厂</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> FactoryDao <span class="hljs-title">getStaticFactoryDaoImpl</span><span class="hljs-params">()</span></span>&#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> StaticFacotryDaoImpl();<br>	&#125;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringAction</span> </span>&#123;<br>	<span class="hljs-keyword">private</span> FactoryDao staticFactoryDao; <span class="hljs-comment">//注入对象</span><br>	<span class="hljs-comment">//注入对象的 set 方法</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setStaticFactoryDao</span><span class="hljs-params">(FactoryDao staticFactoryDao)</span> </span>&#123;<br>		<span class="hljs-keyword">this</span>.staticFactoryDao = staticFactoryDao;<br>	&#125;<br>&#125;<br><span class="hljs-comment">//factory-method=&quot;getStaticFactoryDaoImpl&quot;指定调用哪个工厂方法</span><br>````<br>```xml<br>&lt;bean name=<span class="hljs-string">&quot;springAction&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot; SpringAction&quot;</span> &gt;<br>&lt;!--使用静态工厂的方法注入对象,对应下面的配置文件--&gt;<br>&lt;property name=&quot;staticFactoryDao&quot; ref=&quot;staticFactoryDao&quot;&gt;&lt;/property&gt;<br>&lt;/bean&gt;<br>&lt;!--此处获取对象的方式是从工厂类中获取静态方法--&gt;<br>&lt;bean name=<span class="hljs-string">&quot;staticFactoryDao&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;DaoFactory&quot;</span><br>		factory-method=&quot;getStaticFactoryDaoImpl&quot;&gt;&lt;/bean&gt;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DaoFactory</span> </span>&#123; <span class="hljs-comment">//静态工厂</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> FactoryDao <span class="hljs-title">getStaticFactoryDaoImpl</span><span class="hljs-params">()</span></span>&#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> StaticFacotryDaoImpl();<br>	&#125;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SpringAction</span> </span>&#123;<br>	<span class="hljs-keyword">private</span> FactoryDao staticFactoryDao; <span class="hljs-comment">//注入对象</span><br>	<span class="hljs-comment">//注入对象的 set 方法</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setStaticFactoryDao</span><span class="hljs-params">(FactoryDao staticFactoryDao)</span> </span>&#123;<br>		<span class="hljs-keyword">this</span>.staticFactoryDao = staticFactoryDao;<br>	&#125;<br>&#125;<br><span class="hljs-comment">//factory-method=&quot;getStaticFactoryDaoImpl&quot;指定调用哪个工厂方法</span><br>````<br>```xml<br>&lt;bean name=<span class="hljs-string">&quot;springAction&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot; SpringAction&quot;</span> &gt;<br>&lt;!--使用静态工厂的方法注入对象,对应下面的配置文件--&gt;<br>&lt;property name=<span class="hljs-string">&quot;staticFactoryDao&quot;</span> ref=<span class="hljs-string">&quot;staticFactoryDao&quot;</span>&gt;&lt;/property&gt;<br>&lt;/bean&gt;<br>&lt;!--此处获取对象的方式是从工厂类中获取静态方法--&gt;<br>&lt;bean name=<span class="hljs-string">&quot;staticFactoryDao&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;DaoFactory&quot;</span><br>		factory-method=<span class="hljs-string">&quot;getStaticFactoryDaoImpl&quot;</span>&gt;&lt;/bean&gt;<br></code></pre></div></td></tr></table></figure>
 
 
 <h2 id="实例工厂"><a href="#实例工厂" class="headerlink" title="实例工厂"></a>实例工厂</h2><blockquote>
@@ -450,7 +452,7 @@
 <li>Transactions 事务</li>
 </ol>
 <h2 id="AOP-核心概念"><a href="#AOP-核心概念" class="headerlink" title="AOP 核心概念"></a>AOP 核心概念</h2><p>1、切面(aspect):类是对物体特征的抽象,切面就是对横切关注点的抽象<br>2、横切关注点:对哪些方法进行拦截,拦截后怎么处理,这些关注点称之为横切关注点。<br>3、连接点(joinpoint):被拦截到的点,因为 Spring 只支持方法类型的连接点,所以在 Spring中连接点指的就是被拦截到的方法,实际上连接点还可以是字段或者构造器。<br>4、切入点(pointcut):对连接点进行拦截的定义<br>5、通知(advice):所谓通知指的就是指拦截到连接点之后要执行的代码,通知分为前置、后置、异常、最终、环绕通知五类。<br>6、目标对象:代理的目标对象<br>7、织入(weave):将切面应用到目标对象并导致代理对象创建的过程<br>8、引入(introduction):在不修改代码的前提下,引入可以在运行期为类动态地添加一些方法或字段。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-aop.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-aop.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h3 id="AOP-两种代理方式"><a href="#AOP-两种代理方式" class="headerlink" title="AOP 两种代理方式"></a>AOP 两种代理方式</h3><p>Spring 提 供 了 两 种 方 式 来 生 成 代 理 对 象 : JDKProxy 和 Cglib , 具体使用哪种方式生成由AopProxyFactory 根据 AdvisedSupport 对象的配置来决定。默认的策略是如果目标类是接口,则使用 JDK 动态代理技术,否则使用 Cglib 来生成代理。</p>
 <ul>
 <li><p>JDK 动态接口代理</p>
@@ -465,17 +467,17 @@
 </li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Aspect</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TransactionDemo</span> </span>&#123;<br>	<span class="hljs-meta">@Pointcut(value=&quot;execution(* com.yangxin.core.service.*.*.*(..))&quot;)</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">point</span><span class="hljs-params">()</span></span>&#123;<br>	&#125;<br>	<span class="hljs-meta">@Before(value=&quot;point()&quot;)</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">before</span><span class="hljs-params">()</span></span>&#123;<br>		System.out.println(<span class="hljs-string">&quot;transaction begin&quot;</span>);<br>	&#125;<br>	<span class="hljs-meta">@AfterReturning(value = &quot;point()&quot;)</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">after</span><span class="hljs-params">()</span></span>&#123;<br>		System.out.println(<span class="hljs-string">&quot;transaction commit&quot;</span>);<br>	&#125;<br>	<span class="hljs-meta">@Around(&quot;point()&quot;)</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">around</span><span class="hljs-params">(ProceedingJoinPoint joinPoint)</span> <span class="hljs-keyword">throws</span> Throwable</span>&#123;<br>		System.out.println(<span class="hljs-string">&quot;transaction begin&quot;</span>);<br>		joinPoint.proceed();<br>		System.out.println(<span class="hljs-string">&quot;transaction commit&quot;</span>);<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-proxy.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-proxy.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="Spring-MVC-原理"><a href="#Spring-MVC-原理" class="headerlink" title="Spring MVC 原理"></a>Spring MVC 原理</h1><blockquote>
 <p>Spring 的模型-视图-控制器(MVC)框架是围绕一个 DispatcherServlet 来设计的,这个 Servlet会把请求分发给各个处理器,并支持可配置的处理器映射、视图渲染、本地化、时区与主题渲染等,甚至还能支持文件上传。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-mvc.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-mvc.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h3 id="Http-请求到-DispatcherServlet"><a href="#Http-请求到-DispatcherServlet" class="headerlink" title="Http 请求到 DispatcherServlet"></a>Http 请求到 DispatcherServlet</h3><p>(1) 客户端请求提交到 DispatcherServlet。</p>
 <h3 id="HandlerMapping-寻找处理器"><a href="#HandlerMapping-寻找处理器" class="headerlink" title="HandlerMapping 寻找处理器"></a>HandlerMapping 寻找处理器</h3><p>(2) 由 DispatcherServlet 控制器查询一个或多个 HandlerMapping,找到处理请求的Controller。</p>
 <h3 id="调用处理器-Controller"><a href="#调用处理器-Controller" class="headerlink" title="调用处理器 Controller"></a>调用处理器 Controller</h3><p>(3) DispatcherServlet 将请求提交到 Controller。<br>Controller 调用业务逻辑处理后,返回 ModelAndView<br>(4)(5)调用业务处理和返回结果:Controller 调用业务逻辑处理后,返回 ModelAndView。</p>
 <h3 id="DispatcherServlet-查询-ModelAndView"><a href="#DispatcherServlet-查询-ModelAndView" class="headerlink" title="DispatcherServlet 查询 ModelAndView"></a>DispatcherServlet 查询 ModelAndView</h3><p>(6)(7)处理视图映射并返回模型: DispatcherServlet 查询一个或多个 ViewResoler 视图解析器,找到 ModelAndView 指定的视图。</p>
 <h3 id="ModelAndView-反馈浏览器-HTTP"><a href="#ModelAndView-反馈浏览器-HTTP" class="headerlink" title="ModelAndView 反馈浏览器 HTTP"></a>ModelAndView 反馈浏览器 HTTP</h3><p>(8) Http 响应:视图负责将结果显示到客户端。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-mvc-anno.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-mvc-anno.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="Spring-Boot-原理"><a href="#Spring-Boot-原理" class="headerlink" title="Spring Boot 原理"></a>Spring Boot 原理</h1><p>Spring Boot 是由 Pivotal 团队提供的全新框架,其设计目的是用来简化新 Spring 应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置,从而使开发人员不再需要定义样板化的配置。通过这种方式,Spring Boot 致力于在蓬勃发展的快速应用开发领域(rapid applicationdevelopment)成为领导者。其特点如下:</p>
 <ol>
 <li>创建独立的 Spring 应用程序</li>
@@ -498,7 +500,7 @@
 <h2 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h2><blockquote>
 <p>两阶段提交主要保证了分布式事务的原子性:即所有结点要么全做要么全不做,所谓的两个阶段是指:第一阶段:准备阶段;第二阶段:提交阶段。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-mvc-jps.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-mvc-jps.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>1 准备阶段<br>事务协调者(事务管理器)给每个参与者(资源管理器)发送 Prepare 消息,每个参与者要么直接返回<br>失败(如权限验证失败),要么在本地执行事务,写本地的 redo 和 undo 日志,但不提交,到达一<br>种“万事俱备,只欠东风”的状态。<br>2 提交阶段:<br>如果协调者收到了参与者的失败消息或者超时,直接给每个参与者发送回滚(Rollback)消息;否则,<br>发送提交(Commit)消息;参与者根据协调者的指令执行提交或者回滚操作,释放所有事务处理过<br>程中使用的锁资源。(注意:必须在最后阶段释放锁资源)将提交分成两阶段进行的目的很明确,就是尽可能晚地提交事务,让事务在提交前尽可能地完成所有能完成的工作。</p>
 <h1 id="Mybatis-缓存"><a href="#Mybatis-缓存" class="headerlink" title="Mybatis 缓存"></a>Mybatis 缓存</h1><blockquote>
 <p>Mybatis 中有一级缓存和二级缓存,默认情况下一级缓存是开启的,而且是不能关闭的。一级缓存<br>是指 SqlSession 级别的缓存,当在同一个 SqlSession 中进行相同的 SQL 语句查询时,第二次以<br>后的查询不会从数据库查询,而是直接从缓存中获取,一级缓存最多缓存 1024 条 SQL。</p>
@@ -506,7 +508,7 @@
 <blockquote>
 <p>二级缓存<br>是指可以跨 SqlSession 的缓存。是 mapper 级别的缓存,对于 mapper 级别的缓存不同的<br>sqlsession 是可以共享的。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-mvc-cache.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring-mvc-cache.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>Mybatis 的一级缓存原理( sqlsession 级别 )<br>第一次发出一个查询 sql,sql 查询结果写入 sqlsession 的一级缓存中,缓存使用的数据结构是一个 map。</p>
 <blockquote>
 <p>key:MapperID+offset+limit+Sql+所有的入参<br>value:用户信息</p>
@@ -524,7 +526,7 @@
 <br/>
 
 
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
@@ -548,10 +550,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -578,11 +584,13 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
+    Fluid.utils.loadComments('#comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -628,9 +636,9 @@
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-md">
+  <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
-      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
     </div>
   </div>
 
@@ -695,7 +703,7 @@
           >
             
               <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
             
             <span>桂公网安备2020009931号</span>
           </a>
@@ -708,17 +716,15 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
@@ -727,7 +733,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -735,7 +740,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -782,11 +787,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -856,7 +862,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

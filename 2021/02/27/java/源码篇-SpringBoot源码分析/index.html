@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
+  
   <title>源码篇-SpringBoot源码分析 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -59,11 +60,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -184,7 +185,8 @@
           
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-briefcase"></i>
                 其他
               </a>
@@ -212,13 +214,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -227,7 +229,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -300,11 +302,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -317,7 +319,7 @@
               </p>
             
             <div class="markdown-body">
-              <h1 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210228171202592.png" srcset="/img/loading.gif" alt="image-20210228171202592"></p>
+              <h1 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210228171202592.png" srcset="/img/loading.gif" lazyload alt="image-20210228171202592"></p>
 <h2 id="第一个Run方法"><a href="#第一个Run方法" class="headerlink" title="第一个Run方法"></a>第一个Run方法</h2><pre><code class=" mermaid">graph TD;
 A(第一个Run方法)--&gt;B(初始化SpringApplication类)
 B--&gt;C(配置应用类型webApplicationType)
@@ -333,7 +335,7 @@ E--&gt;F(设置监听器)
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">WebApplicationType</span> </span>&#123;<span class="hljs-comment">//枚举类型</span><br>    NONE,<br>    SERVLET,<br>    REACTIVE;<br>	<span class="hljs-comment">//常量信息</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String[] SERVLET_INDICATOR_CLASSES = <span class="hljs-keyword">new</span> String[]&#123;<span class="hljs-string">&quot;javax.servlet.Servlet&quot;</span>, <span class="hljs-string">&quot;org.springframework.web.context.ConfigurableWebApplicationContext&quot;</span>&#125;;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String WEBMVC_INDICATOR_CLASS = <span class="hljs-string">&quot;org.springframework.web.servlet.DispatcherServlet&quot;</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String WEBFLUX_INDICATOR_CLASS = <span class="hljs-string">&quot;org.springframework.web.reactive.DispatcherHandler&quot;</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String JERSEY_INDICATOR_CLASS = <span class="hljs-string">&quot;org.glassfish.jersey.servlet.ServletContainer&quot;</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String SERVLET_APPLICATION_CONTEXT_CLASS = <span class="hljs-string">&quot;org.springframework.web.context.WebApplicationContext&quot;</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String REACTIVE_APPLICATION_CONTEXT_CLASS = <span class="hljs-string">&quot;org.springframework.boot.web.reactive.context.ReactiveWebApplicationContext&quot;</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">WebApplicationType</span><span class="hljs-params">()</span> </span>&#123;<br>    &#125;<br>	<span class="hljs-comment">//通过类路径下的信息获取应用类型</span><br>    <span class="hljs-function"><span class="hljs-keyword">static</span> WebApplicationType <span class="hljs-title">deduceFromClasspath</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">//是否为reactive类型</span><br>        <span class="hljs-keyword">if</span> (ClassUtils.isPresent(<span class="hljs-string">&quot;org.springframework.web.reactive.DispatcherHandler&quot;</span>, (ClassLoader)<span class="hljs-keyword">null</span>) &amp;&amp; !ClassUtils.isPresent(<span class="hljs-string">&quot;org.springframework.web.servlet.DispatcherServlet&quot;</span>, (ClassLoader)<span class="hljs-keyword">null</span>) &amp;&amp; !ClassUtils.isPresent(<span class="hljs-string">&quot;org.glassfish.jersey.servlet.ServletContainer&quot;</span>, (ClassLoader)<span class="hljs-keyword">null</span>)) &#123;<br>            <span class="hljs-keyword">return</span> REACTIVE;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<span class="hljs-comment">//否则为Servlet类型</span><br>            String[] var0 = SERVLET_INDICATOR_CLASSES;<br>            <span class="hljs-keyword">int</span> var1 = var0.length;<br><br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> var2 = <span class="hljs-number">0</span>; var2 &lt; var1; ++var2) &#123;<br>                String className = var0[var2];<br>                <span class="hljs-keyword">if</span> (!ClassUtils.isPresent(className, (ClassLoader)<span class="hljs-keyword">null</span>)) &#123;<br>                    <span class="hljs-keyword">return</span> NONE;<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">return</span> SERVLET;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">static</span> WebApplicationType <span class="hljs-title">deduceFromApplicationContext</span><span class="hljs-params">(Class&lt;?&gt; applicationContextClass)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (isAssignable(<span class="hljs-string">&quot;org.springframework.web.context.WebApplicationContext&quot;</span>, applicationContextClass)) &#123;<br>            <span class="hljs-keyword">return</span> SERVLET;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> isAssignable(<span class="hljs-string">&quot;org.springframework.boot.web.reactive.context.ReactiveWebApplicationContext&quot;</span>, applicationContextClass) ? REACTIVE : NONE;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>通过加载DispacherHander</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/QQ%E5%9B%BE%E7%89%8720210227235542.png" srcset="/img/loading.gif" alt="QQ图片20210227235542"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/QQ%E5%9B%BE%E7%89%8720210227235542.png" srcset="/img/loading.gif" lazyload alt="QQ图片20210227235542"></p>
 <p>具体的加载方法</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Class&lt;?&gt; forName(String name, <span class="hljs-meta">@Nullable</span> ClassLoader classLoader) <span class="hljs-keyword">throws</span> ClassNotFoundException, LinkageError &#123;<br>    Assert.notNull(name, <span class="hljs-string">&quot;Name must not be null&quot;</span>);<br>    Class&lt;?&gt; clazz = resolvePrimitiveClassName(name);<br>    <span class="hljs-keyword">if</span> (clazz == <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-comment">//优先在缓存中查找</span><br>        clazz = (Class)commonClassCache.get(name);<br>    &#125;<br>    <span class="hljs-keyword">if</span> (clazz != <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-keyword">return</span> clazz;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        Class elementClass;<br>        String elementName;<span class="hljs-comment">//元素名字</span><br>        <span class="hljs-keyword">if</span> (name.endsWith(<span class="hljs-string">&quot;[]&quot;</span>)) &#123;<span class="hljs-comment">//数组类型</span><br>            elementName = name.substring(<span class="hljs-number">0</span>, name.length() - <span class="hljs-string">&quot;[]&quot;</span>.length());<br>            elementClass = forName(elementName, classLoader);<br>            <span class="hljs-keyword">return</span> Array.newInstance(elementClass, <span class="hljs-number">0</span>).getClass();<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (name.startsWith(<span class="hljs-string">&quot;[L&quot;</span>) &amp;&amp; name.endsWith(<span class="hljs-string">&quot;;&quot;</span>)) &#123;<span class="hljs-comment">//L数组类型</span><br>            elementName = name.substring(<span class="hljs-string">&quot;[L&quot;</span>.length(), name.length() - <span class="hljs-number">1</span>);<br>            elementClass = forName(elementName, classLoader);<br>            <span class="hljs-keyword">return</span> Array.newInstance(elementClass, <span class="hljs-number">0</span>).getClass();<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (name.startsWith(<span class="hljs-string">&quot;[&quot;</span>)) &#123;<br>            elementName = name.substring(<span class="hljs-string">&quot;[&quot;</span>.length());<br>            elementClass = forName(elementName, classLoader);<br>            <span class="hljs-keyword">return</span> Array.newInstance(elementClass, <span class="hljs-number">0</span>).getClass();<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            ClassLoader clToUse = classLoader;<br>            <span class="hljs-keyword">if</span> (classLoader == <span class="hljs-keyword">null</span>) &#123;<br>                clToUse = getDefaultClassLoader();<br>            &#125;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-keyword">return</span> Class.forName(name, <span class="hljs-keyword">false</span>, clToUse);<br>            &#125; <span class="hljs-keyword">catch</span> (ClassNotFoundException var9) &#123;<br>                <span class="hljs-keyword">int</span> lastDotIndex = name.lastIndexOf(<span class="hljs-number">46</span>);<br>                <span class="hljs-keyword">if</span> (lastDotIndex != -<span class="hljs-number">1</span>) &#123;<br>                    <span class="hljs-comment">//$代表内部类</span><br>                    String nestedClassName = name.substring(<span class="hljs-number">0</span>, lastDotIndex) + <span class="hljs-string">&#x27;$&#x27;</span> + name.substring(lastDotIndex + <span class="hljs-number">1</span>);<br>                    <span class="hljs-keyword">try</span> &#123;<br>                        <span class="hljs-keyword">return</span> Class.forName(nestedClassName, <span class="hljs-keyword">false</span>, clToUse);<br>                    &#125; <span class="hljs-keyword">catch</span> (ClassNotFoundException var8) &#123;<br>                    &#125;<br>                &#125;<br>                <span class="hljs-keyword">throw</span> var9;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
@@ -377,7 +379,7 @@ I--&gt;J(运行CallRunners)
 <br/>
 
 
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
@@ -401,10 +403,14 @@ I--&gt;J(运行CallRunners)
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -431,11 +437,13 @@ I--&gt;J(运行CallRunners)
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
+    Fluid.utils.loadComments('#comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -481,9 +489,9 @@ I--&gt;J(运行CallRunners)
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-md">
+  <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
-      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
     </div>
   </div>
 
@@ -548,7 +556,7 @@ I--&gt;J(运行CallRunners)
           >
             
               <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
             
             <span>桂公网安备2020009931号</span>
           </a>
@@ -561,17 +569,15 @@ I--&gt;J(运行CallRunners)
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
@@ -580,7 +586,6 @@ I--&gt;J(运行CallRunners)
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -588,7 +593,7 @@ I--&gt;J(运行CallRunners)
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -635,11 +640,12 @@ I--&gt;J(运行CallRunners)
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -709,7 +715,6 @@ I--&gt;J(运行CallRunners)
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
+  
   <title>k8s篇-入门实践 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -59,11 +60,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -184,7 +185,8 @@
           
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-briefcase"></i>
                 其他
               </a>
@@ -212,13 +214,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -227,7 +229,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -300,11 +302,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -371,7 +373,7 @@
 </ul>
 <h1 id="安装Kubernates"><a href="#安装Kubernates" class="headerlink" title="安装Kubernates"></a>安装Kubernates</h1><ul>
 <li><p>修改 hostname,不能使用localhost</p>
-<figure class="highlight dsconfig"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dsconfig">如果您需要修改 <span class="hljs-string">hostname</span>，可执行如下指令：<br><span class="hljs-comment"># 修改 hostname</span><br><span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">your-new-host-name</span><br><span class="hljs-string"></span><span class="hljs-comment"># 查看修改结果</span><br><span class="hljs-string">hostnamectl</span> <span class="hljs-string">status</span><br><span class="hljs-string"></span><span class="hljs-comment"># 设置 hostname 解析</span><br><span class="hljs-string">echo</span> <span class="hljs-string">&quot;127.0.0.1   $(hostname)&quot;</span> &gt;&gt; /<span class="hljs-string">etc</span>/<span class="hljs-string">hosts</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight dsconfig"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dsconfig">如果您需要修改 <span class="hljs-string">hostname</span>，可执行如下指令：<br><span class="hljs-comment"># 修改 hostname</span><br><span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">your-new-host-name</span><br><span class="hljs-comment"># 查看修改结果</span><br><span class="hljs-string">hostnamectl</span> <span class="hljs-string">status</span><br><span class="hljs-comment"># 设置 hostname 解析</span><br><span class="hljs-string">echo</span> <span class="hljs-string">&quot;127.0.0.1   $(hostname)&quot;</span> &gt;&gt; /<span class="hljs-string">etc</span>/<span class="hljs-string">hosts</span><br></code></pre></div></td></tr></table></figure>
 </li>
 <li><p>检查网络</p>
 </li>
@@ -415,7 +417,8 @@
   echo 当前POD_SUBNET=$POD_SUBNET
   echo 当前APISERVER_NAME=$APISERVER_NAME
   exit 1
-fi</code></pre></div>
+fi
+</code></pre></div>
 <p>​<br>​    # 查看完整配置选项 <a target="_blank" rel="noopener" href="https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2">https://godoc.org/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta2</a><br>​    rm -f ./kubeadm-config.yaml<br>​    cat &lt;<EOF > ./kubeadm-config.yaml<br>​    apiVersion: kubeadm.k8s.io/v1beta2<br>​    kind: ClusterConfiguration<br>​    kubernetesVersion: v${1}<br>​    imageRepository: registry.aliyuncs.com/k8sxio<br>​    controlPlaneEndpoint: “${APISERVER_NAME}:6443”<br>​    networking:<br>​      serviceSubnet: “10.96.0.0/16”<br>​      podSubnet: “${POD_SUBNET}”<br>​      dnsDomain: “cluster.local”<br>​    EOF<br>​<br>​    # kubeadm init<br>​    # 根据您服务器网速的情况，您需要等候 3 - 10 分钟<br>​    kubeadm init –config=kubeadm-config.yaml –upload-certs<br>​<br>    # 配置 kubectl<br>    rm -rf /root/.kube/<br>    mkdir /root/.kube/<br>    cp -i /etc/kubernetes/admin.conf /root/.kube/config</p>
 <div class="hljs code-wrapper"><pre><code># 安装 calico 网络插件
 # 参考文档 https://docs.projectcalico.org/v3.13/getting-started/kubernetes/self-managed-onprem/onpremises
@@ -424,13 +427,14 @@ rm -f calico-3.13.1.yaml
 wget https://kuboard.cn/install-script/calico/calico-3.13.1.yaml
 kubectl apply -f calico-3.13.1.yaml
 
-<figure class="highlight xml"><table><tr><td class="gutter hljs"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><br><span class="hljs-tag">&lt;/<span class="hljs-name">details</span>&gt;</span><br><br><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br><br><br>- 检查 master 初始化结果<br><br></code></pre></div></td></tr></table></figure></code></pre>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><br><span class="hljs-tag">&lt;/<span class="hljs-name">details</span>&gt;</span><br><br><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br><br><br>- 检查 master 初始化结果<br><br></code></pre></div></td></tr></table></figure>
+</code></pre>
 <h1 id="只在-master-节点执行"><a href="#只在-master-节点执行" class="headerlink" title="只在 master 节点执行"></a>只在 master 节点执行</h1><h1 id="执行如下命令，等待-3-10-分钟，直到所有的容器组处于-Running-状态"><a href="#执行如下命令，等待-3-10-分钟，直到所有的容器组处于-Running-状态" class="headerlink" title="执行如下命令，等待 3-10 分钟，直到所有的容器组处于 Running 状态"></a>执行如下命令，等待 3-10 分钟，直到所有的容器组处于 Running 状态</h1><p>watch kubectl get pod -n kube-system -o wide</p>
 <h1 id="查看-master-节点初始化结果"><a href="#查看-master-节点初始化结果" class="headerlink" title="查看 master 节点初始化结果"></a>查看 master 节点初始化结果</h1><p>kubectl get nodes -o wide</p>
-<figure class="highlight http"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http"><br><br>成功<br><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs"><br><br>成功<br><br></code></pre></div></td></tr></table></figure>
 <p>Every 2.0s: kubectl get pod -n kube-system -o wide                                                                                                                                                                                               Tue Jul 28 17:31:56 2020</p>
 <p>NAME                                       READY   STATUS     RESTARTS   AGE    IP             NODE     NOMINATED NODE   READINESS GATES<br>calico-kube-controllers-5b8b769fcd-dw2fq   0/1     Pending    0          99s    <none>         <none>   <none>           <none><br>calico-node-gcw6r                          0/1     Init:0/3   0          99s    192.168.0.39   mikey    <none>           <none><br>coredns-66db54ff7f-2f9qn                   0/1     Pending    0          99s    <none>         <none>   <none>           <none><br>coredns-66db54ff7f-csm5w                   0/1     Pending    0          99s    <none>         <none>   <none>           <none><br>etcd-mikey                                 1/1     Running    0          108s   192.168.0.39   mikey    <none>           <none><br>kube-apiserver-mikey                       1/1     Running    0          108s   192.168.0.39   mikey    <none>           <none><br>kube-controller-manager-mikey              1/1     Running    0          108s   192.168.0.39   mikey    <none>           <none><br>kube-proxy-xhmgq                           1/1     Running    0          99s    192.168.0.39   mikey    <none>           <none><br>kube-scheduler-mikey                       1/1     Running    0          108s   192.168.0.39   mikey    <none>           <none></p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs plain"><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs"><br></code></pre></div></td></tr></table></figure>
 <p>[root@server-781e6bf7-bce3-4d09-adc8-2a169fdb8719 ~]# kubectl get nodes -o wide<br>NAME    STATUS     ROLES    AGE     VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                KERNEL-VERSION                CONTAINER-RUNTIME<br>mikey   NotReady   master   2m18s   v1.18.6   192.168.0.39   <none>        CentOS Linux 7 (Core)   3.10.0-1062.12.1.el7.x86_64   docker://19.3.8</p>
 <figure class="highlight gauss"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gauss"><br>- 初始化 worker节点<br>&gt;获得 join命令参数在 master 节点上执行<br><br>```kubeadm <span class="hljs-built_in">token</span> <span class="hljs-keyword">create</span> --<span class="hljs-keyword">print</span>-join-command```<br>    <br>可获取kubeadm join 命令及参数，如下所示<br><br>kubeadm <span class="hljs-built_in">token</span> <span class="hljs-keyword">create</span> 命令的输出<br><br>&gt;kubeadm join apiserver.demo:<span class="hljs-number">6443</span> --<span class="hljs-built_in">token</span> mpfjma<span class="hljs-number">.4</span>vjjg8flqihor4vt     --discovery-<span class="hljs-built_in">token</span>-ca-cert-hash sha256:<span class="hljs-number">6</span>f7a8e40a810323672de5eee6f4d19aa2dbdb38411845a1bf5dd63485c43d303<br><br>`该 <span class="hljs-built_in">token</span> 的有效时间为 <span class="hljs-number">2</span> 个小时，<span class="hljs-number">2</span>小时内，您可以使用此 <span class="hljs-built_in">token</span> 初始化任意数量的 worker 节点`<br><br><br>- 初始化worker<br><br>针对所有的 worker 节点执行<br><br></code></pre></div></td></tr></table></figure>
 <h1 id="只在-worker-节点执行"><a href="#只在-worker-节点执行" class="headerlink" title="只在 worker 节点执行"></a>只在 worker 节点执行</h1><h1 id="替换-x-x-x-x-为-master-节点的内网-IP"><a href="#替换-x-x-x-x-为-master-节点的内网-IP" class="headerlink" title="替换 x.x.x.x 为 master 节点的内网 IP"></a>替换 x.x.x.x 为 master 节点的内网 IP</h1><p>export MASTER_IP=x.x.x.x</p>
@@ -440,7 +444,7 @@ kubectl apply -f calico-3.13.1.yaml
 <p>出现问题<code>kubeadm reset</code>进行重置</p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://kuboard.cn/install/install-k8s.html#%E6%96%87%E6%A1%A3%E7%89%B9%E7%82%B9">单节点安装</a></p>
 <p><a target="_blank" rel="noopener" href="https://kuboard.cn/learning/k8s-bg/what-is-k8s.html#%E5%9B%9E%E9%A1%BE">Kubernates 教学</a><br/></p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
@@ -464,10 +468,14 @@ kubectl apply -f calico-3.13.1.yaml
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -494,11 +502,13 @@ kubectl apply -f calico-3.13.1.yaml
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
+    Fluid.utils.loadComments('#comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -544,9 +554,9 @@ kubectl apply -f calico-3.13.1.yaml
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-md">
+  <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
-      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
     </div>
   </div>
 
@@ -611,7 +621,7 @@ kubectl apply -f calico-3.13.1.yaml
           >
             
               <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
             
             <span>桂公网安备2020009931号</span>
           </a>
@@ -624,17 +634,15 @@ kubectl apply -f calico-3.13.1.yaml
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
@@ -643,7 +651,6 @@ kubectl apply -f calico-3.13.1.yaml
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -651,7 +658,7 @@ kubectl apply -f calico-3.13.1.yaml
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -698,11 +705,12 @@ kubectl apply -f calico-3.13.1.yaml
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -772,7 +780,6 @@ kubectl apply -f calico-3.13.1.yaml
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
+  
   <title>数据库篇-MySQL底层实现机制 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -59,11 +60,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -184,7 +185,8 @@
           
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-briefcase"></i>
                 其他
               </a>
@@ -212,13 +214,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -227,7 +229,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -300,11 +302,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -326,7 +328,7 @@
 </ul>
 <h1 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>数据库存储引擎是数据库底层软件组织,数据库管理系统(DBMS)使用数据引擎进行创建、查询、更新和删除数据。不同的存储引擎提供不同的存储机制、索引技巧、锁定水平等功能,使用不同的存储引擎,还可以 获得特定的功能。现在许多不同的数据库管理系统都支持多种不同的数据引擎。存储引擎主要有: 1. MyIsam , 2. InnoDB, 3. Memory, 4. Archive, 5. Federated 。</p>
 <h2 id="InnoDB-B-树"><a href="#InnoDB-B-树" class="headerlink" title="InnoDB( B+树 )"></a>InnoDB( B+树 )</h2><p>InnoDB 底层存储结构为 B+树, B 树的每个节点对应 innodb 的一个 page,page 大小是固定的,一般设为 16k。其中非叶子节点只有键值,叶子节点包含完成数据。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/innodb.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/innodb.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>适用场景:<br>1)经常更新的表,适合处理多重并发的更新请求。<br>2)支持事务。<br>3)可以从灾难中恢复(通过 bin-log 日志等)。<br>4)外键约束。只有他支持外键。<br>5)支持自动增加列属性 auto_increment。</p>
 <h2 id="TokuDB-Fractal-Tree-节点带数据"><a href="#TokuDB-Fractal-Tree-节点带数据" class="headerlink" title="TokuDB( Fractal Tree-节点带数据 )"></a>TokuDB( Fractal Tree-节点带数据 )</h2><p>TokuDB 底层存储结构为 <code>Fractal Tree</code>,<code>Fractal Tree</code> 的结构与 B+树有些类似, 在 Fractal Tree中,每一个 child 指针除了需要指向一个 child 节点外,还会带有一个 Message Buffer ,这个Message Buffer 是一个 FIFO 的队列,用来缓存更新操作。</p>
 <p>例如,一次插入操作只需要落在某节点的 Message Buffer 就可以马上返回了,并不需要搜索到叶子节点。这些缓存的更新会在查询时或后台异步合并应用到对应的节点中。TokuDB 在线添加索引,不影响读写操作, 非常快的写入性能, Fractal-tree 在事务实现上有优势。 他主要适用于访问频率不高的数据或历史数据归档。</p>
@@ -344,11 +346,11 @@
 </ol>
 <h2 id="数据库三范式"><a href="#数据库三范式" class="headerlink" title="数据库三范式"></a>数据库三范式</h2><p>范式是具有最小冗余的表结构。范式具体如下:</p>
 <p>第一范式(1st NF -列都是不可再分)<br>第一范式的目标是确保每列的原子性:如果每列都是不可再分的最小数据单元(也称为最小的原子单元),则满足第一范式(1NF)</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/1st-nf.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/1st-nf.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>首先满足第一范式,并且表中非主键列不存在对主键的部分依赖。 第二范式要求每个表只描述一件事情。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/2st-nf.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/2st-nf.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>第三范式(3rd NF- 不存在对非主键列的传递依赖)<br>第三范式定义是,满足第二范式,并且表中的列不存在对非主键列的传递依赖。除了主键订单编号外,顾客姓名依赖于非主键顾客编号。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/3st-nf.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/3st-nf.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h2 id="数据库是事务"><a href="#数据库是事务" class="headerlink" title="数据库是事务"></a>数据库是事务</h2><blockquote>
 <p>事务(TRANSACTION)是作为单个逻辑工作单元执行的一系列操作,这些操作作为一个整体一起向系统提交,要么都执行、要么都不执行 。事务是一个不可分割的工作逻辑单元事务必须具备以下四个属性,简称 ACID 属性:</p>
 </blockquote>
@@ -400,9 +402,9 @@
 </ol>
 <h2 id="分区分表"><a href="#分区分表" class="headerlink" title="分区分表"></a>分区分表</h2><p>分库分表有垂直切分和水平切分两种。</p>
 <h3 id="垂直切分-按照功能模块"><a href="#垂直切分-按照功能模块" class="headerlink" title="垂直切分 ( 按照功能模块 )"></a>垂直切分 ( 按照功能模块 )</h3><p>将表按照功能模块、关系密切程度划分出来,部署到不同的库上。例如,我们会建立定义数据库 workDB、商品数据库 payDB、用户数据库 userDB、日志数据库 logDB 等,分别用于存储项目数据定义表、商品定义表、用户数据表、日志数据表等。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/vertical-partitioning.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/vertical-partitioning.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h3 id="水平切分-按照规则划分存储"><a href="#水平切分-按照规则划分存储" class="headerlink" title="水平切分 ( 按照规则划分存储 )"></a>水平切分 ( 按照规则划分存储 )</h3><p>当一个表中的数据量过大时,我们可以把该表的数据按照某种规则,例如 userID 散列,进行划分,然后存储到多个结构相同的表,和不同的库上。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/horizontal-partitioning.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/horizontal-partitioning.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h3 id="两阶段提交协议"><a href="#两阶段提交协议" class="headerlink" title="两阶段提交协议"></a>两阶段提交协议</h3><p>分布式事务是指会涉及到操作多个数据库的事务,在分布式系统中,各个节点之间在物理上相互独立,通过网络进行沟通和协调。</p>
 <p>XA 就是 X/Open DTP 定义的交易中间件与数据库之间的接口规范(即接口函数),交易中间件<br>用它来通知数据库事务的开始、结束以及提交、回滚等。 XA 接口函数由数据库厂商提供。<br>二阶段提交(Two-phaseCommit)是指,在计算机网络以及数据库领域内,为了使基于分布式系统<br>架构下的所有节点在进行事务提交时保持一致性而设计的一种算法(Algorithm)。通常,二阶段提<br>交也被称为是一种协议(Protocol))。在分布式系统中,每个节点虽然可以知晓自己的操作时成功<br>或者失败,却无法知道其他节点的操作的成功或失败。当一个事务跨越多个节点时,为了保持事<br>务的 ACID 特性,需要引入一个作为协调者的组件来统一掌控所有节点(称作参与者)的操作结果并<br>最终指示这些节点是否要把操作结果进行真正的提交(比如将更新后的数据写入磁盘等等)。因此,<br>二阶段提交的算法思路可以概括为:参与者将操作成败通知协调者,再由协调者根据所有参与者<br>的反馈情报决定各参与者是否要提交操作还是中止操作。</p>
 <ul>
@@ -435,9 +437,9 @@
 <p>两阶段型<br>1、 就是分布式事务两阶段提交,对应技术上的 XA、JTA/JTS。这是分布式环境下事务处理的</p>
 <p>典型模式。<br>补偿型<br>2、 TCC 型事务(Try/Confirm/Cancel)可以归为补偿型。</p>
 <p>WS-BusinessActivity 提供了一种基于补偿的 long-running 的事务处理模型。服务器 A 发起事务,服务器 B 参与事务,服务器 A 的事务如果执行顺利,那么事务 A 就先行提交,如果事务 B 也执行顺利,则事务 B 也提交,整个事务就算完成。但是如果事务 B 执行失败,事务 B 本身回滚,这时事务 A 已经被提交,所以需要执行一个补偿操作,将已经提交的事务 A 执行的操作作反操作,恢复到未执行前事务 A 的状态。这样的 SAGA 事务模型,是牺牲了一定的隔离性和一致性的,但是提高了 long-running 事务的可用性。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/soft-transcation.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/soft-transcation.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>异步确保型<br>3、 通过将一系列同步的事务操作变为基于消息执行的异步操作, 避免了分布式事务中的同步阻塞操作的影响。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/async-sure.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/async-sure.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>最大努力通知型(多次尝试)<br>4、 这是分布式事务中要求最低的一种, 也可以通过消息中间件实现, 与前面异步确保型操作不同的一点是, 在消息由 MQ Server 投递到消费者之后, 允许在达到最大重试次数之后正常结束事务。</p>
 <h1 id="CAP"><a href="#CAP" class="headerlink" title="CAP"></a>CAP</h1><p>CAP 原则又称 CAP 定理,指的是在一个分布式系统中, Consistency(一致性)、 Availability(可用性)、Partition tolerance(分区容错性),三者不可得兼。</p>
 <h2 id="一致性-C"><a href="#一致性-C" class="headerlink" title="一致性(C):"></a>一致性(C):</h2><p>1.在分布式系统中的所有数据备份,在同一时刻是否同样的值。(等同于所有节点访问同一份最新的数据副本)</p>
@@ -452,7 +454,7 @@
 <br/>
 
 
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
@@ -476,10 +478,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -506,11 +512,13 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
+    Fluid.utils.loadComments('#comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -556,9 +564,9 @@
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-md">
+  <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
-      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
     </div>
   </div>
 
@@ -623,7 +631,7 @@
           >
             
               <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
             
             <span>桂公网安备2020009931号</span>
           </a>
@@ -636,17 +644,15 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
@@ -655,7 +661,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -663,7 +668,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -710,11 +715,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -784,7 +790,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

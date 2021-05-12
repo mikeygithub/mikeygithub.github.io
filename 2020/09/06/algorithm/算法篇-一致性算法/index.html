@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
+  
   <title>算法篇-一致性算法 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -59,11 +60,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -184,7 +185,8 @@
           
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-briefcase"></i>
                 其他
               </a>
@@ -212,13 +214,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -227,7 +229,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -300,11 +302,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -356,7 +358,7 @@
 <p>leader election 都采用先到先得的投票方式</p>
 <h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3><p>zab 用的是 epoch 和 count 的组合来唯一表示一个值, 而 raft 用的是 term 和 index<br>zab 的 follower 在投票给一个 leader 之前必须和 leader 的日志达成一致,而 raft 的 follower<br>则简单地说是谁的 term 高就投票给谁<br>raft 协议的心跳是从 leader 到 follower, 而 zab 协议则相反<br>raft 协议数据只有单向地从 leader 到 follower(成为 leader 的条件之一就是拥有最新的 log),而 zab 协议在 discovery 阶段, 一个 prospective leader 需要将自己的 log 更新为 quorum 里面最新的 log,然后才好在 synchronization 阶段将 quorum 里的其他机器的 log 都同步到一致.</p>
 <h3 id="NWR"><a href="#NWR" class="headerlink" title="NWR"></a>NWR</h3><p>N :在分布式存储系统中,有多少份备份数据<br>W :代表一次成功的更新操作要求至少有 w 份数据写入成功<br>R : 代表一次成功的读数据操作要求至少有 R 份数据成功读取<br>NWR 值的不同组合会产生不同的一致性效果,当 W+R&gt;N 的时候,整个系统对于客户端来讲能保证强一致性。而如果 R+W&lt;=N,则无法保证数据的强一致性。以常见的 N=3、W=2、R=2 为例:<br>N=3,表示,任何一个对象都必须有三个副本( Replica),W=2 表示,对数据的修改操作(Write)只需要在 3 个 Replica 中的 2 个上面完成就返回,R=2 表示,从三个对象中要读取到 2个数据对象,才能返回。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/nwr.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/nwr.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="Gossip"><a href="#Gossip" class="headerlink" title="Gossip"></a>Gossip</h1><p>Gossip 算法又被称为反熵(Anti-Entropy),熵是物理学上的一个概念,代表杂乱无章,而反熵就是在杂乱无章中寻求一致,这充分说明了 Gossip 的特点:在一个有界网络中,每个节点都随机地与其他节点通信,经过一番杂乱无章的通信,最终所有节点的状态都会达成一致。每个节点可能知道所有其他节点,也可能仅知道几个邻居节点,只要这些节可以通过网络连通,最终他们的状态都是一致的,当然这也是疫情传播的特点。</p>
 <h1 id="一致性-Hash"><a href="#一致性-Hash" class="headerlink" title="一致性 Hash"></a>一致性 Hash</h1><p>一 致 性 哈 希 算 法 (Consistent Hashing Algorithm) 是 一 种 分 布 式 算 法 , 常 用 于 负 载 均 衡 。<br>Memcached client 也选择这种算法,解决将 key-value 均匀分配到众多 Memcached server 上的问题。它可以取代传统的取模操作,解决了取模操作无法应对增删 Memcached Server 的问题(增删 server 会导致同一个 key,在 get 操作时分配不到数据真正存储的 server,命中率会急剧下降)。</p>
 <p>一致性 Hash 特性<br>平衡性(Balance):平衡性是指哈希的结果能够尽可能分布到所有的缓冲中去,这样可以使得<br>所有的缓冲空间都得到利用。<br>单调性(Monotonicity):单调性是指如果已经有一些内容通过哈希分派到了相应的缓冲中,<br>又有新的缓冲加入到系统中。哈希的结果应能够保证原有已分配的内容可以被映射到新的缓<br>冲中去,而不会被映射到旧的缓冲集合中的其他缓冲区。容易看到,上面的简单求余算法<br>hash(object)%N 难以满足单调性要求。<br>平滑性(Smoothness):平滑性是指缓存服务器的数目平滑改变和缓存对象的平滑改变是一致<br>的。<br>20.1.6.2.<br>一致性 Hash 原理</p>
@@ -370,9 +372,9 @@
 <li>把对象映射到服务节点</li>
 <li>现在服务节点和对象都已经通过同一个 hash 算法映射到 hash 数值空间中了,首先确定对象<br>hash 值在环上的位置,从此位置沿环顺时针“行走”,第一台遇到的服务器就是其应该定位<br>到的服务器。</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/con-hash.png" srcset="/img/loading.gif" alt="avatar"><br>考察 cache 的变动<br>5.<br>通过 hash 然后求余的方法带来的最大问题就在于不能满足单调性,当 cache 有所变动时,<br>cache 会失效。<br>5.1 移除 cache:考虑假设 cache B 挂掉了,根据上面讲到的映射方法,这时受影响的将仅是<br>那些沿 cache B 逆时针遍历直到下一个 cache ( cache C )之间的对象。<br>5.2 添加 cache:再考虑添加一台新的 cache D 的情况,这时受影响的将仅是那些沿 cache<br>D 逆时针遍历直到下一个 cache 之间的对象,将这些对象重新映射到 cache D 上即可。<br>虚拟节点<br>hash 算法并不是保证绝对的平衡,如果 cache 较少的话,对象并不能被均匀的映射到 cache 上,<br>为了解决这种情况, consistent hashing 引入了“虚拟节点”的概念,它可以如下定义:<br>虚拟节点( virtual node )是实际节点在 hash 空间的复制品( replica ),一实际个节点对应了<br>若干个“虚拟节点”,这个对应个数也成为“复制个数”,“虚拟节点”在 hash 空间中以 hash<br>值排列。<br>仍以仅部署 cache A 和 cache C 的情况为例。现在我们引入虚拟节点,并设置“复制个数”为 2 ,<br>这就意味着一共会存在 4 个“虚拟节点”, cache A1, cache A2 代表了 cache A; cache C1,<br>cache C2 代表了 cache C 。此时,对象到“虚拟节点”的映射关系为:<br>objec1-&gt;cache A2 ; objec2-&gt;cache A1 ; objec3-&gt;cache C1 ; objec4-&gt;cache C2 ;<br>因此对象 object1 和 object2 都被映射到了 cache A 上,而 object3 和 object4 映射到了 cache<br>C 上;平衡性有了很大提高。<br>引入“虚拟节点”后,映射关系就从 { 对象 -&gt; 节点 } 转换到了 { 对象 -&gt; 虚拟节点 } 。查询物体所<br>在 cache 时的映射关系如下图 所示。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hash-cache.png" srcset="/img/loading.gif" alt="avatar"><br/></p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/con-hash.png" srcset="/img/loading.gif" lazyload alt="avatar"><br>考察 cache 的变动<br>5.<br>通过 hash 然后求余的方法带来的最大问题就在于不能满足单调性,当 cache 有所变动时,<br>cache 会失效。<br>5.1 移除 cache:考虑假设 cache B 挂掉了,根据上面讲到的映射方法,这时受影响的将仅是<br>那些沿 cache B 逆时针遍历直到下一个 cache ( cache C )之间的对象。<br>5.2 添加 cache:再考虑添加一台新的 cache D 的情况,这时受影响的将仅是那些沿 cache<br>D 逆时针遍历直到下一个 cache 之间的对象,将这些对象重新映射到 cache D 上即可。<br>虚拟节点<br>hash 算法并不是保证绝对的平衡,如果 cache 较少的话,对象并不能被均匀的映射到 cache 上,<br>为了解决这种情况, consistent hashing 引入了“虚拟节点”的概念,它可以如下定义:<br>虚拟节点( virtual node )是实际节点在 hash 空间的复制品( replica ),一实际个节点对应了<br>若干个“虚拟节点”,这个对应个数也成为“复制个数”,“虚拟节点”在 hash 空间中以 hash<br>值排列。<br>仍以仅部署 cache A 和 cache C 的情况为例。现在我们引入虚拟节点,并设置“复制个数”为 2 ,<br>这就意味着一共会存在 4 个“虚拟节点”, cache A1, cache A2 代表了 cache A; cache C1,<br>cache C2 代表了 cache C 。此时,对象到“虚拟节点”的映射关系为:<br>objec1-&gt;cache A2 ; objec2-&gt;cache A1 ; objec3-&gt;cache C1 ; objec4-&gt;cache C2 ;<br>因此对象 object1 和 object2 都被映射到了 cache A 上,而 object3 和 object4 映射到了 cache<br>C 上;平衡性有了很大提高。<br>引入“虚拟节点”后,映射关系就从 { 对象 -&gt; 节点 } 转换到了 { 对象 -&gt; 虚拟节点 } 。查询物体所<br>在 cache 时的映射关系如下图 所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hash-cache.png" srcset="/img/loading.gif" lazyload alt="avatar"><br/></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
@@ -396,10 +398,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -426,11 +432,13 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
+    Fluid.utils.loadComments('#comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -476,9 +484,9 @@
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-md">
+  <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
-      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
     </div>
   </div>
 
@@ -543,7 +551,7 @@
           >
             
               <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
             
             <span>桂公网安备2020009931号</span>
           </a>
@@ -556,17 +564,15 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
@@ -575,7 +581,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -583,7 +588,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -630,11 +635,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -704,7 +710,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

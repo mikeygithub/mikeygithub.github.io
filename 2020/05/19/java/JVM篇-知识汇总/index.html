@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
+  
   <title>JVM篇-知识汇总 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -59,11 +60,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -184,7 +185,8 @@
           
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-briefcase"></i>
                 其他
               </a>
@@ -212,13 +214,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -227,7 +229,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -300,11 +302,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -317,8 +319,8 @@
               </p>
             
             <div class="markdown-body">
-              <h1 id="JVM-知识汇总"><a href="#JVM-知识汇总" class="headerlink" title="JVM 知识汇总"></a>JVM 知识汇总</h1><h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">JVM是可运行Java代码的假想计算机，包括一套字节指令集，一组寄存器，一个栈，一个垃圾回收，堆和一个存储方法域．<br>Jvm是运行在操作系统上的他与硬件没有直接的交互．<br></code></pre></div></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/jvm.png" srcset="/img/loading.gif" alt="avatar"></p>
+              <h1 id="JVM-知识汇总"><a href="#JVM-知识汇总" class="headerlink" title="JVM 知识汇总"></a>JVM 知识汇总</h1><h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">JVM是可运行Java代码的假想计算机，包括一套字节指令集，一组寄存器，一个栈，一个垃圾回收，堆和一个存储方法域．<br>Jvm是运行在操作系统上的他与硬件没有直接的交互．<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/jvm.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="运行过程"><a href="#运行过程" class="headerlink" title="运行过程"></a>运行过程</h1><blockquote>
 <p>我们都知道Java源文件，通过编译器能够生产相应的.Class文件，也就是字节码文件，而字节码文件又通过Java虚拟机中的解释器，编译成特定机器上的机器码</p>
 </blockquote>
@@ -328,12 +330,12 @@
 <blockquote>
 <p>每一种平台的解释器是不同的，但是实现的虚拟机是相同的，这也就是Java为什么能够跨平台的原因，当一个程序从开始运行，这时虚拟机就开始实例化了，多个程序启动　就会存在多个虚拟机实例．程序退出或者关闭则虚拟机实例消亡，多个虚拟机实例之间数据不能共享&lt;</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/RunTimeJvm.png" srcset="/img/loading.gif" alt="avatar"> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/RunTimeJvm.png" srcset="/img/loading.gif" lazyload alt="avatar"> </p>
 <h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><blockquote>
 <p>这里所说的线程程序执行过程中的一个线程实体．JVM允许一个应用并发执行多个线程．<code>Hotspot JVM中的Java线程与原生操作系统线程有直接的映射关系</code>．当线程本地存储，缓冲区分配，同步对象，栈，程序计数器等准备好以后，就会创建一个操作系统图原生线程，并把他们分配到任何可以的CPU上．当原生线程初始化完毕，就会调用Java线程的run()方法．当线程结束时，会释放原生线程和Java线程的所有资源</p>
 </blockquote>
-<h3 id="Hotspot-JVM后台运行的系统线程主要有下面几个"><a href="#Hotspot-JVM后台运行的系统线程主要有下面几个" class="headerlink" title="Hotspot JVM后台运行的系统线程主要有下面几个"></a>Hotspot JVM后台运行的系统线程主要有下面几个</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/20200519184914.png" srcset="/img/loading.gif" alt="avatar"> </p>
-<h3 id="JVM-内存区域"><a href="#JVM-内存区域" class="headerlink" title="JVM 内存区域"></a>JVM 内存区域</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/20200519185041.png" srcset="/img/loading.gif" alt="avatar"> </p>
+<h3 id="Hotspot-JVM后台运行的系统线程主要有下面几个"><a href="#Hotspot-JVM后台运行的系统线程主要有下面几个" class="headerlink" title="Hotspot JVM后台运行的系统线程主要有下面几个"></a>Hotspot JVM后台运行的系统线程主要有下面几个</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/20200519184914.png" srcset="/img/loading.gif" lazyload alt="avatar"> </p>
+<h3 id="JVM-内存区域"><a href="#JVM-内存区域" class="headerlink" title="JVM 内存区域"></a>JVM 内存区域</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/20200519185041.png" srcset="/img/loading.gif" lazyload alt="avatar"> </p>
 <blockquote>
 <p>jvm内存区域主要分为线程私有区域［程序计数器，虚拟机栈，本地方法区］，线程共享区域［java堆，方法区］，直接内存．</p>
 </blockquote>
@@ -341,7 +343,7 @@
 <h4 id="线程共享区域随虚拟机的启动-关闭而创建-销毁"><a href="#线程共享区域随虚拟机的启动-关闭而创建-销毁" class="headerlink" title="线程共享区域随虚拟机的启动/关闭而创建/销毁"></a>线程共享区域随虚拟机的启动/关闭而创建/销毁</h4><blockquote>
 <p>直接内存并不是JVM运行时数据区的一部分,但也会被频繁的使用:在JDK1.4引入的NIO提供了基于Channel与Buffer的IO方式．他可以使用Native函数库直接分配堆外内存，然后使用DirectByteBuffer对象作为这个内存的引用进行操作，这样避免了在Java堆和Native中来回复制数据，因此在一场场景中可以显著提高性能．</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200519213321.png" srcset="/img/loading.gif" alt="avatar"> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200519213321.png" srcset="/img/loading.gif" lazyload alt="avatar"> </p>
 <h1 id="程序计数器-线程私有"><a href="#程序计数器-线程私有" class="headerlink" title="程序计数器(线程私有)"></a>程序计数器(线程私有)</h1><blockquote>
 <p>一块较小的内存空间，<code>是当前线程所执行的字节码的行号指示器</code>，每条线程都要有一个独立的程序计数器，这类内存也称为<code>线程私有</code>的内存．</p>
 </blockquote>
@@ -357,7 +359,7 @@
 <blockquote>
 <p>栈帧( Frame)是用来存储数据和部分过程结果的数据结构,同时也被用来处理动态链接(Dynamic Linking)、 方法返回值和异常分派( Dispatch Exception)。栈帧随着方法调用而创建,随着方法结束而销毁——无论方法是正常完成还是异常完成(抛出了在方法内未被捕获的异常)都算作方法结束。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200519213321.png" srcset="/img/loading.gif" alt="avatar"> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200519213321.png" srcset="/img/loading.gif" lazyload alt="avatar"> </p>
 <h1 id="本地方法区-线程私有"><a href="#本地方法区-线程私有" class="headerlink" title="本地方法区(线程私有)"></a>本地方法区(线程私有)</h1><blockquote>
 <p>本地方法区和 Java Stack 作用类似, 区别是虚拟机栈为执行 Java 方法服务, 而本地方法栈则为<br> Native 方法服务, 如果一个 VM 实现使用 C-linkage 模型来支持 Native 调用, 那么该栈将会是一个<br> C 栈,但 HotSpot VM 直接就把本地方法栈和虚拟机栈合二为一。</p>
 </blockquote>
@@ -374,7 +376,7 @@
 <h1 id="JVM运行时内存"><a href="#JVM运行时内存" class="headerlink" title="JVM运行时内存"></a>JVM运行时内存</h1><blockquote>
 <p>Java堆GC的角度还可以细分为:新生代(Eden区，From Survivor区和To Survivor区)和老年代</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/Jvm_runtime.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/Jvm_runtime.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h2 id="新生代"><a href="#新生代" class="headerlink" title="新生代"></a>新生代</h2><blockquote>
 <p>是用来存放新生对象的，一般占用堆的1/3空间.由于频繁创建对象，所以新生代会频繁触发MinorGC进行垃圾回收.新生代又分为Eden区、SurvivorFrom、SurvivorTo三个区。</p>
 </blockquote>
@@ -420,7 +422,7 @@
 <h1 id="Java8与元数据"><a href="#Java8与元数据" class="headerlink" title="Java8与元数据"></a>Java8与元数据</h1><blockquote>
 <p>在Java8中，永久代已经被移除，被一个称为“元数据”（元空间）的区域所取代。元空间的本质和永久代类似，元空间与永久代之间的最大区别在于：元空间并不在虚拟机中，而是使用本地内存。因此默认情况下元空间的大小仅仅受本地内存限制。类的元数据放入native memory字符串池和类的静态变量放入Java堆中，这样可以加载多少类的元数据就不会由MaxPermSize控制，而是由系统实际可用空间来控制。</p>
 </blockquote>
-<h1 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/jvmrubback.png" srcset="/img/loading.gif" alt="avatar"></p>
+<h1 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/jvmrubback.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h2 id="如何确定垃圾"><a href="#如何确定垃圾" class="headerlink" title="如何确定垃圾"></a>如何确定垃圾</h2><ul>
 <li><p>引用计数法</p>
 <blockquote>
@@ -438,7 +440,7 @@
 </blockquote>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/mark_sweep.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/mark_sweep.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>缺点：<code>内存碎片化严重，后续可能发生大对象不能找到可利用空间的问题</code></p>
 <ul>
 <li>复制算法(copying)<blockquote>
@@ -446,7 +448,7 @@
 </blockquote>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/copy.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/copy.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>缺点：<code>内存被压缩到了原本的一半。且存活对象对象增多的话，Copying算法的效率会大大降低</code></p>
 <ul>
 <li>标记整理算法(Mark-Compact)<blockquote>
@@ -454,7 +456,7 @@
 </blockquote>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/Mark-Compact.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/Mark-Compact.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <ul>
 <li>分代收集算法<blockquote>
 <p>分代收集法是目前大部分 JVM 所采用的方法,其核心思想是根据对象存活的不同生命周期将内存划分为不同的域,一般情况下将 GC 堆划分为老生代(Tenured/Old Generation)和新生代(YoungGeneration)。老生代的特点是每次垃圾回收时只有少量对象需要被回收,新生代的特点是每次垃圾回收时都有大量垃圾需要被回收,因此可以根据不同区域选择不同的算法。</p>
@@ -463,7 +465,7 @@
 </ul>
 <p>新生代与复制算法</p>
 <blockquote>
-<p>目前大部分 JVM 的 GC 对于新生代都采取 Copying 算法,因为新生代中每次垃圾回收都要<br> 回收大部分对象,即要复制的操作比较少,但通常并不是按照 1:1 来划分新生代。一般将新生代<br> 划分为一块较大的 Eden 空间和两个较小的 Survivor 空间(From Space, To Space),每次使用<br> Eden 空间和其中的一块 Survivor 空间,当进行回收时,将该两块空间中还存活的对象复制到另<br> 一块 Survivor 空间中。<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/young-mark-copy.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>目前大部分 JVM 的 GC 对于新生代都采取 Copying 算法,因为新生代中每次垃圾回收都要<br> 回收大部分对象,即要复制的操作比较少,但通常并不是按照 1:1 来划分新生代。一般将新生代<br> 划分为一块较大的 Eden 空间和两个较小的 Survivor 空间(From Space, To Space),每次使用<br> Eden 空间和其中的一块 Survivor 空间,当进行回收时,将该两块空间中还存活的对象复制到另<br> 一块 Survivor 空间中。<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/young-mark-copy.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 </blockquote>
 <p>老年代与标记复制算法</p>
 <blockquote>
@@ -493,7 +495,7 @@
 <h1 id="在新生代-复制算法"><a href="#在新生代-复制算法" class="headerlink" title="在新生代-复制算法"></a>在新生代-复制算法</h1><p>每次垃圾收集都能发现大批对象已死, 只有少量存活. 因此选用复制算法, 只需要付出少量<br>存活对象的复制成本就可以完成收集.</p>
 <h1 id="在老年代-标记整理算法"><a href="#在老年代-标记整理算法" class="headerlink" title="在老年代-标记整理算法"></a>在老年代-标记整理算法</h1><p>因为对象存活率高、没有额外空间对它进行分配担保, 就必须采用“标记—清理”或“标<br>记—整理”算法来进行回收, 不必进行内存复制, 且直接腾出空闲内存.<br>分区算法则将整个堆空间划分为连续的不同小区间, 每个小区间独立使用, 独立回收. 这样做的<br>好处是可以控制一次回收多少个小区间 , 根据目标停顿时间, 每次合理地回收若干个小区间(而不是<br>整个堆), 从而减少一次 GC 所产生的停顿。</p>
 <h1 id="GC-垃圾收集器"><a href="#GC-垃圾收集器" class="headerlink" title="GC 垃圾收集器"></a>GC 垃圾收集器</h1><p>Java 堆内存被划分为新生代和年老代两部分,新生代主要使用复制和标记-清除垃圾回收 算法 ;<br>年老代主要使用标记-整理垃圾回收算法,因此 java 虚拟中针对新生代和年老代分别提供了多种不<br>同的垃圾收集器,JDK1.6 中 Sun HotSpot 虚拟机的垃圾收集器如下:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/JDK16SunHotspot.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/JDK16SunHotspot.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <ul>
 <li><p>Serial 垃圾收集器(单线程、复制算法)</p>
 <blockquote>
@@ -518,17 +520,17 @@
 </ul>
 <p>1.在JDK1.5之前版本中与新生代的Parallel　Scavenge收集器搭配使用。</p>
 <p>2.作为年老代中使用CMS收集器的后备垃圾收集方案：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200527092744.png" srcset="/img/loading.gif" alt="avatar"></p>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">新生代 Parallel Scavenge 收集器与 ParNew 收集器工作原理类似,都是多线程的收集器,都使<br>用的是复制算法,在垃圾收集过程中都需要暂停所有的工作线程。新生代 Parallel<br>Scavenge/ParNew 与年老代 Serial Old 搭配垃圾收集过程图:<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200527092744.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">新生代 Parallel Scavenge 收集器与 ParNew 收集器工作原理类似,都是多线程的收集器,都使<br>用的是复制算法,在垃圾收集过程中都需要暂停所有的工作线程。新生代 Parallel<br>Scavenge/ParNew 与年老代 Serial Old 搭配垃圾收集过程图:<br></code></pre></div></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200527092908.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200527092908.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <ul>
 <li>Parallel Old收集器(多线程标记整理算法)<blockquote>
 <p>Parallel Old收集器是Parallel Scavenge的年老代版本，使用多线程的标记-整理算法，在JDK1.才开始提供。<br>在JDK1.6之前，新生代使用ParallelScavenge收集器只能搭配年老代的Serial Old收集器只能保证新生代的吞吐量优先，无法保证整体的吞吐量，Parallel Old正是为了在老代同样提供吞吐量优先的垃圾收集的搭配策略。<br>新生代Parallel Scavenge和老年代Parallel Old收集器搭配运行过程图：</p>
 </blockquote>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200527095030.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200527095030.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <ul>
 <li>CMS收集器(多线程标记清除算法)<blockquote>
 <p>Concurrent mark sweep(CMS)收集器是一种年老代垃圾收集器，其最主要目标是获取最短垃圾回收停顿时间，和其他年老代使用标记-整理算法不同，它使用多线程的标记-清除算法。最短的垃圾收集停顿时间可以为交互比较高的程序提高用户体验。</p>
@@ -553,7 +555,7 @@
 <p>清除 GC Roots 不可达对象,和用户线程一起工作,不需要暂停工作线程。由于耗时最长的并发标记和并发清除过程中,垃圾收集线程可以和用户现在一起并发工作,所以总体上来看CMS 收集器的内存回收和用户线程是一起并发地执行。</p>
 </blockquote>
 <p>CMS收集器工作过程</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200527100033.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200527100033.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <ul>
 <li>G1收集器<blockquote>
 <p>Garbage first 垃圾收集器是目前垃圾收集器理论发展的最前沿成果,相比与 CMS 收集器,G1 收<br>集器两个最突出的改进是:</p>
@@ -561,16 +563,18 @@
 </li>
 </ul>
 <ol>
-<li>基于标记-整理算法,不产生内存碎片。</li>
-<li>可以非常精确控制停顿时间,在不牺牲吞吐量前提下,实现低停顿垃圾回收。<blockquote>
+<li><p>基于标记-整理算法,不产生内存碎片。</p>
+</li>
+<li><p>可以非常精确控制停顿时间,在不牺牲吞吐量前提下,实现低停顿垃圾回收。</p>
+<blockquote>
 <p>G1 收集器避免全区域垃圾收集,它把堆内存划分为大小固定的几个独立区域,并且跟踪这些区域<br>的垃圾收集进度,同时在后台维护一个优先级列表,每次根据所允许的收集时间,优先回收垃圾<br>最多的区域。区域划分和优先级区域回收机制,确保 G1 收集器可以在有限时间获得最高的垃圾收<br>集效率。</p>
 </blockquote>
-</li>
-</ol>
 <h1 id="Jvm类加载机制"><a href="#Jvm类加载机制" class="headerlink" title="Jvm类加载机制"></a>Jvm类加载机制</h1><blockquote>
 <p>JVM类加载机制分为:<code>加载、验证、准备、解析、初始化</code></p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200528223950.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200528223950.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
+</li>
+</ol>
 <ul>
 <li><p>加载</p>
 <blockquote>
@@ -631,20 +635,20 @@
 </blockquote>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/application_classloader.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/application_classloader.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h2 id="双亲委派"><a href="#双亲委派" class="headerlink" title="双亲委派"></a>双亲委派</h2><blockquote>
 <p>当一个类收到类加载请求，他首先不会尝试自己去加载这个类，而是把这个请求委派给父类去完成，每一层次类加载器都是如此，因此所有的加载请求都应该传送到启动类加载其中，只有当父类加载器反馈自己无法完成这个请求的时候(在它的加载路径下没有找到所需的Class)，子类加载器才会尝试自己去加载。</p>
 </blockquote>
 <blockquote>
 <p>采用双亲委派的好处是比如加载位于<code>rt.jar</code>包中的类<code>java.lang.Object</code>，不管是哪个加载器加载这个类，最终都是委托给顶层的启动类加载器进行加载，这样就保证了使用不同的类加载器最终得到的都是同一个Object对象。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200529101019.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200529101019.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h3 id="OSGI-动态模型系统"><a href="#OSGI-动态模型系统" class="headerlink" title="OSGI(动态模型系统)"></a>OSGI(动态模型系统)</h3><blockquote>
 <p>OSGI(Open Service Gateway Initiative)，是面向Java的动态模型系统，是Java动态模块化系统的一系列规范。</p>
 </blockquote>
 <h1 id="动态改变构造"><a href="#动态改变构造" class="headerlink" title="动态改变构造"></a>动态改变构造</h1><p>OSGi 服务平台提供在多种网络设备上无需重启的动态改变构造的功能。为了最小化耦合度和促使<br>这些耦合度可管理,OSGi 技术提供一种面向服务的架构,它能使这些组件动态地发现对方。</p>
 <h1 id="模块化编程与热插拔"><a href="#模块化编程与热插拔" class="headerlink" title="模块化编程与热插拔"></a>模块化编程与热插拔</h1><p>OSGi 旨在为实现 Java 程序的模块化编程提供基础条件,基于 OSGi 的程序很可能可以实现模块级的热插拔功能,当程序升级更新时,可以只停用、重新安装然后启动程序的其中一部分,这对企业级程序开发来说是非常具有诱惑力的特性。OSGi 描绘了一个很美好的模块化开发目标,而且定义了实现这个目标的所需要服务与架构,同时也有成熟的框架进行实现支持。但并非所有的应用都适合采用 OSGi 作为基础架构,它在提供强大功能同时,也引入了额外的复杂度,因为它不遵守了类加载的双亲委托模型。<br><br/></p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
@@ -668,10 +672,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -698,11 +706,13 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
+    Fluid.utils.loadComments('#comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -748,9 +758,9 @@
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-md">
+  <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
-      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
     </div>
   </div>
 
@@ -815,7 +825,7 @@
           >
             
               <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
             
             <span>桂公网安备2020009931号</span>
           </a>
@@ -828,17 +838,15 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
@@ -847,7 +855,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -855,7 +862,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -902,11 +909,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -976,7 +984,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

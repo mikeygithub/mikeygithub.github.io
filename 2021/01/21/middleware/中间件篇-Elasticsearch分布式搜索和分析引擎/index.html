@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
+  
   <title>中间件篇-Elasticsearch分布式搜索和分析引擎 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -59,11 +60,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -184,7 +185,8 @@
           
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-briefcase"></i>
                 其他
               </a>
@@ -212,13 +214,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -227,7 +229,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -300,11 +302,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -343,42 +345,42 @@
 <p>实现方法很简单，为每个分片创建冗余的副本，处理查询时可以把这些副本当做最初的主分片（primary shard）使用。</p>
 <p>如果主分片所在的主机宕机了，ElasticSearch会自动从该分片的副本中选出一个当做新的主分片，不会中断索引和搜索服务，并且可以在任意时间节点添加或删除副本，可随时调整副本的数量。</p>
 <h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/downloads/elasticsearch">下载软件</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -L -O https:&#x2F;&#x2F;artifacts.elastic.co&#x2F;downloads&#x2F;elasticsearch&#x2F;elasticsearch-7.10.2-linux-x86_64.tar.gz<br>tar -xzvf elasticsearch-7.10.2-linux-x86_64.tar.gz<br>cd elasticsearch-7.10.2<br>.&#x2F;bin&#x2F;elasticsearch<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.10.2-linux-x86_64.tar.gz<br>tar -xzvf elasticsearch-7.10.2-linux-x86_64.tar.gz<br>cd elasticsearch-7.10.2<br>./bin/elasticsearch<br></code></pre></div></td></tr></table></figure>
 
 <p>华为云加速<code>wget https://mirrors.huaweicloud.com/elasticsearch/7.9.3/elasticsearch-7.9.3-linux-x86_64.tar.gz</code></p>
 <p class="note note-danger">
 无法使用root启动
 </p>
 
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">can not run elasticsearch as root<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">can not run elasticsearch as root<br></code></pre></div></td></tr></table></figure>
 
 <p>1、创建用户：elasticsearch</p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">adduser elasticsearch<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">adduser elasticsearch<br></code></pre></div></td></tr></table></figure>
 <p>2、创建用户密码，需要输入两次</p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">passwd elasticsearch<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">passwd elasticsearch<br></code></pre></div></td></tr></table></figure>
 <p>3、将对应的文件夹权限赋给该用户</p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">chown -R elasticsearch elasticsearch-6.0.0<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">chown -R elasticsearch elasticsearch-6.0.0<br></code></pre></div></td></tr></table></figure>
 <p>4、切换至elasticsearch用户</p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">su elasticsearch<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">su elasticsearch<br></code></pre></div></td></tr></table></figure>
 <p>5、进入启动目录启动 /usr/local/elasticsearch-6.0.0/bin  使用后台启动方式：./elasticsearch -d</p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">.&#x2F;elasticsearch -d<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">./elasticsearch -d<br></code></pre></div></td></tr></table></figure>
 <p>6、启动后测试</p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl ip:9200<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl ip:9200<br></code></pre></div></td></tr></table></figure>
 <p>如果返回一个json数据说明启动成功</p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">&#123;<br>  &quot;name&quot; : &quot;mikey&quot;,<br>  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,<br>  &quot;cluster_uuid&quot; : &quot;02UVRTOaS7mSdfs2oRc43A&quot;,<br>  &quot;version&quot; : &#123;<br>    &quot;number&quot; : &quot;7.9.3&quot;,<br>    &quot;build_flavor&quot; : &quot;default&quot;,<br>    &quot;build_type&quot; : &quot;tar&quot;,<br>    &quot;build_hash&quot; : &quot;c4138e51121ef06a6404866cddc601906fe5c868&quot;,<br>    &quot;build_date&quot; : &quot;2020-10-16T10:36:16.141335Z&quot;,<br>    &quot;build_snapshot&quot; : false,<br>    &quot;lucene_version&quot; : &quot;8.6.2&quot;,<br>    &quot;minimum_wire_compatibility_version&quot; : &quot;6.8.0&quot;,<br>    &quot;minimum_index_compatibility_version&quot; : &quot;6.0.0-beta1&quot;<br>  &#125;,<br>  &quot;tagline&quot; : &quot;You Know, for Search&quot;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">&#123;<br>  &quot;name&quot; : &quot;mikey&quot;,<br>  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,<br>  &quot;cluster_uuid&quot; : &quot;02UVRTOaS7mSdfs2oRc43A&quot;,<br>  &quot;version&quot; : &#123;<br>    &quot;number&quot; : &quot;7.9.3&quot;,<br>    &quot;build_flavor&quot; : &quot;default&quot;,<br>    &quot;build_type&quot; : &quot;tar&quot;,<br>    &quot;build_hash&quot; : &quot;c4138e51121ef06a6404866cddc601906fe5c868&quot;,<br>    &quot;build_date&quot; : &quot;2020-10-16T10:36:16.141335Z&quot;,<br>    &quot;build_snapshot&quot; : false,<br>    &quot;lucene_version&quot; : &quot;8.6.2&quot;,<br>    &quot;minimum_wire_compatibility_version&quot; : &quot;6.8.0&quot;,<br>    &quot;minimum_index_compatibility_version&quot; : &quot;6.0.0-beta1&quot;<br>  &#125;,<br>  &quot;tagline&quot; : &quot;You Know, for Search&quot;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <h1 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h1><blockquote>
 <p>Kibana是一个开源分析和可视化平台，旨在与Elasticsearch合作。您可以使用Kibana来搜索、查看和交互存储在Elasticsearch索引中的数据。您可以轻松地执行高级数据分析，并在各种图表、表格和地图中可视化数据。</p>
 </blockquote>
 <p>下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -L -O https:&#x2F;&#x2F;artifacts.elastic.co&#x2F;downloads&#x2F;kibana&#x2F;kibana-7.10.2-linux-x86_64.tar.gz<br>tar xzvf kibana-7.10.2-linux-x86_64.tar.gz<br>cd kibana-7.10.2-linux-x86_64&#x2F;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -L -O https://artifacts.elastic.co/downloads/kibana/kibana-7.10.2-linux-x86_64.tar.gz<br>tar xzvf kibana-7.10.2-linux-x86_64.tar.gz<br>cd kibana-7.10.2-linux-x86_64/<br></code></pre></div></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage"># 修改配置文件<br>vim config&#x2F;kibana.yml<br># 添加任何ip都可以访问<br>server.host: &quot;0.0.0.0&quot;<br># 默认语言改为中文<br>i18n.locale: &quot;zh-CN&quot;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage"># 修改配置文件<br>vim config/kibana.yml<br># 添加任何ip都可以访问<br>server.host: &quot;0.0.0.0&quot;<br># 默认语言改为中文<br>i18n.locale: &quot;zh-CN&quot;<br></code></pre></div></td></tr></table></figure>
 <p>启动</p>
 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">.<span class="hljs-regexp">/bin/</span>kibana<br></code></pre></div></td></tr></table></figure>
 
 <p>打开<code>http://localhost:5601/</code>，进入控制台即可对数据进行操作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210318215614354.png" srcset="/img/loading.gif" alt="image-20210318215614354"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210318215614354.png" srcset="/img/loading.gif" lazyload alt="image-20210318215614354"></p>
 <p>华为云加速<code>wget https://mirrors.huaweicloud.com/kibana/7.9.3/kibana-7.9.3-linux-x86_64.tar.gz</code></p>
 <h1 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.x/getting-started-index.html">QUICK START</a></p>
 <h2 id="请求格式"><a href="#请求格式" class="headerlink" title="请求格式"></a>请求格式</h2><p><code>curl -X&lt;VERB&gt; &#39;&lt;PROTOCOL&gt;://&lt;HOST&gt;:&lt;PORT&gt;/&lt;PATH&gt;?&lt;QUERY_STRING&gt;&#39; -d &#39;&lt;BODY&gt;&#39;</code></p>
@@ -414,14 +416,14 @@
 <td>一个 JSON 格式的请求体 (如果请求需要的话)</td>
 </tr>
 </tbody></table>
-<h2 id="创建Mapping"><a href="#创建Mapping" class="headerlink" title="创建Mapping"></a>创建Mapping</h2><figure class="highlight"><figcaption><span>request</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">PUT /post<br>&#123;<br>  &quot;settings&quot;:&#123;<br>    &quot;number_of_shards&quot;:3,<br>    &quot;number_of_replicas&quot;:2<br>  &#125;,<br>  &quot;mappings&quot;:&#123;<br>    &quot;properties&quot;:&#123;<br>      &quot;id&quot;:&#123;&quot;type&quot;:&quot;long&quot;&#125;,<br>      &quot;title&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;,<br>      &quot;context&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;<br>    &#125;<br>  &#125;<br> <br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="创建Mapping"><a href="#创建Mapping" class="headerlink" title="创建Mapping"></a>创建Mapping</h2><figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">PUT /post<br>&#123;<br>  &quot;settings&quot;:&#123;<br>    &quot;number_of_shards&quot;:3,<br>    &quot;number_of_replicas&quot;:2<br>  &#125;,<br>  &quot;mappings&quot;:&#123;<br>    &quot;properties&quot;:&#123;<br>      &quot;id&quot;:&#123;&quot;type&quot;:&quot;long&quot;&#125;,<br>      &quot;title&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;,<br>      &quot;context&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;<br>    &#125;<br>  &#125;<br> <br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><p>格式</p>
 <figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">PUT /&#123;index&#125;/&#123;type&#125;/&#123;id&#125;<br>&#123;<br>  <span class="hljs-string">&quot;field&quot;</span>: <span class="hljs-string">&quot;value&quot;</span>,<br>  ...<br>&#125;<br></code></pre></div></td></tr></table></figure>
 <p>实例</p>
 <figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">PUT <span class="hljs-regexp">/post/</span>_doc/<span class="hljs-number">1</span><br>&#123;<br>  <span class="hljs-string">&quot;id&quot;</span>:<span class="hljs-string">&quot;1&quot;</span>,<br>  <span class="hljs-string">&quot;title&quot;</span>:<span class="hljs-string">&quot;麦奇的文章&quot;</span>,<br>  <span class="hljs-string">&quot;conttext&quot;</span>:<span class="hljs-string">&quot;按价格卡机是发动机案件发到付件阿里山的房间爱看书的积分&quot;</span><br>&#125;<br><span class="hljs-string">&#x27;</span><br></code></pre></div></td></tr></table></figure>
 
-<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><figure class="highlight"><figcaption><span>request</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">GET /post/_doc/1<br></code></pre></div></td></tr></table></figure>
+<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">GET /post/_doc/1<br></code></pre></div></td></tr></table></figure>
 <p>返回数据</p>
 <figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;_index&quot;</span> : <span class="hljs-string">&quot;post&quot;</span>,<br>  <span class="hljs-attr">&quot;_type&quot;</span> : <span class="hljs-string">&quot;_doc&quot;</span>,<br>  <span class="hljs-attr">&quot;_id&quot;</span> : <span class="hljs-string">&quot;1&quot;</span>,<br>  <span class="hljs-attr">&quot;_version&quot;</span> : <span class="hljs-number">1</span>,<br>  <span class="hljs-attr">&quot;_seq_no&quot;</span> : <span class="hljs-number">0</span>,<br>  <span class="hljs-attr">&quot;_primary_term&quot;</span> : <span class="hljs-number">1</span>,<br>  <span class="hljs-attr">&quot;found&quot;</span> : <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">&quot;_source&quot;</span> : &#123;<br>    <span class="hljs-attr">&quot;id&quot;</span> : <span class="hljs-string">&quot;1&quot;</span>,<br>    <span class="hljs-attr">&quot;title&quot;</span> : <span class="hljs-string">&quot;麦奇的文章&quot;</span>,<br>    <span class="hljs-attr">&quot;conttext&quot;</span> : <span class="hljs-string">&quot;按价格卡机是发动机案件发到付件阿里山的房间爱看书的积分&quot;</span><br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
@@ -429,42 +431,42 @@
 <figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js">curl -X GET <span class="hljs-string">&quot;localhost:9200/customer/doc/1?pretty&amp;pretty&quot;</span> -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> -d<span class="hljs-string">&#x27;</span><br></code></pre></div></td></tr></table></figure>
 
 <h2 id="过滤查询"><a href="#过滤查询" class="headerlink" title="过滤查询"></a>过滤查询</h2><p> 查询last_name=Leo的记录</p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">GET /employee/_search?q=last_name:Leo<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">GET /employee/_search?q=last_name:Leo<br></code></pre></div></td></tr></table></figure>
 
 <p>表达式查询</p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match&quot; : &#123;<br>            &quot;last_name&quot; : &quot;Smith&quot;<br>        &#125;<br>    &#125;<br>&#125;<br>&#x27;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match&quot; : &#123;<br>            &quot;last_name&quot; : &quot;Smith&quot;<br>        &#125;<br>    &#125;<br>&#125;<br>&#x27;<br></code></pre></div></td></tr></table></figure>
 
 <p>过滤查询</p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;bool&quot;: &#123;<br>            &quot;must&quot;: &#123;<br>                &quot;match&quot; : &#123;<br>                    &quot;last_name&quot; : &quot;smith&quot; <br>                &#125;<br>            &#125;,<br>            &quot;filter&quot;: &#123;<br>                &quot;range&quot; : &#123;<br>                    &quot;age&quot; : &#123; &quot;gt&quot; : 30 &#125; <br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br>&#x27;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;bool&quot;: &#123;<br>            &quot;must&quot;: &#123;<br>                &quot;match&quot; : &#123;<br>                    &quot;last_name&quot; : &quot;smith&quot; <br>                &#125;<br>            &#125;,<br>            &quot;filter&quot;: &#123;<br>                &quot;range&quot; : &#123;<br>                    &quot;age&quot; : &#123; &quot;gt&quot; : 30 &#125; <br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br>&#x27;<br></code></pre></div></td></tr></table></figure>
 
 <p>全文搜索</p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match&quot; : &#123;<br>            &quot;about&quot; : &quot;rock climbing&quot;<br>        &#125;<br>    &#125;<br>&#125;<br>&#x27;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match&quot; : &#123;<br>            &quot;about&quot; : &quot;rock climbing&quot;<br>        &#125;<br>    &#125;<br>&#125;<br>&#x27;<br></code></pre></div></td></tr></table></figure>
 
 <p>精确查询</p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match_phrase&quot; : &#123;<br>            &quot;about&quot; : &quot;rock climbing&quot;<br>        &#125;<br>    &#125;<br>&#125;&#x27;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match_phrase&quot; : &#123;<br>            &quot;about&quot; : &quot;rock climbing&quot;<br>        &#125;<br>    &#125;<br>&#125;&#x27;<br></code></pre></div></td></tr></table></figure>
 
 <p>高亮搜索</p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match_phrase&quot; : &#123;<br>            &quot;about&quot; : &quot;rock climbing&quot;<br>        &#125;<br>    &#125;,<br>    &quot;highlight&quot;: &#123;<br>        &quot;fields&quot; : &#123;<br>            &quot;about&quot; : &#123;&#125;<br>        &#125;<br>    &#125;<br>&#125;&#x27;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match_phrase&quot; : &#123;<br>            &quot;about&quot; : &quot;rock climbing&quot;<br>        &#125;<br>    &#125;,<br>    &quot;highlight&quot;: &#123;<br>        &quot;fields&quot; : &#123;<br>            &quot;about&quot; : &#123;&#125;<br>        &#125;<br>    &#125;<br>&#125;&#x27;<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="统计查询"><a href="#统计查询" class="headerlink" title="统计查询"></a>统计查询</h2><figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>  &quot;aggs&quot;: &#123;<br>    &quot;all_interests&quot;: &#123;<br>      &quot;terms&quot;: &#123; &quot;field&quot;: &quot;interests&quot; &#125;<br>    &#125;<br>  &#125;<br>&#125;&#x27;<br></code></pre></div></td></tr></table></figure>
+<h2 id="统计查询"><a href="#统计查询" class="headerlink" title="统计查询"></a>统计查询</h2><figure class="highlight http"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>  &quot;aggs&quot;: &#123;<br>    &quot;all_interests&quot;: &#123;<br>      &quot;terms&quot;: &#123; &quot;field&quot;: &quot;interests&quot; &#125;<br>    &#125;<br>  &#125;<br>&#125;&#x27;<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h2><figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">PUT /blog/_doc/123<br>&#123;<br>  &quot;title&quot;: &quot;My first blog entry update&quot;,<br>  &quot;text&quot;:  &quot;I am starting to get the hang of this...&quot;,<br>  &quot;date&quot;:  &quot;2014/01/02&quot;,<br>  &quot;remark&quot;: &quot;hhhhhhhhhhhhhhhhhh&quot;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-
-<p>CURL</p>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -X POST &quot;localhost:9200/customer/doc/1/_update?pretty&amp;pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>  &quot;doc&quot;: &#123; &quot;name&quot;: &quot;Jane Doe&quot; &#125;<br>&#125;<br>&#x27;<br></code></pre></div></td></tr></table></figure>
-
-<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">DELETE /blog/_doc/123<br></code></pre></div></td></tr></table></figure>
+<h2 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h2><figure class="highlight http"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">PUT /blog/_doc/123<br>&#123;<br>  &quot;title&quot;: &quot;My first blog entry update&quot;,<br>  &quot;text&quot;:  &quot;I am starting to get the hang of this...&quot;,<br>  &quot;date&quot;:  &quot;2014/01/02&quot;,<br>  &quot;remark&quot;: &quot;hhhhhhhhhhhhhhhhhh&quot;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>CURL</p>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -X DELETE &quot;localhost:9200/customer/doc/2?pretty&amp;pretty&quot;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -X POST &quot;localhost:9200/customer/doc/1/_update?pretty&amp;pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>  &quot;doc&quot;: &#123; &quot;name&quot;: &quot;Jane Doe&quot; &#125;<br>&#125;<br>&#x27;<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><figure class="highlight http"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">DELETE /blog/_doc/123<br></code></pre></div></td></tr></table></figure>
+
+<p>CURL</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -X DELETE &quot;localhost:9200/customer/doc/2?pretty&amp;pretty&quot;<br></code></pre></div></td></tr></table></figure>
 
 <p>批处理</p>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -X POST &quot;localhost:9200/customer/doc/_bulk?pretty&amp;pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;&quot;index&quot;:&#123;&quot;_id&quot;:&quot;1&quot;&#125;&#125;<br>&#123;&quot;name&quot;: &quot;John Doe&quot; &#125;<br>&#123;&quot;index&quot;:&#123;&quot;_id&quot;:&quot;2&quot;&#125;&#125;<br>&#123;&quot;name&quot;: &quot;Jane Doe&quot; &#125;<br>&#x27;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -X POST &quot;localhost:9200/customer/doc/_bulk?pretty&amp;pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;&quot;index&quot;:&#123;&quot;_id&quot;:&quot;1&quot;&#125;&#125;<br>&#123;&quot;name&quot;: &quot;John Doe&quot; &#125;<br>&#123;&quot;index&quot;:&#123;&quot;_id&quot;:&quot;2&quot;&#125;&#125;<br>&#123;&quot;name&quot;: &quot;Jane Doe&quot; &#125;<br>&#x27;<br></code></pre></div></td></tr></table></figure>
 
 <h1 id="代码实操"><a href="#代码实操" class="headerlink" title="代码实操"></a>代码实操</h1><p>依赖添加</p>
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.elasticsearch.client<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>elasticsearch-rest-client<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>7.11.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
 <p>在使用前先创建其对应的<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.x/mapping.html">Mapping</a></p>
-<figure class="highlight"><figcaption><span>request</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">PUT /consumer<br>&#123;<br>  &quot;settings&quot;:&#123;<br>    &quot;number_of_shards&quot;:3,<br>    &quot;number_of_replicas&quot;:2<br>  &#125;,<br>  &quot;mappings&quot;:&#123;<br>    &quot;properties&quot;:&#123;<br>      &quot;first_name&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;,<br>      &quot;last_name&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;,<br>      &quot;age&quot;:&#123;&quot;type&quot;:&quot;long&quot;&#125;,<br>      &quot;about&quot;:&#123;&quot;type&quot;: &quot;text&quot;&#125;,<br>      &quot;interests&quot;:&#123;&quot;type&quot;: &quot;text&quot;&#125;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight http"><figcaption><span>request</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs http">PUT /consumer<br>&#123;<br>  &quot;settings&quot;:&#123;<br>    &quot;number_of_shards&quot;:3,<br>    &quot;number_of_replicas&quot;:2<br>  &#125;,<br>  &quot;mappings&quot;:&#123;<br>    &quot;properties&quot;:&#123;<br>      &quot;first_name&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;,<br>      &quot;last_name&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;,<br>      &quot;age&quot;:&#123;&quot;type&quot;:&quot;long&quot;&#125;,<br>      &quot;about&quot;:&#123;&quot;type&quot;: &quot;text&quot;&#125;,<br>      &quot;interests&quot;:&#123;&quot;type&quot;: &quot;text&quot;&#125;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>初始化</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">RestClient restClient = RestClient.builder(<span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">9200</span>, <span class="hljs-string">&quot;http&quot;</span>)).build();<br></code></pre></div></td></tr></table></figure>
@@ -488,7 +490,7 @@
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/index.html">官方文档</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d48c32423789">Elasticsearch简介与实战</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/inverted-index.html">倒排索引</a><br/></p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
@@ -512,10 +514,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -542,11 +548,13 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
+    Fluid.utils.loadComments('#comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -592,9 +600,9 @@
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-md">
+  <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
-      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
     </div>
   </div>
 
@@ -659,7 +667,7 @@
           >
             
               <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
             
             <span>桂公网安备2020009931号</span>
           </a>
@@ -672,17 +680,15 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
@@ -691,7 +697,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -699,7 +704,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -746,11 +751,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -820,7 +826,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

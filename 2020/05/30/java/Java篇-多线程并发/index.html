@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
+  
   <title>Java篇-多线程并发 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -59,11 +60,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -184,7 +185,8 @@
           
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-briefcase"></i>
                 其他
               </a>
@@ -212,13 +214,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -227,7 +229,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -300,11 +302,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -317,7 +319,7 @@
               </p>
             
             <div class="markdown-body">
-              <h1 id="Java-并发知识库"><a href="#Java-并发知识库" class="headerlink" title="Java 并发知识库"></a>Java 并发知识库</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/thread.png" srcset="/img/loading.gif" alt="avatar"></p>
+              <h1 id="Java-并发知识库"><a href="#Java-并发知识库" class="headerlink" title="Java 并发知识库"></a>Java 并发知识库</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/thread.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="Java线程实现-创建方式"><a href="#Java线程实现-创建方式" class="headerlink" title="Java线程实现/创建方式"></a>Java线程实现/创建方式</h1><h2 id="继承Thread"><a href="#继承Thread" class="headerlink" title="继承Thread"></a>继承Thread</h2><blockquote>
 <p>Thread类本质上是实现了<code>Runnable</code>接口的一个实例，代表一个线程的实例。启动线程的唯一方法就是通过<code>Thread</code>类的<code>start</code>实例方法。start方法是一个native方法，它将启动一个新的线程，并执行run()方法。</p>
 </blockquote>
@@ -340,15 +342,15 @@
 <h3 id="4种线程池"><a href="#4种线程池" class="headerlink" title="4种线程池"></a>4种线程池</h3><blockquote>
 <p>Java 里面线程池的顶级接口是 Executor,但是严格意义上讲 Executor 并不是一个线程池,而只是一个执行线程的工具。真正的线程池接口是 ExecutorService。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/threadpool.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/threadpool.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <ul>
-<li>NewCachedThreadPool<blockquote>
+<li><p>NewCachedThreadPool</p>
+<blockquote>
 <p>创建一个可根据需要创建新线程的线程池，但是在以前构造的线程可用时将重用他们。对于执行很多短期异步任务的程序而言，这些线程池通常可提高程序性能<br><code>调用 execute 将重用以前构造 的线程(如果线程可用)。如果现有线程没有可用的,则创建一个新线程并添加到池中。终止并 从缓存中移除那些已有 60 秒钟未被使用的线程。</code>因此,长时间保持空闲的线程池不会使用任何资源。</p>
 </blockquote>
 </li>
-</ul>
-<ul>
-<li>newFixedThreadPool</li>
+<li><p>newFixedThreadPool</p>
+</li>
 </ul>
 <blockquote>
 <p>创建一个可重用固定线程数的线程池,以共享的无界队列方式来运行这些线程。在任意点,在大<br> 多数 nThreads 线程会处于处理任务的活动状态。如果在所有线程处于活动状态时提交附加任务,<br> 则在有可用线程之前,附加任务将在队列中等待。如果在关闭前的执行期间由于失败而导致任何<br> 线程终止,那么一个新线程将代替它执行后续的任务(如果需要)。在某个线程被显式地关闭之<br> 前,池中的线程将一直存在。</p>
@@ -360,8 +362,6 @@
 <p>创建一个线程池,它可安排在给定延迟后运行命令或者定期地执行。</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadPool</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>        ScheduledExecutorService scheduledThreadPool= Executors.newScheduledThreadPool(<span class="hljs-number">3</span>);<br>        scheduledThreadPool.schedule(<span class="hljs-keyword">new</span> Runnable()&#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>                System.out.println(<span class="hljs-string">&quot;延迟三秒&quot;</span>);<br>            &#125;<br>        &#125;, <span class="hljs-number">3</span>, TimeUnit.SECONDS);<br>        scheduledThreadPool.scheduleAtFixedRate(<span class="hljs-keyword">new</span> Runnable()&#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>                System.out.println(<span class="hljs-string">&quot;延迟 1 秒后每三秒执行一次&quot;</span>);<br>            &#125;<br>        &#125;,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,TimeUnit.SECONDS);<br><br>    &#125;<br><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
-
-
 <ul>
 <li>newSingleThreadExecutor</li>
 </ul>
@@ -385,7 +385,8 @@
 <li>程放入锁池(lock pool)中。</li>
 </ul>
 <p>其他阻塞 (sleep/join)</p>
-<div class="hljs code-wrapper"><pre><code> - 运行(running)的线程执行 Thread.sleep(long ms)或 t.join()方法,或者发出了 I/O 请求时,JVM 会把该线程置为阻塞状态。当 sleep()状态超时、join()等待线程终止或者超时、或者 I/O处理完毕时,线程重新转入可运行(runnable)状态。</code></pre></div>
+<div class="hljs code-wrapper"><pre><code> - 运行(running)的线程执行 Thread.sleep(long ms)或 t.join()方法,或者发出了 I/O 请求时,JVM 会把该线程置为阻塞状态。当 sleep()状态超时、join()等待线程终止或者超时、或者 I/O处理完毕时,线程重新转入可运行(runnable)状态。
+</code></pre></div>
 </li>
 <li><p>线程死亡(DEAD)<br>线程会以下面三种方式结束,结束后就是死亡状态。</p>
 <p><em>正常结束</em>  </p>
@@ -400,10 +401,8 @@
 <blockquote>
 <p>3.直接调用该线程的 stop()方法来结束该线程—该方法通常容易导致死锁,不推荐使用。</p>
 </blockquote>
-</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/QQ%E5%9B%BE%E7%89%8720200610172044.png" srcset="/img/loading.gif" alt="avatar"></p>
-<h2 id="终止线程-4-种方式"><a href="#终止线程-4-种方式" class="headerlink" title="终止线程 4 种方式"></a>终止线程 4 种方式</h2><ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/QQ%E5%9B%BE%E7%89%8720200610172044.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
+<h2 id="终止线程-4-种方式"><a href="#终止线程-4-种方式" class="headerlink" title="终止线程 4 种方式"></a>终止线程 4 种方式</h2></li>
 <li><p>正常运行结束</p>
 <blockquote>
 <p>程序运行结束,线程自动结束。</p>
@@ -415,11 +414,10 @@
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadSafe</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">boolean</span> exit = <span class="hljs-keyword">false</span>;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">while</span> (!exit)&#123;<br>            <span class="hljs-comment">//do something</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-</li>
-</ul>
 <p>定义了一个退出标志 exit,当 exit 为 true 时,while 循环退出,exit 的默认值为 false.在定义 exit<br>时,使用了一个 Java 关键字 volatile,这个关键字的目的是使 exit 同步,也就是说在同一时刻只<br>能由一个线程来修改 exit 的值。</p>
-<ul>
-<li>Interrupt 方法结束线程<blockquote>
+</li>
+<li><p>Interrupt 方法结束线程</p>
+<blockquote>
 <p>使用 interrupt()方法来中断线程有两种情况:</p>
 </blockquote>
 </li>
@@ -427,16 +425,14 @@
 <p> 1.线程处于阻塞状态:如使用了 sleep,同步锁的 wait,socket 中的 receiver,accept 等方法时,<br> 会使线程处于阻塞状态。当调用线程的 interrupt()方法时,会抛出 InterruptException 异常。<br> 阻塞中的那个方法抛出这个异常,通过代码捕获该异常,然后 break 跳出循环状态,从而让<br> 我们有机会结束这个线程的执行。通常很多人认为只要调用 interrupt 方法线程就会结束,实<br> 际上是错的, 一定要先捕获 InterruptedException 异常之后通过 break 来跳出循环,才能正<br> 常结束 run 方法。</p>
 <p> 2.线程未处于阻塞状态:使用 isInterrupted()判断线程的中断标志来退出循环。当使用<br> interrupt()方法时,中断标志就会置 true,和使用自定义的标志来控制循环是一样的道理。</p>
  <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadSafe</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">while</span> (!isInterrupted())&#123; <span class="hljs-comment">//非阻塞过程中通过判断中断标志来退出</span><br>            <span class="hljs-keyword">try</span>&#123;<br>                Thread.sleep(<span class="hljs-number">5</span>*<span class="hljs-number">1000</span>);<span class="hljs-comment">//阻塞过程捕获中断异常来退出</span><br>            &#125;<span class="hljs-keyword">catch</span>(InterruptedException e)&#123;<br>                e.printStackTrace();<br>                <span class="hljs-keyword">break</span>;<span class="hljs-comment">//捕获到异常之后,执行 break 跳出循环</span><br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-
-
 <ul>
 <li><p>stop 方法终止线程(线程不安全)</p>
 <blockquote>
 <p>程序中可以直接使用 thread.stop()来强行终止线程,但是 stop 方法是很危险的,就象突然关<br>闭计算机电源,而不是按正常程序关机一样,可能会产生不可预料的结果,不安全主要是:<br>thread.stop()调用之后,创建子线程的线程就会抛出 ThreadDeatherror 的错误,并且会释放子<br>线程所持有的所有锁。一般任何进行加锁的代码块,都是为了保护数据的一致性,如果在<code>调用 thread.stop()后导致了该线程所持有的所有锁的突然释放(不可控制)</code>,那么被保护数据就有可能呈<br>现不一致性,其他线程在使用这些被破坏的数据时,有可能导致一些很奇怪的应用程序错误。因<br>此,并不推荐使用 stop 方法来终止线程。</p>
 </blockquote>
-</li>
+<h2 id="sleep-与-wait-区别"><a href="#sleep-与-wait-区别" class="headerlink" title="sleep 与 wait 区别"></a>sleep 与 wait 区别</h2></li>
 </ul>
-<h2 id="sleep-与-wait-区别"><a href="#sleep-与-wait-区别" class="headerlink" title="sleep 与 wait 区别"></a>sleep 与 wait 区别</h2><p> 1.对于 sleep()方法,我们首先要知道该方法是属于 Thread 类中的。而 wait()方法,则是属于Object 类中的。<br> 2.sleep()方法导致了程序暂停执行指定的时间,让出 cpu 该其他线程,但是他的监控状态依然保持者,当指定的时间到了又会自动恢复运行状态。<br> 3. 在调用 sleep()方法的过程中,线程不会释放对象锁。<br> 4. 而当调用 wait()方法的时候,线程会放弃对象锁,进入等待此对象的等待锁定池,只有针对此对象调用 notify()方法后本线程才进入对象锁定池准备获取对象锁进入运行状态。  </p>
+<p> 1.对于 sleep()方法,我们首先要知道该方法是属于 Thread 类中的。而 wait()方法,则是属于Object 类中的。<br> 2.sleep()方法导致了程序暂停执行指定的时间,让出 cpu 该其他线程,但是他的监控状态依然保持者,当指定的时间到了又会自动恢复运行状态。<br> 3. 在调用 sleep()方法的过程中,线程不会释放对象锁。<br> 4. 而当调用 wait()方法的时候,线程会放弃对象锁,进入等待此对象的等待锁定池,只有针对此对象调用 notify()方法后本线程才进入对象锁定池准备获取对象锁进入运行状态。  </p>
 <h2 id="start-与-run-区别"><a href="#start-与-run-区别" class="headerlink" title="start 与 run 区别"></a>start 与 run 区别</h2><p> 1.start()方法来启动线程,真正实现了多线程运行。这时无需等待 run 方法体代码执行完毕,可以直接继续执行下面的代码。<br> 2.通过调用 Thread 类的 start()方法来启动一个线程, 这时此线程是处于就绪状态, 并没有运行。<br> 3.方法 run()称为线程体,它包含了要执行的这个线程的内容,线程就进入了运行状态,开始运行 run 函数当中的代码。 Run 方法运行结束, 此线程终止。然后 CPU 再调度其它线程。</p>
 <h2 id="JAVA-后台线程"><a href="#JAVA-后台线程" class="headerlink" title="JAVA 后台线程"></a>JAVA 后台线程</h2><p>1.定义:守护线程–也称“服务线程”,他是后台线程,它有一个特性,即为用户线程 提供 公共服务,在没有用户线程可服务时会自动离开。  </p>
 <p>2.优先级:守护线程的优先级比较低,用于为系统中的其它对象和线程提供服务。  </p>
@@ -474,7 +470,7 @@
 <li>!Owner:当前释放锁的线程。</li>
 </ol>
 <p><strong>Synchronized 实现</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/synchronized.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/synchronized.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <blockquote>
 <p>1.JVM 每次从队列的尾部取出一个数据用于锁竞争候选者(OnDeck),但是并发情况下,<br>ContentionList 会被大量的并发线程进行 CAS 访问,为了降低对尾部元素的竞争,JVM 会将<br>一部分线程移动到 EntryList 中作为候选竞争线程。</p>
 </blockquote>
@@ -511,7 +507,7 @@
 <h1 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h1><blockquote>
 <p>ReentantLock 继承接口 Lock 并实现了接口中定义的方法,他是一种可重入锁,除了能完成 synchronized 所能完成的所有工作外,还提供了诸如可响应中断锁、可轮询锁请求、定时锁等避免多线程死锁的方法。</p>
 </blockquote>
-<h3 id="Lock-接口的主要方法"><a href="#Lock-接口的主要方法" class="headerlink" title="Lock 接口的主要方法"></a>Lock 接口的主要方法</h3> <figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">void lock(): 执行此方法时, 如果锁处于空闲状态, 当前线程将获取到锁. 相反, 如果锁已经被其他线程持有, 将禁用当前线程, 直到当前线程获取到锁.<br>boolean tryLock():如果锁可用, 则获取锁, 并立即返回 true, 否则返回 false. 该方法和lock()的区别在于, tryLock()只是&quot;试图&quot;获取锁, 如果锁不可用, 不会导致当前线程被禁用,当前线程仍然继续往下执行代码. 而 lock()方法则是一定要获取到锁, 如果锁不可用, 就一直等待, 在未获得锁之前,当前线程并不继续向下执行.<br>void unlock():执行此方法时, 当前线程将释放持有的锁. 锁只能由持有者释放, 如果线程并不持有锁, 却执行该方法, 可能导致异常的发生.<br>Condition newCondition():条件对象,获取等待通知组件。该组件和当前的锁绑定,当前线程只有获取了锁,才能调用该组件的 await()方法,而调用后,当前线程将缩放锁。<br>getHoldCount() :查询当前线程保持此锁的次数,也就是执行此线程执行 lock 方法的次数。<br>getQueueLength():返回正等待获取此锁的线程估计数,比如启动 10 个线程,1 个线程获得锁,此时返回的是 9<br>getWaitQueueLength:(Condition condition)返回等待与此锁相关的给定条件的线程估计数。比如 10 个线程,用同一个 condition 对象,并且此时这 10 个线程都执行了condition 对象的 await 方法,那么此时执行此方法返回 10<br>hasWaiters(Condition condition) : 查 询 是 否 有 线 程 等 待 与 此 锁 有 关 的 给 定 条 件(condition),对于指定 contidion 对象,有多少线程执行了 condition.await 方法<br>hasQueuedThread(Thread thread):查询给定线程是否等待获取此锁<br>hasQueuedThreads():是否有线程等待此锁<br>isFair():该锁是否公平锁<br>isHeldByCurrentThread(): 当前线程是否保持锁锁定,线程的执行 lock 方法的前后分别是 false 和 true<br>isLock():此锁是否有任意线程占用<br>lockInterruptibly():如果当前线程未被中断,获取锁<br>tryLock():尝试获得锁,仅在调用时锁未被线程占用,获得锁<br>tryLock(long timeout TimeUnit unit):如果锁在给定等待时间内没有被另一个线程保持,则获取该锁。<br></code></pre></div></td></tr></table></figure>
+<h3 id="Lock-接口的主要方法"><a href="#Lock-接口的主要方法" class="headerlink" title="Lock 接口的主要方法"></a>Lock 接口的主要方法</h3> <figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">void lock(): 执行此方法时, 如果锁处于空闲状态, 当前线程将获取到锁. 相反, 如果锁已经被其他线程持有, 将禁用当前线程, 直到当前线程获取到锁.<br>boolean tryLock():如果锁可用, 则获取锁, 并立即返回 true, 否则返回 false. 该方法和lock()的区别在于, tryLock()只是&quot;试图&quot;获取锁, 如果锁不可用, 不会导致当前线程被禁用,当前线程仍然继续往下执行代码. 而 lock()方法则是一定要获取到锁, 如果锁不可用, 就一直等待, 在未获得锁之前,当前线程并不继续向下执行.<br>void unlock():执行此方法时, 当前线程将释放持有的锁. 锁只能由持有者释放, 如果线程并不持有锁, 却执行该方法, 可能导致异常的发生.<br>Condition newCondition():条件对象,获取等待通知组件。该组件和当前的锁绑定,当前线程只有获取了锁,才能调用该组件的 await()方法,而调用后,当前线程将缩放锁。<br>getHoldCount() :查询当前线程保持此锁的次数,也就是执行此线程执行 lock 方法的次数。<br>getQueueLength():返回正等待获取此锁的线程估计数,比如启动 10 个线程,1 个线程获得锁,此时返回的是 9<br>getWaitQueueLength:(Condition condition)返回等待与此锁相关的给定条件的线程估计数。比如 10 个线程,用同一个 condition 对象,并且此时这 10 个线程都执行了condition 对象的 await 方法,那么此时执行此方法返回 10<br>hasWaiters(Condition condition) : 查 询 是 否 有 线 程 等 待 与 此 锁 有 关 的 给 定 条 件(condition),对于指定 contidion 对象,有多少线程执行了 condition.await 方法<br>hasQueuedThread(Thread thread):查询给定线程是否等待获取此锁<br>hasQueuedThreads():是否有线程等待此锁<br>isFair():该锁是否公平锁<br>isHeldByCurrentThread(): 当前线程是否保持锁锁定,线程的执行 lock 方法的前后分别是 false 和 true<br>isLock():此锁是否有任意线程占用<br>lockInterruptibly():如果当前线程未被中断,获取锁<br>tryLock():尝试获得锁,仅在调用时锁未被线程占用,获得锁<br>tryLock(long timeout TimeUnit unit):如果锁在给定等待时间内没有被另一个线程保持,则获取该锁。<br></code></pre></div></td></tr></table></figure>
 
 <h1 id="非公平锁"><a href="#非公平锁" class="headerlink" title="非公平锁"></a>非公平锁</h1><p>JVM 按随机、就近原则分配锁的机制则称为不公平锁,ReentrantLock 在构造函数中提供了是否公平锁的初始化方式,默认为非公平锁。非公平锁实际执行的效率要远远超出公平锁,除非程序有特殊需要,否则最常用非公平锁的分配机制。</p>
 <h1 id="公平锁"><a href="#公平锁" class="headerlink" title="公平锁"></a>公平锁</h1><p>公平锁指的是锁的分配机制是公平的,通常先对锁提出获取请求的线程会先被分配到锁,ReentrantLock 在构造函数中提供了是否公平锁的初始化方式来定义公平锁。</p>
@@ -586,7 +582,7 @@
 <ul>
 <li>线程基本方法<br>线程相关的基本方法有 <code>wait,notify,notifyAll,sleep,join,yield</code> 等。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/threadmethods.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/threadmethods.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h2 id="线程等待-wait"><a href="#线程等待-wait" class="headerlink" title="线程等待(wait)"></a>线程等待(wait)</h2><blockquote>
 <p>调用该方法的线程进入 WAITING 状态,只有等待另外线程的通知或被中断才会返回,需要注意的<br>是调用 wait()方法后,会释放对象的锁。因此,wait 方法一般用在同步方法或同步代码块中。<br>4.1.10.2.</p>
 </blockquote>
@@ -597,9 +593,11 @@
 <p>2.若调用 sleep()而使线程处于 TIMED-WATING 状态,这时调用 interrupt()方法,会抛出InterruptedException,从而使线程提前结束 TIMED-WATING 状态。</p>
 <p>3.许多声明抛出 InterruptedException 的方法(如 Thread.sleep(long mills 方法)),抛出异常前,都会清除中断标识位,所以抛出异常后,调用 isInterrupted()方法将会返回 false。</p>
 <p>4.中断状态是线程固有的一个标识位,可以通过此标识位安全的终止线程。比如,你想终止一个线程 thread 的时候,可以调用 thread.interrupt()方法,在线程的 run 方法内部可以根据 thread.isInterrupted()的值来优雅的终止线程。</p>
-<h3 id="Join-等待其他线程终止"><a href="#Join-等待其他线程终止" class="headerlink" title="Join 等待其他线程终止"></a>Join 等待其他线程终止</h3><div class="hljs code-wrapper"><pre><code>join() 方法,等待其他线程终止,在当前线程中调用一个线程的 join() 方法,则当前线程转为阻塞状态,回到另一个线程结束,当前线程再由阻塞状态变为就绪状态,等待 cpu 的宠幸。</code></pre></div>
-<h5 id="为什么要用-join-方法"><a href="#为什么要用-join-方法" class="headerlink" title="为什么要用 join()方法?"></a>为什么要用 join()方法?</h5><div class="hljs code-wrapper"><pre><code>很多情况下,主线程生成并启动了子线程,需要用到子线程返回的结果,也就是需要主线程需要在子线程结束后再结束,这时候就要用到 join() 方法。</code></pre></div>
-<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">System.out.println(Thread.currentThread().getName() + &quot;线程运行开始!&quot;);<br>Thread6 thread1 = new Thread6();<br>thread1.setName(&quot;线程 B&quot;);<br>thread1.join();<br>System.out.println(&quot;这时 thread1 执行完毕之后才能执行主线程&quot;);<br></code></pre></div></td></tr></table></figure>
+<h3 id="Join-等待其他线程终止"><a href="#Join-等待其他线程终止" class="headerlink" title="Join 等待其他线程终止"></a>Join 等待其他线程终止</h3><div class="hljs code-wrapper"><pre><code>join() 方法,等待其他线程终止,在当前线程中调用一个线程的 join() 方法,则当前线程转为阻塞状态,回到另一个线程结束,当前线程再由阻塞状态变为就绪状态,等待 cpu 的宠幸。
+</code></pre></div>
+<h5 id="为什么要用-join-方法"><a href="#为什么要用-join-方法" class="headerlink" title="为什么要用 join()方法?"></a>为什么要用 join()方法?</h5><div class="hljs code-wrapper"><pre><code>很多情况下,主线程生成并启动了子线程,需要用到子线程返回的结果,也就是需要主线程需要在子线程结束后再结束,这时候就要用到 join() 方法。
+</code></pre></div>
+<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">System.out.println(Thread.currentThread().getName() + &quot;线程运行开始!&quot;);<br>Thread6 thread1 = new Thread6();<br>thread1.setName(&quot;线程 B&quot;);<br>thread1.join();<br>System.out.println(&quot;这时 thread1 执行完毕之后才能执行主线程&quot;);<br></code></pre></div></td></tr></table></figure>
 
 <h3 id="线程唤醒-notify"><a href="#线程唤醒-notify" class="headerlink" title="线程唤醒(notify)"></a>线程唤醒(notify)</h3><p>Object 类中的 notify() 方法,唤醒在此对象监视器上等待的单个线程,如果所有线程都在此对象上等待,则会选择唤醒其中一个线程,选择是任意的,并在对实现做出决定时发生,线程通过调<br>用其中一个 wait() 方法,在对象的监视器上等待,直到当前的线程放弃此对象上的锁定,才能继续执行被唤醒的线程,被唤醒的线程将以常规方式与在该对象上主动同步的其他所有线程进行竞争。类似的方法还有 notifyAll() ,唤醒再次监视器上等待的所有线程。</p>
 <h4 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法:"></a>其他方法:</h4><ol>
@@ -620,7 +618,7 @@
 <h2 id="线程上下文切换"><a href="#线程上下文切换" class="headerlink" title="线程上下文切换"></a>线程上下文切换</h2><blockquote>
 <p>巧妙地利用了时间片轮转的方式, CPU 给每个任务都服务一定的时间,然后把当前任务的状态保存下来,在加载下一任务的状态后,继续服务下一任务,任务的状态保存及再加载, 这段过程就叫做上下文切换。时间片轮转的方式使多个任务在同一颗 CPU 上执行变成了可能。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/threadcontentchange.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/threadcontentchange.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h4 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h4><p>(有时候也称做任务)是指一个程序运行的实例。在 Linux 系统中,线程就是能并行运行并且与他们的父进程(创建他们的进程)共享同一地址空间(一段内存区域)和其他资源的轻量级的进程。</p>
 <h3 id="上下文"><a href="#上下文" class="headerlink" title="上下文"></a>上下文</h3><p>是指某一时间点 CPU 寄存器和程序计数器的内容。</p>
 <h3 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h3><p>是 CPU 内部的数量较少但是速度很快的内存(与之对应的是 CPU 外部相对较慢的 RAM 主内存)。寄存器通过对常用值(通常是运算的中间值)的快速访问来提高计算机程序运行的速度。</p>
@@ -650,7 +648,7 @@
 <li>任务接口:每个任务必须实现的接口,用于工作线程调度其运行</li>
 <li>任务队列:用于存放待处理的任务,提供一种缓冲机制<br>Java 中 的 线 程 池 是 通 过 Executor 框 架 实 现 的 , 该 框 架 中 用 到 了 Executor , Executors ,ExecutorService,ThreadPoolExecutor ,Callable 和 Future、FutureTask 这几个类。</li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/threadpoolcon.png" srcset="/img/loading.gif" alt="avatar"><br>ThreadPoolExecutor 的构造方法如下:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/threadpoolcon.png" srcset="/img/loading.gif" lazyload alt="avatar"><br>ThreadPoolExecutor 的构造方法如下:</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ThreadPoolExecutor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> corePoolSize,<span class="hljs-keyword">int</span> maximumPoolSize, <span class="hljs-keyword">long</span> keepAliveTime,TimeUnit unit, BlockingQueue&lt;Runnable&gt; workQueue)</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,Executors.defaultThreadFactory(), defaultHandler);<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <ol>
@@ -682,13 +680,13 @@
 <blockquote>
 <p>d)如果队列满了,而且正在运行的线程数量大于或等于 maximumPoolSize,那么线程池会抛出异常 RejectExecutionException。<br>3. 当一个线程完成任务时,它会从队列中取下一个任务来执行。<br>4. 当一个线程无事可做,超过一定的时间(keepAliveTime)时,线程池会判断,如果当前运行的线程数大于 corePoolSize,那么这个线程就被停掉。所以线程池的所有任务完成后,它最终会收缩到 corePoolSize 的大小。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/threadwork.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/threadwork.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h3 id="JAVA-阻塞队列原理"><a href="#JAVA-阻塞队列原理" class="headerlink" title="JAVA 阻塞队列原理"></a>JAVA 阻塞队列原理</h3><blockquote>
 <p>阻塞队列,关键字是阻塞,先理解阻塞的含义,在阻塞队列中,线程阻塞有这样的两种情况:</p>
 </blockquote>
-<p>1.当队列中没有数据的情况下,消费者端的所有线程都会被自动阻塞(挂起),直到有数据放入队列。<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/thread-1.png" srcset="/img/loading.gif" alt="avatar"></p>
-<p>2.当队列中填满数据的情况下,生产者端的所有线程都会被自动阻塞(挂起),直到队列中有空的位置,线程被自动唤醒。<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/thread-2.png" srcset="/img/loading.gif" alt="avatar"></p>
-<h3 id="阻塞队列的主要方法"><a href="#阻塞队列的主要方法" class="headerlink" title="阻塞队列的主要方法"></a>阻塞队列的主要方法</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/blockqueue.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p>1.当队列中没有数据的情况下,消费者端的所有线程都会被自动阻塞(挂起),直到有数据放入队列。<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/thread-1.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
+<p>2.当队列中填满数据的情况下,生产者端的所有线程都会被自动阻塞(挂起),直到队列中有空的位置,线程被自动唤醒。<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/thread-2.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
+<h3 id="阻塞队列的主要方法"><a href="#阻塞队列的主要方法" class="headerlink" title="阻塞队列的主要方法"></a>阻塞队列的主要方法</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/blockqueue.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <ul>
 <li>抛出异常:抛出一个异常;  </li>
 <li>特殊值:返回一个特殊值(null 或 false,视情况而定)</li>
@@ -705,7 +703,7 @@
 <p>2:poll(long timeout, TimeUnit unit):从 BlockingQueue 取出一个队首的对象,如果在指定时间内,队列一旦有数据可取,则立即返回队列中的数据。否则直到时间超时还没有数据可取,返回失败。</p>
 <p>3:take():取走 BlockingQueue 里排在首位的对象,若 BlockingQueue 为空,阻断进入等待状态直到 BlockingQueue 有新的数据被加入。</p>
 <p>4.drainTo():一次性从 BlockingQueue 获取所有可用的数据对象(还可以指定获取数据的个数),通过该方法,可以提升获取数据效率;不需要多次分批加锁或释放锁。</p>
-<h3 id="Java中的阻塞队列"><a href="#Java中的阻塞队列" class="headerlink" title="Java中的阻塞队列"></a>Java中的阻塞队列</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/blocking_queue.png" srcset="/img/loading.gif" alt="avatar"></p>
+<h3 id="Java中的阻塞队列"><a href="#Java中的阻塞队列" class="headerlink" title="Java中的阻塞队列"></a>Java中的阻塞队列</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/blocking_queue.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <ul>
 <li>ArrayBlockingQueue: 由数组结构组成的有界阻塞队列.(公平、非公平)<blockquote>
 <p>用数组实现的有界阻塞队列。此队列按照先进先出(FIFO)的原则对元素进行排序。默认情况下<br>不保证访问者公平的访问队列,所谓公平访问队列是指阻塞的所有生产者线程或消费者线程,当<br>队列可用时,可以按照阻塞的先后顺序访问队列,即先阻塞的生产者线程,可以先往队列里插入<br>元素,先阻塞的消费者线程,可以先从队列里获取元素。通常情况下为了保证公平性会降低吞吐<br>量。我们可以使用以下代码创建一个公平的阻塞队列:<code>ArrayBlockingQueue fairQueue = new ArrayBlockingQueue(1000,true);</code></p>
@@ -725,14 +723,15 @@
 </li>
 </ul>
 <ul>
-<li>DelayQueue: 使用优先级队列实现的无界阻塞队列.(缓存失效、定时任务 )<blockquote>
+<li><p>DelayQueue: 使用优先级队列实现的无界阻塞队列.(缓存失效、定时任务 )</p>
+<blockquote>
 <p>是一个支持延时获取元素的无界阻塞队列。队列使用 PriorityQueue 来实现。队列中的元素必须实<br>现 Delayed 接口,在创建元素时可以指定多久才能从队列中获取当前元素。只有在延迟期满时才<br>能从队列中提取元素。我们可以将 DelayQueue 运用在以下应用场景:</p>
 </blockquote>
-</li>
-</ul>
 <blockquote>
 <p>1.缓存系统的设计:可以用 DelayQueue 保存缓存元素的有效期,使用一个线程循环查询 DelayQueue,一旦能从 DelayQueue 中获取元素时,表示缓存有效期到了。<br>2.定时任务调度 : 使用 DelayQueue 保存当天将会执行的任务和执行时间,一旦从DelayQueue 中获取到任务就开始执行,从比如 TimerQueue 就是使用 DelayQueue 实现的。</p>
 </blockquote>
+</li>
+</ul>
 <ul>
 <li>SynchronousQueue: 不存储元素的阻塞队列.(不存储数据、可用于传递数据)<blockquote>
 <p>是一个不存储元素的阻塞队列。每一个 put 操作必须等待一个 take 操作,否则不能继续添加元素。<br>SynchronousQueue 可以看成是一个传球手,负责把生产者线程处理的数据直接传递给消费者线<br>程。队列本身并不存储任何元素,非常适合于传递性场景,比如在一个线程中使用的数据,传递给<br>另 外 一 个 线 程 使 用 , SynchronousQueue 的 吞 吐 量 高 于 LinkedBlockingQueue 和<br>ArrayBlockingQueue。</p>
@@ -785,7 +784,7 @@
 <p>Java 语言提供了一种稍弱的同步机制,即 volatile 变量,用来确保将变量的更新操作通知到其他线程。volatile 变量具备两种特性,volatile 变量不会被缓存在寄存器或者对其他处理器不可见的地方,因此在读取 volatile 类型的变量时总会返回最新写入的值。</p>
 </blockquote>
 <p><strong>变量可见性</strong><br>其一是保证该变量对所有线程可见,这里的可见性指的是当一个线程修改了变量的值,那么新的<br>值对于其他线程是可以立即获取的。<br><strong>禁止重排序</strong><br>volatile 禁止了指令重排。<br><code>比 sychronized 更轻量级的同步锁</code><br>在访问 volatile 变量时不会执行加锁操作,因此也就不会使执行线程阻塞,因此 volatile 变量是一<br>种比 sychronized 关键字更轻量级的同步机制。volatile 适合这种场景:一个变量被多个线程共<br>享,线程直接给这个变量赋值。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/volatile.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/volatile.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <blockquote>
 <p>当对非 volatile 变量进行读写的时候,每个线程先从内存拷贝变量到 CPU 缓存中。如果计算机有<br> 多个 CPU,每个线程可能在不同的 CPU 上被处理,这意味着每个线程可以拷贝到不同的 CPU<br> cache 中。而声明变量是 volatile 的,JVM 保证了每次读变量都从内存中读,跳过 CPU cache<br> 这一步。</p>
 </blockquote>
@@ -802,7 +801,7 @@
 
 
 <h3 id="ThreadLocal-作用-线程本地存储"><a href="#ThreadLocal-作用-线程本地存储" class="headerlink" title="ThreadLocal 作用( 线程本地存储 )"></a>ThreadLocal 作用( 线程本地存储 )</h3><p>ThreadLocal,很多地方叫做线程本地变量,也有些地方叫做线程本地存储,ThreadLocal 的作用<br>是提供线程内的局部变量,这种变量在线程的生命周期内起作用,减少同一个线程内多个函数或<br>者组件之间一些公共变量的传递的复杂度。<br>ThreadLocalMap (线程的一个属性)<br>1.每个线程中都有一个自己的 ThreadLocalMap 类对象,可以将线程自己的对象保持到其中,各管各的,线程可以正确的访问到自己的对象。<br>2.将 一 个共 用的 ThreadLocal 静 态实 例作 为 key, 将 不同 对象 的引 用保存 到 不同 线程 的ThreadLocalMap 中,然后在线程执行的各处通过这个静态 ThreadLocal 实例的 get()方法取得自己线程保存的那个对象,避免了将这个对象作为参数传递的麻烦。<br>3.ThreadLocalMap 其实就是线程里面的一个属性,它在 Thread 类中定义<code>ThreadLocal.ThreadLocalMap threadLocals = null;</code></p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/ThreadLocal.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/ThreadLocal.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p><strong>使用场景</strong><br>最常见的 ThreadLocal 使用场景为 用来解决 数据库连接、Session 管理等。</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> ThreadLocal threadSession = <span class="hljs-keyword">new</span> ThreadLocal();<br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Session <span class="hljs-title">getSession</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InfrastructureException </span>&#123;<br>       Session s = (Session) threadSession.get();<br>       <span class="hljs-keyword">try</span> &#123;<br>           <span class="hljs-keyword">if</span> (s == <span class="hljs-keyword">null</span>) &#123;<br>               s = getSessionFactory().openSession();<br>               threadSession.set(s);<br>           &#125;<br>       &#125; <span class="hljs-keyword">catch</span> (HibernateException ex) &#123;<br>           <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InfrastructureException(ex);<br>       &#125;<br>       <span class="hljs-keyword">return</span> s;<br>   &#125;<br></code></pre></div></td></tr></table></figure>
 
@@ -840,7 +839,7 @@
 <blockquote>
 <p>ConcurrentHashMap 是由 Segment 数组结构和 HashEntry 数组结构组成。Segment 是一种可<br>重入锁 ReentrantLock,在 ConcurrentHashMap 里扮演锁的角色,HashEntry 则用于存储键值<br>对数据。一个 ConcurrentHashMap 里包含一个 Segment 数组,Segment 的结构和 HashMap<br>类似,是一种数组和链表结构, 一个 Segment 里包含一个 HashEntry 数组,每个 HashEntry 是<br>一个链表结构的元素, 每个 Segment 守护一个 HashEntry 数组里的元素,当对 HashEntry 数组的<br>数据进行修改时,必须首先获得它对应的 Segment 锁。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/ConcurrentHashMap.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/ConcurrentHashMap.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h2 id="Java-中用到的线程调度"><a href="#Java-中用到的线程调度" class="headerlink" title="Java 中用到的线程调度"></a>Java 中用到的线程调度</h2><p>抢占式调度:  </p>
 <blockquote>
 <p>抢占式调度指的是每条线程执行的时间、线程的切换都由系统控制,系统控制指的是在系统某种<br>运行机制下,可能每条线程都分同样的执行时间片,也可能是某些线程执行的时间片较长,甚至<br>某些线程得不到执行的时间片。在这种机制下,一个线程的堵塞不会导致整个进程堵塞。</p>
@@ -849,7 +848,7 @@
 <blockquote>
 <p>协同式调度指某一线程执行完后主动通知系统切换到另一线程上执行,这种模式就像接力赛一样,<br>一个人跑完自己的路程就把接力棒交接给下一个人,下个人继续往下跑。线程的执行时间由线程<br>本身控制,线程切换可以预知,不存在多线程同步问题,但它有一个致命弱点:如果一个线程编<br>写有问题,运行到一半就一直堵塞,那么可能导致整个系统崩溃。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/threadway.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/threadway.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>JVM 的线程调度实现(抢占式调度)</p>
 <blockquote>
 <p>java 使用的线程调使用抢占式调度,Java 中线程会按优先级分配 CPU 时间片运行,且优先级越高<br>越优先执行,但优先级高并不代表能独自占用执行时间片,可能是优先级高得到越多的执行时间<br>片,反之,优先级低的分到的执行时间少但不会分配不到执行时间。</p>
@@ -863,7 +862,7 @@
 <p>1.非抢占式优先权算法<br>在这种方式下,系统一旦把处理机分配给就绪队列中优先权最高的进程后,该进程便一直执行下<br>去,直至完成;或因发生某事件使该进程放弃处理机时。这种调度算法主要用于批处理系统中;<br>也可用于某些对实时性要求不严的实时系统中。</p>
 <p>2.抢占式优先权调度算法<br>在这种方式下,系统同样是把处理机分配给优先权最高的进程,使之执行。但在其执行期间,只<br>要又出现了另一个其优先权更高的进程,进程调度程序就立即停止当前进程(原优先权最高的进程)<br>的执行,重新将处理机分配给新到的优先权最高的进程。显然,这种抢占式的优先权调度算法能<br>更好地满足紧迫作业的要求,故而常用于要求比较严格的实时系统中,以及对性能要求较高的批<br>处理和分时系统中。</p>
 <h3 id="高响应比优先调度算法"><a href="#高响应比优先调度算法" class="headerlink" title="高响应比优先调度算法"></a>高响应比优先调度算法</h3><p>在批处理系统中,短作业优先算法是一种比较好的算法,其主要的不足之处是长作业的运行<br>得不到保证。如果我们能为每个作业引入前面所述的动态优先权,并使作业的优先级随着等待时<br>间的增加而以速率 a 提高,则长作业在等待一定的时间后,必然有机会分配到处理机。该优先权的<br>变化规律可描述为:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hightresponse.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hightresponse.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>(1) 如果作业的等待时间相同,则要求服务的时间愈短,其优先权愈高,因而该算法有利于短作业。<br>(2) 当要求服务的时间相同时,作业的优先权决定于其等待时间,等待时间愈长,其优先权愈高,因而它实现的是先来先服务。<br>(3) 对于长作业,作业的优先级可以随等待时间的增加而提高,当其等待时间足够长时,其优先级便可升到很高,从而也可获得处理机。简言之,该算法既照顾了短作业,又考虑了作业到达的先后次序,不会使长作业长期得不到服务。因此,该算法实现了一种较好的折衷。当然,在利用该算法时,每要进行调度之前,都须先做响应比的计算,这会增加系统开销。</p>
 <h3 id="基于时间片的轮转调度算法"><a href="#基于时间片的轮转调度算法" class="headerlink" title="基于时间片的轮转调度算法"></a>基于时间片的轮转调度算法</h3><p>1.时间片轮转法<br>在早期的时间片轮转法中,系统将所有的就绪进程按先来先服务的原则排成一个队列,每次调度<br>时,把 CPU 分配给队首进程,并令其执行一个时间片。时间片的大小从几 ms 到几百 ms。当执行<br>的时间片用完时,由一个计时器发出时钟中断请求,调度程序便据此信号来停止该进程的执行,<br>并将它送往就绪队列的末尾;然后,再把处理机分配给就绪队列中新的队首进程,同时也让它执<br>行一个时间片。这样就可以保证就绪队列中的所有进程在一给定的时间内均能获得一时间片的处<br>理机执行时间。</p>
 <p>2.多级反馈队列调度算法</p>
@@ -879,10 +878,10 @@
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AtomicInteger</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Number</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">int</span> value;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> <span class="hljs-title">get</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> value;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getAndIncrement</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (;;) &#123; <span class="hljs-comment">//CAS 自旋,一直尝试,直达成功</span><br>            <span class="hljs-keyword">int</span> current = get();<br>            <span class="hljs-keyword">int</span> next = current + <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span> (compareAndSet(current, next))<br>                <span class="hljs-keyword">return</span> current;<br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">compareAndSet</span><span class="hljs-params">(<span class="hljs-keyword">int</span> expect, <span class="hljs-keyword">int</span> update)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> unsafe.compareAndSwapInt(<span class="hljs-keyword">this</span>, valueOffset, expect, update);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>getAndIncrement 采用了 CAS 操作,每次从内存中读取数据然后将此数据和+1 后的结果进行<br>CAS 操作,如果成功就返回结果,否则重试直到成功为止。而 compareAndSet 利用 JNI 来完成<br>CPU 指令的操作。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/CAS.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/CAS.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h3 id="ABA-问题"><a href="#ABA-问题" class="headerlink" title="ABA 问题"></a>ABA 问题</h3><p>CAS 会导致“ABA 问题”。CAS 算法实现一个重要前提需要取出内存中某时刻的数据,而在下时<br>刻比较并替换,那么在这个时间差类会导致数据的变化。<br>比如说一个线程 one 从内存位置 V 中取出 A,这时候另一个线程 two 也从内存中取出 A,并且<br>two 进行了一些操作变成了 B,然后 two 又将 V 位置的数据变成 A,这时候线程 one 进行 CAS 操<br>作发现内存中仍然是 A,然后 one 操作成功。尽管线程 one 的 CAS 操作成功,但是不代表这个过<br>程就是没有问题的。<br>部分乐观锁的实现是通过版本号(version)的方式来解决 ABA 问题,乐观锁每次在执行数据的修<br>改操作时,都会带上一个版本号,一旦版本号和数据的版本号一致就可以执行修改操作并对版本<br>号执行+1 操作,否则就执行失败。因为每次操作的版本号都会随之增加,所以不会出现 ABA 问<br>题,因为版本号只会增加不会减少。</p>
 <h3 id="什么是-AQS-抽象的队列同步器"><a href="#什么是-AQS-抽象的队列同步器" class="headerlink" title="什么是 AQS( 抽象的队列同步器 )"></a>什么是 AQS( 抽象的队列同步器 )</h3><p>AbstractQueuedSynchronizer 类如其名,抽象的队列式的同步器,AQS 定义了一套多线程访问<br>共享资源的同步器框架,许多同步类实现都依赖于它,如常用的<br><code>ReentrantLock/Semaphore/CountDownLatch</code>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/ABA.png" srcset="/img/loading.gif" alt="avatar"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/ABA.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>它维护了一个 volatile int state(代表共享资源)和一个 FIFO 线程等待队列(多线程争用资源被<br>阻塞时会进入此队列)。这里 volatile 是核心关键词,具体 volatile 的语义,在此不述。state 的<br>访问方式有三种:</p>
 <ul>
 <li>getState()</li>
@@ -905,7 +904,7 @@
 </ol>
 <h3 id="同步器的实现是-ABS-核心-state-资源状态计数"><a href="#同步器的实现是-ABS-核心-state-资源状态计数" class="headerlink" title="同步器的实现是 ABS 核心( state 资源状态计数)"></a>同步器的实现是 ABS 核心( state 资源状态计数)</h3><p>同步器的实现是 ABS 核心,以 ReentrantLock 为例,state 初始化为 0,表示未锁定状态。A 线程<br>lock()时,会调用 tryAcquire()独占该锁并将 state+1。此后,其他线程再 tryAcquire()时就会失<br>败,直到 A 线程 unlock()到 state=0(即释放锁)为止,其它线程才有机会获取该锁。当然,释放<br>锁之前,A 线程自己是可以重复获取此锁的(state 会累加),这就是可重入的概念。但要注意,<br>获取多少次就要释放多么次,这样才能保证 state 是能回到零态的。<br>以 CountDownLatch 以例,任务分为 N 个子线程去执行,state 也初始化为 N(注意 N 要与<br>线程个数一致)。这 N 个子线程是并行执行的,每个子线程执行完后 countDown()一次,state<br>会 CAS 减 1。等到所有子线程都执行完后(即 state=0),会 unpark()主调用线程,然后主调用线程<br>就会从 await()函数返回,继续后余动作。</p>
 <h3 id="ReentrantReadWriteLock-实现独占和共享两种方式"><a href="#ReentrantReadWriteLock-实现独占和共享两种方式" class="headerlink" title="ReentrantReadWriteLock 实现独占和共享两种方式"></a>ReentrantReadWriteLock 实现独占和共享两种方式</h3><p>一般来说,自定义同步器要么是独占方法,要么是共享方式,他们也只需实现 tryAcquire-tryRelease、tryAcquireShared-tryReleaseShared 中的一种即可。但 AQS 也支持自定义同步器同时实现独占和共享两种方式,如 ReentrantReadWriteLock。<br><br/></p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
@@ -929,10 +928,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -959,11 +962,13 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
+    Fluid.utils.loadComments('#comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -1009,9 +1014,9 @@
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-md">
+  <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
-      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
     </div>
   </div>
 
@@ -1076,7 +1081,7 @@
           >
             
               <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
             
             <span>桂公网安备2020009931号</span>
           </a>
@@ -1089,17 +1094,15 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
@@ -1108,7 +1111,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -1116,7 +1118,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -1163,11 +1165,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -1237,7 +1240,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

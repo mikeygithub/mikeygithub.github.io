@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
-  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
+  
   <title>中间件篇-AeroSpike随机存储数据库 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -59,11 +60,11 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -184,7 +185,8 @@
           
           
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-briefcase"></i>
                 其他
               </a>
@@ -212,13 +214,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -227,7 +229,7 @@
   </div>
 </nav>
 
-    <div class="banner intro-2" id="background" parallax=true
+    <div class="banner" id="banner" parallax=true
          style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -300,11 +302,11 @@
     
       
 
-<div class="container-fluid">
-  <div class="row">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
     <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
@@ -350,15 +352,19 @@
 
 <h1 id="AQL操作"><a href="#AQL操作" class="headerlink" title="AQL操作"></a>AQL操作</h1><p>COMMANDS<br>  DDL<br>      CREATE INDEX <index> ON <ns>[.<set>] (<bin>) NUMERIC|STRING|GEO2DSPHERE<br>      CREATE LIST/MAPKEYS/MAPVALUES INDEX <index> ON <ns>[.<set>] (<bin>) NUMERIC|STRING|GEO2DSPHERE<br>      DROP INDEX <ns>[.<set>] <index><br>      Examples:</p>
 <div class="hljs code-wrapper"><pre><code>      CREATE INDEX idx_foo ON test.demo (foo) NUMERIC
-      DROP INDEX test.demo idx_foo</code></pre></div>
+      DROP INDEX test.demo idx_foo
+  
+</code></pre></div>
 <p>  MANAGE UDFS<br>      REGISTER MODULE ‘<filepath>‘<br>      REMOVE MODULE <filename></p>
 <div class="hljs code-wrapper"><pre><code>      &lt;filepath&gt; is file path to the UDF module(in single quotes).
       &lt;filename&gt; is file name of the UDF module.
-
+  
   Examples:
-
+  
       REGISTER MODULE &#39;~/test.lua&#39; 
-      REMOVE MODULE test.lua</code></pre></div>
+      REMOVE MODULE test.lua
+  
+</code></pre></div>
 <p>  USER ADMINISTRATION<br>      CREATE USER <user> PASSWORD <password> ROLE[S] <role1>,<role2>…<br>          pre-defined roles: read|read-write|read-write-udf|sys-admin|user-admin<br>      DROP USER <user><br>      SET PASSWORD <password> [FOR <user>]<br>      GRANT ROLE[S] <role1>,<role2>… TO <user><br>      REVOKE ROLE[S] <role1>,<role2>… FROM <user><br>      CREATE ROLE <role> PRIVILEGE[S] &lt;priv1[.ns1[.set1]]&gt;,&lt;priv2[.ns2[.set2]]&gt;…<br>          priv: read|read-write|read-write-udf|sys-admin|user-admin|data-admin<br>          ns:   namespace.  Applies to all namespaces if not set.<br>          set:  set name.  Applie to all sets within namespace if not set.<br>                sys-admin, user-admin and data-admin can’t be qualified with namespace or set.<br>      DROP ROLE <role><br>      GRANT PRIVILEGE[S] &lt;priv1[.ns1[.set1]]&gt;,&lt;priv2[.ns2[.set2]]&gt;… TO <role><br>      REVOKE PRIVILEGE[S] &lt;priv1[.ns1[.set1]]&gt;,&lt;priv2[.ns2[.set2]]&gt;… FROM <role></p>
 <p>  DML<br>      INSERT INTO <ns>[.<set>] (PK, <bins>) VALUES (<key>, <values>)<br>      DELETE FROM <ns>[.<set>] WHERE PK = <key><br>      TRUNCATE <ns>[.<set>] [upto <LUT>] </p>
 <div class="hljs code-wrapper"><pre><code>      &lt;ns&gt; is the namespace for the record.
@@ -367,14 +373,14 @@
       &lt;bins&gt; is a comma-separated list of bin names.
       &lt;values&gt; is comma-separated list of bin values, which may include type cast expressions. Set to NULL (case insensitive &amp; w/o quotes) to delete the bin.
       &lt;LUT&gt; is last update time upto which set or namespace needs to be truncated. LUT is either nanosecond since Unix epoch like 1513687224599000000 or in date string in format like &quot;Dec 19 2017 12:40:00&quot;.
-
+  
     Type Cast Expression Formats:
-
+  
         CAST(&lt;Value&gt; AS &lt;TypeName&gt;)
         &lt;TypeName&gt;(&lt;Value&gt;)
-
+  
     Supported AQL Types:
-
+  
           Bin Value Type                    Equivalent Type Name(s)
        ===============================================================
         Integer                           DECIMAL, INT, NUMERIC
@@ -385,16 +391,18 @@
         GeoJSON                           GEOJSON
         String                            CHAR, STRING, TEXT, VARCHAR
        ===============================================================
-
+  
     [Note:  Type names and keywords are case insensitive.]
-
+  
   Examples:
-
+  
       INSERT INTO test.demo (PK, foo, bar) VALUES (&#39;key1&#39;, 123, &#39;abc&#39;)
       INSERT INTO test.demo (PK, foo, bar) VALUES (&#39;key1&#39;, CAST(&#39;123&#39; AS INT), JSON(&#39;&#123;&quot;a&quot;: 1.2, &quot;b&quot;: [1, 2, 3]&#125;&#39;))
       INSERT INTO test.demo (PK, foo, bar) VALUES (&#39;key1&#39;, LIST(&#39;[1, 2, 3]&#39;), MAP(&#39;&#123;&quot;a&quot;: 1, &quot;b&quot;: 2&#125;&#39;))
       INSERT INTO test.demo (PK, gj) VALUES (&#39;key1&#39;, GEOJSON(&#39;&#123;&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [123.4, -456.7]&#125;&#39;))
-      DELETE FROM test.demo WHERE PK = &#39;key1&#39;</code></pre></div>
+      DELETE FROM test.demo WHERE PK = &#39;key1&#39;
+  
+</code></pre></div>
 <p>  INVOKING UDFS<br>      EXECUTE <module>.<function>(<args>) ON <ns>[.<set>]<br>      EXECUTE <module>.<function>(<args>) ON <ns>[.<set>] WHERE PK = <key><br>      EXECUTE <module>.<function>(<args>) ON <ns>[.<set>] WHERE <bin> = <value><br>      EXECUTE <module>.<function>(<args>) ON <ns>[.<set>] WHERE <bin> BETWEEN <lower> AND <upper></p>
 <div class="hljs code-wrapper"><pre><code>      &lt;module&gt; is UDF module containing the function to invoke.
       &lt;function&gt; is UDF to invoke.
@@ -406,11 +414,13 @@
       &lt;value&gt; is the value of a bin.
       &lt;lower&gt; is the lower bound for a numeric range query.
       &lt;upper&gt; is the lower bound for a numeric range query.
-
+  
   Examples:
-
+  
       EXECUTE myudfs.udf1(2) ON test.demo
-      EXECUTE myudfs.udf1(2) ON test.demo WHERE PK = &#39;key1&#39;</code></pre></div>
+      EXECUTE myudfs.udf1(2) ON test.demo WHERE PK = &#39;key1&#39;
+  
+</code></pre></div>
 <p>  OPERATE<br>      OPERATE &lt;op(<bin>, params…)&gt;[with_policy(<map policy>),] [&lt;op(<bin>, params…)&gt; with_policy (<map policy>) …] ON <ns>[.<set>] where PK=<key></p>
 <div class="hljs code-wrapper"><pre><code>      &lt;op&gt; name of operation to perform.
       &lt;bin&gt; is the name of a bin.
@@ -419,7 +429,7 @@
       &lt;ns&gt; is the namespace for the records to be queried.
       &lt;set&gt; is the set name for the record to be queried.
       &lt;key&gt; is the record&#39;s primary key.
-
+  
   OP
       LIST_APPEND (&lt;bin&gt;, &lt;val&gt;)         
       LIST_INSERT (&lt;bin&gt;, &lt;index&gt;, &lt;val&gt;)
@@ -467,11 +477,14 @@
       PREPEND (&lt;bin&gt;, &lt;val&gt;)
       APPEND  (&lt;bin&gt;, &lt;val&gt;)
       INCR    (&lt;bin&gt;, &lt;numeric val&gt;)
-
+  
   Examples:
-
+  
       OPERATE LIST_APPEND(listbin, 1), LIST_APPEND(listbin2, 10) ON test.demo where PK = &#39;key1&#39;
-      OPERATE LIST_POP_RANGE(listbin, 1, 10) ON test.demo where PK = &#39;key1&#39;</code></pre></div>
+      OPERATE LIST_POP_RANGE(listbin, 1, 10) ON test.demo where PK = &#39;key1&#39;
+  
+  
+</code></pre></div>
 <p>  QUERY<br>      SELECT <bins> FROM <ns>[.<set>]<br>      SELECT <bins> FROM <ns>[.<set>] WHERE <bin> = <value><br>      SELECT <bins> FROM <ns>[.<set>] WHERE <bin> BETWEEN <lower> AND <upper><br>      SELECT <bins> FROM <ns>[.<set>] WHERE PK = <key><br>      SELECT <bins> FROM <ns>[.<set>] IN <indextype> WHERE <bin> = <value><br>      SELECT <bins> FROM <ns>[.<set>] IN <indextype> WHERE <bin> BETWEEN <lower> AND <upper><br>      SELECT <bins> FROM <ns>[.<set>] IN <indextype> WHERE <bin> CONTAINS <GeoJSONPoint><br>      SELECT <bins> FROM <ns>[.<set>] IN <indextype> WHERE <bin> WITHIN <GeoJSONPolygon></p>
 <div class="hljs code-wrapper"><pre><code>      &lt;ns&gt; is the namespace for the records to be queried.
       &lt;set&gt; is the set name for the record to be queried.
@@ -482,15 +495,17 @@
       &lt;bins&gt; can be either a wildcard (*) or a comma-separated list of bin names.
       &lt;lower&gt; is the lower bound for a numeric range query.
       &lt;upper&gt; is the lower bound for a numeric range query.
-
+  
   Examples:
-
+  
       SELECT * FROM test.demo
       SELECT * FROM test.demo WHERE PK = &#39;key1&#39;
       SELECT foo, bar FROM test.demo WHERE PK = &#39;key1&#39;
       SELECT foo, bar FROM test.demo WHERE foo = 123
       SELECT foo, bar FROM test.demo WHERE foo BETWEEN 0 AND 999
-      SELECT * FROM test.demo WHERE gj CONTAINS CAST(&#39;&#123;&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [0.0, 0.0]&#125;&#39; AS GEOJSON)</code></pre></div>
+      SELECT * FROM test.demo WHERE gj CONTAINS CAST(&#39;&#123;&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [0.0, 0.0]&#125;&#39; AS GEOJSON)
+  
+</code></pre></div>
 <p>  AGGREGATION<br>      AGGREGATE <module>.<function>(<args>) ON <ns>[.<set>]<br>      AGGREGATE <module>.<function>(<args>) ON <ns>[.<set>] WHERE <bin> = <value><br>      AGGREGATE <module>.<function>(<args>) ON <ns>[.<set>] WHERE <bin> BETWEEN <lower> AND <upper></p>
 <div class="hljs code-wrapper"><pre><code>      &lt;module&gt; is UDF module containing the function to invoke.
       &lt;function&gt; is UDF to invoke.
@@ -502,49 +517,57 @@
       &lt;value&gt; is the value of a bin.
       &lt;lower&gt; is the lower bound for a numeric range query.
       &lt;upper&gt; is the lower bound for a numeric range query.
-
+  
   Examples:
-
+  
       AGGREGATE myudfs.udf2(2) ON test.demo WHERE foo = 123
-      AGGREGATE myudfs.udf2(2) ON test.demo WHERE foo BETWEEN 0 AND 999</code></pre></div>
+      AGGREGATE myudfs.udf2(2) ON test.demo WHERE foo BETWEEN 0 AND 999
+  
+</code></pre></div>
 <p>  EXPLAIN<br>      EXPLAIN SELECT * FROM <ns>[.<set>] WHERE PK = <key></p>
 <div class="hljs code-wrapper"><pre><code>      &lt;ns&gt; is the namespace for the records to be queried.
       &lt;set&gt; is the set name for the record to be queried.
       &lt;key&gt; is the record&#39;s primary key.
-
+  
   Examples:
-
-      EXPLAIN SELECT * FROM test.demo WHERE PK = &#39;key1&#39;</code></pre></div>
+  
+      EXPLAIN SELECT * FROM test.demo WHERE PK = &#39;key1&#39;
+  
+  
+</code></pre></div>
 <p>  INFO<br>      SHOW NAMESPACES | SETS | BINS | INDEXES<br>      SHOW SCANS | QUERIES<br>      STAT NAMESPACE <ns> | INDEX <ns> <indexname><br>      STAT SYSTEM<br>      ASINFO <ASInfoCommand></p>
 <p>  JOB MANAGEMENT<br>      KILL_QUERY <transaction_id><br>      KILL_SCAN <scan_id></p>
 <p>  USER ADMINISTRATION<br>      SHOW USER [<user>]<br>      SHOW USERS<br>      SHOW ROLE <role><br>      SHOW ROLES</p>
 <p>  MANAGE UDFS<br>      SHOW MODULES<br>      DESC MODULE <filename></p>
 <div class="hljs code-wrapper"><pre><code>      &lt;filepath&gt; is file path to the UDF module(in single quotes).
       &lt;filename&gt; is file name of the UDF module.
-
+  
   Examples:
-
+  
       SHOW MODULES
-      DESC MODULE test.lua</code></pre></div>
+      DESC MODULE test.lua
+  
+</code></pre></div>
 <p>  RUN <filepath></p>
 <p>  SYSTEM <bash command></p>
 <p>  SETTINGS<br>        ECHO                          (true | false, default false)<br>        VERBOSE                       (true | false, default false)<br>        OUTPUT                        (TABLE | JSON | MUTE | RAW, default TABLE)<br>        OUTPUT_TYPES                  (true | false, default true)<br>        TIMEOUT                       (time in ms, default: 1000)<br>        LUA_USERPATH                  <path>, default : /opt/aerospike/usr/udf/lua<br>        USE_SMD                       (true | false, default false)<br>        RECORD_TTL                    (time in sec, default: 0)<br>        RECORD_PRINT_METADATA         (true | false, default false, prints record metadata)<br>        REPLICA_ANY                   (true | false, default false)<br>        KEY_SEND                      (true | false, default false)<br>        DURABLE_DELETE                (true | false, default false)<br>        FAIL_ON_CLUSTER_CHANGE        (true | false, default true, policy applies to scans)<br>        SCAN_PRIORITY                 priority of scan (LOW, MEDIUM, HIGH, AUTO), default : AUTO<br>        NO_BINS                       (true | false, default false, No bins as part of scan and query result)<br>        LINEARIZE_READ                (true | false, default false, Make read linearizable, applicable only for namespace with strong_consistency enabled.)</p>
 <div class="hljs code-wrapper"><pre><code>  To get the value of a setting, run:
-
+    
       aql&gt; GET &lt;setting&gt;
-
+    
   To set the value of a setting, run:
-
+    
       aql&gt; SET &lt;setting&gt; &lt;value&gt;
-
+    
   To reset the value of a setting back to default, run:
-
+    
       aql&gt; RESET &lt;setting&gt;
-
-
+    
+    
 OTHER
     HELP
-    QUIT|EXIT|Q</code></pre></div>
+    QUIT|EXIT|Q
+</code></pre></div>
 <p><a target="_blank" rel="noopener" href="https://www.aerospike.com/download/server/5.5.0.7/">下载地址</a><br><a target="_blank" rel="noopener" href="https://www.aerospike.com/docs/operations/install/index.html">安装教程</a><br><a target="_blank" rel="noopener" href="https://www.aerospike.com/docs/operations/install/linux/other/">参考资料</a></p>
 <h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><blockquote>
 <p>条件：数据库已成功运行</p>
@@ -559,7 +582,7 @@ OTHER
 <h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a target="_blank" rel="noopener" href="https://github.com/aerospike/aerospike-dev-notebooks.docker">aerospike-dev-notebooks</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.developer.aerospike.com/">https://www.developer.aerospike.com/</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/aerospike-examples/aerospike-sample-applications">aerospike-sample-applications</a><br><br/></p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" alt="扫一扫，关注我"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
 
             </div>
             <hr>
@@ -583,10 +606,14 @@ OTHER
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
-                <div class="post-prevnext row">
+                <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
                     
@@ -613,11 +640,13 @@ OTHER
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('comments', function() {
+    Fluid.utils.loadComments('#comments', function() {
       var light = 'github-light';
       var dark = 'github-dark';
       var schema = document.documentElement.getAttribute('data-user-color-scheme');
@@ -663,9 +692,9 @@ OTHER
 
 <!-- Custom -->
 
-  <div class="col-lg-7 mx-auto nopadding-md">
+  <div class="col-lg-7 mx-auto nopadding-x-md">
     <div class="container custom post-custom mx-auto">
-      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
     </div>
   </div>
 
@@ -730,7 +759,7 @@ OTHER
           >
             
               <span style="visibility: hidden; width: 0">|</span>
-              <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon"/>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
             
             <span>桂公网安备2020009931号</span>
           </a>
@@ -743,17 +772,15 @@ OTHER
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
     NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
     window.addEventListener('load', function() {
       NProgress.done();
     })
@@ -762,7 +789,6 @@ OTHER
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -770,7 +796,7 @@ OTHER
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -817,11 +843,12 @@ OTHER
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -891,7 +918,6 @@ OTHER
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>
