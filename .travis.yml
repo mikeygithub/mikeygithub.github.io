@@ -7,6 +7,7 @@ branches:
   only:
   - src
 script:
+- yuque-hexo clean
 - yuque-hexo sync
 - hexo generate
 deploy:
@@ -23,9 +24,3 @@ notifications:
   - biaogejiushibiao@qq.com
   on_success: change
   on_failure: always
-before_install:
-#  - openssl aes-256-cbc -K $encrypted_1687bb340939_key -iv $encrypted_1687bb340939_iv -in id_rsa.enc -out ~/.ssh/id_rsa -d
-#  - chmod 600 ~/.ssh/id_rsa
-#  - echo -e "Host $SERVER_IP\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-after_success:
-#  - travis_wait rsync -az --delete ./public/ root@$SERVER_IP:/usr/share/nginx/html/
