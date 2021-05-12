@@ -250,8 +250,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-05-09 17:24" pubdate>
-        2021年5月9日 下午
+      <time datetime="2021-05-12 10:24" pubdate>
+        2021年5月12日 上午
       </time>
     </span>
   
@@ -262,7 +262,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      137 字
+      141 字
     </span>
   
 
@@ -322,7 +322,8 @@
               <p>触发 travis-ci 函数</p>
 <figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">function travis_trigger() &#123;<br>     #travi-ci用户名<br>     local org=$1 &amp;&amp; shift<br>  	 #仓库名<br>     local repo=$1 &amp;&amp; shift<br>  	 #访问token 通过travis-ci 输入 travis --org token 得出<br>     local TRAVIS_TOKEN=$1 &amp;&amp; shift<br>  	 #分支<br>     local branch=$&#123;1:-master&#125; &amp;&amp; shift<br>		 #请求体<br>     body=<span class="hljs-string">&quot;&#123;</span><br><span class="hljs-string">             \&quot;request\&quot;: &#123;</span><br><span class="hljs-string">               \&quot;branch\&quot;: \&quot;$&#123;branch&#125;\&quot;</span><br><span class="hljs-string">              &#125;</span><br><span class="hljs-string">           &#125;&quot;</span><br>		 #curl请求<br>     curl -s -X POST \<br>          -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \<br>          -H <span class="hljs-string">&quot;Accept: application/json&quot;</span> \<br>          -H <span class="hljs-string">&quot;Travis-API-Version: 3&quot;</span> \<br>          -H <span class="hljs-string">&quot;Authorization: token $TRAVIS_TOKEN&quot;</span> \<br>          -d <span class="hljs-string">&quot;$body&quot;</span> \<br>          <span class="hljs-string">&quot;https://api.travis-ci.org/repo/$&#123;org&#125;%2F$&#123;repo&#125;/requests&quot;</span><br> &#125;<br></code></pre></div></td></tr></table></figure>
 
-<p>测试</p>
+<p>使用测试<br>​</p>
+<p>发布</p>
 
             </div>
             <hr>
@@ -359,18 +360,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/05/09/yuque/ggirvn/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">测试同步到博客</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/05/07/java/%E5%B7%A5%E5%85%B7%E7%AF%87-JProflie%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/">
-                        <span class="hidden-mobile">工具篇-JProflie性能分析</span>
+                      <a href="/2021/05/09/devops/DevOps%E7%AF%87-TeamCity%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">DevOps篇-TeamCity学习笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
