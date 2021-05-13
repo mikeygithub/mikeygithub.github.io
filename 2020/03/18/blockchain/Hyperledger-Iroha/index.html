@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
@@ -64,7 +65,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -389,7 +390,7 @@
 <p>3.2。启动Iroha </p>
 <p>3.2.1。创建一个Docker网络<br>要进行操作，Iroha需要一个PostgreSQL数据库。让我们从创建Docker网络开始，以便Postgres和Iroha的容器可以在同一虚拟网络上运行并成功通信。在本指南中，我们将其称为iroha-network，但您可以使用任何名称。在您的终端中输入以下命令：</p>
 <p>泊坞窗网络创建iroha-network<br>3.2.2。启动PostgreSQL容器<br>现在，我们需要PostgreSQL在容器中运行，将其附加到之前创建的网络，并公开用于通信的端口：</p>
-<figure class="highlight haml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haml">docker--name some-postgres\ <br>-<span class="ruby">e POSTGRES_USER = postgres\ </span><br><span class="ruby"></span>-<span class="ruby">e POSTGRES_PASSWORD = mysecretpassword \ </span><br><span class="ruby"></span>-<span class="ruby">p <span class="hljs-number">5432</span>：<span class="hljs-number">5432</span> \ </span><br><span class="ruby"></span>-<span class="ruby">-network =iroha-network\ </span><br><span class="ruby"></span>-<span class="ruby">d postgres：<span class="hljs-number">9.5</span> \ </span><br><span class="ruby"></span>-<span class="ruby">c <span class="hljs-string">&#x27;max_prepared_transactions = 100&#x27;</span></span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight haml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haml">docker--name some-postgres\ <br>-<span class="ruby">e POSTGRES_USER = postgres\ </span><br><span class="ruby">-e POSTGRES_PASSWORD = mysecretpassword \ </span><br><span class="ruby">-p <span class="hljs-number">5432</span>：<span class="hljs-number">5432</span> \ </span><br><span class="ruby">--network =iroha-network\ </span><br><span class="ruby">-d postgres：<span class="hljs-number">9.5</span> \ </span><br><span class="ruby">-c <span class="hljs-string">&#x27;max_prepared_transactions = 100&#x27;</span></span><br></code></pre></div></td></tr></table></figure>
 
 <p>注意</p>
 <p>如果已经在主机系统上的默认端口（5432）上运行了Postgres，则应选择另一个将被占用的空闲端口。例如5433：-p 5433:5432</p>
@@ -404,7 +405,7 @@
 <p>关于如何设置参数以及如何根据您的环境和负载期望对其进行调整的指南：配置。目前我们不需要这样做。</p>
 <p>3.2.5。启动Iroha容器<br>我们几乎准备启动我们的Iroha集装箱。您只需要知道配置文件的路径（从上述步骤开始）。</p>
 <p>让我们使用以下命令在Docker容器中启动Iroha节点：</p>
-<figure class="highlight haml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haml">docker run --name iroha \ <br>-<span class="ruby">d \ </span><br><span class="ruby"></span>-<span class="ruby">p <span class="hljs-number">50051</span>：<span class="hljs-number">50051</span> \ </span><br><span class="ruby"></span>-<span class="ruby">v <span class="hljs-variable">$ </span>&#123; pwd ） / iroha / example：/ opt / iroha_data \ </span><br><span class="ruby"></span>-<span class="ruby">v blockstore：/ tmp / block_store \ </span><br><span class="ruby"></span>-<span class="ruby">-network = iroha-network \ </span><br><span class="ruby"></span>-<span class="ruby"> e KEY = <span class="hljs-string">&#x27;node0&#x27;</span>  \</span><br><span class="ruby"></span>hyperledger / iroha：latest<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight haml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haml">docker run --name iroha \ <br>-<span class="ruby">d \ </span><br><span class="ruby">-p <span class="hljs-number">50051</span>：<span class="hljs-number">50051</span> \ </span><br><span class="ruby">-v <span class="hljs-variable">$ </span>&#123; pwd ） / iroha / example：/ opt / iroha_data \ </span><br><span class="ruby">-v blockstore：/ tmp / block_store \ </span><br><span class="ruby">--network = iroha-network \ </span><br><span class="ruby">- e KEY = <span class="hljs-string">&#x27;node0&#x27;</span>  \</span><br><span class="ruby">hyperledger / iroha：latest</span><br></code></pre></div></td></tr></table></figure>
 
 <p>如果成功启动节点，您将在启动容器的同一控制台中看到容器ID。</p>
 <p>让我们详细了解一下此命令的作用：</p>

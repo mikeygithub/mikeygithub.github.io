@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
@@ -64,7 +65,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -345,10 +346,8 @@
 <tr><td>2379-2380</td><td>Read-only Kubelet API (Heapster)</td></tr>
 <tr><td>30000-32767</td><td>NodePort Services默认端口范围。</td></tr>
 </table>
-    
-# Docker 安装
 
-<p>在机器安装Docker，推荐使用1.12 版本（v1.10和v1.11也可以正常使用），1.13和17.03+版本未经过Kubernetes团队的测试和验证。有关安装说明，请参阅Docker官方文档 Docker安装。</p>
+<h1 id="Docker-安装"><a href="#Docker-安装" class="headerlink" title="Docker 安装"></a>Docker 安装</h1><p>在机器安装Docker，推荐使用1.12 版本（v1.10和v1.11也可以正常使用），1.13和17.03+版本未经过Kubernetes团队的测试和验证。有关安装说明，请参阅Docker官方文档 Docker安装。</p>
 <h1 id="kubectl-安装"><a href="#kubectl-安装" class="headerlink" title="kubectl 安装"></a>kubectl 安装</h1><p>在所有机器上安装kubectl，可参考： kubectl安装。</p>
 <h1 id="kubelet和kubeadm-安装"><a href="#kubelet和kubeadm-安装" class="headerlink" title="kubelet和kubeadm 安装"></a>kubelet和kubeadm 安装</h1><p>在所有机器上安装以下软件包：</p>
 <ul>
@@ -358,11 +357,11 @@
 <p>注意：如果机器上已经安装了kubeadm，则应需要apt-get update &amp;&amp; apt-get upgrade或者yum update获得最新版本的kubeadm。如果想了解不同版本的kubeadm，请参考</p>
 <p>配置机器：</p>
 <p>SSH登录主机。<br>如果使用的是Ubuntu或HypriotOS，请运行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">apt-get update &amp;&amp; apt-get install -y apt-transport-https<br>curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -<br>cat &lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list<br>deb http://apt.kubernetes.io/ kubernetes-xenial main<br>EOF<br>apt-get update<br>apt-get install -y kubelet kubeadm<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">apt-get update &amp;&amp; apt-get install -y apt-transport-https<br>curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -<br>cat &lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list<br>deb http://apt.kubernetes.io/ kubernetes-xenial main<br>EOF<br>apt-get update<br>apt-get install -y kubelet kubeadm<br></code></pre></div></td></tr></table></figure>
 
 <p>如果使用的是CentOS，请运行：</p>
 <p><code>cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">[kubernetes]<br>name=Kubernetes<br>baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64<br>enabled=1<br>gpgcheck=1<br>repo_gpgcheck=1<br>gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg<br>        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg<br>EOF<br>setenforce 0<br>yum install -y kubelet kubeadm<br>systemctl enable kubelet &amp;&amp; systemctl start kubelet<br><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">[kubernetes]<br>name=Kubernetes<br>baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64<br>enabled=1<br>gpgcheck=1<br>repo_gpgcheck=1<br>gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg<br>        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg<br>EOF<br>setenforce 0<br>yum install -y kubelet kubeadm<br>systemctl enable kubelet &amp;&amp; systemctl start kubelet<br><br></code></pre></div></td></tr></table></figure>
 
 <p>执行完后，kubelet会进入每隔几秒重新启动一次的循环模式，因为kubelet在等待kubeadm发出的命令。</p>
 <p>注意：必须使用运行setenforce 0命令来禁用SELinux，因为需要允许容器访问主机文件系统，这是配置pod网络所要求的。（直到kubelet中对SELinux支持得到改进）</p>

@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
@@ -64,7 +65,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -321,12 +322,12 @@
 <li><p>下载</p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">wget https://udomain.dl.sourceforge.net/project/bochs/bochs/2.6.2/bochs-2.6.2.tar.gz<br></code></pre></div></td></tr></table></figure></li>
 <li><p>解压</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">tar -zxvf bochs-2.6.2.tar.gz<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">tar -zxvf bochs-2.6.2.tar.gz<br></code></pre></div></td></tr></table></figure>
 </li>
 <li><p>配置</p>
 </li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">./configure \<br>--prefix=/your_path/bochs \<br>--enable-debugger\<br>--enable-disasm \<br>--enable-iodebug \<br>--enable-x86-debugger \<br>--with-x \<br>--with-x11<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">./configure \<br>--prefix=/your_path/bochs \<br>--enable-debugger\<br>--enable-disasm \<br>--enable-iodebug \<br>--enable-x86-debugger \<br>--with-x \<br>--with-x11<br></code></pre></div></td></tr></table></figure>
 <p>解释</p>
 <blockquote>
 <p>–prefix=/your_path/bochs 是用来指定 bochs 的安装目录,根据个人实际情况将 your_path 替换为自己待安装的路径。<br> –enable-debugger 打开 bochs 自己的调试器。<br> –enable-disasm 使 bochs 支持反汇编。<br> –enable-iodebug 启用 io 接口调试器。<br> –enable-x86-debugger 支持 x86 调试器。<br> –with-x 使用 x windows。<br> –with-x11 使用 x11 图形用户接口。  </p>
@@ -337,7 +338,7 @@
 <p>make install报错</p>
 <p><code>x.cc:37:10: fatal error: X11/Xlib.h: No such file or directory  #include &lt;X11/Xlib.h&gt;           ^~~~~~~~~~~~</code><br>还报错<br><code>x.cc:42:10: fatal error: X11/extensions/Xrandr.h: No such file or directory  #include &lt;X11/extensions/Xrandr.h&gt;           ^~~~~~~~~~~~~~~~~~~~~~~~~</code></p>
 <p>解决方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">sudo apt-get install libx11-dev ................. for X11/Xlib.h<br>sudo apt-get install mesa-common-dev........ for GL/glx.h<br>sudo apt-get install libglu1-mesa-dev ..... for GL/glu.h<br>sudo apt-get install libxrandr-dev ........... for X11/extensions/Xrandr.h<br>sudo apt-get install libxi-dev ................... for X11/extensions/XInput.h<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">sudo apt-get install libx11-dev ................. for X11/Xlib.h<br>sudo apt-get install mesa-common-dev........ for GL/glx.h<br>sudo apt-get install libglu1-mesa-dev ..... for GL/glu.h<br>sudo apt-get install libxrandr-dev ........... for X11/extensions/Xrandr.h<br>sudo apt-get install libxi-dev ................... for X11/extensions/XInput.h<br></code></pre></div></td></tr></table></figure>
 
 <h1 id="配置软件"><a href="#配置软件" class="headerlink" title="配置软件"></a>配置软件</h1><p>将安装目录下的配置文件<code>bochs/share/doc/bochs/bochsrc-sample.txt</code>复制到当前目录</p>
 <figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">mv /home/mikey/bochs/share/doc/bochs/bochsrc-sample.txt ./bochsrc<br></code></pre></div></td></tr></table></figure>

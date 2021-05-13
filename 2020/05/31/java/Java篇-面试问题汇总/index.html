@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
@@ -64,7 +65,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -326,7 +327,7 @@
 </blockquote>
 </li>
 <li><p>对象在内存中的存储布局？（对象与数组的存储不同）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text"><br>普通对象和数组不同。<br><br>普通对象有四项：占用16个字节<br><br>markword(标记用，放锁状态年龄 hashcode等)、 8个字节<br><br>类型指针classpointer(指向属于哪个类型 a.class)、4个字节<br><br>实例数据instance data(存放实例数据int a = new int[0],存放a)、<br><br>对齐padding(前面三个内容的位数不是8的倍数(读一块内容的时候，整块读最快)，则补上) 4个字节，<br><br>JOL能将能将对象打印出来，打印布局。<br><br>数组对象有5项：<br><br>markword(标记用，放锁状态年龄 hashcode等)、 8个字节<br><br>类型指针classpointer(指向属于哪个类型 a.class)、4个字节<br><br>数组长度<br><br>实例数据instance data(存放实例数据int a = new int[0],存放a)、<br><br>对齐padding(前面三个内容的位数不是8的倍数(读一块内容的时候，整块读最快)，则补上) 4个字节，<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text"><br>普通对象和数组不同。<br><br>普通对象有四项：占用16个字节<br><br>markword(标记用，放锁状态年龄 hashcode等)、 8个字节<br><br>类型指针classpointer(指向属于哪个类型 a.class)、4个字节<br><br>实例数据instance data(存放实例数据int a = new int[0],存放a)、<br><br>对齐padding(前面三个内容的位数不是8的倍数(读一块内容的时候，整块读最快)，则补上) 4个字节，<br><br>JOL能将能将对象打印出来，打印布局。<br><br>数组对象有5项：<br><br>markword(标记用，放锁状态年龄 hashcode等)、 8个字节<br><br>类型指针classpointer(指向属于哪个类型 a.class)、4个字节<br><br>数组长度<br><br>实例数据instance data(存放实例数据int a = new int[0],存放a)、<br><br>对齐padding(前面三个内容的位数不是8的倍数(读一块内容的时候，整块读最快)，则补上) 4个字节，<br></code></pre></div></td></tr></table></figure>
 </li>
 <li><p>对象头具体包括什么？（markword klasspointer）synchronized锁信息？</p>
 <blockquote>

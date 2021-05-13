@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
@@ -64,7 +65,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -313,7 +314,7 @@
             <h1 style="display: none">JVM篇-知识汇总</h1>
             
             <div class="markdown-body">
-              <h1 id="JVM-知识汇总"><a href="#JVM-知识汇总" class="headerlink" title="JVM 知识汇总"></a>JVM 知识汇总</h1><h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">JVM是可运行Java代码的假想计算机，包括一套字节指令集，一组寄存器，一个栈，一个垃圾回收，堆和一个存储方法域．<br>Jvm是运行在操作系统上的他与硬件没有直接的交互．<br></code></pre></div></td></tr></table></figure>
+              <h1 id="JVM-知识汇总"><a href="#JVM-知识汇总" class="headerlink" title="JVM 知识汇总"></a>JVM 知识汇总</h1><h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">JVM是可运行Java代码的假想计算机，包括一套字节指令集，一组寄存器，一个栈，一个垃圾回收，堆和一个存储方法域．<br>Jvm是运行在操作系统上的他与硬件没有直接的交互．<br></code></pre></div></td></tr></table></figure>
 <p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/jvm.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="运行过程"><a href="#运行过程" class="headerlink" title="运行过程"></a>运行过程</h1><blockquote>
 <p>我们都知道Java源文件，通过编译器能够生产相应的.Class文件，也就是字节码文件，而字节码文件又通过Java虚拟机中的解释器，编译成特定机器上的机器码</p>
@@ -515,7 +516,7 @@
 <p>1.在JDK1.5之前版本中与新生代的Parallel　Scavenge收集器搭配使用。</p>
 <p>2.作为年老代中使用CMS收集器的后备垃圾收集方案：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200527092744.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">新生代 Parallel Scavenge 收集器与 ParNew 收集器工作原理类似,都是多线程的收集器,都使<br>用的是复制算法,在垃圾收集过程中都需要暂停所有的工作线程。新生代 Parallel<br>Scavenge/ParNew 与年老代 Serial Old 搭配垃圾收集过程图:<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">新生代 Parallel Scavenge 收集器与 ParNew 收集器工作原理类似,都是多线程的收集器,都使<br>用的是复制算法,在垃圾收集过程中都需要暂停所有的工作线程。新生代 Parallel<br>Scavenge/ParNew 与年老代 Serial Old 搭配垃圾收集过程图:<br></code></pre></div></td></tr></table></figure>
 
 <p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200527092908.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <ul>
@@ -557,18 +558,16 @@
 </li>
 </ul>
 <ol>
-<li><p>基于标记-整理算法,不产生内存碎片。</p>
-</li>
-<li><p>可以非常精确控制停顿时间,在不牺牲吞吐量前提下,实现低停顿垃圾回收。</p>
-<blockquote>
+<li>基于标记-整理算法,不产生内存碎片。</li>
+<li>可以非常精确控制停顿时间,在不牺牲吞吐量前提下,实现低停顿垃圾回收。<blockquote>
 <p>G1 收集器避免全区域垃圾收集,它把堆内存划分为大小固定的几个独立区域,并且跟踪这些区域<br>的垃圾收集进度,同时在后台维护一个优先级列表,每次根据所允许的收集时间,优先回收垃圾<br>最多的区域。区域划分和优先级区域回收机制,确保 G1 收集器可以在有限时间获得最高的垃圾收<br>集效率。</p>
 </blockquote>
+</li>
+</ol>
 <h1 id="Jvm类加载机制"><a href="#Jvm类加载机制" class="headerlink" title="Jvm类加载机制"></a>Jvm类加载机制</h1><blockquote>
 <p>JVM类加载机制分为:<code>加载、验证、准备、解析、初始化</code></p>
 </blockquote>
 <p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/TIM%E5%9B%BE%E7%89%8720200528223950.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
-</li>
-</ol>
 <ul>
 <li><p>加载</p>
 <blockquote>

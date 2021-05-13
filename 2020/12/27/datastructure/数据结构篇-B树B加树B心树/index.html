@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
@@ -64,7 +65,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -272,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14
+      15
        分钟
     </span>
   
@@ -343,7 +344,7 @@
     代码结构
 </p>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cgo">#define MAXM 10		//定义B树的最大的阶数<br>typedef   int KeyType;       	//KeyType为关键字类型<br>typedef struct node <br>&#123;      int keynum; 	         	 //结点当前拥有的关键字的个数<br>       KeyType key[MAXM];      	//[1..keynum]存放关键字<br>       struct node *parent;	   	//双亲结点指针<br>       struct node *ptr[MAXM]; 	//孩子结点指针数组[0..keynum]<br>&#125;  BTNode;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cgo">#define MAXM 10		&#x2F;&#x2F;定义B树的最大的阶数<br>typedef   int KeyType;       	&#x2F;&#x2F;KeyType为关键字类型<br>typedef struct node <br>&#123;      int keynum; 	         	 &#x2F;&#x2F;结点当前拥有的关键字的个数<br>       KeyType key[MAXM];      	&#x2F;&#x2F;[1..keynum]存放关键字<br>       struct node *parent;	   	&#x2F;&#x2F;双亲结点指针<br>       struct node *ptr[MAXM]; 	&#x2F;&#x2F;孩子结点指针数组[0..keynum]<br>&#125;  BTNode;<br></code></pre></div></td></tr></table></figure>
 
 <h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><blockquote>
 <p>将k与根结点中的key[i]进行比较：<br>1.若k=key[i]，则查找成功；<br>2.若k＜key[1]，则沿着指针ptr[0]所指的子树继续查找；<br>3.若key[i]＜k＜key[i+1]，则沿着指针ptr[i]所指的子树继续查找；<br>4.若k＞key[n]，则沿着指针ptr[n]所指的子树继续查找。</p>

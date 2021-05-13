@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
@@ -64,7 +65,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -338,13 +339,13 @@
 </blockquote>
 <p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/threadpool.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <ul>
-<li><p>NewCachedThreadPool</p>
-<blockquote>
+<li>NewCachedThreadPool<blockquote>
 <p>创建一个可根据需要创建新线程的线程池，但是在以前构造的线程可用时将重用他们。对于执行很多短期异步任务的程序而言，这些线程池通常可提高程序性能<br><code>调用 execute 将重用以前构造 的线程(如果线程可用)。如果现有线程没有可用的,则创建一个新线程并添加到池中。终止并 从缓存中移除那些已有 60 秒钟未被使用的线程。</code>因此,长时间保持空闲的线程池不会使用任何资源。</p>
 </blockquote>
 </li>
-<li><p>newFixedThreadPool</p>
-</li>
+</ul>
+<ul>
+<li>newFixedThreadPool</li>
 </ul>
 <blockquote>
 <p>创建一个可重用固定线程数的线程池,以共享的无界队列方式来运行这些线程。在任意点,在大<br> 多数 nThreads 线程会处于处理任务的活动状态。如果在所有线程处于活动状态时提交附加任务,<br> 则在有可用线程之前,附加任务将在队列中等待。如果在关闭前的执行期间由于失败而导致任何<br> 线程终止,那么一个新线程将代替它执行后续的任务(如果需要)。在某个线程被显式地关闭之<br> 前,池中的线程将一直存在。</p>
@@ -356,6 +357,8 @@
 <p>创建一个线程池,它可安排在给定延迟后运行命令或者定期地执行。</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadPool</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>        ScheduledExecutorService scheduledThreadPool= Executors.newScheduledThreadPool(<span class="hljs-number">3</span>);<br>        scheduledThreadPool.schedule(<span class="hljs-keyword">new</span> Runnable()&#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>                System.out.println(<span class="hljs-string">&quot;延迟三秒&quot;</span>);<br>            &#125;<br>        &#125;, <span class="hljs-number">3</span>, TimeUnit.SECONDS);<br>        scheduledThreadPool.scheduleAtFixedRate(<span class="hljs-keyword">new</span> Runnable()&#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>                System.out.println(<span class="hljs-string">&quot;延迟 1 秒后每三秒执行一次&quot;</span>);<br>            &#125;<br>        &#125;,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,TimeUnit.SECONDS);<br><br>    &#125;<br><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
 <ul>
 <li>newSingleThreadExecutor</li>
 </ul>
@@ -379,8 +382,7 @@
 <li>程放入锁池(lock pool)中。</li>
 </ul>
 <p>其他阻塞 (sleep/join)</p>
-<div class="hljs code-wrapper"><pre><code> - 运行(running)的线程执行 Thread.sleep(long ms)或 t.join()方法,或者发出了 I/O 请求时,JVM 会把该线程置为阻塞状态。当 sleep()状态超时、join()等待线程终止或者超时、或者 I/O处理完毕时,线程重新转入可运行(runnable)状态。
-</code></pre></div>
+<div class="hljs code-wrapper"><pre><code> - 运行(running)的线程执行 Thread.sleep(long ms)或 t.join()方法,或者发出了 I/O 请求时,JVM 会把该线程置为阻塞状态。当 sleep()状态超时、join()等待线程终止或者超时、或者 I/O处理完毕时,线程重新转入可运行(runnable)状态。</code></pre></div>
 </li>
 <li><p>线程死亡(DEAD)<br>线程会以下面三种方式结束,结束后就是死亡状态。</p>
 <p><em>正常结束</em>  </p>
@@ -395,8 +397,10 @@
 <blockquote>
 <p>3.直接调用该线程的 stop()方法来结束该线程—该方法通常容易导致死锁,不推荐使用。</p>
 </blockquote>
+</li>
+</ul>
 <p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/QQ%E5%9B%BE%E7%89%8720200610172044.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
-<h2 id="终止线程-4-种方式"><a href="#终止线程-4-种方式" class="headerlink" title="终止线程 4 种方式"></a>终止线程 4 种方式</h2></li>
+<h2 id="终止线程-4-种方式"><a href="#终止线程-4-种方式" class="headerlink" title="终止线程 4 种方式"></a>终止线程 4 种方式</h2><ul>
 <li><p>正常运行结束</p>
 <blockquote>
 <p>程序运行结束,线程自动结束。</p>
@@ -408,10 +412,11 @@
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadSafe</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">boolean</span> exit = <span class="hljs-keyword">false</span>;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">while</span> (!exit)&#123;<br>            <span class="hljs-comment">//do something</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<p>定义了一个退出标志 exit,当 exit 为 true 时,while 循环退出,exit 的默认值为 false.在定义 exit<br>时,使用了一个 Java 关键字 volatile,这个关键字的目的是使 exit 同步,也就是说在同一时刻只<br>能由一个线程来修改 exit 的值。</p>
 </li>
-<li><p>Interrupt 方法结束线程</p>
-<blockquote>
+</ul>
+<p>定义了一个退出标志 exit,当 exit 为 true 时,while 循环退出,exit 的默认值为 false.在定义 exit<br>时,使用了一个 Java 关键字 volatile,这个关键字的目的是使 exit 同步,也就是说在同一时刻只<br>能由一个线程来修改 exit 的值。</p>
+<ul>
+<li>Interrupt 方法结束线程<blockquote>
 <p>使用 interrupt()方法来中断线程有两种情况:</p>
 </blockquote>
 </li>
@@ -419,14 +424,16 @@
 <p> 1.线程处于阻塞状态:如使用了 sleep,同步锁的 wait,socket 中的 receiver,accept 等方法时,<br> 会使线程处于阻塞状态。当调用线程的 interrupt()方法时,会抛出 InterruptException 异常。<br> 阻塞中的那个方法抛出这个异常,通过代码捕获该异常,然后 break 跳出循环状态,从而让<br> 我们有机会结束这个线程的执行。通常很多人认为只要调用 interrupt 方法线程就会结束,实<br> 际上是错的, 一定要先捕获 InterruptedException 异常之后通过 break 来跳出循环,才能正<br> 常结束 run 方法。</p>
 <p> 2.线程未处于阻塞状态:使用 isInterrupted()判断线程的中断标志来退出循环。当使用<br> interrupt()方法时,中断标志就会置 true,和使用自定义的标志来控制循环是一样的道理。</p>
  <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadSafe</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">while</span> (!isInterrupted())&#123; <span class="hljs-comment">//非阻塞过程中通过判断中断标志来退出</span><br>            <span class="hljs-keyword">try</span>&#123;<br>                Thread.sleep(<span class="hljs-number">5</span>*<span class="hljs-number">1000</span>);<span class="hljs-comment">//阻塞过程捕获中断异常来退出</span><br>            &#125;<span class="hljs-keyword">catch</span>(InterruptedException e)&#123;<br>                e.printStackTrace();<br>                <span class="hljs-keyword">break</span>;<span class="hljs-comment">//捕获到异常之后,执行 break 跳出循环</span><br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
 <ul>
 <li><p>stop 方法终止线程(线程不安全)</p>
 <blockquote>
 <p>程序中可以直接使用 thread.stop()来强行终止线程,但是 stop 方法是很危险的,就象突然关<br>闭计算机电源,而不是按正常程序关机一样,可能会产生不可预料的结果,不安全主要是:<br>thread.stop()调用之后,创建子线程的线程就会抛出 ThreadDeatherror 的错误,并且会释放子<br>线程所持有的所有锁。一般任何进行加锁的代码块,都是为了保护数据的一致性,如果在<code>调用 thread.stop()后导致了该线程所持有的所有锁的突然释放(不可控制)</code>,那么被保护数据就有可能呈<br>现不一致性,其他线程在使用这些被破坏的数据时,有可能导致一些很奇怪的应用程序错误。因<br>此,并不推荐使用 stop 方法来终止线程。</p>
 </blockquote>
-<h2 id="sleep-与-wait-区别"><a href="#sleep-与-wait-区别" class="headerlink" title="sleep 与 wait 区别"></a>sleep 与 wait 区别</h2></li>
+</li>
 </ul>
-<p> 1.对于 sleep()方法,我们首先要知道该方法是属于 Thread 类中的。而 wait()方法,则是属于Object 类中的。<br> 2.sleep()方法导致了程序暂停执行指定的时间,让出 cpu 该其他线程,但是他的监控状态依然保持者,当指定的时间到了又会自动恢复运行状态。<br> 3. 在调用 sleep()方法的过程中,线程不会释放对象锁。<br> 4. 而当调用 wait()方法的时候,线程会放弃对象锁,进入等待此对象的等待锁定池,只有针对此对象调用 notify()方法后本线程才进入对象锁定池准备获取对象锁进入运行状态。  </p>
+<h2 id="sleep-与-wait-区别"><a href="#sleep-与-wait-区别" class="headerlink" title="sleep 与 wait 区别"></a>sleep 与 wait 区别</h2><p> 1.对于 sleep()方法,我们首先要知道该方法是属于 Thread 类中的。而 wait()方法,则是属于Object 类中的。<br> 2.sleep()方法导致了程序暂停执行指定的时间,让出 cpu 该其他线程,但是他的监控状态依然保持者,当指定的时间到了又会自动恢复运行状态。<br> 3. 在调用 sleep()方法的过程中,线程不会释放对象锁。<br> 4. 而当调用 wait()方法的时候,线程会放弃对象锁,进入等待此对象的等待锁定池,只有针对此对象调用 notify()方法后本线程才进入对象锁定池准备获取对象锁进入运行状态。  </p>
 <h2 id="start-与-run-区别"><a href="#start-与-run-区别" class="headerlink" title="start 与 run 区别"></a>start 与 run 区别</h2><p> 1.start()方法来启动线程,真正实现了多线程运行。这时无需等待 run 方法体代码执行完毕,可以直接继续执行下面的代码。<br> 2.通过调用 Thread 类的 start()方法来启动一个线程, 这时此线程是处于就绪状态, 并没有运行。<br> 3.方法 run()称为线程体,它包含了要执行的这个线程的内容,线程就进入了运行状态,开始运行 run 函数当中的代码。 Run 方法运行结束, 此线程终止。然后 CPU 再调度其它线程。</p>
 <h2 id="JAVA-后台线程"><a href="#JAVA-后台线程" class="headerlink" title="JAVA 后台线程"></a>JAVA 后台线程</h2><p>1.定义:守护线程–也称“服务线程”,他是后台线程,它有一个特性,即为用户线程 提供 公共服务,在没有用户线程可服务时会自动离开。  </p>
 <p>2.优先级:守护线程的优先级比较低,用于为系统中的其它对象和线程提供服务。  </p>
@@ -501,7 +508,7 @@
 <h1 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h1><blockquote>
 <p>ReentantLock 继承接口 Lock 并实现了接口中定义的方法,他是一种可重入锁,除了能完成 synchronized 所能完成的所有工作外,还提供了诸如可响应中断锁、可轮询锁请求、定时锁等避免多线程死锁的方法。</p>
 </blockquote>
-<h3 id="Lock-接口的主要方法"><a href="#Lock-接口的主要方法" class="headerlink" title="Lock 接口的主要方法"></a>Lock 接口的主要方法</h3> <figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">void lock(): 执行此方法时, 如果锁处于空闲状态, 当前线程将获取到锁. 相反, 如果锁已经被其他线程持有, 将禁用当前线程, 直到当前线程获取到锁.<br>boolean tryLock():如果锁可用, 则获取锁, 并立即返回 true, 否则返回 false. 该方法和lock()的区别在于, tryLock()只是&quot;试图&quot;获取锁, 如果锁不可用, 不会导致当前线程被禁用,当前线程仍然继续往下执行代码. 而 lock()方法则是一定要获取到锁, 如果锁不可用, 就一直等待, 在未获得锁之前,当前线程并不继续向下执行.<br>void unlock():执行此方法时, 当前线程将释放持有的锁. 锁只能由持有者释放, 如果线程并不持有锁, 却执行该方法, 可能导致异常的发生.<br>Condition newCondition():条件对象,获取等待通知组件。该组件和当前的锁绑定,当前线程只有获取了锁,才能调用该组件的 await()方法,而调用后,当前线程将缩放锁。<br>getHoldCount() :查询当前线程保持此锁的次数,也就是执行此线程执行 lock 方法的次数。<br>getQueueLength():返回正等待获取此锁的线程估计数,比如启动 10 个线程,1 个线程获得锁,此时返回的是 9<br>getWaitQueueLength:(Condition condition)返回等待与此锁相关的给定条件的线程估计数。比如 10 个线程,用同一个 condition 对象,并且此时这 10 个线程都执行了condition 对象的 await 方法,那么此时执行此方法返回 10<br>hasWaiters(Condition condition) : 查 询 是 否 有 线 程 等 待 与 此 锁 有 关 的 给 定 条 件(condition),对于指定 contidion 对象,有多少线程执行了 condition.await 方法<br>hasQueuedThread(Thread thread):查询给定线程是否等待获取此锁<br>hasQueuedThreads():是否有线程等待此锁<br>isFair():该锁是否公平锁<br>isHeldByCurrentThread(): 当前线程是否保持锁锁定,线程的执行 lock 方法的前后分别是 false 和 true<br>isLock():此锁是否有任意线程占用<br>lockInterruptibly():如果当前线程未被中断,获取锁<br>tryLock():尝试获得锁,仅在调用时锁未被线程占用,获得锁<br>tryLock(long timeout TimeUnit unit):如果锁在给定等待时间内没有被另一个线程保持,则获取该锁。<br></code></pre></div></td></tr></table></figure>
+<h3 id="Lock-接口的主要方法"><a href="#Lock-接口的主要方法" class="headerlink" title="Lock 接口的主要方法"></a>Lock 接口的主要方法</h3> <figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">void lock(): 执行此方法时, 如果锁处于空闲状态, 当前线程将获取到锁. 相反, 如果锁已经被其他线程持有, 将禁用当前线程, 直到当前线程获取到锁.<br>boolean tryLock():如果锁可用, 则获取锁, 并立即返回 true, 否则返回 false. 该方法和lock()的区别在于, tryLock()只是&quot;试图&quot;获取锁, 如果锁不可用, 不会导致当前线程被禁用,当前线程仍然继续往下执行代码. 而 lock()方法则是一定要获取到锁, 如果锁不可用, 就一直等待, 在未获得锁之前,当前线程并不继续向下执行.<br>void unlock():执行此方法时, 当前线程将释放持有的锁. 锁只能由持有者释放, 如果线程并不持有锁, 却执行该方法, 可能导致异常的发生.<br>Condition newCondition():条件对象,获取等待通知组件。该组件和当前的锁绑定,当前线程只有获取了锁,才能调用该组件的 await()方法,而调用后,当前线程将缩放锁。<br>getHoldCount() :查询当前线程保持此锁的次数,也就是执行此线程执行 lock 方法的次数。<br>getQueueLength():返回正等待获取此锁的线程估计数,比如启动 10 个线程,1 个线程获得锁,此时返回的是 9<br>getWaitQueueLength:(Condition condition)返回等待与此锁相关的给定条件的线程估计数。比如 10 个线程,用同一个 condition 对象,并且此时这 10 个线程都执行了condition 对象的 await 方法,那么此时执行此方法返回 10<br>hasWaiters(Condition condition) : 查 询 是 否 有 线 程 等 待 与 此 锁 有 关 的 给 定 条 件(condition),对于指定 contidion 对象,有多少线程执行了 condition.await 方法<br>hasQueuedThread(Thread thread):查询给定线程是否等待获取此锁<br>hasQueuedThreads():是否有线程等待此锁<br>isFair():该锁是否公平锁<br>isHeldByCurrentThread(): 当前线程是否保持锁锁定,线程的执行 lock 方法的前后分别是 false 和 true<br>isLock():此锁是否有任意线程占用<br>lockInterruptibly():如果当前线程未被中断,获取锁<br>tryLock():尝试获得锁,仅在调用时锁未被线程占用,获得锁<br>tryLock(long timeout TimeUnit unit):如果锁在给定等待时间内没有被另一个线程保持,则获取该锁。<br></code></pre></div></td></tr></table></figure>
 
 <h1 id="非公平锁"><a href="#非公平锁" class="headerlink" title="非公平锁"></a>非公平锁</h1><p>JVM 按随机、就近原则分配锁的机制则称为不公平锁,ReentrantLock 在构造函数中提供了是否公平锁的初始化方式,默认为非公平锁。非公平锁实际执行的效率要远远超出公平锁,除非程序有特殊需要,否则最常用非公平锁的分配机制。</p>
 <h1 id="公平锁"><a href="#公平锁" class="headerlink" title="公平锁"></a>公平锁</h1><p>公平锁指的是锁的分配机制是公平的,通常先对锁提出获取请求的线程会先被分配到锁,ReentrantLock 在构造函数中提供了是否公平锁的初始化方式来定义公平锁。</p>
@@ -587,11 +594,9 @@
 <p>2.若调用 sleep()而使线程处于 TIMED-WATING 状态,这时调用 interrupt()方法,会抛出InterruptedException,从而使线程提前结束 TIMED-WATING 状态。</p>
 <p>3.许多声明抛出 InterruptedException 的方法(如 Thread.sleep(long mills 方法)),抛出异常前,都会清除中断标识位,所以抛出异常后,调用 isInterrupted()方法将会返回 false。</p>
 <p>4.中断状态是线程固有的一个标识位,可以通过此标识位安全的终止线程。比如,你想终止一个线程 thread 的时候,可以调用 thread.interrupt()方法,在线程的 run 方法内部可以根据 thread.isInterrupted()的值来优雅的终止线程。</p>
-<h3 id="Join-等待其他线程终止"><a href="#Join-等待其他线程终止" class="headerlink" title="Join 等待其他线程终止"></a>Join 等待其他线程终止</h3><div class="hljs code-wrapper"><pre><code>join() 方法,等待其他线程终止,在当前线程中调用一个线程的 join() 方法,则当前线程转为阻塞状态,回到另一个线程结束,当前线程再由阻塞状态变为就绪状态,等待 cpu 的宠幸。
-</code></pre></div>
-<h5 id="为什么要用-join-方法"><a href="#为什么要用-join-方法" class="headerlink" title="为什么要用 join()方法?"></a>为什么要用 join()方法?</h5><div class="hljs code-wrapper"><pre><code>很多情况下,主线程生成并启动了子线程,需要用到子线程返回的结果,也就是需要主线程需要在子线程结束后再结束,这时候就要用到 join() 方法。
-</code></pre></div>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">System.out.println(Thread.currentThread().getName() + &quot;线程运行开始!&quot;);<br>Thread6 thread1 = new Thread6();<br>thread1.setName(&quot;线程 B&quot;);<br>thread1.join();<br>System.out.println(&quot;这时 thread1 执行完毕之后才能执行主线程&quot;);<br></code></pre></div></td></tr></table></figure>
+<h3 id="Join-等待其他线程终止"><a href="#Join-等待其他线程终止" class="headerlink" title="Join 等待其他线程终止"></a>Join 等待其他线程终止</h3><div class="hljs code-wrapper"><pre><code>join() 方法,等待其他线程终止,在当前线程中调用一个线程的 join() 方法,则当前线程转为阻塞状态,回到另一个线程结束,当前线程再由阻塞状态变为就绪状态,等待 cpu 的宠幸。</code></pre></div>
+<h5 id="为什么要用-join-方法"><a href="#为什么要用-join-方法" class="headerlink" title="为什么要用 join()方法?"></a>为什么要用 join()方法?</h5><div class="hljs code-wrapper"><pre><code>很多情况下,主线程生成并启动了子线程,需要用到子线程返回的结果,也就是需要主线程需要在子线程结束后再结束,这时候就要用到 join() 方法。</code></pre></div>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">System.out.println(Thread.currentThread().getName() + &quot;线程运行开始!&quot;);<br>Thread6 thread1 = new Thread6();<br>thread1.setName(&quot;线程 B&quot;);<br>thread1.join();<br>System.out.println(&quot;这时 thread1 执行完毕之后才能执行主线程&quot;);<br></code></pre></div></td></tr></table></figure>
 
 <h3 id="线程唤醒-notify"><a href="#线程唤醒-notify" class="headerlink" title="线程唤醒(notify)"></a>线程唤醒(notify)</h3><p>Object 类中的 notify() 方法,唤醒在此对象监视器上等待的单个线程,如果所有线程都在此对象上等待,则会选择唤醒其中一个线程,选择是任意的,并在对实现做出决定时发生,线程通过调<br>用其中一个 wait() 方法,在对象的监视器上等待,直到当前的线程放弃此对象上的锁定,才能继续执行被唤醒的线程,被唤醒的线程将以常规方式与在该对象上主动同步的其他所有线程进行竞争。类似的方法还有 notifyAll() ,唤醒再次监视器上等待的所有线程。</p>
 <h4 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法:"></a>其他方法:</h4><ol>
@@ -717,15 +722,14 @@
 </li>
 </ul>
 <ul>
-<li><p>DelayQueue: 使用优先级队列实现的无界阻塞队列.(缓存失效、定时任务 )</p>
-<blockquote>
+<li>DelayQueue: 使用优先级队列实现的无界阻塞队列.(缓存失效、定时任务 )<blockquote>
 <p>是一个支持延时获取元素的无界阻塞队列。队列使用 PriorityQueue 来实现。队列中的元素必须实<br>现 Delayed 接口,在创建元素时可以指定多久才能从队列中获取当前元素。只有在延迟期满时才<br>能从队列中提取元素。我们可以将 DelayQueue 运用在以下应用场景:</p>
-</blockquote>
-<blockquote>
-<p>1.缓存系统的设计:可以用 DelayQueue 保存缓存元素的有效期,使用一个线程循环查询 DelayQueue,一旦能从 DelayQueue 中获取元素时,表示缓存有效期到了。<br>2.定时任务调度 : 使用 DelayQueue 保存当天将会执行的任务和执行时间,一旦从DelayQueue 中获取到任务就开始执行,从比如 TimerQueue 就是使用 DelayQueue 实现的。</p>
 </blockquote>
 </li>
 </ul>
+<blockquote>
+<p>1.缓存系统的设计:可以用 DelayQueue 保存缓存元素的有效期,使用一个线程循环查询 DelayQueue,一旦能从 DelayQueue 中获取元素时,表示缓存有效期到了。<br>2.定时任务调度 : 使用 DelayQueue 保存当天将会执行的任务和执行时间,一旦从DelayQueue 中获取到任务就开始执行,从比如 TimerQueue 就是使用 DelayQueue 实现的。</p>
+</blockquote>
 <ul>
 <li>SynchronousQueue: 不存储元素的阻塞队列.(不存储数据、可用于传递数据)<blockquote>
 <p>是一个不存储元素的阻塞队列。每一个 put 操作必须等待一个 take 操作,否则不能继续添加元素。<br>SynchronousQueue 可以看成是一个传球手,负责把生产者线程处理的数据直接传递给消费者线<br>程。队列本身并不存储任何元素,非常适合于传递性场景,比如在一个线程中使用的数据,传递给<br>另 外 一 个 线 程 使 用 , SynchronousQueue 的 吞 吐 量 高 于 LinkedBlockingQueue 和<br>ArrayBlockingQueue。</p>

@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
@@ -64,7 +65,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -456,7 +457,7 @@
 <p>要获得整数的移码表示,可以利用定义计算,也可以先求出该数的补码后将符号位 取反。</p>
 </blockquote>
 <p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219151808472.png" srcset="/img/loading.gif" lazyload alt="image-20210219151808472"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">(1)当真值为正时,原码、补码和反码的表示形式均相同,即符号位用“0”表示,数值 部分与真值相同。<br>(2)当真值为负时,原码、补码和反码的表示形式不同,但其符号位都用“1”表示,而 数值部分的关系为:反码是原码“每位取反”,补码是反码“加1”,补码是原码“求反加1”。<br>(3)移码较为特殊,当符号位为“0”时,表示真值为负数;当符号位为“1”时,表示真值 为正数。移码与补码编码仅符号位相反。<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">(1)当真值为正时,原码、补码和反码的表示形式均相同,即符号位用“0”表示,数值 部分与真值相同。<br>(2)当真值为负时,原码、补码和反码的表示形式不同,但其符号位都用“1”表示,而 数值部分的关系为:反码是原码“每位取反”,补码是反码“加1”,补码是原码“求反加1”。<br>(3)移码较为特殊,当符号位为“0”时,表示真值为负数;当符号位为“1”时,表示真值 为正数。移码与补码编码仅符号位相反。<br></code></pre></div></td></tr></table></figure>
 
 <h2 id="浮点数的表示方法"><a href="#浮点数的表示方法" class="headerlink" title="浮点数的表示方法"></a>浮点数的表示方法</h2><blockquote>
 <p>由于计算机 字 长 的 限 制,当 需 要 表 示 的 数 据 有 很 大 的 数 值 范 围 (如 电 子 的 质 量 为 9×10-28克,太阳的质量为2×1033克)时,它们不能直接用定点小数或定点整数表示,而必 须用浮点数表示。由于计算机采用二进制,所以浮点数的一般表示形式为式</p>
@@ -681,7 +682,8 @@
 <p>(2)电气特性:规定了总线中每条信号线的有效形式、电流或电压的变化范围、信号传 送的方向(输入或输出)、信号采用单端或双端(差动)表示、信号是单向传输或双向传输、 信号上拉电阻阻值、驱动电路等要素。 </p>
 <p>(3)功能特性:规定了总线中每条信号线的功能及数据传输协议。总线信号按功能分 为:地址信号、数据信号和控制信号三类,所有地址信号线组成地址总线,所有数据信号线 组成数据总线,所有控制信号线组成控制总线。　　</p>
 <p>(4)时间特性:规定了总线的工作时序,即在总线上完成各种操作时,相关信号状态变 化与时钟节拍(时间)之间的关系。</p>
-<h2 id="中断处理速度"><a href="#中断处理速度" class="headerlink" title="中断处理速度"></a>中断处理速度</h2><blockquote>
+<p>##　中断处理速度 </p>
+<blockquote>
 <p>中断的快速响应特性使其可以应用于实时系统(Real-TimeSystem),但执行中断处理程序会影响中断的效率。一次中断过程需要有响应时间、信息保护与恢复时间,也许还需 要中断源识别时间(非向量中断),这些非实质中断处理时间统称为中断额外开销时间,所 以一次中断过程所需的完整时间是对中断源实质的处理时间与中断额外开销时间之和。因 为中断额外开销时间不会为零,所以中断频率(单位时间内响应中断的次数)受到一定限 制。更快速地响应中断、尽可能地缩短中断处理时间是提高中断处理速度的两个重要环节, 是中断方式实现中的关注点。</p>
 </blockquote>
 <h1 id="第9章-并行体系结构"><a href="#第9章-并行体系结构" class="headerlink" title="第9章 并行体系结构"></a>第9章 并行体系结构</h1><blockquote>

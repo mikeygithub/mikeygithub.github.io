@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
@@ -64,7 +65,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -316,14 +317,14 @@
               <h1 id="MINIKUBE-INSTALL-TUTORIALS"><a href="#MINIKUBE-INSTALL-TUTORIALS" class="headerlink" title="MINIKUBE INSTALL TUTORIALS"></a>MINIKUBE INSTALL TUTORIALS</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ul>
 <li>Ubuntu16</li>
 </ul>
-<h2 id="安装-kubectl"><a href="#安装-kubectl" class="headerlink" title="安装 kubectl"></a>安装 kubectl</h2><figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl<br>chmod +x ./kubectl<br>sudo mv ./kubectl /usr/local/bin/kubectl<br>kubectl version --client<br></code></pre></div></td></tr></table></figure>
+<h2 id="安装-kubectl"><a href="#安装-kubectl" class="headerlink" title="安装 kubectl"></a>安装 kubectl</h2><figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl<br>chmod +x ./kubectl<br>sudo mv ./kubectl /usr/local/bin/kubectl<br>kubectl version --client<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="安装-Minikube"><a href="#安装-Minikube" class="headerlink" title="安装 Minikube"></a>安装 Minikube</h2><figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_1.8.0_amd64.deb &amp;&amp; sudo dpkg -i minikube_1.8.0_amd64.deb<br></code></pre></div></td></tr></table></figure>
+<h2 id="安装-Minikube"><a href="#安装-Minikube" class="headerlink" title="安装 Minikube"></a>安装 Minikube</h2><figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_1.8.0_amd64.deb &amp;&amp; sudo dpkg -i minikube_1.8.0_amd64.deb<br></code></pre></div></td></tr></table></figure>
 
 <blockquote>
 <p>国内可能无法访问,可以采用阿里源</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -Lo minikube https://github.com/kubernetes/minikube/releases/download/v1.8.0/minikube-linux-amd64 &amp;&amp; chmod +x minikube &amp;&amp; sudo mv minikube /usr/local/bin/<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">curl -Lo minikube https://github.com/kubernetes/minikube/releases/download/v1.8.0/minikube-linux-amd64 &amp;&amp; chmod +x minikube &amp;&amp; sudo mv minikube /usr/local/bin/<br></code></pre></div></td></tr></table></figure>
 
 <h2 id="配置-Hypervisor"><a href="#配置-Hypervisor" class="headerlink" title="配置 Hypervisor"></a>配置 Hypervisor</h2><p>验证您的系统是否启用了虚拟化支持：<code>egrep -q &#39;vmx|svm&#39; /proc/cpuinfo &amp;&amp; echo yes || echo no</code></p>
 <blockquote>
@@ -333,7 +334,8 @@
 <h2 id="所需镜像如下"><a href="#所需镜像如下" class="headerlink" title="所需镜像如下"></a>所需镜像如下</h2><blockquote>
 <p>若无法连接谷歌可直接下载以下镜像（要对应版本）</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">docker pull registry.aliyuncs.com/google_containers/kube-proxy:v1.17.3<br>docker pull registry.aliyuncs.com/google_containers/kube-controller-manager:v1.17.3<br>docker pull registry.aliyuncs.com/google_containers/kube-apiserver:v1.17.3<br>docker pull registry.aliyuncs.com/google_containers/kube-scheduler:v1.17.3<br>docker pull registry.aliyuncs.com/google_containers/coredns:1.6.5<br>docker pull registry.aliyuncs.com/google_containers/etcd:3.4.3-0<br>docker pull registry.aliyuncs.com/google_containers/pause:3.1<br>docker pull registry.aliyuncs.com/google_containers/storage-provisioner:v1.8.1<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">docker pull registry.aliyuncs.com/google_containers/kube-proxy:v1.17.3<br>docker pull registry.aliyuncs.com/google_containers/kube-controller-manager:v1.17.3<br>docker pull registry.aliyuncs.com/google_containers/kube-apiserver:v1.17.3<br>docker pull registry.aliyuncs.com/google_containers/kube-scheduler:v1.17.3<br>docker pull registry.aliyuncs.com/google_containers/coredns:1.6.5<br>docker pull registry.aliyuncs.com/google_containers/etcd:3.4.3-0<br>docker pull registry.aliyuncs.com/google_containers/pause:3.1<br>docker pull registry.aliyuncs.com/google_containers/storage-provisioner:v1.8.1<br></code></pre></div></td></tr></table></figure>
+
 <h2 id="Kubernetes-可视化界面"><a href="#Kubernetes-可视化界面" class="headerlink" title="Kubernetes 可视化界面"></a>Kubernetes 可视化界面</h2><p><code>minikube dashboard</code></p>
 <p>访问控制台的连接即可</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://github.com/AliyunContainerService/minikube">Github代码库</a><br><a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/221687">参考博文</a><br><a target="_blank" rel="noopener" href="https://minikube.sigs.k8s.io/docs/start/">官方文档</a><br><br/></p>

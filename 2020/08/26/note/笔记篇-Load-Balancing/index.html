@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
@@ -64,7 +65,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -409,7 +410,7 @@
 <h2 id="upstream-module-和健康检测"><a href="#upstream-module-和健康检测" class="headerlink" title="upstream_module 和健康检测"></a>upstream_module 和健康检测</h2><p>ngx_http_upstream_module 是负载均衡模块,可以实现网站的负载均衡功能即节点的健康检查,upstream 模块允许 Nginx 定义一组或多组节点服务器组,使用时可通过 proxy_pass 代理方式把网站的请求发送到事先定义好的对应 Upstream 组 的名字上。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/nginx-table.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <p>proxy_pass 请求转发<br>proxy_pass 指令属于 ngx_http_proxy_module 模块,此模块可以将请求转发到另一台服务器,在实际的反向代理工作中,会通过 location 功能匹配指定的 URI,然后把接收到服务匹配 URI 的<br>请求通过 proyx_pass 抛给定义好的 upstream 节点池。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">location /download/ &#123;<br>    proxy_pass http://download/vedio/;<br>&#125;<br>//这是前端代理节点的设置<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">location &#x2F;download&#x2F; &#123;<br>    proxy_pass http:&#x2F;&#x2F;download&#x2F;vedio&#x2F;;<br>&#125;<br>&#x2F;&#x2F;这是前端代理节点的设置<br></code></pre></div></td></tr></table></figure>
 
 <p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/proxy-model-param.png" srcset="/img/loading.gif" lazyload alt="avatar"></p>
 <h1 id="HAProxy"><a href="#HAProxy" class="headerlink" title="HAProxy"></a>HAProxy<br/></h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>

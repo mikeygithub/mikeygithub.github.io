@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
@@ -64,7 +65,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -392,7 +393,7 @@
 <p>给定两个单词 word1 和 word2，计算出将 word1 转换成 word2 所使用的最少操作数 。</p>
 <p>你可以对一个单词进行如下三种操作：</p>
 <p>插入一个字符<br>删除一个字符<br>替换一个字符</p>
-<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">示例 <span class="hljs-number">1</span>:<br>输入: word1 = <span class="hljs-string">&quot;horse&quot;</span>, word2 = <span class="hljs-string">&quot;ros&quot;</span><br>输出: <span class="hljs-number">3</span><br>解释: <br>horse -&gt; rorse (将 <span class="hljs-string">&#x27;h&#x27;</span> 替换为 <span class="hljs-string">&#x27;r&#x27;</span>)<br>rorse -&gt; rose (删除 <span class="hljs-string">&#x27;r&#x27;</span>)<br>rose -&gt; ros (删除 <span class="hljs-string">&#x27;e&#x27;</span>)<br><br><span class="hljs-number">12345678</span><br>示例 <span class="hljs-number">2</span>:<br>输入: word1 = <span class="hljs-string">&quot;intention&quot;</span>, word2 = <span class="hljs-string">&quot;execution&quot;</span><br>输出: <span class="hljs-number">5</span><br>解释: <br>intention -&gt; inention (删除 <span class="hljs-string">&#x27;t&#x27;</span>)<br>inention -&gt; enention (将 <span class="hljs-string">&#x27;i&#x27;</span> 替换为 <span class="hljs-string">&#x27;e&#x27;</span>)<br>enention -&gt; exention (将 <span class="hljs-string">&#x27;n&#x27;</span> 替换为 <span class="hljs-string">&#x27;x&#x27;</span>)<br>exention -&gt; exection (将 <span class="hljs-string">&#x27;n&#x27;</span> 替换为 <span class="hljs-string">&#x27;c&#x27;</span>)<br>exection -&gt; execution (插入 <span class="hljs-string">&#x27;u&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">示例 <span class="hljs-number">1</span>:<br>输入: word1 = <span class="hljs-string">&quot;horse&quot;</span>, word2 = <span class="hljs-string">&quot;ros&quot;</span><br>输出: <span class="hljs-number">3</span><br>解释: <br>horse -&gt; rorse (将 &#x27;h&#x27; 替换为 &#x27;r&#x27;)<br>rorse -&gt; rose (删除 &#x27;r&#x27;)<br>rose -&gt; ros (删除 &#x27;e&#x27;)<br><br><span class="hljs-number">12345678</span><br>示例 <span class="hljs-number">2</span>:<br>输入: word1 = <span class="hljs-string">&quot;intention&quot;</span>, word2 = <span class="hljs-string">&quot;execution&quot;</span><br>输出: <span class="hljs-number">5</span><br>解释: <br>intention -&gt; inention (删除 &#x27;t&#x27;)<br>inention -&gt; enention (将 &#x27;i&#x27; 替换为 &#x27;e&#x27;)<br>enention -&gt; exention (将 &#x27;n&#x27; 替换为 &#x27;x&#x27;)<br>exention -&gt; exection (将 &#x27;n&#x27; 替换为 &#x27;c&#x27;)<br>exection -&gt; execution (插入 &#x27;u&#x27;)<br></code></pre></div></td></tr></table></figure>
 
 <p><strong>思路：升级维度</strong><br>将word1与word2的长度作为二维数组长度新建二维数组，二维数组用来存储最短编辑距离；<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/jike-3.png" srcset="/img/loading.gif" lazyload></p>
 <ul>

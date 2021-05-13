@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
@@ -64,7 +65,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -319,7 +320,7 @@
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><blockquote>
 <p>Java程序经过编译后的字节码是运行在JVM上的，通过JDWP将其和代码联系起来，提供给开发者一个可视化的UI环境进行调试，Java调试器架构如下所示。</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">          Components                          Debugger Interfaces<br><br>               /    |--------------|<br>              /     |     VM       |<br>debuggee ----(      |--------------|  &lt;------- JVM TI - Java VM Tool Interface<br>              \     |   back-end   |<br>               \    |--------------|<br>               /           |<br>comm channel -(            |  &lt;--------------- JDWP - Java Debug Wire Protocol<br>               \           |<br>                    |--------------|<br>                    | front-end    |<br>                    |--------------|  &lt;------- JDI - Java Debug Interface<br>                    |      UI      |<br>                    |--------------|<br><br><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs text">          Components                          Debugger Interfaces<br><br>               /    |--------------|<br>              /     |     VM       |<br>debuggee ----(      |--------------|  &lt;------- JVM TI - Java VM Tool Interface<br>              \     |   back-end   |<br>               \    |--------------|<br>               /           |<br>comm channel -(            |  &lt;--------------- JDWP - Java Debug Wire Protocol<br>               \           |<br>                    |--------------|<br>                    | front-end    |<br>                    |--------------|  &lt;------- JDI - Java Debug Interface<br>                    |      UI      |<br>                    |--------------|<br><br><br></code></pre></div></td></tr></table></figure>
 
 
 <h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>对服务端的JVM配置参数</p>

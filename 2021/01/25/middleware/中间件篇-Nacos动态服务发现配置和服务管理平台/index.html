@@ -7,6 +7,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
   <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
   <meta name="viewport"
@@ -64,7 +65,7 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
 
 <body>
@@ -262,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      998 字
+      1k 字
     </span>
   
 
@@ -272,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      13
        分钟
     </span>
   
@@ -347,51 +348,51 @@
 方式一通过下载源码
 </p>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">git clone https://github.com/alibaba/nacos.git<br>cd nacos/<br>mvn -Prelease-nacos -Dmaven.test.skip=true clean install -U <br>ls -al distribution/target/<br><br>// change the $version to your actual path<br>cd distribution/target/nacos-server-$version/nacos/bin<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">git clone https:&#x2F;&#x2F;github.com&#x2F;alibaba&#x2F;nacos.git<br>cd nacos&#x2F;<br>mvn -Prelease-nacos -Dmaven.test.skip&#x3D;true clean install -U <br>ls -al distribution&#x2F;target&#x2F;<br><br>&#x2F;&#x2F; change the $version to your actual path<br>cd distribution&#x2F;target&#x2F;nacos-server-$version&#x2F;nacos&#x2F;bin<br></code></pre></div></td></tr></table></figure>
 
 <p class="note note-primary">
 方式二下载可运行包
 </p>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">unzip nacos-server-$version.zip  OR tar -xvf nacos-server-$version.tar.gz<br>cd nacos/bin<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">unzip nacos-server-$version.zip  OR tar -xvf nacos-server-$version.tar.gz<br>cd nacos&#x2F;bin<br></code></pre></div></td></tr></table></figure>
 
 <p class="note note-primary">
 启动服务
 </p>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">bash startup.sh -m standalone<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">bash startup.sh -m standalone<br></code></pre></div></td></tr></table></figure>
 
 <p class="note note-primary">
 服务注册
 </p>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -X POST &#x27;http://127.0.0.1:8848/nacos/v1/ns/instance?serviceName=nacos.naming.serviceName&amp;ip=20.18.7.10&amp;port=8080&#x27;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -X POST &#39;http:&#x2F;&#x2F;127.0.0.1:8848&#x2F;nacos&#x2F;v1&#x2F;ns&#x2F;instance?serviceName&#x3D;nacos.naming.serviceName&amp;ip&#x3D;20.18.7.10&amp;port&#x3D;8080&#39;<br></code></pre></div></td></tr></table></figure>
 
 
 <p class="note note-primary">
 服务发现
 </p>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -X GET &#x27;http://127.0.0.1:8848/nacos/v1/ns/instance/list?serviceName=nacos.naming.serviceName&#x27;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -X GET &#39;http:&#x2F;&#x2F;127.0.0.1:8848&#x2F;nacos&#x2F;v1&#x2F;ns&#x2F;instance&#x2F;list?serviceName&#x3D;nacos.naming.serviceName&#39;<br></code></pre></div></td></tr></table></figure>
 
 <p class="note note-primary">
 发布配置
 </p>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -X POST &quot;http://127.0.0.1:8848/nacos/v1/cs/configs?dataId=nacos.cfg.dataId&amp;group=test&amp;content=helloWorld&quot;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -X POST &quot;http:&#x2F;&#x2F;127.0.0.1:8848&#x2F;nacos&#x2F;v1&#x2F;cs&#x2F;configs?dataId&#x3D;nacos.cfg.dataId&amp;group&#x3D;test&amp;content&#x3D;helloWorld&quot;<br></code></pre></div></td></tr></table></figure>
 
 
 <p class="note note-primary">
 获取配置
 </p>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -X GET &quot;http://127.0.0.1:8848/nacos/v1/cs/configs?dataId=nacos.cfg.dataId&amp;group=test&quot;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">curl -X GET &quot;http:&#x2F;&#x2F;127.0.0.1:8848&#x2F;nacos&#x2F;v1&#x2F;cs&#x2F;configs?dataId&#x3D;nacos.cfg.dataId&amp;group&#x3D;test&quot;<br></code></pre></div></td></tr></table></figure>
 
 <p class="note note-primary">
 关闭服务
 </p>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">sh shutdown.sh<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jshelllanguage">sh shutdown.sh<br></code></pre></div></td></tr></table></figure>
 
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://nacos.io/en-us/docs/quick-start.html">官方文档</a><br/></p>
 <p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg" srcset="/img/loading.gif" lazyload alt="扫一扫，关注我"></p>
