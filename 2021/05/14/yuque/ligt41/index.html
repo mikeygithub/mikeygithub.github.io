@@ -263,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      265 字
+      998 字
     </span>
   
 
@@ -273,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      11
        分钟
     </span>
   
@@ -315,16 +315,50 @@
             
             <div class="markdown-body">
               <p> <img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621000416705-2098bc07-a498-4c7d-bd7c-0a8ccb4a74f4.png#clientId=ufc67ca33-8eee-4&from=paste&height=128&id=ufb083d64&margin=%5Bobject%20Object%5D&name=image.png&originHeight=128&originWidth=128&originalType=binary&size=49428&status=done&style=none&taskId=u07149515-61c0-4854-adf0-c52b9f1aea9&width=128" srcset="/img/loading.gif" lazyload alt="image.png"><br>​</p>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
+<h1 id="软件简介"><a href="#软件简介" class="headerlink" title="软件简介"></a>软件简介</h1><blockquote>
 <p>Java Flight Recorder 和 JDK Mission Control 共同创建了一个完整的工具链，以不断收集低级别和详细的运行时信息，从而支持事后事件分析。java flight recorder 是 oraclejdk 中内置的一个评测和事件收集框架。它允许 Java 管理员和开发人员收集有关 Java 虚拟机（JVM）和 Java 应用程序行为的详细底层信息。JDK 任务控制是一套先进的工具，它能够对 Java 飞行记录器收集的大量数据进行有效而详细的分析。该工具链使开发人员和管理员能够从本地运行或部署在生产环境中的 Java 应用程序收集和分析数据。</p>
 </blockquote>
-<h1 id="JFR"><a href="#JFR" class="headerlink" title="JFR"></a>JFR</h1><h1 id="JMC"><a href="#JMC" class="headerlink" title="JMC"></a>JMC</h1><p>​</p>
-<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/jdk-mission-control.html"> JDK Mission Control</a></p>
+<h2 id="JFR-和-JMC"><a href="#JFR-和-JMC" class="headerlink" title="JFR 和 JMC"></a>JFR 和 JMC</h2><p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/jdk-mission-control.html"> JDK Mission Control</a><br>​</p>
+<p>MC 由以下客户端应用程序和插件组成：</p>
+<blockquote>
+<p>JVM 浏览器显示正在运行的 Java 应用程序及其 JVM。<br>JMX 控制台是一种用于监视和管理 jvm 的机制。它连接到正在运行的 JVM，收集、实时显示其特性，并允许您通过托管 bean（mbean）更改其一些运行时属性。您还可以创建在某些事件上触发的规则（例如，如果应用程序的 CPU 使用率达到 90%，则发送电子邮件）。<br>Flight Recorder（JFR）是一种用于收集有关正在运行的 Java 应用程序的诊断和分析数据的工具。它被集成到 JVM 中，造成的性能开销非常小，因此可以在生产环境中使用。JFR 不断地保存有关正在运行的应用程序的大量数据。此配置文件信息包括线程示例、锁配置文件和垃圾收集详细信息。JFR 在逻辑分组的表格和图表中显示诊断信息。它允许您选择关注问题所需的时间范围和详细程度。当联系 Oracle 支持人员帮助诊断 Java 应用程序的问题时，JFR 收集的数据是必不可少的。<br>jcmd 实用程序或诊断命令用于向 JVM 发送诊断命令请求。这些请求对于管理来自 Flight Recorder 的记录、故障排除以及诊断 JVM 和 Java 应用程序非常有用。<br>插件有助于堆转储分析和 DTrace 记录。请参阅插件详细信息。JMC 插件使用 java management extensions（JMX）代理连接到 JVM。有关 JMX 的更多信息，请参阅 JMX 技术主页。</p>
+</blockquote>
 <p>jfr 为 JDK 自带的工具，但是 JMC 需要我们自己去官网下载，选择对应的平台进行安装</p>
 <p>下载链接：<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/products-jmc8-downloads.html">https://www.oracle.com/java/technologies/javase/products-jmc8-downloads.html</a><br>​</p>
-<p>​</p>
-<p>​</p>
-<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>官方文档：<a target="_blank" rel="noopener" href="https://docs.oracle.com/en/java/java-components/jdk-mission-control/8/user-guide/">https://docs.oracle.com/en/java/java-components/jdk-mission-control/8/user-guide/</a></p>
+<h1 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h1><p>开启 JFR 收集:  由于 JFR 是商用的，所以需要解锁 Java 程序的商业 feature:</p>
+<blockquote>
+<p>JDK 1.8u40 之前版本，需再 jvm 启动前添加参数</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-XX:+UnlockCommercialFeatures -XX:+FlightRecorder<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>JDK 1.8u40 之后版本，不需要在启动的时候通过 flag 来解锁了，可以动态的解锁</p>
+</blockquote>
+<p>动态解锁 后可以运行许 JFR 采集任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 先通过jcmd命令查看你要进行监控的java程序pid</span><br>jcmd 18137 VM.unlock_commercial_features<br></code></pre></div></td></tr></table></figure>
+
+<p>检查是否已经成功开启</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">jcmd 18137 VM.check_commercial_features<br></code></pre></div></td></tr></table></figure>
+
+<p>输出：Commercial Features already unlocked.则表示已经开启，接下来就是启动采集任务，可设定指定时长。<br>​</p>
+<p>采集 5min 的 JFR 任务(采集固定时长 JFR 任务)</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">jcmd 18137 JFR.start name=core_api_1 settings=profile delay=5s duration=5m filename=<span class="hljs-string">&quot;/home/mikey/jfr/core_api.jfr&quot;</span> compress=<span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure>
+
+<p>检查任务是否在进行</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">jcmd 18137 JFR.check<br></code></pre></div></td></tr></table></figure>
+
+<p>另一种方式是一直采集数据</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">jcmd <span class="hljs-number">18137</span> JFR.start name=core_api_2 settings=profile delay=5s duration=<span class="hljs-number">0</span> compress=<span class="hljs-keyword">true</span><br></code></pre></div></td></tr></table></figure>
+
+<p>转存 jfr 文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">jcmd 18137 JFR.dump name=zhibi_jfr_test2 filename=<span class="hljs-string">&quot;/home/mikey/jfr/core_api_2.jfr&quot;</span> compress=<span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure>
+
+<p>停止持续采集 JFR 任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">jcmd 18137 JFR.stop name=core_api_2<br></code></pre></div></td></tr></table></figure>
+
+<p>通过 JMC 将 jfr 文件导入即可查看相关的数据情况<br>​</p>
+<h1 id="详细教程"><a href="#详细教程" class="headerlink" title="详细教程"></a>详细教程</h1><p>TODO</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>官方文档：<a target="_blank" rel="noopener" href="https://docs.oracle.com/en/java/java-components/jdk-mission-control/8/user-guide/">https://docs.oracle.com/en/java/java-components/jdk-mission-control/8/user-guide/</a></p>
 <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1620799343096-89ce2681-3063-4534-be06-be610367739c.png#clientId=uadd4da19-1647-4&from=paste&height=430&id=u7b333f28&margin=%5Bobject%20Object%5D&name=image.png&originHeight=430&originWidth=430&originalType=binary&size=53356&status=done&style=none&taskId=uf6e2de31-a181-45e5-a3ba-4562464e7f0&width=430" srcset="/img/loading.gif" lazyload alt="image.png"><br>扫一扫、关注我</p>
 
             </div>
