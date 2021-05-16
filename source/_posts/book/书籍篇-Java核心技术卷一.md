@@ -124,7 +124,7 @@ LocalDate类以及java.time 包中的其他类是不可变的一没 有方法能
 当然，并不是所有类都应当是不可变的。如果员工加薪时让raiseSalary方法返回一个新
 的Employee对象，这会很奇怪。
 
-# 第5章 继承
+# 第五章 继承
 
 ## 类、超类和子类
 
@@ -459,6 +459,52 @@ rraylgPair p = Arayaygrginax(); .
 ## 异常分类
 
 ![Java 中的异常层次结构](https://i.loli.net/2021/05/03/v26siHt1RwKYuOD.png)
+
+
+
+> 注释： RuntimeExc ti on 这个名字很容易让人混淆 实际上，现在讨论的所有错误都发生在运行时
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
