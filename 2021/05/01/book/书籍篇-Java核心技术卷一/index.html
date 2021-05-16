@@ -263,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      7k 字
+      7.1k 字
     </span>
   
 
@@ -273,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      76
+      77
        分钟
     </span>
   
@@ -358,7 +358,7 @@
 <p>与变量应该有一-个能够反映其含义的名字一样， 类也应该如此(在标准类库中，也存在<br>着一些含义不明确的例子，如: Date类实际上是-一个用于描述时间的类)。<br>命名类名的良好习惯是采用一个名词(Order)、前面有形容词修饰的名词(RushOrder)<br>或动名词(有“-ing”后缀)修饰名词(例如，BillingAddress)。 对于方法来说，习惯是访问<br>器方法用小写get 开头(getSalary), 更改器方法用小写的set开头(setSalary)。</p>
 <p>7.优先使用不可变的类</p>
 <p>LocalDate类以及java.time 包中的其他类是不可变的一没 有方法能修改对象的状态。<br>类似plusDays的方法并不是更改对象，而是返回状态已修改的新对象。<br>更改对象的问题在于，如果多个线程试图同时更新-一个对象，就会发生并发更改。其结<br>果是不可预料的。如果类是不可变的，就可以安全地在多个线程间共享其对象。<br>因此，要尽可能让类是不可变的，这是-一个很好的想法。对于表示值的类，如一个字符<br>串或-一个时间点，这尤其容易。计算会生成新值，而不是更新原来的值。<br>当然，并不是所有类都应当是不可变的。如果员工加薪时让raiseSalary方法返回一个新<br>的Employee对象，这会很奇怪。</p>
-<h1 id="第5章-继承"><a href="#第5章-继承" class="headerlink" title="第5章 继承"></a>第5章 继承</h1><h2 id="类、超类和子类"><a href="#类、超类和子类" class="headerlink" title="类、超类和子类"></a>类、超类和子类</h2><p>关键字<code>extends</code>表明正在构造的新类派生于一个已存在的类。已存在的类称为超类( superclass)、基类(base class)或父类( parent class);新类称为子类( subclass)、派生类(derived class)或孩子类(child cass)。超类和子类是Java程序员最常用的两个术语，而了解 其他语言的程序员可能更加偏爱使用父类和孩子类，这些都是继承时使用的术语。</p>
+<h1 id="第五章-继承"><a href="#第五章-继承" class="headerlink" title="第五章 继承"></a>第五章 继承</h1><h2 id="类、超类和子类"><a href="#类、超类和子类" class="headerlink" title="类、超类和子类"></a>类、超类和子类</h2><p>关键字<code>extends</code>表明正在构造的新类派生于一个已存在的类。已存在的类称为超类( superclass)、基类(base class)或父类( parent class);新类称为子类( subclass)、派生类(derived class)或孩子类(child cass)。超类和子类是Java程序员最常用的两个术语，而了解 其他语言的程序员可能更加偏爱使用父类和孩子类，这些都是继承时使用的术语。</p>
 <h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>有一个用来判断是否应该设计为继承 关系的简单规则，这就是“is-a” 规则，它 表明子类的每个对象也是超类的对象。例Employee 继承层次 如，每个经理都是雇员，因此，将Manager类设计为Employee类的子类是显而易见的，反之不然，并不是每一- 名雇员都是经理。 “is-a” 规则的另- -种表述法是置换法则。它表明程序中出现超类对象的任何地方都可以用子类对象置换。</p>
 <pre><code class=" mermaid">graph BT;
 a(executive)--&gt;b(Manager);
@@ -476,6 +476,9 @@ f(programmer)--&gt;b
 <li>允许用户保存所有操作的结果，并以妥善的方式终止程序。</li>
 </ul>
 <h2 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h2><p><img src="https://i.loli.net/2021/05/03/v26siHt1RwKYuOD.png" srcset="/img/loading.gif" lazyload alt="Java 中的异常层次结构"></p>
+<blockquote>
+<p>注释： RuntimeExc ti on 这个名字很容易让人混淆 实际上，现在讨论的所有错误都发生在运行时</p>
+</blockquote>
 <br/>
 
 
