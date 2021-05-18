@@ -263,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      7.1k 字
+      9.8k 字
     </span>
   
 
@@ -273,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      77
+      108
        分钟
     </span>
   
@@ -470,7 +470,13 @@ f(programmer)--&gt;b
 <p>利用代理可以在运行时创建一个实 了一组给定接口的新类 这种功能只有在编译时无法确定需要实现哪个接口 时才有必要使用。</p>
 </blockquote>
 <p>代理类是在程序运行过程中创建的 然而，一旦被创建，就变成了常规类，与虚拟机中的任何其他类没有什么区别所有的代理类都拓展基于Proxy类。</p>
-<h1 id="第七章-异常、断言和日志"><a href="#第七章-异常、断言和日志" class="headerlink" title="第七章 异常、断言和日志"></a>第七章 异常、断言和日志</h1><h2 id="处理错误"><a href="#处理错误" class="headerlink" title="处理错误"></a>处理错误</h2><p>假设在一个Java程序运行期间出现了一个错误。这个错误可能是由于文件包含了错误信息，或者网络连接出现问题造成的，也有可能是因为使用无效的数组下标，或者试图使用一个没有被赋值的对象引用而造成的。用户期望在出现错误时,程序能够采用一-些理智的行为。如果由于出现错误而使得某些操作没有完成，程序应该:</p>
+<h1 id="第七章-异常、断言和日志"><a href="#第七章-异常、断言和日志" class="headerlink" title="第七章 异常、断言和日志"></a>第七章 异常、断言和日志</h1><p>在Java语言中，给出了3种处理系统错误的机制:</p>
+<ul>
+<li>抛出一个异常</li>
+<li>日志</li>
+<li>使用断言</li>
+</ul>
+<h2 id="处理错误"><a href="#处理错误" class="headerlink" title="处理错误"></a>处理错误</h2><p>假设在一个Java程序运行期间出现了一个错误。这个错误可能是由于文件包含了错误信息，或者网络连接出现问题造成的，也有可能是因为使用无效的数组下标，或者试图使用一个没有被赋值的对象引用而造成的。用户期望在出现错误时,程序能够采用一-些理智的行为。如果由于出现错误而使得某些操作没有完成，程序应该:</p>
 <ul>
 <li>返回到一种安全状态，并能够让用户执行一些 其他的命令;或者</li>
 <li>允许用户保存所有操作的结果，并以妥善的方式终止程序。</li>
@@ -478,6 +484,194 @@ f(programmer)--&gt;b
 <h2 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h2><p><img src="https://i.loli.net/2021/05/03/v26siHt1RwKYuOD.png" srcset="/img/loading.gif" lazyload alt="Java 中的异常层次结构"></p>
 <blockquote>
 <p>注释： RuntimeExc ti on 这个名字很容易让人混淆 实际上，现在讨论的所有错误都发生在运行时</p>
+</blockquote>
+<blockquote>
+<p>警告：如果在子类中覆盖了超类的一个方法，子类方法中声明的受查异常不能比起类方法中声明的异常更通用（也就是说，子类方法 中可以抛出更特定的异常， 或者根本不抛出任何异常） 特别需要说明的是，如果超类方法没有抛 出任何受查异常，子类也不能抛出任何受查异常 例如，如果覆盖 JComponent.paintComponent 方法，由于超类中这个方法没有抛出任何异常，所以，自定义paintComponent 也不能抛出任何受查异常。</p>
+</blockquote>
+<p>Finally代码块</p>
+<blockquote>
+<p>当 finally 子句包含 return 语句时，将会出现一种意想不到的结果 假设利用 return语句从町语句块中退出 在方法返回前， finally 子句的内容将被执行 如果 finally 子句中也有一个 return 语句，这个返回值将会覆盖房、始的返回值。</p>
+</blockquote>
+<h2 id="断言的概念"><a href="#断言的概念" class="headerlink" title="断言的概念"></a>断言的概念</h2><p>假设确信某个属性符合要求，并且代码的执行依赖于这个属性 例如，需要计算<code>double y = Math.sqrt(x)</code>我们确信，这里的x是一个非负数值。原因是: x是另外一个计算的结果，而这个结果不可能是负值;或者x是个方法的参数,而这个方法要求它的调用者只能提供一个正数。<br>然而，还是希望进行检查，以避免让“不是一个数”的数值参与计算操作。当然，也可以抛出一个异常:<br><code>if (x&lt; 0) throw new IlegalArgumentException(&quot;x &lt; 0&quot;);</code><br>但是这段代码会一直保 留在程序中，即使测试完毕也不会自动地删除。如果在程序中含有大量的这种检查，程序运行起来会相当慢。<br>断言机制允许在测试期间向代码中插入一些检查语句。当代码发布时，这些插入的检测语句将会被自动地移走。<br>Java语言引入了关键字assert。这个关键字有两种形式:</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs aspectj"><span class="hljs-keyword">assert</span>条件;<br><span class="hljs-keyword">assert</span>条件:表达式;<br></code></pre></div></td></tr></table></figure>
+
+<p>这两种形式都会对条件进行检测，如果结果为false,则抛出一个AsertionError异常。在第二种形式中，表达式将被传人AstionError的构造器，并转换成一个消息字符串。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (x &lt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> AssertionError(x);<br></code></pre></div></td></tr></table></figure>
+
+<p>在默认情况下，断言被禁用。可以在运行程序时用-eablassertiors或-ea选项启用:<code>java -enableassertions MyApp</code></p>
+<h2 id="断言的使用选择"><a href="#断言的使用选择" class="headerlink" title="断言的使用选择"></a>断言的使用选择</h2><p>什么时候应该选择使用断言呢?请记住下面几点:</p>
+<ul>
+<li>断言失败是致命的、不可恢复的错误。</li>
+<li>断言检查只用于开发和测阶段(这种做法有时候被戏称为“在靠近海岸时穿上救生衣，但在海中央时就把救生衣抛掉吧”)。<br>因此，不应该使用断言向程序的其他部分通告发生了可恢复性的错误，或者，不应该作为程序向用户通告问题的手段。断言只应该用于在测试阶段确定程序内部的错误位置。</li>
+</ul>
+<h2 id="日志的使用"><a href="#日志的使用" class="headerlink" title=" 日志的使用"></a> 日志的使用</h2><p>优点：</p>
+<ul>
+<li>可以很容易地取消全部日志记录，或者仅仅取消某个级别的日志，而且打开和关闭这个操作也很容易。</li>
+<li>可以很简单地禁止日志记录的输出，因此，将这些日志代码留在程序中的开销很小。</li>
+<li>日志记录可以被定向到不同的处理器，用于在控制台中显示，用于存储在文件中等。</li>
+<li>日志记录器和处理器都可以对记录进行过滤。过滤器可以根据过滤实现器制定的标准丟弃那些无用的记录项。</li>
+<li>日志记录可以采用不同的方式格式化，例如，纯文本或XML。</li>
+<li>应用程序可以使用多个日志记录器，它们使用类似包名的这种具有层次结构的名字，例如，com.mycompany.myapp。</li>
+<li>在默认情况下，日志系统的配置由配置文件控制。如果需要的话，应用程序可以替换<br>这个配置。</li>
+</ul>
+<p>基本：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Logger.getG1oba().info(<span class="hljs-string">&quot;File-&gt;0pen menu item selected&quot;</span>);<br></code></pre></div></td></tr></table></figure>
+
+<p>高级：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Logger myLogger = Logger. getLogger(<span class="hljs-string">&#x27;com.mycompany.myapp&#x27;</span>);<br></code></pre></div></td></tr></table></figure>
+
+<p>日志级别：</p>
+<ul>
+<li><p>SEVERE </p>
+</li>
+<li><p>WARNING </p>
+</li>
+<li><p>INFO </p>
+</li>
+<li><p>CONFIG </p>
+</li>
+<li><p>FINE </p>
+</li>
+<li><p>FINER </p>
+</li>
+<li><p>FINEST </p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/05/16/ogdBR3ZvYuym6kK.png" srcset="/img/loading.gif" lazyload alt="image-20210516144048950"></p>
+<h1 id="第八章-范型程序设计"><a href="#第八章-范型程序设计" class="headerlink" title="第八章 范型程序设计"></a>第八章 范型程序设计</h1><p>简单案例</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span>&lt;<span class="hljs-title">T</span>&gt;</span>&#123;<br>    <span class="hljs-keyword">private</span> T first;<br>    <span class="hljs-keyword">private</span> T second;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Pair</span><span class="hljs-params">()</span></span>&#123;<br>        first = <span class="hljs-keyword">null</span>;<br>        second= <span class="hljs-keyword">null</span>; <br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Pair</span><span class="hljs-params">(T first, T second)</span> </span>&#123; <br>        <span class="hljs-keyword">this</span>.first = first; <br>        <span class="hljs-keyword">this</span>.second = second; <br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getFirst</span><span class="hljs-params">()</span></span>&#123; <br>        <span class="hljs-keyword">return</span> first; <br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getSecond</span><span class="hljs-params">()</span></span>&#123; <br>        <span class="hljs-keyword">return</span> second; <br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFirst</span><span class="hljs-params">(T newValue)</span></span>&#123;<br>        first = newValue;<br>    &#125; <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setSecond</span><span class="hljs-params">(T newValue)</span> </span>&#123;<br>        second = newValue; <br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>类型擦除</p>
+<blockquote>
+<p>无论何时定义-一个泛型类型，都自动提供了-.个相应的原始类型(rawtype)。原始类型的名字就是删去类型参数后的泛型类型名。擦除( erased)类型变量，并替换为限定类型(无限定的变量用Object)。</p>
+</blockquote>
+<p>约束与局限性</p>
+<ul>
+<li>不能用基本类型实例化类型参数</li>
+<li>运行时类型查询只适用于原始类型</li>
+<li>不能创建参数化类型的数组</li>
+<li>不能实例化类型变量</li>
+<li>不能构造泛型数组</li>
+<li>泛型类的静态上下文中类型变量无效</li>
+<li>不能抛出或捕获泛型类的实例</li>
+<li>可以消除对受查异常的检查</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs scala"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A&lt;T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">B&gt;</span></span><br><span class="hljs-class"><span class="hljs-comment">//这个边界声明了T必须具有类型B或者从B导出的类型。</span></span><br><span class="hljs-class"><span class="hljs-title">class</span> <span class="hljs-title">A&lt;T</span> <span class="hljs-title">super</span> <span class="hljs-title">B&gt;</span></span><br><span class="hljs-class"><span class="hljs-comment">//&lt; ? super Class&gt;表示，指定类的基类。</span></span><br></code></pre></div></td></tr></table></figure>
+
+<p>直观地讲， 带有超类型限定的通配柯 可以向泛型对象写人，带有子类型限定的通配符可以从泛型对象读取</p>
+<p><strong>PECS原则</strong></p>
+<p>如果要从集合中读取类型T的数据，并且不能写入，可以使用 ? extends 通配符；(Producer Extends) </p>
+<p>如果要从集合中写入类型T的数据，并且不需要读取，可以使用 ? super 通配符；(Consumer Super) </p>
+<p>如果既要存又要取，那么就不要使用任何通配符。</p>
+<h1 id="第九章-集合"><a href="#第九章-集合" class="headerlink" title="第九章 集合"></a>第九章 集合</h1><pre><code class=" mermaid">graph BT;
+List--&gt;Collection
+NavigableSet--&gt;SortedSet--&gt;Set--&gt;Collection--&gt;Iterable
+Deque--&gt;Queue--&gt;Collection
+
+NavigableMap--&gt;SortedMap--&gt;Map
+
+ListIterable--&gt;Itertor
+
+RamdomAccess
+
+</code></pre>
+
+<p>Java中的具体集合</p>
+<p><img src="https://i.loli.net/2021/05/18/UbS2ugKyonEcQTL.png" srcset="/img/loading.gif" lazyload alt="Java中的具体集合"></p>
+<pre><code class=" mermaid">graph BT;
+LinkedList--&gt;AbstractSquentialList--&gt;AbstractList
+ArrayList--&gt;AbstractList--&gt;AbstractCollection
+
+LinkHashSet--&gt;HashSet--&gt;AbstractSet--&gt;AbstractCollection
+EnumSet--&gt;AbstractSet
+TreeSet--&gt;AbstractSet
+
+PriorityQueue--&gt;AbstractQueue--&gt;AbstractCollection
+ArrayQueue--&gt;AbstractCollection
+</code></pre>
+
+<pre><code class=" mermaid">graph BT;
+LinkedHashMap--&gt;HashMap--&gt;AbstractMap
+TreeMap--&gt;AbstractMap
+EnumMap--&gt;AbstractMap
+WeakHashMap--&gt;AbstractMap
+IdentityHashMap--&gt;AbstractMap
+</code></pre>
+
+<h1 id="第十章-图形程序设计"><a href="#第十章-图形程序设计" class="headerlink" title="第十章 图形程序设计"></a>第十章 图形程序设计</h1><p>略</p>
+<h1 id="第十一章-事件处理"><a href="#第十一章-事件处理" class="headerlink" title="第十一章 事件处理"></a>第十一章 事件处理</h1><p>略</p>
+<h1 id="第十二章-Swing用户界面组件"><a href="#第十二章-Swing用户界面组件" class="headerlink" title="第十二章 Swing用户界面组件"></a>第十二章 Swing用户界面组件</h1><p>略</p>
+<h1 id="第十三章-部署Java应用"><a href="#第十三章-部署Java应用" class="headerlink" title="第十三章 部署Java应用"></a>第十三章 部署Java应用</h1><p>略</p>
+<h1 id="第十四章-并发"><a href="#第十四章-并发" class="headerlink" title="第十四章 并发"></a>第十四章 并发</h1><h2 id="线程、进程、携程、程序"><a href="#线程、进程、携程、程序" class="headerlink" title="线程、进程、携程、程序"></a>线程、进程、携程、程序</h2><ul>
+<li>线程</li>
+</ul>
+<blockquote>
+<p>线程是计算机独立调度的基本单位</p>
+</blockquote>
+<ul>
+<li>进程</li>
+</ul>
+<blockquote>
+<p>计算机分配资源的最小单位</p>
+</blockquote>
+<ul>
+<li>协程</li>
+</ul>
+<blockquote>
+<p>微线程、英文Coroutines，是一种比线程更加轻量级的存在。正如一个进程可以拥有多个线程一样，一个线程也可以拥有多个协程。</p>
+</blockquote>
+<ul>
+<li>程序</li>
+</ul>
+<blockquote>
+<p>程序是一组计算机能识别和执行的指令</p>
+</blockquote>
+<p>线程五种状态</p>
+<pre><code class=" mermaid">graph LR;
+创建--&gt;就绪--&gt;运行
+运行--&gt;阻塞--&gt;就绪
+运行--&gt;销毁
+</code></pre>
+
+<h2 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h2><blockquote>
+<p>在Java程序设计语言中，每一个线程有一一个优先级。 默认情况下，一个线程继承它的父线程的优先级。可以用setPriority方法提高或降低任何-个线程的优先级。可以将优先级设置为在MIN PRIORITY (在Thread类中定义为1)与MAX PRIORITY (定义为10)之间的任何值。NORM_PRIORITY被定义为5。</p>
+</blockquote>
+<h2 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h2><blockquote>
+<p>可以通过调用<code>setDaemon(true);</code>将线程转换为守护线程(daemon thread)。这样- -个线程没有什么神奇。 </p>
+</blockquote>
+<p>守护线程的唯一用途:</p>
+<blockquote>
+<p>是为其他线程提供服务。计时线程就是一个例子， 它定时地发送“计时器嘀嗒”信号给其他线程或清空过时的高速缓存项的线程。当只剩下守护线程时，虚拟机就退出了，由于如果只剩下守护线程，就没必要继续运行程序了。</p>
+</blockquote>
+<blockquote>
+<p>守护线程有时会被初学者错误地使用，他们不打算考虑关机( shutdown)动作。但是，这是很危险的。守护线程应该永远不去访问固有资源，如文件、数据库,因为它会在任何时候甚至在一个操作的中间发生中断。</p>
+</blockquote>
+<h2 id="未捕获异常处理器"><a href="#未捕获异常处理器" class="headerlink" title="未捕获异常处理器"></a>未捕获异常处理器</h2><blockquote>
+<p>线程的run方法不能抛出任何受查异常，但是，非受查异常会导致线程终止。在这种情况下，线程就死亡了。但是不需要任何catch子句来处理可以被传播的异常。相反，就在线程死亡之前，异常被传递到一个用于未捕获异常的处理器。该处理器必须属于一个实现<code>Thread.UncaughtExceptionHandler</code>接口的类。这个接口只有一个方法。<code>void uncaughtException(Threaed t, Trowable e)</code><br>可以用setUncaughtExceptionHandler方法为任何线程安装-一个处理器。也可以用Thread类的静态方法setDefaultUncaughtExceptionHandler为所有线程安装一个默认的处理器。替换处理器可以使用日志API发送未捕获异常的报告到日志文件。</p>
+</blockquote>
+<p>如果不安装默认的处理器，默认的处理器为空。但是，如果不为独立的线程安装处理器，此时的处理器就是该线程的ThreadGroup对象。</p>
+<h2 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h2><h3 id="锁对象"><a href="#锁对象" class="headerlink" title="锁对象"></a>锁对象</h3><ul>
+<li>synchronized</li>
+</ul>
+<blockquote>
+<p>关键字锁，JVM级别</p>
+</blockquote>
+<p> 锁用来保护代码片段，任何时刻只能有一个线程执行被保护的代码。<br> 锁可以管理试图进人被保护代码段的线程。<br> 锁可以拥有一-个或多个相关的条件对象。<br> 每个条件对象管理那些已经进人被保护的代码段但还不能运行的线程。</p>
+<ul>
+<li>ReetrantLock</li>
+</ul>
+<blockquote>
+<p>显式锁，API级别</p>
+</blockquote>
+<ul>
+<li>可重入性</li>
+</ul>
+<p>锁是可重入的，因为线程可以重复地获得已经持有的锁。锁保持一个持有计数( hold count)来跟踪对lock方法的嵌套调用。线程在每-.次调用lock都要调用unlock来释放锁。由于这-特性，被一个锁保护的代码可以调用另一个使用相同的锁的方法。</p>
+<h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><blockquote>
+<p>假设对共享变量除了赋值之外并不完成其他操作，那么可以将这些共享变量声明为volatile，java.util.concurrent. omic 包中有很多类使用了很高效的机器级指令（而不是使用锁）</p>
+</blockquote>
+<h3 id="锁测试与超时"><a href="#锁测试与超时" class="headerlink" title="锁测试与超时"></a>锁测试与超时</h3><blockquote>
+<p> 线程在调用lock方法来获得另一个线程所持有的锁的时候，很可能发生阻塞。应该更加谨慎地申请锁。tryLock 方法试图申请一个锁，在成功获得锁后返回true,否则，立即返回false,而且线程可以立即离开去做其他事情。</p>
 </blockquote>
 <br/>
 
