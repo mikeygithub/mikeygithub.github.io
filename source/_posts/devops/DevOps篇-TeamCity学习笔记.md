@@ -30,7 +30,7 @@ tags: teamcity
 
 ![新建项目](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/teamcity-new-project.png)
 
-![输入项目地址和访问用户名秘密](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/img/teamcity-new-project-1.png)
+![输入项目地址和访问用户名秘密](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/teamcity-new-project-1.png)
 
 
 

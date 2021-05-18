@@ -450,7 +450,14 @@ rraylgPair p = Arayaygrginax(); .
 
 # 第七章 异常、断言和日志
 
+在Java语言中，给出了3种处理系统错误的机制:
+
+- 抛出一个异常
+- 日志
+- 使用断言
+
 ## 处理错误
+
 假设在一个Java程序运行期间出现了一个错误。这个错误可能是由于文件包含了错误信息，或者网络连接出现问题造成的，也有可能是因为使用无效的数组下标，或者试图使用一个没有被赋值的对象引用而造成的。用户期望在出现错误时,程序能够采用一-些理智的行为。如果由于出现错误而使得某些操作没有完成，程序应该:
 
 - 返回到一种安全状态，并能够让用户执行一些 其他的命令;或者
@@ -460,15 +467,317 @@ rraylgPair p = Arayaygrginax(); .
 
 ![Java 中的异常层次结构](https://i.loli.net/2021/05/03/v26siHt1RwKYuOD.png)
 
-
-
 > 注释： RuntimeExc ti on 这个名字很容易让人混淆 实际上，现在讨论的所有错误都发生在运行时
 
+> 警告：如果在子类中覆盖了超类的一个方法，子类方法中声明的受查异常不能比起类方法中声明的异常更通用（也就是说，子类方法 中可以抛出更特定的异常， 或者根本不抛出任何异常） 特别需要说明的是，如果超类方法没有抛 出任何受查异常，子类也不能抛出任何受查异常 例如，如果覆盖 JComponent.paintComponent 方法，由于超类中这个方法没有抛出任何异常，所以，自定义paintComponent 也不能抛出任何受查异常。
+
+Finally代码块
+
+> 当 finally 子句包含 return 语句时，将会出现一种意想不到的结果 假设利用 return语句从町语句块中退出 在方法返回前， finally 子句的内容将被执行 如果 finally 子句中也有一个 return 语句，这个返回值将会覆盖房、始的返回值。
+
+## 断言的概念
+
+假设确信某个属性符合要求，并且代码的执行依赖于这个属性 例如，需要计算`double y = Math.sqrt(x)`我们确信，这里的x是一个非负数值。原因是: x是另外一个计算的结果，而这个结果不可能是负值;或者x是个方法的参数,而这个方法要求它的调用者只能提供一个正数。
+然而，还是希望进行检查，以避免让“不是一个数”的数值参与计算操作。当然，也可以抛出一个异常:
+`if (x< 0) throw new IlegalArgumentException("x < 0");`
+但是这段代码会一直保 留在程序中，即使测试完毕也不会自动地删除。如果在程序中含有大量的这种检查，程序运行起来会相当慢。
+断言机制允许在测试期间向代码中插入一些检查语句。当代码发布时，这些插入的检测语句将会被自动地移走。
+Java语言引入了关键字assert。这个关键字有两种形式:
+
+```
+assert条件;
+assert条件:表达式;
+```
+
+这两种形式都会对条件进行检测，如果结果为false,则抛出一个AsertionError异常。在第二种形式中，表达式将被传人AstionError的构造器，并转换成一个消息字符串。
+
+```java
+if (x <= 0) throw new AssertionError(x);
+```
+
+在默认情况下，断言被禁用。可以在运行程序时用-eablassertiors或-ea选项启用:`java -enableassertions MyApp`
+
+## 断言的使用选择
+
+什么时候应该选择使用断言呢?请记住下面几点:
+
+- 断言失败是致命的、不可恢复的错误。
+- 断言检查只用于开发和测阶段(这种做法有时候被戏称为“在靠近海岸时穿上救生衣，但在海中央时就把救生衣抛掉吧”)。
+  因此，不应该使用断言向程序的其他部分通告发生了可恢复性的错误，或者，不应该作为程序向用户通告问题的手段。断言只应该用于在测试阶段确定程序内部的错误位置。
+
+##  日志的使用
+
+优点：
+
+- 可以很容易地取消全部日志记录，或者仅仅取消某个级别的日志，而且打开和关闭这个操作也很容易。
+- 可以很简单地禁止日志记录的输出，因此，将这些日志代码留在程序中的开销很小。
+- 日志记录可以被定向到不同的处理器，用于在控制台中显示，用于存储在文件中等。
+- 日志记录器和处理器都可以对记录进行过滤。过滤器可以根据过滤实现器制定的标准丟弃那些无用的记录项。
+- 日志记录可以采用不同的方式格式化，例如，纯文本或XML。
+- 应用程序可以使用多个日志记录器，它们使用类似包名的这种具有层次结构的名字，例如，com.mycompany.myapp。
+- 在默认情况下，日志系统的配置由配置文件控制。如果需要的话，应用程序可以替换
+  这个配置。
+
+基本：
+
+```java
+Logger.getG1oba().info("File->0pen menu item selected");
+```
+
+高级：
+
+```java
+private static final Logger myLogger = Logger. getLogger('com.mycompany.myapp');
+```
+
+日志级别：
+
+- SEVERE 
+- WARNING 
+- INFO 
+- CONFIG 
+- FINE 
+- FINER 
+
+- FINEST 
+
+
+
+![image-20210516144048950](https://i.loli.net/2021/05/16/ogdBR3ZvYuym6kK.png)
 
 
 
 
 
+# 第八章 范型程序设计
+
+简单案例
+
+```java
+public class Pair<T>{
+    private T first;
+    private T second;
+    public Pair(){
+        first = null;
+        second= null; 
+    }
+    public Pair(T first, T second) { 
+        this.first = first; 
+        this.second = second; 
+    }
+    public T getFirst(){ 
+        return first; 
+    }
+    public T getSecond(){ 
+        return second; 
+    }
+    public void setFirst(T newValue){
+        first = newValue;
+    } 
+    public void setSecond(T newValue) {
+        second = newValue; 
+    }
+}
+```
+
+类型擦除
+
+> 无论何时定义-一个泛型类型，都自动提供了-.个相应的原始类型(rawtype)。原始类型的名字就是删去类型参数后的泛型类型名。擦除( erased)类型变量，并替换为限定类型(无限定的变量用Object)。
+
+约束与局限性
+
+- 不能用基本类型实例化类型参数
+- 运行时类型查询只适用于原始类型
+- 不能创建参数化类型的数组
+- 不能实例化类型变量
+- 不能构造泛型数组
+- 泛型类的静态上下文中类型变量无效
+- 不能抛出或捕获泛型类的实例
+- 可以消除对受查异常的检查
+
+```
+class A<T extends B>
+//这个边界声明了T必须具有类型B或者从B导出的类型。
+class A<T super B>
+//< ? super Class>表示，指定类的基类。
+```
+
+直观地讲， 带有超类型限定的通配柯 可以向泛型对象写人，带有子类型限定的通配符可以从泛型对象读取
+
+**PECS原则**
+
+如果要从集合中读取类型T的数据，并且不能写入，可以使用 ? extends 通配符；(Producer Extends) 
+
+如果要从集合中写入类型T的数据，并且不需要读取，可以使用 ? super 通配符；(Consumer Super) 
+
+如果既要存又要取，那么就不要使用任何通配符。
+
+
+
+# 第九章 集合
+
+
+
+```mermaid
+graph BT;
+List-->Collection
+NavigableSet-->SortedSet-->Set-->Collection-->Iterable
+Deque-->Queue-->Collection
+
+NavigableMap-->SortedMap-->Map
+
+ListIterable-->Itertor
+
+RamdomAccess
+
+```
+
+Java中的具体集合
+
+![Java中的具体集合](https://i.loli.net/2021/05/18/UbS2ugKyonEcQTL.png)
+
+
+
+```mermaid
+graph BT;
+LinkedList-->AbstractSquentialList-->AbstractList
+ArrayList-->AbstractList-->AbstractCollection
+
+LinkHashSet-->HashSet-->AbstractSet-->AbstractCollection
+EnumSet-->AbstractSet
+TreeSet-->AbstractSet
+
+PriorityQueue-->AbstractQueue-->AbstractCollection
+ArrayQueue-->AbstractCollection
+```
+
+```mermaid
+graph BT;
+LinkedHashMap-->HashMap-->AbstractMap
+TreeMap-->AbstractMap
+EnumMap-->AbstractMap
+WeakHashMap-->AbstractMap
+IdentityHashMap-->AbstractMap
+```
+
+# 第十章 图形程序设计
+
+
+
+略
+
+
+
+# 第十一章 事件处理
+
+
+
+略
+
+
+
+# 第十二章 Swing用户界面组件
+
+
+
+略
+
+
+
+# 第十三章 部署Java应用
+
+
+
+略
+
+
+
+
+
+# 第十四章 并发
+
+## 线程、进程、携程、程序
+
+- 线程
+
+> 线程是计算机独立调度的基本单位
+
+- 进程
+
+> 计算机分配资源的最小单位
+
+- 协程
+
+> 微线程、英文Coroutines，是一种比线程更加轻量级的存在。正如一个进程可以拥有多个线程一样，一个线程也可以拥有多个协程。
+
+- 程序
+
+> 程序是一组计算机能识别和执行的指令
+
+
+
+线程五种状态
+
+```mermaid
+graph LR;
+创建-->就绪-->运行
+运行-->阻塞-->就绪
+运行-->销毁
+```
+
+## 线程优先级
+
+> 在Java程序设计语言中，每一个线程有一一个优先级。 默认情况下，一个线程继承它的父线程的优先级。可以用setPriority方法提高或降低任何-个线程的优先级。可以将优先级设置为在MIN PRIORITY (在Thread类中定义为1)与MAX PRIORITY (定义为10)之间的任何值。NORM_PRIORITY被定义为5。
+
+
+
+
+
+## 守护线程
+
+> 可以通过调用`setDaemon(true);`将线程转换为守护线程(daemon thread)。这样- -个线程没有什么神奇。 
+
+守护线程的唯一用途:
+
+>是为其他线程提供服务。计时线程就是一个例子， 它定时地发送“计时器嘀嗒”信号给其他线程或清空过时的高速缓存项的线程。当只剩下守护线程时，虚拟机就退出了，由于如果只剩下守护线程，就没必要继续运行程序了。
+
+>守护线程有时会被初学者错误地使用，他们不打算考虑关机( shutdown)动作。但是，这是很危险的。守护线程应该永远不去访问固有资源，如文件、数据库,因为它会在任何时候甚至在一个操作的中间发生中断。
+
+
+
+## 未捕获异常处理器
+> 线程的run方法不能抛出任何受查异常，但是，非受查异常会导致线程终止。在这种情况下，线程就死亡了。但是不需要任何catch子句来处理可以被传播的异常。相反，就在线程死亡之前，异常被传递到一个用于未捕获异常的处理器。该处理器必须属于一个实现`Thread.UncaughtExceptionHandler`接口的类。这个接口只有一个方法。`void uncaughtException(Threaed t, Trowable e)`
+> 可以用setUncaughtExceptionHandler方法为任何线程安装-一个处理器。也可以用Thread类的静态方法setDefaultUncaughtExceptionHandler为所有线程安装一个默认的处理器。替换处理器可以使用日志API发送未捕获异常的报告到日志文件。
+
+如果不安装默认的处理器，默认的处理器为空。但是，如果不为独立的线程安装处理器，此时的处理器就是该线程的ThreadGroup对象。
+
+## 同步
+
+### 锁对象
+
+- synchronized
+
+> 关键字锁，JVM级别
+
+ 锁用来保护代码片段，任何时刻只能有一个线程执行被保护的代码。
+ 锁可以管理试图进人被保护代码段的线程。
+ 锁可以拥有一-个或多个相关的条件对象。
+ 每个条件对象管理那些已经进人被保护的代码段但还不能运行的线程。
+
+- ReetrantLock
+
+> 显式锁，API级别
+
+- 可重入性
+
+锁是可重入的，因为线程可以重复地获得已经持有的锁。锁保持一个持有计数( hold count)来跟踪对lock方法的嵌套调用。线程在每-.次调用lock都要调用unlock来释放锁。由于这-特性，被一个锁保护的代码可以调用另一个使用相同的锁的方法。
+
+### 原子性
+
+> 假设对共享变量除了赋值之外并不完成其他操作，那么可以将这些共享变量声明为volatile，java.util.concurrent. omic 包中有很多类使用了很高效的机器级指令（而不是使用锁）
+
+### 锁测试与超时
+>  线程在调用lock方法来获得另一个线程所持有的锁的时候，很可能发生阻塞。应该更加谨慎地申请锁。tryLock 方法试图申请一个锁，在成功获得锁后返回true,否则，立即返回false,而且线程可以立即离开去做其他事情。
 
 
 
