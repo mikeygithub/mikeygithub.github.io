@@ -1,6 +1,6 @@
 ---
 title: 读书笔记篇-Java核心技术卷一
-index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/javahxjs.png'
+index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/java-hxjs.png'
 hide: false
 date: 2021-05-01 16:12:25
 category: 读书笔记
