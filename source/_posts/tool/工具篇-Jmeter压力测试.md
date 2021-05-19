@@ -1,5 +1,5 @@
 ---
-title: 工具篇-Jmeter工具入门使用
+title: 工具篇-Jmeter压力测试
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/jmeter.jpeg'
 hide: false
 password: ''
