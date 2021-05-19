@@ -263,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      160 字
+      2k 字
     </span>
   
 
@@ -273,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      21
        分钟
     </span>
   
@@ -318,6 +318,72 @@
 <h1 id="第一章-JavaSe8-的流库"><a href="#第一章-JavaSe8-的流库" class="headerlink" title="第一章 JavaSe8 的流库"></a>第一章 JavaSe8 的流库</h1><blockquote>
 <p>流提供了- 种让我们可以在比集合更高的概念级别上指定计算的数据视图。通过使用流，我们可以说明想要完成什么任务，而不是说明如何去实现它。我们将操作的调度留给具体实现去解决。例如，假设我们想要计算某个属性的平均值，那么我们就可以指定数据源和该属性，然后，流库就可以对计算进行优化，例如，使用多线程来计算总和与个数，并将结果合并。</p>
 </blockquote>
+<p>流表面上看起来和集合很类似，都可以让我们转换和获取数据。但是，它们之间存在着显著的差异:<br>​</p>
+<ul>
+<li>流并不存储其元素。这些元素可能存储在底层的集合中，或者是按需生成的。</li>
+<li>流的操作不会修改其数据源。例如，filter 方法不会从新的流中移除元素，而是会生成一个新的流，其中不包含被过滤掉的元素。</li>
+<li>流的操作是尽可能惰性执行的。这意味着直至需要其结果时，操作才会执行。例如，如果我们只想查找前 5 个长单词而不是所有长单词，那么 filter 方法就会在匹配到第 5 个单词后停止过滤。因此，我们甚至可以操作无限流。</li>
+</ul>
+<h2 id="流的创建"><a href="#流的创建" class="headerlink" title="流的创建"></a>流的创建</h2><ul>
+<li>collection 接口下的所有实现类自带</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621329977461-4dcc3239-28dc-4201-9a29-3838775ea5b0.png#clientId=u69651ac2-d1b6-4&from=paste&height=487&id=u48341fec&margin=%5Bobject%20Object%5D&name=image.png&originHeight=487&originWidth=784&originalType=binary&size=75122&status=done&style=none&taskId=u96441948-4b81-43f6-847c-352e1207d8e&width=784" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<ul>
+<li>数组通过 java.util.stream Stream 类静态方法进行创建流</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span>&lt;T&gt; Stream&lt;T&gt; <span class="hljs-title">of</span><span class="hljs-params">(T t)</span> </span>&#123;<br>       <span class="hljs-keyword">return</span> StreamSupport.stream(<span class="hljs-keyword">new</span> Streams.StreamBuilderImpl&lt;&gt;(t), <span class="hljs-keyword">false</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="filter-map-flatMap-方法"><a href="#filter-map-flatMap-方法" class="headerlink" title="filter map flatMap 方法"></a>filter map flatMap 方法</h2><ul>
+<li>filter 转换会产生-一个流，它的元素与某种条件相匹配。下面，我们将一个字符串流转换，f11ter 的引元是 Predicate<T>即从 T 到 boolean 的函数。</li>
+<li>在使用 map 时，会有一个函数应用到每个元素上，并且其结果是包含了应用该函数后所产生的所有结果的流。</li>
+<li>产生一个流，它是通过将 mapper 应用于当前流中所有元素所产生的结果连接到一起而获得的。(注意，这里的每个结果都是一个流。)</li>
+</ul>
+<h2 id="抽取子流和连接流"><a href="#抽取子流和连接流" class="headerlink" title="抽取子流和连接流"></a>抽取子流和连接流</h2><p>调用 stream.limit(n)会返回一个新的流，它在 n 个元素之后结束(如果原来的流更短，那么就会在流结束时结束)。这个方法对于裁剪无限流的尺寸会显得特别有用。例如，</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Strear&lt;Double&gt; randoms = Stream.generate(Math::random).limit(<span class="hljs-number">100</span>);<br></code></pre></div></td></tr></table></figure>
+
+<p>会产生一个包含 100 个随机数的流。调用 stream.skip(n)正好相反:它会丢弃前 n 个元素。这个方法在将文本分隔为单词时会显得很方便，因为按照 split 方法的工作方式，第一个元素是没什么用的空字符串。<br>​</p>
+<h2 id="其他的流转换"><a href="#其他的流转换" class="headerlink" title="其他的流转换"></a>其他的流转换</h2><blockquote>
+<p>distinct 方法会返回一个流，它的元素是从原有流中产生的，即原来的元素按照同样的顺序剔除重复元素后产生的。这个流显然能够记住它已经看到过的元素。</p>
+</blockquote>
+<h2 id="Option"><a href="#Option" class="headerlink" title="Option"></a>Option</h2><p>Optional<T>对象是一种包装器对象， 要么包装了类型 T 的对象，要么没有包装任何对象。对于第一种情况，我们称这种值为存在的。Optional<T> 类型被当作-种更安全的方式，用来替代类型 T 的引用，这种引用要么引用某个对象，要么为 nu11。但是，它只有在正确使用的情况下才会更安全。</p>
+<p>如何使用 Optional 值，有效地使用 Optional 的关键是要使用这样的方法:</p>
+<blockquote>
+<p>它在值不存在的情况下会产生-个可替代物，而只有在值存在的情况下才会使用这个值。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String result = optionlString.orElse(<span class="hljs-string">&quot;&quot;</span>);<span class="hljs-comment">// The wrapped string, or”if none</span><br></code></pre></div></td></tr></table></figure>
+
+<p>你还可以调用代码来计算默认值:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String result = optionlString.orElseGet(()-&gt;Local.getDefault().getDisplayName());<br><span class="hljs-comment">// The function is only called when needed</span><br></code></pre></div></td></tr></table></figure>
+
+<p>或者可以在没有任何值时抛出异常:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String result = optionlString.orElseGet(IllegalStateExection::<span class="hljs-keyword">new</span>);<br><span class="hljs-comment">//Supply a nethod that yields an exception objet</span><br></code></pre></div></td></tr></table></figure>
+
+<p>刚刚看到了如何在不存在任何值的情况下产生相应的替代物。另一条使用可选值的策略是只有在其存在的情况下才消费该值。ifPresent 方法会接受-个函数。如果该可选值存在，那么它会被传递给该函数。否则，不会发生任何事情。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">optionalValue.ifPresent(v -&gt; Process );<br><span class="hljs-comment">//例如，如果在该值存在的情况下想要将其添加到某个集中，那么就可以调用</span><br>optionalValue.ifPresent(v -&gt; results. add());<br><span class="hljs-comment">//或者直接调用</span><br>optionalValue.ifPresent(results:add);<br><span class="hljs-comment">//当调用ifPresent时，从该函数不会返回任何值。如果想要处理函数的结果，应该使用map</span><br>Optional&lt;Boolean&gt; added = optionalValue.map(results::add);<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="约简操作"><a href="#约简操作" class="headerlink" title="约简操作"></a>约简操作</h2><p>reduce 方法是-种用于从流中计算某个值的通用机制，其最简单的形式将接受-个二元函数，并从前两个元素开始持续应用它。如果该函数是求和函数,那么就很容易解释这种机制:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;Integer&gt; values = ... ;<br>Optional&lt;Integer&gt; sun = values.stream.reduce((x, y)→x+y);<br></code></pre></div></td></tr></table></figure>
+
+<p>在上面的情况中，reduce 方法会计算 v0+v1+v2+..其中 v 是流中的元素。如果流为空，那么该方法会返回一个 optional,因为没有任何有效的结果。</p>
+<blockquote>
+<p>警告:不要修改在执行某项流操作后会将元素返回到流中的集合(即使这种修改是线程安全的)。记住，流并不会收集它们的数据，数据总是在单独的集合中。如果修改了这样的集合，那么流操作的结果就是未定义的。JDK 文档对这项需求并未做出任何约束，并且对顺序流和并行流都采用了这种处理方式。更准确地讲，因为中间的流操作都是惰性的，所以直到执行终结操作时才对集合进行修改仍旧是可行的。例如，下面的操作尽管并不推荐，但是仍旧可以工作.</p>
+</blockquote>
+<p>​</p>
+<p>为了让并行流正常工作，需要满足大量的条件:<br>​</p>
+<ul>
+<li>数据应该在内存中。必须等到数据到达是非常低效的。</li>
+<li>流应该可以被高效地分成若干个子部分。由数组或平衡二叉树支撑的流都可以工作得很好，但是 Stream. iterate 返回的结果不行。</li>
+<li>流操作的工作量应该具有较大的规模。如果总工作负载并不是很大，那么搭建并行计算时所付出的代价就没有什么意义。</li>
+<li>流操作不应该被阻塞。<blockquote>
+<p>换句话说，不要将所有的流都转换为并行流。只有在对已经位于内存中的数据执行大量计算操作时，才应该使用并行流。</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="第二章-输入输出"><a href="#第二章-输入输出" class="headerlink" title="第二章 输入输出"></a>第二章 输入输出</h1><h2 id="输入-输出流"><a href="#输入-输出流" class="headerlink" title="输入/输出流"></a>输入/输出流</h2><blockquote>
+<p>在 Java API 中，可以从其中读入一个字节序列的对象称做输入流，而可以向其中写人一个字节序列的对象称做输出流。这些字节序列的来源地和目的地可以是文件，而且通常都是文件，但是也可以是网络连接，甚至是内存块。抽象类 InputStream 和 outputstream 构成了输人/输出(I/O)类层次结构的基础。</p>
+</blockquote>
+<p>p55</p>
+<p>第 3 章 XML<br>第 4 章网络<br>第 5 章数据库编程<br>第 6 章日 期和时间 API<br>第 7 章国际化<br>第 8 章脚本、 编译与注解处理.<br>第 9 章安全<br>第 10 章高级 Swing<br>第 11 章高级 AWT<br>第 12 章本地方法</p>
 <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1620799343096-89ce2681-3063-4534-be06-be610367739c.png#clientId=uadd4da19-1647-4&from=paste&height=430&id=u7b333f28&margin=%5Bobject%20Object%5D&name=image.png&originHeight=430&originWidth=430&originalType=binary&size=53356&status=done&style=none&taskId=uf6e2de31-a181-45e5-a3ba-4562464e7f0&width=430" srcset="/img/loading.gif" lazyload alt="image.png"><br>扫一扫、关注我</p>
 
             </div>
