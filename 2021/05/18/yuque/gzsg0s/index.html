@@ -263,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2k 字
+      7k 字
     </span>
   
 
@@ -273,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      21
+      79
        分钟
     </span>
   
@@ -382,9 +382,402 @@
 <h1 id="第二章-输入输出"><a href="#第二章-输入输出" class="headerlink" title="第二章 输入输出"></a>第二章 输入输出</h1><h2 id="输入-输出流"><a href="#输入-输出流" class="headerlink" title="输入/输出流"></a>输入/输出流</h2><blockquote>
 <p>在 Java API 中，可以从其中读入一个字节序列的对象称做输入流，而可以向其中写人一个字节序列的对象称做输出流。这些字节序列的来源地和目的地可以是文件，而且通常都是文件，但是也可以是网络连接，甚至是内存块。抽象类 InputStream 和 outputstream 构成了输人/输出(I/O)类层次结构的基础。</p>
 </blockquote>
-<p>p55</p>
-<p>第 3 章 XML<br>第 4 章网络<br>第 5 章数据库编程<br>第 6 章日 期和时间 API<br>第 7 章国际化<br>第 8 章脚本、 编译与注解处理.<br>第 9 章安全<br>第 10 章高级 Swing<br>第 11 章高级 AWT<br>第 12 章本地方法</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1620799343096-89ce2681-3063-4534-be06-be610367739c.png#clientId=uadd4da19-1647-4&from=paste&height=430&id=u7b333f28&margin=%5Bobject%20Object%5D&name=image.png&originHeight=430&originWidth=430&originalType=binary&size=53356&status=done&style=none&taskId=uf6e2de31-a181-45e5-a3ba-4562464e7f0&width=430" srcset="/img/loading.gif" lazyload alt="image.png"><br>扫一扫、关注我</p>
+<h3 id="流家族"><a href="#流家族" class="headerlink" title="流家族"></a>流家族</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/gif/2630542/1621390806487-7f8f6223-c9b8-4fe3-8e42-902bd94dc417.gif#clientId=u24c7e2d9-48fd-4&from=ui&id=u36277e81&margin=%5Bobject%20Object%5D&name=0_1317892654T848.gif&originHeight=526&originWidth=1024&originalType=binary&size=51270&status=done&style=none&taskId=u7ff027fb-bcdd-4a12-8301-e16b6cccd76" srcset="/img/loading.gif" lazyload alt="0_1317892654T848.gif"><br><img src="https://cdn.nlark.com/yuque/0/2021/gif/2630542/1621390747439-97394f87-0624-44db-a848-140628bbe071.gif#clientId=u24c7e2d9-48fd-4&from=ui&id=ud78a13c1&margin=%5Bobject%20Object%5D&name=0_1317893033Samy.gif&originHeight=500&originWidth=1024&originalType=binary&size=36767&status=done&style=none&taskId=ub82c74a4-773b-4042-aabd-203250a0566" srcset="/img/loading.gif" lazyload alt="0_1317893033Samy.gif"></p>
+<h3 id="Reader-和-Writer-的层次结构"><a href="#Reader-和-Writer-的层次结构" class="headerlink" title="Reader 和 Writer 的层次结构"></a>Reader 和 Writer 的层次结构</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/gif/2630542/1621390877941-5c9831b0-d478-43ce-9e80-fd444981a609.gif#clientId=u24c7e2d9-48fd-4&from=ui&id=u64094a96&margin=%5Bobject%20Object%5D&name=0_1317892158nZfc.gif&originHeight=628&originWidth=700&originalType=binary&size=38735&status=done&style=none&taskId=u1ee5dfbd-bd32-4cc2-ae0b-551d9156afd" srcset="/img/loading.gif" lazyload alt="0_1317892158nZfc.gif"></p>
+<blockquote>
+<p>注意: java. io.Closeab1e 接口扩展了 java.lang.AutoCloseable 接口。因此，对任何 Closcable 进行操作时，都可以使用 try-with-resource 语句( try-with-resource 语句是指声明了一个或多个资源的 try 语句)。 为什么要有两个接口呢?因为 Closeable 接口的 close 方法只抛出 IOException,而 AutoCloseable.close 方法可以抛出任何异常。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621391616615-34d4b79f-9ec9-4e6a-898e-9f44f73d79a4.png#clientId=u24c7e2d9-48fd-4&from=ui&id=uc0fd4f4b&margin=%5Bobject%20Object%5D&name=%E6%9C%AA%E5%91%BD%E5%90%8D%E6%96%87%E4%BB%B6.png&originHeight=444&originWidth=847&originalType=binary&size=32897&status=done&style=none&taskId=u92d2c78f-2f27-4589-8e08-1493785e374" srcset="/img/loading.gif" lazyload alt="未命名文件.png"></p>
+<h3 id="如何读入文本"><a href="#如何读入文本" class="headerlink" title="如何读入文本"></a>如何读入文本</h3><p>最简单的处理任意文本的方式就是使用构建 Scanner 对象。或者，我们也可以将短小的文本文件像下面这样读人到一个字符串中:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String content = <span class="hljs-keyword">new</span> String(Files.readAllBytes(path),charset);<br></code></pre></div></td></tr></table></figure>
+
+<p>但是，如果想要将这个文件-行行地读入， 那么可以调用:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;String&gt; lines = Files.readAll(paht,charset);<br></code></pre></div></td></tr></table></figure>
+
+<p>如果文件太大，那么可以将行惰性处理为一个 Stream<String>对象:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">try</span> (Stream&lt;String&gt; lines = Files.lines(path, charset);<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="随机访问文件"><a href="#随机访问文件" class="headerlink" title="随机访问文件"></a>随机访问文件</h3><p>RandomAccessFile 类可以在文件中的任何位置查找或写人数据。磁盘文件都是随机访问的，但是与网络套接字通信的输人 1 输出流却不是。你可以打开一个随机访问文件，只用于读人或者同时用于读写，你可以通过使用字符串“r” (用于读入访问)或“rw” (用于读人 1 写出访问)作为构造器的第二个参数来指定这个选项。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">RandomAccessFile in = RandomAccessFile(<span class="hljs-string">&quot;employee.bat&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>);<br>RandomAccessFile inOut = <span class="hljs-keyword">new</span> RandomAccessFile(<span class="hljs-string">&quot;employee.dat&quot;</span>, <span class="hljs-string">&quot;rw&quot;</span>);<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="ZIP-文档"><a href="#ZIP-文档" class="headerlink" title="ZIP 文档"></a>ZIP 文档</h3><p>ZIP 文档(通常)以压缩格式存储了一个或多个文件，每个 ZIP 文档都有一个头，包含诸如每个文件名字和所使用的压缩方法等信息。在 Java 中，可以使用 Z1pInputStream 来读人 ZIP 文档。你可能需要浏览文档中每个单独的项，getNextEntry 方法就可以返回一个描述这些项的 ZipEntry 类型的对象。向 ZipInputStre am 的 getInputstream 方法传递该项可以获取用于读取该项的输入流。然后调用 closeEntry 来读入下一项。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">ZipInputStream zip = <span class="hljs-keyword">new</span> ZipInputStream(<span class="hljs-keyword">new</span> ZipInputStream(zipname));<br>ZipEmpty zipEmpty;<br><span class="hljs-keyword">while</span>((zipEmpty.getNextEntry())!=<span class="hljs-keyword">null</span>)&#123;<br>	InputStream input = zip.getInputStream(zipEmpty);<br>    <span class="hljs-comment">//read the context of in</span><br>    zipEmpty.close();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="文件加锁机制"><a href="#文件加锁机制" class="headerlink" title="文件加锁机制"></a>文件加锁机制</h3><blockquote>
+<p>考虑一下多个同时执行的程序需要修改同一个文件的情形，很明显，这些程序需要以某种方式进行通信，不然这个文件很容易被损坏。文件锁可以解决这个问题，它可以控制对文件或文件中某个范围的字节的访问。</p>
+</blockquote>
+<p>假设你的应用程序将用户的偏好存储在;一个配置文件中，当用户调用这个应用的两个实例时，这两个实例就有可能会同时希望写这个配置文件。在这种情况下，第一个实例应该锁定这个文件，当第二个实例发现这个文件被锁定时，它必须决策是等待直至这个文件解锁，还是直接跳过这个写操作过程。<br>要锁定一个文件，可以调用 FileChannel 类的 lock 或 tryLock 方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">FileChannel fileChannel = FileChannel.open(Paths.get(<span class="hljs-string">&quot;TestFileLock.java&quot;</span>));<br>fileChannel.lock();<br></code></pre></div></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">FileLock fileLock = fileChannel.lock();<br></code></pre></div></td></tr></table></figure>
+
+<p>第一个调用会阻塞直至可获得锁，而第二个调用将立即返回，要么返回锁，要么在锁不可获得的情况下返回 null。这个文件将保持锁定状态，直至这个通道关闭，或者在锁上调用了 release 方法。你还可以通过下面的调用锁定文件的-部分:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function">FileLock <span class="hljs-title">lock</span><span class="hljs-params">(<span class="hljs-keyword">long</span> start, <span class="hljs-keyword">long</span> size, <span class="hljs-keyword">boolean</span> shared)</span></span><br></code></pre></div></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function">FileLock <span class="hljs-title">tryLock</span><span class="hljs-params">(<span class="hljs-keyword">long</span> start, <span class="hljs-keyword">long</span> size, <span class="hljs-keyword">boolean</span> shared)</span></span><br></code></pre></div></td></tr></table></figure>
+
+<p>如果 shared 标志为 false,则锁定文件的目的是读写，而如果为 true,则这是一个共享锁，它允许多个进程从文件中读入，并阻止任何进程获得独占的锁。并非所有的操作系统都支持共享锁，因此你可能会在请求共享锁的时候得到的是独占的锁。调用 FfileLock 类的 isShared 方法可以查询你所持有的锁的类型。</p>
+<blockquote>
+<p>注意:如果你锁定了文件的尾部，而这个文件的长度随后增长超过了锁定的部分，那么增长出来的额外区域是未锁定的，要想锁定所有的字节，可以使用 Long.MAX _VALUE 来表示尺寸。</p>
+</blockquote>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><blockquote>
+<p>正则表达式( regular expression)用于指定字符串的模式，你可以在任何需要定位匹配某种特定模式的字符串的情况下使用正则表达式。例如，我们有-个示例程序就是用来定位 HTML 文件中的所有超链接的，它是通过查找<a href =”...*> 模式的字符串来实现此目的的。</p>
+</blockquote>
+<p>​</p>
+<p>当然，在指定模式时，… 标记法并不够精确。你需要精确地指定什么样的字符序列才是合法的匹配，这就要求无论何时，当你要描述-一个模式时，都需要使用某种特定的语法。下面是一个简单的示例，正则表达式</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">[j]awa.+t<br></code></pre></div></td></tr></table></figure>
+
+<p>匹配下列形式的所有字符串:</p>
+<ul>
+<li>第一个字母是 J 或 j。</li>
+<li>接下来的三个字母是 ava</li>
+<li>字符串的其余部分由一个或多个任意的字符构成。例如，字符串”Javanese”就匹配这个特定的正则表达式，但是字符串“core Java’就不匹配。正如你所见，你需要了解-点这种语法，以理解正则表达式的含义。幸运的是，对于大多數情况，一小部分很直观的语法结构就足够用了。</li>
+<li>字符类(charater cass)是一个括在括号中的可选择的字符集，例如，[Jj]、 [0-9]、[A-Za-z]或[^0-9]。这里“_”表示是-一个范围(所有 Unicode 值落在两个边界范围之内的字符)，而^表示补集(除了指定字符之外的所有字符)。</li>
+<li>如果字符类中包含“-”,那么它必须是第一-项或最后-项; 如果要包含“[“，那么它必须是第一_项; 如果要包含“A”，那么它可以是除开始位置之外的任何位置。其中，你只需要转义“[”和“\”。</li>
+<li>有许多预定的字符类，例如\d (数字)和\plSc) ( Unicode 货币符号)。</li>
+</ul>
+<h4 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h4><table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>正则表达式的写法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td>“.”</td>
+<td>任意一个字符</td>
+</tr>
+<tr>
+<td>^</td>
+<td>“^Spring”</td>
+<td>以 Spring 开始的字符</td>
+</tr>
+<tr>
+<td>$</td>
+<td>“EEEE$”</td>
+<td>匹配行结束符,以”EEEE”结束的字符</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>“\d”</td>
+<td>0-9 的任何一个数字</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>“\D”</td>
+<td>任何一个非数字字符</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>“\s”</td>
+<td>空白字符，如”\t”,”\n”</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>“\S”</td>
+<td>非空白字符</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>“\w”</td>
+<td>可用作标识符的字符，但不包括“$”</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>“\W”</td>
+<td>不可用作标识符的字符</td>
+</tr>
+<tr>
+<td>\p{Lower}</td>
+<td>\p{Lower}</td>
+<td>小定字母 a-z</td>
+</tr>
+<tr>
+<td>\p{Upper}</td>
+<td>\p{Upper}</td>
+<td>大写字母 A-Z</td>
+</tr>
+<tr>
+<td>\p{ASCII}</td>
+<td>\p{ASCII}</td>
+<td>ASCII 字符</td>
+</tr>
+<tr>
+<td>\p{Alpha}</td>
+<td>\p{Alpha}</td>
+<td>字母字符</td>
+</tr>
+<tr>
+<td>\p{Digit}</td>
+<td>\p{Digit}</td>
+<td>十进制数字，0-9</td>
+</tr>
+<tr>
+<td>\p{Alnum}</td>
+<td>\p{Alnum}</td>
+<td>数字或字母字符</td>
+</tr>
+<tr>
+<td>\p{Punct}</td>
+<td>\p{Punct}</td>
+<td>标点符号：！“#%&amp;()*=-</td>
+</tr>
+<tr>
+<td>\p{Graph}</td>
+<td>\p{Graph}</td>
+<td>可见字符：[\p{Alnum}\p{Punct}]</td>
+</tr>
+<tr>
+<td>\p{Print}</td>
+<td>\p{Print}</td>
+<td>可打印字符[\p{Graph}\x20]</td>
+</tr>
+<tr>
+<td>\p{Blank}</td>
+<td>\p{Blank}</td>
+<td>空格或制表符：[\t]</td>
+</tr>
+<tr>
+<td>\p{Cntrl}</td>
+<td>\p{Cntrl}</td>
+<td>控制字符：[\x00-\x1F\x7F]</td>
+</tr>
+</tbody></table>
+<h4 id="方括号"><a href="#方括号" class="headerlink" title="方括号"></a>方括号</h4><p>方括号括起来若干个字符来表示一个元字符，该元字符可代表方括号中的任何一个字符。reg=“[abc]4”—– 则”a4”,”b4”,”c4”,都是和此正则表达式匹配的字符串</p>
+<table>
+<thead>
+<tr>
+<th>方括号例子</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[^456]</td>
+<td>代表 4，5，6 之外的任何字符</td>
+</tr>
+<tr>
+<td>[a-r]</td>
+<td>代表 a~r 中的任何一个字母</td>
+</tr>
+<tr>
+<td>[a-Za-Z]</td>
+<td>代表任意一个英文字母</td>
+</tr>
+<tr>
+<td>[a-e[g-z]]</td>
+<td>代表 a-e 或者 g-z 中的任意一个字母</td>
+</tr>
+<tr>
+<td>[a-o&amp;&amp;[def]]</td>
+<td>代表字母 d,e,f(交运算)</td>
+</tr>
+<tr>
+<td>[a-o&amp;&amp;[^bc]]</td>
+<td>代表字母 a,d(差运算)</td>
+</tr>
+</tbody></table>
+<h4 id="小括号"><a href="#小括号" class="headerlink" title="小括号"></a>小括号</h4><p>将 () 之间括起来的表达式定义为“组”(group)，并且将匹配这个表达式的字符保存到一个临时区域,这个元字符在字符串提取的时候非常有用。</p>
+<h4 id="限定修饰符"><a href="#限定修饰符" class="headerlink" title="限定修饰符"></a>限定修饰符</h4><p>使用限定修饰符来限定元字符出现的次数</p>
+<table>
+<thead>
+<tr>
+<th>限定修饰符</th>
+<th>意义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>?</td>
+<td>0 次或 1 次</td>
+<td>A?</td>
+</tr>
+<tr>
+<td>*</td>
+<td>0 次或多次</td>
+<td>A*</td>
+</tr>
+<tr>
+<td>+</td>
+<td>1 次或多次</td>
+<td>A+</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>正好出现 n 次</td>
+<td>A{2}</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>至少出现 n 次</td>
+<td>A{2,}</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>出现 n 到 m 次</td>
+<td>A{2,6}</td>
+</tr>
+</tbody></table>
+<h1 id="第三章-XML"><a href="#第三章-XML" class="headerlink" title="第三章 XML"></a>第三章 XML</h1><blockquote>
+<p>eXtensible Markup Language 可扩展标记语言</p>
+</blockquote>
+<h2 id="解析-XML-文档"><a href="#解析-XML-文档" class="headerlink" title="解析 XML 文档"></a>解析 XML 文档</h2><ul>
+<li><p>dom 解析</p>
+<blockquote>
+<p>灵活性高，可操作性强，把数据全部载入内存进行操作，无法解析超大的 XML 文件。</p>
+</blockquote>
+</li>
+<li><p>sax 解析</p>
+<blockquote>
+<p>按行进行解析，效率高，无需担心内存不够问题。</p>
+</blockquote>
+</li>
+</ul>
+<p>##</p>
+<p>XML Schema</p>
+<blockquote>
+<p>XML Schema 的作用是定义 XML 文档的合法构建模块，类似 DTD。</p>
+</blockquote>
+<ul>
+<li>定义可出现在文档中的元素</li>
+<li>定义可出现在文档中的属性</li>
+<li>定义哪个元素是子元素</li>
+<li>定义子元素的次序</li>
+<li>定义子元素的数目</li>
+<li>定义元素是否为空，或者是否可包含文本</li>
+<li>定义元素和属性的数据类型</li>
+<li>定义元素和属性的默认值以及固定值</li>
+</ul>
+<h1 id="第四章-网络"><a href="#第四章-网络" class="headerlink" title="第四章 网络"></a>第四章 网络</h1><blockquote>
+<p>​</p>
+</blockquote>
+<h2 id="Telnet-工具"><a href="#Telnet-工具" class="headerlink" title="Telnet 工具"></a>Telnet 工具</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">telnet [-8acdEfFKLrx][-b&lt;主机别名&gt;][-e&lt;脱离字符&gt;][-k&lt;域名&gt;][-l&lt;用户名称&gt;][-n&lt;记录文件&gt;][-S&lt;服务类型&gt;][-X&lt;认证形态&gt;][主机名称或IP地址&lt;通信端口&gt;]<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>参数说明</strong>：</p>
+<ul>
+<li>-8 允许使用 8 位字符资料，包括输入与输出。</li>
+<li>-a 尝试自动登入远端系统。</li>
+<li>-b&lt;主机别名&gt; 使用别名指定远端主机名称。</li>
+<li>-c 不读取用户专属目录里的.telnetrc 文件。</li>
+<li>-d 启动排错模式。</li>
+<li>-e&lt;脱离字符&gt; 设置脱离字符。</li>
+<li>-E 滤除脱离字符。</li>
+<li>-f 此参数的效果和指定”-F”参数相同。</li>
+<li>-F 使用 Kerberos V5 认证时，加上此参数可把本地主机的认证数据上传到远端主机。</li>
+<li>-k&lt;域名&gt; 使用 Kerberos 认证时，加上此参数让远端主机采用指定的领域名，而非该主机的域名。</li>
+<li>-K 不自动登入远端主机。</li>
+<li>-l&lt;用户名称&gt; 指定要登入远端主机的用户名称。</li>
+<li>-L 允许输出 8 位字符资料。</li>
+<li>-n&lt;记录文件&gt; 指定文件记录相关信息。</li>
+<li>-r 使用类似 rlogin 指令的用户界面。</li>
+<li>-S&lt;服务类型&gt; 设置 telnet 连线所需的 IP TOS 信息。</li>
+<li>-x 假设主机有支持数据加密的功能，就使用它。</li>
+<li>-X&lt;认证形态&gt; 关闭指定的认证形态。</li>
+</ul>
+<h1 id="第五章-数据库编程"><a href="#第五章-数据库编程" class="headerlink" title="第五章 数据库编程"></a>第五章 数据库编程</h1><h2 id="JDBC-的设计"><a href="#JDBC-的设计" class="headerlink" title="JDBC 的设计"></a>JDBC 的设计</h2><blockquote>
+<p>从一开始，Java 技术开发人员就意识到了 Java 在数据库应用方面的巨大潜力。从 1995 年开始，他们就致力于扩展 Java 标准类库，使之可以运用 SQL 访问数据库。他们最初希望通过扩展 Java,就可以让人们“纯”用 Java 语言与任何数据库进行通信。但是，他们很快发现这是一项无法完成的任务:因为业界存在许多不同的数据库，且它们所使用的协议也各不相同。尽管很多数据库供应商都表示支持 Java 提供-套数据库访问的标准网络协议，但是每一家 企业都希望 Java 能采用自己的网络协议。所有的数据库供应商和工具开发商都认为，如果 Java 能够为 SQL 访问提供一套“纯” Java API,同时提供-个驱动管理器，以允许第三方驱动程序可以连接到特定的数据库，那它就会显得非常有用。这样，数据库供应商就可以提供自已的驱动程序，将其插人到驱动管理器中。这将成为-种向驱动管理器注册第三方驱动程序的简单机制。</p>
+</blockquote>
+<p>​</p>
+<p>这种接口组织方式遵循了微软公司非常成功的 ODBC 模式，ODBC 为 C 语言访问数据库提供了一套编程接口。JDBC 和 ODBC 都基于同一个思想:根据 API 编写的程序都可以与驱动管理器进行通信，而驱动管理器则通过驱动程序与实际的数据库进行通信。所有这些都意味着 JIDBC API 是大部分程序员不得不使用的接口。</p>
+<h1 id="第六章日-期和时间-API"><a href="#第六章日-期和时间-API" class="headerlink" title="第六章日 期和时间 API"></a>第六章日 期和时间 API</h1><p>​</p>
+<blockquote>
+<p>光阴似箭，我们可以很容易地设置一个起点，然后向前和向后以秒来计时。那为什么处理时间会如此之难呢?问题出在人类自身上。如果我们只需告诉对方:“1523793600 时来见我，别迟到!”那么一切都会很简单。但是我们希望时间能够和朝夕与季节挂钩，这就使事情变得复杂了。Java 1.0 有一个 Date 类，事后证明它过于简单了，当 Java 1.1 引入 Calendar 类之后，Date 类中的大部分方法就被弃用了。但是，Calendar 的 API 还不够给力，它的实例是易变的，并且它没有处理诸如闰秒这样的问题。第 3 次升级很吸引人，那就是 Java SE 8 中引入的 java. time API,它修正了过去的缺陷，并且应该会服役相当长的- -段时间。在本章中，你将会学习是什么使时间计算变得如此烦人，以及日期和时间 API 是如何解决这些问题的。</p>
+</blockquote>
+<p>​</p>
+<h3 id="时间线"><a href="#时间线" class="headerlink" title="时间线"></a>时间线</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Instant start = Instant.now();<br>Thread.sleep(<span class="hljs-number">1000</span>);<br>Instant end = Instant.now();<br>Duration between = Duration.between(start, end);<br><span class="hljs-keyword">long</span> l = between.toMillis();<br>System.out.println(l);<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="本地时间"><a href="#本地时间" class="headerlink" title="本地时间"></a>本地时间</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">LocalDate now = LocalDate.now();<br>LocalDate of = LocalDate.of(<span class="hljs-number">1999</span>, <span class="hljs-number">02</span>, <span class="hljs-number">15</span>);<br>LocalDate date = LocalDate.of(<span class="hljs-number">1998</span>, Month.FEBRUARY, <span class="hljs-number">10</span>);<br></code></pre></div></td></tr></table></figure>
+
+<h1 id="第七章国际化"><a href="#第七章国际化" class="headerlink" title="第七章国际化"></a>第七章国际化</h1><blockquote>
+<p>多数程序员相信将他们的程序进行国际化需要做的所有事情就是支持 Unicode 并在用户接口中对消息进行翻译。但是，在本章你将会看到，国际化一个程序所要做的事情绝不仅仅是提供 Unicode 支持。在世界的不同地方，日期、时间、货币甚至数字的格式都不相同。你需要用一种简单的方法来为不同的语言配置菜单与按钮的名字、消息字符串和快捷键。</p>
+</blockquote>
+<h2 id="Locale-对象"><a href="#Locale-对象" class="headerlink" title="Locale 对象"></a>Locale 对象</h2><blockquote>
+<p>一旦有了一个 Locale,你能用它做什么呢?答案是它所能做的事情很有限。Locale 类中唯- -有用的是那些识别语言和国家代码的方法，其中最重要的一个是 getdisplayName，它返回一个描述 Locale 的字符串。这个字符串并不包含前面所说的由两个字母组成的代码，而是以一种面向用户的形式来表现，比如 中文 (中国)</p>
+</blockquote>
+<p>相关方法</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String country = defaultLocale.getCountry();<span class="hljs-comment">//返回国家地区代码</span><br>String language = defaultLocale.getLanguage();<span class="hljs-comment">//返回国家的语言</span><br>String displayCountry = defaultLocale.getDisplayCountry();<span class="hljs-comment">//返回适合向用户显示的国家信息</span><br>String displayLanaguage = defaultLocale.getDisplayLanaguage();<span class="hljs-comment">//返回适合向用户展示的语言信息</span><br>String displayName = defaultLocale.getDisplayName();<span class="hljs-comment">//返回适合向用户展示的语言环境名</span><br></code></pre></div></td></tr></table></figure>
+
+<p>获取当前本地对象</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestLocale</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;<br>        Locale aDefault = Locale.getDefault();<br>        String displayName = aDefault.getDisplayName();<br>        System.out.println(displayName);<span class="hljs-comment">//中文 (中国)</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>如果需要改变地域查看效果</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">javac TestLocale.java -d .<br>java -Duser.language=de -Duser.region=CH com.example.annotation.controller.TestLocale<br><span class="hljs-comment">//输出 Deutsch (Schweiz)</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="数字格式"><a href="#数字格式" class="headerlink" title="数字格式"></a>数字格式</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Locale loc = Locale.GERMAN;<br>NumberFormat format = NumberFormat.getCurrencyInstance(loc);<br><span class="hljs-keyword">double</span> amt = <span class="hljs-number">12134.23</span>;<br>String s = format.format(amt);<br>System.out.println(s);<span class="hljs-comment">//¤ 12.134,23</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="货币"><a href="#货币" class="headerlink" title="货币"></a>货币</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">NumberFormat dollarInstance = NumberFormat.getCurrencyInstance(Locale.US);<br>NumberFormat euroInstance = NumberFormat.getCurrencyInstance(Locale.GERMANY);<br>String res1 = dollarInstance.format(<span class="hljs-number">2000</span>);<br>String res2 = euroInstance.format(<span class="hljs-number">2000</span>);<br>System.out.println(res1);<span class="hljs-comment">//$2,000.00</span><br>System.out.println(res2);<span class="hljs-comment">//2.000,00 €</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="日期和时间"><a href="#日期和时间" class="headerlink" title="日期和时间"></a>日期和时间</h2><blockquote>
+<p>当格式化日期和时间时，需要考虑 4 个与 Locale 相关的问题:</p>
+<ul>
+<li>月份和星期应该用本地语言来表示。</li>
+<li>年月日的顺序要符合本地习惯。</li>
+<li>公历可能不是本地首选的日期表示方法。.</li>
+<li>必须要考虑本地的时区。</li>
+</ul>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621411363960-6836366b-b017-4195-8c39-e2f423593ee2.png#clientId=u24c7e2d9-48fd-4&from=paste&height=159&id=ud1dc1a52&margin=%5Bobject%20Object%5D&name=image.png&originHeight=159&originWidth=574&originalType=binary&size=61272&status=done&style=none&taskId=u112c32f1-13ee-4566-be0c-ee882f92e46&width=574" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">FormatStyle medium = FormatStyle.MEDIUM;<br>DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDate(medium);<br>DateTimeFormatter dateFormatter = DateTimeFormatter.ofLocalizedDate(medium);<br>DateTimeFormatter timeFormatter = DateTimeFormatter.ofLocalizedTime(medium);<br><span class="hljs-comment">//with locale</span><br>Locale china = Locale.CHINA;<br>DateTimeFormatter chinaDateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(medium).withLocale(china);<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="排序和范化"><a href="#排序和范化" class="headerlink" title="排序和范化"></a>排序和范化</h2><h2 id="资源包"><a href="#资源包" class="headerlink" title="资源包"></a>资源包</h2><h2 id="文本文件和字符集"><a href="#文本文件和字符集" class="headerlink" title="文本文件和字符集"></a>文本文件和字符集</h2><h2 id="消息格式化"><a href="#消息格式化" class="headerlink" title="消息格式化"></a>消息格式化</h2><blockquote>
+<p>Java 类库中有-个 MessageFormat 类，它与用 printf 方法进行格式化很类似，但是它支持 Locale,并且会对数字和日期进行格式化。</p>
+</blockquote>
+<p>​</p>
+<h1 id="第八章脚本、-编译与注解处理"><a href="#第八章脚本、-编译与注解处理" class="headerlink" title="第八章脚本、 编译与注解处理."></a>第八章脚本、 编译与注解处理.</h1><blockquote>
+<p>脚本语言是一种通过在运行时解释程序文本，从而避免使用通常的编辑/编译/链接/运行循环的语言。脚本语言有许多优势:</p>
+<ul>
+<li>便于快速变更，鼓励不断试验。</li>
+<li>可以修改运行着的程序的行为。</li>
+<li>支持程序用户的定制化。</li>
+</ul>
+<p>另-方面，大多数脚本语言都缺乏可以使编写复杂应用受益的特性，例如强类型、封装和模块化。</p>
+</blockquote>
+<h2 id="脚本引擎"><a href="#脚本引擎" class="headerlink" title="脚本引擎"></a>脚本引擎</h2><p>​</p>
+<p>​</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621412869538-6328abc0-8a1b-43e7-b67e-3964a2eb37d6.png#clientId=u24c7e2d9-48fd-4&from=paste&height=150&id=u1af06aee&margin=%5Bobject%20Object%5D&name=image.png&originHeight=150&originWidth=576&originalType=binary&size=53850&status=done&style=none&taskId=uc0c3dbea-de0c-49f6-9c96-567032f6223&width=576" srcset="/img/loading.gif" lazyload alt="image.png"><br>​</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Engine</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;<br>        ScriptEngineManager scriptEngineManager = <span class="hljs-keyword">new</span> ScriptEngineManager();<br>        ScriptEngine nashorn = scriptEngineManager.getEngineByName(<span class="hljs-string">&quot;nashorn&quot;</span>);<br>        Object eval = nashorn.eval(<span class="hljs-string">&quot;n=1999&quot;</span>);<br>        System.out.println(eval);<span class="hljs-comment">//1999</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="编译器-API"><a href="#编译器-API" class="headerlink" title="编译器 API"></a>编译器 API</h2><p>有许多工具都需要调用 Java 编译器，例如:</p>
+<ul>
+<li>开发环境。</li>
+<li>Java 教学和辅导程序。</li>
+<li>自动化的构建和测试工具。</li>
+<li>处理 Java 代码段的模板工具，例如 JavaServer Pages (JSP)。</li>
+</ul>
+<p>在过去，应用程序是通过在 jdk/1ib/toos.jar 类库中未归档的类调用 Java 编译器的。如今-个用于编译的公共 API 成为 Java 平台的一部分，并且它再也不需要使用 tools.jar 了。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();<br><br>OutputStream outStream = ...;<br>OutputStream errStream = ...;<br><br><span class="hljs-keyword">int</span> code = compiler.run(<span class="hljs-keyword">null</span>, outStream, errStream, <span class="hljs-string">&quot;-sourcepath&quot;</span>, <span class="hljs-string">&quot;src&quot;</span>, <span class="hljs-string">&quot;Test.java&quot;</span>);<br><span class="hljs-comment">//if return 0 instance of success</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="动态-Java-代码生成"><a href="#动态-Java-代码生成" class="headerlink" title="动态 Java 代码生成"></a>动态 Java 代码生成</h2><p>在用于动态 Web 页面的 JSP 技术中，可以在 HTML 中混杂 Java 代码，例如:</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">&lt;p&gt;The current date and time is &lt;b&gt;&lt;k= new java.uti1,Date(); %&gt;&lt;/b&gt;&lt;/p&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>JSP 引擎动态地将 Java 代码编译到 Servlet 中。</p>
+<h2 id="使用注解"><a href="#使用注解" class="headerlink" title="使用注解"></a>使用注解</h2><blockquote>
+<p>注解是那些插入到源代码中使用其他工具可以对其进行处理的标签。这些工具可以在源码层次上进行操作，或者可以处理编译器在其中放置了注解的类文件。</p>
+</blockquote>
+<p>注解不会改变程序的编译方式。Java 编译器对于包含注解和不包含注解的代码会生成相<br>同的虚拟机指令。为了能够受益于注解，你需要选择-个处理工具，然后向你的处理工具可以理解的代码中插入注解，之后运用该处理工具处理代码。注解的使用范围还是很广泛的，并且这种广泛性让人乍一看会觉得有些杂乱无章。下面是关于注解的一些可能的用法:</p>
+<ul>
+<li>附属文件的自动生成，例如部署描述符或者 bean 信息类。</li>
+<li>测试、日志、事务语义等代码的自动生成。</li>
+</ul>
+<p>​</p>
+<p>注解简介</p>
+<blockquote>
+<p>我们首先介绍基本概念，然后将这些概念运用到一个具体示例中:我们将某些方法标注为 AWT 构件的事件监听器，然后向你展示一个能够分析注解和连接监听器的注解处理器。然后，我们对其语法规则进行详细讨论。最后我们以两个注解处理的高级示例结束本章。其中一个可以处理源代码级别的注解。另外一个使用了 Apache 的字节码工程类库，可以向注解过的方法中添加额外的字节码。</p>
+</blockquote>
+<p>​</p>
+<p><img src="https://cdn.nlark.com/yuque/__mermaid_v3/3c6102f37ff8a506f91d8010d17ea3f2.svg#lake_card_v2=eyJ0eXBlIjoibWVybWFpZCIsImNvZGUiOiJncmFwaCBMUjtcbkEoXCJAQWN0aW9uTGlzdGVybmVyRm9yXCIpLS0-SmF2Yee8luivkeWZqC0tPkIoXCJAQWN0aW9uTGlzdGVybmVyRm9y57G75paH5Lu2XCIpLS0-SmF2YeiZmuaLn-acui0tPueoi-W6j-i_kOeUqEFQSeWPjeWwhOacuuWItuWkhOeQhuazqOinoyIsInVybCI6Imh0dHBzOi8vY2RuLm5sYXJrLmNvbS95dXF1ZS9fX21lcm1haWRfdjMvM2M2MTAyZjM3ZmY4YTUwNmY5MWQ4MDEwZDE3ZWEzZjIuc3ZnIiwiaWQiOiJZMGx4aCIsIm1hcmdpbiI6eyJ0b3AiOnRydWUsImJvdHRvbSI6dHJ1ZX0sImNhcmQiOiJkaWFncmFtIn0=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="第九章安全"><a href="#第九章安全" class="headerlink" title="第九章安全"></a>第九章安全</h1><p>Java 技术提供了以下三种确保安全的机制:</p>
+<ul>
+<li>语言设计特性(对数组的边界进行检查,无不受检查的类型转换，无指针算法等)。</li>
+<li>访问控制机制，用于控制代码能够执行的操作(比如文件访问，网络访向等)。</li>
+<li>代码签名，利用该特性，代码的作者就能够用标准的加密算法来认证 Java 代码。这样，该代码的使用者就能够准确地知道谁创建了该代码，以及代码被标识后是否被修改过。</li>
+</ul>
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><h1 id="第十章高级-Swing"><a href="#第十章高级-Swing" class="headerlink" title="第十章高级 Swing"></a>第十章高级 Swing</h1><p>略</p>
+<h1 id="第十一章高级-AWT"><a href="#第十一章高级-AWT" class="headerlink" title="第十一章高级 AWT"></a>第十一章高级 AWT</h1><p>略</p>
+<h1 id="第十二章本地方法"><a href="#第十二章本地方法" class="headerlink" title="第十二章本地方法"></a>第十二章本地方法</h1><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1620799343096-89ce2681-3063-4534-be06-be610367739c.png#clientId=uadd4da19-1647-4&from=paste&height=430&id=u7b333f28&margin=%5Bobject%20Object%5D&name=image.png&originHeight=430&originWidth=430&originalType=binary&size=53356&status=done&style=none&taskId=uf6e2de31-a181-45e5-a3ba-4562464e7f0&width=430" srcset="/img/loading.gif" lazyload alt="image.png"><br>扫一扫、关注我</p>
 
             </div>
             <hr>
