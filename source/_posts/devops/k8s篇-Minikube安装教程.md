@@ -69,8 +69,7 @@ docker pull registry.aliyuncs.com/google_containers/storage-provisioner:v1.8.1
 
 [Github代码库](https://github.com/AliyunContainerService/minikube)
 [参考博文](https://yq.aliyun.com/articles/221687)
-[官方文档](https://minikube.sigs.k8s.io/docs/start/)
-<br/>
+[官方文档](https://minikube.sigs.k8s.io/docs/start/)  
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

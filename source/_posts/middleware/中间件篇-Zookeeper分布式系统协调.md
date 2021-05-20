@@ -132,7 +132,7 @@ ZAB 提交事务并不像 2PC 一样需要全部 follower 都 ACK,只需要得�
 
 # 参考资料
 
-[官方文档]()<br/>
+[官方文档]()   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

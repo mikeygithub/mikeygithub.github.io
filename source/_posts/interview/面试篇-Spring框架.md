@@ -368,7 +368,7 @@ target method 执行
 around after advice
 after advice
 afterThrowing:异常发生
-java.lang.RuntimeException: 异常发生<br/>
+java.lang.RuntimeException: 异常发生   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

@@ -1030,7 +1030,7 @@ time工具的常用语法格式如下：
 
 # 参考资料
 
-[计算机组成与系统结构](http://www.xduph.com/)<br/>
+[计算机组成与系统结构](http://www.xduph.com/)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

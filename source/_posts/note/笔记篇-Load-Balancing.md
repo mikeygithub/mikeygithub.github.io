@@ -227,7 +227,7 @@ location /download/ {
 
 ![avatar](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/proxy-model-param.png)
 
-# HAProxy<br/>
+# HAProxy   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

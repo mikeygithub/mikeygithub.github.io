@@ -544,8 +544,7 @@ key:MapperID+offset+limit+Sql+所有的入参
 # Tomcat 架构
 
 [参考资料](https://www.cnblogs.com/alimayun/p/10604532.html)
+  
 
-<br/>
 
-
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

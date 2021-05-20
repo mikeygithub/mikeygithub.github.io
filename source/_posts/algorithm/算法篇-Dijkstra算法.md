@@ -58,7 +58,7 @@ G={V,E}
 
 # 参考资料
 
-[Dijkstra算法图文详解](https://blog.csdn.net/lbperfect123/article/details/84281300)<br/>
+[Dijkstra算法图文详解](https://blog.csdn.net/lbperfect123/article/details/84281300)
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

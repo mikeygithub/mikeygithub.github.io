@@ -108,7 +108,7 @@ Tomcat提供了delegate属性用于控制是否启用Java委派模式，默认�
 
 [Tomcat架构解析.刘光瑞]()
 
-[简单实现HttpServer服务器](https://www.cnblogs.com/biaogejiushibiao/p/10397354.html)<br/>
+[简单实现HttpServer服务器](https://www.cnblogs.com/biaogejiushibiao/p/10397354.html)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

@@ -219,7 +219,7 @@ public class AnnotationApplication {
 
 # 参考资料
 
-[Java自定义注解](https://www.cnblogs.com/liangweiping/p/3837332.html)<br/>
+[Java自定义注解](https://www.cnblogs.com/liangweiping/p/3837332.html)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

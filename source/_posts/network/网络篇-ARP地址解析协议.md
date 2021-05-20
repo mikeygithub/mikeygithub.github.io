@@ -72,8 +72,7 @@ arp -a
 
 # 参考资料
 
-[ARP地址解析协议原理](https://www.cnblogs.com/csguo/p/7542944.html)
-<br/>
+[ARP地址解析协议原理](https://www.cnblogs.com/csguo/p/7542944.html)  
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

@@ -1891,8 +1891,7 @@ test2执行：这个是test1的脚本
 
 [菜鸟教程](https://www.runoob.com/linux/linux-shell.html)
 
-[W3cSchool Shell教程](https://www.w3cschool.cn/linux/linux-shell.html)
-<br/>
+[W3cSchool Shell教程](https://www.w3cschool.cn/linux/linux-shell.html)  
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

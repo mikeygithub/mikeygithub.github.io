@@ -120,7 +120,7 @@ zip main.zip main
 
 [Serverless 入门教程](https://www.jianshu.com/p/e7eb45a10f96)
 
-[通过一个案例，理解FaaS的运行逻辑](https://blog.csdn.net/li1669852599/article/details/108795172)<br/>
+[通过一个案例，理解FaaS的运行逻辑](https://blog.csdn.net/li1669852599/article/details/108795172)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

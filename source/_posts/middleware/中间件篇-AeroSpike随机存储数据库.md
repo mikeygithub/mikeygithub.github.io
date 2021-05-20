@@ -472,8 +472,7 @@ public class Test{
 
 https://www.developer.aerospike.com/
 
-[aerospike-sample-applications](https://github.com/aerospike-examples/aerospike-sample-applications)
-<br/>
+[aerospike-sample-applications](https://github.com/aerospike-examples/aerospike-sample-applications)  
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

@@ -1460,7 +1460,7 @@ select * from b , (select tid from a limit 50000,200) a where b.id = a .tid;
 
 - 组合八：id列上没有索引，RR隔离级别
 
-- 组合九：Serializable隔离级别<br/>
+- 组合九：Serializable隔离级别   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

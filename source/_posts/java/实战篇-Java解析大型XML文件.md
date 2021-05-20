@@ -166,7 +166,7 @@ public class ParseHandler extends DefaultHandler {
 
 # 参考资料
 
-[项目代码](https://github.com/mikeygithub/parse-xml.git)<br/>
+[项目代码](https://github.com/mikeygithub/parse-xml.git)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

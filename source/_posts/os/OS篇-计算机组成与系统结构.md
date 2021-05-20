@@ -550,7 +550,7 @@ $$
 
 # 参考资料
 
-[计算机组成与系统结构](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/ppt/计算机组成与系统结构.pptx)<br/>
+[计算机组成与系统结构](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/ppt/计算机组成与系统结构.pptx)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

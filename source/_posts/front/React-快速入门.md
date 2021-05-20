@@ -70,8 +70,7 @@ ReactDOM.render(
 
 [官网](https://www.taniarascia.com/)
 
-[快速开始](https://www.taniarascia.com/getting-started-with-react/)
-<br/>
+[快速开始](https://www.taniarascia.com/getting-started-with-react/)  
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

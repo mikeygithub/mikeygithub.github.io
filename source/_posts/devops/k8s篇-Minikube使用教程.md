@@ -129,8 +129,7 @@ Deployment更新镜像：
 
 ## K8s kubectl 命令表
 
-[kubectl命令列表](http://docs.kubernetes.org.cn/683.html)
-<br/>
+[kubectl命令列表](http://docs.kubernetes.org.cn/683.html)  
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

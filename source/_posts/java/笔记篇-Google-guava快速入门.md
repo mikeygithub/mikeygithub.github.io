@@ -115,7 +115,7 @@ a library for modeling graph
 
 [github guava 地址](https://github.com/google/guava)
 
-https://www.baeldung.com/guava-guide<br/>
+https://www.baeldung.com/guava-guide   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

@@ -10,7 +10,7 @@ tags: Linux
 
 <p class="note note-primary">
 Linux是由linus开发的一款基于unix的系统，
-</p><br/>
+</p>   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

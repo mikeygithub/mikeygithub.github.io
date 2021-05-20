@@ -627,7 +627,7 @@ Go的应用范围一直在扩大，云计算，微服务，区块链，哪里都
 
 [相关资料](https://github.com/mikeygithub/go-study.git)
 
-[学习网站](http://c.biancheng.net/golang/)<br/>
+[学习网站](http://c.biancheng.net/golang/)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

@@ -83,7 +83,6 @@ count(0)=count(1)=count(*)
 9、SELECT COUNT(*) 的时候，加不加where条件有差别吗？
 
 10、COUNT(*)、COUNT(1)和COUNT(字段名)的执行过程是怎样的？
-<br/>
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

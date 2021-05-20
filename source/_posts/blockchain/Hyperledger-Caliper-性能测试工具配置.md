@@ -120,7 +120,6 @@ One-step install也包含了npm run cleanup命令。所以安装完你依旧会�
 https://github.com/hyperledger/caliper  
 https://hyperledger.github.io/caliper/docs/1_Getting_Started.html  
 https://github.com/hyperledger/caliper/blob/master/packages/caliper-tests-integration/README.md  
-<br/>
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

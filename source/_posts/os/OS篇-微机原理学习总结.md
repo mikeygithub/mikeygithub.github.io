@@ -200,7 +200,7 @@ tags: 微机原理
 
 # 参考资料
 
-[微机原理与接口技术](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/微机原理与接口技术.ppt)<br/>
+[微机原理与接口技术](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/微机原理与接口技术.ppt)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

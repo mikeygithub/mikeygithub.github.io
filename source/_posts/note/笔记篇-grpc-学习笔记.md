@@ -82,7 +82,7 @@ From the `examples/helloworld` directory:
 
 # 相关资料
 
-[官方文档](https://grpc.io/docs/)<br/>
+[官方文档](https://grpc.io/docs/)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

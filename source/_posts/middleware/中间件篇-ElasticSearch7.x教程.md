@@ -4714,8 +4714,7 @@ public enum ResultEnum {
                 .map(e -> JSON.parseObject(e.getSourceAsString(), personPlayer.class))
                 .collect(Collectors.toList());
     }
-```
-<br/>
+```  
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

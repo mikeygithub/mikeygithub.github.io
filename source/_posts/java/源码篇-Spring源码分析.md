@@ -333,7 +333,7 @@ TODO
 
 # 参考资料
 
-[Spring核心IOC的源码分析](https://javadoop.com/post/spring-ioc)<br/>
+[Spring核心IOC的源码分析](https://javadoop.com/post/spring-ioc)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

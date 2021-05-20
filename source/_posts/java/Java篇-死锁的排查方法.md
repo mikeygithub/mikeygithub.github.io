@@ -181,7 +181,7 @@ Found 1 deadlock.
 
 # 参考相关资料
 
-[如何快速排查死锁？如何避免死锁？（值得收藏）](https://blog.csdn.net/yuandengta/article/details/107189812)<br/>
+[如何快速排查死锁？如何避免死锁？（值得收藏）](https://blog.csdn.net/yuandengta/article/details/107189812)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

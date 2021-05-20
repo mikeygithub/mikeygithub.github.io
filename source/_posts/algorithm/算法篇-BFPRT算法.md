@@ -290,7 +290,6 @@ BFPRT 算法在最坏情况下的时间复杂度是 O(n)，下面予以证明。
 - [Median of medians](https://en.wikipedia.org/wiki/Median_of_medians).维基百科
 - [bfprt算法解析](https://blog.csdn.net/qq_40938077/article/details/81213820)
 - [bfprt算法](https://blog.csdn.net/softimite_zifeng/article/details/77103544)
-<br/>
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

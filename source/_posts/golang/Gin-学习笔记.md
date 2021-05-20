@@ -60,7 +60,7 @@ $ go run main.go
 # 相关资料
 
 [官网文档](https://github.com/gin-gonic/gin)  
-[参考博文](https://geektutu.com/post/quick-go-gin.html)<br/>
+[参考博文](https://geektutu.com/post/quick-go-gin.html)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

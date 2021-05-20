@@ -128,7 +128,7 @@ sh shutdown.sh
 
 # 参考资料
 
-[官方文档](https://nacos.io/en-us/docs/quick-start.html)<br/>
+[官方文档](https://nacos.io/en-us/docs/quick-start.html)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

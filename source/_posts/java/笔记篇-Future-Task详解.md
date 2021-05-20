@@ -131,7 +131,7 @@ public class Main {
 
 # 参考
 
-[JDK1.7 FutureTask](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/FutureTask.html)<br/>
+[JDK1.7 FutureTask](https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/FutureTask.html)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

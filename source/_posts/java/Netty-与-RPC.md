@@ -260,8 +260,7 @@ Apache Thrift,它采用接口描述语言定义并创建服务,支持可扩展�
 
 1、多语言开发的需要 2、性能问题
 
-![avatar](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/thrift.png)
-<br/>
+![avatar](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/thrift.png)  
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

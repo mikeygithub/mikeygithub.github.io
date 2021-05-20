@@ -59,8 +59,7 @@ jdk1.7之后: -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
 
 [Tutorial: Remote debug](https://www.jetbrains.com/help/idea/tutorial-remote-debug.html)
 
+  
 
-<br/>
 
-
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

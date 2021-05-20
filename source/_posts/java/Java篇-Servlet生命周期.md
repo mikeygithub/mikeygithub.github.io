@@ -386,8 +386,7 @@ public abstract class HttpServlet extends GenericServlet {
 
 # 参考资料
 
-[servlet的执行原理与生命周期](https://blog.csdn.net/javaloveiphone/article/details/8154791)
-<br/>
+[servlet的执行原理与生命周期](https://blog.csdn.net/javaloveiphone/article/details/8154791)  
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

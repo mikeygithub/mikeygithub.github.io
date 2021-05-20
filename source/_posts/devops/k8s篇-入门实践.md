@@ -439,7 +439,7 @@ kubeadm join apiserver.demo:6443 --token mpfjma.4vjjg8flqihor4vt     --discovery
 
 [单节点安装](https://kuboard.cn/install/install-k8s.html#%E6%96%87%E6%A1%A3%E7%89%B9%E7%82%B9)
 
-[Kubernates 教学](https://kuboard.cn/learning/k8s-bg/what-is-k8s.html#%E5%9B%9E%E9%A1%BE)<br/>
+[Kubernates 教学](https://kuboard.cn/learning/k8s-bg/what-is-k8s.html#%E5%9B%9E%E9%A1%BE)   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 

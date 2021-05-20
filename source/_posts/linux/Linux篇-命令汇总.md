@@ -860,7 +860,7 @@ category: Linux
 <td colspan="22"  height="19">$touchmyfile</td>
 </tr>
 </tbody>
-</table><br/>
+</table>   
 
 
-![扫一扫，关注我](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wechat.jpg)
+ 
