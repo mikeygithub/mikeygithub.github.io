@@ -263,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      587 字
+      750 字
     </span>
   
 
@@ -273,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      10
        分钟
     </span>
   
@@ -329,9 +329,20 @@
 <p>释放锁时将记录进行删除</p>
 <figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> database_lock <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">resource</span>=<span class="hljs-number">1</span>;<br></code></pre></div></td></tr></table></figure>
 <h2 id="基于乐观锁实现"><a href="#基于乐观锁实现" class="headerlink" title="基于乐观锁实现"></a>基于乐观锁实现</h2><blockquote>
+<p>乐观锁的思想就是获取锁的时候并不进行判断，而是在更新的时候对其获取时的版本号进行对比，如果一致则进行更新。</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`optimistic_lock`</span> (<br>	<span class="hljs-string">`id`</span> <span class="hljs-built_in">BIGINT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> AUTO_INCREMENT,<br>	<span class="hljs-string">`resource`</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;锁定的资源&#x27;</span>,<br>	<span class="hljs-string">`version`</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;版本信息&#x27;</span>,<br>	<span class="hljs-string">`created_at`</span> datetime <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;创建时间&#x27;</span>,<br>	<span class="hljs-string">`updated_at`</span> datetime <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;更新时间&#x27;</span>,<br>	<span class="hljs-string">`deleted_at`</span> datetime <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;删除时间&#x27;</span>, <br>	PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-string">`id`</span>),<br>	<span class="hljs-keyword">UNIQUE</span> <span class="hljs-keyword">KEY</span> <span class="hljs-string">`uiq_idx_resource`</span> (<span class="hljs-string">`resource`</span>) <br>) <span class="hljs-keyword">ENGINE</span>=<span class="hljs-keyword">InnoDB</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">CHARSET</span>=utf8mb4 <span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">&#x27;数据库分布式锁表&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
 
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> optimistic_lock(<span class="hljs-keyword">resource</span>, <span class="hljs-keyword">version</span>, created_at, updated_at) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">20</span>, <span class="hljs-number">1</span>, <span class="hljs-keyword">CURTIME</span>(), <span class="hljs-keyword">CURTIME</span>());<br></code></pre></div></td></tr></table></figure>
+
+<p>STEP1 - 获取资源： <code>SELECT resource, version FROM optimistic_lock WHERE id = 1</code><br>STEP2 - 执行业务逻辑<br>STEP3 - 更新资源：<code>UPDATE optimistic_lock SET resource = resource -1, version = version + 1 WHERE id = 1 AND version = oldVersion</code></p>
+<h2 id="基于悲观锁实现"><a href="#基于悲观锁实现" class="headerlink" title="基于悲观锁实现"></a>基于悲观锁实现</h2><blockquote>
+</blockquote>
+<p>关闭事务自动提交</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">mysql&gt; SET AUTOCOMMIT = 0;<br>Query OK, 0 rows affected (0.00 sec)<br></code></pre></div></td></tr></table></figure>
+
+<p>STEP1 - 获取锁：<code>SELECT * FROM database_lock WHERE id = 1 FOR UPDATE;</code>。<br>STEP2 - 执行业务逻辑。<br>STEP3 - 释放锁：COMMIT。</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> database_lock <span class="hljs-keyword">WHERE</span> description=<span class="hljs-string">&#x27;lock&#x27;</span> <span class="hljs-keyword">FOR</span> <span class="hljs-keyword">UPDATE</span>;<br></code></pre></div></td></tr></table></figure>
 
 <h1 id="基于Redis实现"><a href="#基于Redis实现" class="headerlink" title="基于Redis实现"></a>基于Redis实现</h1><h2 id="加锁"><a href="#加锁" class="headerlink" title="加锁"></a>加锁</h2><blockquote>
 <p>加锁实际上就是在redis中，给Key键设置一个值，为避免死锁，并给定一个过期时间。</p>
