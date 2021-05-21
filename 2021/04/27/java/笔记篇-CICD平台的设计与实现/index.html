@@ -263,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      213 字
+      334 字
     </span>
   
 
@@ -273,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      3
        分钟
     </span>
   
@@ -323,15 +323,21 @@
 <p>在CICD的流程中主要分为</p>
 <pre><code class=" mermaid">graph LR;
 
-A(提交代码)--触发--&gt;B(依赖扫描)
-B--&gt;C(打包项目)
-C--&gt;D(编译构建)--&gt;E(部署应用)--&gt;启动成功
+开发者--&gt;开发功能--&gt;A(提交代码)--触发--&gt;B(依赖扫描)
+B--拉取--&gt;C(打包项目)
+C--构建--&gt;D(编译构建)--分配资源--&gt;E(部署应用)--&gt;启动应用--成功--&gt;测试功能--&gt;发布版本
+测试功能--修复BUG--&gt;开发功能
 
+启动应用--失败通知--&gt;开发者
 </code></pre>
 
+<blockquote>
+<p>根据上面的功能流程进行分析我们需要的一些组件自建代码库可以采用gitlab、代码审计使用gerrit进行扫描、资源的动态分配可以采用k8s进行分配。</p>
+</blockquote>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.gerritcodereview.com/">Gerrit 代码评审工具</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.docker.com/">Docker</a></p>
+<p><a href="">k8s</a></p>
 
-
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1>
             </div>
             <hr>
             <div>
