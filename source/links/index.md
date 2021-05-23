@@ -50,7 +50,7 @@ comment: 'utterances'
 <table>
     <tr>
         <td><a href="https://riris.cn">Bryce's Club</a></td>
-        <td><a href="https://dhbxs.club">灯火不休时</a></td>
+        <td><a href="blog.dhbxs.top">灯火不休时</a></td>
         <td><a href="https://blog.ccknbc.cc">CC的部落格</a></td>
         <td><a href="https://www.mgxnb.club">M-GX</a></td>
         <td><a href="https://goopher97-github-io.vercel.app">GOOPHER's Blog</a></td>
