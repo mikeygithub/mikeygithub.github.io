@@ -1,7 +1,7 @@
 ---
 title: 友链
 date: 2020-12-31 14:38:21
-layout: links
+layout: link
 comment: 'utterances'
 ---
 <p class="note note-primary">框架</p>
