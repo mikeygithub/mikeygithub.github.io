@@ -49,10 +49,17 @@ comment: 'utterances'
 <p class="note note-primary">友链</p>
 <table>
     <tr>
+        <td><a href="https://sunbufu.vercel.app/posts/">孙不服的博客</a></td>
+        <td><a href="https://hiwannz.com/">见字如面</a></td>
+        <td><a href="https://you.ci/">有次博客</a></td>
+        <td><a href="https://geekplayers.com/">极客玩家大白</a></td>
         <td><a href="https://riris.cn">Bryce's Club</a></td>
         <td><a href="https://blog.dhbxs.top">灯火不休时</a></td>
         <td><a href="https://blog.ccknbc.cc">CC的部落格</a></td>
         <td><a href="https://www.mgxnb.club">M-GX</a></td>
         <td><a href="https://goopher97-github-io.vercel.app">GOOPHER's Blog</a></td>
+    </tr>
+    <tr>
+        <td><a href="https://dreamylost.cn/">梦境迷离</a></td>
     </tr>
 </table>
