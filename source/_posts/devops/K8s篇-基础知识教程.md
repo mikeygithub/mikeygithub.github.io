@@ -4,7 +4,7 @@ index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/im
 hide: false
 date: 2020-07-01 00:59:42
 category: DevOps
-tags: K8S
+tags: Kubernetes
 ---
 
 # 什么是K8S
