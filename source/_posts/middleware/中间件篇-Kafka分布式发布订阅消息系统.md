@@ -163,41 +163,48 @@ rm -rf /tmp/kafka-logs /tmp/zookeeper
 # 脚本详解
 
 ```text
-connect-distributed.sh        
-kafka-preferred-replica-election.sh
-connect-mirror-maker.sh       
-kafka-producer-perf-test.sh
-connect-standalone.sh         
-kafka-reassign-partitions.sh
-kafka-acls.sh                 
-kafka-replica-verification.sh
-kafka-broker-api-versions.sh  
-kafka-run-class.sh
-kafka-configs.sh              
-kafka-server-start.sh
-kafka-console-consumer.sh     
-kafka-server-stop.sh
-kafka-console-producer.sh     
-kafka-streams-application-reset.sh
-kafka-consumer-groups.sh      
-kafka-topics.sh -------------------topic相关
-kafka-consumer-perf-test.sh   
-kafka-verifiable-consumer.sh
-kafka-delegation-tokens.sh    
-kafka-verifiable-producer.sh
-kafka-delete-records.sh       
-trogdor.sh
-kafka-dump-log.sh
-kafka-features.sh             
-zookeeper-security-migration.sh
-kafka-leader-election.sh      
-zookeeper-server-start.sh
-kafka-log-dirs.sh             
-zookeeper-server-stop.sh
-kafka-mirror-maker.sh         
-zookeeper-shell.sh      
-windows windows下的脚本
+./
+├── connect-distributed.sh									连接分布式
+├── connect-mirror-maker.sh									连接集群镜像
+├── connect-standalone.sh										连接单机模式
+├── kafka-acls.sh														权限相关
+├── kafka-broker-api-versions.sh						broker相关信息					
+├── kafka-configs.sh												卡夫卡配置
+├── kafka-console-consumer.sh								控制台消费
+├── kafka-console-producer.sh								控制台生产
+├── kafka-consumer-groups.sh								消费组
+├── kafka-consumer-perf-test.sh							消费指标测试
+├── kafka-delegation-tokens.sh							委托令牌
+├── kafka-delete-records.sh									删除记录
+├── kafka-dump-log.sh												保存日志
+├── kafka-features.sh												特性
+├── kafka-leader-election.sh							  领导者选举		
+├── kafka-log-dirs.sh												日志目录
+├── kafka-mirror-maker.sh										集群镜像制作
+├── kafka-preferred-replica-election.sh			触发指定分区进行“优先副本”选举					
+├── kafka-producer-perf-test.sh							生产者指标测试			
+├── kafka-reassign-partitions.sh						分区副本迁移功能				
+├── kafka-replica-verification.sh						副本验证
+├── kafka-run-class.sh											卡夫卡核心脚本
+├── kafka-server-start.sh										启动服务
+├── kafka-server-stop.sh										停止服务
+├── kafka-streams-application-reset.sh			流应用重置相关			
+├── kafka-topics.sh													topic管理
+├── kafka-verifiable-consumer.sh						验证消费者			
+├── kafka-verifiable-producer.sh						验证生产者
+├── trogdor.sh															代理相关
+├── windows																	windows下的相关脚本
 ```
+
+# 基础命令
+
+
+
+
+
+
+
+
 
 # Kafka 为何如此之快
 
@@ -1233,6 +1240,8 @@ group.initial.rebalance.delay.ms=0
 
 [更多内容](https://github.com/didi/Logi-KafkaManager.git)
 
+
+
 # 参考资料
 
 [官方文档-快速开始](http://kafka.apache.org/quickstart)
@@ -1246,4 +1255,3 @@ group.initial.rebalance.delay.ms=0
 [DEVELOPER GUIDE FOR KAFKA STREAMS](http://kafka.apache.org/25/documentation/streams/developer-guide/)   
 
 
- 
