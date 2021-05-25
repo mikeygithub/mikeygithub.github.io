@@ -263,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      4k 字
     </span>
   
 
@@ -273,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      26
+      44
        分钟
     </span>
   
@@ -350,10 +350,16 @@
 <blockquote>
 <p>Reactor 提供了丰富的组合选项，其中代码反映了抽象过程的组织，所有内容通常保持在同一级别（嵌套最小化）。</p>
 </blockquote>
-<p>​</p>
-<p>​</p>
-<p>​</p>
-<p>​</p>
+<h3 id="装配线类比"><a href="#装配线类比" class="headerlink" title="装配线类比"></a>装配线类比</h3><p>您可以将被动应用程序处理的数据视为在装配线中移动。反应器既是传送带又是工作站。原材料从一个来源（原始出版商）倾泻而出，最终成为成品，准备推送到消费者（或订阅者）手中。<br>原材料可以经过各种转换和其他中间步骤，也可以是将中间件聚集在一起的大型装配线的一部分。如果在某一点出现故障或堵塞（可能装箱产品花费的时间太长），受影响的工作站可以向上游发出信号，限制原材料的流动。<br>​</p>
+<h3 id="操作员"><a href="#操作员" class="headerlink" title="操作员"></a>操作员</h3><p>在 Reactor 中，操作员是装配模拟中的工作站。每个操作符向发布者添加行为，并将上一步的发布者包装到新实例中。因此，整个链是链接的，因此数据源于第一个发布者，并沿着链向下移动，通过每个链接进行转换。最终，订户完成了这个过程。请记住，在订阅者订阅发布者之前什么都不会发生，我们很快就会看到。<br>理解操作符创建新实例可以帮助您避免一个常见的错误，该错误会导致您认为您在链中使用的操作符没有被应用。请参见常见问题解答中的此项。<br>虽然 reactivestreams 规范根本没有指定操作符，但是 Reactor 等 Reactive 库的最佳附加值之一是它们提供了丰富的操作符词汇表。从简单的转换和过滤到复杂的编排和错误处理，这些都涉及很多方面。</p>
+<h3 id="在订阅之前不会发生任何事情"><a href="#在订阅之前不会发生任何事情" class="headerlink" title="在订阅之前不会发生任何事情"></a>在订阅之前不会发生任何事情</h3><p>​</p>
+<p>在 Reactor 中，当您编写发布者链时，默认情况下数据不会开始泵入其中。相反，您可以创建异步过程的抽象描述（这有助于重用和组合）。<br>通过订阅，您可以将发布者绑定到订阅者，从而触发整个链中的数据流。这是通过来自订阅者的单个请求信号在内部实现的，该信号向上游传播，一直传回源发布者。<br>​</p>
+<h3 id="背压"><a href="#背压" class="headerlink" title="背压"></a>背压</h3><p>​</p>
+<p>上游传播信号也用于实现背压，我们在装配线中描述了当工作站处理比上游工作站慢时向上发送的反馈信号。<br>由反应流规范定义的真正机制与类比非常接近：订户可以在无限制模式下工作，并让源以最快的可实现速率推送所有数据，或者它可以使用请求机制向源发出信号，它准备处理最多 n 个元素。<br>​</p>
+<p>中间操作员也可以更改中转请求。想象一个缓冲区操作符，它将元素分组为 10 个批次。如果订阅者请求一个缓冲区，则源可以产生 10 个元素。一些操作员还实施预取策略，这避免了请求（1）往返，如果在请求之前生成元素并不太昂贵，则有益。<br>​</p>
+<p>这将推送模型转换为推拉混合动力，如果下游可以随时可用，则下游可以从上游拉动 n 个元件。但是如果元素还没有准备好，那么它们就会在生产时被上游推。<br>​</p>
+<h3 id="热与冷"><a href="#热与冷" class="headerlink" title="热与冷"></a>热与冷</h3><p>​</p>
+<p>Rx 系列反应库区分了两大类反应序列：热反应序列和冷反应序列。这种区别主要与反应流对订户的反应有关：<br>对于每个订阅者，包括在数据源处，冷序列重新开始。例如，如果源代码包装了一个 HTTP 调用，则会为每个订阅发出一个新的 HTTP 请求。<br>对于每个订户，热序列不是从头开始的。更确切地说，迟来的订阅者接收他们订阅之后发出的信号。然而，请注意，一些热反应流可以缓存或重放全部或部分排放的历史。从一般的角度来看，热序列甚至可以在没有订阅者在侦听时发出（“订阅之前什么都不会发生”规则的一个例外）。</p>
 <h1 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h1><blockquote>
 <p>Reactor 是 JVM 的完全无阻塞的反应式编程基础，具有高效的需求管理（以管理“背压”的形式）。它直接与 Java8 功能 API 集成，特别是 CompletableFuture、Stream 和 Duration。它提供了可组合的异步序列 api —  通量（对于[N]元素）和单（对于[0 | 1]元素） —  广泛实现了反应流规范。Reactor 还支持与 Reactor netty 项目的非阻塞进程间通信。Reactor Netty 适合于微服务体系结构，它为 HTTP（包括 Websockets）、TCP 和 UDP 提供了支持背压的网络引擎。完全支持反应式编码和解码。</p>
 </blockquote>
@@ -367,12 +373,18 @@
 <p>2.简单应用</p>
 <h1 id="Reactor-特性"><a href="#Reactor-特性" class="headerlink" title="Reactor 特性"></a>Reactor 特性</h1><p>Reactor 项目的主要工件是 Reactor core，它是一个 Reactor 库，关注于反应流规范并以 java8 为目标。Reactor 引入了可组合的反应式类型，这些类型实现了 Publisher，但也提供了丰富的操作符词汇表：Flux 和 Mono。Flux 对象表示 0..N 项的反应序列，而 Mono 对象表示单个值或空（0..1）结果。<br>​</p>
 <p>这种区别在类型中携带了一些语义信息，表示异步处理的粗略基数。例如，一个 HTTP 请求只产生一个响应，因此执行计数操作没有多大意义。因此，将这种 HTTP 调用的结果表示为 Mono<HttpResponse>比将其表示为 Flux<HttpResponse>更有意义，因为它只提供与零项或一项上下文相关的运算符。更改处理的最大基数的运算符也会切换到相关类型。例如，count 操作符存在于 Flux 中，但它返回一个 Mono<Long>。</p>
-<h2 id="Flux，0-N-项的异步序列"><a href="#Flux，0-N-项的异步序列" class="headerlink" title="Flux，0-N 项的异步序列"></a>Flux，0-N 项的异步序列</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621910072310-1e7310cb-38f2-499f-a40e-331a5e5720a2.png#clientId=u960800f8-e5f7-4&from=paste&height=417&id=u7078b960&margin=%5Bobject%20Object%5D&name=image.png&originHeight=417&originWidth=907&originalType=binary&size=59435&status=done&style=none&taskId=u7bd46946-db39-4c08-b306-b47c3ca4af6&width=907" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h2 id="Mono，异步-0-1-结果"><a href="#Mono，异步-0-1-结果" class="headerlink" title="Mono，异步 0-1 结果"></a>Mono，异步 0-1 结果</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621911568161-70758361-bf9d-4240-b432-5744e4d3471f.png#clientId=u960800f8-e5f7-4&from=paste&height=445&id=ude8f0208&margin=%5Bobject%20Object%5D&name=image.png&originHeight=445&originWidth=851&originalType=binary&size=57376&status=done&style=none&taskId=u45c4e529-52f7-4c19-8c91-7d26eb3182b&width=851" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="Flux，0-N-项的异步序列"><a href="#Flux，0-N-项的异步序列" class="headerlink" title="Flux，0-N 项的异步序列"></a>Flux，0-N 项的异步序列</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621910072310-1e7310cb-38f2-499f-a40e-331a5e5720a2.png#clientId=u960800f8-e5f7-4&from=paste&height=417&id=u7078b960&margin=%5Bobject%20Object%5D&name=image.png&originHeight=417&originWidth=907&originalType=binary&size=59435&status=done&style=none&taskId=u7bd46946-db39-4c08-b306-b47c3ca4af6&width=907" srcset="/img/loading.gif" lazyload alt="image.png"><br>Flux<T>是一个标准发布器<T>，它表示由 0 到 N 个发出的项组成的异步序列，可以选择由完成信号或错误终止。在 reactivestreams 规范中，这三种类型的信号转换为对下游用户的 onNext、onComplete 和 onError 方法的调用。在这种大范围的可能信号下，磁通是通用的无功类型。请注意，所有事件，甚至终止的事件，都是可选的：没有 onNext 事件，但 onComplete 事件表示一个空的有限序列，但是如果删除 onComplete，则会有一个无限的空序列（不是特别有用，除了围绕取消的测试）。类似地，无限序列不一定是空的。例如，Flux.interval（Duration）产生一个无限大的 Flux<Long>，并从时钟发出规则的滴答声。</p>
+<h2 id="Mono，异步-0-1-结果"><a href="#Mono，异步-0-1-结果" class="headerlink" title="Mono，异步 0-1 结果"></a>Mono，异步 0-1 结果</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621911568161-70758361-bf9d-4240-b432-5744e4d3471f.png#clientId=u960800f8-e5f7-4&from=paste&height=445&id=ude8f0208&margin=%5Bobject%20Object%5D&name=image.png&originHeight=445&originWidth=851&originalType=binary&size=57376&status=done&style=none&taskId=u45c4e529-52f7-4c19-8c91-7d26eb3182b&width=851" srcset="/img/loading.gif" lazyload alt="image.png"><br>Mono<T>是一种专门的发布器，它通过 onNext 信号最多发出一个项目，然后以 onComplete 信号终止（成功的 Mono，有值或无值），或者只发出一个 onError 信号（失败的 Mono）。大多数 Mono 实现在调用 onNext 之后，都会立即在其订户上调用 onComplete。never（）是一个异常值：它不发出任何信号，这在技术上是不被禁止的，尽管在测试之外不是非常有用。另一方面，明确禁止 onNext 和 onError 的组合。<br>Mono 只提供了可用于流的操作符的子集，并且一些操作符（特别是那些将 Mono 与另一个发布者相结合的操作符）切换到流。例如，Mono#concatWith（Publisher）返回一个通量，而 Mono#then（Mono）返回另一个单声道。<br>请注意，可以使用 Mono 表示只有完成概念的无值异步进程（类似于 Runnable）。要创建一个，可以使用空的 Mono<Void>。</p>
 <h2 id="创建-Flux-或-Mono-并订阅它的简单方法"><a href="#创建-Flux-或-Mono-并订阅它的简单方法" class="headerlink" title="创建 Flux 或 Mono 并订阅它的简单方法"></a>创建 Flux 或 Mono 并订阅它的简单方法</h2><blockquote>
 <p>开始使用 Flux 和 Mono 最简单的方法是使用它们各自类中的众多工厂方法之一。</p>
 </blockquote>
 <p>​</p>
+<p>例如，要创建一个字符串序列，可以枚举它们，也可以将它们放入集合中，并从中创建通量，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Flux&lt;String&gt; seq1 = Flux.just(<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;bar&quot;</span>, <span class="hljs-string">&quot;foobar&quot;</span>);<br>List&lt;String&gt; iterable = Arrays.asList(<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;bar&quot;</span>, <span class="hljs-string">&quot;foobar&quot;</span>);<br>Flux&lt;String&gt; seq2 = Flux.fromIterable(iterable);<br></code></pre></div></td></tr></table></figure>
+
+<p>工厂方法的其他示例包括：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Mono&lt;String&gt; noData = Mono.empty();<br>Mono&lt;String&gt; data = Mono.just(<span class="hljs-string">&quot;foo&quot;</span>);<br>Flux&lt;Integer&gt; numbersFromFiveToSeven = Flux.range(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>);<br></code></pre></div></td></tr></table></figure>
+
 <p>​</p>
 <h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p><a target="_blank" rel="noopener" href="https://projectreactor.io/docs/core/release/reference/index.html#about-doc">官方文档</a><br>​</p>
 <p><a target="_blank" rel="noopener" href="https://projectreactor.io/docs">https://projectreactor.io/docs</a><br>​</p>
