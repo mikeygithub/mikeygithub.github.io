@@ -263,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      1.6k 字
     </span>
   
 
@@ -273,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23
+      24
        分钟
     </span>
   
@@ -321,6 +321,11 @@
 <h1 id="框架简介"><a href="#框架简介" class="headerlink" title="框架简介"></a>框架简介</h1><blockquote>
 <p>Reactor 是 JVM 的完全无阻塞的反应式编程基础，具有高效的需求管理（以管理“背压”的形式）。它直接与 Java8 功能 API 集成，特别是 CompletableFuture、Stream 和 Duration。它提供了可组合的异步序列 api —  通量（对于[N]元素）和单（对于[0 | 1]元素） —  广泛实现了反应流规范。Reactor 还支持与 Reactor netty 项目的非阻塞进程间通信。Reactor Netty 适合于微服务体系结构，它为 HTTP（包括 Websockets）、TCP 和 UDP 提供了支持背压的网络引擎。完全支持反应式编码和解码。</p>
 </blockquote>
+<p>Spring WebFlux 大量使用两个发布者：</p>
+<ul>
+<li>Mono：返回 0 或 1 个元素。<br>Mono<String> mono = Mono.just(“Alex”); Mono<String> mono = Mono.empty();</li>
+<li>Flux：返回 0…N 个元素。 Flux 可以是无穷无尽的，这意味着它可以永远保持发光。 它还可以返回一系列元素，然后在返回所有元素后发送完成通知。<br>Flux<String> flux = Flux.just(“A”, “B”, “C”); Flux<String> flux = Flux.fromArray(new String[]{“A”, “B”, “C”}); Flux<String> flux = Flux.fromIterable(Arrays.asList(“A”, “B”, “C”)); //To subscribe call method flux.subscribe();</li>
+</ul>
 <h1 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h1><p>1.导入依赖</p>
 <figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;<br>&lt;project xmlns=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> xmlns:xsi=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br>	xsi:schemaLocation=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;<br>	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;<br>	&lt;parent&gt;<br>		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>		&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;<br>		&lt;version&gt;2.4.3&lt;/version&gt;<br>		&lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;<br>	&lt;/parent&gt;<br>	&lt;groupId&gt;com.example&lt;/groupId&gt;<br>	&lt;artifactId&gt;reactive-rest-service&lt;/artifactId&gt;<br>	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;<br>	&lt;name&gt;reactive-rest-service&lt;/name&gt;<br>	&lt;description&gt;Demo project for Spring Boot&lt;/description&gt;<br>	&lt;properties&gt;<br>		&lt;java.version&gt;1.8&lt;/java.version&gt;<br>	&lt;/properties&gt;<br>	&lt;dependencies&gt;<br>		&lt;dependency&gt;<br>			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>			&lt;artifactId&gt;spring-boot-starter-webflux&lt;/artifactId&gt;<br>		&lt;/dependency&gt;<br><br>		&lt;dependency&gt;<br>			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>			&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;<br>			&lt;scope&gt;test&lt;/scope&gt;<br>		&lt;/dependency&gt;<br>		&lt;dependency&gt;<br>			&lt;groupId&gt;io.projectreactor&lt;/groupId&gt;<br>			&lt;artifactId&gt;reactor-test&lt;/artifactId&gt;<br>			&lt;scope&gt;test&lt;/scope&gt;<br>		&lt;/dependency&gt;<br>	&lt;/dependencies&gt;<br><br>	&lt;build&gt;<br>		&lt;plugins&gt;<br>			&lt;plugin&gt;<br>				&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>				&lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;<br>			&lt;/plugin&gt;<br>		&lt;/plugins&gt;<br>	&lt;/build&gt;<br>&lt;/project&gt;<br></code></pre></div></td></tr></table></figure>
 
