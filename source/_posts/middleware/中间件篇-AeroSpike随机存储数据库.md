@@ -11,20 +11,23 @@ tags: AeroSpike
 
 1. Aerospike 是一个分布式、可扩展的数据库，其架构有三个关键目标:
 
-- 为 web 规模的应用程序创建一个灵活的、可扩展的平台
-- 提供传统数据库所期望的健壮性和可靠性(如 ACID)
-- 以最少的人工参与提供操作效率
+>1. 为 web 规模的应用程序创建一个灵活的、可扩展的平台
+2. 提供传统数据库所期望的健壮性和可靠性(如 ACID)
+3. 以最少的人工参与提供操作效率
+
 
 1. T级别大数据高并发的结构化数据存储解决方案，读写操作达微妙级，99%的响应可在1毫秒内实现，99.9%的响应可在5毫秒内实现。
-2. 采用混合架构，索引存储在 RAM 中，而数据存储在闪存/固态硬盘(SSD) 上，自动感知集群，可以随意增加节点线性扩容，无需分片，无需人工干预（性能与节点成正比上升），支持多语言集成；与redis相比不太会遇到性能瓶颈
-   大部分的源代码是用 c 语言编写的，符合 ANSI C99标准。
+2. 采用混合架构，索引存储在 RAM 中，而数据存储在闪存/固态硬盘(SSD) 上，自动感知集群，可以随意增加节点线性扩容，无需分片，无需人工干预（性能与节点成正比上升），支持多语言集成；与redis相比不太会遇到性能瓶颈大部分的源代码是用 c 语言编写的，符合 ANSI C99标准。
 
-#### 为什么要用AS
+## 为什么要用AS
 
 K-V类型的数据库必须要提的就是redis，redis数据完全存储在内存虽然保证了查询性能，但是成本太高。AS最大的卖点就是可以存储在SSD上，并且保证和redis相同的查询性能。
-AS内部在访问SSD屏蔽了文件系统层级，直接访问地址，保证了数据的读取速度。 AS同时支持二级索引与聚合，支持简单的sql操作，相比于其他nosql数据库，有一定优势。
 
-#### Namespaces(库)
+<p  class="note note-primary">
+AS内部在访问SSD屏蔽了文件系统层级，直接访问地址，保证了数据的读取速度。 AS同时支持二级索引与聚合，支持简单的sql操作，相比于其他nosql数据库，有一定优势。
+</p>
+
+## Namespaces(库)
 
 AS数据存储的最高层级，类比于传统的数据库的库层级，一个namespace包含记录（records），索引（indexes ）及策略（policies）。
 其中策略决定namespace的行为，包括：
@@ -32,19 +35,19 @@ AS数据存储的最高层级，类比于传统的数据库的库层级，一个
 2.一条记录存储的副本个数。
 3.过期时间（TTL）：不同redis的针对key设置TTL，AS可以在库的层级进行全局设置，并且支持对于已存在的数据进行TTL的设置。
 
-#### Set(表)
+## Set(表)
 
 存储于namespace，是一个逻辑分区，类比于传统数据库的表。set的存储策略继承自namespace，也可以为set设置单独的存储策略
 
-#### Records(行)
+## Records(行)
 
 类比于传统数据库的行，包含key，Bins（value）,和Metadata（元数据）。key全局唯一，作为K-V数据库一般也是通过key去查询。Bins相当于列，存储具体的数据。元数据存储一些基本信息，例如TTL等。
 
-#### Key
+## Key
 
 提到key，有一个和key伴生的概念是摘要（Digests），当key被存入数据库，key与set信息一起被哈希化成一个160位的摘要。数据库中，摘要为所有操作定位记录。key主要用于应用程序访问，而摘要主要用于数据库内部查找记录.
 
-#### Metadata
+## Metadata
 
 每一条记录包含以下几条元数据
 1.generation（代）：表示记录被修改的次数。该数字在程序度数据时返回，用来确认正在写入的数据从最后一次读开始未被修改过。
@@ -53,7 +56,7 @@ AS数据存储的最高层级，类比于传统的数据库的库层级，一个
 
 3.last-update-time （LUT）：上次更新时间，这是一个数据库内部的元数据，不会返回给客户端。
 
-#### Bins
+## Bins
 
 在一条记录里，数据被存储在一个或多个bins里，bins由名称和值组成。bins不需要指定数据类型，数据类型有bins中的值决定。动态的数据类型提供了很好的灵活性。AS中每条记录可以由完全不同的bins组成。记录无模式，你可以记录的任何生命周期增加或删除bins。
 
@@ -112,10 +115,12 @@ delete from test where pk='key2'
 格式 SELECT * FROM <ns>[.<set>] WHERE PK = <key>
 ```
 
-# AQL操作
+# AQL
 
 COMMANDS
-  DDL
+  
+## DDL
+
       CREATE INDEX <index> ON <ns>[.<set>] (<bin>) NUMERIC|STRING|GEO2DSPHERE
       CREATE LIST/MAPKEYS/MAPVALUES INDEX <index> ON <ns>[.<set>] (<bin>) NUMERIC|STRING|GEO2DSPHERE
       DROP INDEX <ns>[.<set>] <index>
@@ -124,7 +129,9 @@ COMMANDS
           CREATE INDEX idx_foo ON test.demo (foo) NUMERIC
           DROP INDEX test.demo idx_foo
       
-  MANAGE UDFS
+  
+## MANAGE UDFS
+
       REGISTER MODULE '<filepath>'
       REMOVE MODULE <filename>
       
@@ -136,7 +143,9 @@ COMMANDS
           REGISTER MODULE '~/test.lua' 
           REMOVE MODULE test.lua
       
-  USER ADMINISTRATION
+  
+## USER ADMINISTRATION
+
       CREATE USER <user> PASSWORD <password> ROLE[S] <role1>,<role2>...
           pre-defined roles: read|read-write|read-write-udf|sys-admin|user-admin
       DROP USER <user>
@@ -153,7 +162,8 @@ COMMANDS
       REVOKE PRIVILEGE[S] <priv1[.ns1[.set1]]>,<priv2[.ns2[.set2]]>... FROM <role>
       
       
-  DML
+##  DML
+
       INSERT INTO <ns>[.<set>] (PK, <bins>) VALUES (<key>, <values>)
       DELETE FROM <ns>[.<set>] WHERE PK = <key>
       TRUNCATE <ns>[.<set>] [upto <LUT>] 
@@ -193,7 +203,8 @@ COMMANDS
           INSERT INTO test.demo (PK, gj) VALUES ('key1', GEOJSON('{"type": "Point", "coordinates": [123.4, -456.7]}'))
           DELETE FROM test.demo WHERE PK = 'key1'
       
-  INVOKING UDFS
+##  INVOKING UDFS
+
       EXECUTE <module>.<function>(<args>) ON <ns>[.<set>]
       EXECUTE <module>.<function>(<args>) ON <ns>[.<set>] WHERE PK = <key>
       EXECUTE <module>.<function>(<args>) ON <ns>[.<set>] WHERE <bin> = <value>
@@ -215,7 +226,8 @@ COMMANDS
           EXECUTE myudfs.udf1(2) ON test.demo
           EXECUTE myudfs.udf1(2) ON test.demo WHERE PK = 'key1'
       
-  OPERATE
+##  OPERATE
+
       OPERATE <op(<bin>, params...)>[with_policy(<map policy>),] [<op(<bin>, params...)> with_policy (<map policy>) ...] ON <ns>[.<set>] where PK=<key>
       
           <op> name of operation to perform.
@@ -280,7 +292,7 @@ COMMANDS
           OPERATE LIST_POP_RANGE(listbin, 1, 10) ON test.demo where PK = 'key1'
       
       
-  QUERY
+##  QUERY
       SELECT <bins> FROM <ns>[.<set>]
       SELECT <bins> FROM <ns>[.<set>] WHERE <bin> = <value>
       SELECT <bins> FROM <ns>[.<set>] WHERE <bin> BETWEEN <lower> AND <upper>
@@ -309,7 +321,7 @@ COMMANDS
           SELECT foo, bar FROM test.demo WHERE foo BETWEEN 0 AND 999
           SELECT * FROM test.demo WHERE gj CONTAINS CAST('{"type": "Point", "coordinates": [0.0, 0.0]}' AS GEOJSON)
       
-  AGGREGATION
+##  AGGREGATION
       AGGREGATE <module>.<function>(<args>) ON <ns>[.<set>]
       AGGREGATE <module>.<function>(<args>) ON <ns>[.<set>] WHERE <bin> = <value>
       AGGREGATE <module>.<function>(<args>) ON <ns>[.<set>] WHERE <bin> BETWEEN <lower> AND <upper>
@@ -330,7 +342,7 @@ COMMANDS
           AGGREGATE myudfs.udf2(2) ON test.demo WHERE foo = 123
           AGGREGATE myudfs.udf2(2) ON test.demo WHERE foo BETWEEN 0 AND 999
       
-  EXPLAIN
+##  EXPLAIN
       EXPLAIN SELECT * FROM <ns>[.<set>] WHERE PK = <key>
       
           <ns> is the namespace for the records to be queried.
@@ -342,24 +354,24 @@ COMMANDS
           EXPLAIN SELECT * FROM test.demo WHERE PK = 'key1'
       
       
-  INFO
+##  INFO
       SHOW NAMESPACES | SETS | BINS | INDEXES
       SHOW SCANS | QUERIES
       STAT NAMESPACE <ns> | INDEX <ns> <indexname>
       STAT SYSTEM
       ASINFO <ASInfoCommand>
       
-  JOB MANAGEMENT
+##  JOB MANAGEMENT
       KILL_QUERY <transaction_id>
       KILL_SCAN <scan_id>
       
-  USER ADMINISTRATION
+##  USER ADMINISTRATION
       SHOW USER [<user>]
       SHOW USERS
       SHOW ROLE <role>
       SHOW ROLES
       
-  MANAGE UDFS
+##  MANAGE UDFS
       SHOW MODULES
       DESC MODULE <filename>
       
@@ -371,12 +383,12 @@ COMMANDS
           SHOW MODULES
           DESC MODULE test.lua
       
-  RUN <filepath>
+##  RUN <filepath>
       
-  SYSTEM <bash command>
+##  SYSTEM <bash command>
       
       
-  SETTINGS
+##  SETTINGS
         ECHO                          (true | false, default false)
         VERBOSE                       (true | false, default false)
         OUTPUT                        (TABLE | JSON | MUTE | RAW, default TABLE)
@@ -408,7 +420,7 @@ COMMANDS
           aql> RESET <setting>
         
         
-    OTHER
+##    OTHER
         HELP
         QUIT|EXIT|Q
 
