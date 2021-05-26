@@ -263,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2k 字
+      3.1k 字
     </span>
   
 
@@ -273,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20
+      31
        分钟
     </span>
   
@@ -314,7 +314,7 @@
             <h1 style="display: none">读书笔记篇-Java并发编程实战</h1>
             
             <div class="markdown-body">
-              <p> <img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621417377157-b69f7b9b-638d-42d6-82b5-ef97f1fe1e9a.png#clientId=u2b01d586-10d7-4&from=paste&height=385&id=uf864cd50&margin=%5Bobject%20Object%5D&name=image.png&originHeight=385&originWidth=542&originalType=binary&size=145430&status=done&style=none&taskId=ud3e3e9bb-5ffe-4dd5-a93b-a24fc9dc03d&width=542" srcset="/img/loading.gif" lazyload alt="image.png"><br>​</p>
+              <p> <img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1622007928788-e0c9bebc-b0ce-4bed-9b6a-c9d6ca8fdba7.png#clientId=u437d290e-2655-4&from=paste&height=549&id=u8e6aa1d1&margin=%5Bobject%20Object%5D&name=image.png&originHeight=549&originWidth=900&originalType=binary&size=254559&status=done&style=none&taskId=u2c6f5f5c-5b2c-40a3-b3db-45c6be03d89&width=900" srcset="/img/loading.gif" lazyload alt="image.png"><br>​</p>
 <p>​</p>
 <h1 id="第-1-章-介绍"><a href="#第-1-章-介绍" class="headerlink" title="第 1 章 介绍"></a>第 1 章 介绍</h1><h2 id="1-1-并发的-非常-简短历史"><a href="#1-1-并发的-非常-简短历史" class="headerlink" title="1.1 并发的(非常)简短历史"></a>1.1 并发的(非常)简短历史</h2><blockquote>
 <p>在发展的初期，计算机还没有操作系统;它们自始至终执行一个程序，这个程序直接访问机器的所有资源。这样-个程序运行 在无保护的金属器件上，不仅写起来困难，而且每次只运行一个程序，不能很好地利用昂贵且稀缺的计算机资源。</p>
@@ -403,15 +403,62 @@
 <h3 id="2-4-用锁来保护状态"><a href="#2-4-用锁来保护状态" class="headerlink" title="2.4 用锁来保护状态"></a>2.4 用锁来保护状态</h3><blockquote>
 <p>对于每个可被多个线程访问的可变状态变量，如果所有访问它的线程在执行时都占有同一个锁，这种情况下，我们称这个变量是由这个锁保护的。</p>
 </blockquote>
-<p>对象的内部锁与它的状态之间没有内在的关系。尽管大多数类普遍使用这样一种非常有效的锁机制:</p>
+<p>对象的内部锁与它的状态之间没有内在的关系。尽管大多数类普遍使用这样一种非常有效的锁机制:<br>​</p>
 <blockquote>
 <p>用对象的内部锁来保护所有的域，然而这并不是必需的。即使获得了与对象关联的锁也不能阻止其他线程访问这个对象一-获得 对象的锁后，唯-可以做的事情是阻止其他线程再获得相同的锁。作为一种便利， 每个对象都有一个内部锁，所以你不需要显式地创建锁对象。你可以构造自己的锁协议或同步策略，使你可以安全地访问共享状态，并且贯穿程序都始终如一地使用它们。</p>
 </blockquote>
+<blockquote>
+<p>每个共享的可变变量都需要由唯一一个确定 的锁保护。而维护者应该清楚这个锁。</p>
+</blockquote>
+<blockquote>
+<p>锁保护的变量，意味着每次访问变量都需要获得改锁，确保在同一时刻只有一个线程可以访问这个变量。</p>
+</blockquote>
+<p>​</p>
 <h3 id="2-5-活跃度与性能"><a href="#2-5-活跃度与性能" class="headerlink" title="2.5 活跃度与性能"></a>2.5 活跃度与性能</h3><p>​</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1622000498030-453fb26b-90a7-4c7a-a9c3-66e4fd9ce7ce.png#clientId=u437d290e-2655-4&from=paste&height=196&id=uc503b894&margin=%5Bobject%20Object%5D&name=image.png&originHeight=196&originWidth=489&originalType=binary&size=10428&status=done&style=none&taskId=u1742a538-e8ec-491d-88f9-17e3cb4d265&width=489" srcset="/img/loading.gif" lazyload alt="image.png"><br>上图表示多个请求到达同步的 Factoring Servlet 时所发生的事情:这些请求排队等候并依次被处理。我们把这种 Web 应用的运行方式描述为**弱并发(poor concurrency) **的。<br>​</p>
+<p>一种表现:限制并发调用数量的，并非可用的处理器资源，而恰恰是应用程序自身的结构。幸运的是，通过缩小 synchronized 块的范围来维护线程安全性，我们很容易提升 Servlet 的并发性。你应该谨慎地控制 synchronized 块不要过小:你不可以将-个原子操作分解到多个 synchronized 块中。不过你应该尽量从 synchroni zed 块中分离耗时的且不影响共享状态的操作。这样即使在耗时操作的执行过程中,也不会阻止其他线程访问共享状态。<br>​</p>
+<blockquote>
+<p>有些耗时的计算或操作，比如网络或控制台 I/O,难以快速完成。执行这些操作期间不要占有锁。</p>
+</blockquote>
 <p>​</p>
-<p>第 3 章 共享对象<br>​</p>
+<h1 id="第-3-章-共享对象"><a href="#第-3-章-共享对象" class="headerlink" title="第 3 章 共享对象"></a>第 3 章 共享对象</h1><h2 id="3-1-可见性"><a href="#3-1-可见性" class="headerlink" title="3.1 可见性"></a>3.1 可见性</h2><p>​</p>
+<p>Java 内存模型（JMM）<br>​</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1622001334623-b3c24416-58bc-4025-95e4-80e6025c2eb0.png#clientId=u437d290e-2655-4&from=paste&height=318&id=ueea0a783&margin=%5Bobject%20Object%5D&name=image.png&originHeight=636&originWidth=821&originalType=binary&size=43328&status=done&style=none&taskId=uef1cdcb1-394b-42b3-aa4f-e02bc2e6f10&width=411" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>Java 的内存模型如上图所示，在多线程进行操作数据的时候，会先从主内存中拷贝一份到自己的工作内存中，在处理数据完成后，再将其写入主内存中，完成操作。</p>
+</blockquote>
 <p>​</p>
-<p>3.1 可见性<br>3.2 发布和逸出<br>3.3 线程封闭<br>3.4 不可变性<br>3.5 安全发布</p>
+<h3 id="过期数据"><a href="#过期数据" class="headerlink" title="过期数据"></a>过期数据</h3><blockquote>
+<p>当线程读取数据时，可能读取到的是一个过期的数据，除非每一次访问数据都是同步的，否则很肯读取到过期数据。</p>
+</blockquote>
+<p>​</p>
+<h3 id="非原子的-64-位操作"><a href="#非原子的-64-位操作" class="headerlink" title="非原子的 64 位操作"></a>非原子的 64 位操作</h3><blockquote>
+<p>当一个线程在没有同步的情况下读取变量，它可能会得到一个过期值。但是至少它可以看到某个线程在那里设定的一个真实数值，而不是一个凭空而来的值。这样的安全保证被称为是最低限的安全性(out- of-thin- air safety)</p>
+</blockquote>
+<p>​</p>
+<p>最低限的安全性应用于所有的变量，除了一个例外:没有声明为 volatile 的 64 位数值变量(double 和 long) 。Java 存储模型要求获取和存储操作都为原子的，但是对于非 volatile 的 long 和 double 变量，JVM 允许将 64 位的读或写划分为两个 32 位的操作。如果读和写发生在不同的线程,这种情况读取-一个非 volatile 类型 long 就可能会出现得到一个值的高 32 位和另一个值的低 32 位 3。因此，即使你并不关心过期数据，但仅仅在多线程程序中使用共享的、可变的 long 和 double 变量也可能是不安全的，除非将它们声明为 volatile 类型，或者用锁保护起来。</p>
+<h3 id="锁和可见性"><a href="#锁和可见性" class="headerlink" title="锁和可见性"></a>锁和可见性</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1622008382846-1f6d688f-4c0e-4618-9980-7c0296065574.png#clientId=u437d290e-2655-4&from=paste&height=376&id=ub514f93d&margin=%5Bobject%20Object%5D&name=image.png&originHeight=376&originWidth=563&originalType=binary&size=58325&status=done&style=none&taskId=u9d6aa4ec-3108-4e4b-981d-d1e28d64351&width=563" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>当访问一个共享的可变变量时，为什么要求所有线程由同一个锁进行同步，我们现在可以给出另一个理由一为 了保证一个线程对数值进行的写入，其他线程也都可见。另一方面，如果一个线程在没有恰当地使用锁的情况下读取了变量，那么这个变量很可能是一个过期的数据。</p>
+</blockquote>
+<p>​</p>
+<blockquote>
+<p>锁不仅仅是关于同步与互斥的，也是关于内存可见的。为了保证所有线程都能够看到共享的、可变变量的最新值，读取和写入线程必须使用公共的锁进行同步.</p>
+</blockquote>
+<p>​</p>
+<h3 id="volatile-变量"><a href="#volatile-变量" class="headerlink" title="volatile 变量"></a>volatile 变量</h3><blockquote>
+<p>在 Java 中 volatile 关键字确保对一个变量的更新以可预见的方式告知其他线程。</p>
+</blockquote>
+<p>​</p>
+<p>加锁可以保证可见性与原子性; volatile 变量只能保证可见性。<br>​</p>
+<p>只有满足了下面所有的标准后，你才能使用 volatile 变量:<br>​</p>
+<ul>
+<li>写入变量时 并不依赖变量的当前值:或者能够确保只有单一的线程修改变量的值:</li>
+<li>变量不需 要与其他的状态变量共同参与不变约束;</li>
+<li>而且，访问变量时，没有其他的原因需要加锁。</li>
+</ul>
+<p>​</p>
+<h3 id="3-2-发布和逸出"><a href="#3-2-发布和逸出" class="headerlink" title="3.2 发布和逸出"></a>3.2 发布和逸出</h3><p>3.3 线程封闭<br>3.4 不可变性<br>3.5 安全发布</p>
 
             </div>
             <hr>
