@@ -263,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      687 字
+      2k 字
     </span>
   
 
@@ -273,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      20
        分钟
     </span>
   
@@ -349,17 +349,69 @@
 <blockquote>
 <p>无论何时，只要有多于一个的线程访问给定的状态变量，而且其中某个线程会写入该变量，此时必须使用同步来协调线程对该变量的访问。</p>
 </blockquote>
-<p>2.1 什么是线程安全性<br>​</p>
+<p>​</p>
+<h2 id="2-1-什么是线程安全性"><a href="#2-1-什么是线程安全性" class="headerlink" title="2.1 什么是线程安全性"></a>2.1 什么是线程安全性</h2><p>​</p>
 <blockquote>
 <p>当多个线程访问一个类时，如果不用考虑这些线程在运行时环境下的调度和交替执行，并且不需要额外的同步及在调用方代码不必作其他的协调，这个类的行为仍然是正确的，那么称这个类是线程安全的。</p>
 </blockquote>
 <p>​</p>
-<p>2.2 原子性<br>2.3 锁<br>2.4 用锁来保护状态<br>2.5 活跃度与性能<br>​</p>
+<blockquote>
+<p>有状态对象(Stateful Bean) ：就是有实例变量的对象，可以保存数据，是非线程安全的。每个用户有自己特有的一个实例，在用户的生存期内，bean 保持了用户的信息，即“有状态”；一旦用户灭亡（调用结束或实例结束），bean 的生命期也告结束。即每个用户最初都会得到一个初始的 bean。</p>
+</blockquote>
+<p>​</p>
+<p>无状态对象永远是线程安全的。多数 Servlet 都可以实现为无状态的，这一事实 极大地降低了确保 Servlet 线程安<br>全的负担，只有当 Servlet 要为不同的请求记录一些信 息时，才会将线程安全的需求提到日程上来。<br>​</p>
+<h2 id="2-2-原子性"><a href="#2-2-原子性" class="headerlink" title="2.2 原子性"></a>2.2 原子性</h2><p>​</p>
+<blockquote>
+<p>原子性，顾名思义就是不可再分的单位。在这里指的是原子操作，其指的是在对数据操作的过程中不会被线程调度机制打断的操作；这种操作一旦开始，就一直运行到结束，中间不会有任何 context switch （切换到另一个线程）</p>
+</blockquote>
+<p>​</p>
+<h4 id="竞争条件"><a href="#竞争条件" class="headerlink" title="竞争条件"></a>竞争条件</h4><p>​</p>
+<blockquote>
+<p>当计算的正确性依赖于运行时中相关的时许或者多线程的交替时，会产生竞争条件。</p>
+</blockquote>
+<p>​</p>
+<blockquote>
+<p>最常见的竞争条件是“检查再运行”（check then act），使用一个潜在的过期值作为决定下一步操作的依据。</p>
+</blockquote>
+<p>​</p>
+<blockquote>
+<p>检查再运行的的常用用法就是<strong>惰性初始化</strong>，惰性初始化的目的是延迟对象的初始化，直到程序真正使用它，同时确保它只初始化<strong>一次</strong>。</p>
+</blockquote>
+<p>​</p>
+<h4 id="复合操作"><a href="#复合操作" class="headerlink" title="复合操作"></a>复合操作</h4><p>​</p>
+<blockquote>
+<p>将“检查再运行”和“读-写-改”操作的全部执行过程看作是复合操作</p>
+</blockquote>
+<blockquote>
+<p>假设有操作 A 和 B,如果从执行 A 的线程的角度看，当其他线程执行 B 时，要么 B 全部执行完成，要么一点都没有执行，这样 A 和 B 互为原子操作。一个原子操作是指:该操作对于所有的操作，包括它自己，都满足前面描述的状态。</p>
+</blockquote>
+<p>​</p>
+<h2 id="2-3-锁"><a href="#2-3-锁" class="headerlink" title="2.3 锁"></a>2.3 锁</h2><blockquote>
+<p>为了保护状态的一致性，要在单一的原子操作中更新相互关联的状态变量。</p>
+</blockquote>
+<p>​</p>
+<h4 id="内部锁"><a href="#内部锁" class="headerlink" title="内部锁"></a>内部锁</h4><p>​</p>
+<blockquote>
+<p>Java 提供了强制原子性的内置锁机制：synchronized 块。有两种作用：1.是锁饮用的对象 2.锁代码块。</p>
+</blockquote>
+<p>​</p>
+<p>每个 Java 对象都可以隐式地扮演一个用于同步的锁的角色:这些内置的锁被称作内部锁(intrinsic locks)或监视器锁(monitor locks)。执行线程进入 synchronized 块之前会自动获得锁;而无论通过正常控制路径退出，还是从块中抛出异常，线程都在放弃对 synchronized 块的控制时自动释放锁。获得内部锁的唯一途径是: 进入这个内部锁保护的同步块或方法。<br>​</p>
+<p>内部锁在 Java 中扮演了互斥锁(mutual exclusion lock,也称作 mutex)的角色，意味着至多只有一个线程可以拥有锁，当线程 A 尝试请求一个被线程 B 占有的锁时，线程 A 必须等待或者阻塞，直到 B 释放它。如果 B 永远不释放锁，A 将永远等下去。<br>​</p>
+<h4 id="重进入-Reentrancy"><a href="#重进入-Reentrancy" class="headerlink" title="重进入(Reentrancy)"></a>重进入(Reentrancy)</h4><p>​</p>
+<p>当一个线程请求其他线程已经占有的锁时，请求线程将被阻塞。然而内部锁是可重进入的，因此线程在试图获得它自已占有的锁时，请求会成功。重进入意味着所的请求是基于“每线程(per-thread) ”，而不是基于“每调用(per invocation) ”的。重进入的实现是通过为每个锁关联-个请求计数(acquisition count)和-个占有它的线程。当计数为 0 时，认为锁是未被占有的。线程请求-个未被占有的锁时，JVM 将记录锁的占有者，并且将请求计数置为 1。如果同一线程再次请求这个锁，计数将递增:每次占用线程退出同步块，计数器值将递减。直到计数器达到 0 时，锁被释放。<br>​</p>
+<p>​</p>
+<h3 id="2-4-用锁来保护状态"><a href="#2-4-用锁来保护状态" class="headerlink" title="2.4 用锁来保护状态"></a>2.4 用锁来保护状态</h3><blockquote>
+<p>对于每个可被多个线程访问的可变状态变量，如果所有访问它的线程在执行时都占有同一个锁，这种情况下，我们称这个变量是由这个锁保护的。</p>
+</blockquote>
+<p>对象的内部锁与它的状态之间没有内在的关系。尽管大多数类普遍使用这样一种非常有效的锁机制:</p>
+<blockquote>
+<p>用对象的内部锁来保护所有的域，然而这并不是必需的。即使获得了与对象关联的锁也不能阻止其他线程访问这个对象一-获得 对象的锁后，唯-可以做的事情是阻止其他线程再获得相同的锁。作为一种便利， 每个对象都有一个内部锁，所以你不需要显式地创建锁对象。你可以构造自己的锁协议或同步策略，使你可以安全地访问共享状态，并且贯穿程序都始终如一地使用它们。</p>
+</blockquote>
+<h3 id="2-5-活跃度与性能"><a href="#2-5-活跃度与性能" class="headerlink" title="2.5 活跃度与性能"></a>2.5 活跃度与性能</h3><p>​</p>
 <p>​</p>
 <p>第 3 章 共享对象<br>​</p>
 <p>​</p>
 <p>3.1 可见性<br>3.2 发布和逸出<br>3.3 线程封闭<br>3.4 不可变性<br>3.5 安全发布</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1620799343096-89ce2681-3063-4534-be06-be610367739c.png#clientId=uadd4da19-1647-4&from=paste&height=430&id=u7b333f28&margin=%5Bobject%20Object%5D&name=image.png&originHeight=430&originWidth=430&originalType=binary&size=53356&status=done&style=none&taskId=uf6e2de31-a181-45e5-a3ba-4562464e7f0&width=430" srcset="/img/loading.gif" lazyload alt="image.png"><br>扫一扫、关注我</p>
 
             </div>
             <hr>
