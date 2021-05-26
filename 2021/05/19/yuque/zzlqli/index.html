@@ -263,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.1k 字
+      5.3k 字
     </span>
   
 
@@ -273,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      31
+      55
        分钟
     </span>
   
@@ -458,7 +458,67 @@
 <li>而且，访问变量时，没有其他的原因需要加锁。</li>
 </ul>
 <p>​</p>
-<h3 id="3-2-发布和逸出"><a href="#3-2-发布和逸出" class="headerlink" title="3.2 发布和逸出"></a>3.2 发布和逸出</h3><p>3.3 线程封闭<br>3.4 不可变性<br>3.5 安全发布</p>
+<h3 id="发布和逸出"><a href="#发布和逸出" class="headerlink" title="发布和逸出"></a>发布和逸出</h3><p>发布(publishing)一个对象的意思是使它能够被当前范围之外的代码所使用。比如将一个引用存储到其他代码可以访问的地方，在-一个非私有的方法中返回这个引用，也可以把它传递到其他类的方法中。在很多情况下，我们需要确保对象及它们的内部状态不被暴露(publish)。在另外-些情况下，为了正当的使用目的，我们又的确希望发布一个对象，但是用线程安全的方法完成这些工作时，可能需要同步。如果变量发布了内部状态，就可能危及到封装性，并使程序难以维持稳定:如果发布对象时，它还没有完成构造，同样危及线程安全。一个对象在尚未准备好时就将它发布，这种情况称作逸出(escape) 。<br>​</p>
+<p>​</p>
+<p>让我们看看一个对象是如何逸出的。<br>​</p>
+<blockquote>
+<p>最常见的发布对象方式就是将对象的引用存储到公共静态域中，任何类和线程都可以看到这个域。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnsafeStatus</span></span>&#123;<br>	<span class="hljs-keyword">private</span> String[] status = <span class="hljs-keyword">new</span> String()&#123;<br>    	<span class="hljs-string">&quot;MIKEY&quot;</span>,<span class="hljs-string">&quot;LEO&quot;</span>,<span class="hljs-string">&quot;DON&quot;</span>,<br>    &#125;;<br>    <span class="hljs-keyword">public</span> String[] getStatus()&#123;<span class="hljs-keyword">return</span> status;&#125;<span class="hljs-comment">//当别的类调用这个方法时，就可以获取到status，可以对其进行修改操作。</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>不要让 this 引用在构造期间逸出。</p>
+</blockquote>
+<h2 id="3-3-线程封闭"><a href="#3-3-线程封闭" class="headerlink" title="3.3 线程封闭"></a>3.3 线程封闭</h2><p>访问共享的、可变的数据要求使用同步。-个可以避免同步的方式就是不共享数据。如果数据仅在单线程中被访问，就不需要任何同步。线程封闭(Thread confinement)技术是实现线程安全的最简单的方式之-。 当对象封闭在一个线程中时，这种做法会自动成为线程安全的，即使被封闭的对象本身并不是。<br>​</p>
+<blockquote>
+<p>Swing 发展了线程封闭技术。Swing 的可视化组件和数据模型对象并不是线程安全的，它们是通过将它们限制到 Swing 的事件分发线程中，实现线程安全的。为了正确地使用 Swing,运行在不同于事件线程(event thread)的其他线程中的代码不应该访问这些对象(为了简化这些, Swing 提供了 invokelater 机制,用于在事件线程中安排执行 Runnable 实例)。</p>
+</blockquote>
+<h4 id="Ad-hoc-线程限制"><a href="#Ad-hoc-线程限制" class="headerlink" title="Ad-hoc 线程限制"></a>Ad-hoc 线程限制</h4><p>Ad-boc 线程限制 10 是指维护线程限制性的任务全部落在实现上的这种情况。因为没有可见性修饰符与本地变量等语言特性协助将对象限制在目标线程上,所以这种方式是非常容易出错的。事实上,对于像 GUI 应用中的可视化组件或者数据模型这些线程限制对象，对它们的引用通常是公用域。<br>​</p>
+<p>如果决定将一个像 GUI 这样特定的子系统实现为“单线程化”的子系统，通常就要使用线程限制技术。单线程化子系统有时所带来的简便性的好处远远胜过 ad-hoc 线程限制的易损性”。<br>​</p>
+<p>线程限制的一种特例是将它用于 volatile 变量。只要你确保只通过单一线程写入共享的 volatile 变量，那么在这些 volaile 变量上执行“读-改-写”操作就是安全的。在这种情况下，你就将修改操作限制在单- -的线程中， 从而阻止了竞争条件。并且，可见性保证 volatile 变量能够确保其他线程能看到最新的值。<br>​</p>
+<p>鉴于 ad-hoc 线程限制固有的易损性，因此应该有节制地使用它。如果可能的话，用一种线程限制的强形式(栈限制或者 Thread Local)取代它。</p>
+<h4 id="栈限制"><a href="#栈限制" class="headerlink" title="栈限制"></a>栈限制</h4><blockquote>
+<p>栈限制是线程限制的一种特例，在栈限制中，只能通过本地变量才可以触及对象。正如封装使不变约束更容易被保持，本地变量使对象更容易被限制在线程本地中。本地变量本身就被限制在执行线程中:它们存在于执行线程栈。其他线程无法访问这个栈。</p>
+</blockquote>
+<blockquote>
+<p>栈限制(也称线程内部或者线程本地用法，但是不要与核心库类的 ThreadLocal 混淆)与 ad-hoc 线程限制相比，更易维护，更健壮。.</p>
+</blockquote>
+<h4 id="Thread-local"><a href="#Thread-local" class="headerlink" title="Thread local"></a>Thread local</h4><blockquote>
+<p>一种维护线程限制的更 加规范的方式是使用 ThreadLocal,它允许你将每个线程与持有数值的对象关联在一起。ThreadLocal 提供了 get 与 set 访问器，为每个使用它的线程维护- 份单独的拷贝。所以 get 总是返回由当前执行线程通过 set 设置的最新值。</p>
+</blockquote>
+<p>​</p>
+<p>线程本地(Thread Local)变量通常用于防止在基于可变的单体(Singleton) 或全局变量的设计中，出现(不正确的)共享。比如说，一个单线程化的应用程序可能会维护-个全局的数据库连接，这个 Connection 在启动时就已经被初始化了。这样就可以避免为每个方法都传递一个 Connection. 因为 JDBC 规范并未要求 Connection;自身一定是线程安全的，因此，如果没有额外的协调时，使用全局变量的多线程应用程序同样不是线程安全的。通过利用 ThreadLocal 存储 JDBC 连接，每个线程都会拥有属于自己的 Connection.<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1622011370030-cce891ae-b014-4b04-b7f6-b60618ecf680.png#clientId=u2ff06500-278a-4&from=paste&height=180&id=ua2312ea1&margin=%5Bobject%20Object%5D&name=image.png&originHeight=180&originWidth=536&originalType=binary&size=24317&status=done&style=none&taskId=ua9333b6c-f3af-494f-930f-e6e4aadec1a&width=536" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="3-4-不可变性"><a href="#3-4-不可变性" class="headerlink" title="3.4 不可变性"></a>3.4 不可变性</h2><blockquote>
+<p>不可变对象永远是线程安全的。</p>
+</blockquote>
+<p>​</p>
+<p>只有满足如下状态，一个对象才是不可变的:<br>​</p>
+<ul>
+<li>它的状态不能在创建后再被修改;</li>
+<li>所有城都是 final 类型 3:并且，</li>
+<li>它被正确创建(创建期间没有发生 this 引用的逸出)。</li>
+</ul>
+<p>​</p>
+<blockquote>
+<p>从技术上讲，不可变对象的城并未全部声明为 final 类型，这样的情况是可能存在的，string 就是这种类。设计这种类依赖于对良性数据竞争的精准分析，还需要对 Java 存储模型有深入的理解。(满足一 下你的好奇心: string 会惰性地 (Lazily)计算哈希值:当第一次调用 hashcode 时，string 计算哈希值，并将它缓存在一个非 final 域中。之所以可以这样做，仅是因为这个城所表现的非默认的( nondefault)值，在每次计算后都得到相同的结果，因为该结果来自一个已经确定的不可变的状态。但请不要自己这样做! )</p>
+</blockquote>
+<p>​</p>
+<h4 id="Final-域"><a href="#Final-域" class="headerlink" title="Final 域"></a>Final 域</h4><p>​</p>
+<p>final 关键字源于 C++的 const 机制，不过受到了更多的限制。它对不可变性对象的创建提供了支持。final 域是不能修改的(尽管如果 final 域指向的对象是可变的，这个对象仍然可被修改)，然而它在 Java 存储模型中还有着特殊的语义。final 域使得确保初始化安全性(initialization safety) 成为可能，初始化安全性让不可变性对象不需要同步就能自由地被访问和共享。<br>​</p>
+<p>​</p>
+<p>3.5 安全发布</p>
+<blockquote>
+<p>不可变对象可以在没有额外同步的情况下，安全地用于任意线程;甚至发布它们时亦不需要同步。</p>
+</blockquote>
+<p>如果一个对象不是不可变的，它就必须被安全地发布，通常发布线程与消费线程都必须同步化。此刻让我们关注一下， 如何确保消费线程能够看到处于发布当时的对象状态;我们要解决对象发布后对其修改的可见性问题。<br>为了安全地发布对象，对象的引用以及对象的状态必须同时对其他线程可见。<br>​</p>
+<p>一个正确创建的对象可以通过下列条件安全地发布:</p>
+<ul>
+<li>通过静态初始化器初始化对象的引用;</li>
+<li>将它的引用存储到 volatile 域或 AtomicReference;</li>
+<li>将它的引用存储到正确创建的对象的 final 域中;</li>
+<li>或者将它的引用存储到由锁正确保护的城中。</li>
+</ul>
+<p>第 4 章组合对象<br>4.1 设计线程安全的类<br>4.2 实例限制<br>4.3 委托线程安全<br>4.4 向已有的线程安全类添加功能<br>4.5 同步策略的文档化<br>第 5 章构建块<br>5.1 同步容器<br>5.2 并发容器<br>5.3 阻塞队列和生产者-消费者模式<br>5.4 阻塞和可中断的方法<br>5.5 Synchronizer<br>5.6 为计算结果建立高效、可伸缩的高速…<br>第 2 部分构建并发应用程序<br>第 6 章任务执行<br>6.1 在线程中执行任务<br>6.2 Executor 框架<br>6.3 寻找可强化的并行性<br>第 7 章取消和关闭</p>
 
             </div>
             <hr>
