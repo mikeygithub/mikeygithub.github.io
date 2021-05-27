@@ -263,7 +263,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.3k 字
+      6.3k 字
     </span>
   
 
@@ -273,7 +273,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      55
+      66
        分钟
     </span>
   
@@ -511,14 +511,99 @@
 <p>不可变对象可以在没有额外同步的情况下，安全地用于任意线程;甚至发布它们时亦不需要同步。</p>
 </blockquote>
 <p>如果一个对象不是不可变的，它就必须被安全地发布，通常发布线程与消费线程都必须同步化。此刻让我们关注一下， 如何确保消费线程能够看到处于发布当时的对象状态;我们要解决对象发布后对其修改的可见性问题。<br>为了安全地发布对象，对象的引用以及对象的状态必须同时对其他线程可见。<br>​</p>
-<p>一个正确创建的对象可以通过下列条件安全地发布:</p>
+<p>一个正确创建的对象可以通过下列条件安全地发布:<br>​</p>
 <ul>
 <li>通过静态初始化器初始化对象的引用;</li>
 <li>将它的引用存储到 volatile 域或 AtomicReference;</li>
 <li>将它的引用存储到正确创建的对象的 final 域中;</li>
 <li>或者将它的引用存储到由锁正确保护的城中。</li>
 </ul>
-<p>第 4 章组合对象<br>4.1 设计线程安全的类<br>4.2 实例限制<br>4.3 委托线程安全<br>4.4 向已有的线程安全类添加功能<br>4.5 同步策略的文档化<br>第 5 章构建块<br>5.1 同步容器<br>5.2 并发容器<br>5.3 阻塞队列和生产者-消费者模式<br>5.4 阻塞和可中断的方法<br>5.5 Synchronizer<br>5.6 为计算结果建立高效、可伸缩的高速…<br>第 2 部分构建并发应用程序<br>第 6 章任务执行<br>6.1 在线程中执行任务<br>6.2 Executor 框架<br>6.3 寻找可强化的并行性<br>第 7 章取消和关闭</p>
+<h1 id="第-4-章组合对象"><a href="#第-4-章组合对象" class="headerlink" title="第 4 章组合对象"></a>第 4 章组合对象</h1><p>​</p>
+<h2 id="4-1-设计线程安全的类"><a href="#4-1-设计线程安全的类" class="headerlink" title="4.1 设计线程安全的类"></a>4.1 设计线程安全的类</h2><p>​</p>
+<p>三要素<br>​</p>
+<ul>
+<li>确定对象状态由哪些变量构成的。</li>
+<li>确定限制状态变量的不变约束。</li>
+<li>制定一个管理并发访问对象状态的策略。</li>
+</ul>
+<p>​</p>
+<blockquote>
+<p>如果对象的域都是基本类型(primitive)的，那么这些域就组成了对象的完整状态。如果一个对象的域引用了其他对象，那么他的状态也同时包含了被引用对象的域。LinkedList 的状态包括了所有存储在链表中的节点对象的状态。</p>
+</blockquote>
+<p>​</p>
+<p>同步策略（synchronization policy）<br>​</p>
+<blockquote>
+<p>定义了对象如何协调对其状态的访问，并且不会违反他的不变约束或后验条件。它规定了如何把不可变性、线程限制和锁结合起来，从而维护线程的安全性，还指明了哪些锁保护哪些变量。为了保证开发者于维护者可以分析并维护类，应该将类的同步策略写入文档。</p>
+</blockquote>
+<p>​</p>
+<h2 id="4-2-实例限制"><a href="#4-2-实例限制" class="headerlink" title="4.2 实例限制"></a>4.2 实例限制</h2><p>​</p>
+<blockquote>
+<p>即使一个对象不是线程安全的，仍有许多技术可以让它安全的用于多线程程序。比如你可以确保它只被单一的线程访问（线程限制），也可以确保所有的访问都正确的被锁保护。</p>
+</blockquote>
+<p>​</p>
+<blockquote>
+<p>将数据封装走对象内部，把对数据的访问限制在对象的方法上，更易确保线程在访问数据时总能获得正确的锁。</p>
+</blockquote>
+<p>​</p>
+<blockquote>
+<p>限制性使构造线程安全的类变得更容易，因为类的状态被限制后，分析它的线程安全时，就不必检查完整的程序。</p>
+</blockquote>
+<p>​</p>
+<h3 id="Java-监视器模式"><a href="#Java-监视器模式" class="headerlink" title="Java 监视器模式"></a>Java 监视器模式</h3><blockquote>
+<p>线程限制原则的直接推论之一是 Java 监视器（Java monitor pattern）。遵循 Java 监视器模式的对象封装了所有的可变状态，并由对象自己的内部锁保护。</p>
+</blockquote>
+<p>私有锁保护状态</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PrivateLock</span></span>&#123;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Object lock = <span class="hljs-keyword">new</span> Object();<br>    Widget widget;<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">someMethod</span><span class="hljs-params">()</span></span>&#123;<br>    	<span class="hljs-keyword">synchronized</span>(lock)&#123;<br>        	<span class="hljs-comment">//访问或修改Widget的状态</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>使用私有锁对象，而不是对象的内部锁(或任何其他可公共访问的锁)，有很多好处。私有的锁对象可以封装锁，这样客户代码无法得到它。然而可公共访问的锁允许客户代码涉足它的同步策略一-正 确地或不正确地。客户不正确地得到另一一个对象的锁，会引起活跃度方面的问题。另外要验证程序是正确地使用着一个可公共访问的锁，需要检查完整的程序，而不是一个单独的类。</p>
+</blockquote>
+<h2 id="4-3-委托线程安全"><a href="#4-3-委托线程安全" class="headerlink" title="4.3 委托线程安全"></a>4.3 委托线程安全</h2><blockquote>
+<p>可以将线程的安全委托于一些安全的类或者容器、如 JUC 下的一些并发类。</p>
+</blockquote>
+<p>非状态依赖变量<br>​</p>
+<blockquote>
+<p>我们可以将线程安全委托到多个隐含的状态变量上，只要这些变量彼此独立的，这意味组合对象并未增加任何涉及多个状态变量的不变约束。</p>
+</blockquote>
+<p>​</p>
+<p>当委托无法胜任时<br>​</p>
+<blockquote>
+<p>如果一个类由多个彼此独立的线程安全的状态变量组成，并且类的操作不包含任何无效状态转换时，可以将线程安全委托给这些状态变量。</p>
+</blockquote>
+<h2 id="4-4-向已有的线程安全类添加功能"><a href="#4-4-向已有的线程安全类添加功能" class="headerlink" title="4.4 向已有的线程安全类添加功能"></a>4.4 向已有的线程安全类添加功能</h2><p>​</p>
+<ul>
+<li>客户端加锁<blockquote>
+<p>对于一个由 Collections.synchronizedList 封装的 ArrayList，向原始类中加入方法或者拓展类都不正确，因为客户代码不知道同步封装工厂方法返回 List 对象的类型。第三个策略是拓展功能，而不是拓展类本身，并将拓展代码置入一个“助手（helper）”类。</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ListHelper</span>&lt;<span class="hljs-title">E</span>&gt;</span>&#123;<br>	<span class="hljs-keyword">public</span> List&lt;E&gt; list = Collections.synchronizedList(<span class="hljs-keyword">new</span> ArrayList&lt;E&gt;());<br>    ...<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">putIfAbsent</span><span class="hljs-params">(E x)</span></span>&#123;<br>    	<span class="hljs-keyword">synchronized</span>(list)&#123;<br>        	<span class="hljs-keyword">boolean</span> absent = !list.contains(x);<br>            <span class="hljs-keyword">if</span>(absent)list.add(x);<br>            <span class="hljs-keyword">return</span> absent;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="4-5-同步策略的文档化"><a href="#4-5-同步策略的文档化" class="headerlink" title="4.5 同步策略的文档化"></a>4.5 同步策略的文档化</h2><p>​</p>
+<blockquote>
+<p>为类的用户编写类线程安全性担保的文档；为类的维护编写类的同步策略文档。</p>
+</blockquote>
+<p>​</p>
+<h1 id="第-5-章构建块"><a href="#第-5-章构建块" class="headerlink" title="第 5 章构建块"></a>第 5 章构建块</h1><p>​</p>
+<h2 id="5-1-同步容器"><a href="#5-1-同步容器" class="headerlink" title="5.1 同步容器"></a>5.1 同步容器</h2><p>​</p>
+<ul>
+<li>Vector</li>
+<li>Hashtable</li>
+<li>Collections.synchronizedXxx 工厂方法创建的容器</li>
+</ul>
+<p>​</p>
+<p>p80<br>​</p>
+<p>5.2 并发容器<br>​</p>
+<p>5.3 阻塞队列和生产者-消费者模式<br>​</p>
+<p>5.4 阻塞和可中断的方法<br>​</p>
+<p>5.5 Synchronizer<br>​</p>
+<p>5.6 为计算结果建立高效、可伸缩的高速…<br>​</p>
+<p>第 2 部分构建并发应用程序<br>​</p>
+<p>第 6 章任务执行<br>​</p>
+<p>6.1 在线程中执行任务<br>​</p>
+<p>6.2 Executor 框架<br>​</p>
+<p>6.3 寻找可强化的并行性<br>​</p>
+<p>第 7 章取消和关闭</p>
 
             </div>
             <hr>
