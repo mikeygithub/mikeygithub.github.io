@@ -2,7 +2,7 @@
 title: 算法篇-Dijkstra算法
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/Dijkstra.png
 date: 2020-12-02 10:08:10
-category: 算法
+category: 算法学习
 tags: 最短路径
 ---
 

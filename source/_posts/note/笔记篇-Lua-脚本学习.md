@@ -2,7 +2,7 @@
 title: 笔记篇-Lua-脚本学习
 date: 2020-05-02 23:32:53
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/luaa.gif
-category: 后端
+category: 学习笔记
 tags: lua
 ---
 

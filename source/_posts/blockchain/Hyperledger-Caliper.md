@@ -2,8 +2,8 @@
 title: Hyperledger Caliper 测试框架
 date: 2020-03-16 22:58:21
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/caliper.png
-category: Hyperledger
-tags: 区块链
+category: 区块链篇
+tags: Hyperledger
 ---
 ## Caliper 简介
 Caliper是一个区块链性能基准框架，允许用户使用自定义用例测试不同的区块链解决方案，并获得一组性能测试结果。

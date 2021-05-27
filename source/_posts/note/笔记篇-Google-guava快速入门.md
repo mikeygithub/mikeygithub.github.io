@@ -3,7 +3,7 @@ title: 笔记篇-Google guava快速入门
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/google-guava.jpg'
 hide: false
 date: 2021-04-11 10:05:57
-category: Java
+category: 学习笔记
 tags: Guava
 ---
 

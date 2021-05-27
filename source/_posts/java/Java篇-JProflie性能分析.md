@@ -1,10 +1,10 @@
 ---
-title: 工具篇-JProflie性能分析
+title: Java篇-JProflie性能分析
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/jproflie.jpeg'
 hide: false
 password: ''
 date: 2021-05-07 00:05:09
-category: 工具
+category: Java相关
 tags: JProflie
 ---
 

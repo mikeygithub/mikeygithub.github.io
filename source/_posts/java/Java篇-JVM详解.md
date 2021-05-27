@@ -3,7 +3,7 @@ title: Java篇-JVM详解
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/jvm.jpeg
 hide: false
 date: 2021-02-024 11:50:06
-category: Java
+category: Java相关
 tags: JVM
 ---
 

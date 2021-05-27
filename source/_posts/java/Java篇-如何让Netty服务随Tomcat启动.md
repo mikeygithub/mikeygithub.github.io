@@ -1,8 +1,8 @@
 ---
-title: 如何让Netty服务随Tomcat启动
+title: Java篇-如何让Netty服务随Tomcat启动
 date: 2020-05-01 08:50:06
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/netty.png
-category: 后端
+category: Java相关
 tags: netty
 ---
 

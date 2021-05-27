@@ -2,7 +2,7 @@
 title: 面试篇-MySQL
 date: 2020-11-18 16:48:29
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/mysql-interview.png
-category: 面试
+category: 面试相关
 tags: MySQL
 ---
 

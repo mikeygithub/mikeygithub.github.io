@@ -3,7 +3,7 @@ title: 微服务篇-Istio 大型微服务系统管理工具
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/Istio.jpeg
 hide: false
 date: 2021-02-03 17:16:43
-category: 微服务
+category: 微服务篇
 tags: Istio
 ---
 

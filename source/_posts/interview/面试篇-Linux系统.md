@@ -2,7 +2,7 @@
 title: 面试篇-Linux系统
 date: 2020-11-27 21:54:34
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/linux-logo.jpeg
-category: 面试
+category: 面试相关
 tags: Linux
 ---
 

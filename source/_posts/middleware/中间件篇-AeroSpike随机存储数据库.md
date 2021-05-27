@@ -3,7 +3,7 @@ title: 中间件篇-AeroSpike随机存储数据库
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/as.png'
 hide: false
 date: 2021-03-28 00:10:11
-category: 中间件
+category: 中间件篇
 tags: AeroSpike
 ---
 

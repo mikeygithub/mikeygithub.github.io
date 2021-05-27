@@ -1,9 +1,9 @@
 ---
-title: RPC篇-高性能的Dubbo框架
+title: Java篇-高性能的Dubbo框架
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dubbo.png
 hide: false
 date: 2021-01-22 19:27:12
-category: 框架
+category: Java相关
 tags: Dubbo
 ---
 

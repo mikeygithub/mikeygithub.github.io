@@ -2,7 +2,7 @@
 title: Java篇-多线程并发
 date: 2020-05-30 12:29:53
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/many_thread.jpeg
-category: Java
+category: Java相关
 tags: Thread
 ---
 

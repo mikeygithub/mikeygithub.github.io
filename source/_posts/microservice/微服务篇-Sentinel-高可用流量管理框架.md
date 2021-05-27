@@ -3,7 +3,7 @@ title: Sentinel-高可用流量管理框架
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/sentinel.png
 hide: false
 date: 2021-01-21 21:09:21
-category: 框架
+category: 微服务篇
 tags: sentinel
 ---
 ### 软件简介

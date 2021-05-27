@@ -2,7 +2,7 @@
 title: React 快速入门
 date: 2020-08-12 20:49:05
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/react.jpeg
-category: React
+category: 前端相关
 tags: React
 ---
 

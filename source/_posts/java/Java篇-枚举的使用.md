@@ -4,7 +4,7 @@ index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/im
 hide: false
 password: ''
 date: 2018-03-09 23:47:04
-category: Java
+category: Java相关
 tags: 枚举
 ---
 

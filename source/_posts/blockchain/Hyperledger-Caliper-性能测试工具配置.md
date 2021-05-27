@@ -2,8 +2,8 @@
 title: Hyperledger Caliper 性能测试工具配置
 date: 2020-03-20 23:41:24
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/caliper2.png
-category: Hyperledger
-tags: 区块链
+category: 区块链篇 
+tags: Hyperledger-Caliper
 ---
 
 # Caliper性能测试工具配置

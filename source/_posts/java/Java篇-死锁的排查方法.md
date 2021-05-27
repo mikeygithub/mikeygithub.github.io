@@ -2,7 +2,7 @@
 title: Java篇-死锁的排查方法
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/javabingfa.jpeg
 date: 2020-12-21 09:28:01
-category: 多线程
+category: Java相关
 tags: 死锁排查
 ---
 

@@ -2,7 +2,7 @@
 title: 中间件篇-Kafka分布式发布订阅消息系统
 date: 2021-03-20 23:02:58
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/kafka.jpeg
-category: 框架
+category: 中间件篇
 tags: kafka
 ---
 # Kafka 概念

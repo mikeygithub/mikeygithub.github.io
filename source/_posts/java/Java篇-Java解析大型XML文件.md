@@ -1,9 +1,9 @@
 ---
-title: 实战篇-Java解析大型XML文件
+title: Java篇-Java解析大型XML文件
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/xml.jpeg'
 hide: false
 date: 2021-03-29 22:04:38
-category: Java
+category: Java相关
 tags: 解析XML文件
 ---
 

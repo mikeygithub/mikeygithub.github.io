@@ -2,7 +2,7 @@
 title: 中间件篇-RabbitMQ消息服务器
 date: 2020-08-18 22:45:53
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/rabbitmq.png
-category: 中间件
+category: 中间件篇
 tags: Rabbitmq
 ---
 

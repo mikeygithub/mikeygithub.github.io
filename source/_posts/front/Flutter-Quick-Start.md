@@ -2,7 +2,7 @@
 title: Flutter 快速入门
 date: 2020-03-29 12:27:39
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/flutter.png
-category: 前端
+category: 前端相关
 tags: Flutter
 ---
 

@@ -2,8 +2,8 @@
 title: Hyperledger Iroha
 date: 2020-03-18 00:36:27
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/Iroha.png
-category: Hyperledger
-tags: 区块链
+category: 区块链篇
+tags: Hyperledger-Iroha
 ---
 
 

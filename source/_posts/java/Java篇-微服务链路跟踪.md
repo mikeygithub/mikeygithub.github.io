@@ -1,9 +1,9 @@
 ---
-title: 笔记篇-微服务链路跟踪
+title: Java篇-微服务链路跟踪
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/softservice.jpeg'
 hide: false
 date: 2021-04-27 23:31:35
-category: 微服务
+category: Java相关
 tags: 链路跟踪
 ---
 

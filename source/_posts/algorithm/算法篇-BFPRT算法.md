@@ -2,7 +2,7 @@
 title: 算法篇-BFPRT算法
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/bfprt-logo.png
 date: 2020-11-30 16:36:50
-category: 算法
+category: 算法学习
 tags: 算法
 ---
 

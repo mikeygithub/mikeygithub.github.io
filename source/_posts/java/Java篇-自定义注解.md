@@ -3,7 +3,7 @@ title: Java篇-自定义注解
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/annotation-logo.png'
 hide: false
 date: 2018-03-08 13:49:25
-category: Java
+category: Java相关
 tags: 注解
 ---
 

@@ -3,7 +3,7 @@ title: Nacos-动态服务发现配置和服务管理平台
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/nacos.jpg
 hide: false
 date: 2021-01-25 22:39:23
-category: 微服务
+category: 中间件篇
 tags: 服务发现
 ---
 

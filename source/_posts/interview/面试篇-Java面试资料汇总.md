@@ -2,7 +2,7 @@
 title: 面试篇-Java面试资料汇总
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/interview-data.png
 date: 2020-11-29 10:55:41
-category: 面试
+category: 面试相关
 tags: 资料
 ---
 

@@ -1,9 +1,9 @@
 ---
-title: 笔记篇-Future-Task详解
+title: Java篇-Future-Task详解
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/Future-Task.jpeg'
 hide: false
 date: 2021-04-12 00:05:01
-category: 笔记
+category: Java相关
 tags: Future-Task
 ---
 

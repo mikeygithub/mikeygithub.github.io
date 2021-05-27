@@ -3,7 +3,7 @@ title: 工具篇-MAC常用软件
 index_img: 'https://i.loli.net/2021/04/30/SfBsZlNxzmYKgWy.jpg'
 hide: false
 date: 2021-04-30 23:31:35
-category: 笔记
+category: 工具相关
 tags: 工具
 ---
 

@@ -3,7 +3,7 @@ title: 笔记篇-Groovy快速入门
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/groovy.png'
 hide: false
 date: 2021-04-11 10:05:16
-category: 笔记
+category: 学习笔记
 tags: Groovy
 ---
 

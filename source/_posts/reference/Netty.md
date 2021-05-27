@@ -2,7 +2,7 @@
 title: Netty
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/netty.png
 date: 2020-12-28 17:38:41
-category: 框架
+category: 转载文章
 tags: Netty
 ---
 

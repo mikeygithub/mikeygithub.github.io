@@ -2,7 +2,7 @@
 title: Service Mesh
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/service-mesh.jpeg
 date: 2020-12-10 21:05:59
-category: 微服务
+category: 微服务篇
 tags: Service Mesh
 ---
 # Service Mesh

@@ -2,7 +2,7 @@
 title: Linux篇-I/O多路复用之select、poll和epoll的区别
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/select-poll-epoll.png
 date: 2020-12-03 17:45:11
-category: 笔记
+category: Linux学习
 tags: I/O
 ---
 

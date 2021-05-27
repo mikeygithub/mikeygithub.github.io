@@ -3,7 +3,7 @@ title: 中间件篇-ElasticSearch7.x教程
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/elasticsearch.jpg'
 hide: false
 date: 2021-03-30 21:34:11
-category: 中间件
+category: 中间件篇
 tags: Elasticsearch
 ---
 

@@ -2,7 +2,7 @@
 title: 为什么DNS使用UDP而不是TCP
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dns.jpeg
 date: 2021-01-06 17:38:41
-category: 计算机网络
+category: 转载文章
 tags: DNS
 ---
 

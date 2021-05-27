@@ -2,7 +2,7 @@
 title: 面试篇-Spring框架
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/spring.jpeg
 date: 2020-11-29 10:09:06
-category: 面试
+category: 面试相关
 tags: 框架
 ---
 

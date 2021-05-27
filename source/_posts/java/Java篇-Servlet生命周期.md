@@ -2,7 +2,7 @@
 title: Java篇-Servlet生命周期
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/servlet-logo.png
 date: 2020-12-02 10:07:07
-category: 笔记
+category: Java相关
 tags: Servlet
 ---
 

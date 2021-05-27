@@ -3,7 +3,7 @@ title: Linux篇-Linux操作系统教程
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/linux.jpeg
 hide: false
 date: 2021-02-10 10:03:44
-category: Linux
+category: Linux学习
 tags: Linux
 ---
 # 第1章 Linux概述

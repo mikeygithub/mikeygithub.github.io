@@ -3,7 +3,7 @@ title: Linux篇-命令汇总
 date: 2018-07-03 20:21:33
 tags: Linux命令
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/linux.jpeg
-category: Linux
+category: Linux学习
 ---
 
 

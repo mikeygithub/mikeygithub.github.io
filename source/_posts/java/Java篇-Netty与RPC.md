@@ -2,7 +2,7 @@
 title: Netty 与 RPC
 date: 2020-08-10 20:35:18
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/netty.png
-category: 框架
+category: Java相关
 tags: netty
 ---
 

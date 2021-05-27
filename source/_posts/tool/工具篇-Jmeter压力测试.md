@@ -4,7 +4,7 @@ index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/im
 hide: false
 password: ''
 date: 2021-05-03 18:24:16
-category: 工具
+category: 工具相关
 tags: Jmeter
 ---
 

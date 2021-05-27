@@ -3,7 +3,7 @@ title: OS篇-分布式系统(麻省理工大学)
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/Distributed-Systems.jpeg
 hide: false
 date: 2021-01-02 21:25:31
-category: 分布式系统
+category: 操作系统
 tags: 分布式系统
 ---
 # Introduction

@@ -2,7 +2,7 @@
 title: 工具篇-Mermaid使用教程
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/mermaid.png
 date: 2020-12-07 20:38:41
-category: 工具
+category: 工具相关
 tags: Mermaid
 ---
 
