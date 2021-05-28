@@ -3,7 +3,7 @@ title: k8s篇-安装教程
 date: 2020-03-21 21:39:49
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/k8s.png
 category: DevOps
-tags: k8s
+tags: Kubernetes
 ---
 
 # Kubernetes 安装 kubeadm

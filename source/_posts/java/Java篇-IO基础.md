@@ -3,7 +3,7 @@ title: Java篇-IO基础
 date: 2020-05-27 10:02:33
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/nio.jpg
 category: Java相关
-tags: IO/NIO
+tags: I/O
 ---
 
 # 阻塞IO模型

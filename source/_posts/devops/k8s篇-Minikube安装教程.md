@@ -3,7 +3,7 @@ title: k8s篇-Minikube安装教程
 date: 2020-03-25 12:39:54
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/minikube.jpeg
 category: DevOps
-tags: k8s
+tags: Kubernetes
 ---
 # MINIKUBE INSTALL TUTORIALS
 

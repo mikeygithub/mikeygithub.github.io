@@ -3,7 +3,7 @@ title: k8s篇-Minikube使用教程
 date: 2020-04-02 00:35:52
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/minikube.png
 category: DevOps
-tags: k8s
+tags: Kubernetes
 ---
 
 ## 启动 K8s 集群

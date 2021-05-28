@@ -4,7 +4,7 @@ index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/im
 hide: false
 date: 2021-04-27 23:35:38
 category: DevOps
-tags: CICD
+tags: CI/CD
 ---
 
 # 背景简介

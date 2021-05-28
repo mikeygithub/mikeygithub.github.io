@@ -3,7 +3,7 @@ title: Linux篇-Centos安装图形化界面
 date: 2018-07-05 14:50:45
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/centos.jpeg
 category: Linux学习
-tags: centos
+tags: Linux
 ---
 
 >最近有重新来捣鼓捣鼓Linux了，这次撸的版本是centos7.4的，虽然说是不要桌面，但是感觉初学者还是安装一下比较好balalalala。。。。。。。。。废话不说的直接进入正题：

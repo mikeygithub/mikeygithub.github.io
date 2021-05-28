@@ -3,7 +3,7 @@ title: Beego 学习笔记
 date: 2019-05-21 16:49:03
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/beego.jpg
 category: Golang
-tags: beego
+tags: Beego
 ---
 
 # Bee 工具的使用
