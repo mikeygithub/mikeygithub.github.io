@@ -319,13 +319,20 @@
 <p>Reactive Streams 是规范，Reactor 实现了 Reactive Streams。Web Flux 以 Reactor 为基础，实现 Web 领域的反应式编程框架。</p>
 </blockquote>
 <h1 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h1><blockquote>
-<p>在服务端需要一个非阻塞的 Web 堆栈来处理具有少量线程的并发并使用较少的硬件资源进行扩展。Servlet 3.1 确实为非阻塞 I/O 提供了 API。然而，使用它会远离 Servlet API 的其余部分，其中契约是同步 ( Filter, Servlet) 或阻塞 ( getParameter, getPart)。这是一个新的通用 API 作为任何非阻塞运行时的基础的动机。这很重要，因为服务器（例如 Netty）在异步、非阻塞空间中建立良好。</p>
+<p>在服务端需要一个非阻塞的 Web 堆栈来处理具有少量线程的并发并使用较少的硬件资源进行扩展。Servlet 3.1 确实为非阻塞 I/O 提供了 API。但是，使用它会远离 Servlet API 的其余部分，其中契约是同步 ( Filter, Servlet) 或阻塞 ( getParameter, getPart)。这是一个新的通用 API 作为任何非阻塞运行时的基础的目的。这很重要，因为服务器（例如 Netty）在异步、非阻塞空间中构建的十分完美。</p>
+</blockquote>
+<h1 id="知识铺垫"><a href="#知识铺垫" class="headerlink" title="知识铺垫"></a>知识铺垫</h1><blockquote>
+<p>在详细说明之前可能要解释一下阻塞和非阻塞的概念。所谓阻塞就是指我们在发送请求处理业务逻辑过程中需要</p>
 </blockquote>
 <h1 id="框架简介"><a href="#框架简介" class="headerlink" title="框架简介"></a>框架简介</h1><blockquote>
-<p>Spring Framework 中包含的原始 Web 框架 Spring Web MVC 是专门为 Servlet API 和 Servlet 容器构建的。反应式堆栈 Web 框架 Spring WebFlux 是在 5.0 版本中添加的。它是完全非阻塞的，支持 <a target="_blank" rel="noopener" href="https://www.reactive-streams.org/">Reactive Streams</a>背压，并在 Netty，Undertow 和 Servlet 3.1+容器等服务器上运行。<br>两个 Web 框架都反映了其源模块的名称（{spring-framework-main-code}/spring-webmvc[spring-webmvc] 和 {spring-framework-main-code}/spring-webflux[spring-webflux]）和在 Spring Framework 中并存。每个模块都是可选的。应用程序可以使用一个或另一个模块，或者在某些情况下，两者都使用——例如，带有响应式 WebClient.</p>
+<p>Spring Framework 中包含的原始 Web 框架 Spring Web MVC 是专门为 Servlet API 和 Servlet 容器构建的。反应式堆栈 Web 框架 Spring WebFlux 是在 5.0 版本中添加的。它是完全非阻塞的，支持 <a target="_blank" rel="noopener" href="https://www.reactive-streams.org/">Reactive Streams</a>背压，并在 Netty，Undertow 和 Servlet 3.1+容器等服务器上运行。</p>
+</blockquote>
+<p>​</p>
+<blockquote>
+<p>两个 Web 框架都反映了其源模块的名称（{spring-framework-main-code}/spring-webmvc[spring-webmvc] 和 {spring-framework-main-code}/spring-webflux[spring-webflux]）和在 Spring Framework 中并存。每个模块都是可选的。应用程序可以使用一个或另一个模块，或者在某些情况下，两者都使用——例如，带有响应式 WebClient.</p>
 </blockquote>
 <h1 id="适用范围"><a href="#适用范围" class="headerlink" title="适用范围"></a>适用范围</h1><blockquote>
-<p>Spring WebFlux 是基于 Reactor 进行实现的 WEB 非阻塞式框架，在详细说明之前可能要解释一下阻塞和非阻塞。所谓阻塞就是指我们在发送请求处理业务逻辑过程中需要</p>
+<p>Spring WebFlux 是基于 Reactor 进行实现的 WEB 非阻塞式框架，</p>
 </blockquote>
 <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1622361557487-64a5b5e5-f6db-4653-bc3b-4265bfcd175e.png#clientId=u1590e5df-cc26-4&from=paste&height=446&id=u8554fad4&margin=%5Bobject%20Object%5D&name=image.png&originHeight=446&originWidth=800&originalType=binary&size=125357&status=done&style=none&taskId=u50b33503-b98b-430e-864b-e3fc79f6ec3&width=800" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h1 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h1><p>1.导入依赖</p>
