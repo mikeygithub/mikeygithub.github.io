@@ -87,7 +87,7 @@ Fluid.plugins = {
 
       var imageTitle = $image.attr('title') || $image.attr('alt');
       if (imageTitle) {
-        $imageWrap.append(`<p class="image-caption">${imageTitle}</p>`);
+        //$imageWrap.append(`<p class="image-caption">${imageTitle}</p>`);
         $imageWrap.attr('title', imageTitle).attr('data-caption', imageTitle);
       }
     });
