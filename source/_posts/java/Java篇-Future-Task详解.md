@@ -23,11 +23,11 @@ Creates a FutureTask that will, upon running, execute the given Runnable, and ar
 
 类图
 
-![image-20210418142037763](/home/mikey/Downloads/jsDeliver/resource/img/image-20210418142037763.png)
+![image-20210418142037763](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210418142037763.png)
 
 对应的相关方法和属性
 
-![image-20210418142238155](/home/mikey/Downloads/jsDeliver/resource/img/image-20210418142238155.png)
+![image-20210418142238155](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210418142238155.png)
 
 运行状态
 
