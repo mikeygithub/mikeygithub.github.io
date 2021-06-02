@@ -276,7 +276,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      674 字
+      1.1k 字
     </span>
   
 
@@ -286,7 +286,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      12
        分钟
     </span>
   
@@ -335,15 +335,38 @@
 <p>​</p>
 <p>Kubernetes 是-个完备的分布式系统支撑平台。Kubernetes 具有完备的集群管理能力，包括多层次的安全防护和准入机制、多租户应用支撑能力、透明的服务注册和服务发现机制、内建的智能负载均衡器、强大的故障发现和自我修复能力、服务滚动升级和在线扩容能力、可扩展的资源自动调度机制，以及多粒度的资源配额管理能力。同时, Kubernetes 提供了完善的管理工具，这些工具涵盖了包括开发、部署测试、运维监控在内的各个环节。因此，Kubernetes 是一个全新的基于容器技术的分布式架构解决方案，并且是一个一站式的完备的分布式系统开发和支撑平台。<br>​</p>
 <p>​</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1622015650517-20e874aa-b24c-4cb0-9795-b7ad0fd90b28.png#clientId=u8daca5e1-04c4-4&from=paste&height=1984&id=u94dd642c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1984&originWidth=2409&originalType=binary&size=324401&status=done&style=none&taskId=u971334fd-13c0-4491-bf84-0feefe16a2a&width=2409" srcset="/img/loading.gif" lazyload alt="image.png"><br>​</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1622015650517-20e874aa-b24c-4cb0-9795-b7ad0fd90b28.png#clientId=u8daca5e1-04c4-4&from=paste&height=1984&id=u94dd642c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=1984&originWidth=2409&originalType=binary&size=324401&status=done&style=none&taskId=u971334fd-13c0-4491-bf84-0feefe16a2a&width=2409" srcset="/img/loading.gif" lazyload alt="image.png"><br>一些特性：<br>​</p>
+<ul>
+<li>Service 的服务进程目前都基于 Socket 通信方式对外提供服务，比如 Redis、Memcache、MySQL、Web Server，或者是实现了某个具体业务的特定 TCP Server 进程。虽然一个 Service 通常由多个相关的服务进程提供服务，每个服务进程都有一个独立的 Endpoint（IP+Port）访问点，但 Kubernetes 能够让我们通过 Service（虚拟 Cluster IP +Service Port）连接到指定的 Service。</li>
+</ul>
 <p>​</p>
-<p>1.2 为什么 要用 Kubernetes<br>1.3 从一个简单的例子开始<br>1.3.1 环境准备<br>1.3.2 启 动 MySQL 服务<br>1.3.3 启 动 Tomcat 应用<br>1.3.4 通过浏览器 访问网页<br>​</p>
+<ul>
+<li>容器提供了强大的隔离功能，所以有必要把为 Service 提供服务的这组进程放入容器中进行隔离。为此，Kubernetes 设计了 Pod 对象，将每个服务进程都包装到相应的 Pod 中，使其成为在 Pod 中运行的一个容器 （Container）。为了建立 Service 和 Pod 间的关联关系，Kubernetes 首先给每个 Pod 都贴上一个标签（Label），给运行 MySQL 的 Pod 贴上 name=mysql 标签，给运行 PHP 的 Pod 贴上 name=php 标签，然后给相应的 Service 定义标签选择器（Label Selector），比如 MySQL Service 的标签选择器的选择条件为 name=mysql，意为该 Service 要作用于所有包含 name=mysql Label 的 Pod。这样一来，就巧妙解决了 Service 与 Pod 的关联问题。</li>
+</ul>
+<p>​</p>
+<h2 id="1-2-为什么要用-Kubernetes"><a href="#1-2-为什么要用-Kubernetes" class="headerlink" title="1.2 为什么要用 Kubernetes"></a>1.2 为什么要用 Kubernetes</h2><ul>
+<li>降低协作难度，减少运维成本。</li>
+<li>无需关注语言本身，完全面向微服务化架构。</li>
+<li>自动弹性扩容，应对大流量。</li>
+</ul>
+<h2 id="1-3-从一个简单的例子开始"><a href="#1-3-从一个简单的例子开始" class="headerlink" title="1.3 从一个简单的例子开始"></a>1.3 从一个简单的例子开始</h2><blockquote>
+<p>搭建一个简单 Java Web 引用程序</p>
+</blockquote>
+<h3 id="1-3-1-环境准备"><a href="#1-3-1-环境准备" class="headerlink" title="1.3.1 环境准备"></a>1.3.1 环境准备</h3><p><a target="_blank" rel="noopener" href="https://mikeygithub.github.io/2021/05/17/yuque/am5lkt/">搭建环境及启动集群</a></p>
+<h3 id="1-3-2-启-动-MySQL-服务"><a href="#1-3-2-启-动-MySQL-服务" class="headerlink" title="1.3.2 启 动 MySQL 服务"></a>1.3.2 启 动 MySQL 服务</h3><p>​</p>
+<p>1.生成配置文件</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">kubectl create deployment mysql --image=mysql -o yaml --dry-run &gt; mysql-rc.yaml<br></code></pre></div></td></tr></table></figure>
+
+<p>2.配置文件<br>​</p>
+<p>p47<br>​</p>
+<h3 id="1-3-3-启动-Tomcat-应用"><a href="#1-3-3-启动-Tomcat-应用" class="headerlink" title="1.3.3 启动 Tomcat 应用"></a>1.3.3 启动 Tomcat 应用</h3><p>###</p>
+<h3 id="1-3-4-通过浏览器访问网页"><a href="#1-3-4-通过浏览器访问网页" class="headerlink" title="1.3.4 通过浏览器访问网页"></a>1.3.4 通过浏览器访问网页</h3><p>​</p>
 <p>1.4 Kubernetes 的基本概念和术语<br>1.4.1 Master<br>1.4.2 Node<br>1.4.3 Pod<br>1.4.4 Label<br>1.4.5 Replication Controller<br>1.4.6 Deployment<br>1.4.7 Horizontal Pod Autoscaler<br>1.4.8 StatefulSet<br>1.4.9 Service<br>1.4.10 Job<br>1.4.11 Volume<br>​</p>
 <p>#</p>
 <p>#</p>
 <p>#</p>
 <h1 id="第-2-章-Kubernetes-安装配置指南"><a href="#第-2-章-Kubernetes-安装配置指南" class="headerlink" title="第 2 章 Kubernetes 安装配置指南"></a>第 2 章 Kubernetes 安装配置指南</h1><p>第 3 章 深入掌握 Pod<br>第 4 章 深入掌握 Service<br>第 5 章 核心组件运行机制<br>第 6 章 深入分析集群安全机制<br>第 7 章 网络原理<br>第 8 章 共享存储原理<br>第 9 章 Kubernetes 开发指南<br>第 10 章 Kubernetes 集群管理<br>第 11 章 Trouble Shooting 指导<br>第 12 章 Kubernetes 开 发中的新功能</p>
-
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1>
             </div>
             <hr>
             <div>
