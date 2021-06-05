@@ -1,5 +1,5 @@
 ---
-title: 笔记篇-Knife4j Tutorials
+title: 笔记篇-Knife4j入门使用
 date: 2020-03-21 01:42:54
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/knife4j.jpeg
 category: 学习笔记
@@ -100,7 +100,7 @@ public class SwaggerConfiguration {
 
  
 
- ![avatar](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/knife4j-1.jpg)
+ ![avatar](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/knife4j-1.png)
 
  
 
