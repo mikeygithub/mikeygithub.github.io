@@ -144,6 +144,6 @@ MemStore 后续会逐渐刷到 HDFS 中。
 # HBase vs Cassandra
 
 
-![avatar](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-vs-cassandra-1.png)
+![avatar](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-vs-cassandra-1.png.png)
 
-![avatar](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-vs-cassandra-2.png)
+![avatar](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-vs-cassandra-2.png.png)
