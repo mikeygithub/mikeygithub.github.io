@@ -1,0 +1,781 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+  <title>监控篇-普罗米修斯Prometheus - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>麦奇</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/todo/">
+                <i class="iconfont icon-plan"></i>
+                代办
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-briefcase"></i>
+                其他
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://www.yuque.com/aichihongdouheyumi/blog">
+                    
+                    在线创作
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/about/">
+                    
+                    关于麦奇
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://bing.ioliu.cn/v1/rand') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="监控篇-普罗米修斯Prometheus">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Mikey
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-06 17:24" pubdate>
+        2021年6月6日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      49
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">监控篇-普罗米修斯Prometheus</h1>
+            
+            <div class="markdown-body">
+              <p> <img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1622951644209-15028cee-2fa0-47c3-a416-4e8c4464a68d.png#clientId=u4034253d-ad06-4&from=paste&height=434&id=u80d280a8&margin=%5Bobject%20Object%5D&name=image.png&originHeight=434&originWidth=1006&originalType=binary%E2%88%B6=1&size=253696&status=done&style=none&taskId=ufd6dc11c-fa85-4aef-9dae-82267a19d44&width=1006" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h1><h1 id="查询函数"><a href="#查询函数" class="headerlink" title="查询函数"></a>查询函数</h1><blockquote>
+<p>使用</p>
+</blockquote>
+<p>Some functions have default arguments, e.g. year(v=vector(time()) instant-vector). This means that there is one argument v which is an instant vector, which if not provided it will default to the value of the expression vector(time()).</p>
+<h2 id="abs"><a href="#abs" class="headerlink" title="abs()"></a>abs()</h2><p>abs(v instant-vector) returns the input vector with all sample values converted to their absolute value.</p>
+<h2 id="absent"><a href="#absent" class="headerlink" title="absent()"></a>absent()</h2><p>absent(v instant-vector) returns an empty vector if the vector passed to it has any elements and a 1-element vector with the value 1 if the vector passed to it has no elements.<br>This is useful for alerting on when no time series exist for a given metric name and label combination.<br>absent(nonexistent{job=”myjob”}) # =&gt; {job=”myjob”} absent(nonexistent{job=”myjob”,instance=~”.*“}) # =&gt; {job=”myjob”} absent(sum(nonexistent{job=”myjob”})) # =&gt; {}<br>In the first two examples, absent() tries to be smart about deriving labels of the 1-element output vector from the input vector.</p>
+<h2 id="absent-over-time"><a href="#absent-over-time" class="headerlink" title="absent_over_time()"></a>absent_over_time()</h2><p>absent_over_time(v range-vector) returns an empty vector if the range vector passed to it has any elements and a 1-element vector with the value 1 if the range vector passed to it has no elements.<br>This is useful for alerting on when no time series exist for a given metric name and label combination for a certain amount of time.<br>absent_over_time(nonexistent{job=”myjob”}[1h]) # =&gt; {job=”myjob”} absent_over_time(nonexistent{job=”myjob”,instance=~”.*“}[1h]) # =&gt; {job=”myjob”} absent_over_time(sum(nonexistent{job=”myjob”})[1h:]) # =&gt; {}<br>In the first two examples, absent_over_time() tries to be smart about deriving labels of the 1-element output vector from the input vector.</p>
+<h2 id="ceil"><a href="#ceil" class="headerlink" title="ceil()"></a>ceil()</h2><p>ceil(v instant-vector) rounds the sample values of all elements in v up to the nearest integer.</p>
+<h2 id="changes"><a href="#changes" class="headerlink" title="changes()"></a>changes()</h2><p>For each input time series, changes(v range-vector) returns the number of times its value has changed within the provided time range as an instant vector.</p>
+<h2 id="clamp"><a href="#clamp" class="headerlink" title="clamp()"></a>clamp()</h2><p>clamp(v instant-vector, min scalar, max scalar) clamps the sample values of all elements in v to have a lower limit of min and an upper limit of max.<br>Special cases: - Return an empty vector if min &gt; max - Return NaN if min or max is NaN</p>
+<h2 id="clamp-max"><a href="#clamp-max" class="headerlink" title="clamp_max()"></a>clamp_max()</h2><p>clamp_max(v instant-vector, max scalar) clamps the sample values of all elements in v to have an upper limit of max.</p>
+<h2 id="clamp-min"><a href="#clamp-min" class="headerlink" title="clamp_min()"></a>clamp_min()</h2><p>clamp_min(v instant-vector, min scalar) clamps the sample values of all elements in v to have a lower limit of min.</p>
+<h2 id="day-of-month"><a href="#day-of-month" class="headerlink" title="day_of_month()"></a>day_of_month()</h2><p>day_of_month(v=vector(time()) instant-vector) returns the day of the month for each of the given times in UTC. Returned values are from 1 to 31.</p>
+<h2 id="day-of-week"><a href="#day-of-week" class="headerlink" title="day_of_week()"></a>day_of_week()</h2><p>day_of_week(v=vector(time()) instant-vector) returns the day of the week for each of the given times in UTC. Returned values are from 0 to 6, where 0 means Sunday etc.</p>
+<h2 id="days-in-month"><a href="#days-in-month" class="headerlink" title="days_in_month()"></a>days_in_month()</h2><p>days_in_month(v=vector(time()) instant-vector) returns number of days in the month for each of the given times in UTC. Returned values are from 28 to 31.</p>
+<h2 id="delta"><a href="#delta" class="headerlink" title="delta()"></a>delta()</h2><p>delta(v range-vector) calculates the difference between the first and last value of each time series element in a range vector v, returning an instant vector with the given deltas and equivalent labels. The delta is extrapolated to cover the full time range as specified in the range vector selector, so that it is possible to get a non-integer result even if the sample values are all integers.<br>The following example expression returns the difference in CPU temperature between now and 2 hours ago:<br>delta(cpu_temp_celsius{host=”zeus”}[2h])<br>delta should only be used with gauges.</p>
+<h2 id="deriv"><a href="#deriv" class="headerlink" title="deriv()"></a>deriv()</h2><p>deriv(v range-vector) calculates the per-second derivative of the time series in a range vector v, using <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Simple_linear_regression">simple linear regression</a>.<br>deriv should only be used with gauges.</p>
+<h2 id="exp"><a href="#exp" class="headerlink" title="exp()"></a>exp()</h2><p>exp(v instant-vector) calculates the exponential function for all elements in v. Special cases are:</p>
+<ul>
+<li>Exp(+Inf) = +Inf</li>
+<li>Exp(NaN) = NaN</li>
+</ul>
+<h2 id="floor"><a href="#floor" class="headerlink" title="floor()"></a>floor()</h2><p>floor(v instant-vector) rounds the sample values of all elements in v down to the nearest integer.</p>
+<h2 id="histogram-quantile"><a href="#histogram-quantile" class="headerlink" title="histogram_quantile()"></a>histogram_quantile()</h2><p>histogram_quantile(φ scalar, b instant-vector) calculates the φ-quantile (0 ≤ φ ≤ 1) from the buckets b of a <a target="_blank" rel="noopener" href="https://prometheus.io/docs/concepts/metric_types/#histogram">histogram</a>. (See <a target="_blank" rel="noopener" href="https://prometheus.io/docs/practices/histograms">histograms and summaries</a> for a detailed explanation of φ-quantiles and the usage of the histogram metric type in general.) The samples in b are the counts of observations in each bucket. Each sample must have a label le where the label value denotes the inclusive upper bound of the bucket. (Samples without such a label are silently ignored.) The <a target="_blank" rel="noopener" href="https://prometheus.io/docs/concepts/metric_types/#histogram">histogram metric type</a> automatically provides time series with the _bucket suffix and the appropriate labels.<br>Use the rate() function to specify the time window for the quantile calculation.<br>Example: A histogram metric is called http_request_duration_seconds. To calculate the 90th percentile of request durations over the last 10m, use the following expression:<br>histogram_quantile(0.9, rate(http_request_duration_seconds_bucket[10m]))<br>The quantile is calculated for each label combination in http_request_duration_seconds. To aggregate, use the sum() aggregator around the rate() function. Since the le label is required by histogram_quantile(), it has to be included in the by clause. The following expression aggregates the 90th percentile by job:<br>histogram_quantile(0.9, sum by (job, le) (rate(http_request_duration_seconds_bucket[10m])))<br>To aggregate everything, specify only the le label:<br>histogram_quantile(0.9, sum by (le) (rate(http_request_duration_seconds_bucket[10m])))<br>The histogram_quantile() function interpolates quantile values by assuming a linear distribution within a bucket. The highest bucket must have an upper bound of +Inf. (Otherwise, NaN is returned.) If a quantile is located in the highest bucket, the upper bound of the second highest bucket is returned. A lower limit of the lowest bucket is assumed to be 0 if the upper bound of that bucket is greater than 0. In that case, the usual linear interpolation is applied within that bucket. Otherwise, the upper bound of the lowest bucket is returned for quantiles located in the lowest bucket.<br>If b has 0 observations, NaN is returned. If b contains fewer than two buckets, NaN is returned. For φ &lt; 0, -Inf is returned. For φ &gt; 1, +Inf is returned.</p>
+<h2 id="holt-winters"><a href="#holt-winters" class="headerlink" title="holt_winters()"></a>holt_winters()</h2><p>holt_winters(v range-vector, sf scalar, tf scalar) produces a smoothed value for time series based on the range in v. The lower the smoothing factor sf, the more importance is given to old data. The higher the trend factor tf, the more trends in the data is considered. Both sf and tf must be between 0 and 1.<br>holt_winters should only be used with gauges.</p>
+<h2 id="hour"><a href="#hour" class="headerlink" title="hour()"></a>hour()</h2><p>hour(v=vector(time()) instant-vector) returns the hour of the day for each of the given times in UTC. Returned values are from 0 to 23.</p>
+<h2 id="idelta"><a href="#idelta" class="headerlink" title="idelta()"></a>idelta()</h2><p>idelta(v range-vector) calculates the difference between the last two samples in the range vector v, returning an instant vector with the given deltas and equivalent labels.<br>idelta should only be used with gauges.</p>
+<h2 id="increase"><a href="#increase" class="headerlink" title="increase()"></a>increase()</h2><p>increase(v range-vector) calculates the increase in the time series in the range vector. Breaks in monotonicity (such as counter resets due to target restarts) are automatically adjusted for. The increase is extrapolated to cover the full time range as specified in the range vector selector, so that it is possible to get a non-integer result even if a counter increases only by integer increments.<br>The following example expression returns the number of HTTP requests as measured over the last 5 minutes, per time series in the range vector:<br>increase(http_requests_total{job=”api-server”}[5m])<br>increase should only be used with counters. It is syntactic sugar for rate(v) multiplied by the number of seconds under the specified time range window, and should be used primarily for human readability. Use rate in recording rules so that increases are tracked consistently on a per-second basis.</p>
+<h2 id="irate"><a href="#irate" class="headerlink" title="irate()"></a>irate()</h2><p>irate(v range-vector) calculates the per-second instant rate of increase of the time series in the range vector. This is based on the last two data points. Breaks in monotonicity (such as counter resets due to target restarts) are automatically adjusted for.<br>The following example expression returns the per-second rate of HTTP requests looking up to 5 minutes back for the two most recent data points, per time series in the range vector:<br>irate(http_requests_total{job=”api-server”}[5m])<br>irate should only be used when graphing volatile, fast-moving counters. Use rate for alerts and slow-moving counters, as brief changes in the rate can reset the FOR clause and graphs consisting entirely of rare spikes are hard to read.<br>Note that when combining irate() with an <a target="_blank" rel="noopener" href="https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators">aggregation operator</a> (e.g. sum()) or a function aggregating over time (any function ending in _over_time), always take a irate() first, then aggregate. Otherwise irate() cannot detect counter resets when your target restarts.</p>
+<h2 id="label-join"><a href="#label-join" class="headerlink" title="label_join()"></a>label_join()</h2><p>For each timeseries in v, label_join(v instant-vector, dst_label string, separator string, src_label_1 string, src_label_2 string, …) joins all the values of all the src_labels using separator and returns the timeseries with the label dst_label containing the joined value. There can be any number of src_labels in this function.<br>This example will return a vector with each time series having a foo label with the value a,b,c added to it:<br>label_join(up{job=”api-server”,src1=”a”,src2=”b”,src3=”c”}, “foo”, “,”, “src1”, “src2”, “src3”)</p>
+<h2 id="label-replace"><a href="#label-replace" class="headerlink" title="label_replace()"></a>label_replace()</h2><p>For each timeseries in v, label_replace(v instant-vector, dst_label string, replacement string, src_label string, regex string) matches the regular expression regex against the label src_label. If it matches, then the timeseries is returned with the label dst_label replaced by the expansion of replacement. $1 is replaced with the first matching subgroup, $2 with the second etc. If the regular expression doesn’t match then the timeseries is returned unchanged.<br>This example will return a vector with each time series having a foo label with the value a added to it:<br>label_replace(up{job=”api-server”,service=”a:c”}, “foo”, “$1”, “service”, “(.<em>):.</em>“)</p>
+<h2 id="ln"><a href="#ln" class="headerlink" title="ln()"></a>ln()</h2><p>ln(v instant-vector) calculates the natural logarithm for all elements in v. Special cases are:</p>
+<ul>
+<li>ln(+Inf) = +Inf</li>
+<li>ln(0) = -Inf</li>
+<li>ln(x &lt; 0) = NaN</li>
+<li>ln(NaN) = NaN</li>
+</ul>
+<h2 id="log2"><a href="#log2" class="headerlink" title="log2()"></a>log2()</h2><p>log2(v instant-vector) calculates the binary logarithm for all elements in v. The special cases are equivalent to those in ln.</p>
+<h2 id="log10"><a href="#log10" class="headerlink" title="log10()"></a>log10()</h2><p>log10(v instant-vector) calculates the decimal logarithm for all elements in v. The special cases are equivalent to those in ln.</p>
+<h2 id="minute"><a href="#minute" class="headerlink" title="minute()"></a>minute()</h2><p>minute(v=vector(time()) instant-vector) returns the minute of the hour for each of the given times in UTC. Returned values are from 0 to 59.</p>
+<h2 id="month"><a href="#month" class="headerlink" title="month()"></a>month()</h2><p>month(v=vector(time()) instant-vector) returns the month of the year for each of the given times in UTC. Returned values are from 1 to 12, where 1 means January etc.</p>
+<h2 id="predict-linear"><a href="#predict-linear" class="headerlink" title="predict_linear()"></a>predict_linear()</h2><p>predict_linear(v range-vector, t scalar) predicts the value of time series t seconds from now, based on the range vector v, using <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Simple_linear_regression">simple linear regression</a>.<br>predict_linear should only be used with gauges.</p>
+<h2 id="rate"><a href="#rate" class="headerlink" title="rate()"></a>rate()</h2><p>rate(v range-vector) calculates the per-second average rate of increase of the time series in the range vector. Breaks in monotonicity (such as counter resets due to target restarts) are automatically adjusted for. Also, the calculation extrapolates to the ends of the time range, allowing for missed scrapes or imperfect alignment of scrape cycles with the range’s time period.<br>The following example expression returns the per-second rate of HTTP requests as measured over the last 5 minutes, per time series in the range vector:<br>rate(http_requests_total{job=”api-server”}[5m])<br>rate should only be used with counters. It is best suited for alerting, and for graphing of slow-moving counters.<br>Note that when combining rate() with an aggregation operator (e.g. sum()) or a function aggregating over time (any function ending in _over_time), always take a rate() first, then aggregate. Otherwise rate() cannot detect counter resets when your target restarts.</p>
+<h2 id="resets"><a href="#resets" class="headerlink" title="resets()"></a>resets()</h2><p>For each input time series, resets(v range-vector) returns the number of counter resets within the provided time range as an instant vector. Any decrease in the value between two consecutive samples is interpreted as a counter reset.<br>resets should only be used with counters.</p>
+<h2 id="round"><a href="#round" class="headerlink" title="round()"></a>round()</h2><p>round(v instant-vector, to_nearest=1 scalar) rounds the sample values of all elements in v to the nearest integer. Ties are resolved by rounding up. The optional to_nearest argument allows specifying the nearest multiple to which the sample values should be rounded. This multiple may also be a fraction.</p>
+<h2 id="scalar"><a href="#scalar" class="headerlink" title="scalar()"></a>scalar()</h2><p>Given a single-element input vector, scalar(v instant-vector) returns the sample value of that single element as a scalar. If the input vector does not have exactly one element, scalar will return NaN.</p>
+<h2 id="sgn"><a href="#sgn" class="headerlink" title="sgn()"></a>sgn()</h2><p>sgn(v instant-vector) returns a vector with all sample values converted to their sign, defined as this: 1 if v is positive, -1 if v is negative and 0 if v is equal to zero.</p>
+<h2 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h2><p>sort(v instant-vector) returns vector elements sorted by their sample values, in ascending order.</p>
+<h2 id="sort-desc"><a href="#sort-desc" class="headerlink" title="sort_desc()"></a>sort_desc()</h2><p>Same as sort, but sorts in descending order.</p>
+<h2 id="sqrt"><a href="#sqrt" class="headerlink" title="sqrt()"></a>sqrt()</h2><p>sqrt(v instant-vector) calculates the square root of all elements in v.</p>
+<h2 id="time"><a href="#time" class="headerlink" title="time()"></a>time()</h2><p>time() returns the number of seconds since January 1, 1970 UTC. Note that this does not actually return the current time, but the time at which the expression is to be evaluated.</p>
+<h2 id="timestamp"><a href="#timestamp" class="headerlink" title="timestamp()"></a>timestamp()</h2><p>timestamp(v instant-vector) returns the timestamp of each of the samples of the given vector as the number of seconds since January 1, 1970 UTC.<br><em>This function was added in Prometheus 2.0</em></p>
+<h2 id="vector"><a href="#vector" class="headerlink" title="vector()"></a>vector()</h2><p>vector(s scalar) returns the scalar s as a vector with no labels.</p>
+<h2 id="year"><a href="#year" class="headerlink" title="year()"></a>year()</h2><p>year(v=vector(time()) instant-vector) returns the year for each of the given times in UTC.</p>
+<h2 id="over-time"><a href="#over-time" class="headerlink" title="_over_time()"></a><aggregation>_over_time()</h2><p>The following functions allow aggregating each series of a given range vector over time and return an instant vector with per-series aggregation results:</p>
+<ul>
+<li>avg_over_time(range-vector): the average value of all points in the specified interval.</li>
+<li>min_over_time(range-vector): the minimum value of all points in the specified interval.</li>
+<li>max_over_time(range-vector): the maximum value of all points in the specified interval.</li>
+<li>sum_over_time(range-vector): the sum of all values in the specified interval.</li>
+<li>count_over_time(range-vector): the count of all values in the specified interval.</li>
+<li>quantile_over_time(scalar, range-vector): the φ-quantile (0 ≤ φ ≤ 1) of the values in the specified interval.</li>
+<li>stddev_over_time(range-vector): the population standard deviation of the values in the specified interval.</li>
+<li>stdvar_over_time(range-vector): the population standard variance of the values in the specified interval.</li>
+<li>last_over_time(range-vector): the most recent point value in specified interval.</li>
+</ul>
+<p>Note that all values in the specified interval have the same weight in the aggregation even if the values are not equally spaced throughout the interval.</p>
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/DevOps/">DevOps</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Prometheus/">Prometheus</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/09/yuque/ugsxgu/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">基建篇-异地多活架构设计实现</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/03/yuque/vfp0q5/">
+                        <span class="hidden-mobile">架构篇-浅谈大流量红包雨的实现</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     Copyright © 2017-2021 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> And <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> Core on Github Page 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        桂ICP备2020009931号-1
+      </a>
+    </span>
+    
+      
+        <span>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+            rel="nofollow noopener"
+            class="beian-police"
+            target="_blank"
+          >
+            
+              <span style="visibility: hidden; width: 0">|</span>
+              <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+            
+            <span>桂公网安备2020009931号</span>
+          </a>
+        </span>
+      
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
