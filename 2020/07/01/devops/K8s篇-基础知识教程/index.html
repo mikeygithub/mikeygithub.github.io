@@ -417,7 +417,7 @@
 <li>Pod 是一组容器（可包含一个或多个应用程序容器），以及共享存储（卷 Volumes）、IP 地址和有关如何运行容器的信息。</li>
 <li>如果多个容器紧密耦合并且需要共享磁盘等资源，则他们应该被部署在同一个Pod（容器组）中。</li>
 </ul>
-<p><img src="/home/mikey/Downloads/jsDeliver/resource/img/dr5oXFv0IS-AbqyhAACfzxoTgIY518.png" srcset="/img/loading.gif" lazyload alt="screenshot"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0IS-AbqyhAACfzxoTgIY518.png" srcset="/img/loading.gif" lazyload alt="screenshot"></p>
 <h2 id="Master"><a href="#Master" class="headerlink" title="Master"></a>Master</h2><p>Kubernetes里的Master指的是集群控制节点，每个Kubernetes集群里需要有一个Master节点来负责整个集群的管理和控制，基本上Kubernetes的所有控制命令都发给它，它来负责具体的执行过程，我们后面执行的所有命令基本都是在Master节点上运行的。Master节点通常会占据一个独立的服务器（高可用部署建议用3台服务器），其主要原因是它太重要了，是整个集群的“首脑”，如果宕机或者不可用，那么对集群内容器应用的管理都将失效。</p>
 <p>Master节点上运行着以下一组关键进程。</p>
 <ul>
@@ -447,15 +447,15 @@
 
 <p>当我们定义了一个RC并提交到Kubernetes集群中以后，Master节点上的<strong>Controller Manager组件</strong>就得到通知，定期巡检系统中当前存活的目标Pod，并确保目标Pod实例的数量刚好等于此RC的期望值，如果有过多的Pod副本在运行，系统就会停掉一些Pod，否则系统就会再自动创建一些Pod。可以说，通过RC，Kubernetes实现了用户应用集群的高可用性，并且大大减少了系统管理员在传统IT环境中需要完成的许多手工运维工作（如主机监控脚本、应用监控脚本、故障恢复脚本等）。</p>
 <p>下面我们以3个Node节点的集群为例，说明Kubernetes如何通过RC来实现Pod副本数量自动控制的机制。假如我们的RC里定义redis-slave这个Pod需要保持3个副本，系统将可能在其中的两个Node上创建Pod。图1.9描述了在两个Node上创建redis-slave Pod的情形。</p>
-<p><img src="/home/mikey/Downloads/jsDeliver/resource/img/dr5oXFv0JRGAXF8nAABNjP-OvJk363.png" srcset="/img/loading.gif" lazyload alt="screenshot"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0JRGAXF8nAABNjP-OvJk363.png" srcset="/img/loading.gif" lazyload alt="screenshot"></p>
 <p>假设Node2上的Pod2意外终止，根据RC定义的replicas数量2，Kubernetes将会自动创建并启动一个新的Pod，以保住整个集群中始终有两个redis-slave Pod在运行。</p>
 <p>如图所示，系统可能选择Node3或者Node1来创建一个新的Pod。</p>
-<p><img src="/home/mikey/Downloads/jsDeliver/resource/img/dr5oXFv0JVeASS5FAABYqOWmPjY884.png" srcset="/img/loading.gif" lazyload alt="screenshot"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0JVeASS5FAABYqOWmPjY884.png" srcset="/img/loading.gif" lazyload alt="screenshot"></p>
 <p>此外，在运行时，我们可以通过修改RC的副本数量，来实现Pod的动态缩放（Scaling）功能，还可以通过执行kubectl scale命令来一键完成：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-variable">$kubectl</span> scale rc redis-slave <span class="hljs-attribute">--replicas</span>=3<br>scaled<br></code></pre></div></td></tr></table></figure>
 
 <p>Scaling的执行结果如图所示。</p>
-<p><img src="/home/mikey/Downloads/jsDeliver/resource/img/dr5oXFv0JYeAJO3MAABdk3EvE_w414.png" srcset="/img/loading.gif" lazyload alt="screenshot"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0JYeAJO3MAABdk3EvE_w414.png" srcset="/img/loading.gif" lazyload alt="screenshot"></p>
 <p>需要注意的是，删除RC并不会影响通过该RC已创建好的Pod。为了删除所有Pod，可以设置replicas的值为0，然后更新该RC。另外，kubectl提供了stop和delete命令来一次性删除RC和RC控制的全部Pod。</p>
 <p>当我们的应用升级时，通常会通过Build一个新的Docker镜像，并用新的镜像版本来替代旧的版本的方式达到目的，在系统升级的过程中，我们希望是平滑的方式，比如当前系统中10个对应的旧版本的Pod，最佳的方式是旧版本的Pod每次停止一个，同时创建一个新版本的Pod，在整个升级过程中，此消彼长，而运行中的Pod数量始终是10个，几分钟以后，当所有的Pod都已经是最新版本时，升级过程完成。通过RC的机制，Kubernetes很容易就实现了这种高级实用的特性，被称为“滚动升级”（Rolling Update），具体的操作方法详见第四章。</p>
 <p>由于Replication Controller与Kubernetes代码中的模块Replication Controller同名，同时这个词也无法准确表达它的本意，所以在Kubernetes v1.2时，它就升级成了另外一个新的概念–Replica Set，官方解释为“下一代的RC”，它与RC当前存在的唯一区别是：Replica Sets支持基于集合的Label selector（Set-based selector），而RC只支持基于等式的Label Selector（equality-based selector），这使得Replica Set的功能更强，下面是等价于之前RC例子的Replica Set的定义（省去了Pod模版部分的内容）：</p>
@@ -534,10 +534,10 @@
 <p>StatefulSet控制的Pod副本的启停顺序是受控的，操作第n个Pod时，前n-1个Pod已经时运行且准备好的状态。</p>
 <p>StatefulSet里的Pod采用稳定的持久化存储卷，通过PV/PVC来实现，删除Pod时默认不会删除与StatefulSet相关的存储卷（为了保证数据的安全）。</p>
 <h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>Service也是Kubernetes里的最核心的资源对象之一，Kubernetes里的每个Service其实就是我们经常提起的微服务架构中的一个“微服务”，之前我们所说的Pod、RC等资源对象其实都是为这节所说的“服务”——Kubernetes Service作“嫁衣”的。下图显示了Pod、RC与Service的逻辑关系。</p>
-<p><img src="/home/mikey/Downloads/jsDeliver/resource/img/dr5oXFv0K4eAMuaUAACvvKRWv6A962.png" srcset="/img/loading.gif" lazyload alt="Pod、RC与Service的关系"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0K4eAMuaUAACvvKRWv6A962.png" srcset="/img/loading.gif" lazyload alt="Pod、RC与Service的关系"></p>
 <p>从图中我们看到，Kubernetes的Service定义了一个服务的访问入口地址，前端的应用（Pod）通过这个入口地址访问其背后的一组由Pod副本组成的集群实例，Service与其后端Pod副本集群之间则是通过Label Selector来实现“无缝对接”的。而RC的作用实际上是保证Service的服务能力和服务质量始终处于预期的标准。</p>
 <p>通过分析、识别并建模系统中的所有服务为微服务—–Kubernetes Service，最终我们的系统由多个提供不同业务能力而又彼此独立的微服务单元所组成，服务之间通过TCP/IP进行通信，从而形成了我们强大而又灵活的弹性网格，拥有了强大的分布式能力、弹性扩展能力、容错能力，于此同时，我们的程序架构也变得简单和直观许多，如图所示。</p>
-<p><img src="/home/mikey/Downloads/jsDeliver/resource/img/dr5oXFv0K6eANG1RAACEnAcItP4264.png" srcset="/img/loading.gif" lazyload alt="Kubernetes所提供的微服务网格架构"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0K6eANG1RAACEnAcItP4264.png" srcset="/img/loading.gif" lazyload alt="Kubernetes所提供的微服务网格架构"></p>
 <p>既然每个Pod都会被分配一个单独的IP地址，而且每个Pod都提供了一个独立的<code>Endpoint(Pod IP+ContainerPort)</code>以被客户端访问，现在多个Pod副本组成了一个集群来提供服务，那么客户端如何来访问它们呢？一般的做法是部署一个负载均衡器（软件或硬件），为这组Pod开启一个对外的服务端口如8000端口，并且将这些Pod的Endpoint列表加入8000端口的转发列表中，客户端就可以通过负载均衡器的对外IP地址+服务端口来访问服务，而客户端的请求最后会被转发转发到哪个Pod，则由负载均衡器的算法所决定。</p>
 <p>Kubernetes也遵循了上述常规做法，运行在每个Node上的kube-proxy进程其实就是一个智能的软件负载均衡器，它负责把对Service的请求转发到后端的某个Pod实例上，并在内部实现服务的负载均衡与会话机制。但Kubernetes发明了一种很巧妙又影响深远的设计：<code>Service不是共用一个负载均衡的IP地址，而是每个Service分配了全局唯一的虚拟IP地址，这个虚拟IP地址被称为Cluster IP</code>。这样一来，每个服务就变成了具备唯一IP地址的“通信节点”，服务调用就变成了最基础的TCP网络通信问题。</p>
 <p>我们知道，Pod的Endpoint地址会随着Pod的销毁和重新创建而发生改变，因为新Pod的IP地址与之前旧Pod的不同。而Service一旦被创建，Kubernetes就会自动为它分配一个可用的Cluster IP，而且在Service的整个生命周期内。它的Cluster IP不会发生改变。于是，服务发现这个棘手的问题在Kubernetes的架构里也得到轻松解决：只要用Service的Name与Service的Cluster IP地址做一个DNS域名映射即可完美解决问题。现在想想，这真是一个很棒的设计。</p>
