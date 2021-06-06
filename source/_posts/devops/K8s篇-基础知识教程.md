@@ -166,7 +166,7 @@ TIP
 - Pod 是一组容器（可包含一个或多个应用程序容器），以及共享存储（卷 Volumes）、IP 地址和有关如何运行容器的信息。
 - 如果多个容器紧密耦合并且需要共享磁盘等资源，则他们应该被部署在同一个Pod（容器组）中。
 
-![screenshot](/home/mikey/Downloads/jsDeliver/resource/img/dr5oXFv0IS-AbqyhAACfzxoTgIY518.png)
+![screenshot](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0IS-AbqyhAACfzxoTgIY518.png)
 
 
 
@@ -246,13 +246,13 @@ template:
 
 下面我们以3个Node节点的集群为例，说明Kubernetes如何通过RC来实现Pod副本数量自动控制的机制。假如我们的RC里定义redis-slave这个Pod需要保持3个副本，系统将可能在其中的两个Node上创建Pod。图1.9描述了在两个Node上创建redis-slave Pod的情形。
 
-![screenshot](/home/mikey/Downloads/jsDeliver/resource/img/dr5oXFv0JRGAXF8nAABNjP-OvJk363.png)
+![screenshot](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0JRGAXF8nAABNjP-OvJk363.png)
 
 假设Node2上的Pod2意外终止，根据RC定义的replicas数量2，Kubernetes将会自动创建并启动一个新的Pod，以保住整个集群中始终有两个redis-slave Pod在运行。
 
 如图所示，系统可能选择Node3或者Node1来创建一个新的Pod。
 
-![screenshot](/home/mikey/Downloads/jsDeliver/resource/img/dr5oXFv0JVeASS5FAABYqOWmPjY884.png)
+![screenshot](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0JVeASS5FAABYqOWmPjY884.png)
 
 此外，在运行时，我们可以通过修改RC的副本数量，来实现Pod的动态缩放（Scaling）功能，还可以通过执行kubectl scale命令来一键完成：
 
@@ -263,7 +263,7 @@ scaled
 
 Scaling的执行结果如图所示。
 
-![screenshot](/home/mikey/Downloads/jsDeliver/resource/img/dr5oXFv0JYeAJO3MAABdk3EvE_w414.png)
+![screenshot](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0JYeAJO3MAABdk3EvE_w414.png)
 
 需要注意的是，删除RC并不会影响通过该RC已创建好的Pod。为了删除所有Pod，可以设置replicas的值为0，然后更新该RC。另外，kubectl提供了stop和delete命令来一次性删除RC和RC控制的全部Pod。
 
@@ -463,13 +463,13 @@ StatefulSet里的Pod采用稳定的持久化存储卷，通过PV/PVC来实现，
 
 Service也是Kubernetes里的最核心的资源对象之一，Kubernetes里的每个Service其实就是我们经常提起的微服务架构中的一个“微服务”，之前我们所说的Pod、RC等资源对象其实都是为这节所说的“服务”------Kubernetes Service作“嫁衣”的。下图显示了Pod、RC与Service的逻辑关系。
 
-![Pod、RC与Service的关系](/home/mikey/Downloads/jsDeliver/resource/img/dr5oXFv0K4eAMuaUAACvvKRWv6A962.png)
+![Pod、RC与Service的关系](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0K4eAMuaUAACvvKRWv6A962.png)
 
 从图中我们看到，Kubernetes的Service定义了一个服务的访问入口地址，前端的应用（Pod）通过这个入口地址访问其背后的一组由Pod副本组成的集群实例，Service与其后端Pod副本集群之间则是通过Label Selector来实现“无缝对接”的。而RC的作用实际上是保证Service的服务能力和服务质量始终处于预期的标准。
 
 通过分析、识别并建模系统中的所有服务为微服务-----Kubernetes Service，最终我们的系统由多个提供不同业务能力而又彼此独立的微服务单元所组成，服务之间通过TCP/IP进行通信，从而形成了我们强大而又灵活的弹性网格，拥有了强大的分布式能力、弹性扩展能力、容错能力，于此同时，我们的程序架构也变得简单和直观许多，如图所示。
 
-![Kubernetes所提供的微服务网格架构](/home/mikey/Downloads/jsDeliver/resource/img/dr5oXFv0K6eANG1RAACEnAcItP4264.png)
+![Kubernetes所提供的微服务网格架构](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0K6eANG1RAACEnAcItP4264.png)
 
 既然每个Pod都会被分配一个单独的IP地址，而且每个Pod都提供了一个独立的`Endpoint(Pod IP+ContainerPort)`以被客户端访问，现在多个Pod副本组成了一个集群来提供服务，那么客户端如何来访问它们呢？一般的做法是部署一个负载均衡器（软件或硬件），为这组Pod开启一个对外的服务端口如8000端口，并且将这些Pod的Endpoint列表加入8000端口的转发列表中，客户端就可以通过负载均衡器的对外IP地址+服务端口来访问服务，而客户端的请求最后会被转发转发到哪个Pod，则由负载均衡器的算法所决定。
 
