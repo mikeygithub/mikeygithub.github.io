@@ -276,7 +276,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.8k 字
+      5.8k 字
     </span>
   
 
@@ -286,7 +286,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      32
+      68
        分钟
     </span>
   
@@ -441,8 +441,167 @@
 <p>Event 是一个事件的记录，记录了事件的最早产生时间、最后重现时间、重复次数、发起者、类型，以及导致此事件的原因等众多信息。Event 通常会被关联到某个具体的资源对象上，是排查故障的重要参考信息，之前我们看到 Node 的描述信息包括了 Event，而 Pod 同样有 Event 记录，当我们发现某个 Pod 迟迟无法创建时，可以用<code>kubectl describe pod xxxx</code>来查看它的描述信息，以定位问题的成因，比如下面这个 Event 记录信息表明 Pod 里的一个容器被探针检测为失败一次：</p>
 </blockquote>
 <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1622992693786-423482f9-1733-4b7b-9767-b9033188badd.png#clientId=ufe2744ca-714f-4&from=paste&height=224&id=u46b3f3bf&margin=%5Bobject%20Object%5D&name=image.png&originHeight=224&originWidth=678&originalType=binary%E2%88%B6=1&size=45998&status=done&style=none&taskId=u5b73b613-6d23-48b7-b7fa-df2036b8a0e&width=678" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<p>p66<br>​</p>
-<h3 id="1-4-4-Label"><a href="#1-4-4-Label" class="headerlink" title="1.4.4 Label"></a>1.4.4 Label</h3><h3 id="1-4-5-Replication-Controller"><a href="#1-4-5-Replication-Controller" class="headerlink" title="1.4.5 Replication Controller"></a>1.4.5 Replication Controller</h3><h3 id="1-4-6-Deployment"><a href="#1-4-6-Deployment" class="headerlink" title="1.4.6 Deployment"></a>1.4.6 Deployment</h3><h3 id="1-4-7-Horizontal-Pod-Autoscaler"><a href="#1-4-7-Horizontal-Pod-Autoscaler" class="headerlink" title="1.4.7 Horizontal Pod Autoscaler"></a>1.4.7 Horizontal Pod Autoscaler</h3><h3 id="1-4-8-StatefulSet"><a href="#1-4-8-StatefulSet" class="headerlink" title="1.4.8 StatefulSet"></a>1.4.8 StatefulSet</h3><h3 id="1-4-9-Service"><a href="#1-4-9-Service" class="headerlink" title="1.4.9 Service"></a>1.4.9 Service</h3><h3 id="1-4-10-Job"><a href="#1-4-10-Job" class="headerlink" title="1.4.10 Job"></a>1.4.10 Job</h3><h3 id="1-4-11-Volume"><a href="#1-4-11-Volume" class="headerlink" title="1.4.11 Volume"></a>1.4.11 Volume</h3><p>​</p>
+<blockquote>
+<p>k8s 分配资源以 m 为单位，其中 100-300m 表示占用 0.1-0.3 个 CPU</p>
+</blockquote>
+<p>​</p>
+<blockquote>
+<p>在 k8s 中一个计算资源进行配额限制需要设置以下两个参数</p>
+</blockquote>
+<ul>
+<li>Requests：该资源的最小申请量，系统必须满足要求。</li>
+<li>Limits：该资源最大允许使用的量，不能被突破，当容器试图使用超过这个量的资源时，可能会被 Kubernetes“杀掉”并重启。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623029832711-16f6055d-7fd8-4466-aebf-71992ef8b81a.png#clientId=u83b58e58-0218-4&from=paste&height=173&id=ud50ce463&margin=%5Bobject%20Object%5D&name=image.png&originHeight=173&originWidth=424&originalType=binary%E2%88%B6=1&size=11352&status=done&style=none&taskId=u1e662aa4-e1c2-402d-aa9d-bd3ff418780&width=424" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623029851744-94b1b5b1-3148-40b3-8421-c1b64182d613.png#clientId=u83b58e58-0218-4&from=paste&height=190&id=u83de06a0&margin=%5Bobject%20Object%5D&name=image.png&originHeight=190&originWidth=389&originalType=binary%E2%88%B6=1&size=29115&status=done&style=none&taskId=uc8f67322-57fc-4491-baef-f85e5741ef3&width=389" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="1-4-4-Label"><a href="#1-4-4-Label" class="headerlink" title="1.4.4 Label"></a>1.4.4 Label</h3><blockquote>
+<p>一个 Label 由（key=value）的键值对组成，其中 key、value 由用户自己定义， Label 的定义可以是在各种资源上，Node、Pod、Service、RC 等。Label 通常在资源对象定义时确定，也可以在对象创建后动态添加或者删除</p>
+</blockquote>
+<p>​</p>
+<p>常用的 Label 示例<br>​</p>
+<ul>
+<li>版本标签：”release”:”stable”、”release”:”canary”。</li>
+<li>环境标签：”environment”:”dev”、”environment”:”qa”、”environment”:”production”。</li>
+<li>架构标签：”tier”:”frontend”、”tier”:”backend”、”tier”:”middleware”。</li>
+<li>分区标签：”partition”:”customerA”、”partition”:”customerB”。</li>
+<li>质量管控标签：”track”:”daily”、”track”:”weekly”。</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<p>Label Selector 可以被类比为 SQL 语句中的 where 查询条件，例如，name=redis-slave 这个 Label Selector 作用于 Pod 时，可以被类比为</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> pod <span class="hljs-keyword">where</span> pod’s <span class="hljs-keyword">name</span> =‘redis-<span class="hljs-keyword">slave</span>’<br></code></pre></div></td></tr></table></figure>
+
+<p>这样的语句。<br>​</p>
+<p>当前有两种 Label Selector 表达式：基于等式的（Equality-based）和基于集合的（Set-based），前者采用等式类表达式匹配标签，下面是一些具体的例子。</p>
+<ul>
+<li>name=redis-slave：匹配所有具有标签 name=redis-slave 的资源对象。</li>
+<li>env!=production：匹配所有不具有标签 env=production 的资源对象，比如 env=test 就是满足此条件的标签之一。</li>
+</ul>
+<p>后者则使用集合操作类表达式匹配标签，下面是一些具体的例子。</p>
+<ul>
+<li>name in（redis-master, redis-slave）：匹配所有具有标签 name=redis-master 或者 name=redis-slave 的资源对象。</li>
+<li>name not in（php-frontend）：匹配所有不具有标签 name=php-frontend 的资源对象。</li>
+</ul>
+<p>可以通过多个 Label Selector 表达式的组合实现复杂的条件选择，多个表达式之间用“，”进行分隔即可，几个条件之间是“AND”的关系，即同时满足多个条件，比如下面的例子：<br>​</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">name=redis-salve,env!=production<br>name noint &#123;php-frontend&#125;,env!=production<br></code></pre></div></td></tr></table></figure>
+
+<p>Labels 定义在 metadata 中</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">apiVersion: v1<br>kind: Pod<br>metadata :<br>  name: myweb<br>  labels:<br>	name: myweb<br></code></pre></div></td></tr></table></figure>
+
+<p>管理对象 RC 和 Service 则通过 Selector 字段设置需要关联 Pod 的 Label：<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623044657863-da44922e-e871-4dc5-b2ea-f1c8b9f8c96a.png#clientId=u83b58e58-0218-4&from=paste&height=323&id=u096ccef5&margin=%5Bobject%20Object%5D&name=image.png&originHeight=323&originWidth=426&originalType=binary%E2%88%B6=1&size=20029&status=done&style=none&taskId=u7a140974-52af-4ac6-b677-5c1597fe597&width=426" srcset="/img/loading.gif" lazyload alt="image.png"><br>​ 其他管理对象如 Deployment、ReplicaSet、DaemonSet 和 Job 则可以在 Selector 中使用基于集合的筛选条件定义，例如：<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623044757114-245de64f-cefb-4a8e-a090-47109679735a.png#clientId=u83b58e58-0218-4&from=paste&height=101&id=uc6d7623c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=101&originWidth=430&originalType=binary%E2%88%B6=1&size=10868&status=done&style=none&taskId=u40919521-404a-4cf8-addd-fd9e3f3afe7&width=430" srcset="/img/loading.gif" lazyload alt="image.png"><br>matchLabels 用于定义一组 Label，与直接写在 Selector 中的作用相同；matchExpressions 用于定义一组基于集合的筛选条件，可用的条件运算符包括 In、NotIn、Exists 和 DoesNotExist。<br>​</p>
+<p>如果同时设置了 matchLabels 和 matchExpressions，则两组条件为 AND 关系，即需要同时满足所有条件才能完成 Selector 的筛选。<br>​</p>
+<p>Label Selector 在 Kubernetes 中的重要使用场景如下。<br>​</p>
+<ul>
+<li>kube-controller 进程通过在资源对象 RC 上定义的 Label Selector 来筛选要监控的 Pod 副本数量，使 Pod 副本数量始终符合预期设定的全自动控制流程。</li>
+<li>kube-proxy 进程通过 Service 的 Label Selector 来选择对应的 Pod，自动建立每个 Service 到对应 Pod 的请求转发路由表，从而实现 Service 的智能负载均衡机制。</li>
+<li>通过对某些 Node 定义特定的 Label，并且在 Pod 定义文件中使用 NodeSelector 这种标签调度策略，kube-scheduler 进程可以实现 Pod 定向调度的特性。</li>
+</ul>
+<h3 id="1-4-5-Replication-Controller"><a href="#1-4-5-Replication-Controller" class="headerlink" title="1.4.5 Replication Controller"></a>1.4.5 Replication Controller</h3><blockquote>
+<p>RC 定义了一个期望的场景，即声明某种 Pod 的副本数量在任意时刻都符合某个预期值，所以 RC 的定义包括如下几个部分。</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>Pod 期待的副本数量。</li>
+<li>用于筛选目标 Pod 的 Label Selector。</li>
+<li>当 Pod 的副本数量小于预期数量时，用于创建新 Pod 的 Pod 模板 （template）。</li>
+</ul>
+</blockquote>
+<p>​</p>
+<p>下面是一个完整的 RC 定义的例子，即确保拥有 tier=frontend 标签的这个 Pod（运行 Tomcat 容器）在整个 Kubernetes 集群中始终只有一个副本：<br>​</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623045883767-7ff23ccd-4fe7-4529-8ee0-79c9596f9e90.png#clientId=u83b58e58-0218-4&from=paste&height=365&id=udf139883&margin=%5Bobject%20Object%5D&name=image.png&originHeight=365&originWidth=431&originalType=binary%E2%88%B6=1&size=53771&status=done&style=none&taskId=u70860821-486d-4c98-849b-bb8c4649599&width=431" srcset="/img/loading.gif" lazyload alt="image.png"><br>在运行时，我们可以通过修改 RC 的副本数量，来实现 Pod 的动态缩放（Scaling），这可以通过执行 kubectl scale 命令来一键完成：</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">kubectl scale re redis-salve <span class="hljs-comment">--replicas=3 scale</span><br></code></pre></div></td></tr></table></figure>
+
+<p>需要注意的是，删除 RC 并不会影响通过该 RC 已创建好的 Pod。为了删除所有 Pod，可以设置 replicas 的值为 0，然后更新该 RC。另外，kubectl 提供了 stop 和 delete 命令来一次性删除 RC 和 RC 控制的全部 Pod。<br>​</p>
+<p>在 Kubernetes 1.2 中，升级为另外一个新概念—Replica Set，官方解释其为“下一代的 RC”。Replica Set 与 RC 当前的唯一区别是，Replica Sets 支持基于集合的 Label selector（Set-based selector），而 RC 只支持基于等式的 Label Selector（equality-based selector），这使得 Replica Set 的功能更强。下面是等价于之前 RC 例子的 Replica Set 的定义（省去了 Pod 模板部分的内容）：<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623065703452-eb9674f1-4187-494a-ae16-4c633cdd81b5.png#clientId=u83b58e58-0218-4&from=paste&height=365&id=u5c16ed81&margin=%5Bobject%20Object%5D&name=image.png&originHeight=365&originWidth=831&originalType=binary%E2%88%B6=1&size=120912&status=done&style=none&taskId=ubf2848dd-26f9-4784-a724-6e2a906aaa5&width=831" srcset="/img/loading.gif" lazyload alt="image.png"><br>kubectl 命令行工具适用于 RC 的绝大部分命令同样适用于 ReplicaSet。此外，我们当前很少单独使用 Replica Set，它主要被 Deployment 这个更高层的资源对象所使用，从而形成一整套 Pod 创建、删除、更新的编排机制。我们在使用 Deployment 时，无须关心它是如何创建和维护 Replica Set 的，这一切都是自动发生的。<br>​</p>
+<p>RC（Replica Set）的一些特性与作用。<br>​</p>
+<ul>
+<li>在大多数情况下，我们通过定义一个 RC 实现 Pod 的创建及副本数量的自动控制。</li>
+<li>在 RC 里包括完整的 Pod 定义模板。</li>
+<li>RC 通过 Label Selector 机制实现对 Pod 副本的自动控制。</li>
+<li>通过改变 RC 里的 Pod 副本数量，可以实现 Pod 的扩容或缩容。</li>
+<li>通过改变 RC 里 Pod 模板中的镜像版本，可以实现 Pod 的滚动升级。</li>
+</ul>
+<h3 id="1-4-6-Deployment"><a href="#1-4-6-Deployment" class="headerlink" title="1.4.6 Deployment"></a>1.4.6 Deployment</h3><blockquote>
+<p>Deployment 极度相似。</p>
+</blockquote>
+<p>​</p>
+<p>Deployment 相对于 RC 的一个最大升级是我们可以随时知道当前 Pod“部署”的进度。实际上由于一个 Pod 的创建、调度、绑定节点及在目<br>标 Node 上启动对应的容器这一完整过程需要一定的时间，所以我们期待<br>系统启动 N 个 Pod 副本的目标状态，实际上是一个连续变化的“部署过<br>程”导致的最终状态。<br>​</p>
+<p>Deployment 的典型使用场景有以下几个：<br>​</p>
+<ul>
+<li>创建一个 Deployment 对象来生成对应的 Replica Set 并完成 Pod 副本的创建。</li>
+<li>检查 Deployment 的状态来看部署动作是否完成（Pod 副本数量是否达到预期的值）。</li>
+<li>更新 Deployment 以创建新的 Pod（比如镜像升级）。</li>
+<li>如果当前 Deployment 不稳定，则回滚到一个早先的 Deployment 版本。</li>
+<li>暂停 Deployment 以便于一次性修改多个 PodTemplateSpec 的配置项，之后再恢复 Deployment，进行新的发布。</li>
+<li>扩展 Deployment 以应对高负载。</li>
+<li>查看 Deployment 的状态，以此作为发布是否成功的指标。</li>
+<li>清理不再需要的旧版本 ReplicaSets。</li>
+</ul>
+<blockquote>
+<p>Deployment 的定义和 RC 也极度相似</p>
+</blockquote>
+<p>​</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623067286569-305c8f34-f091-4476-bd46-33cc0c95e843.png#clientId=u83b58e58-0218-4&from=paste&height=82&id=u60bb0c44&margin=%5Bobject%20Object%5D&name=image.png&originHeight=82&originWidth=561&originalType=binary%E2%88%B6=1&size=26419&status=done&style=none&taskId=u6f630de0-ae7d-4c73-a87c-c076e7742d9&width=561" srcset="/img/loading.gif" lazyload alt="image.png"><br>完整案例</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">extensions/v1beta1</span><br><span class="hljs-attr">kind:</span> <span class="hljs-string">Deployment</span><br><span class="hljs-attr">metadata:</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">frontend</span><br><span class="hljs-attr">spec:</span><br>  <span class="hljs-attr">replicas:</span> <span class="hljs-number">1</span><br>  <span class="hljs-attr">selector:</span><br>    <span class="hljs-attr">matchLabels:</span><br>      <span class="hljs-attr">tier:</span> <span class="hljs-string">frontend</span><br>    <span class="hljs-attr">matchExpressions:</span><br>      <span class="hljs-bullet">-</span> &#123; <span class="hljs-attr">key:</span> <span class="hljs-string">tier</span>, <span class="hljs-attr">oprator:</span> <span class="hljs-string">In</span>, <span class="hljs-attr">values:</span> [<span class="hljs-string">frontend</span>] &#125;<br>    <span class="hljs-attr">template:</span><br>      <span class="hljs-attr">metadata:</span><br>        <span class="hljs-attr">labels:</span><br>          <span class="hljs-attr">app:</span> <span class="hljs-string">app-demo</span><br>          <span class="hljs-attr">tier:</span> <span class="hljs-string">frontend</span><br>      <span class="hljs-attr">spec:</span><br>        <span class="hljs-attr">containers:</span><br>          <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">tomcat-demo</span><br>            <span class="hljs-attr">image:</span> <span class="hljs-string">tomcat</span><br>            <span class="hljs-attr">imagePullPolicy:</span> <span class="hljs-string">IfNotPresent</span><br>            <span class="hljs-attr">ports:</span><br>              <span class="hljs-bullet">-</span> <span class="hljs-attr">containerPort:</span> <span class="hljs-number">8080</span><br></code></pre></div></td></tr></table></figure>
+
+<p>创建 Deployment</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">kubectl</span> <span class="hljs-string">create</span> <span class="hljs-string">-f</span> <span class="hljs-string">tomcat-deployment.yaml</span><br></code></pre></div></td></tr></table></figure>
+
+<p>查看信息</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">kubectl</span> <span class="hljs-string">get</span> <span class="hljs-string">deployments</span><br></code></pre></div></td></tr></table></figure>
+
+<p>查看 rs</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">kubectl</span> <span class="hljs-string">get</span> <span class="hljs-string">rs</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-4-7-Horizontal-Pod-Autoscaler"><a href="#1-4-7-Horizontal-Pod-Autoscaler" class="headerlink" title="1.4.7 Horizontal Pod Autoscaler"></a>1.4.7 Horizontal Pod Autoscaler</h3><blockquote>
+<p>通过手工执行 kubectl scale 命令，我们可以实现 Pod 扩容或缩容。如果仅仅到此为止，显然不符合谷歌对 Kubernetes 的定位目标—自动化、 智能化。</p>
+</blockquote>
+<p>​</p>
+<p>通过追踪分析指定 RC 控制的所有目标 Pod 的负载变化情况，来确定是否需要有针对性地调整目标 Pod 的副本数量，这是 HPA 的实现原理。当前，HPA 有以下两种方式作为 Pod 负载的度量指标。<br>​</p>
+<ul>
+<li>CPUUtilizationPercentage。<blockquote>
+<p>CPUUtilizationPercentage 是一个算术平均值，即目标 Pod 所有副本自身的 CPU 利用率的平均值。</p>
+</blockquote>
+</li>
+</ul>
+<p>具体例子<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623079352966-ced60de1-19d3-499b-9ce1-710b7e149815.png#clientId=u83b58e58-0218-4&from=paste&height=247&id=uccd49c82&margin=%5Bobject%20Object%5D&name=image.png&originHeight=247&originWidth=558&originalType=binary%E2%88%B6=1&size=29354&status=done&style=none&taskId=u9376b22b-ab07-4665-b9be-d86d8938444&width=558" srcset="/img/loading.gif" lazyload alt="image.png"><br>等价于</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">kubectl</span> <span class="hljs-string">autoscale</span> <span class="hljs-string">deployment</span> <span class="hljs-string">php-apache</span> <span class="hljs-string">--cpu-percent=90</span> <span class="hljs-string">--min=1</span> <span class="hljs-string">--max=10</span><br></code></pre></div></td></tr></table></figure>
+
+<p>​</p>
+<ul>
+<li>应用程序自定义的度量指标，比如服务在每秒内的相应请求数 （TPS 或 QPS）</li>
+</ul>
+<h3 id="1-4-8-StatefulSet"><a href="#1-4-8-StatefulSet" class="headerlink" title="1.4.8 StatefulSet"></a>1.4.8 StatefulSet</h3><p>背景</p>
+<blockquote>
+<p>在 Kubernetes 系统中，Pod 的管理对象 RC、Deployment、DaemonSet 和 Job 都面向无状态的服务。但现实中有很多服务是有状态的，特别是一些复杂的中间件集群，例如 MySQL 集群、MongoDB 集群、Akka 集群、ZooKeeper 集群等，这些应用集群有 4 个共同点。<br>​</p>
+</blockquote>
+<blockquote>
+<p>（1）每个节点都有固定的身份 ID，通过这个 ID，集群中的成员可以相互发现并通信。<br>（2）集群的规模是比较固定的，集群规模不能随意变动。<br>（3）集群中的每个节点都是有状态的，通常会持久化数据到永久存储中。<br>（4）如果磁盘损坏，则集群里的某个节点无法正常运行，集群功能受损。</p>
+</blockquote>
+<p>StatefulSet 从本质上来说，可以看作 Deployment/RC 的一个特殊变种，它有如下特性:<br>​</p>
+<ul>
+<li>StatefulSet 里的每个 Pod 都有稳定、唯一的网络标识，可以用来发现集群内的其他成员。假设 StatefulSet 的名称为 kafka，那么第 1 个 Pod 叫 kafka-0，第 2 个叫 kafka-1，以此类推。</li>
+<li>StatefulSet 控制的 Pod 副本的启停顺序是受控的，操作第 n 个 Pod 时，前 n-1 个 Pod 已经是运行且准备好的状态。</li>
+<li>StatefulSet 里的 Pod 采用稳定的持久化存储卷，通过 PV 或 PVC 来实现，删除 Pod 时默认不会删除 StatefulSet 相关的存储卷（为了保证数据的安全）。</li>
+</ul>
+<p>Headless Service 与普通 Service 的关键区别在于，它没有 Cluster IP，如果解析 Headless Service 的 DNS 域名，则返回的是该 Service 对应的全部 Pod 的 Endpoint 列表。StatefulSet 在 Headless Service 的基础上又为 StatefulSet 控制的每个 Pod 实例都创建了一个 DNS 域名，这个域名的格式为：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">$(podname).$(headless</span> <span class="hljs-string">service</span> <span class="hljs-string">name)</span><br></code></pre></div></td></tr></table></figure>
+
+<p>比如一个 3 节点的 Kafka 的 StatefulSet 集群对应的 Headless Service 的名称为 kafka，StatefulSet 的名称为 kafka，则 StatefulSet 里的 3 个 Pod 的 DNS 名称分别为 kafka-0.kafka、kafka-1.kafka、kafka-3.kafka，这些 DNS 名称可以直接在集群的配置文件中固定下来。</p>
+<h3 id="1-4-9-Service"><a href="#1-4-9-Service" class="headerlink" title="1.4.9 Service"></a>1.4.9 Service</h3><blockquote>
+<p>Service 服务也是 Kubernetes 里的核心资源对象之一，Kubernetes 里的每个 Service 其实就是我们经常提起的微服务架构中的一个微服务</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623080292711-998344f4-2f2a-4213-b50f-68280a9efa16.png#clientId=u83b58e58-0218-4&from=paste&height=251&id=u0bffac3d&margin=%5Bobject%20Object%5D&name=image.png&originHeight=251&originWidth=550&originalType=binary%E2%88%B6=1&size=89979&status=done&style=none&taskId=u0728a840-f106-49a9-8a26-845b6750d74&width=550" srcset="/img/loading.gif" lazyload alt="image.png"><br>Kubernetes 的 Service 定义了一个服务的访问入口地址，前端的应用（Pod）通过这个入口地址访问其背后的一组由 Pod 副本组成的集群实例，Service 与其后端 Pod 副本集群之间则是通过 Label Selector 来实现无缝对接的。RC 的作用实际上是保证 Service 的服务能力和服务质量始终符合预期标准。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623080389084-31370e03-11a8-4658-b881-b0b39069d7e0.png#clientId=u83b58e58-0218-4&from=paste&height=238&id=ue1de85fa&margin=%5Bobject%20Object%5D&name=image.png&originHeight=238&originWidth=455&originalType=binary%E2%88%B6=1&size=90074&status=done&style=none&taskId=u8ea96079-d2bf-403a-91f4-ed14e3af078&width=455" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>Kubernetes 也遵循负载均衡做法，运行在每个 Node 上的 kube-proxy 进程其实就是一个智能的软件负载均衡器，负责把对 Service 的请求转发到后端的某个 Pod 实例上，并在内部实现服务的负载均衡与会话保持机制。但 Kubernetes 发明了一种很巧妙又影响深远的设计：</p>
+<blockquote>
+<p>Service 没有共用一个负载均衡器的 IP 地址，每个 Service 都被分配了一个全局唯一的虚拟 IP 地址，这个虚拟 IP 被称为 Cluster IP。这样一来，每个服务就变成了具备唯一 IP 地址的通信节点，服务调用就变成了最基础的 TCP 网络通信问题。</p>
+</blockquote>
+<p>我们知道，Pod 的 Endpoint 地址会随着 Pod 的销毁和重新创建而发生改变，因为新 Pod 的 IP 地址与之前旧 Pod 的不同。而 Service 一旦被创建，Kubernetes 就会自动为它分配一个可用的 Cluster IP，而且在 Service 的整个生命周期内，它的 Cluster IP 不会发生改变。于是，服务发现这个棘手的问题在 Kubernetes 的架构里也得以轻松解决：</p>
+<blockquote>
+<p>只要用 Service 的 Name 与 Service 的 Cluster IP 地址做一个 DNS 域名映射即可完美解决问题。</p>
+</blockquote>
+<p>​</p>
+<p>p88<br>​</p>
+<h3 id="1-4-10-Job"><a href="#1-4-10-Job" class="headerlink" title="1.4.10 Job"></a>1.4.10 Job</h3><h3 id="1-4-11-Volume"><a href="#1-4-11-Volume" class="headerlink" title="1.4.11 Volume"></a>1.4.11 Volume</h3><p>​</p>
 <p>#</p>
 <p>#</p>
 <p>#</p>
