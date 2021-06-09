@@ -276,7 +276,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.8k 字
+      9k 字
     </span>
   
 
@@ -286,7 +286,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      68
+      106
        分钟
     </span>
   
@@ -600,12 +600,125 @@
 <p>只要用 Service 的 Name 与 Service 的 Cluster IP 地址做一个 DNS 域名映射即可完美解决问题。</p>
 </blockquote>
 <p>​</p>
-<p>p88<br>​</p>
-<h3 id="1-4-10-Job"><a href="#1-4-10-Job" class="headerlink" title="1.4.10 Job"></a>1.4.10 Job</h3><h3 id="1-4-11-Volume"><a href="#1-4-11-Volume" class="headerlink" title="1.4.11 Volume"></a>1.4.11 Volume</h3><p>​</p>
-<p>#</p>
-<p>#</p>
-<p>#</p>
-<h1 id="第-2-章-Kubernetes-安装配置指南"><a href="#第-2-章-Kubernetes-安装配置指南" class="headerlink" title="第 2 章 Kubernetes 安装配置指南"></a>第 2 章 Kubernetes 安装配置指南</h1><p>第 3 章 深入掌握 Pod<br>第 4 章 深入掌握 Service<br>第 5 章 核心组件运行机制<br>第 6 章 深入分析集群安全机制<br>第 7 章 网络原理<br>第 8 章 共享存储原理<br>第 9 章 Kubernetes 开发指南<br>第 10 章 Kubernetes 集群管理<br>第 11 章 Trouble Shooting 指导<br>第 12 章 Kubernetes 开 发中的新功能</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span><br><span class="hljs-string">kind：Service</span><br><span class="hljs-attr">metadata:</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">tomcat-service</span><br><span class="hljs-attr">spec:</span><br>  <span class="hljs-attr">ports:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">port:</span> <span class="hljs-number">8080</span><br>  <span class="hljs-attr">selector:</span><br>    <span class="hljs-attr">tier:</span> <span class="hljs-string">frontend</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-comment"># 启动实例</span><br><span class="hljs-string">kubectl</span> <span class="hljs-string">create</span> <span class="hljs-string">-f</span> <span class="hljs-string">tomcat-server.yaml</span><br><span class="hljs-comment"># 查看暴露的端口</span><br><span class="hljs-string">kubectl</span> <span class="hljs-string">get</span> <span class="hljs-string">endpoints</span><br><span class="hljs-comment"># 查看详细信息（Cluster IP）</span><br><span class="hljs-string">kubectl</span> <span class="hljs-string">get</span> <span class="hljs-string">svc</span> <span class="hljs-string">tomcat-service</span> <span class="hljs-string">-o</span> <span class="hljs-string">yaml</span><br></code></pre></div></td></tr></table></figure>
+
+<p>很多服务都存在多个端口的问题，通常一个端口提供业务服务，另外一个端口提供管理服务，比如 Mycat、Codis 等常见中间件。Kubernetes Service 支持多个 Endpoint，在存在多个 Endpoint 的情况下，要求每个 Endpoint 都定义一个名称来区分。下面是 Tomcat 多端口的 Service 定义样例：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span><br><span class="hljs-attr">kind:</span> <span class="hljs-string">Service</span><br><span class="hljs-attr">metadata:</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">tomcat-service</span><br><span class="hljs-attr">spec:</span><br>  <span class="hljs-attr">ports:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">port:</span> <span class="hljs-number">8080</span><br>      <span class="hljs-attr">name:</span> <span class="hljs-string">service-port</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">port:</span> <span class="hljs-number">8005</span><br>      <span class="hljs-attr">name:</span> <span class="hljs-string">shutdown-port</span><br>  <span class="hljs-attr">selector:</span><br>    <span class="hljs-attr">tier:</span> <span class="hljs-string">frontend</span><br></code></pre></div></td></tr></table></figure>
+
+<p>服务发现机制</p>
+<blockquote>
+<p>来 Kubernetes 通过 Add-On 增值包引入了 DNS 系统，把服务名作为 DNS 域名，这样程序就可以直接使用服务名来建立通信连接了。</p>
+</blockquote>
+<p>​</p>
+<ul>
+<li><p>Node IP：Node 的 IP 地址。</p>
+<blockquote>
+<p>​</p>
+</blockquote>
+</li>
+<li><p>Pod IP：Pod 的 IP 地址。</p>
+<blockquote>
+<p>​</p>
+</blockquote>
+</li>
+<li><p>Cluster IP：Service 的 IP 地址。</p>
+<blockquote>
+<p>Cluster IP 仅仅作用于 Kubernetes Service 这个对象，并由 Kubernetes 管理和分配 IP 地址（来源于 Cluster IP 地址池）。</p>
+</blockquote>
+</li>
+</ul>
+<p>◎ Cluster IP 无法被 Ping，因为没有一个“实体网络对象”来响应。<br>◎ Cluster IP 只能结合 Service Port 组成一个具体的通信端口，单独的 Cluster IP 不具备 TCP/IP 通信的基础，并且它们属于 Kubernetes 集群这样一个封闭的空间，集群外的节点如果要访问这个通信端口，则需要做一些额外的工作。<br>◎ 在 Kubernetes 集群内，Node IP 网、Pod IP 网与 Cluster IP 网之间的通信，采用的是 Kubernetes 自己设计的一种编程方式的特殊路由规则，与我们熟知的 IP 路由有很大的不同。<br>​</p>
+<p>Service 的 Cluster IP 属于 Kubernetes 集群内部的地址，无法在集群外部直接使用这个地址。那么矛盾来了：实际上在我们开发的业务系统中肯定多少有一部分服务是要提供给 Kubernetes 集群外部的应用或者用户来使用的，典型的例子就是 Web 端的服务模块，比如上面的 tomcat-service，那么用户怎么访问它？<br>采用 NodePort 是解决上述问题的最直接、有效的常见做法。以 tomcat-service 为例，在 Service 的定义里做如下扩展即可（见代码中的 type 部分）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span><br><span class="hljs-attr">kind:</span> <span class="hljs-string">Service</span><br><span class="hljs-attr">metadata:</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">tomcat-service</span><br><span class="hljs-attr">spec:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">NodePort</span><br>  <span class="hljs-attr">ports:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">port:</span> <span class="hljs-number">8080</span><br>      <span class="hljs-attr">name:</span> <span class="hljs-string">service-port</span><br>  <span class="hljs-attr">selector:</span><br>    <span class="hljs-attr">tier:</span> <span class="hljs-string">frontend</span><br></code></pre></div></td></tr></table></figure>
+
+<p>其中，nodePort:31002 这个属性表明手动指定 tomcat-service 的 NodePort 为 31002，否则 Kubernetes 会自动分配一个可用的端口。接下来在浏览器里访问 http://<nodePortIP>:31002/，就可以看到 Tomcat 的欢迎界面了</p>
+<p>NodePort 的实现方式是在 Kubernetes 集群里的每个 Node 上都为需要外部访问的 Service 开启一个对应的 TCP 监听端口，外部系统只要用任意一个 Node 的 IP 地址+具体的 NodePort 端口号即可访问此服务，在任意 Node 上运行 netstat 命令，就可以看到有 NodePort 端口被监听：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623117947202-5cf2159c-a1ba-4a56-a682-aa6d434a8307.png#clientId=u2ced509c-70cf-4&from=paste&height=35&id=u3e5ebbff&margin=%5Bobject%20Object%5D&name=image.png&originHeight=35&originWidth=444&originalType=binary%E2%88%B6=1&size=5730&status=done&style=none&taskId=u81b383a0-b5f4-4ef3-aeb6-3bc3706f1f1&width=444" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="1-4-10-Job"><a href="#1-4-10-Job" class="headerlink" title="1.4.10 Job"></a>1.4.10 Job</h3><blockquote>
+<p>与 RC、Deployment、ReplicaSet、DaemonSet 类似，Job 也控制一组 Pod 容器。从这个角度来看，Job 也是一种特殊的 Pod 副本自动控制器，同时 Job 控制 Pod 副本与 RC 等控制器的工作机制有以下重要差别。</p>
+</blockquote>
+<p>​</p>
+<p>（1）Job 所控制的 Pod 副本是短暂运行的，可以将其视为一组 Docker 容器，其中的每个 Docker 容器都仅仅运行一次。当 Job 控制的所有 Pod 副本都运行结束时，对应的 Job 也就结束了。Job 在实现方式上与<br>RC 等副本控制器不同，Job 生成的 Pod 副本是不能自动重启的，对应 Pod 副本的 RestartPoliy 都被设置为 Never。因此，当对应的 Pod 副本都执行完成时，相应的 Job 也就完成了控制使命，即 Job 生成的 Pod 在 Kubernetes 中<br>是短暂存在的。Kubernetes 在 1.5 版本之后又提供了类似 crontab 的定时任务——CronJob，解决了某些批处理任务需要定时反复执行的问题。<br>​</p>
+<p>（2）Job 所控制的 Pod 副本的工作模式能够多实例并行计算，以 TensorFlow 框架为例，可以将一个机器学习的计算任务分布到 10 台机器上，在每台机器上都运行一个 worker 执行计算任务，这很适合通过 Job 生成 10 个 Pod 副本同时启动运算。</p>
+<h3 id="1-4-11-Volume"><a href="#1-4-11-Volume" class="headerlink" title="1.4.11 Volume"></a>1.4.11 Volume</h3><blockquote>
+<p>​Volume（存储卷）是 Pod 中能够被多个容器访问的共享目录。</p>
+</blockquote>
+<p>Kubernetes 的 Volume 概念、用途和目的与 Docker 的 Volume 比较类似，但两者不能等价。首先，Kubernetes 中的 Volume 被定义在 Pod 上，然后被一个 Pod 里的多个容器挂载到具体的文件目录下；其次，Kubernetes 中的<br>Volume 与 Pod 的生命周期相同，但与容器的生命周期不相关，当容器终止或者重启时，Volume 中的数据也不会丢失。最后，Kubernetes 支持多种类型的 Volume，例如 GlusterFS、Ceph 等先进的分布式文件系统。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623131618080-4d0c3302-c699-4d4f-939b-c72315255fd5.png#clientId=u2ced509c-70cf-4&from=paste&height=383&id=u126e9558&margin=%5Bobject%20Object%5D&name=image.png&originHeight=383&originWidth=648&originalType=binary%E2%88%B6=1&size=44054&status=done&style=none&taskId=u48dd0896-0dfc-4b2a-9f93-1bc801b8e0d&width=648" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="Volume-类型"><a href="#Volume-类型" class="headerlink" title="Volume 类型"></a>Volume 类型</h3><h4 id="emptyDir"><a href="#emptyDir" class="headerlink" title="emptyDir"></a>emptyDir</h4><p>一个 emptyDir Volume 是在 Pod 分配到 Node 时创建的。从它的名称就可以看出，它的初始内容为空，并且无须指定宿主机上对应的目录文件，因为这是 Kubernetes 自动分配的一个目录，当 Pod 从 Node 上移除时，emptyDir 中的数据也会被永久删除。emptyDir 的一些用途如下。<br>◎ 临时空间，例如用于某些应用程序运行时所需的临时目录，且无须永久保留。<br>◎ 长时间任务的中间过程 CheckPoint 的临时保存目录。<br>◎ 一个容器需要从另一个容器中获取数据的目录（多容器共享目录）。<br>目前，用户无法控制 emptyDir 使用的介质种类。如果 kubelet 的配置是使用硬盘，那么所有 emptyDir 都将被创建在该硬盘上。Pod 在将来可以设置 emptyDir 是位于硬盘、固态硬盘上还是基于内存的 tmpfs 上，上面的例子便采用了 emptyDir 类的 Volume。<br>​</p>
+<h4 id="hostPath"><a href="#hostPath" class="headerlink" title="hostPath"></a>hostPath</h4><p>hostPath 为在 Pod 上挂载宿主机上的文件或目录，它通常可以用于以下几方面。<br>◎ 容器应用程序生成的日志文件需要永久保存时，可以使用宿主机的高速文件系统进行存储。<br>◎ 需要访问宿主机上 Docker 引擎内部数据结构的容器应用时，可以通过定义 hostPath 为宿主机/var/lib/docker 目录，使容器内部应用可以直接访问 Docker 的文件系统。在使用这种类型的 Volume 时，需要注意以下几点。<br>◎ 在不同的 Node 上具有相同配置的 Pod，可能会因为宿主机上的目录和文件不同而导致对 Volume 上目录和文件的访问结果不一致。<br>◎ 如果使用了资源配额管理，则 Kubernetes 无法将 hostPath 在宿主机上使用的资源纳入管理。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">volumes:<br>- name: <span class="hljs-string">&quot;persistent-storage&quot;</span><br>  hostPaht:<br>	path: <span class="hljs-string">&quot;/data&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="gcePersistentDisk"><a href="#gcePersistentDisk" class="headerlink" title="gcePersistentDisk"></a>gcePersistentDisk</h4><p>使用这种类型的 Volume 表示使用谷歌公有云提供的永久磁盘（Persistent Disk，PD）存放 Volume 的数据，它与 emptyDir 不同，PD 上的内容会被永久保存，当 Pod 被删除时，PD 只是被卸载（Unmount），但不会被删除。需要注意的是，你需要先创建一个 PD，才能使用 gcePersistentDisk。 使用 gcePersistentDisk 时有以下一些限制条件。<br>◎ Node（运行 kubelet 的节点）需要是 GCE 虚拟机。<br>◎ 这些虚拟机需要与 PD 存在于相同的 GCE 项目和 Zone 中。<br>​</p>
+<p>通过 gcloud 命令即可创建一个 PD：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">gcloud compute disks create --size=500GB --zone=us-centrall my-data-disk<br></code></pre></div></td></tr></table></figure>
+
+<p>定义 gcePersistentDisk 类型的 Volume 的示例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">volumes:<br>- name: test-volumes<br>  gcePersistentDisk:<br>	pdName: my-data-disk<br>    fsType: ext4<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="awsElasticBlockStore"><a href="#awsElasticBlockStore" class="headerlink" title="awsElasticBlockStore"></a>awsElasticBlockStore</h4><h4 id="NFS"><a href="#NFS" class="headerlink" title="NFS"></a>NFS</h4><blockquote>
+<p>使用 NFS 网络文件系统提供的共享目录存储数据时，我们需要在系统中部署一个 NFS Server。定义 NFS 类型的 Volume 的示例如下</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">volumes:<br>  - name: nfs<br>    nfs:<br>	  server: nfs-server.localhost<br>      path: <span class="hljs-string">&quot;/&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="其他类型的-Volume"><a href="#其他类型的-Volume" class="headerlink" title="其他类型的 Volume"></a>其他类型的 Volume</h4><p>◎ iscsi：使用 iSCSI 存储设备上的目录挂载到 Pod 中。<br>◎ flocker：使用 Flocker 管理存储卷。<br>◎ glusterfs：使用开源 GlusterFS 网络文件系统的目录挂载到 Pod 中。<br>◎ rbd：使用 Ceph 块设备共享存储（Rados Block Device）挂载到 Pod 中。<br>◎ gitRepo：通过挂载一个空目录，并从 Git 库 clone 一个 git repository 以供 Pod 使用。<br>◎ secret：一个 Secret Volume 用于为 Pod 提供加密的信息，你可以将定义在 Kubernetes 中的 Secret 直接挂载为文件让 Pod 访问。Secret Volume 是通过 TMFS（内存文件系统）实现的，这种类型的 Volume 总是不会被持久化的。</p>
+<h2 id="Persistent-Volume"><a href="#Persistent-Volume" class="headerlink" title="Persistent Volume"></a>Persistent Volume</h2><p>PV 可以被理解成 Kubernetes 集群中的某个网络存储对应的一块存储，它与 Volume 类似，但有以下区别。<br>​</p>
+<ul>
+<li>PV 只能是网络存储，不属于任何 Node，但可以在每个 Node 上访问。◎ PV 并不是被定义在 Pod 上的，而是独立于 Pod 之外定义的。</li>
+<li>PV 目前支持的类型包括：gcePersistentDisk、AWSElasticBlockStore、AzureFile、AzureDisk、FC（Fibre Channel）、Flocker、NFS、iSCSI、RBD（Rados Block Device）、CephFS、 Cinder、GlusterFS、VsphereVolume、Quobyte Volumes、VMware Photon、Portworx Volumes、ScaleIO Volumes 和 HostPath（仅供单机测试）。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">apiVersion: v1<br>kind: PersistentVolume<br>metadata:<br>  name: pv0003<br>spec:<br>  capacity:<br>	storage: 5Gi<br>  accessModes:<br>	- ReadWriteOnce<br>  nfs:<br>	path: /somepath<br>    server: <span class="hljs-number">172.147</span><span class="hljs-number">.0</span><span class="hljs-number">.156</span><br></code></pre></div></td></tr></table></figure>
+
+<p>比较重要的是 PV 的 accessModes 属性，目前有以下类型。<br>​</p>
+<ul>
+<li>ReadWriteOnce：读写权限，并且只能被单个 Node 挂载。</li>
+<li>ReadOnlyMany：只读权限，允许被多个 Node 挂载。</li>
+<li>ReadWriteMany：读写权限，允许被多个 Node 挂载。</li>
+</ul>
+<p>​</p>
+<p>如果某个 Pod 想申请某种类型的 PV，则首先需要定义一个 PersistentVolumeClaim 对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">apiVersion: v1<br>kind: PersistentVolumeClaim<br>metadata:<br>  name: myclaim<br>spec:<br>  accessModes:<br>    - ReadWriterOnce<br>  resource:<br>	requests:<br>	  storage: 8Gi<br></code></pre></div></td></tr></table></figure>
+
+<p>这 Pod 的 Volume 定义中引用上述 PVC 即可</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">volumes:<br>  - name: mypd<br>    persistntVolumeClaim:<br>	  claimName: myclaim<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="Namespace"><a href="#Namespace" class="headerlink" title="Namespace"></a>Namespace</h2><blockquote>
+<p>Namespace（命名空间）是 Kubernetes 系统中的另一个非常重要的概念，Namespace 在很多情况下用于实现多租户的资源隔离。</p>
+</blockquote>
+<p>kubernetes 默认会创建一个 namespace，如果在创建资源时不指明 namespace 则默认在默认的 namespace 下。<br>​</p>
+<p>创建 namespace 为 development 的 namespace</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">apiVersion: v1<br>kind: Namespace<br>metadata:<br>  name: development<br></code></pre></div></td></tr></table></figure>
+
+<p>在创建资源对象时指定对应的 namespace</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">apiVersion: v1<br>kind: Pod<br>metadata:<br>  name: busybox<br>  namespace: development<br>spec:<br>  containers:<br>  - image: busybox<br>    commond:<br>	  - sleep<br>      - <span class="hljs-string">&quot;3306&quot;</span><br>    name: busybox<br></code></pre></div></td></tr></table></figure>
+
+<p>查看对应的 pod（需要指明 namespace）</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">kubectl get pods --namespace=development<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="Annotation"><a href="#Annotation" class="headerlink" title="Annotation"></a>Annotation</h2><p>​</p>
+<p>Annotation（注解）与 Label 类似，也使用 key/value 键值对的形式进行定义。不同的是 Label 具有严格的命名规则，它定义的是 Kubernetes 对象的元数据（Metadata），并且用于 Label Selector。Annotation 则是用户<br>任意定义的附加信息，以便于外部工具查找。在很多时候，Kubernetes 的模块自身会通过 Annotation 标记资源对象的一些特殊信息。通常来说，用 Annotation 来记录的信息如下。</p>
+<ul>
+<li>build 信息、release 信息、Docker 镜像信息等，例如时间戳、release id 号、PR 号、镜像 Hash 值、Docker Registry 地址等。</li>
+<li>日志库、监控库、分析库等资源库的地址信息。</li>
+<li>程序调试工具信息，例如工具名称、版本号等。</li>
+<li>团队的联系信息，例如电话号码、负责人名称、网址等。</li>
+</ul>
+<h2 id="ConfigMap"><a href="#ConfigMap" class="headerlink" title="ConfigMap"></a>ConfigMap</h2><blockquote>
+<p>首先，把所有的配置项都当作 key-value 字符串，当然 value 可以来自某个文本文件，比如配置项 password=123456、user=root、host=192.168.8.4 用于表示连接 FTP 服务器的配置参数。这些配置项可以作为 Map 表中的一个项，整个 Map 的数据可以被持久化存储在 Kubernetes 的 Etcd 数据库中，然后提供 API 以方便 Kubernetes 相关组件或客户应用 CRUD 操作这些数据，上述专门用来保存配置参数的 Map 就是 Kubernetes ConfigMap 资源对象。</p>
+</blockquote>
+<p>接下来，Kubernetes 提供了一种内建机制，将存储在 etcd 中的 ConfigMap 通过 Volume 映射的方式变成目标 Pod 内的配置文件，不管目标 Pod 被调度到哪台服务器上，都会完成自动映射。进一步地，如果 ConfigMap 中的 key-value 数据被修改，则映射到 Pod 中的“配置文件”也会随之自动更新。于是，Kubernetes ConfigMap 就成了分布式系统中最为简单（使用方法简单，但背后实现比较复杂）且对应用无侵入的配置中心。ConfigMap 配置集中化的一种简单方案如图<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623163264502-dc3036a0-73fa-4bc8-af69-cd1f95c2d824.png#clientId=u2ced509c-70cf-4&from=paste&height=418&id=ud76a93f8&margin=%5Bobject%20Object%5D&name=image.png&originHeight=418&originWidth=784&originalType=binary%E2%88%B6=1&size=214401&status=done&style=none&taskId=u52bec702-6314-4b36-ba9f-859cc0fe88a&width=784" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="第-2-章-Kubernetes-安装配置指南"><a href="#第-2-章-Kubernetes-安装配置指南" class="headerlink" title="第 2 章 Kubernetes 安装配置指南"></a>第 2 章 Kubernetes 安装配置指南</h1><h2 id="安装-Kubernetes"><a href="#安装-Kubernetes" class="headerlink" title="安装 Kubernetes"></a>安装 Kubernetes</h2><p><a target="_blank" rel="noopener" href="https://mikeygithub.github.io/2021/05/17/yuque/am5lkt/">https://mikeygithub.github.io/2021/05/17/yuque/am5lkt/</a></p>
+<h2 id="Kubeadm"><a href="#Kubeadm" class="headerlink" title="Kubeadm"></a>Kubeadm</h2><blockquote>
+<p>Kubernetes 快速搭建集群工具</p>
+</blockquote>
+<h2 id="Kubeadm-Config"><a href="#Kubeadm-Config" class="headerlink" title="Kubeadm Config"></a>Kubeadm Config</h2><p>kubeadm config 子命令提供了对这一组功能的支持：<br>​</p>
+<p>◎ kubeadm config upload from-file：由配置文件上传到集群中生成 ConfigMap。<br>◎ kubeadm config upload from-flags：由配置参数生成 ConfigMap。<br>◎ kubeadm config view：查看当前集群中的配置值。<br>◎ kubeadm config print init-defaults：输出 kubeadm init 默认参数文件的内容。<br>◎ kubeadm config print join-defaults：输出 kubeadm join 默认参数文件的内容。<br>◎ kubeadm config migrate：在新旧版本之间进行配置转换。<br>◎ kubeadm config images list：列出所需的镜像列表。<br>◎ kubeadm config images pull：拉取镜像到本地。<br>​</p>
+<p>​</p>
+<p>​</p>
+<p>​</p>
+<h1 id="第-3-章-深入掌握-Pod"><a href="#第-3-章-深入掌握-Pod" class="headerlink" title="第 3 章 深入掌握 Pod"></a>第 3 章 深入掌握 Pod</h1><p>第 4 章 深入掌握 Service<br>第 5 章 核心组件运行机制<br>第 6 章 深入分析集群安全机制<br>第 7 章 网络原理<br>第 8 章 共享存储原理<br>第 9 章 Kubernetes 开发指南<br>第 10 章 Kubernetes 集群管理<br>第 11 章 Trouble Shooting 指导<br>第 12 章 Kubernetes 开 发中的新功能</p>
 <h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1>
             </div>
             <hr>
