@@ -19,7 +19,7 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-  <title>笔记篇-ELK搭建记录 - 麦奇</title>
+  <title>读书笔记篇-深入理解Java虚拟机 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -249,7 +249,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="笔记篇-ELK搭建记录">
+            <span class="h2" id="subtitle" title="读书笔记篇-深入理解Java虚拟机">
               
             </span>
 
@@ -264,8 +264,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-06-15 17:24" pubdate>
-        2021年6月15日 下午
+      <time datetime="2021-06-19 17:24" pubdate>
+        2021年6月19日 下午
       </time>
     </span>
   
@@ -276,7 +276,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      557 字
+      2.1k 字
     </span>
   
 
@@ -286,7 +286,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      27
        分钟
     </span>
   
@@ -324,51 +324,32 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">笔记篇-ELK搭建记录</h1>
+            <h1 style="display: none">读书笔记篇-深入理解Java虚拟机</h1>
             
             <div class="markdown-body">
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623683509547-3a4bd4da-0a0a-4a07-bda7-c6437abf72e7.png#clientId=u26bf8ca5-3861-4&from=paste&height=582&id=u35b58cb6&margin=%5Bobject%20Object%5D&name=image.png&originHeight=582&originWidth=1072&originalType=binary%E2%88%B6=1&size=191476&status=done&style=none&taskId=uc5777002-39a0-420e-9b4f-eee967a4574&width=1072" srcset="/img/loading.gif" lazyload alt="image.png"><br>​</p>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
-<p>基于 ELK 搭建一个实时日志分析平台</p>
-</blockquote>
-<h1 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h1><p><img src="https://cdn.nlark.com/yuque/__mermaid_v3/93dab3463c660a05775008e5f031c575.svg#lake_card_v2=eyJ0eXBlIjoibWVybWFpZCIsImNvZGUiOiJncmFwaCBMUjtcbkEoRmlsZWJlYXQpLS0-RChLYWZrYSlcbkIoRmlsZWJlYXQpLS0-RChLYWZrYSlcbkMoRmlsZWJlYXQpLS0-RChLYWZrYSlcblxuRC0tPkxvZ3N0YXNoLS0-RihFU01hc3RlcilcbkYoRVNNYXN0ZXIpLS0-RShcIkVTIGRhdGEgbm9kZVwiKS0tPktpYmFuYVxuRihFU01hc3RlciktLT5HKFwiRVMgZGF0YSBub2RlXCIpLS0-S2liYW5hXG5GKEVTTWFzdGVyKS0tPkkoXCJFUyBkYXRhIG5vZGVcIiktLT5LaWJhbmEiLCJ1cmwiOiJodHRwczovL2Nkbi5ubGFyay5jb20veXVxdWUvX19tZXJtYWlkX3YzLzkzZGFiMzQ2M2M2NjBhMDU3NzUwMDhlNWYwMzFjNTc1LnN2ZyIsImlkIjoiajk1TmkiLCJtYXJnaW4iOnsidG9wIjp0cnVlLCJib3R0b20iOnRydWV9LCJjYXJkIjoiZGlhZ3JhbSJ9" srcset="/img/loading.gif" lazyload></p>
-<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>filebeat:<a target="_blank" rel="noopener" href="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.13.1-linux-x86_64.tar.gz">https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.13.1-linux-x86_64.tar.gz</a><br>kafka:<a target="_blank" rel="noopener" href="https://downloads.apache.org/kafka/2.8.0/kafka_2.12-2.8.0.tgz">https://downloads.apache.org/kafka/2.8.0/kafka_2.12-2.8.0.tgz</a><br>elasticsearch:<a target="_blank" rel="noopener" href="https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.13.2-linux-x86_64.tar.gz">https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.13.2-linux-x86_64.tar.gz</a><br>logstash:<a target="_blank" rel="noopener" href="https://artifacts.elastic.co/downloads/logstash/logstash-7.13.2-linux-x86_64.tar.gz">https://artifacts.elastic.co/downloads/logstash/logstash-7.13.2-linux-x86_64.tar.gz</a><br>kinba:<a target="_blank" rel="noopener" href="https://artifacts.elastic.co/downloads/kibana/kibana-7.13.2-linux-x86_64.tar.gz">https://artifacts.elastic.co/downloads/kibana/kibana-7.13.2-linux-x86_64.tar.gz</a><br>​</p>
-<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-comment">#下载</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.13.1-linux-x86_64.tar.gz</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://downloads.apache.org/kafka/2.8.0/kafka_2.12-2.8.0.tgz</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.13.2-linux-x86_64.tar.gz</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://artifacts.elastic.co/downloads/logstash/logstash-7.13.2-linux-x86_64.tar.gz</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://artifacts.elastic.co/downloads/kibana/kibana-7.13.2-linux-x86_64.tar.gz</span><br><span class="hljs-comment">#解压</span><br><span class="hljs-string">ls</span> <span class="hljs-string">*.tar.gz</span> <span class="hljs-string">|</span> <span class="hljs-string">xargs</span> <span class="hljs-string">-n1</span> <span class="hljs-string">tar</span> <span class="hljs-string">xzvf</span><br><span class="hljs-comment">#将filebeat的用户权限改为root</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">chown</span> <span class="hljs-string">-hR</span> <span class="hljs-string">root</span> <span class="hljs-string">/home/mikey/Downloads/ELK/filebeat-7.13.1-linux-x86_64</span><br></code></pre></div></td></tr></table></figure>
-
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">nohup ./bin/zookeeper-server-start.sh config/zookeeper.properties &amp;<br>nohup ./bin/kafka-server-start.sh config/server.properties &amp;<br></code></pre></div></td></tr></table></figure>
-
-<h2 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./bin/elasticsearch -d<br></code></pre></div></td></tr></table></figure>
-
-<h2 id="kibana"><a href="#kibana" class="headerlink" title="kibana"></a>kibana</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./bin/kibana &amp;<br></code></pre></div></td></tr></table></figure>
-
-<h2 id="Filebeat"><a href="#Filebeat" class="headerlink" title="Filebeat"></a>Filebeat</h2><p>1.查看可用的收集模型</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./filebeat modules list<br></code></pre></div></td></tr></table></figure>
-
-<p>2.开启需要收集的模型</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./filebeat modules <span class="hljs-built_in">enable</span> system nginx mysql<br></code></pre></div></td></tr></table></figure>
-
-<p>3.设置日志文件路径，编辑 filebeat.yml 配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#配置输出到kafka</span><br>output.kafka:<br>  <span class="hljs-comment"># initial brokers for reading cluster metadata</span><br>  hosts: [<span class="hljs-string">&quot;kafka1:9092&quot;</span>, <span class="hljs-string">&quot;kafka2:9092&quot;</span>, <span class="hljs-string">&quot;kafka3:9092&quot;</span>]<br><br>  <span class="hljs-comment"># message topic selection + partitioning</span><br>  topic: collect_log_topic<br>  partition.round_robin:<br>    reachable_only: <span class="hljs-literal">false</span><br>  required_acks: 1<br>  compression: gzip<br>  max_message_bytes: 1000000<br></code></pre></div></td></tr></table></figure>
-
-<p>4.授权启动</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo chown root filebeat.yml<br>sudo chown root modules.d/system.yml<br>sudo ./filebeat -e<br></code></pre></div></td></tr></table></figure>
-
-<p>5.添加大盘</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./filebeat setup --dashboards<br></code></pre></div></td></tr></table></figure>
-
-<h2 id="logstash"><a href="#logstash" class="headerlink" title="logstash"></a>logstash</h2><p>1.配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">input &#123;<br>    kafka &#123;<br>        <span class="hljs-built_in">type</span> =&gt; <span class="hljs-string">&quot;ad&quot;</span><br>        bootstrap_servers =&gt; <span class="hljs-string">&quot;127.0.0.1:9092,114.118.13.66:9093,114.118.13.66:9094&quot;</span><br>        client_id =&gt; <span class="hljs-string">&quot;es_ad&quot;</span><br>        group_id =&gt; <span class="hljs-string">&quot;es_ad&quot;</span><br>        auto_offset_reset =&gt; <span class="hljs-string">&quot;latest&quot;</span> <span class="hljs-comment"># 从最新的偏移量开始消费</span><br>        consumer_threads =&gt; 5<br>        decorate_events =&gt; <span class="hljs-literal">true</span> <span class="hljs-comment"># 此属性会将当前topic、offset、group、partition等信息也带到message中</span><br>        topics =&gt; [<span class="hljs-string">&quot;collect_log_topic&quot;</span>] <span class="hljs-comment"># 数组类型，可配置多个topic</span><br>        tags =&gt; [<span class="hljs-string">&quot;nginx&quot;</span>,]<br>    &#125;<br>&#125;<br>output &#123;<br>        elasticsearch &#123;<br>            hosts =&gt; [<span class="hljs-string">&quot;114.118.10.253:9200&quot;</span>]<br>            index =&gt; <span class="hljs-string">&quot;log-%&#123;+YYYY-MM-dd&#125;&quot;</span><br>            document_type =&gt; <span class="hljs-string">&quot;access_log&quot;</span><br>            timeout =&gt; 300<br>        &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-
-<p>2.创建目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mkdir logs_data_dir<br></code></pre></div></td></tr></table></figure>
-
-<p>3.启动 logstash</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">nohup bin/logstash -f config/kafka-logstash-es.conf --path.data=./logs_data_dir 1&gt;/dev/null 2&gt;&amp;1 &amp;<br></code></pre></div></td></tr></table></figure>
-
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623769167329-b34f3d76-e61c-4eb9-b040-baa9525f217f.png#clientId=uc97758be-dec4-4&from=ui&id=ue1b2e2e9&margin=%5Bobject%20Object%5D&name=index.png&originHeight=441&originWidth=1919&originalType=binary%E2%88%B6=1&size=121528&status=done&style=none&taskId=u489325a8-422c-4e63-a720-c3358d6b7c8" srcset="/img/loading.gif" lazyload alt="index.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623769175483-cd12e635-3dd7-432b-89aa-a05cd0474a6d.png#clientId=uc97758be-dec4-4&from=ui&id=u56f361ad&margin=%5Bobject%20Object%5D&name=data.png&originHeight=783&originWidth=1919&originalType=binary%E2%88%B6=1&size=242991&status=done&style=none&taskId=u477cfaa7-936e-4b4c-b6e4-ab8aba80739" srcset="/img/loading.gif" lazyload alt="data.png"></p>
-<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><p>相关博文: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/zsql/p/13137833.html">一篇文章搞懂 filebeat（ELK）</a></p>
-<p>Filebeat 官方文档: <a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/beats/filebeat/current/index.html">Filebeat Reference</a></p>
-<p>filebeat 输出到 kafka: <a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/beats/filebeat/current/kafka-output.html">https://www.elastic.co/guide/en/beats/filebeat/current/kafka-output.html</a></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1624086152318-0e07680f-c2d8-4585-90d0-1f2f9314ffdc.png#clientId=u2ba520a4-b93b-4&from=paste&height=581&id=u60e89699&margin=%5Bobject%20Object%5D&name=image.png&originHeight=581&originWidth=815&originalType=binary%E2%88%B6=1&size=527093&status=done&style=none&taskId=u357f4715-7d7c-49aa-ad8b-fd3c2fef31c&width=815" srcset="/img/loading.gif" lazyload alt="image.png"><br>​</p>
+<h1 id="第-1-章-走近-Java"><a href="#第-1-章-走近-Java" class="headerlink" title="第 1 章 走近 Java"></a>第 1 章 走近 Java</h1><h2 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h2><h3 id="1-2-iava-技术体系"><a href="#1-2-iava-技术体系" class="headerlink" title="1.2 iava 技术体系"></a>1.2 iava 技术体系</h3><ul>
+<li>Java 程序设计语言口各种硬件平台，上的 Java 虚拟机</li>
+<li>Class 文件格式</li>
+<li>Java API 类库</li>
+<li>来自商业机构和开源社区的第三方 Java 类库</li>
+</ul>
+<h3 id="1-3-iava-发展史"><a href="#1-3-iava-发展史" class="headerlink" title="1.3 iava 发展史"></a>1.3 iava 发展史</h3><p>1.4 iava 虚拟机发展 史<br>1.5 展望 iava 技术的未来<br>1.6 实战:自己编译 idk<br>1.7 本章小结<br>​</p>
+<h1 id="第-2-章-java-内存区域-与内存湓出异常"><a href="#第-2-章-java-内存区域-与内存湓出异常" class="headerlink" title="第 2 章 java 内存区域 与内存湓出异常"></a>第 2 章 java 内存区域 与内存湓出异常</h1><p>2.1 概述<br>2.2 运行时数据区 域<br>2.2.1 程序计数器<br>2.2.2 iava 虚 拟机栈<br>2.2.3 本地方 法栈<br>2.2.4 iava 堆<br>2.2.5 方法区<br>2.2.6<br>运行时常量池<br>2.2.7 直 接内存<br>▼2.3 hotspot 虛 拟机对象探秘<br>2.3.1 对 象的创建<br>2.3.2 对 象的内存布局<br>2.3.3 对 象的访问定位<br>▼2.4 实战 : outofmemorverror 异常<br>2.4.1 iava 堆湓出<br>2.4.2 虚拟机栈和本地方 法栈湓出<br>2.4.3 方法区和运行时常量池湓出<br>2.4.4 本机直 接内存湓出<br>2.5 本章小结</p>
+<h1 id="第-3-章垃圾收集器与内存分配策略"><a href="#第-3-章垃圾收集器与内存分配策略" class="headerlink" title="第 3 章垃圾收集器与内存分配策略"></a>第 3 章垃圾收集器与内存分配策略</h1><p>3.1 概述<br>3.2 对象已死吗<br>3.2.1 引用计数算法<br>3.2.2 可达性分析算法<br>3.2.3 再 谈引用<br>3.2.4 生存还是死亡<br>3.2.5 回收方法区<br>3.3 垃圾收集算法<br>3.3.1 标记清除算法<br>3.3.2 复制算法<br>3.3.3 标记整理算法<br>3.3.4 分代收集算法<br>▼3.4 hotspot 的算法实现<br>3.4.1 枚举根节点<br>3.4.2 安全点<br>3.4.3 安全区域<br>3.5 垃圾收集器<br>3.5.1 serial 收集 器<br>3.5.2 parnew 收集 器<br>3.5.3 parallel scavenqe 收集器<br>3.5.4 serial old 收集器<br>3.5.5 parallel old 收集器<br>3.5.6 cms 收集 器<br>3.5.7 q1 收集 器<br>3.5.8 理解 ac 日志<br>3.5.9 垃圾收集器参数总结<br>v 3.6 内存分配与回收策略<br>3.6.1 对象 优先在 eden 分配<br>3.6.2 大对象直接进入老年代<br>3.6.3 长期存活的对象 将进入老年代<br>3.6.4 动态对象 年龄判定<br>3.6.5 空间分配担保<br>3.7 本章小结</p>
+<h1 id="第-4-章虚拟机性能监控与故障处理工具"><a href="#第-4-章虚拟机性能监控与故障处理工具" class="headerlink" title="第 4 章虚拟机性能监控与故障处理工具"></a>第 4 章虚拟机性能监控与故障处理工具</h1><p>4.1 概述<br>▼4.2 idk 的命令行工具<br>4.2.1 ips :虚拟机进程状况工具<br>4.2.2 istat: 虛拟机统计信息监视工具<br>4.2.3 info : iava 配置信息工具<br>4.2.4 imap : iava 内存映像工具<br>4.2.5 ihat: 虛拟机堆转储快照分析工具<br>4.2.6 istack : iava 堆栈跟踪工具<br>4.2.7 hsdis : it 生成代码反汇编<br>4.3 idk 的可视化工具<br>4.3.1 iconsole : iava 监视与管理控制台<br>4.3.2 visualvm:多合-故障处理工具<br>​</p>
+<p>4.4 本章小结</p>
+<h1 id="第-5-章调优案例分析与实战"><a href="#第-5-章调优案例分析与实战" class="headerlink" title="第 5 章调优案例分析与实战"></a>第 5 章调优案例分析与实战</h1><p>5.1 概述<br>5.2 案例分析<br>5.2.1 高性 能硬件上的程序部署策略<br>5.2.2 集群间同步 导致的内存湓出<br>5.2.3 堆外内存导致的湓出错误<br>5.2.4 外部命令导致系统缓慢<br>5.2.5 服务器 ivm 进程崩溃<br>5.2.6 不恰当数据结构导致内存占用过大<br>5.2.7 由 windows 虚 拟内存导致的长时间停顿<br>5.3 实战 : eclipse 运行速度调优<br>5.3.1 调优前的程序运行状态<br>5.3.2<br>升级 idk 1.6 的性能变化及兼容问题<br>5.3.3 编译时间和类 加载时间的优化<br>5.3.4 调整内存设置控制垃圾收集频率<br>5.3.5 选择收集器降低延迟<br>5.4 本章小结</p>
+<h1 id="第-6-章类文件结构"><a href="#第-6-章类文件结构" class="headerlink" title="第 6 章类文件结构"></a>第 6 章类文件结构</h1><p>6.1 概述<br>6.2 无关性的基石<br>6.3 class 类文件的结构<br>6.3.1 魔数与 class 文件的版本<br>6.3.2 常量池<br>6.3.3 访问标志<br>6.3.4 类索引、父类索引与接口索引集合<br>6.3.5 字段表集合<br>6.3.6 方法表集合<br>6.3.7 属性表集合<br>6.4 字节码指令简介<br>6.4.1 字节码与 数据类型<br>6.4.2 加载和存储指令<br>6.4.3 运算指令<br>6.4.4 类型转换指令<br>6.4.5 对象创建与 访问指令<br>6.4.6 操作数栈管理指令<br>6.4.7 控制转移指令<br>6.4.8 方法调用和返回指令<br>6.4.9 异常处理指令<br>6.4.10 同步指令:<br>6.5 公有 设计和私有实现<br>6.6 class 文件结构的发展<br>6.7 本章小结</p>
+<h1 id="第-7-章虚拟机类加载机制"><a href="#第-7-章虚拟机类加载机制" class="headerlink" title="第 7 章虚拟机类加载机制"></a>第 7 章虚拟机类加载机制</h1><p>7.1 概述<br>7.2 类加载的时机<br>7.3 类加载的过程 .<br>7.3.1 加载<br>7.3.2 验证<br>7.3.3 准备<br>7.3.4 解析<br>7.3.5 初始化<br>7.4 类加载器<br>7.4.1 类与类加载器<br>7.4.2 双亲 委派模型<br>7.4.3 破坏双亲 委派模型<br>7.5 本章小结</p>
+<h1 id="第-8-章虚拟机字节码执行引擎"><a href="#第-8-章虚拟机字节码执行引擎" class="headerlink" title="第 8 章虚拟机字节码执行引擎"></a>第 8 章虚拟机字节码执行引擎</h1><p>8.1 概述<br>8.2 运行时栈帧结构<br>8.2.1 局部变量表<br>8.2.2 操作数栈<br>8.2.3 动态连接<br>8.2.4 方法返回地址<br>8.2.5 附加信息<br>8.3 方法调用<br>8.3.1 解析<br>8.3.2 分派<br>8.3.3 动态类型语言 支持<br>8.4 基于栈的字节码解释执行引擎<br>8.4.1 解释执行<br>8.4.2 基于栈的指令集 与基于寄存器的指令集<br>8.4.3 基于栈的解释器 执行过程<br>8.5 本章小结</p>
+<h1 id="第-9-章类加载及执行子-系统的案例与实战"><a href="#第-9-章类加载及执行子-系统的案例与实战" class="headerlink" title="第 9 章类加载及执行子 系统的案例与实战"></a>第 9 章类加载及执行子 系统的案例与实战</h1><p>9.1 概述<br>9.2 案例分析<br>9.2.1 tomcat :正统的类加载器架构<br>9.2.3 字 节码生成技术与动态代理的实现 9.2.4 retrotranslator :跨越 idk 版本<br>9.3 实战:自己动手实现远程执行功能<br>9.3.1 目标<br>9.3.2 思路<br>9..3 实现<br>9.3.4 验证<br>9.4 本章小结<br>第四部分程序编译与代码优化</p>
+<h1 id="第-10-章早期-编译期-优化"><a href="#第-10-章早期-编译期-优化" class="headerlink" title="第 10 章早期(编译期)优化"></a>第 10 章早期(编译期)优化</h1><p>10.1 概述<br>10.2 iavac 编译 器<br>10.2.1 iavac 的源码 与调试<br>10.2.2 解析与填充符号表<br>10.2.3<br>注解处理器<br>10.2.4 语义分析与字节码生成<br>10.3 iava 语 法糖的味道<br>10.3.1 泛型与类型擦除<br>10.3.2 自动装箱、 拆箱与逼历循环<br>10.3.3 条件 编译<br>10.4 实战:插入式注解处理器<br>10.4.1 实战目标<br>10.4.2 代码实现<br>10.4.3<br>运行与测试<br>10.4.4 其他应用案例<br>10.5 本 章小结</p>
+<h1 id="第-11-章晚期-运行期-优化"><a href="#第-11-章晚期-运行期-优化" class="headerlink" title="第 11 章晚期(运行期)优化"></a>第 11 章晚期(运行期)优化</h1><p>11.1 概述<br>11.2 hotspot 虛 拟机内的即时编译器<br>11.2.1 解释 器与编译器<br>11.2.2 编译对象 与触发条件<br>11.2.3 编译过程<br>11.2.4 查看及分析即时编译结果<br>11.3 编译优化技术<br>11.3.1 优化技术概览<br>11.3.2 公共子表达 式消除<br>11.3.3 数组边界 检查消除<br>11.3.4 方 法内联<br>11.3.5 逃逸分析<br>11.4 iava 与 c/c+ +的编译器对比<br>11.5 本章小结</p>
+<h1 id="第-12-章-iava-内存-模型与线程"><a href="#第-12-章-iava-内存-模型与线程" class="headerlink" title="第 12 章 iava 内存 模型与线程"></a>第 12 章 iava 内存 模型与线程</h1><h2 id="12-1-概述"><a href="#12-1-概述" class="headerlink" title="12.1 概述"></a>12.1 概述</h2><p>12.2 硬件的效率与一致性<br>12.3 iava 内存 模型<br>12.3.1 主内存与工作内存<br>12.3.2 内存间交互操作<br>12.3.3 对 于 volatile 型变量的特殊规则<br>12.3.4 对于 lonq 和 double 型变量的特殊规则<br>12.3.5 原子性、 可见性与有序性<br>12.3.6 先行发生原则<br>12.4 iava 与线程<br>12.4.1 线程的实现<br>12.4.2 iava 线程调度<br>12.4.3 状态转 换<br>12.5 本章小结</p>
+<h1 id="第-13-章线程安全与锁优化"><a href="#第-13-章线程安全与锁优化" class="headerlink" title="第 13 章线程安全与锁优化"></a>第 13 章线程安全与锁优化</h1><p>13.1 概述<br>13.2 线程安全<br>13.2.1 iava 语 言中的线程安全<br>13.2.2 线程安 全的实现方法<br>”13.3 锁优化<br>13.3.1 自旋锁与自适应自旋<br>13.3.2 锁消除<br>13.3.3 锁粗化<br>13.3.4 轻量级锁<br>13.3.5 偏向锁<br>13.4 本章小结<br>​</p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/pdf/2630542/1624090706234-33a42d25-2e68-4b4f-b06e-5be1f18d51d6.pdf?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2021/pdf/2630542/1624090706234-33a42d25-2e68-4b4f-b06e-5be1f18d51d6.pdf%22,%22name%22:%22Java%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89.pdf%22,%22size%22:17442757,%22type%22:%22application/pdf%22,%22ext%22:%22pdf%22,%22status%22:%22done%22,%22taskId%22:%22u93f13b54-899a-4107-ab87-b297ccf807f%22,%22taskType%22:%22upload%22,%22id%22:%22uf24bbaf7%22,%22card%22:%22file%22%7D">Java 虚拟机（第二版）.pdf</a></p>
+<p>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1QFEwUGvtDZ0Gz6v2AcJCRQ">https://pan.baidu.com/s/1QFEwUGvtDZ0Gz6v2AcJCRQ</a> 提取码: ymh2</p>
 
             </div>
             <hr>
@@ -378,7 +359,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                      <a class="hover-with-bg" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
                     
                   </div>
                 
@@ -386,7 +367,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/ELK/">ELK</a>
+                      <a class="hover-with-bg" href="/tags/JVM/">JVM</a>
                     
                   </div>
                 
@@ -403,18 +384,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/06/19/yuque/igsuwc/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">读书笔记篇-深入理解Java虚拟机</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/06/12/yuque/gzsi6i/">
-                        <span class="hidden-mobile">总结篇-实习记录</span>
+                      <a href="/2021/06/15/yuque/cspm38/">
+                        <span class="hidden-mobile">笔记篇-ELK搭建记录</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
