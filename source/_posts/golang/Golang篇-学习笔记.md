@@ -1,5 +1,5 @@
 ---
-title: Golang 学习笔记一
+title: Golang篇-学习笔记
 date: 2019-05-18 10:53:06
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/golang.jpeg
 category: Golang

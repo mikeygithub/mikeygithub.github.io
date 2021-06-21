@@ -1,5 +1,5 @@
 ---
-title: Go-kit 学习笔记
+title: Golang篇-Gokit学习笔记
 date: 2019-08-03 16:49:48
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/go-kit.png
 category: Golang

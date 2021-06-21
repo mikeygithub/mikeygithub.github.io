@@ -1,5 +1,5 @@
 ---
-title: Gin 学习笔记
+title: Golang篇-Gin学习笔记
 date: 2019-05-23 16:49:25
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/go-gin.jpg
 category: Golang
