@@ -1,11 +1,10 @@
 ---
-title: 学习篇-2021学习路线规划
+title: 学习篇-Java阅读书单
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/xxjh.jpeg'
 hide: false
 date: 2021-05-01 17:54:46
 category: 学习计划
 tags: 学习路线
-password: "mikey"
 ---
 
 # 技术方面
@@ -56,15 +55,3 @@ java基础-->软件设计技术-->领域驱动-->软件架构，逐步递进升�
 第二部分和第三部分是有相关性的，一定要形成自己的技术地图，自己的方法论。
 ```
 
-# 职业方面
-
-- 保持灵敏的嗅觉探索这个社会，了解互联网发展趋势，学习如何创业。
-  
-# 生活方面
-
-- 坚持跑步锻炼身体。
-- 学习如何理财。
-- 保持和家人常联系。  
-
-
- 
