@@ -19,7 +19,7 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-  <title>Gin 学习笔记 - 麦奇</title>
+  <title>Golang篇-Iris学习笔记 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -249,7 +249,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Gin 学习笔记">
+            <span class="h2" id="subtitle" title="Golang篇-Iris学习笔记">
               
             </span>
 
@@ -264,8 +264,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2019-05-23 16:49" pubdate>
-        2019年5月23日 下午
+      <time datetime="2019-05-25 16:49" pubdate>
+        2019年5月25日 下午
       </time>
     </span>
   
@@ -276,7 +276,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      179 字
+      657 字
     </span>
   
 
@@ -286,7 +286,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      12
        分钟
     </span>
   
@@ -324,50 +324,43 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Gin 学习笔记</h1>
+            <h1 style="display: none">Golang篇-Iris学习笔记</h1>
             
             <div class="markdown-body">
-              <h1 id="Gin简介"><a href="#Gin简介" class="headerlink" title="Gin简介"></a>Gin简介</h1><blockquote>
-<p>Gin是用Go（Golang）编写的HTTP Web框架。它具有类似于Martini的API，但性能比Martini快40倍。</p>
+              <h1 id="Iris简介"><a href="#Iris简介" class="headerlink" title="Iris简介"></a>Iris简介</h1><blockquote>
+<p>Iris是一个高效且经过精心设计的跨平台Web框架，具有一组强大的功能。借助无限的潜力和可移植性，构建自己的高性能Web应用程序和API。</p>
 </blockquote>
-<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><h2 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h2><p class="note note-primary">
-    Go 1.7 or Go 1.8 will be no longer supported soon.
-</p>
+<h1 id="快速安装"><a href="#快速安装" class="headerlink" title="快速安装"></a>快速安装</h1><p>Iris is a cross-platform software.</p>
+<p>The only requirement is the <a target="_blank" rel="noopener" href="https://golang.org/dl/">Go Programming Language</a>, version 1.14 and above.</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ mkdir myapp<br>$ go mod init myapp<br>$ go get github.com/kataras/iris/v12@masterCopy to clipboardErrorCopied<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>To install Gin package, you need to install Go and set your Go workspace first.</p>
-<ol>
-<li>Download and install it:</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ go get -u github.com/gin-gonic/gin<br></code></pre></div></td></tr></table></figure>
+<p>Import it in your code:</p>
+<figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/kataras/iris/v12&quot;</span>Copy to clipboardErrorCopied<br></code></pre></div></td></tr></table></figure>
 
-<ol>
-<li>Import it in your code:</li>
-</ol>
-<figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a><a target="_blank" rel="noopener" href="https://www.iris-go.com/docs/#/?id=troubleshooting">Troubleshooting</a></h3><p>If you get a network error during installation please make sure you set a valid <a target="_blank" rel="noopener" href="https://github.com/golang/go/wiki/Modules#are-there-always-on-module-repositories-and-enterprise-proxies">GOPROXY environment variable</a>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">go env -w GOPROXY=https://goproxy.cn,https://gocenter.io,https://goproxy.io,directCopy to clipboardErrorCopied<br></code></pre></div></td></tr></table></figure>
 
-<ol>
-<li>(Optional) Import <code>net/http</code>. This is required for example if using constants such as <code>http.StatusOK</code>.</li>
-</ol>
-<figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;net/http&quot;</span><br></code></pre></div></td></tr></table></figure>
+<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh"><span class="hljs-comment"># assume the following codes in main.go file</span><br>$ cat main.goCopy to clipboardErrorCopied<br>package main<br><br>import <span class="hljs-string">&quot;github.com/kataras/iris/v12&quot;</span><br><br>func <span class="hljs-function"><span class="hljs-title">main</span></span>() &#123;<br>    app := iris.New()<br><br>    booksAPI := app.Party(<span class="hljs-string">&quot;/books&quot;</span>)<br>    &#123;<br>        booksAPI.Use(iris.Compression)<br><br>        // GET: http://localhost:8080/books<br>        booksAPI.Get(<span class="hljs-string">&quot;/&quot;</span>, list)<br>        // POST: http://localhost:8080/books<br>        booksAPI.Post(<span class="hljs-string">&quot;/&quot;</span>, create)<br>    &#125;<br><br>    app.Listen(<span class="hljs-string">&quot;:8080&quot;</span>)<br>&#125;<br><br>// Book example.<br><span class="hljs-built_in">type</span> Book struct &#123;<br>    Title string `json:<span class="hljs-string">&quot;title&quot;</span>`<br>&#125;<br><br>func list(ctx iris.Context) &#123;<br>    books := []Book&#123;<br>        &#123;<span class="hljs-string">&quot;Mastering Concurrency in Go&quot;</span>&#125;,<br>        &#123;<span class="hljs-string">&quot;Go Design Patterns&quot;</span>&#125;,<br>        &#123;<span class="hljs-string">&quot;Black Hat Go&quot;</span>&#125;,<br>    &#125;<br><br>    ctx.JSON(books)<br>    // TIP: negotiate the response between server<span class="hljs-string">&#x27;s prioritizes</span><br><span class="hljs-string">    // and client&#x27;</span>s requirements, instead of ctx.JSON:<br>    // ctx.Negotiation().JSON().MsgPack().Protobuf()<br>    // ctx.Negotiate(books)<br>&#125;<br><br>func create(ctx iris.Context) &#123;<br>    var b Book<br>    err := ctx.ReadJSON(&amp;b)<br>    // TIP: use ctx.ReadBody(&amp;b) to <span class="hljs-built_in">bind</span><br>    // any <span class="hljs-built_in">type</span> of incoming data instead.<br>    <span class="hljs-keyword">if</span> err != nil &#123;<br>        ctx.StopWithProblem(iris.StatusBadRequest, iris.NewProblem().<br>            Title(<span class="hljs-string">&quot;Book creation failure&quot;</span>).DetailErr(err))<br>        // TIP: use ctx.StopWithError(code, err) when only<br>        // plain text responses are expected on errors.<br>        <span class="hljs-built_in">return</span><br>    &#125;<br><br>    println(<span class="hljs-string">&quot;Received Book: &quot;</span> + b.Title)<br><br>    ctx.StatusCode(iris.StatusCreated)<br>&#125;Copy to clipboardErrorCopied<br></code></pre></div></td></tr></table></figure>
 
-<ol>
-<li>Create your project folder and <code>cd</code> inside</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ mkdir -p <span class="hljs-variable">$GOPATH</span>/src/github.com/myusername/project &amp;&amp; <span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">$_</span>&quot;</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>MVC</strong> equivalent:</p>
+<figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;github.com/kataras/iris/v12/mvc&quot;</span>Copy to clipboardErrorCopied<br>m := mvc.New(booksAPI)<br>m.Handle(<span class="hljs-built_in">new</span>(BookController))Copy to clipboardErrorCopied<br><span class="hljs-keyword">type</span> BookController <span class="hljs-keyword">struct</span> &#123;<br>    <span class="hljs-comment">/* dependencies */</span><br>&#125;<br><br><span class="hljs-comment">// GET: http://localhost:8080/books</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *BookController)</span> <span class="hljs-title">Get</span><span class="hljs-params">()</span> []<span class="hljs-title">Book</span></span> &#123;<br>    <span class="hljs-keyword">return</span> []Book&#123;<br>        &#123;<span class="hljs-string">&quot;Mastering Concurrency in Go&quot;</span>&#125;,<br>        &#123;<span class="hljs-string">&quot;Go Design Patterns&quot;</span>&#125;,<br>        &#123;<span class="hljs-string">&quot;Black Hat Go&quot;</span>&#125;,<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">// POST: http://localhost:8080/books</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c *BookController)</span> <span class="hljs-title">Post</span><span class="hljs-params">(b Book)</span> <span class="hljs-title">int</span></span> &#123;<br>    <span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;Received Book: &quot;</span> + b.Title)<br><br>    <span class="hljs-keyword">return</span> iris.StatusCreated<br>&#125;Copy to clipboardErrorCopied<br></code></pre></div></td></tr></table></figure>
 
-<ol>
-<li>Copy a starting template inside your project</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ curl https://raw.githubusercontent.com/gin-gonic/examples/master/basic/main.go &gt; main.go<br></code></pre></div></td></tr></table></figure>
+<p><strong>Run</strong> your Iris web server:</p>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ go run main.go<br>&gt; Now listening on: http://localhost:8080<br>&gt; Application started. Press CTRL+C to shut down.Copy to clipboardErrorCopied<br></code></pre></div></td></tr></table></figure>
 
-<ol>
-<li>Run your project</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ go run main.go<br></code></pre></div></td></tr></table></figure>
+<p><strong>List</strong> Books:</p>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ curl --header <span class="hljs-string">&#x27;Accept-Encoding:gzip&#x27;</span> http://localhost:8080/books<br><br>[<br>  &#123;<br>    <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;Mastering Concurrency in Go&quot;</span><br>  &#125;,<br>  &#123;<br>    <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;Go Design Patterns&quot;</span><br>  &#125;,<br>  &#123;<br>    <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;Black Hat Go&quot;</span><br>  &#125;<br>]Copy to clipboardErrorCopied<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>Create</strong> a new Book:</p>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ curl -i -X POST \<br>--header <span class="hljs-string">&#x27;Content-Encoding:gzip&#x27;</span> \<br>--header <span class="hljs-string">&#x27;Content-Type:application/json&#x27;</span> \<br>--data <span class="hljs-string">&quot;&#123;\&quot;title\&quot;:\&quot;Writing An Interpreter In Go\&quot;&#125;&quot;</span> \<br>http://localhost:8080/books<br><br>&gt; HTTP/1.1 201 CreatedCopy to clipboardErrorCopied<br></code></pre></div></td></tr></table></figure>
+
+<p>That’s how an <strong>error</strong> response looks like:</p>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">$ curl -X POST --data <span class="hljs-string">&quot;&#123;\&quot;title\&quot; \&quot;not valid one\&quot;&#125;&quot;</span> \<br>http://localhost:8080/books<br><br>&gt; HTTP/1.1 400 Bad Request<br><br>&#123;<br>  <span class="hljs-string">&quot;status&quot;</span>: 400,<br>  <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;Book creation failure&quot;</span><br>  <span class="hljs-string">&quot;detail&quot;</span>: <span class="hljs-string">&quot;invalid character &#x27;\&quot;&#x27; after object key&quot;</span>,<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p><a target="_blank" rel="noopener" href="https://github.com/gin-gonic/gin">官网文档</a><br><a target="_blank" rel="noopener" href="https://geektutu.com/post/quick-go-gin.html">参考博文</a>   </p>
+
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p><a target="_blank" rel="noopener" href="https://iris-go.com/">官网</a>   </p>
 
             </div>
             <hr>
@@ -385,7 +378,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/go-gin/">go-gin</a>
+                      <a class="hover-with-bg" href="/tags/go-iris/">go-iris</a>
                     
                   </div>
                 
@@ -402,9 +395,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2019/05/25/golang/Iris-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                      <a href="/2019/08/03/golang/Golang%E7%AF%87-Gokit%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Iris 学习笔记</span>
+                        <span class="hidden-mobile">Golang篇-Gokit学习笔记</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -412,8 +405,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2019/05/21/golang/Beego-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                        <span class="hidden-mobile">Beego 学习笔记</span>
+                      <a href="/2019/05/23/golang/Golang%E7%AF%87-Gin%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">Golang篇-Gin学习笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
