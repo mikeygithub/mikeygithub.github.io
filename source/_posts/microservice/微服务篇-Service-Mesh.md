@@ -9,56 +9,55 @@ tags: ServiceMesh
 
 >Service Mesh(服务网格)
 
-# What's a service mesh?
-A service mesh, like the open source project Istio, is a way to control how different parts of an application share data with one another. Unlike other systems for managing this communication, a service mesh is a dedicated infrastructure layer built right into an app. This visible infrastructure layer can document how well (or not) different parts of an app interact, so it becomes easier to optimize communication and avoid downtime as an app grows.
+# 什么是服务网格？
+服务网格（例如开源项目 Istio）用于控制应用的不同部分之间如何共享数据。与用于管理此类通信的其他系统不同，服务网格内置于应用程序中的专用基础架构层。这个可见的基础架构层可以记录应用的不同部分是否能正常交互。因此，随着应用的不断发展，它在优化通信和避免停机方面就显得更加有用。
 
-Each part of an app, called a “service,” relies on other services to give users what they want. If a user of an online retail app wants to buy something, they need to know if the item is in stock. So, the service that communicates with the company's inventory database needs to communicate with the product webpage, which itself needs to communicate with the user’s online shopping cart. To add business value, this retailer might eventually build a service that gives users in-app product recommendations. This new service will communicate with a database of product tags to make recommendations, but it also needs to communicate with the same inventory database that the product page needed—it’s a lot of reusable, moving parts.
+应用的每个部分——即“服务”，都要与其他服务相互协作，来为用户提供所需的内容。如果在线零售应用的用户想购买什么东西，他们得知道该商品是否有货。因此，负责与公司库存数据库通信的服务需要与产品网页进行通信，而产品网页本身，也需要与用户的在线购物车通信。为了增加业务价值，该零售商之后可能会推出一项新服务：在应用中为用户提供产品推荐。要推荐产品，这项新服务除了要与产品标签数据库进行通信外，还需要与产品页面所需的同一个库存数据库进行通信，因此这涉及到大量可重复使用的移动组件。
 
-Modern applications are often broken down in this way, as a network of services each performing a specific business function. In order to execute its function, one service might need to request data from several other services. But what if some services get overloaded with requests, like the retailer’s inventory database? This is where a service mesh comes in—it routes requests from one service to the next, optimizing how all the moving parts work together.
+现代应用常以这种方式拆分，所有组件构成一个服务网络，每一个都分别执行特定的业务功能。要执行相应的功能，一项服务可能需要向其他几项服务请求数据。但如果有些服务（例如零售商的库存数据库）遇到请求超载会怎样呢？这就要靠服务网格了，它会将请求从一项服务路由到下一项，从而优化所有移动组件的协同工作方式。
 
-Don’t microservices already do this?
-A microservices architecture lets developers make changes to an app’s services without the need for a full redeploy. Unlike app development in other architectures, individual microservices are built by small teams with the flexibility to choose their own tools and coding languages. Basically, microservices are built independently, communicate with each other, and can individually fail without escalating into an application-wide outage.
-
-
-# Microservices architecture
-Service-to-service communication is what makes microservices possible. The logic governing communication can be coded into each service without a service mesh layer—but as communication gets more complex, a service mesh becomes more valuable. For cloud-native apps built in a microservices architecture, a service mesh is a way to comprise a large number of discrete services into a functional application.
-
-# How does it work?
-A service mesh doesn’t introduce new functionality to an app’s runtime environment—apps in any architecture have always needed rules to specify how requests get from point A to point B. What’s different about a service mesh is that it takes the logic governing service-to-service communication out of individual services and abstracts it to a layer of infrastructure.
-
-To do this, a service mesh is built into an app as an array of network proxies. Proxies are a familiar concept in enterprise IT—if you are accessing this webpage from a work computer, there’s a good chance you just used one:
-
-As your request for this page went out, it was first received by your company’s web proxy…
-After passing the proxy’s security measure, it was sent to the server that hosts this page…
-Next, this page was returned to the proxy and again checked against its security measures…
-And then it was finally sent from the proxy to you.
-
-
-In a service mesh, requests are routed between microservices through proxies in their own infrastructure layer. For this reason, individual proxies that make up a service mesh are sometimes called “sidecars,” since they run alongside each service, rather than within them. Taken together, these “sidecar” proxies—decoupled from each service—form a mesh network.
+# 微服务不是已经做到这一点了吗？
+微服务架构可让开发人员更改应用的服务，而无需全部重新部署。与其他架构的应用开发不同，每个微服务都是由小型团队来构建，他们可以灵活地选择自己的工具和编码语言。总体而言，微服务是独立构建的，它们之间彼此通信，出现故障也只是单独情况，而不会升级为整个应用的中断。
 
 
 
-A sidecar proxy sits alongside a microservice and routes requests to other proxies. Together, these sidecars form a mesh network.
+服务间的通信，令微服务成为可能。在没有服务网格层时，逻辑管理的通信可以编码到每个服务中，但随着通信变得越来越复杂，服务网格的价值也就愈发显著。对于以微服务架构构建的云原生应用而言，利用服务网格，可以将大量离散服务整合为一个功能应用。
 
-Without a service mesh, each microservice needs to be coded with logic to govern service-to-service communication, which means developers are less focused on business goals. It also means communication failures are harder to diagnose because the logic that governs interservice communication is hidden within each service.
+# 服务网格是如何运作的？
+服务网格不会为应用的运行时环境加入新功能，任何架构中的应用还是需要相应的规则来指定请求如何从 A 点到达 B 点。但服务网格的不同之处在于，它从各个服务中提取逻辑管理的服务间通信，并将其抽象为一个基础架构层。
 
-# How can a service mesh optimize communication?
-Every new service added to an app, or new instance of an existing service running in a container, complicates the communication environment and introduces new points of possible failure. Within a complex microservices architecture, it can become nearly impossible to locate where problems have occurred without a service mesh.
+要这样做，服务网格会以网络代理阵列的形式内置到应用中。代理的概念在企业 IT 中并不陌生，如果您从一台工作计算机访问网页，很可能就会使用代理：
 
-That’s because a service mesh also captures every aspect of service-to-service communication as performance metrics. Over time, data made visible by the service mesh can be applied to the rules for interservice communication, resulting in more efficient and reliable service requests.
+对该网页的请求发出后，首先会被公司的 Web 代理收到……
+通过了代理的安全措施检查后，它会被发送到托管此网页的服务器……
+接下来，该网页将返回代理并再次进行安全措施检查……
+之后，网页就会从代理发送给您。
 
-For example, If a given service fails, a service mesh can collect data on how long it took before a retry succeeded. As data on failure times for a given service aggregates, rules can be written to determine the optimal wait time before retrying that service, ensuring that the system does not become overburdened by unnecessary retries.
 
-# Planning for the future
-If you’re building microservices, you probably anticipate certain needs down the road, like scaling rapidly and adding new features to meet business needs. It’s likely that a microservices architecture will look very different a year out from its launch. At first, libraries built within microservices might be able to handle service-to-service communication with minimal disruption to operations. If you’re fulfilling the potential of microservices by increasing scale and features, that shouldn’t stay true for long. This can cause problems over time as services get overloaded with requests and developers spend more and more time coding request logic for each service.
+在服务网格中，请求将通过所在基础架构层中的代理在微服务之间路由。正因如此，构成服务网格的各个代理有时也被称为“sidecar”（挎斗），这是因为它们与每个服务并行运行，而非在内部运行。总之，这些“sidecar”代理（与每项服务分离）构成了网格式网络。
 
-# With a service mesh:
 
-Developers can focus on adding business value, instead of connecting services.
-Distributed tracing of requests through Jaeger presents a visible infrastructure layer alongside services, so problems are easier to recognize and diagnose.
-Apps are more resilient to downtime, since a service mesh can reroute requests away from failed services.
-Performance metrics can suggest ways to optimize communication in the runtime environment.
-Start planning for the future—experiment with a service mesh on Red Hat® OpenShift® Service Mesh. Experience a uniform way to connect, manage, and observe microservices-based applications with behavioral insight into—and control of—the networked microservices in your service mesh. OpenShift Service Mesh is available (at no cost) for Red Hat OpenShift.
+
+sidecar 代理与微服务并肩协作，用于将请求路由给其他代理。这些 sidecar 共同构成了网格式网络。
+
+如果没有服务网格，每项微服务都需要进行逻辑编码，才能管理服务间通信，这会导致开发人员无法专注于业务目标。同时，这也意味着通信故障难以诊断，因为管理服务间通信的逻辑隐藏在每项服务中。
+
+# 服务网格是如何优化通信的？
+每向应用中添加一项新服务或为容器中运行的现有服务添加一个新实例，都会让通信环境变得更加复杂，并可能埋入新的故障点。在复杂的微服务架构中，如果没有服务网格，几乎不可能找到哪里出了问题。
+
+这是因为服务网格还会以性能指标的形式，捕获服务间通信的一切信息。随着时间推移，服务网格获取的数据逐渐累积，可用来改善服务间通信的规则，从而生成更有效、更可靠的服务请求。
+
+例如，如果某个服务失败，服务网格可以收集有关在重试成功前所花时间的数据。随着某服务故障持续时间的数据不断积累，开发人员可编写相应的规则，以确定在重试该服务前的最佳等待时间，从而确保系统不会因不必要的重试而负担过重。
+
+# 规划未来
+在构建微服务的过程中，您可能会预见到某些需求，例如快速扩展和添加新的功能以满足业务需求。与刚刚启动时相比，一年后的微服务架构很可能大不相同。首先，微服务中构建的库，在处理服务间通信时也许能够将操作中断次数降至最低。要想发挥微服务的潜力，单纯通过增加规模和功能绝非长久之计。随着时间推移，服务会遭遇请求超载，开发人员需要花费越来越多的时间为每项服务编写请求逻辑，所以各种问题也随之而来。
+
+而借助服务网格：
+
+开发人员可以专注于增加业务价值，不再在连接服务上消耗精力。
+Jaeger 分布式跟踪请求呈现了与服务一起的可见基础架构层，更便于识别和诊断问题。
+应用更容易抵御停机影响，因为服务网格可以从发生故障的服务中重新路由请求。
+性能指标可建议改良方案，从而优化运行时环境中的通信。
 
 # 参考资料
 
