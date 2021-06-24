@@ -109,6 +109,15 @@ lazyload: true
     <div class="timeline-small-body">
         <ul>
         <li>
+           <div class="bullet blue"></div>
+           <div class="date">2021年06月24日</div>
+           <div class="desc">
+             <h3>荣誉证书</h3>
+             <h4>在学校的最后一张证书</h4>
+             <img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1624536271974-d05b02a1-677d-4964-bb3e-5f8083dd8e05.jpeg">
+             </div>
+         </li>    
+        <li>
            <div class="bullet pink"></div>
            <div class="date">2021年06月14日</div>
            <div class="desc">
