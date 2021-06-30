@@ -1,6 +1,6 @@
 ---
 title: 笔记篇-JAVA远程DEBUG教程
-index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/debug.jpeg'
+index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/debug.jpg'
 hide: false
 date: 2021-04-29 23:31:35
 category: Java相关
