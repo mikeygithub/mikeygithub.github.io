@@ -113,8 +113,8 @@ lazyload: true
            <div class="date">2021年06月29日</div>
            <div class="desc">
              <h3>毕业快乐</h3>
-             <h4></h4>
-             <img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1625298314653-825ea09f-3588-404b-82c3-691553287e1d.jpeg?x-oss-process=image%2Fresize%2Cw_1495">
+             <h4>毕业快乐呀</h4>
+             <img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1625298314653-825ea09f-3588-404b-82c3-691553287e1d.jpeg">
              </div>
          </li>                
         <li>
@@ -123,7 +123,7 @@ lazyload: true
            <div class="desc">
              <h3>拨穗仪式</h3>
              <h4>和校长位移的一张合影</h4>
-             <img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1625298295992-299990cd-9bf4-4644-9af9-432454be5a08.jpeg?x-oss-process=image%2Fresize%2Cw_1495">
+             <img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1625298295992-299990cd-9bf4-4644-9af9-432454be5a08.jpeg">
              </div>
          </li>                
         <li>
