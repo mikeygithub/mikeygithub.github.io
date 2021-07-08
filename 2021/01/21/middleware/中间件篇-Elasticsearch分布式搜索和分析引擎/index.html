@@ -276,7 +276,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.2k 字
+      4.1k 字
     </span>
   
 
@@ -286,7 +286,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      45
+      57
        分钟
     </span>
   
@@ -495,6 +495,83 @@
 <p>关系型数据库通过增加一个 <em>索引</em> 比如一个 B树（B-tree）索引 到指定的列上，以便提升数据检索速度。Elasticsearch 和 Lucene 使用了一个叫做 <em>倒排索引</em> 的结构来达到相同的目的。</p>
 <p>+ 默认的，一个文档中的每一个属性都是 <em>被索引</em> 的（有一个倒排索引）和可搜索的。一个没有倒排索引的属性是不能被搜索到的。</p>
 <p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html">Elasticsearch: 权威指南</a></p>
+<h1 id="相关工具"><a href="#相关工具" class="headerlink" title="相关工具"></a>相关工具</h1><p>一、基础类工具</p>
+<p>1、Head插件</p>
+<p>  ES集群状态查看、索引数据查看、ES DSL实现（增、删、改、查），比较适用json串的格式化</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="http://mobz.github.io/elasticsearch-head/">http://mobz.github.io/elasticsearch-head/</a></p>
+<p>2、kibana工具</p>
+<p>  除了支持各种数据的可视化之外，最重要的是：支持Dev Tool进行RESTFUL API增删改查操作。<br>  ——比Postman工具和curl都方便很多。</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://www.elastic.co/products/kibana">https://www.elastic.co/products/kibana</a></p>
+<p>3、ElasticHD工具</p>
+<p>  支持sql转DSL</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://github.com/360EntSecGroup-Skylar/ElasticHD">https://github.com/360EntSecGroup-Skylar/ElasticHD</a></p>
+<p>4、cerebro工具</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://github.com/lmenezes/cerebro">https://github.com/lmenezes/cerebro</a></p>
+<p>5、Elaticsearch-HQ工具</p>
+<p>  管理elasticsearch集群以及通过web界面来进行查询操作</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://github.com/royrusso/elasticsearch-HQ">https://github.com/royrusso/elasticsearch-HQ</a></p>
+<p>6、Elaticsearch-migration工具</p>
+<p>  支持多版本间数据迁移，使用sroll + bulk</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://github.com/medcl/elasticsearch-migration">https://github.com/medcl/elasticsearch-migration</a></p>
+<p>7、Elaticsearch-Exporter</p>
+<p>  将ES中的数据向其它导出的脚本实现</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://github.com/mallocator/Elasticsearch-Exporter">https://github.com/mallocator/Elasticsearch-Exporter</a></p>
+<p>8、Elaticsearch-dump</p>
+<p>  移动和保存索引的工具</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://github.com/taskrabbit/elasticsearch-dump">https://github.com/taskrabbit/elasticsearch-dump</a></p>
+<p>二、集群数据处理工具</p>
+<p>1、Elaticsearch-curator</p>
+<p>  es官方工具，可以管理索引数据保留时间</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/elasticsearch-curator">https://pypi.python.org/pypi/elasticsearch-curator</a></p>
+<p>  ES6.3有Index LifeCycle Management ，可以管理索引的保存期限</p>
+<p>三、安全类工具</p>
+<p>1、x-pack工具</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://www.elastic.co/downloads/x-pack">https://www.elastic.co/downloads/x-pack</a></p>
+<p>2、search-guard第三方工具</p>
+<p>  Search Guard  是 Elasticsearch 的安全插件。它为后端系统（如LDAP或Kerberos）提供身份验证和授权，并向Elasticsearch添加审核日志记录和文档/字段级安全性。</p>
+<p>  Search Guard所有基本安全功能（非全部）都是免费的，并且内置在Search Guard中。  Search Guard支持OpenSSL并与Kibana和logstash配合使用。</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://github.com/floragunncom/search-guard">https://github.com/floragunncom/search-guard</a></p>
+<p>四、可视化类工具</p>
+<p>1、grafana工具</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://grafana.com/grafana">https://grafana.com/grafana</a></p>
+<p>  grafana工具与kibana可视化区别： </p>
+<p>如果你的业务线数据较少且单一，可以用kibana做出很棒很直观的数据分析。</p>
+<p>而如果你的数据源很多并且业务线也多，建议使用grafana，可以减少你的工作量</p>
+<p>   对比：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/54388690">https://www.zhihu.com/question/54388690</a></p>
+<p>五、自动化运维工具</p>
+<p>1、ansible</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://github.com/elastic/ansible-elasticsearch">https://github.com/elastic/ansible-elasticsearch</a></p>
+<p>2、puppet</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://github.com/elastic/puppet-elasticsearch">https://github.com/elastic/puppet-elasticsearch</a></p>
+<p>3、cookbook</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://github.com/elastic/cookbook-elasticsearch">https://github.com/elastic/cookbook-elasticsearch</a></p>
+<p>六、类SQL查询工具</p>
+<p>1、Elaticsearch-SQL工具</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://github.com/NLPchina/elasticsearch-sql">https://github.com/NLPchina/elasticsearch-sql</a></p>
+<p>  ES8.3+会集成SQL</p>
+<p>七、增强类工具</p>
+<p>1、conveyor工具</p>
+<p>  kibna插件——图形化数据导入工具</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="http://t.cn/REOhwGT">http://t.cn/REOhwGT</a></p>
+<p>2、kibana_markdown_doc_view工具</p>
+<p>  Kibana文档查看强化插件，以markdown格式展示文档</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="http://t.cn/REOhKgB">http://t.cn/REOhKgB</a></p>
+<p>3、indices_view工具</p>
+<p>  indices_view 是新蛋网开源的一个 kibana APP 插件项目，可以安装在 kibana 中，快速、高效、便捷的查看elasticsearch 中 indices 相关信息</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://gitee.com/newegg/indices_view">https://gitee.com/newegg/indices_view</a></p>
+<p>4、dremio工具</p>
+<p>  支持sql转DSL，</p>
+<p>  支持elasticsearch、mysql、oracle、mongo、csv等多种格式可视化处理；</p>
+<p>  支持ES多表的Join操作</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://www.dremio.com/">https://www.dremio.com/</a></p>
+<p>八、报警类工具</p>
+<p>1、elastalert</p>
+<p>  ElastAlert 是 Yelp 公司开源的一套用 Python2.6 写的报警框架。属于后来 Elastic.co 公司出品的 Watcher 同类产品。</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="http://elastalert.readthedocs.org/">http://elastalert.readthedocs.org/</a></p>
+<p>2、sentinl</p>
+<p>  SENTINL 6扩展了Siren Investigate和Kibana的警报和报告功能，使用标准查询，可编程验证器和各种可配置操作来监控，通知和报告数据系列更改 - 将其视为一个独立的“Watcher” “报告”功能（支持PNG / PDF快照）。</p>
+<p>  SENTINL还旨在简化在Siren Investigate / Kibana 6.x中通过其本地应用程序界面创建和管理警报和报告的过程，或通过在Kibana 6.x +中使用本地监视工具来创建和管理警报和报告的过程。</p>
+<p>  参考地址：<a target="_blank" rel="noopener" href="https://github.com/sirensolutions/sentinl">https://github.com/sirensolutions/sentinl</a></p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/index.html">官方文档</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d48c32423789">Elasticsearch简介与实战</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/inverted-index.html">倒排索引</a>   </p>
