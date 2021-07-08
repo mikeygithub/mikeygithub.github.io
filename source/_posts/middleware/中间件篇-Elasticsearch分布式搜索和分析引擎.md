@@ -504,6 +504,10 @@ public class Elasticsearch {
 
 [Elasticsearch: 权威指南](https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html)
 
+# 相关工具
+
+elasticsearch-dump导入导出工具：https://github.com/elasticsearch-dump/elasticsearch-dump
+
 
 # 参考资料
 
