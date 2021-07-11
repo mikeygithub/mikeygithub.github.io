@@ -45,6 +45,7 @@ comment: 'utterances'
         <td><a href="http://pan.naifei.cc/new">网盘下载</a></td>
         <td><a href="https://teahour.fm/">Teahour</a></td>
         <td><a href="https://www.321tool.com/book/type/1">321在线工具站</a></td>
+        <td><a href="http://45.runchang.top/">短连接生成</a></td>
     </tr>
 </table>
 <p class="note note-primary">友链</p>
