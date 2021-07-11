@@ -276,7 +276,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6.4k 字
+      12.2k 字
     </span>
   
 
@@ -286,7 +286,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      69
+      132
        分钟
     </span>
   
@@ -537,8 +537,185 @@
 <ol start="4">
 <li>一个页一般是 16KB ，当记录中的数据太多，当前页放不下的时候，会把多余的数据存储到其他页中，这种<br>现象称为 行溢出 。</li>
 </ol>
-<h1 id="第-5-章盛放记录的大盒子-InnoDB-数据页结构"><a href="#第-5-章盛放记录的大盒子-InnoDB-数据页结构" class="headerlink" title="第 5 章盛放记录的大盒子-InnoDB 数据页结构"></a>第 5 章盛放记录的大盒子-InnoDB 数据页结构</h1><p>p63</p>
-<h1 id="第-6-章快速查询的秘籍-B-树索引"><a href="#第-6-章快速查询的秘籍-B-树索引" class="headerlink" title="第 6 章快速查询的秘籍-B+树索引"></a>第 6 章快速查询的秘籍-B+树索引</h1><p>#</p>
+<h1 id="第-5-章盛放记录的大盒子-InnoDB-数据页结构"><a href="#第-5-章盛放记录的大盒子-InnoDB-数据页结构" class="headerlink" title="第 5 章盛放记录的大盒子-InnoDB 数据页结构"></a>第 5 章盛放记录的大盒子-InnoDB 数据页结构</h1><h2 id="不同类型的页简介"><a href="#不同类型的页简介" class="headerlink" title="不同类型的页简介"></a>不同类型的页简介</h2><p>前边我们简单提了一下 页 的概念,它是 InnoDB 管理存储空间的基本单位,一个页的大小一般是 16KB 。<br>​</p>
+<p>InnoDB 为了不同的目的而设计了许多种不同类型的 页 ,比如存放表空间头部信息的页,存放 Insert Buffer 信息的页,存放 INODE 信息的页,存放 undo 日志信息的页等等等等。当然了,如果我说的这些名词你一个都没有听过,就当我放了个屁吧~ 不过这没有一毛钱关系,我们今儿个也不准备说这些类型的页,我们聚焦的是那些存放我们表中记录的那种类型的页,官方称这种存放记录的页为索引( INDEX )页,鉴于我们还没有了解过索引是个什么东西,而这些表中的记录就是我们日常口中所称的 数据 ,所以目前还是叫这种存放记录的页为 数据页吧。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625966118117-d2d4d9c1-d761-4d6a-b614-290250d600a5.png#clientId=u0148d4bb-e7f9-4&from=paste&height=335&id=u524c67b7&margin=%5Bobject%20Object%5D&name=image.png&originHeight=670&originWidth=712&originalType=binary%E2%88%B6=1&size=111644&status=done&style=none&taskId=ua8789e85-5c1f-4218-a6d7-1641a2463d3&width=356" srcset="/img/loading.gif" lazyload alt="image.png"><br>从图中可以看出,一个 InnoDB 数据页的存储空间大致被划分成了 7 个部分,有的部分占用的字节数是确定的,有的部分占用的字节数是不确定的。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625966151809-bcbcfe33-7208-4b01-8a1f-23aa02495de4.png#clientId=u0148d4bb-e7f9-4&from=paste&height=152&id=ueeb45a45&margin=%5Bobject%20Object%5D&name=image.png&originHeight=304&originWidth=682&originalType=binary%E2%88%B6=1&size=45430&status=done&style=none&taskId=uc8e45a92-03c6-42a7-bd1d-2ad6c2a900b&width=341" srcset="/img/loading.gif" lazyload alt="image.png"><br>在页的 7 个组成部分中,我们自己存储的记录会按照我们指定的 行格式 存储到 User Records 部分。但是在一开始生成页的时候,其实并没有 User Records 这个部分,每当我们插入一条记录,都会从 Free Space 部分,也就<br>是尚未使用的存储空间中申请一个记录大小的空间划分到 User Records 部分,当 Free Space 部分的空间全部<br>被 User Records 部分替代掉之后,也就意味着这个页使用完了,如果还有新的记录插入的话,就需要去申请新<br>的页了,这个过程的图示如下:<br>​</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625967119313-80450118-7a15-423d-a42b-e482a04677ca.png#clientId=u0148d4bb-e7f9-4&from=paste&height=163&id=u0dffbf14&margin=%5Bobject%20Object%5D&name=image.png&originHeight=326&originWidth=910&originalType=binary%E2%88%B6=1&size=67504&status=done&style=none&taskId=uaef0a206-42e5-4f09-b87b-e507cd0c159&width=455" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625968157007-ea43b35f-b7d3-46e9-9aa0-24acc400fe23.png#clientId=u0148d4bb-e7f9-4&from=paste&height=196&id=u3e0b05c2&margin=%5Bobject%20Object%5D&name=image.png&originHeight=391&originWidth=865&originalType=binary%E2%88%B6=1&size=51189&status=done&style=none&taskId=u7b671f73-fadf-4820-ad87-dcd8b80ec4a&width=432.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>从图中可以看到,我们特意把 记录头信息 的 5 个字节的数据给标出来了,说明它很重要,我们再次先把这些 记录头信息 中各个属性的大体意思浏览一下(我们目前使用 Compact 行格式进行演示):<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625968837782-8330b4b1-ecc6-45f2-b04a-ed9d72161585.png#clientId=u0148d4bb-e7f9-4&from=paste&height=179&id=u4e6d8f55&margin=%5Bobject%20Object%5D&name=image.png&originHeight=358&originWidth=874&originalType=binary%E2%88%B6=1&size=48642&status=done&style=none&taskId=u6c0e2ab2-9adc-468e-9799-13e3bd3e115&width=437" srcset="/img/loading.gif" lazyload alt="image.png"><br>行格式简化图<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625968964380-35efab2f-eae3-4c32-868a-a593dafa11c4.png#clientId=u0148d4bb-e7f9-4&from=paste&height=157&id=u70550d21&margin=%5Bobject%20Object%5D&name=image.png&originHeight=314&originWidth=896&originalType=binary%E2%88%B6=1&size=47478&status=done&style=none&taskId=uf826d54c-9fc2-4cf9-81b8-e3a7ff739c7&width=448" srcset="/img/loading.gif" lazyload alt="image.png"><br>向 page_demo 表中插入几条记录:</p>
+<figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">INSERT</span> <span class="hljs-selector-tag">INTO</span> <span class="hljs-selector-tag">page_demo</span> <span class="hljs-selector-tag">VALUES</span>(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>, <span class="hljs-string">&#x27;aaaa&#x27;</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">200</span>, <span class="hljs-string">&#x27;bbbb&#x27;</span>), (<span class="hljs-number">3</span>, <span class="hljs-number">300</span>, <span class="hljs-string">&#x27;cccc&#x27;</span>),<br>(<span class="hljs-number">4</span>, <span class="hljs-number">400</span>, <span class="hljs-string">&#x27;dddd&#x27;</span>);<br></code></pre></div></td></tr></table></figure>
+
+<p>Query OK, 4 rows affected (0.00 sec)<br>Records: 4 Duplicates: 0 Warnings: 0<br>为了方便大家分析这些记录在 页 的 User Records 部分中是怎么表示的,我把记录中头信息和实际的列数据都用<br>十进制表示出来了(其实是一堆二进制位),所以这些记录的示意图就是:<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625969285274-90171e44-95c9-4d96-9b73-bba8dd294fc5.png#clientId=u0148d4bb-e7f9-4&from=paste&height=155&id=u3f485aa7&margin=%5Bobject%20Object%5D&name=image.png&originHeight=310&originWidth=875&originalType=binary%E2%88%B6=1&size=65438&status=done&style=none&taskId=ue9822eca-3785-40a6-8973-11a728a2088&width=437.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<ul>
+<li><strong>delete_mask</strong></li>
+</ul>
+<p>这个属性标记着当前记录是否被删除,占用 1 个二进制位,值为 0 的时候代表记录并没有被删除,为 1 的时候代表记录被删除掉了。<br>啥?被删除的记录还在 页 中么?是的,摆在台面上的和背地里做的可能大相径庭,你以为它删除了,可它还在真实的磁盘上。这些被删除的记录之所以不立即从磁盘上移除,是因为移除它们之后把其他的记录在磁盘上重新排列需要性能消耗,所以只是打一个删除标记而已,所有被删除掉的记录都会组成一个所谓的 <strong>垃圾链表</strong> ,在这个链表中的记录占用的空间称之为所谓的 可重用空间 ,之后如果有新记录插入到表中的话,可能把这些被删除的记录占用的存储空间覆盖掉。<br>​</p>
+<ul>
+<li><strong>min_rec_mask</strong></li>
+</ul>
+<p>B+树的每层非叶子节点中的最小记录都会添加该标记。反正我们自己插入的四条记录的 min_rec_mask 值都是 0 ,意味着它们都不是 B+ 树的非叶<br>子节点中的最小记录。</p>
+<ul>
+<li><strong>heap_no</strong></li>
+</ul>
+<p>这个属性表示当前记录在本 页 中的位置,从图中可以看出来,我们插入的 4 条记录在本 页 中的位置分别<br>是: 2 、 3 、 4 、 5 。是不是少了点啥?是的,怎么不见 heap_no 值为 0 和 1 的记录呢?<br>这其实是设计 InnoDB 的大叔们玩的一个小把戏,他们自动给每个页里边儿加了两个记录,由于这两个记录<br>并不是我们自己插入的,所以有时候也称为 伪记录 或者 虚拟记录 。这两个伪记录一个代表 最小记录 ,一<br>个代表 最大记录 ,等一下哈~,记录可以比大小么?<br>是的,记录也可以比大小,对于一条完整的记录来说,比较记录的大小就是比较 主键 的大小。比方说我们<br>插入的 4 行记录的主键值分别是: 1 、 2 、 3 、 4 ,这也就意味着这 4 条记录的大小从小到大依次递增。<br>​</p>
+<blockquote>
+<p>小贴士:请注意我强调了对于<code>一条完整的记录</code>来说,比较记录的大小就相当于比的是主键的大小。</p>
+</blockquote>
+<p>​</p>
+<p>但是不管我们向 页 中插入了多少自己的记录,设计 InnoDB 的大叔们都规定他们定义的两条伪记录分别为最<br>小记录与最大记录。这两条记录的构造十分简单,都是由 5 字节大小的 记录头信息 和 8 字节大小的一个固定<br>的部分组成的,如图所示<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625972986436-b8fab629-d422-4d91-83f9-35028df7d6c8.png#clientId=u0148d4bb-e7f9-4&from=paste&height=235&id=u07eb3b3c&margin=%5Bobject%20Object%5D&name=image.png&originHeight=470&originWidth=743&originalType=binary%E2%88%B6=1&size=76074&status=done&style=none&taskId=u94e3890a-fb01-4742-8841-7d2f63a34fe&width=371.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>由于这两条记录不是我们自己定义的记录,所以它们并不存放在 页 的 User Records 部分,他们被单独放在一个称为 Infimum + Supremum 的部分,如图所示:<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625975530481-0e6536a3-83db-4667-890b-e09d3fcc84ee.png#clientId=u0148d4bb-e7f9-4&from=paste&height=200&id=u95282242&margin=%5Bobject%20Object%5D&name=image.png&originHeight=399&originWidth=878&originalType=binary%E2%88%B6=1&size=79827&status=done&style=none&taskId=ue92d0bde-8a8d-4294-84fe-c5625f48fd7&width=439" srcset="/img/loading.gif" lazyload alt="image.png"><br>从图中我们可以看出来,最小记录和最大记录的 heap_no 值分别是 0 和 1 ,也就是说它们的位置最靠前。<br>​</p>
+<ul>
+<li><strong>record_type</strong></li>
+</ul>
+<p>这个属性表示当前记录的类型,一共有 4 种类型的记录, 0 表示普通记录, 1 表示 B+树非叶节点记录, 2 表<br>示最小记录, 3 表示最大记录。从图中我们也可以看出来,我们自己插入的记录就是普通记录,它们的<br>record_type 值都是 0 ,而最小记录和最大记录的 record_type 值分别为 2 和 3 。<br>至于 record_type 为 1 的情况,我们之后在说索引的时候会重点强调的。<br>​</p>
+<ul>
+<li><strong>next_record</strong></li>
+</ul>
+<p>这玩意儿非常重要,它表示从当前记录的真实数据到下一条记录的真实数据的地址偏移量。比方说第一条记<br>录的 next_record 值为 32 ,意味着从第一条记录的真实数据的地址处向后找 32 个字节便是下一条记录的<br>真实数据。如果你熟悉数据结构的话,就立即明白了,这其实是个 链表 ,可以通过一条记录找到它的下一<br>条记录。但是需要注意注意再注意的一点是, 下一条记录 <strong>指得并不是按照我们插入顺序的下一条记录,而</strong><br><strong>是按照主键值由小到大的顺序的下一条记录</strong>。而且规定 Infimum 记录(也就是最小记录) 的下一条记录就是<br>本页中主键值最小的用户记录,而本页中主键值最大的用户记录的下一条记录就是 Supremum 记录(也就<br>是最大记录) ,为了更形象的表示一下这个 next_record 起到的作用,我们用箭头来替代一下<br>next_record 中的地址偏移量:<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625975791753-d82ed46a-ed5f-44b3-ba95-e3329e043d44.png#clientId=u0148d4bb-e7f9-4&from=paste&height=230&id=u45bbfe77&margin=%5Bobject%20Object%5D&name=image.png&originHeight=460&originWidth=885&originalType=binary%E2%88%B6=1&size=80778&status=done&style=none&taskId=ub0b64dbb-aef6-489a-b5f4-0030e24a10b&width=442.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>从图中可以看出来,我们的记录按照主键从小到大的顺序形成了一个单链表。 最大记录 的 next_record 的值为 0 ,这也就是说最大记录是没有 下一条记录 了,它是这个单链表中的最后一个节点。如果从中删除掉<br>一条记录,这个链表也是会跟着变化的,比如我们把第 2 条记录删掉:</p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">mysql</span>&gt; DELETE FROM page_demo WHERE c<span class="hljs-number">1</span> = <span class="hljs-number">2</span>;<br><span class="hljs-attribute">Query</span> OK, <span class="hljs-number">1</span> row affected (<span class="hljs-number">0</span>.<span class="hljs-number">02</span> sec)<br></code></pre></div></td></tr></table></figure>
+
+<p>删掉第 2 条记录后的示意图就是:<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625975854173-b5da49d0-afbd-4d23-a5cb-be664d29c54b.png#clientId=u0148d4bb-e7f9-4&from=paste&height=209&id=u91b5a971&margin=%5Bobject%20Object%5D&name=image.png&originHeight=417&originWidth=852&originalType=binary%E2%88%B6=1&size=78701&status=done&style=none&taskId=u7ff183bc-6f4d-4765-974c-a8ee95305d5&width=426" srcset="/img/loading.gif" lazyload alt="image.png"><br>从图中可以看出来,删除第 2 条记录前后主要发生了这些变化:</p>
+<ul>
+<li>第 2 条记录并没有从存储空间中移除,而是把该条记录的 delete_mask 值设置为 1 。</li>
+<li>第 2 条记录的 next_record 值变为了 0,意味着该记录没有下一条记录了。</li>
+<li>第 1 条记录的 next_record 指向了第 3 条记录。</li>
+<li>还有一点你可能忽略了,就是 最大记录 的 n_owned 值从 5 变成了 4 ,关于这一点的变化我们稍后会详细说明的。</li>
+</ul>
+<p>所以,不论我们怎么对页中的记录做增删改操作,InnoDB 始终会维护一条记录的单链表,链表中的各个节点是按照主键值由小到大的顺序连接起来的。<br>​</p>
+<blockquote>
+<p>小贴士:你会不会觉得 next_record 这个指针有点儿怪,为啥要指向记录头信息和真实数据之间的位置呢?为啥不干脆指向整条记录的开头位置,也就是记录的额外信息开头的位置呢?因为这个位置刚刚好,向左读取就是记录头信息,向右读取就是真实数据。我们前边还说过变长字段长度列表、NULL 值列表中的信息都是逆序存放,这样可以使记录中位置靠前的字段和它们对应的字段长度信息在内存中的距离更近,可能会提高高速缓存的命中率。当然如果你看不懂这句话的话就不要勉强了,果断跳过~</p>
+</blockquote>
+<p>再来看一个有意思的事情,因为主键值为 2 的记录被我们删掉了,但是存储空间却没有回收,如果我们再次把这条记录插入到表中,会发生什么事呢?</p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">mysql</span>&gt; INSERT INTO page_demo VALUES(<span class="hljs-number">2</span>, <span class="hljs-number">200</span>, &#x27;bbbb&#x27;);<br><span class="hljs-attribute">Query</span> OK, <span class="hljs-number">1</span> row affected (<span class="hljs-number">0</span>.<span class="hljs-number">00</span> sec)<br></code></pre></div></td></tr></table></figure>
+
+<p>我们看一下记录的存储情况:<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625976010449-051a5779-24bf-4a3c-b28c-9a293cd657fa.png#clientId=u0148d4bb-e7f9-4&from=paste&height=226&id=ufa26d833&margin=%5Bobject%20Object%5D&name=image.png&originHeight=451&originWidth=871&originalType=binary%E2%88%B6=1&size=87074&status=done&style=none&taskId=u71e4be98-0ab9-4ffb-be8c-6f9d595af29&width=435.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>从图中可以看到, InnoDB 并没有因为新记录的插入而为它申请新的存储空间,而是直接复用了原来被删除记录的存储空间。</p>
+<blockquote>
+<p>小贴士:当数据页中存在多条被删除掉的记录时,这些记录的 next_record 属性将会把这些被删除掉的记录组成一个垃圾链表,以备之后重用这部分存储空间。</p>
+</blockquote>
+<h2 id="Page-Directory-页目录"><a href="#Page-Directory-页目录" class="headerlink" title="Page Directory(页目录)"></a>Page Directory(页目录)</h2><ol>
+<li>将所有正常的记录(包括最大和最小记录,不包括标记为已删除的记录)划分为几个组。</li>
+<li>每个组的最后一条记录(也就是组内最大的那条记录)的头信息中的 n_owned 属性表示该记录拥有多少条记<br>录,也就是该组内共有几条记录。</li>
+<li>将每个组的最后一条记录的地址偏移量单独提取出来按顺序存储到靠近 页 的尾部的地方,这个地方就是所谓的 Page Directory ,也就是 页目录 (此时应该返回头看看页面各个部分的图)。页面目录中的这些地址偏移量被称为 槽 (英文名: Slot ),所以这个页面目录就是由 槽 组成的。<br>​</li>
+</ol>
+<p>比方说现在的 page_demo 表中正常的记录共有 6 条, InnoDB 会把它们分成两组,第一组中只有一个最小记录,<br>第二组中是剩余的 5 条记录,看下边的示意图:<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625976170372-6a8b77de-214f-43b4-b682-baea37e424b7.png#clientId=u0148d4bb-e7f9-4&from=paste&height=245&id=u05056b46&margin=%5Bobject%20Object%5D&name=image.png&originHeight=490&originWidth=895&originalType=binary%E2%88%B6=1&size=92560&status=done&style=none&taskId=u66f653b6-493c-4fd5-bb1b-18acbed7a72&width=447.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>现在 页目录 部分中有两个槽,也就意味着我们的记录被分成了两个组, 槽 1 中的值是 112 ,代表最大记录的地址偏移量(就是从页面的 0 字节开始数,数 112 个字节); 槽 0 中的值是 99 ,代表最小记录的地址偏移量。<br>注意最小和最大记录的头信息中的 n_owned 属性<br>​</p>
+<ul>
+<li>最小记录的 n_owned 值为 1 ,这就代表着以最小记录结尾的这个分组中只有 1 条记录,也就是最小记录本身。</li>
+<li>最大记录的 n_owned 值为 5 ,这就代表着以最大记录结尾的这个分组中只有 5 条记录,包括最大记录本身还有我们自己插入的 4 条记录。</li>
+</ul>
+<p>99 和 112 这样的地址偏移量很不直观,我们用箭头指向的方式替代数字,这样更易于我们理解,所以修改后的<br>示意图就是这样:<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625985204507-46a7217c-cfa0-484d-8063-e150f0d3b7b1.png#clientId=u0148d4bb-e7f9-4&from=paste&height=231&id=ua4d67934&margin=%5Bobject%20Object%5D&name=image.png&originHeight=462&originWidth=860&originalType=binary%E2%88%B6=1&size=73050&status=done&style=none&taskId=u793b9e63-e9f9-490d-8fab-bd1737cc1ae&width=430" srcset="/img/loading.gif" lazyload alt="image.png"><br>单纯从逻辑上看一下这些记录和页目录的关系<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625985254598-4122b57b-144b-468f-9064-14c8dbeb9b3e.png#clientId=u0148d4bb-e7f9-4&from=paste&height=234&id=u96385d1d&margin=%5Bobject%20Object%5D&name=image.png&originHeight=467&originWidth=863&originalType=binary%E2%88%B6=1&size=77604&status=done&style=none&taskId=ua032223d-9a00-48b7-91d1-6bd0cc39b22&width=431.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>对于最小记录所在的分组只能有 1 条记录,最大记录所在的分组拥有的记录条数只能在 1<del>8 条之间,剩下的分组中记录的条数范围只能在是 4</del>8 条之间。</p>
+</blockquote>
+<p>步骤:</p>
+<ul>
+<li>初始情况下一个数据页里只有最小记录和最大记录两条记录,它们分属于两个分组。</li>
+<li>之后每插入一条记录,都会从 页目录 中找到主键值比本记录的主键值大并且差值最小的槽,然后把该槽对应的记录的 n_owned 值加 1,表示本组内又添加了一条记录,直到该组中的记录数等于 8 个。</li>
+<li>在一个组中的记录数等于 8 个后再插入一条记录时,会将组中的记录拆分成两个组,一个组中 4 条记录,另一个 5 条记录。这个过程会在 页目录 中新增一个 槽 来记录这个新增分组中最大的那条记录的偏移量。</li>
+</ul>
+<p>由于现在 page_demo 表中的记录太少,无法演示添加了 页目录 之后加快查找速度的过程,所以再往 page_demo 表中添加一些记录:</p>
+<figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">mysql</span>&gt; <span class="hljs-selector-tag">INSERT</span> <span class="hljs-selector-tag">INTO</span> <span class="hljs-selector-tag">page_demo</span> <span class="hljs-selector-tag">VALUES</span>(<span class="hljs-number">5</span>, <span class="hljs-number">500</span>, <span class="hljs-string">&#x27;eeee&#x27;</span>), (<span class="hljs-number">6</span>, <span class="hljs-number">600</span>, <span class="hljs-string">&#x27;ffff&#x27;</span>), (<span class="hljs-number">7</span>, <span class="hljs-number">700</span>, <span class="hljs-string">&#x27;gggg&#x27;</span>),<br>(<span class="hljs-number">8</span>, <span class="hljs-number">800</span>, <span class="hljs-string">&#x27;hhhh&#x27;</span>), (<span class="hljs-number">9</span>, <span class="hljs-number">900</span>, <span class="hljs-string">&#x27;iiii&#x27;</span>), (<span class="hljs-number">10</span>, <span class="hljs-number">1000</span>, <span class="hljs-string">&#x27;jjjj&#x27;</span>), (<span class="hljs-number">11</span>, <span class="hljs-number">1100</span>, <span class="hljs-string">&#x27;kkkk&#x27;</span>), (<span class="hljs-number">12</span>, <span class="hljs-number">1200</span>, &#x27;l<br>lll<span class="hljs-string">&#x27;), (13, 1300, &#x27;</span>mmmm<span class="hljs-string">&#x27;), (14, 1400, &#x27;</span>nnnn<span class="hljs-string">&#x27;), (15, 1500, &#x27;</span>oooo<span class="hljs-string">&#x27;), (16, 1600, &#x27;</span>pppp&#x27;);<br><span class="hljs-selector-tag">Query</span> <span class="hljs-selector-tag">OK</span>, <span class="hljs-selector-tag">12</span> <span class="hljs-selector-tag">rows</span> <span class="hljs-selector-tag">affected</span> (<span class="hljs-number">0.00</span> sec)<br><span class="hljs-selector-tag">Records</span>: <span class="hljs-selector-tag">12</span> <span class="hljs-selector-tag">Duplicates</span>: <span class="hljs-selector-tag">0</span> <span class="hljs-selector-tag">Warnings</span>: <span class="hljs-selector-tag">0</span><br></code></pre></div></td></tr></table></figure>
+
+<p>哈,我们一口气又往表中添加了 12 条记录,现在页里边就一共有 18 条记录了(包括最小和最大记录),这些记录<br>被分成了 5 个组,如图所示:<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625985774761-249c901d-d32f-4c36-bd90-912ccfff9002.png#clientId=u0148d4bb-e7f9-4&from=paste&height=276&id=u7dd645b1&margin=%5Bobject%20Object%5D&name=image.png&originHeight=552&originWidth=874&originalType=binary%E2%88%B6=1&size=134405&status=done&style=none&taskId=u652ec42e-373b-418b-87ba-7b600f52b00&width=437" srcset="/img/loading.gif" lazyload alt="image.png"><br>比方说我们想找主键值为 6 的记录,过程是这样的:</p>
+<ol>
+<li>计算中间槽的位置: (0+4)/2=2 ,所以查看 槽 2 对应记录的主键值为 8 ,又因为 8 &gt; 6 ,所以设置 high=2 , low 保持不变。</li>
+<li>重新计算中间槽的位置: (0+2)/2=1 ,所以查看 槽 1 对应的主键值为 4 ,又因为 4 &lt; 6 ,所以设置 low=1 , high 保持不变。</li>
+<li>因为 high - low 的值为 1,所以确定主键值为 5 的记录在 槽 2 对应的组中。此刻我们需要找到 槽 2 中主键值最小的那条记录,然后沿着单向链表遍历 槽 2 中的记录。但是我们前边又说过,每个槽对应的记录都是该组中主键值最大的记录,这里 槽 2 对应的记录是主键值为 8 的记录,怎么定位一个组中最小的记录呢?别忘了各个槽都是挨着的,我们可以很轻易的拿到 槽 1 对应的记录(主键值为 4 ),该条记录的下一条记录就是 槽 2 中主键值最小的记录,该记录的主键值为 5 。所以我们可以从这条主键值为 5 的记录出发,遍历 槽 2 中的各条记录,直到找到主键值为 6 的那条记录即可。由于一个组中包含的记录条数只能是 1~8 条,所以遍历一个组中的记录的代价是很小的。<br>​</li>
+</ol>
+<p>所以在一个数据页中查找指定主键值的记录的过程分为两步:<br><strong>1. 通过二分法确定该记录所在的槽,并找到该槽中主键值最小的那条记录。</strong><br><strong>2. 通过记录的 next_record 属性遍历该槽所在的组中的各个记录。</strong><br><strong>​</strong></p>
+<h2 id="Page-Header-页面头部"><a href="#Page-Header-页面头部" class="headerlink" title="Page Header(页面头部)"></a>Page Header(页面头部)</h2><p>设计 InnoDB 的大叔们为了能得到一个数据页中存储的记录的状态信息,比如本页中已经存储了多少条记录,第一条记录的地址是什么,页目录中存储了多少个槽等等,特意在页中定义了一个叫 Page Header 的部分,它是<br>页 结构的第二部分,这个部分占用固定的 56 个字节,专门存储各种状态信息,具体各个字节都是干嘛的看下<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625986589078-03756c27-c290-44df-9659-ce6eea73f270.png#clientId=u0148d4bb-e7f9-4&from=paste&height=279&id=uadeff1bf&margin=%5Bobject%20Object%5D&name=image.png&originHeight=558&originWidth=890&originalType=binary%E2%88%B6=1&size=109685&status=done&style=none&taskId=u1d33db30-28fb-4412-a0f1-477a4d36715&width=445" srcset="/img/loading.gif" lazyload alt="image.png"><br><strong>PAGE_DIRECTION</strong><br>假如新插入的一条记录的主键值比上一条记录的主键值大,我们说这条记录的插入方向是右边,反之则是左边。用来表示最后一条记录插入方向的状态就是 PAGE_DIRECTION 。<br>​</p>
+<p><strong>PAGE_N_DIRECTION</strong><br>假设连续几次插入新记录的方向都是一致的, InnoDB 会把沿着同一个方向插入记录的条数记下来,这个条数就用 PAGE_N_DIRECTION 这个状态表示。当然,如果最后一条记录的插入方向改变了的话,这个状态的值会被清零重新统计。</p>
+<h2 id="File-Header-文件头部"><a href="#File-Header-文件头部" class="headerlink" title="File Header(文件头部)"></a>File Header(文件头部)</h2><p>我们现在描述的 File Header 针对各种类型的页都通用,也就是说不同类型的页都会以 File Header 作为第一个组成部分,它描述了一些针对各种页都通用的一些信息,比方说这个页的编号是多少,它的上一个页、下一个页是谁啦吧啦吧啦~ 这个部分占用固定的 38 个字节,是由下边这些内容组成的:<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625990905436-5946edc5-9908-40c8-8f76-4ab45587dc34.png#clientId=u0148d4bb-e7f9-4&from=paste&height=187&id=u91cb86e6&margin=%5Bobject%20Object%5D&name=image.png&originHeight=373&originWidth=899&originalType=binary%E2%88%B6=1&size=53165&status=done&style=none&taskId=ua9de8aed-ae42-40ed-bbe9-8b3ce3b96ce&width=449.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>对照着这个表格,我们看几个目前比较重要的部分:</p>
+<ul>
+<li>FIL_PAGE_SPACE_OR_CHKSUM</li>
+</ul>
+<p>这个代表当前页面的校验和(checksum)。啥是个校验和?就是对于一个很长很长的字节串来说,我们会通过某种算法来计算一个比较短的值来代表这个很长的字节串,这个比较短的值就称为 校验和 。这样在比较两个很长的字节串之前先比较这两个长字节串的校验和,如果校验和都不一样两个长字节串肯定是不同的,所以省去了直接比较两个比较长的字节串的时间损耗。<br>​</p>
+<ul>
+<li>FIL_PAGE_OFFSET</li>
+</ul>
+<p>每一个 页 都有一个单独的页号,就跟你的身份证号码一样, InnoDB 通过页号来可以唯一定位一个页 。</p>
+<ul>
+<li>FIL_PAGE_TYPE</li>
+</ul>
+<p>这个代表当前 页 的类型,我们前边说过, InnoDB 为了不同的目的而把页分为不同的类型,我们上边介绍的其实都是存储记录的 数据页 ,其实还有很多别的类型的页,具体如下表:</p>
+<table>
+<thead>
+<tr>
+<th>类型名称</th>
+<th>十六进制</th>
+<th>描述</th>
+<th>:–:</th>
+<th>:–:</th>
+<th>:–:</th>
+<th>:–:</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FIL_PAGE_TYPE_ALLOCATED</td>
+<td>0x0000</td>
+<td>最新分配,还没使用</td>
+<td></td>
+<td>FIL_PAGE_UNDO_LOG</td>
+<td>0x0002</td>
+<td>Undo 日志页</td>
+</tr>
+<tr>
+<td>FIL_PAGE_INODE</td>
+<td>0x0003</td>
+<td>段信息节点</td>
+<td></td>
+<td>FIL_PAGE_IBUF_FREE_LIST</td>
+<td>0x0004</td>
+<td>Insert Buffer 空闲列表</td>
+</tr>
+<tr>
+<td>FIL_PAGE_IBUF_BITMAP</td>
+<td>0x0005</td>
+<td>Insert Buffer 位图</td>
+<td></td>
+<td>FIL_PAGE_TYPE_SYS</td>
+<td>0x0006</td>
+<td>系统页</td>
+</tr>
+<tr>
+<td>FIL_PAGE_TYPE_TRX_SYS</td>
+<td>0x0007</td>
+<td>事务系统数据</td>
+<td></td>
+<td>FIL_PAGE_TYPE_FSP_HDR</td>
+<td>0x0008</td>
+<td>表空间头部信息</td>
+</tr>
+<tr>
+<td>FIL_PAGE_TYPE_XDES</td>
+<td>0x0009</td>
+<td>扩展描述页</td>
+<td></td>
+<td>FIL_PAGE_TYPE_BLOB</td>
+<td>0x000A</td>
+<td>BLOB 页</td>
+</tr>
+<tr>
+<td>FIL_PAGE_INDEX</td>
+<td>0x45BF</td>
+<td>索引页,也就是我们所说的 数据页</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>我们存放记录的数据页的类型其实是 FIL_PAGE_INDEX ,也就是所谓的 索引页 。<br>​</p>
+<ul>
+<li>FIL_PAGE_PREV 和 FIL_PAGE_NEXT</li>
+</ul>
+<p>我们前边强调过, InnoDB 都是以页为单位存放数据的,有时候我们存放某种类型的数据占用的空间非常大(比方说一张表中可以有成千上万条记录), InnoDB 可能不可以一次性为这么多数据分配一个非常大的存储空间,如果分散到多个不连续的页中存储的话需要把这些页关联起来, FIL_PAGE_PREV 和 FIL_PAGE_NEXT 就分别代表本页的上一个和下一个页的页号。这样通过建立一个双向链表把许许多多的页就都串联起来了,而无需这些页在物理上真正连着。需要注意的是,并不是所有类型的页都有上一个和下一个页的属性,不过我们本集中唠叨的 数据页 (也就是类型为 FIL_PAGE_INDEX 的页)是有这两个属性的,所以所有的数据页其<br>实是一个双链表,就像这样:<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625996086775-cd65a484-ea84-416d-9435-5df231b242ca.png#clientId=u0148d4bb-e7f9-4&from=paste&height=173&id=u0a44df46&margin=%5Bobject%20Object%5D&name=image.png&originHeight=346&originWidth=890&originalType=binary%E2%88%B6=1&size=76075&status=done&style=none&taskId=u9ee35f6e-80ae-4cfc-ae04-1e9b302785c&width=445" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="File-Trailer"><a href="#File-Trailer" class="headerlink" title="File Trailer"></a>File Trailer</h2><p>我们知道 InnoDB 存储引擎会把数据存储到磁盘上,但是磁盘速度太慢,需要以 页 为单位把数据加载到内存中处理,如果该页中的数据在内存中被修改了,那么在修改后的某个时间需要把数据同步到磁盘中。但是在同步了一半的时候中断电了咋办,这不是莫名尴尬么?为了检测一个页是否完整(也就是在同步的时候有没有发生只同步一半的尴尬情况),设计 InnoDB 的大叔们在每个页的尾部都加了一个 File Trailer 部分,这个部分由 8 个字节组成,可以分成 2 个小部分:</p>
+<ul>
+<li>前 4 个字节代表页的校验和这个部分是和 File Header 中的校验和相对应的。每当一个页面在内存中修改了,在同步之前就要把它的校验和算出来,因为 File Header 在页面的前边,所以校验和会被首先同步到磁盘,当完全写完时,校验和也会被写到页的尾部,如果完全同步成功,则页的首部和尾部的校验和应该是一致的。如果写了一半儿断电了,那么在 File Header 中的校验和就代表着已经修改过的页,而在 File Trialer 中的校验和代表着原先的页,二者不同则意味着同步中间出了错。</li>
+</ul>
+<p>​</p>
+<ul>
+<li>后 4 个字节代表页面被最后修改时对应的日志序列位置(LSN)这个部分也是为了校验页的完整性的,只不过我们目前还没说 LSN 是个什么意思,所以大家可以先不用管这个属性。</li>
+</ul>
+<p>这个 File Trailer 与 File Header 类似,都是所有类型的页通用的。</p>
+<h1 id="第-6-章快速查询的秘籍-B-树索引"><a href="#第-6-章快速查询的秘籍-B-树索引" class="headerlink" title="第 6 章快速查询的秘籍-B+树索引"></a>第 6 章快速查询的秘籍-B+树索引</h1><p>各个数据页可以组成一个 双向链表 ,而每个数据页中的记录会按照主键值从小到大的顺序组成一个 单向链表 ,每个数据页都会为存储在它里边儿的记录生成一个页目录 ,在通过主键查找某条记录的时候可以在 页目录 中使用二分法快速定位到对应的槽,然后再遍历该槽对应分组中的记录即可快速找到指定的记录<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626008666713-d4097e67-5360-4d04-a606-129bbd42eeff.png#clientId=u0148d4bb-e7f9-4&from=paste&height=136&id=u0d18b711&margin=%5Bobject%20Object%5D&name=image.png&originHeight=272&originWidth=885&originalType=binary%E2%88%B6=1&size=57435&status=done&style=none&taskId=uc5d29e22-d665-4303-9bd2-f030086fe81&width=442.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>其中页 a、页 b、页 c … 页 n 这些页可以不在物理结构上相连,只要通过双向链表相关联即可。</p>
 <h1 id="第-7-章好东西也得先学会怎么用-B-树索引的使用"><a href="#第-7-章好东西也得先学会怎么用-B-树索引的使用" class="headerlink" title="第 7 章好东西也得先学会怎么用-B+树索引的使用"></a>第 7 章好东西也得先学会怎么用-B+树索引的使用</h1><p>#</p>
 <h1 id="第-8-章数据的家-MySQL-的数据目录"><a href="#第-8-章数据的家-MySQL-的数据目录" class="headerlink" title="第 8 章数据的家-MySQL 的数据目录"></a>第 8 章数据的家-MySQL 的数据目录</h1><p>#</p>
 <h1 id="第-9-章存放页面的大池子-InnoDB-的表空间"><a href="#第-9-章存放页面的大池子-InnoDB-的表空间" class="headerlink" title="第 9 章存放页面的大池子-InnoDB 的表空间"></a>第 9 章存放页面的大池子-InnoDB 的表空间</h1><p>#</p>
