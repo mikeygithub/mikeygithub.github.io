@@ -276,7 +276,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      6.4k 字
     </span>
   
 
@@ -286,7 +286,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      69
        分钟
     </span>
   
@@ -354,10 +354,190 @@
 <p>如果端口冲突或者想使用其他端口运行可采用 mysqld -P3307。这样就指定来运行的端口。当然你登入的时候就应该采用 mysql -h127.0.0.1 -uroot -P3307 -p 来进行登入了。</p>
 </blockquote>
 <p>​</p>
-<p>p11</p>
-<h1 id="第-2-章-MySQL-的调控按钮-启动选项和系统变量"><a href="#第-2-章-MySQL-的调控按钮-启动选项和系统变量" class="headerlink" title="第 2 章 MySQL 的调控按钮-启动选项和系统变量"></a>第 2 章 MySQL 的调控按钮-启动选项和系统变量</h1><h1 id="第-3-章乱码的前世今生-字符集和比较规则"><a href="#第-3-章乱码的前世今生-字符集和比较规则" class="headerlink" title="第 3 章乱码的前世今生-字符集和比较规则"></a>第 3 章乱码的前世今生-字符集和比较规则</h1><p>#</p>
-<h1 id="第-4-章从一条记录说起-InnoDB-记录结构"><a href="#第-4-章从一条记录说起-InnoDB-记录结构" class="headerlink" title="第 4 章从一条记录说起-InnoDB 记录结构"></a>第 4 章从一条记录说起-InnoDB 记录结构</h1><p>#</p>
-<h1 id="第-5-章盛放记录的大盒子-InnoDB-数据页结构"><a href="#第-5-章盛放记录的大盒子-InnoDB-数据页结构" class="headerlink" title="第 5 章盛放记录的大盒子-InnoDB 数据页结构"></a>第 5 章盛放记录的大盒子-InnoDB 数据页结构</h1><p>#</p>
+<p>​</p>
+<p>客户端进程可以采用 TCP/IP 、 命名管道或共享内存 、 Unix 域套接字 这几种方式之一来与服务 器进程建立连接，每当有一个客户端进程连接到服务器进程时，服务器进程都会创建一个线程来专门处理与这个 客户端的交互，当该客户端退出时会与服务器断开连接，服务器并不会立即把与该客户端交互的线程销毁掉，而是把它缓存起来，在另一个新的客户端再进行连接时，把这个缓存的线程分配给该新客户端。这样就起到了不频繁创建和销毁线程的效果，从而节省开销。从这一点大家也能看出， MySQL 服务器会为每一个连接进来的客户端 分配一个线程，但是线程分配的太多了会严重影响系统性能，所以我们也需要限制一下可以同时连接到服务器的 客户端数量<br>​</p>
+<h2 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h2><p>如果两个查询请求在任何字符上的不同（例如：空格、注释、大小写），都会导致缓存不会命中。另外，如果查询请求中包含某些系统函数、用户自定义变量和函数、一些系统表，如 mysql 、information_schema、 performance_schema 数据库中的表，那这个请求就不会被缓存。以某些系统函数举例，可能同样的函数的两次调用会产生不一样的结果，比如函数 NOW ，每次调用都会产生最新的当前时间，如果在一个查询请求中调用了这个函数，那即使查询请求的文本信息都一样，那不同时间的两次查询也应该得到不同的结果，如果在第一次查询时就缓存了，那第二次查询的时候直接使用第一次查询的结果就是错误的！<br>​</p>
+<p>不过既然是缓存，那就有它缓存失效的时候。MySQL 的缓存系统会监测涉及到的每张表，只要该表的结构或者数据被修改，如对该表使用了 INSERT 、 UPDATE 、 DELETE 、 TRUNCATE TABLE 、 ALTER TABLE 、 DROP TABLE 或 DROP DATABASE 语句，那使用该表的所有高速缓存查询都将变为无效并从高速缓存中删除！<br>​</p>
+<p>小贴士：</p>
+<blockquote>
+<p>虽然查询缓存有时可以提升系统性能，但也不得不因维护这块缓存而造成一些开销，比如每次都要去查询缓存中检索，查询请求处理完需要更新查询缓存，维护该查询缓存对应的内存区域。从 MySQL 5.7.20 开始，不推荐使用查询缓存，并在 MySQL 8.0 中删除。</p>
+</blockquote>
+<p>​</p>
+<h2 id="语法解析"><a href="#语法解析" class="headerlink" title="语法解析"></a>语法解析</h2><p>如果查询缓存没有命中，接下来就需要进入正式的查询阶段了。因为客户端程序发送过来的请求只是一段文本而已，所以 MySQL 服务器程序首先要对这段文本做分析，判断请求的语法是否正确，然后从文本中将要查询的表、各种查询条件都提取出来放到 MySQL 服务器内部使用的一些数据结构上来。<br>​</p>
+<blockquote>
+<p>这个从指定的文本中提取出我们需要的信息本质上算是一个编译过程，涉及词法解析、语法分析、语义分析等阶段</p>
+</blockquote>
+<h2 id="查询优化"><a href="#查询优化" class="headerlink" title="查询优化"></a>查询优化</h2><p>MySQL 的优化程序会对我们的语句做一些优化，如外连接转换为内连接、表达式简化、子查询转为连接吧啦吧啦的一堆东西。优化的结果就是生成一个执行计划，这个执行计划表明了应该使用哪些索引进行查询，表之间的连接顺序是啥样的。我们可以使用 EXPLAIN 语句来查看某个语句的执行计划。<br>​</p>
+<h2 id="储存引擎"><a href="#储存引擎" class="headerlink" title="储存引擎"></a>储存引擎</h2><p>​ 小贴士：</p>
+<blockquote>
+<p>为什么叫引擎呢？因为这个名字更拉风～ 其实这个存储引擎以前叫做<code>表处理器</code>，后来可能人们觉得太土，就改成了<code>存储引擎</code>的叫法，它的功能就是接收上层传下来的指令，然后对表中的数据进行提取或写入操作。</p>
+</blockquote>
+<p>为了管理方便，人们把 连接管理 、 查询缓存 、 语法解析 、 查询优化 这些并不涉及真实数据存储的功能划分为 MySQL server 的功能，把真实存取数据的功能划分为 存储引擎 的功能。各种不同的存储引擎向上边的 MySQL server 层提供统一的调用接口（也就是存储引擎 API），包含了几十个底层函数，像”读取索引第一条内容”、”读取索引下一条内容”、”插入记录”等等。<br>所以在 MySQL server 完成了查询优化后，只需按照生成的执行计划调用底层存储引擎提供的 API，获取到数据后返回给客户端就好了。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625848725553-dd0a296d-c2d1-4db8-bc8d-5c1d70735740.png#clientId=u3d9adbb4-f372-4&from=paste&height=398&id=uf181a3ee&margin=%5Bobject%20Object%5D&name=image.png&originHeight=398&originWidth=443&originalType=binary%E2%88%B6=1&size=51967&status=done&style=none&taskId=u316592ca-bd6b-4219-adea-510455efcd2&width=443" srcset="/img/loading.gif" lazyload alt="image.png"><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625848740771-27f854f4-f5f6-4c7f-966f-5dafad058099.png#clientId=u3d9adbb4-f372-4&from=paste&height=487&id=ue72a1d3b&margin=%5Bobject%20Object%5D&name=image.png&originHeight=487&originWidth=711&originalType=binary%E2%88%B6=1&size=53271&status=done&style=none&taskId=u52875e76-2a8c-49ce-8a35-25b0678eead&width=711" srcset="/img/loading.gif" lazyload alt="image.png">!<a target="_blank" rel="noopener" href="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625848766118-dc3ab2ba-60ce-4276-96e3-24fad8e48117.png#clientId=u3d9adbb4-f372-4&from=paste&height=398&id=u4b1dee89&margin=%5Bobject%20Object%5D&name=image.png&originHeight=398&originWidth=723&originalType=binary%E2%88%B6=1&size=42887&status=done&style=none&taskId=u34b36891-4dbf-4c51-917d-e5925b3aeca&width=723">image.png</a><br>查看当前服务器程序支持的存储引擎</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">show</span> <span class="hljs-keyword">engines</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625882550394-4b7287a0-af6f-489e-bd6d-a5d232d406fc.png#clientId=u0148d4bb-e7f9-4&from=paste&height=141&id=u85c441d0&margin=%5Bobject%20Object%5D&name=image.png&originHeight=281&originWidth=1199&originalType=binary%E2%88%B6=1&size=58085&status=done&style=none&taskId=u2d295fdb-3eff-4b94-9573-59a49e3d1ab&width=599.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>设置表的存储引擎</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> 表名(<br>	...<br>)<span class="hljs-keyword">ENGINE</span> = 存储引擎名称;<br></code></pre></div></td></tr></table></figure>
+
+<p>修改表存储引擎</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 <span class="hljs-keyword">ENGINE</span> = 存储引擎名称;<br></code></pre></div></td></tr></table></figure>
+
+<h1 id="第-2-章-MySQL-的调控按钮-启动选项和系统变量"><a href="#第-2-章-MySQL-的调控按钮-启动选项和系统变量" class="headerlink" title="第 2 章 MySQL 的调控按钮-启动选项和系统变量"></a>第 2 章 MySQL 的调控按钮-启动选项和系统变量</h1><h2 id="缺省值"><a href="#缺省值" class="headerlink" title="缺省值"></a>缺省值</h2><ul>
+<li>服务器允许同时连入的客户端的默认数量是 <strong>151</strong></li>
+<li>表的默认存储引擎是 <strong>InnoDB</strong></li>
+</ul>
+<h2 id="命令行使用选项"><a href="#命令行使用选项" class="headerlink" title="命令行使用选项"></a>命令行使用选项</h2><p>1.禁止客户端使用 TCP/IP 网络通信</p>
+<figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">mysqld <span class="hljs-comment">--skir-networking</span><br></code></pre></div></td></tr></table></figure>
+
+<p>2.修改默认存储引擎</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-comment">#修改默认存储引擎</span><br>msqld <span class="hljs-comment">--default-storage-engine=MyISAM</span><br><span class="hljs-comment">#创建表</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> sys_var_demo(i <span class="hljs-built_in">int</span>);<br><span class="hljs-comment">#查看</span><br><span class="hljs-keyword">show</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> sys_var_demo;<br></code></pre></div></td></tr></table></figure>
+
+<p>选项的长形式和短形式<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625886500037-3ad5c137-a732-41cf-924b-2e58a37bea58.png#clientId=u0148d4bb-e7f9-4&from=paste&height=116&id=u6bfc7d32&margin=%5Bobject%20Object%5D&name=image.png&originHeight=232&originWidth=298&originalType=binary%E2%88%B6=1&size=10545&status=done&style=none&taskId=u3b802720-48c4-498b-ad03-8214cffa811&width=149" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="配置文件使用选项"><a href="#配置文件使用选项" class="headerlink" title="配置文件使用选项"></a>配置文件使用选项</h2><p>1.配置文件路径<br>Windows 下<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625886647146-570c93b6-f373-451b-842e-0e039a0d9340.png#clientId=u0148d4bb-e7f9-4&from=paste&height=117&id=u1d60e9ec&margin=%5Bobject%20Object%5D&name=image.png&originHeight=233&originWidth=576&originalType=binary%E2%88%B6=1&size=21758&status=done&style=none&taskId=u3a470d6f-8ff9-41e5-b055-9dbbf443106&width=288" srcset="/img/loading.gif" lazyload alt="image.png"><br>Linux 下<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625886743939-9f364a53-4cc2-4646-9b79-b3451b8a49a5.png#clientId=u0148d4bb-e7f9-4&from=paste&height=222&id=u94b43883&margin=%5Bobject%20Object%5D&name=image.png&originHeight=443&originWidth=512&originalType=binary%E2%88%B6=1&size=33546&status=done&style=none&taskId=u9f04bb74-da73-4ff6-896f-f64f00a9bde&width=256" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>在我的计算机中这几个路径中的任意一个都可以当作配置文件来使用,如果它们不存在,你可以手动创建一个,比方说我手动在 ~/.my.cnf 这个路径下创建一个配置文件。</p>
+</blockquote>
+<h2 id="配置文件的优先级"><a href="#配置文件的优先级" class="headerlink" title="配置文件的优先级"></a>配置文件的优先级</h2><p>不同文件：~/.my.cnf &gt; /etc/my.cnf<br>同个文件内：以最后出现的配置为优先<br>​</p>
+<p>如果我们不想让 MySQL 到默认的路径下搜索配置文件(就是上表中列出的那些),可以在命令行指定 defaults-file 选项,比如这样(以 UNIX 系统为例):</p>
+<figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle">mysqld --defaults-<span class="hljs-keyword">file</span>=<span class="hljs-regexp">/tmp/my</span>config.txt<br></code></pre></div></td></tr></table></figure>
+
+<p>这样,在程序启动的时候将只在 /tmp/myconfig.txt 路径下搜索配置文件</p>
+<h2 id="系统变量"><a href="#系统变量" class="headerlink" title="系统变量"></a>系统变量</h2><figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-comment">#查看全部</span><br><span class="hljs-keyword">show</span> <span class="hljs-keyword">variables</span><br><span class="hljs-comment">#查看最大链接数</span><br><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">VARIABLES</span> <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;max_connections&#x27;</span>;<br><span class="hljs-comment">#查看默认存储引擎</span><br><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">VARIABLES</span> <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;default_storage_engine&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p>设置系统变量</p>
+<blockquote>
+<p>可通过两种方式进行设置，命令行和配置文件（上述）</p>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">mysqld <span class="hljs-attribute">--default-storage-engine</span>=MyISAM <span class="hljs-attribute">--max-connections</span>=10<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>对于启动选项来说,如果启动选项名由多个单词组成,各个单词之间用短划线 - 或者下划线 _ 连接起来都可以,但是对应的系统变量之间必须使用下划线 _ 连接起来</p>
+</blockquote>
+<p>系统变量 比较牛逼的一点就是,<strong>对于大部分系统变量来说,它们的值可以在服务器程序运行过程中进行动态修改而无需停止并重启服务器</strong>。<br>​</p>
+<p>系统变量的作用域</p>
+<blockquote>
+<p>有一些系统变量并不是针对单个客户端的,比如允许同时连接到服务器的客户端数量 max_connections ,查询缓存的大小 query_cache_size ,这些公有的系统变量让某个客户端私有显然不合适。</p>
+</blockquote>
+<p>一个新连接到服务器的客户端对应的系统变量的值该怎么设置?<br>为了解决这两个问题,设计 MySQL 的大叔提出了系统变量的 作用范围 的概念,具体来说 <strong>作用范围</strong> 分为这两<br>种:</p>
+<ul>
+<li><strong>GLOBAL</strong> :全局变量,影响服务器的整体操作。</li>
+<li><strong>SESSION</strong> :会话变量,影响某个客户端连接的操作。(注: SESSION 有个别名叫 LOCAL )</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">在服务器程序运行期间通过客户端程序设置系统变量的语法:<br><span class="hljs-keyword">SET</span> [<span class="hljs-keyword">GLOBAL</span>|<span class="hljs-keyword">SESSION</span>] 系统变量名 = 值;<br>或者写成这样也行:<br><span class="hljs-keyword">SET</span> [@@(<span class="hljs-keyword">GLOBAL</span>|<span class="hljs-keyword">SESSION</span>).]var_name = XXX;<br></code></pre></div></td></tr></table></figure>
+
+<p>比如我们想在服务器运行过程中把作用范围为 GLOBAL 的系统变量 default_storage_engine 的值修改为 MyISAM ,也就是想让之后新连接到服务器的客户端都用 MyISAM 作为默认的存储引擎,那我们可以选择下边两条<br>语句中的任意一条来进行设置:</p>
+<figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams">语句一:<span class="hljs-keyword">SET</span> GLOBAL <span class="hljs-comment">default_storage_engine = MyISAM</span>;<br>语句二:<span class="hljs-keyword">SET</span> @@GLOBAL.default_storage_engine <span class="hljs-comment">= MyISAM</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p>如果只想对本客户端生效,也可以选择下边三条语句中的任意一条来进行设置:</p>
+<figure class="highlight gams"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gams">语句一:<span class="hljs-keyword">SET</span> SESSION <span class="hljs-comment">default_storage_engine = MyISAM</span>;<br>语句二:<span class="hljs-keyword">SET</span> @@SESSION.default_storage_engine <span class="hljs-comment">= MyISAM</span>;<br>语句三:<span class="hljs-keyword">SET</span> default_storage_engine <span class="hljs-comment">= MyISAM</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p>从上边的 语句三 也可以看出,如果在设置系统变量的语句中省略了作用范围,默认的作用范围就是 SESSION 。<br>也就是说 <strong>SET 系统变量名 = 值 和 SET SESSION 系统变量名 = 值</strong> 是等价的。<br>​</p>
+<p>查看不同作用域的系统变量</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> [<span class="hljs-keyword">GLOBAL</span>|<span class="hljs-keyword">SESSION</span>] <span class="hljs-keyword">VARIABLES</span> [<span class="hljs-keyword">LIKE</span> 匹配的模式];<br><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">SESSION</span> <span class="hljs-keyword">VARIABLES</span> <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;default_storage_engine&#x27;</span>;<br><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">GLOBAL</span> <span class="hljs-keyword">VARIABLES</span> <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;default_storage_engine&#x27;</span>;<br><span class="hljs-keyword">SET</span> <span class="hljs-keyword">SESSION</span> default_storage_engine = MyISAM;<br><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">SESSION</span> <span class="hljs-keyword">VARIABLES</span> <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;default_storage_engine&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="状态变量"><a href="#状态变量" class="headerlink" title="状态变量"></a>状态变量</h2><p>为了让我们更好的了解服务器程序的运行情况, MySQL 服务器程序中维护了好多关于程序运行状态的变量,它们被称为 状态变量 。比方说 Threads_connected 表示当前有多少客户端与服务器建立了连接, Handler_update<br>表示已经更新了多少行记录吧啦吧啦,像这样显示服务器程序状态信息的 状态变量 还有好几百个．<br>​</p>
+<p>所以查看 状态变量 的语句可以这么写:</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> [<span class="hljs-keyword">GLOBAL</span>|<span class="hljs-keyword">SESSION</span>] <span class="hljs-keyword">STATUS</span> [<span class="hljs-keyword">LIKE</span> 匹配的模式];<br></code></pre></div></td></tr></table></figure>
+
+<p>类似的,如果我们不写明作用范围,默认的作用范围是 SESSION ,比方说这样:</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">STATUS</span> <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;thread%&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625894672351-5304540d-f661-4fa6-ac7d-23e6b778546d.png#clientId=u0148d4bb-e7f9-4&from=paste&height=95&id=ubafe5f09&margin=%5Bobject%20Object%5D&name=image.png&originHeight=189&originWidth=423&originalType=binary%E2%88%B6=1&size=14445&status=done&style=none&taskId=u91065d42-9cb7-4ce7-b8c6-3a96fc5f1d3&width=211.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="第-3-章乱码的前世今生-字符集和比较规则"><a href="#第-3-章乱码的前世今生-字符集和比较规则" class="headerlink" title="第 3 章乱码的前世今生-字符集和比较规则"></a>第 3 章乱码的前世今生-字符集和比较规则</h1><p>将一个字符映射成一个二进制数据的过程也叫做 <strong>编码</strong> ,将一个二进制数据映射到一个字符的过程叫做 <strong>解码</strong></p>
+<h2 id="比较规则简介"><a href="#比较规则简介" class="headerlink" title="比较规则简介"></a>比较规则简介</h2><p>在我们确定了 xiaohaizi 字符集表示字符的范围以及编码规则后,怎么比较两个字符的大小呢?最容易想到的就<br>是直接比较这两个字符对应的二进制编码的大小,比方说字符 ‘a’ 的编码为 0x01 ,字符 ‘b’ 的编码为 0x02 ,<br>所以 ‘a’ 小于 ‘b’ ,这种简单的比较规则也可以被称为二进制比较规则,英文名为 binary collation 。<br>二进制比较规则是简单,但有时候并不符合现实需求,比如在很多场合对于英文字符我们都是不区分大小写的,<br>也就是说 ‘a’ 和 ‘A’ 是相等的,在这种场合下就不能简单粗暴的使用二进制比较规则了,这时候我们可以这样指<br>定比较规则:</p>
+<ol>
+<li>将两个大小写不同的字符全都转为大写或者小写。</li>
+<li>再比较这两个字符对应的二进制数据。<br>​</li>
+</ol>
+<p>这是一种稍微复杂一点点的比较规则,但是实际生活中的字符不止英文字符一种,比如我们的汉字有几万之多,对于某一种字符集来说,比较两个字符大小的规则可以制定出很多种,也就是说同一种字符集可以有多种比较规则,我们稍后就要介绍各种现实生活中用的字符集以及它们的一些比较规则。</p>
+<h2 id="MySQL-中支持的字符集和排序规则"><a href="#MySQL-中支持的字符集和排序规则" class="headerlink" title="MySQL 中支持的字符集和排序规则"></a>MySQL 中支持的字符集和排序规则</h2><p>​</p>
+<ul>
+<li>MySQL 中的 utf8 和 utf8mb4</li>
+</ul>
+<p>​</p>
+<p>我们上边说 utf8 字符集表示一个字符需要使用 1<del>4 个字节,但是我们常用的一些字符使用 1</del>3 个字节就可以表<br>示了。而在 MySQL 中字符集表示一个字符所用最大字节长度在某些方面会影响系统的存储和性能,所以设计<br>MySQL 的大叔偷偷的定义了两个概念:</p>
+<ul>
+<li>utf8mb3 :阉割过的 utf8 字符集,只使用 1~3 个字节表示字符。</li>
+<li>utf8mb4 :正宗的 utf8 字符集,使用 1~4 个字节表示字符。</li>
+</ul>
+<p>​</p>
+<p>有一点需要大家十分的注意,在 MySQL 中 utf8 是 utf8mb3 的别名,所以之后在 MySQL 中提到 utf8 就意味着使<br>用 1~3 个字节来表示一个字符,如果大家有使用 4 字节编码一个字符的情况,比如存储一些 emoji 表情啥的,那请<br>使用 utf8mb4 。<br>​</p>
+<p>字符集查看</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> (<span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span>|<span class="hljs-keyword">CHARSET</span>) [<span class="hljs-keyword">LIKE</span> 匹配的模式];<br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625906763082-adf29711-10e3-42fb-a215-f0e9e49ef57a.png#clientId=u0148d4bb-e7f9-4&from=paste&height=436&id=ud51ffd77&margin=%5Bobject%20Object%5D&name=image.png&originHeight=871&originWidth=738&originalType=binary%E2%88%B6=1&size=165696&status=done&style=none&taskId=u952da62b-a3e3-4e28-b409-f9d69346854&width=369" srcset="/img/loading.gif" lazyload alt="image.png"><br>注意返回结果中的最后一列 Maxlen ,它代表该种字符集表示<strong>一个字符最多需要几个字节</strong>。<br>​</p>
+<p>比较规则的查看</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">COLLATION</span> <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;utf8\_%&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625908369548-071b656f-77ec-4cea-a953-d807cc200e74.png#clientId=u0148d4bb-e7f9-4&from=paste&height=309&id=u30095fe7&margin=%5Bobject%20Object%5D&name=image.png&originHeight=618&originWidth=733&originalType=binary%E2%88%B6=1&size=101024&status=done&style=none&taskId=u6ea0dacc-354e-4f53-aecd-9174733ef5a&width=366.5" srcset="/img/loading.gif" lazyload alt="image.png"><br><strong>比较规则的命名的规律</strong><br>具体规律如下:</p>
+<ul>
+<li>比较规则名称以与其关联的字符集的名称开头。如上图的查询结果的比较规则名称都是以 utf8 开头的。</li>
+<li>后边紧跟着该比较规则主要作用于哪种语言,比如 utf8_polish_ci 表示以波兰语的规则比较,utf8_spanish_ci 是以西班牙语的规则比较, utf8_general_ci 是一种通用的比较规则。</li>
+<li>名称后缀意味着该比较规则是否区分语言中的重音、大小写啥的,具体可以用的值如下:</li>
+</ul>
+<figure class="highlight gherkin"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gherkin">|<span class="hljs-string">后缀</span>|<span class="hljs-string">英文释义</span>|<span class="hljs-string">描述</span>|<span class="hljs-string"> </span>|<span class="hljs-string">:--:</span>|<span class="hljs-string">:--:</span>|<span class="hljs-string">:--:</span>|<span class="hljs-string"> </span>|<span class="hljs-string"> _ai </span>|<span class="hljs-string"> accent insensitive </span>|<span class="hljs-string">不区分重音</span>|<span class="hljs-string"> </span>|<span class="hljs-string"> _as </span>|<span class="hljs-string"> accent sensitive </span>|<span class="hljs-string">区分重</span><br><span class="hljs-string">音</span>|<span class="hljs-string"> </span>|<span class="hljs-string"> _ci </span>|<span class="hljs-string"> case insensitive </span>|<span class="hljs-string">不区分大小写</span>|<span class="hljs-string"> </span>|<span class="hljs-string"> _cs </span>|<span class="hljs-string"> case sensitive </span>|<span class="hljs-string">区分大小写</span>|<span class="hljs-string"> </span>|<span class="hljs-string"> _bin </span>|<span class="hljs-string"> binary </span>|<span class="hljs-string">以二进制</span><br><span class="hljs-string">方式比较</span>|<br><br></code></pre></div></td></tr></table></figure>
+
+<p>比如 utf8_general_ci 这个比较规则是以 ci 结尾的,说明不区分大小写。<br>每种字符集对应若干种比较规则,每种字符集都有一种默认的比较规则, SHOW COLLATION 的返回结果中的<br>Default 列的值为 YES 的就是该字符集的默认比较规则,比方说 utf8 字符集默认的比较规则就是<br>utf8_general_ci 。<br>​</p>
+<p>MySQL 有 4 个级别的字符集和比较规则,分别是:</p>
+<ul>
+<li>服务器级别</li>
+<li>数据库级别</li>
+<li>表级别</li>
+<li>列级别</li>
+</ul>
+<p>​</p>
+<p>查看比较规则系统变量</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">VARIABLES</span> <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;collation_server&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p>指定比较规则和修改比较规则</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-comment">#数据库级别</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> 数据库名<br>[[<span class="hljs-keyword">DEFAULT</span>] <span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> 字符集名称]<br>[[<span class="hljs-keyword">DEFAULT</span>] <span class="hljs-keyword">COLLATE</span> 比较规则名称];<br><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">DATABASE</span> 数据库名<br>[[<span class="hljs-keyword">DEFAULT</span>] <span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> 字符集名称]<br>[[<span class="hljs-keyword">DEFAULT</span>] <span class="hljs-keyword">COLLATE</span> 比较规则名称];<br><br><span class="hljs-comment">#表级别</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> 表名 (列的信息)<br>[[<span class="hljs-keyword">DEFAULT</span>] <span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> 字符集名称]<br>[<span class="hljs-keyword">COLLATE</span> 比较规则名称]]<br><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名<br>[[<span class="hljs-keyword">DEFAULT</span>] <span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> 字符集名称]<br>[<span class="hljs-keyword">COLLATE</span> 比较规则名称]<br><br><span class="hljs-comment">#列级别</span><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> 表名(<br>列名 字符串类型 [<span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> 字符集名称] [<span class="hljs-keyword">COLLATE</span> 比较规则名称],<br>其他列...<br>);<br><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 <span class="hljs-keyword">MODIFY</span> 列名 字符串类型 [<span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> 字符集名称] [<span class="hljs-keyword">COLLATE</span> 比较规则名称];<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>character_set_database 和 collation_database 这两个系统变量是只读的,我们不能通过修改这两个变量的值而改变当前数据库的字符集和比较规则</strong><br>​</p>
+<ul>
+<li>只修改字符集,则比较规则将变为修改后的字符集默认的比较规则。</li>
+<li>只修改比较规则,则字符集将变为修改后的比较规则对应的字符集</li>
+</ul>
+<p>​</p>
+<ul>
+<li>如果创建或修改列时没有显式的指定字符集和比较规则,则该列默认用表的字符集和比较规则</li>
+<li>如果创建或修改表时没有显式的指定字符集和比较规则,则该表默认用数据库的字符集和比较规则</li>
+<li>如果创建或修改数据库时没有显式的指定字符集和比较规则,则该数据库默认用服务器的字符集和比较规则</li>
+</ul>
+<p>​</p>
+<p>​</p>
+<p>我们知道字符 ‘我’ 在 utf8 字符集编码下的字节串长这样: 0xE68891 ,如果一个程序把这个字节串发送到另一个程序里,另一个程序用不同的字符集去解码这个字节串,假设使用的是 gbk 字符集来解释这串字节,解码过程<br>就是这样的:<br>​</p>
+<ol>
+<li>首先看第一个字节 0xE6 ,它的值大于 0x7F (十进制:127),说明是两字节编码,继续读一字节后是 0xE688 ,然后从 gbk 编码表中查找字节为 0xE688 对应的字符,发现是字符 ‘鎴’</li>
+<li>继续读一个字节 0x91 ,它的值也大于 0x7F ,再往后读一个字节发现木有了,所以这是半个字符。</li>
+<li>所以 0xE68891 被 gbk 字符集解释成一个字符 ‘鎴’ 和半个字符。<br>​</li>
+</ol>
+<p>假设用 iso-8859-1 ,也就是 latin1 字符集去解释这串字节,解码过程如下: 1.先读第一个字节 0xE6 ,它对应的 latin1 字符为 æ 。 2.再读第二个字节 0x88 ,它对应的 latin1 字符为 ˆ 。 3.再读第二个字节 0x91 ,它对应的 latin1 字符为 ‘ 。 4.所以整串字节 0xE68891 被 latin1 字符集解释后的字符串就是 ‘æˆ‘’<br>可见,如果对于同一个字符串编码和解码使用的字符集不一样,会产生意想不到的结果,作为人类的我们看上去就像是产生了乱码一样。<br>​</p>
+<p>​</p>
+<p><strong>MySQL 中字符集的转换</strong><br>我们知道从客户端发往服务器的请求本质上就是一个字符串,服务器向客户端返回的结果本质上也是一个字符串,而字符串其实是使用某种字符集编码的二进制数据。这个字符串可不是使用一种字符集的编码方式一条道走到黑的,从发送请求到返回结果这个过程中伴随着多次字符集的转换,在这个过程中会用到 3 个系统变量.<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625914411034-130a1ff6-4e94-42e1-86bf-9b3547d2c234.png#clientId=u0148d4bb-e7f9-4&from=paste&height=79&id=uc0e563c3&margin=%5Bobject%20Object%5D&name=image.png&originHeight=158&originWidth=837&originalType=binary%E2%88%B6=1&size=25570&status=done&style=none&taskId=ufdc3e471-5e2b-47e3-887c-9408044760b&width=418.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>处理过程<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625924945322-cbd9fa86-2a4e-46c8-9a81-e0b135478a1d.png#clientId=u0148d4bb-e7f9-4&from=paste&height=216&id=u8adbdd87&margin=%5Bobject%20Object%5D&name=image.png&originHeight=432&originWidth=899&originalType=binary%E2%88%B6=1&size=86425&status=done&style=none&taskId=ub28e123b-d04f-4cb3-8a9a-0f28b4aa031&width=449.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>为了方便我们设置， MySQL 提供了一条非常简便的语句：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">SET NAMES 字符集名;<br></code></pre></div></td></tr></table></figure>
+
+<p>这一条语句产生的效果和我们执行这 3 条的效果是一样的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">SET character_set_client = 字符集名;<br>SET character_set_connection = 字符集名;<br>SET character_set_results = 字符集名;<br></code></pre></div></td></tr></table></figure>
+
+<p>比方说我的客户端使用的是 utf8 字符集，所以需要把这几个系统变量的值都设置为 utf8 ：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">SET NAMES utf8;<br></code></pre></div></td></tr></table></figure>
+
+<h1 id="第-4-章从一条记录说起-InnoDB-记录结构"><a href="#第-4-章从一条记录说起-InnoDB-记录结构" class="headerlink" title="第 4 章从一条记录说起-InnoDB 记录结构"></a>第 4 章从一条记录说起-InnoDB 记录结构</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>InnoDB 是一个将表中的数据存储到磁盘上的存储引擎，所以即使关机后重启我们的数据还是存在的。而真正处 理数据的过程是发生在内存中的，所以需要把磁盘中的数据加载到内存中，如果是处理写入或修改请求的话，还 需要把内存中的内容刷新到磁盘上。而我们知道读写磁盘的速度非常慢，和内存读写差了几个数量级，所以当我 们想从表中获取某些记录时， InnoDB 存储引擎需要一条一条的把记录从磁盘上读出来么？不，那样会慢死， InnoDB 采取的方式是：将数据划分为若干个页，以页作为磁盘和内存之间交互的基本单位，InnoDB 中页的大小 一般为 16 KB。也就是在一般情况下，一次最少从磁盘中读取 16KB 的内容到内存中，一次最少把内存中的 16KB<br>内容刷新到磁盘中。</p>
+<h2 id="InnoDB-行格式"><a href="#InnoDB-行格式" class="headerlink" title="InnoDB 行格式"></a>InnoDB 行格式</h2><p>我们平时是以记录为单位来向表中插入数据的，这些记录在磁盘上的存放方式也被称为 行格式 或者 记录格式 。 设计 InnoDB 存储引擎的大叔们到现在为止设计了 4 种不同类型的 行格式 ，分别是 Compact 、 Redundant 、 Dynamic 和 Compressed 行格式，随着时间的推移，他们可能会设计出更多的行格式，但是不管怎么变，在原理上大体都是相同的。</p>
+<ol>
+<li>页是 MySQL 中磁盘和内存交互的基本单位，也是 MySQL 是管理存储空间的基本单位。</li>
+<li>指定和修改行格式的语法如下：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">CREATE TABLE 表名 (列的信息) ROW_FORMAT=行格式名称<br>ALTER TABLE 表名 ROW_FORMAT=行格式名称<br></code></pre></div></td></tr></table></figure>
+
+<ol start="3">
+<li>InnoDB 目前定义了 4 种行格式<br>COMPACT 行格式<br>具体组成如图：<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625935408415-b27599d5-55e1-439b-a4e3-18d0a74b96d7.png#clientId=u131e1089-3e9d-4&from=paste&height=288&id=udc877275&margin=%5Bobject%20Object%5D&name=image.png&originHeight=288&originWidth=896&originalType=binary%E2%88%B6=1&size=59097&status=done&style=none&taskId=uf3509ef5-1446-427e-b041-7bc7b594d5a&width=896" srcset="/img/loading.gif" lazyload alt="image.png"><br>Redundant 行格式<br>具体组成如图：<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625935453817-d30600ac-c4fd-49a7-b538-01aa836a23e6.png#clientId=u131e1089-3e9d-4&from=paste&height=470&id=ubf7179e2&margin=%5Bobject%20Object%5D&name=image.png&originHeight=470&originWidth=867&originalType=binary%E2%88%B6=1&size=103570&status=done&style=none&taskId=u61f272d2-6100-47cb-95b8-2aaecf017e0&width=867" srcset="/img/loading.gif" lazyload alt="image.png"></li>
+</ol>
+<h2 id="Dynamic-和-Compressed-行格式"><a href="#Dynamic-和-Compressed-行格式" class="headerlink" title="Dynamic 和 Compressed 行格式"></a>Dynamic 和 Compressed 行格式</h2><p>这两种行格式类似于 COMPACT 行格式 ，只不过在处理行溢出数据时有点儿分歧，它们不会在记录的真实<br>数据处存储字符串的前 768 个字节，而是把所有的字节都存储到其他页面中，只在记录的真实数据处存<br>储其他页面的地址。<br>另外， Compressed 行格式会采用压缩算法对页面进行压缩。<br>​</p>
+<ol start="4">
+<li>一个页一般是 16KB ，当记录中的数据太多，当前页放不下的时候，会把多余的数据存储到其他页中，这种<br>现象称为 行溢出 。</li>
+</ol>
+<h1 id="第-5-章盛放记录的大盒子-InnoDB-数据页结构"><a href="#第-5-章盛放记录的大盒子-InnoDB-数据页结构" class="headerlink" title="第 5 章盛放记录的大盒子-InnoDB 数据页结构"></a>第 5 章盛放记录的大盒子-InnoDB 数据页结构</h1><p>p63</p>
 <h1 id="第-6-章快速查询的秘籍-B-树索引"><a href="#第-6-章快速查询的秘籍-B-树索引" class="headerlink" title="第 6 章快速查询的秘籍-B+树索引"></a>第 6 章快速查询的秘籍-B+树索引</h1><p>#</p>
 <h1 id="第-7-章好东西也得先学会怎么用-B-树索引的使用"><a href="#第-7-章好东西也得先学会怎么用-B-树索引的使用" class="headerlink" title="第 7 章好东西也得先学会怎么用-B+树索引的使用"></a>第 7 章好东西也得先学会怎么用-B+树索引的使用</h1><p>#</p>
 <h1 id="第-8-章数据的家-MySQL-的数据目录"><a href="#第-8-章数据的家-MySQL-的数据目录" class="headerlink" title="第 8 章数据的家-MySQL 的数据目录"></a>第 8 章数据的家-MySQL 的数据目录</h1><p>#</p>
@@ -411,9 +591,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/07/yuque/hmar21/">
+                      <a href="/2021/07/06/yuque/lsztt4/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">读书笔记篇-Linux就该这么学</span>
+                        <span class="hidden-mobile">中间件篇-Nginx高性能HTTP服务器</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
