@@ -60,6 +60,7 @@ comment: 'utterances'
         <td><a href="https://blog.ccknbc.cc">CC的部落格</a></td>
         <td><a href="https://www.mgxnb.club">M-GX</a></td>
         <td><a href="https://goopher97-github-io.vercel.app">GOOPHER's Blog</a></td>
+        <td><a href="https://xyz922.github.io/">xyz922</a></td>
     </tr>
     <tr>
         <td><a href="https://dreamylost.cn/">梦境迷离</a></td>
