@@ -110,6 +110,15 @@ lazyload: true
         <ul>
         <li>
            <div class="bullet pink"></div>
+           <div class="date">2021年08月27日</div>
+           <div class="desc">
+             <h3>记录一下</h3>
+             <h4>日复一日</h4>
+             <img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1630214231400-527b1a51-8311-466b-bf62-3f358d9d3db4.jpeg">
+             </div>
+         </li>            
+        <li>
+           <div class="bullet pink"></div>
            <div class="date">2021年07月12日</div>
            <div class="desc">
              <h3>下班时刻</h3>
