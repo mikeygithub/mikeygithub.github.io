@@ -579,7 +579,7 @@ lazyload: true
                     <img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/photo/39799393c2bb775a.jpg">
                 </div>
                 </div>
-            </li>blob:https://www.yuque.com/460ca670-01b0-4d33-aa2f-f63c60874bf2
+            </li>
             <li>
                 <div class="bullet pink"></div>
                 <div class="date">2019年08月15日</div>
