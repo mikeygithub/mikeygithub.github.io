@@ -504,6 +504,162 @@ public class Elasticsearch {
 
 [Elasticsearch: 权威指南](https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html)
 
+# 相关工具
+一、基础类工具
+
+1、Head插件
+
+  ES集群状态查看、索引数据查看、ES DSL实现（增、删、改、查），比较适用json串的格式化
+
+  参考地址：http://mobz.github.io/elasticsearch-head/
+
+2、kibana工具
+
+  除了支持各种数据的可视化之外，最重要的是：支持Dev Tool进行RESTFUL API增删改查操作。
+  ——比Postman工具和curl都方便很多。
+
+  参考地址：https://www.elastic.co/products/kibana
+
+3、ElasticHD工具
+
+  支持sql转DSL
+
+  参考地址：https://github.com/360EntSecGroup-Skylar/ElasticHD
+
+4、cerebro工具
+
+  参考地址：https://github.com/lmenezes/cerebro
+
+5、Elaticsearch-HQ工具
+
+  管理elasticsearch集群以及通过web界面来进行查询操作
+
+  参考地址：https://github.com/royrusso/elasticsearch-HQ
+
+6、Elaticsearch-migration工具
+
+  支持多版本间数据迁移，使用sroll + bulk
+
+  参考地址：https://github.com/medcl/elasticsearch-migration
+
+7、Elaticsearch-Exporter
+
+  将ES中的数据向其它导出的脚本实现
+
+  参考地址：https://github.com/mallocator/Elasticsearch-Exporter
+
+8、Elaticsearch-dump
+
+  移动和保存索引的工具
+
+  参考地址：https://github.com/taskrabbit/elasticsearch-dump
+
+二、集群数据处理工具
+
+1、Elaticsearch-curator
+
+  es官方工具，可以管理索引数据保留时间
+
+  参考地址：https://pypi.python.org/pypi/elasticsearch-curator
+
+  ES6.3有Index LifeCycle Management ，可以管理索引的保存期限
+
+三、安全类工具
+
+1、x-pack工具
+
+  参考地址：https://www.elastic.co/downloads/x-pack
+
+2、search-guard第三方工具
+
+  Search Guard  是 Elasticsearch 的安全插件。它为后端系统（如LDAP或Kerberos）提供身份验证和授权，并向Elasticsearch添加审核日志记录和文档/字段级安全性。
+
+  Search Guard所有基本安全功能（非全部）都是免费的，并且内置在Search Guard中。  Search Guard支持OpenSSL并与Kibana和logstash配合使用。
+
+  参考地址：https://github.com/floragunncom/search-guard
+
+四、可视化类工具
+
+1、grafana工具
+
+  参考地址：https://grafana.com/grafana
+
+  grafana工具与kibana可视化区别： 
+
+如果你的业务线数据较少且单一，可以用kibana做出很棒很直观的数据分析。
+
+而如果你的数据源很多并且业务线也多，建议使用grafana，可以减少你的工作量
+
+   对比：https://www.zhihu.com/question/54388690
+
+五、自动化运维工具
+
+1、ansible
+
+  参考地址：https://github.com/elastic/ansible-elasticsearch
+
+2、puppet
+
+  参考地址：https://github.com/elastic/puppet-elasticsearch
+
+3、cookbook
+
+  参考地址：https://github.com/elastic/cookbook-elasticsearch
+
+六、类SQL查询工具
+
+1、Elaticsearch-SQL工具
+
+  参考地址：https://github.com/NLPchina/elasticsearch-sql
+
+  ES8.3+会集成SQL
+
+七、增强类工具
+
+1、conveyor工具
+
+  kibna插件——图形化数据导入工具
+
+  参考地址：http://t.cn/REOhwGT
+
+2、kibana_markdown_doc_view工具
+
+  Kibana文档查看强化插件，以markdown格式展示文档
+
+  参考地址：http://t.cn/REOhKgB
+
+3、indices_view工具
+
+  indices_view 是新蛋网开源的一个 kibana APP 插件项目，可以安装在 kibana 中，快速、高效、便捷的查看elasticsearch 中 indices 相关信息
+
+  参考地址：https://gitee.com/newegg/indices_view
+
+4、dremio工具
+
+  支持sql转DSL，
+
+  支持elasticsearch、mysql、oracle、mongo、csv等多种格式可视化处理；
+
+  支持ES多表的Join操作
+
+  参考地址：https://www.dremio.com/
+
+八、报警类工具
+
+1、elastalert
+
+  ElastAlert 是 Yelp 公司开源的一套用 Python2.6 写的报警框架。属于后来 Elastic.co 公司出品的 Watcher 同类产品。
+
+  参考地址：http://elastalert.readthedocs.org/
+
+2、sentinl
+
+  SENTINL 6扩展了Siren Investigate和Kibana的警报和报告功能，使用标准查询，可编程验证器和各种可配置操作来监控，通知和报告数据系列更改 - 将其视为一个独立的“Watcher” “报告”功能（支持PNG / PDF快照）。
+
+  SENTINL还旨在简化在Siren Investigate / Kibana 6.x中通过其本地应用程序界面创建和管理警报和报告的过程，或通过在Kibana 6.x +中使用本地监视工具来创建和管理警报和报告的过程。
+
+  参考地址：https://github.com/sirensolutions/sentinl
+
 
 # 参考资料
 

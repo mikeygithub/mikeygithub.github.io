@@ -17,6 +17,8 @@ finalShell
 
 iTerm
 
+Termius
+
 chrom
 
 firefox

@@ -7,8 +7,8 @@ branches:
   only:
   - src
 script:
-- yuque-hexo clean
-- yuque-hexo sync
+- yuque-hexo-lyrics clean
+- yuque-hexo-lyrics sync
 - hexo generate
 deploy:
   provider: pages
@@ -19,8 +19,8 @@ deploy:
   on:
     branch: src
   local-dir: public
-notifications:
-  email:
-  - biaogejiushibiao@qq.com
-  on_success: change
-  on_failure: always
+#notifications:
+#  email:
+#  - biaogejiushibiao@qq.com
+#  on_success: always
+#  on_failure: always
