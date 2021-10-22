@@ -476,6 +476,11 @@ admin.config-center
 admin.metadata-report.address
 ```
 
+# 性能方面
+
+
+
+
 # 参考资料
 
 [官方文档](http://dubbo.apache.org/zh/docs/v2.7/)  

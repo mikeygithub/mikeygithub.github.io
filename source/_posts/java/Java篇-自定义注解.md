@@ -215,7 +215,7 @@ public class AnnotationApplication {
 
 5.使用效果
 
-![打印日志](https://i.loli.net/2021/05/03/I9fQXR4DCdtlsW8.png)
+![打印日志](https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/I9fQXR4DCdtlsW8.png)
 
 # 参考资料
 
