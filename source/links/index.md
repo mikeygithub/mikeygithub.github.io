@@ -19,6 +19,7 @@ comment: 'utterances'
     <tr>
         <td><a href="https://tech.meituan.com/">美团技术团队</a></td>
         <td><a href="https://codetop.cc">笔试算法高频题</a></td>
+        <td><a href="https://github.com/chefyuan/algorithm-base">algorithm-base</a></td>
         <td><a href="https://leetcode-cn.com/">LeetCode官网</a></td>
         <td><a href="https://mirrors.huaweicloud.com/">华为开源镜像站</a></td>
         <td><a href="https://www.katacoda.com/">Katacoda</a></td>
