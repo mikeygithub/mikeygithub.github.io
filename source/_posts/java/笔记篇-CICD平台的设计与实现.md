@@ -1,7 +1,7 @@
 ---
 title: 笔记篇-CICD平台的设计与实现
 index_img: 'https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/cicd.jpeg'
-hide: false
+hide: true
 date: 2021-04-27 23:35:38
 category: DevOps
 tags: CI/CD
