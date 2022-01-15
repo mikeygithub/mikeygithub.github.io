@@ -1,5 +1,12 @@
-name: BLOG-CICD
-on: [push, repository_dispatch]
+name: deploy
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - main
+  repository_dispatch:
+    types: [deploy]
 jobs:
   blog-cicd:
     name: Hexo build & deploy
@@ -25,7 +32,9 @@ jobs:
           npm install hexo-cli -g
           npm install yuque-hexo -g
           npm install
-          yuque-hexo sync
+		      yuque-hexo-lyrics clean
+		      yuque-hexo-lyrics sync
+		      hexo generate
       - name: Generate files
         run: hexo generate
       - name: Deploy
