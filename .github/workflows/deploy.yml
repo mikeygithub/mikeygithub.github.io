@@ -1,0 +1,43 @@
+name: deploy
+on:
+  push:
+    branches:
+      - main
+  repository_dispatch:
+    types: [deploy]
+jobs:
+  blog-cicd:
+    name: Hexo build & deploy
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+    steps:
+      - name: Checkout codes
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        env:
+          YUQUE_TOKEN: ${{ secrets.YUQUE_TOKEN }}
+        run: |
+          npm install hexo-cli -g
+          npm install yuque-hexo -g
+          npm install yuque-hexo-lyrics -g
+          npm install
+      - name: Sync YuQue
+        run: yuque-hexo-lyrics sync
+      - name: Generate files
+        run: hexo generate
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: master
+          publish_dir: ./public
