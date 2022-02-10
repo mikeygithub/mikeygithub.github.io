@@ -26,9 +26,10 @@ comment: 'utterances'
         <td><a href="https://www.orchome.com/">Orchome</a></td>
         <td><a href="https://snailclimb.gitee.io/javaguide/">JavaGuide</a></td>
         <td><a href="https://www.geeksforgeeks.org/">geeksforgeeks</a></td>
-        
+    </tr>
+    <tr>
+        <td><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">usfca</a></td>
         <td><a href="https://github.com/SharingSource/LogicStack-LeetCode/wiki">宫水三叶的刷题日记</a></td>
-        
     </tr>
 </table>
 <p class="note note-primary">创作</p>
