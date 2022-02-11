@@ -29,7 +29,7 @@ comment: 'utterances'
     </tr>
     <tr>
         <td><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">usfca</a></td>
-        <td><a href="https://github.com/SharingSource/LogicStack-LeetCode/wiki">宫水三叶的刷题日记</a></td>
+        <td><a href="https://github.com/SharingSource/LogicStack-LeetCode/wiki">宫水三叶</a></td>
     </tr>
 </table>
 <p class="note note-primary">创作</p>
