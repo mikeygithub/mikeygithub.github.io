@@ -26,8 +26,6 @@ sticky: 100
 
 <p class="note note-primary">标签</p>
 
-可选便签：
-
 primary
 secondary
 success
