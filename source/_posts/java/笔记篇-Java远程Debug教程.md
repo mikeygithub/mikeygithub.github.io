@@ -45,6 +45,10 @@ tags: Debug
 Jdk1.7之前: -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n
 jdk1.7之后: -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
 ```
+如果是外部Tomcat部署,在Tomcat的bin目录下start.sh文件头部加入
+```
+declare -x CATALINA_OPTS="-server -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000"
+```
 
 ![添加远程调试](https://i.loli.net/2021/04/29/D1AzFu7TsnZikcO.png)
 
