@@ -2,7 +2,7 @@
 title: 数据库篇-MySQL底层实现机制
 date: 2020-06-08 22:45:33
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/mysql.jpeg
-category: 数据库
+category: 数据库篇
 tags: MySQL
 ---
 
@@ -303,4 +303,3 @@ CAP 原则又称 CAP 定理,指的是在一个分布式系统中, Consistency(�
 - [Mysql Explain 详解](https://my.oschina.net/u/585635/blog/4547089)
 
 
- 

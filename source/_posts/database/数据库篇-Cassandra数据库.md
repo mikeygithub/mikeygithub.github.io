@@ -2,7 +2,7 @@
 title: 数据库篇-Cassandra数据库
 date: 2020-08-26 16:43:57
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/Cassandra.jpg
-category: 数据库
+category: 数据库篇
 tags: Cassandra
 ---
 
@@ -211,4 +211,3 @@ MemTable:如果 memtable 有目标分区数据,这个数据会被读出来并且
 # 参考资料
 
 
- 

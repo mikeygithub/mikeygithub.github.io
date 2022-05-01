@@ -2,7 +2,7 @@
 title: 数据库篇-Hbase
 date: 2020-08-19 00:06:34
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase.jpeg
-category: 数据库
+category: 数据库篇
 tags: Hbase
 ---
 

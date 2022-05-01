@@ -25,11 +25,11 @@ comment: 'utterances'
         <td><a href="https://www.katacoda.com/">Katacoda</a></td>
         <td><a href="https://www.orchome.com/">Orchome</a></td>
         <td><a href="https://snailclimb.gitee.io/javaguide/">JavaGuide</a></td>
-        <td><a href="https://www.geeksforgeeks.org/">geeksforgeeks</a></td>
     </tr>
     <tr>
-        <td><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">usfca</a></td>
         <td><a href="https://github.com/SharingSource/LogicStack-LeetCode/wiki">宫水三叶</a></td>
+        <td><a href="https://www.geeksforgeeks.org/">geeksforgeeks</a></td>
+        <td><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">usfca</a></td>
     </tr>
 </table>
 <p class="note note-primary">创作</p>
@@ -57,11 +57,11 @@ comment: 'utterances'
 <p class="note note-primary">友链</p>
 <table>
     <tr>
+        <td><a href="https://blog.csdn.net/significantfrank">张建飞</a></td>
         <td><a href="https://sunbufu.vercel.app/posts/">孙不服的博客</a></td>
         <td><a href="https://hiwannz.com/">见字如面</a></td>
         <td><a href="https://you.ci/">有次博客</a></td>
         <td><a href="https://geekplayers.com/">极客玩家大白</a></td>
-        <td><a href="https://riris.cn">Bryce's Club</a></td>
         <td><a href="https://blog.dhbxs.top">灯火不休时</a></td>
         <td><a href="https://blog.ccknbc.cc">CC的部落格</a></td>
         <td><a href="https://www.mgxnb.club">M-GX</a></td>
@@ -69,8 +69,10 @@ comment: 'utterances'
     </tr>
     <tr>
         <td><a href="https://dreamylost.cn/">梦境迷离</a></td>
+        <td><a href="https://riris.cn">Bryce's Club</a></td>
         <td><a href="https://xyz922.github.io/">xyz922</a></td>
         <td><a href="https://www.ruanx.net">Pion1eer</a></td>
+        <td><a href="https://www.52txr.cn/">陶小桃Blog</a></td>
         <td><a href="https://zhile.io/">知了</a></td>
     </tr>
 </table>

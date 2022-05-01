@@ -3,7 +3,7 @@ title: 数据库篇-SQL之COUNT函数详解
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/sql-count.png
 hide: false
 date: 2021-01-11 23:46:05
-category: 数据库
+category: 数据库篇
 tags: 聚合函数
 ---
 
@@ -85,4 +85,3 @@ count(0)=count(1)=count(*)
 10、COUNT(*)、COUNT(1)和COUNT(字段名)的执行过程是怎样的？
 
 
- 

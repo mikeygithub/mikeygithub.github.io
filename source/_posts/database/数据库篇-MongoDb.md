@@ -2,7 +2,7 @@
 title: 数据库篇-MongoDb
 date: 2020-08-26 16:01:07
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/mogodb.jpg
-category: 数据库
+category: 数据库篇
 tags: MongoDb
 ---
 
@@ -38,4 +38,3 @@ MongoDB 将数据存储为一个文档,数据结构由键值(key=>value)对组�
 - MongoDB 允许在服务端执行脚本,可以用 Javascript 编写某个函数,直接在服务端执行,也可以把函数的定义存储在服务端,下次直接调用即可。
 
 
- 

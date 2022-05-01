@@ -2,7 +2,7 @@
 title: 算法篇-BFPRT算法
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/bfprt-logo.png
 date: 2020-11-30 16:36:50
-category: 算法学习
+category: 算法相关
 tags: 算法
 ---
 
@@ -292,4 +292,3 @@ BFPRT 算法在最坏情况下的时间复杂度是 O(n)，下面予以证明。
 - [bfprt算法](https://blog.csdn.net/softimite_zifeng/article/details/77103544)
 
 
- 
