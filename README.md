@@ -73,3 +73,9 @@ public class ReadMusicList {
 
 
 </details>
+
+
+更新主题时需要绕过防盗链获取图片
+```html
+<meta name="referrer" content="no-referrer"/>
+```
