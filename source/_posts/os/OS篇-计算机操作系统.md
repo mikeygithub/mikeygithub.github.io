@@ -1,7 +1,7 @@
 ---
 title: OS篇-计算机操作系统
 index_img: https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/os.png
-hide: false
+hide: true
 date: 2018-01-18 13:45:32
 category: 操作系统
 tags: 操作系统
@@ -2850,4 +2850,3 @@ FAT技术
 [《《操作系统真象还原》》]()   
 
 
- 
