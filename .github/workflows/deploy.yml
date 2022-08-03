@@ -36,7 +36,7 @@ jobs:
       - name: Clean YuQue
         run: yuque-hexo-lyrics clean
       - name: Sync YuQue
-        run: yuque-hexo-lyrics sync
+        run: YUQUE_TOKEN=${{ secrets.YUQUE_TOKEN }} yuque-hexo-lyrics sync
       - name: Generate files
         run: hexo generate
       - name: Deploy
