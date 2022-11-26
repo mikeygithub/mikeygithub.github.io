@@ -74,5 +74,6 @@ comment: 'utterances'
         <td><a href="https://www.ruanx.net">Pion1eer</a></td>
         <td><a href="https://www.52txr.cn/">陶小桃Blog</a></td>
         <td><a href="https://zhile.io/">知了</a></td>
+        <td><a href="http://blog.cleancoder.com/">Clean Code</a></td>
     </tr>
 </table>
