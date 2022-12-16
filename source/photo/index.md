@@ -185,8 +185,8 @@ lazyload: true
            <div class="date">2021年06月28日</div>
            <div class="desc">
              <h3>拨穗仪式</h3>
-             <h4>和校长位移的一张合影</h4>
-             <img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1625298295992-299990cd-9bf4-4644-9af9-432454be5a08.jpeg">
+             <h4>和校长唯一的一张合影</h4>
+             <img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671164299966-2336a1f5-89d9-4ccd-bfbd-78d40b645961.png">
              </div>
          </li>                
         <li>
@@ -195,7 +195,7 @@ lazyload: true
            <div class="desc">
              <h3>结束啦</h3>
              <h4>开启下一段征程</h4>
-             <img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1625291394018-10e00560-875f-4acb-8562-1ca12a9fece8.jpeg">
+             <img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671164280710-b08d1ccc-0d7c-4b5c-96bf-fde26460657c.png">
              </div>
          </li>    
         <li>
@@ -204,7 +204,7 @@ lazyload: true
            <div class="desc">
              <h3>荣誉证书</h3>
              <h4>在学校的最后一张证书</h4>
-             <img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1624536271974-d05b02a1-677d-4964-bb3e-5f8083dd8e05.jpeg">
+             <img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671164240555-f44320a3-24bc-4aa2-8c84-fccf1ad3e713.png">
              </div>
          </li>    
         <li>
@@ -455,7 +455,7 @@ lazyload: true
                     <h3>荣誉证书</h3>
                     <h4>大学生涯结束了</h4>
             <div class="img-father">
-                    <img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/photo/IMG_20210124_100400.jpg">
+                    <img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1671164333634-73409877-159d-489f-b865-5a0b5be824d2.jpeg">
                 </div>
                 </div>
             </li>
