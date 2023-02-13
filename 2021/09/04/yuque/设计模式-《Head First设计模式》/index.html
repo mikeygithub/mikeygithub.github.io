@@ -1,0 +1,1194 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="记忆 慢一点，你理解的越多，需要记的就越少。 勤做练习，自己做笔记。 阅读 “There are no Dumb Questions” 部分 上床睡觉之前不要再看别的书了,或者至少不再看其他有难度的东西。 多喝水。 大声说出来。 听听你的大脑怎么说。 要有点感觉。 设计一些东西。  设计模式入门模拟鸭子应用利用接 R 如何? 软件开发的不变真理 不管当初软件设计得多好，一段时间之后，总是需要成长">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式-《Head First设计模式》">
+<meta property="og:url" content="https://mikeygithub.github.io/2021/09/04/yuque/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E3%80%8AHead%20First%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E3%80%8B/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="记忆 慢一点，你理解的越多，需要记的就越少。 勤做练习，自己做笔记。 阅读 “There are no Dumb Questions” 部分 上床睡觉之前不要再看别的书了,或者至少不再看其他有难度的东西。 多喝水。 大声说出来。 听听你的大脑怎么说。 要有点感觉。 设计一些东西。  设计模式入门模拟鸭子应用利用接 R 如何? 软件开发的不变真理 不管当初软件设计得多好，一段时间之后，总是需要成长">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1630771061438-c30b4345-f704-4079-9288-51c514df0d93.png">
+<meta property="article:published_time" content="2021-09-04T09:24:22.000Z">
+<meta property="article:modified_time" content="2023-02-13T05:46:21.996Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1630771061438-c30b4345-f704-4079-9288-51c514df0d93.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>设计模式-《Head First设计模式》 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="设计模式-《Head First设计模式》"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-09-04 17:24" pubdate>
+          2021年9月4日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          101 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">设计模式-《Head First设计模式》</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1630771061438-c30b4345-f704-4079-9288-51c514df0d93.png#clientId=uda065cad-5bac-4&from=paste&height=282&id=u8b2730ec&name=image.png&originHeight=524&originWidth=716&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=287750&status=done&style=none&taskId=uaf3d3464-3126-4909-b41f-9c96a066d81&title=&width=385" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="记忆"><a href="#记忆" class="headerlink" title="记忆"></a>记忆</h1><ul>
+<li>慢一点，你理解的越多，需要记的就越少。</li>
+<li>勤做练习，自己做笔记。</li>
+<li>阅读 “There are no Dumb Questions” 部分</li>
+<li>上床睡觉之前不要再看别的书了,或者至少不再看其他有难度的东西。</li>
+<li>多喝水。</li>
+<li>大声说出来。</li>
+<li>听听你的大脑怎么说。</li>
+<li>要有点感觉。</li>
+<li>设计一些东西。</li>
+</ul>
+<h1 id="设计模式入门"><a href="#设计模式入门" class="headerlink" title="设计模式入门"></a>设计模式入门</h1><h3 id="模拟鸭子应用"><a href="#模拟鸭子应用" class="headerlink" title="模拟鸭子应用"></a>模拟鸭子应用</h3><p>利用接 R 如何?</p>
+<h3 id="软件开发的不变真理"><a href="#软件开发的不变真理" class="headerlink" title="软件开发的不变真理"></a>软件开发的不变真理</h3><blockquote>
+<p>不管当初软件设计得多好，一段时间之后，总是需要成长与改变，否则软件就会“死亡”。</p>
+</blockquote>
+<p>分开变化和不变部分</p>
+<blockquote>
+<p>设计原则：找出应用中可能需要变化之处，把它们独立出来，不要和那些不需要变化的代码混在-起.</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1630828129560-0ca58039-8b3c-4b0c-b621-1e10e812e565.png#clientId=u503dcf01-fd51-4&from=paste&height=359&id=ud92875ba&name=image.png&originHeight=623&originWidth=1075&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=173418&status=done&style=none&taskId=u7015c863-8e3a-4ddd-98a5-396b9e13844&title=&width=619" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="设计鸭子的行为"><a href="#设计鸭子的行为" class="headerlink" title="设计鸭子的行为"></a>设计鸭子的行为</h3><blockquote>
+<p>设计原则: 针对接口编程，而不是针对实现编程。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1630828264093-b3666e6e-9c7b-473b-8255-dc0b937f4c6f.png#clientId=u503dcf01-fd51-4&from=paste&height=343&id=u887c2d31&name=image.png&originHeight=343&originWidth=467&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=36640&status=done&style=none&taskId=uc17e4122-60ed-41bf-964f-810b48a9069&title=&width=467" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>“针对接口编程”真正的意思是“针对超类型(supertype)编程”。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1630828392848-eaf87c88-dcd4-473d-a68c-1d124bf2e338.png#clientId=u503dcf01-fd51-4&from=paste&height=632&id=u5794ce64&name=image.png&originHeight=632&originWidth=1106&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=156803&status=done&style=none&taskId=ubc7d25b6-b62d-4558-a2e3-a4cb5b6fb9d&title=&width=1106" srcset="/img/loading.gif" lazyload alt="image.png"><br>这样的设计，可以让飞行和呱呱叫的动作被其他的对象复用，因为这些行为已经与鸭子类无关了。而我们可以新增一些行为不会影响到既有的行为类，也不会影响使用到飞行行为的鸭子类。</p>
+<h3 id="整合鸭子的行为"><a href="#整合鸭子的行为" class="headerlink" title="整合鸭子的行为"></a>整合鸭子的行为</h3><blockquote>
+<p>关键在于，鸭子现在会将^飞行和呱呱叫的动作“委托”(delegate) 别人处理，而不是使用定义在 Duck 类(或子类)内的呱呱叫和“飞行方法。</p>
+</blockquote>
+<ul>
+<li>首先，在 Duck 类中“加入两个实例变量”，分别为”flyBehavior”与”quack Behavior”，**声明为接口类型(而不是具体类实现类型)**，每个鸭子对象都会动态地设置这些变量以在运行时引用正确的行为类型(例如: FlyWithWings.Squcak 等) 我们也必须将 Duck 类与其所有子类中的 fy(与 quack()删除，因为这些行为已经被搬到 FlyBehavior 与 QuackBehavior 类中了。我们用两个相似的方法 performFly()和 performQuack()取代 Duck 类中的 fly()与 quack()。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1630855864851-25ad0872-9d1e-45a3-8044-e995dbd187d3.png#clientId=uad359329-9d55-4&from=paste&height=233&id=u967cc795&name=image.png&originHeight=233&originWidth=829&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=64090&status=done&style=none&taskId=u03564079-f009-4fb1-a147-bfaef8a1084&title=&width=829" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<ul>
+<li>实现 performQuack()</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1631198556470-8caef4fe-b2f5-4e78-8e1d-a21b9f5c8ee0.png#clientId=u88d7be20-2933-4&from=paste&height=217&id=u96b8f705&name=image.png&originHeight=217&originWidth=774&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=46641&status=done&style=none&taskId=uf6f355e1-6548-4c2a-bb3f-6fc7d1cc7bc&title=&width=774" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="测试鸭子的代码"><a href="#测试鸭子的代码" class="headerlink" title="测试鸭子的代码"></a>测试鸭子的代码</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1631202317024-bfc26c5d-90e1-4b54-bde6-8332da3ca604.png#clientId=u88d7be20-2933-4&from=paste&height=423&id=u748dd61e&name=image.png&originHeight=423&originWidth=635&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=66916&status=done&style=none&taskId=u048105fc-a8ce-4f0f-a5d9-d6f1678ce53&title=&width=635" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="动态地设置行为"><a href="#动态地设置行为" class="headerlink" title="动态地设置行为"></a>动态地设置行为</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1631202528629-f849e990-6096-4452-aea3-8b1b2dd5bca3.png#clientId=u88d7be20-2933-4&from=paste&height=308&id=ud494b96a&name=image.png&originHeight=308&originWidth=788&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=62294&status=done&style=none&taskId=ud6d15d97-6f5d-43dd-a5f0-eb8b3c89592&title=&width=788" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="封装行为的大局观"><a href="#封装行为的大局观" class="headerlink" title="封装行为的大局观"></a>封装行为的大局观</h3><blockquote>
+<p>关系可以是 IS-A (是一个)、HAS-A (有一个)或 IMPLEMENTS (实现)</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1631456177980-4d9028ca-9545-4a7f-8e70-04336855175f.png#clientId=uff09bfdf-e768-4&from=paste&height=507&id=u19c10240&name=image.png&originHeight=507&originWidth=866&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=158130&status=done&style=none&taskId=u39cfbbf5-a953-457f-91c5-952a87e19a1&title=&width=866" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="“有一个”比“是-个”更好"><a href="#“有一个”比“是-个”更好" class="headerlink" title="“有一个”比“是-个”更好"></a>“有一个”比“是-个”更好</h3><p>“有一个”关系相当有趣:每-鸭子都有一个 Fly Behavior 和一个 QuackBehavior,好将飞行和呱呱叫委托给它们代为处理。</p>
+<p>当你将两个类结合起来使用，如同本例一般，这就是组合(composition) 。这种做法和“继承”不同的地方在于，<br>鸭子的行为不是继承来的，而是和适当的行为对象“组合”来的。</p>
+<p>第三个设计原则:<strong>多用组合，少用继承。</strong></p>
+<h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3><p>策略模式定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。</p>
+<h3 id="共享模式词汇的威力"><a href="#共享模式词汇的威力" class="headerlink" title="共享模式词汇的威力"></a>共享模式词汇的威力</h3><ul>
+<li><p>你使用模式和他人沟通时，其实“不只是”和他人共享“行话”而已。共享的模式词汇“威力强大”。</p>
+</li>
+<li><p>当你使用模式名称和其他开发人员或者开发团队沟通时，你们之间交流的不只是模式名称，而是一整套模式背后所象征的质量、特性、约束。</p>
+</li>
+<li><p>模式能够让你用更少的词汇做更充分的沟通。当你用模式描述的时候，其他开发人员便很容易地知道你对设计的想法。</p>
+</li>
+<li><p>将说话的方式保持在模式层次，可让你待在“设计圈子”久一点。使用模式谈论软件系统，可以让你保持在设计层次，不会被压低到对象与类这种琐碎的事情上面。</p>
+</li>
+<li><p>共享词汇可帮你的开发团队快速充电。对于设计模式有深入了解的团队，彼此之间对于设计的看法不容易产生误解。</p>
+</li>
+<li><p>共享词汇能帮助初级开发人员迅速成长。初级开发人员向有经验的开发人员看齐。当高级开发人员使用设计模式，初级开发人员也会跟着学。把你的组织建立成一个模式使用者的社区.</p>
+</li>
+</ul>
+<h3 id="我如何使用设计模式"><a href="#我如何使用设计模式" class="headerlink" title="我如何使用设计模式?"></a>我如何使用设计模式?</h3><ul>
+<li>知道 OO 基础，并不足以让</li>
+<li>你设计出良好的 00 系统。</li>
+<li>良好的 0O 设计必须具备可复用、可扩充、可维护三个特性。</li>
+<li>模式可以让我们建造出具有良好 00 设计质量的系统。</li>
+<li>模式被认为是历经验证的 00 设计经验。</li>
+<li>模式不是代码，而是针对设计问题的通用解决方案。你可把它们应用到特定的应用中。</li>
+<li>模式不是被发明，而是被发现。</li>
+<li>大多数的模式和原则，都着眼于软件变化的主题。</li>
+<li>大多数的模式都允许系统局部改变独立于其他部分。</li>
+<li>我们常把系统中会变化的部分抽出来封装。</li>
+<li>模式让开发人员之间有共享的语言，能够最大化沟通的价值。</li>
+</ul>
+<h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><blockquote>
+<p>又称发布-订阅模式</p>
+</blockquote>
+<h2 id="气象监测应用"><a href="#气象监测应用" class="headerlink" title="气象监测应用"></a>气象监测应用</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1631458561739-fa42de69-1aa6-4f4c-a8b4-3ab02c56916e.png#clientId=uff09bfdf-e768-4&from=paste&height=458&id=u34e01152&name=image.png&originHeight=458&originWidth=772&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=118610&status=done&style=none&taskId=u561cbd84-5602-46f4-bf5d-ab51edc1b7c&title=&width=772" srcset="/img/loading.gif" lazyload alt="image.png"><br>初步设定<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1631458704579-b944acf9-ce10-4d47-b981-b73230ee9168.png#clientId=uff09bfdf-e768-4&from=paste&height=708&id=u669f8944&name=image.png&originHeight=708&originWidth=715&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=198335&status=done&style=none&taskId=u71fe891c-04b1-4906-9073-b61e50c6243&title=&width=715" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>错误示范<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1631458917720-53f0d588-9265-4c97-8900-d9718cc44405.png#clientId=uff09bfdf-e768-4&from=paste&height=394&id=u309c5c74&name=image.png&originHeight=394&originWidth=737&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=82573&status=done&style=none&taskId=u603ba3ca-c944-4b22-b901-450ee000985&title=&width=737" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="报纸和杂志"><a href="#报纸和杂志" class="headerlink" title="报纸和杂志"></a>报纸和杂志</h2><p>我们看看报纸和杂志的订阅是怎么回事:</p>
+<p>➊ 报社的业务就是出版报纸。<br>❷ 向某家报社订阅报纸，只要他们有新报纸出版，就会给你送来。只要你是他们的订户你就会-直收到新报纸。<br>❸ 当你不 想再看报纸的时候，取消订阅，他们就不会再送新报纸来。<br>❹ 只要报社还在运营， 就会一直有人(或单位)向他们订阅报纸或取消订阅报纸。</p>
+<p>出版社+订阅者 = 观察者模式</p>
+<p>出版社 =（主题 Subject）<br>订阅者 = （观察者）</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659414620921-5f7c8d60-787e-4ce7-8324-463ae5ab53cd.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><strong>观察者模式定义了一系列对象之间的一对多关系，当一个对象改变状态，其他依赖者都会收到通知。</strong></p>
+<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659421606521-db1a760d-aa3e-4227-ba2f-a16a435bae9b.jpeg" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>松耦合的设计之所以能让我们建立有弹性的 OO 系统，能够应对变化，是因为对象之间的互相依赖降低到了最低。</p>
+</blockquote>
+<p>Java API 有 内置的观察者模式。java.util 包 (package) 内包含最基本的 Observer 接口与 Observable 类，这和我们的 Subject 接口与 Observer 接口很相似。<br>Observer 接口与 Observable 类使用上更方便，因为许多功能都已经事先准备好了。你甚至可以使用推(push) 或拉(pull) 的方式传送数据，稍后就会看到这样的例子。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/observer">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/observer</a></p>
+<h1 id="装饰者模式"><a href="#装饰者模式" class="headerlink" title="装饰者模式"></a>装饰者模式</h1><blockquote>
+<p>装饰者模式动态地将责任附加到对象上（俄罗斯套娃）。若要扩展功能，装饰者提供了比继承更有弹性的替代方案。</p>
+</blockquote>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>当我们去咖啡店买咖啡时系统的设计可能是这样的</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659424265863-6181fcff-16e3-4bcd-9a9b-2b95d2a6088a.jpeg" srcset="/img/loading.gif" lazyload></p>
+<p>购买咖啡时，也可以要求在其中加入各种调料，例如：蒸奶 (Steamed Milk) 、豆染(Soy)、摩卡（Mocha 也就是巧克力风味）或覆盖奶泡。卖家会根据所加人的调料收取不同的费用。所以订单系统必需考点到这些调科部分。就会变成下面的的样子</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659424710208-5949d224-5d3c-414c-b4c8-10ab6866974d.jpeg" srcset="/img/loading.gif" lazyload></p>
+<p>好了，我们己经了解利用继承无法完会解决问题，在星巴效遇到的问题有：类数量爆炸、设计死板。以及基类加人的新功能并不适用手所有的子类所以，在这里要采用不一样的微法：</p>
+<blockquote>
+<p>我们委以饮料为主体，然后在运行时以调“装饰”（decorate）饮料。比方说，如果顾客想要麼卡和奶泡深焙咖啡。</p>
+</blockquote>
+<p>那么，要做的是： 1.拿一个深焙咖啡 (DarkRoast）对象 2.以摩卡（Mocha）对象装饰它 3.以奶泡 (Whip）对象装饰它 4.调用 cost() 方法，井依赖委托(delegate） 将调料的价钱加上去</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659430959863-6e53cf49-7b7f-4cec-9706-f350232e642e.jpeg" srcset="/img/loading.gif" lazyload></p>
+<p>装饰者和被装饰别象有相同的超类裂。<br>你可以用一个或多个装饰者包装一个对象。<br>既然装饰者和被装饰对象有相同的超类型，所以在任何需要原始对象(被包装的)的场合，可以用装饰过的对象代替它。<br><strong>装饰者可以在所委托被装饰者的行为之前或之后，加上自己的行为。以达到特定的目的。（关键点）</strong><br>对象可以在任何时候被装饰，所以可以在运行时动态地、不限量地用你喜欢的装饰者对象</p>
+<h2 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h2><p>装饰者模式动态地将责任附加到对象上若要拓展功能，装饰者提供比继承更有弹性的替代方案。</p>
+<h2 id="类图-1"><a href="#类图-1" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659493040853-a3c73854-40d7-45b6-89a7-6f6e5ed2fe30.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/decorator">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/decorator</a></p>
+<h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h2><blockquote>
+<p>设计原则:类应该对扩展开放，对修改关闭。</p>
+</blockquote>
+<p>我们的目标是允许类容易扩展，在不修改现有代码的情况下，就可搭配新的行为。如能实现这样的目标，有什么好处呢?这样的设计具有弹性可以应对改变，可以接受新的功能来应对改变的需求。</p>
+<h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><p>简单工厂：是静态工厂，由它创建类，大多都是通过传参的方式。如果这个工厂要创建新的对象，那么它就要改代码。</p>
+<p>工厂方法：工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法把实例化推迟到子类。这样的好处是再添加新的对象的时候，就不用再改代码了，代码的可扩展性强了。要做的就是：子类工厂继承或实现抽象的工厂，写一个新的创建类的工厂，然后再在客户端调用即可，不需要修改原来的代码。</p>
+<p>如果要添加很多子类怎么办呢？如果用工厂方法就得一个一个的添，如果创建的是一个产品族（有关系的一类产品：比如我有一个产品）。使用工厂方法的工作量就太大了，那么就需要用到抽象工厂了。</p>
+<p>抽象工厂：提供一个接口，用于创建相关或依赖对象的家族，而不需要明确指定具体定。抽象工厂允许客户使用抽象确有工厂创建一组相关的产品，而不需要(或关心)实际产出的具体产品是什么。这样一样，客户就从具体的产品中被解耦。</p>
+<h2 id="简单工厂"><a href="#简单工厂" class="headerlink" title="简单工厂"></a>简单工厂</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.example.designpattern.factory.simple;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Factory</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Object <span class="hljs-title">getInstance</span><span class="hljs-params">(String name)</span></span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;a&quot;</span>.equals(name))&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Object();<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;b&quot;</span>.equals(name))&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Object();<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;c&quot;</span>.equals(name))&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Object();<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;d&quot;</span>.equals(name))&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Object();<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="方法工厂"><a href="#方法工厂" class="headerlink" title="方法工厂"></a>方法工厂</h2><h2 id="背景-1"><a href="#背景-1" class="headerlink" title="背景"></a>背景</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaStore</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Pizza <span class="hljs-title">orderPizza</span><span class="hljs-params">(String type)</span></span>&#123;<br>        Pizza pizza;<br>        <span class="hljs-comment">//当我们的pizza类型很多时，下面的这种写法不够灵活</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;cheese&quot;</span>.equals(type))&#123;<br>            pizza = <span class="hljs-keyword">new</span> CheesePizza();<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;greek&quot;</span>.equals(type))&#123;<br>            pizza = <span class="hljs-keyword">new</span> GreekPizza();<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;pepperoni&quot;</span>.equals(type))&#123;<br>            pizza = <span class="hljs-keyword">new</span> PepperoniPizza();<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;xxx&quot;</span>.equals(type))&#123;<br>            pizza = <span class="hljs-keyword">new</span> XxxPizza();<br>        &#125;<br>        <span class="hljs-comment">//这里的代码流程基本稳定不变</span><br>        pizza.prepare();<br>        pizza.bake();<br>        pizza.cut();<br>        pizza.box();<br>        <span class="hljs-keyword">return</span> pizza;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们对其判断的代码提取出来，作为一个工厂类，根据 type 获取其实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaStore</span> </span>&#123;<br>    SimplePizzaFactory factory;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PizzaStore</span><span class="hljs-params">(SimplePizzaFactory factory)</span></span>&#123;<br>        <span class="hljs-keyword">this</span>.factory = factory;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Pizza <span class="hljs-title">orderPizza</span><span class="hljs-params">(String type)</span></span>&#123;<br>        <span class="hljs-comment">//通过工厂类</span><br>        Pizza pizza = factory.createPizza(type);<br>        <span class="hljs-comment">//这里的代码流程基本稳定不变</span><br>        pizza.prepare();<br>        pizza.bake();<br>        pizza.cut();<br>        pizza.box();<br>        <span class="hljs-keyword">return</span> pizza;<br>    &#125;<br>&#125;<br><span class="hljs-comment">//简单工厂类</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimplePizzaFactory</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Pizza <span class="hljs-title">createPizza</span><span class="hljs-params">(String type)</span></span>&#123;<br>        Pizza pizza = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;cheese&quot;</span>.equals(type))&#123;<br>            pizza = <span class="hljs-keyword">new</span> CheesePizza();<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;greek&quot;</span>.equals(type))&#123;<br>            pizza = <span class="hljs-keyword">new</span> GreekPizza();<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;pepperoni&quot;</span>.equals(type))&#123;<br>            pizza = <span class="hljs-keyword">new</span> PepperoniPizza();<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;xxx&quot;</span>.equals(type))&#123;<br>            pizza = <span class="hljs-keyword">new</span> XxxPizza();<br>        &#125;<br>        <span class="hljs-keyword">return</span> pizza;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果每个地方有自己的披萨店，那么将其抽象为如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PizzaStore</span> </span>&#123;<br>    SimplePizzaFactory factory;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PizzaStore</span><span class="hljs-params">(SimplePizzaFactory factory)</span></span>&#123;<br>        <span class="hljs-keyword">this</span>.factory = factory;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Pizza <span class="hljs-title">orderPizza</span><span class="hljs-params">(String type)</span></span>&#123;<br>        <span class="hljs-comment">//通过工厂类</span><br>        Pizza pizza = factory.createPizza(type);<br>        <span class="hljs-comment">//这里的代码流程基本稳定不变</span><br>        pizza.prepare();<br>        pizza.bake();<br>        pizza.cut();<br>        pizza.box();<br>        <span class="hljs-keyword">return</span> pizza;<br>    &#125;<br>    <span class="hljs-comment">//抽象工厂方法</span><br>    <span class="hljs-function"><span class="hljs-keyword">abstract</span> Pizza <span class="hljs-title">createPizza</span><span class="hljs-params">(String type)</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>现在已经有了一个 PizzaStore 作为超类，让每个域类型（NYPizzaStore、ChicagoPizzaStore、CaliforniaPizzaStore）都继承这个 PizzaStore 类，<strong>每个子类各自决定如何制作披萨。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NYPizzaStore</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PizzaStore</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span>  Pizza <span class="hljs-title">createPizza</span><span class="hljs-params">(String type)</span></span>&#123;<br>        <span class="hljs-keyword">if</span>(item.equals(<span class="hljs-string">&quot;cheese&quot;</span>))&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> NYStyleCheesePizza();<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(item.equals(<span class="hljs-string">&quot;veggie&quot;</span>))&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> NYStyleVeggiePizza();<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(item.equals(<span class="hljs-string">&quot;clam&quot;</span>))&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> NYStyleClamPizza();<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(item.equals(<span class="hljs-string">&quot;pepperoni&quot;</span>))&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> NYStylePepperoniPizza();<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>    &#125;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ChicagoPizzaStore</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PizzaStore</span> </span>&#123;<br><span class="hljs-comment">//...</span><br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CaliforniaPizzaStore</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PizzaStore</span> </span>&#123;<br><span class="hljs-comment">//...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h2><p>工厂方法模式定义了一个创建对象的接口，但由子类决定要实例化的类是哪一个。工厂方法让类把实例化推迟到子类。</p>
+<h2 id="类图-2"><a href="#类图-2" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659585267356-2aad9db8-ceff-4245-88a8-171171d55ca5.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/factory">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/factory</a></p>
+<h1 id="抽象工厂"><a href="#抽象工厂" class="headerlink" title="抽象工厂"></a>抽象工厂</h1><p>抽象工厂允许客户<strong>使用抽象的接口来创建一组相关的产品</strong>，而不需要自动（或关心）实际产出的具体产品是什么。这样一来，客户就从具体的产品中被解耦。</p>
+<h3 id="类图-3"><a href="#类图-3" class="headerlink" title="类图"></a>类图</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659683536956-879287fa-24cd-4d4d-acb1-bdd6d4820ad2.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/factory">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/factory</a></p>
+<h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h2><p>单例模式确保一个类只有一个实例，并提供一个全局访问点</p>
+<h2 id="类图-4"><a href="#类图-4" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659685399818-0777fd9d-fad0-42f3-9a8a-a3c4a9a6631d.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/singleton">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/singleton</a></p>
+<h1 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h1><p>命令模式（Command Pattern）是一种数据驱动的设计模式，它属于行为型模式。请求以命令的形式包裹在对象中，并传给调用对象。调用对象寻找可以处理该命令的合适的对象，并把该命令传给相应的对象，该对象执行命令。</p>
+<h2 id="定义-4"><a href="#定义-4" class="headerlink" title="定义"></a>定义</h2><p>命令模式将请求封装成对象，以便使用不同的请求或者日志来参数化其他对象。命令模式也支持可撤销的操作。</p>
+<h2 id="类图-5"><a href="#类图-5" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659695205079-63187258-810d-41b6-9776-9fb031224ddd.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/command">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/command</a></p>
+<h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1659695397428-9d35ebe7-dd37-49ae-8330-caa7f0ae992d.png#clientId=ueb6a3a24-9689-4&from=paste&height=481&id=u97d367b7&name=image.png&originHeight=962&originWidth=1776&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=336164&status=done&style=none&taskId=ufc99cd52-6cd2-4364-b56f-ade9157a6a5&title=&width=888" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>适配器模式（Adapter Pattern）是作为两个不兼容的接口之间的桥梁。这种类型的设计模式属于结构型模式，它结合了两个独立接口的功能。<br>这种模式涉及到一个单一的类，该类负责加入独立的或不兼容的接口功能。举个真实的例子，读卡器是作为内存卡和笔记本之间的适配器。您将内存卡插入读卡器，再将读卡器插入笔记本，这样就可以通过笔记本来读取内存卡。</p>
+<h2 id="定义-5"><a href="#定义-5" class="headerlink" title="定义"></a>定义</h2><p>适配器模式将一个类的接口，转换成客户期望的另一个接口。适配器让原本接口不兼容的类可以协作</p>
+<h2 id="类图-6"><a href="#类图-6" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659713519798-9e5c8074-ee27-477b-ad94-ace5b5c8d191.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/adapter">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/adapter</a></p>
+<h1 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h1><h2 id="定义-6"><a href="#定义-6" class="headerlink" title="定义"></a>定义</h2><p>外观模式提供了一个统一的接口，用来访问子系统中的一群接口。外观定义了一个高层接口，让子系统更容易使用。</p>
+<h2 id="类图-7"><a href="#类图-7" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659714803746-daee273d-26b4-498f-9415-f4baedbbcc51.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/facade">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/facade</a></p>
+<h1 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h1><h2 id="定义-7"><a href="#定义-7" class="headerlink" title="定义"></a>定义</h2><p>模板方法模式在一个方法中定义了一个算法的骨架，而将一些步骤延迟到子类中。模板方法使得子类可以在不改变算法的情况下，重新定义算法中的某些步骤。</p>
+<h2 id="类图-8"><a href="#类图-8" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659751354765-d0c0822d-73c5-4126-ac64-4cc845604e27.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/template">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/template</a></p>
+<h1 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h1><h2 id="背景-2"><a href="#背景-2" class="headerlink" title="背景"></a>背景</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DinnerMenu</span></span>&#123;<br>    List&lt;Item&gt; items;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PancakeMenu</span></span>&#123;<br>    Item[] items;<br>&#125;<br><br><span class="hljs-comment">//现在需要遍历这两个的items我们不知道他底层的是数组还是列表</span><br><span class="hljs-comment">//或者如果分为两种遍历方式代码就显得冗余</span><br><br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;items.size();i++)&#123;<br>    Item item = items.get(i);<br>&#125;<br><br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;items.length;i++)&#123;<br>    Item item = items[i];<br>&#125;<br><br><span class="hljs-comment">//那么创建迭代器来屏蔽两者的差异</span><br><br><br></code></pre></td></tr></table></figure>
+
+<h2 id="定义-8"><a href="#定义-8" class="headerlink" title="定义"></a>定义</h2><p>迭代器模式提供一种方法顺序访问一个聚合对象中的各个元素，而不暴露其内部的表示</p>
+<h2 id="类图-9"><a href="#类图-9" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659756639980-d409021c-6661-43dd-96b7-57dfad564951.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/iterator">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/iterator</a></p>
+<h1 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h1><h2 id="定义-9"><a href="#定义-9" class="headerlink" title="定义"></a>定义</h2><p>组合模 式 元许你特对象组合成树形结构来表现“整体/部分”层次结构。组合能让客户以一致的方式处理个别对象以及对象组合。</p>
+<h2 id="类图-10"><a href="#类图-10" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659766079987-ef927bab-21f3-4c04-8552-f84d9382e720.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-10"><a href="#代码-10" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/composite">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/composite</a></p>
+<h1 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h1><h2 id="定义-10"><a href="#定义-10" class="headerlink" title="定义"></a>定义</h2><p>状态模式允许对象在内部状态改变时改变他们的行为，对象看起来像是修改了他们的类</p>
+<h2 id="类图-11"><a href="#类图-11" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659790870750-4ce75f05-f7c8-4dc9-bd8d-63b437bd71eb.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-11"><a href="#代码-11" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern#:~:text=yesterday-,status,-feat%3A%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/status</a></p>
+<h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><h2 id="定义-11"><a href="#定义-11" class="headerlink" title="定义"></a>定义</h2><p>代理模式为另一个对象提供一个替身或占位符以控制这个对象的访问</p>
+<h2 id="类图-12"><a href="#类图-12" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659838892680-5c897c5e-b90c-4a13-9214-0939f19fb779.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-12"><a href="#代码-12" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/proxy">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/proxy</a></p>
+<h1 id="复合模式"><a href="#复合模式" class="headerlink" title="复合模式"></a>复合模式</h1><p>复合模式就是多个设计模式复合在一起</p>
+<h1 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h1><h2 id="定义-12"><a href="#定义-12" class="headerlink" title="定义"></a>定义</h2><p>桥接（Bridge）是用于把抽象化与实现化解耦，使得二者可以独立变化。这种类型的设计模式属于结构型模式，它通过提供抽象化和实现化之间的桥接结构，来实现二者的解耦。<strong>它是用组合关系代替继承关系来实现</strong>，从而降低了抽象和实现这两个可变维度的耦合度。</p>
+<h2 id="类图-13"><a href="#类图-13" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659948064872-618b6d53-2f0d-471d-8ef3-7fd3a3891d15.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-13"><a href="#代码-13" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/bridge">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/bridge</a></p>
+<h1 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h1><h2 id="定义-13"><a href="#定义-13" class="headerlink" title="定义"></a>定义</h2><p>建造者模式（Builder Pattern）使用多个简单的对象一步一步构建成一个复杂的对象。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。主要解决在软件系统中，有时候面临着”一个复杂对象”的创建工作，其通常由各个部分的子对象用一定的算法构成；由于需求的变化，这个复杂对象的各个部分经常面临着剧烈的变化，但是将它们组合在一起的算法却相对稳定。</p>
+<h2 id="类图-14"><a href="#类图-14" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1660030921290-58a2b7f8-d094-4e2c-bf67-e1b3f02edb44.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-14"><a href="#代码-14" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/builder">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/builder</a></p>
+<h1 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h1><h2 id="定义-14"><a href="#定义-14" class="headerlink" title="定义"></a>定义</h2><p>责任链模式（Chain of Responsibility Pattern）为请求创建了一个接收者对象的链。这种模式给予请求的类型，对请求的发送者和接收者进行解耦。这种类型的设计模式属于行为型模式。</p>
+<h2 id="类图-15"><a href="#类图-15" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1660031423524-e54f0d3c-bc49-4300-8b12-fb80ad3aabb4.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-15"><a href="#代码-15" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/responsibility">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/responsibility</a></p>
+<h1 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h1><h2 id="定义-15"><a href="#定义-15" class="headerlink" title="定义"></a>定义</h2><p>享元模式（Flyweight Pattern）主要用于减少创建对象的数量，以减少内存占用和提高性能。这种类型的设计模式属于结构型模式，它提供了减少对象数量从而改善应用所需的对象结构的方式。运用共享技术有效地支持大量细粒度的对象，享元模式尝试重用现有的同类对象，如果未找到匹配的对象，则创建新对象。</p>
+<h2 id="类图-16"><a href="#类图-16" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1660032201272-e3bda8af-9788-4811-939c-7e8411afb7bd.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-16"><a href="#代码-16" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/flyweight">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/flyweight</a></p>
+<h1 id="解释器模式"><a href="#解释器模式" class="headerlink" title="解释器模式"></a>解释器模式</h1><h2 id="定义-16"><a href="#定义-16" class="headerlink" title="定义"></a>定义</h2><p>解释器模式（Interpreter Pattern）提供了评估语言的语法或表达式的方式，它属于行为型模式。这种模式实现了一个表达式接口，该接口解释一个特定的上下文。这种模式被用在 SQL 解析、符号处理引擎等。给定一个语言，定义它的文法表示，并定义一个解释器，这个解释器使用该标识来解释语言中的句子。</p>
+<h2 id="类图-17"><a href="#类图-17" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1660032613416-0d13178f-39d5-481e-9867-144f358515e7.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-17"><a href="#代码-17" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/interpreter">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/interpreter</a></p>
+<h1 id="中介者模式"><a href="#中介者模式" class="headerlink" title="中介者模式"></a>中介者模式</h1><h2 id="定义-17"><a href="#定义-17" class="headerlink" title="定义"></a>定义</h2><p>中介者模式（Mediator Pattern）是用来降低多个对象和类之间的通信复杂性。这种模式提供了一个中介类，该类通常处理不同类之间的通信，并支持松耦合，使代码易于维护。中介者模式属于行为型模式。用一个中介对象来封装一系列的对象交互，中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。</p>
+<h2 id="类图-18"><a href="#类图-18" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1660032908219-1f950de5-abc6-4247-9be3-9e2cc5f10e07.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-18"><a href="#代码-18" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/mediator">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/mediator</a></p>
+<h1 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h1><h2 id="定义-18"><a href="#定义-18" class="headerlink" title="定义"></a>定义</h2><p>备忘录模式（Memento Pattern）保存一个对象的某个状态，以便在适当的时候恢复对象。备忘录模式属于行为型模式。</p>
+<h2 id="类图-19"><a href="#类图-19" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659969186301-c1505e49-a448-4886-89af-ff40536d54c3.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-19"><a href="#代码-19" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/memento">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/memento</a></p>
+<h1 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h1><p>用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。</p>
+<h2 id="定义-19"><a href="#定义-19" class="headerlink" title="定义"></a>定义</h2><p>原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br>这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，以此来减少数据库调用。</p>
+<h2 id="类图-20"><a href="#类图-20" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659969993275-4e6063f1-f6b4-49aa-9077-7c2af2ef6262.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-20"><a href="#代码-20" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/prototype">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/prototype</a></p>
+<h1 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h1><h2 id="定义-20"><a href="#定义-20" class="headerlink" title="定义"></a>定义</h2><p>在访问者模式（Visitor Pattern）中，我们使用了一个访问者类，它改变了元素类的执行算法。通过这种方式，元素的执行算法可以随着访问者改变而改变。这种类型的设计模式属于行为型模式。根据模式，元素对象已接受访问者对象，这样访问者对象就可以处理元素对象上的操作。<strong>主要将数据结构与数据操作分离</strong>。</p>
+<h2 id="类图-21"><a href="#类图-21" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1660035653078-9097ca5a-bc42-4056-bc55-11331b1f35e9.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-21"><a href="#代码-21" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/visitor">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/visitor</a></p>
+<h1 id="策略模式-1"><a href="#策略模式-1" class="headerlink" title="策略模式"></a>策略模式</h1><h2 id="定义-21"><a href="#定义-21" class="headerlink" title="定义"></a>定义</h2><p>在策略模式（Strategy Pattern）中，一个类的行为或其算法可以在运行时更改。这种类型的设计模式属于行为型模式。<br>在策略模式中，我们创建表示各种策略的对象和一个行为随着策略对象改变而改变的 context 对象。策略对象改变 context 对象的执行算法。定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。</p>
+<h2 id="类图-22"><a href="#类图-22" class="headerlink" title="类图"></a>类图</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1660033534346-91268adc-b7b5-4bee-aba3-abfa5a293bbe.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="代码-22"><a href="#代码-22" class="headerlink" title="代码"></a>代码</h2><p><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/strategy">https://github.com/mikeygithub/design-pattern/tree/master/src/main/java/com/example/designpattern/strategy</a></p>
+<h1 id="文章总结"><a href="#文章总结" class="headerlink" title="文章总结"></a>文章总结</h1><p>模式是在某情境 （context)下，针对某问题的某种解决方案。</p>
+<ul>
+<li>情境就是应用某个模式的情况。这应该是会不断出现的情况。</li>
+<li>问题就是你想在某情境下达到的目标，但也可以是某情境下的约束。</li>
+<li>解決方案就是你所追求的：一个通用的设计，用来解决约束、达到日标。</li>
+</ul>
+<p>如果你发现自己处于某个情境下，面对着所欲达到的自标被一群约束影响着的问题，然而，你能够应用某个设计克服这些约束并达到该目标，将你领向某个解决方案。</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>装饰者</td>
+<td>包装一个对象，以提供新的行为。</td>
+</tr>
+<tr>
+<td>状态</td>
+<td>封装了基于状态的行为，并使用委托在行为之间切换。</td>
+</tr>
+<tr>
+<td>迷代器</td>
+<td>在对象的集合之中游走，而不暴露集合的突现。</td>
+</tr>
+<tr>
+<td>外观</td>
+<td>简化一群类的接口。</td>
+</tr>
+<tr>
+<td>策略</td>
+<td>封装可以互换的行为，并使用委托来決定要使用哪一个。</td>
+</tr>
+<tr>
+<td>代理</td>
+<td>包装对象，以控制对此对象的访问。</td>
+</tr>
+<tr>
+<td>工厂方法</td>
+<td>由子类決定要创建的具体类是哪一个。</td>
+</tr>
+<tr>
+<td>适配器</td>
+<td>封装对象，并提供不同的接口。</td>
+</tr>
+<tr>
+<td>观察者</td>
+<td>让对象能够在状态改变时被通知。</td>
+</tr>
+<tr>
+<td>模板方法</td>
+<td>由子类决定如何实现一个算法中的步骤。</td>
+</tr>
+<tr>
+<td>组合</td>
+<td>容户用一致的方式处理对象集合和单个对象。</td>
+</tr>
+<tr>
+<td>单例</td>
+<td>确保有旦只有一个对象被创建。</td>
+</tr>
+<tr>
+<td>抽象工厂</td>
+<td>允许客户创建对象的家族，而无需指定他们的具体类。</td>
+</tr>
+<tr>
+<td>命令</td>
+<td>封装请求成为对象。</td>
+</tr>
+</tbody></table>
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p><a target="_blank" rel="noopener" href="https://www.runoob.com/design-pattern/">https://www.runoob.com/design-pattern/</a><br><a target="_blank" rel="noopener" href="https://github.com/mikeygithub/design-pattern">https://github.com/mikeygithub/design-pattern</a><br><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/pdf/2630542/1630770943252-ed4f0f63-51ac-4e9a-aacf-f6904788cf84.pdf?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2021/pdf/2630542/1630770943252-ed4f0f63-51ac-4e9a-aacf-f6904788cf84.pdf%22,%22name%22:%22Head%20First%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F(%E4%B8%AD%E6%96%87%E7%89%88).pdf%22,%22size%22:42748997,%22type%22:%22application/pdf%22,%22ext%22:%22pdf%22,%22source%22:%22%22,%22status%22:%22done%22,%22mode%22:%22title%22,%22download%22:true,%22taskId%22:%22uf0b40971-7191-4b8d-ba63-4b1eabb1465%22,%22taskType%22:%22upload%22,%22id%22:%22u7f2580e1%22,%22card%22:%22file%22%7D">Head First 设计模式(中文版).pdf</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">设计模式</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">#设计模式</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>设计模式-《Head First设计模式》</div>
+      <div>https://mikeygithub.github.io/2021/09/04/yuque/设计模式-《Head First设计模式》/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年9月4日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/08/yuque/%E7%AC%94%E8%AE%B0%E7%AF%87-Java%E5%BC%80%E5%8F%91%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E6%89%8B%E5%86%8C/" title="笔记篇-Java开发代码规范手册">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记篇-Java开发代码规范手册</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/28/yuque/%E7%AC%94%E8%AE%B0%E7%AF%87-Java%20lambda%E7%9A%84%E5%BA%94%E7%94%A8/" title="Java 8 中Consumer, Supplier, Predicate and Function的应用">
+                        <span class="hidden-mobile">Java 8 中Consumer, Supplier, Predicate and Function的应用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,2010 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第 1 章 Linux 概述  操作系统（Operation System，简称 OS）是管理计算机硬件与软件资源的程序，是计算机系统的内核与基石。 操作系统本质上是运行在计算机上的软件程序 ； 为用户提供一个与系统交互的操作界面 ； 操作系统分内核与外壳 ：  Windows目前最流行的个人桌面操作系统 。  Unix最早的多用户、多任务操作系统  Linux 类 Unix 系统：Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux篇-Linux操作系统教程">
+<meta property="og:url" content="https://mikeygithub.github.io/2021/02/01/yuque/Linux%E7%AF%87-Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="第 1 章 Linux 概述  操作系统（Operation System，简称 OS）是管理计算机硬件与软件资源的程序，是计算机系统的内核与基石。 操作系统本质上是运行在计算机上的软件程序 ； 为用户提供一个与系统交互的操作界面 ； 操作系统分内核与外壳 ：  Windows目前最流行的个人桌面操作系统 。  Unix最早的多用户、多任务操作系统  Linux 类 Unix 系统：Linux">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1657548313851-20957688-ea81-4e22-82ec-44086900c4fc.jpeg">
+<meta property="article:published_time" content="2021-02-01T05:03:44.000Z">
+<meta property="article:modified_time" content="2023-02-13T05:46:13.669Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1657548313851-20957688-ea81-4e22-82ec-44086900c4fc.jpeg">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>Linux篇-Linux操作系统教程 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux篇-Linux操作系统教程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-02-01 13:03" pubdate>
+          2021年2月1日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          16k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          131 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Linux篇-Linux操作系统教程</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1657548313851-20957688-ea81-4e22-82ec-44086900c4fc.jpeg#averageHue=%2333394b&clientId=u5360bbb0-114c-4&from=markdown&id=HtL8s&originHeight=328&originWidth=616&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=u3e0266d2-913c-4f61-a269-0461a404388&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="第-1-章-Linux-概述"><a href="#第-1-章-Linux-概述" class="headerlink" title="第 1 章 Linux 概述"></a>第 1 章 Linux 概述</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226185336241.png#id=eNqoq&originHeight=384&originWidth=528&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>操作系统（Operation System，简称 OS）是管理计算机硬件与软件资源的程序，是计算机系统的内核与基石。</li>
+<li>操作系统本质上是运行在计算机上的软件程序 ；</li>
+<li>为用户提供一个与系统交互的操作界面 ；</li>
+<li>操作系统分内核与外壳 ：</li>
+</ul>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>目前最流行的个人桌面操作系统 。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226185613561.png#id=gvoNl&originHeight=308&originWidth=428&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Unix"><a href="#Unix" class="headerlink" title="Unix"></a>Unix</h2><p>最早的多用户、多任务操作系统</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226185620701.png#id=ZNxnT&originHeight=509&originWidth=668&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><ul>
+<li>类 Unix 系统：Linux 是一种自由、开放源码的类似 Unix 的操作系统</li>
+<li>Linux 内核：严格来说，Linux 这个词本身只表示 Linux 内核</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226185743281.png#id=ZVY5f&originHeight=153&originWidth=178&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>1991 年，芬兰的业余计算机爱好者 Linus Torvalds</li>
+<li>编写了一款类似 Minix 的系统（基于微内核架构的类 Unix 操作系统）</li>
+<li>被 ftp 管理员命名为 Linux</li>
+<li>加入到自由软件基金的 GNU 计划中</li>
+<li>Linux 以一只可爱的企鹅作为标志，象征着敢作敢为、热爱生活。</li>
+</ul>
+<p><code>内核版本</code></p>
+<p>Linux 内核版本由 3 个数字组成：a.b.c ：</p>
+<p>a：当前发布的内核主版本；<br>b：偶数表示稳定版，奇数表示开发中的版本；<br>c：错误修补的次数。</p>
+<p>Linux 内核在内核官方网站<a target="_blank" rel="noopener" href="http://www.kerenl.org上发布/">www.kerenl.org上发布</a></p>
+<table>
+<thead>
+<tr>
+<th><strong>内核版本</strong></th>
+<th><strong>日期</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0.00</td>
+<td>1991.2.4</td>
+<td>两个进程，分别显示 AAA 和 BBB</td>
+</tr>
+<tr>
+<td>0.01</td>
+<td>1991.9</td>
+<td>第一个向外公布的 Linux 内核版本</td>
+</tr>
+<tr>
+<td>0.02</td>
+<td>1991.10.5</td>
+<td>Linux 第一个稳定的工作版本</td>
+</tr>
+<tr>
+<td>0.11</td>
+<td>1991.12.8</td>
+<td>基本可以正常运行的内核版本</td>
+</tr>
+<tr>
+<td>0.12</td>
+<td>1992.1.15</td>
+<td>主要加入数学协处理器的软件模拟程序</td>
+</tr>
+<tr>
+<td>0.95(0.13)</td>
+<td>1992.3.8</td>
+<td>开始加入虚拟文件系统思想的内核版本</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>1996.2.9</td>
+<td>支持多处理器</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>1999.1.26</td>
+<td>支持许多新的文件系统类型，使用全新的文件缓存机制</td>
+</tr>
+<tr>
+<td>2.4</td>
+<td>2001.1.4</td>
+<td>使用一种适应性很强的资源管理系统</td>
+</tr>
+<tr>
+<td>2.6</td>
+<td>2003.12.7</td>
+<td>性能、安全性和驱动程序进行改进</td>
+</tr>
+<tr>
+<td>2.6.30</td>
+<td>2009.6</td>
+<td>改善文件系统、加入完整性检验补丁、线程中断处理支持等</td>
+</tr>
+<tr>
+<td>2.6.32</td>
+<td>2009.12</td>
+<td>改进 Btrfs 文件系统、内存控制器支持、运行时电源管理</td>
+</tr>
+<tr>
+<td>2.6.34</td>
+<td>2010.5</td>
+<td>支持 flash 设备文件系统、新的 Vhost net、新的 perf 功能等</td>
+</tr>
+<tr>
+<td>2.6.38</td>
+<td>2011.3.15</td>
+<td>合并自动进程分组、优化进程调度，改善 VFS 虚拟文件系统可扩展性，透明化内存 Huge Pages 使用过程，实现按需自动调用等</td>
+</tr>
+</tbody></table>
+<h2 id="Linux-发行版"><a href="#Linux-发行版" class="headerlink" title="Linux 发行版"></a>Linux 发行版</h2><h3 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226190142767.png#id=BNGAk&originHeight=1080&originWidth=1920&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>Ubuntu Linux 系统具有如下特色：</p>
+<ul>
+<li><code>系统安全性高</code>，采用“sudo”工具，所有系统相关的任务均需要使用此指令，并输入密码，比起传统系统以管理员账号进行管理工作具有更大的安全性。</li>
+<li><code>统易用性强</code>，传统的 Linux 系统软件安装和删除经常需要用户自己解决软件的依赖性问题，Ubuntu 采用 APT 系统可轻松进行软件安装和删除。</li>
+<li><code>供多种安装方式</code>，可以直接裸机安装或在虚拟机上进行安装，也可以通过安装程序提供的 wubi.exe 程序在 Windows 上进行安装，这为初学者学习和研究 Linux 带来了便利</li>
+<li><code>界面友好</code>，Ubuntu 提供的桌面操作方式特别适合熟悉 Windows 的用户，初学者易于上手</li>
+</ul>
+<hr>
+<p>Ubuntu 每六个月发布一个新版本，用户可以免费升级到最新版本 。<br>Ubuntu 版本的命名遵从“Y.MM (开发代号)”格式，Y 代表年份，MM 代表月份 。<br>由于受到来自官方的和非官方的社区支持，Ubuntu 还有不少衍生版本 。</p>
+<hr>
+<p>流行的官方衍生版 ：</p>
+<ul>
+<li>Kubuntu：基于 KDE 桌面环境。与 Ubuntu 的唯一区别在于桌面环境。</li>
+<li>Edubuntu：用于教育的衍生版，内置的软件全部免费</li>
+<li>Xubuntu：基于 XFce 桌面环境。</li>
+<li>Ubuntu Studio：更适合于多媒体设计人员的衍生版。</li>
+</ul>
+<h3 id="Redhat"><a href="#Redhat" class="headerlink" title="Redhat"></a>Redhat</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226190256321.png#id=ztTlK&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>美国的“红帽子”公司，1995 年发布了桌面版的 Red Hat Linux2.0 ；<br>2003 年，Red Hat Linux9.0 发布 ；<br>2004 年，Red Hat 公司正式决定停止对 Red Hat Linux9.0 的支持；<br>原本的桌面版 Red Hat Linux 发行包则与来自民间的 Fedora 计划合并，成为 Fedora Core 发行版</p>
+<h3 id="Fedora"><a href="#Fedora" class="headerlink" title="Fedora"></a>Fedora</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226190326510.png#id=m8p82&originHeight=442&originWidth=592&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>由 Fedora Project 社区开发、Red Hat 公司赞助一个开放的、创新的 Linux 操作系统，它允许任何人自由地使用、修改和重发布 。</p>
+<h3 id="OpenSuse"><a href="#OpenSuse" class="headerlink" title="OpenSuse"></a>OpenSuse</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226190441643.png#id=v8bQV&originHeight=480&originWidth=647&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>最早是由德国的四个 Linux 爱好者推出的项目，2003 年被 Novell 公司收购。<br>OpenSUSE 向用户提供了漂亮的桌面环境，并提供了优秀的系统管理工具 YaST。</p>
+<h3 id="Debian"><a href="#Debian" class="headerlink" title="Debian"></a>Debian</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226190506322.png#id=y8Nmf&originHeight=448&originWidth=712&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>创始人是伊恩默多克（Ian Murdock）。<br>发行版提供众多的软件包-deb 包。<br>Ubuntu 就是基于 Debian 发行版，两者使用 APT 作为软件管理系统。</p>
+<h3 id="Mandriva"><a href="#Mandriva" class="headerlink" title="Mandriva"></a>Mandriva</h3><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226190536314.png#id=trqHc&originHeight=427&originWidth=560&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>法国的 Mandriva 公司开发 。<br>众多国际级 Linux 发行版中唯一一个默认即支持中文环境的 Linux。</p>
+<h2 id="Linux-和-Windows-的相似之处"><a href="#Linux-和-Windows-的相似之处" class="headerlink" title="Linux 和 Windows 的相似之处"></a>Linux 和 Windows 的相似之处</h2><ul>
+<li>都是多用户操作系统，都可以由许多不同的用户来使用，都可以以组成员的方式来控制资源的访问权限；</li>
+<li>都支持多文件系统，文件资源可以通过 FTP 或者其他协议与其他客户机共享；</li>
+<li>都支持多种网络协议，比如 TCP/IP、NetBIOS 等；</li>
+<li>都可以提供网络服务能力，如 DHCP 和 DNS 等。</li>
+</ul>
+<h2 id="Linux-和-Windows-的不同之处"><a href="#Linux-和-Windows-的不同之处" class="headerlink" title="Linux 和 Windows 的不同之处"></a>Linux 和 Windows 的不同之处</h2><table>
+<thead>
+<tr>
+<th><strong>比较项</strong></th>
+<th><strong>Linux</strong></th>
+<th><strong>Windows</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定位</td>
+<td>Linux 的设计定位是网络，设计灵感来自于网络操作系统 Unix，因此它的命令的设计比较简单、简洁。由于纯文本可以非常好地跨网络工作，所以 Linux 配置文件和数据都以文本为基础</td>
+<td>Windows 最初的目标是家庭和办公应用，例如打印、图形化服务</td>
+</tr>
+<tr>
+<td>图形用户界面</td>
+<td>图形环境并没有集成到 Linux 内核中，而是运行于系统之上的单独一层，这意味着可以在需要时再运行 GUI</td>
+<td>Windows 是把 GUI 直接集成到操作系统内的</td>
+</tr>
+<tr>
+<td>文件扩展名</td>
+<td>Linux 不使用文件扩展名来识别文件的类型，而是根据文件头的内容来识别其类型</td>
+<td>使用文件扩展名来识别文件的类型</td>
+</tr>
+<tr>
+<td>文件执行</td>
+<td>Linux 通过文件访问权限来判断是否为可执行文件。程序和脚本（其实是文本文件）的创建者或管理员可以将需要执行的文件赋予可执行权限，这样做有利于安全。保存到系统上的可执行文件不能自动执行，因此可以防止许多脚本病毒</td>
+<td>对于 Windows 来说用户双击.exe 为扩展名的文件系统都尝试加载执行</td>
+</tr>
+<tr>
+<td>系统重启问题</td>
+<td>Linux 的设计思想之一是，遵循“牛顿运动定律”，一旦开始运行，它将保持运行状态，直到受到外界因素的干扰，比如硬件故障。除了内核之外，其他软件的安装、卸载都不需要重新引导系统</td>
+<td>Windows 在安装软件，特比是安装驱动程序后，经常需要重启系统</td>
+</tr>
+<tr>
+<td>远程管理</td>
+<td>可以远程地完成 Linux 中的很多工作。只要系统的基本网路服务在运行，就可以远程登录并管理系统。如果系统中一个特定的服务出现了问题，可以在进行故障诊断的同时让其他服务继续运行：当在一个系统上同时运行多个服务的时候（例如同时运行 FTP、DNS、WWW 服务），这种管理方式非常重要</td>
+<td>Windows 的远程管理功能较弱</td>
+</tr>
+</tbody></table>
+<h1 id="第-2-章-基本操作"><a href="#第-2-章-基本操作" class="headerlink" title="第 2 章 基本操作"></a>第 2 章 基本操作</h1><h2 id="软件包"><a href="#软件包" class="headerlink" title="软件包"></a>软件包</h2><p>Internet 上有专门为 Ubuntu 建立的软件包仓库，其中包含大量的软件包，它们按照是否遵守 GPL 协议分成四种类型：</p>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>特点</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>main（主要）</td>
+<td>开源软件，可以被自由发布</td>
+<td>Ubuntu 开发团队提供完全技术支持的软件</td>
+</tr>
+<tr>
+<td>restricted（受限）</td>
+<td>专供特殊用途的软件</td>
+<td>被 Ubuntu 开发团队支持，但因为不能直接修改程序，因而 Ubuntu 可能不能提供完全的技术支持。一般主要是硬件驱动程序</td>
+</tr>
+<tr>
+<td>universe（公共）</td>
+<td>自由发布</td>
+<td>可以和“main”软件相安无事地共同运行，但没有安全升级的保障</td>
+</tr>
+<tr>
+<td>multiverse（多元化）</td>
+<td>不开源、不允许自由发布</td>
+<td>不被 Ubuntu 开发团队支持，用户自己承担任何版权和技术风险</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226191433268.png#id=H6OpE&originHeight=497&originWidth=680&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Linux-桌面"><a href="#Linux-桌面" class="headerlink" title="Linux 桌面"></a>Linux 桌面</h2><p>X Window：是 Unix/Linux 中的底层图形界面系统 ；</p>
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p>Shell 命令可以分为内部命令和外部命令：</p>
+<ul>
+<li>内部命令，也称作内置命令，是 Shell 程序的一部分，其中包含的是一些比较简单的 Linux 系统命令，这些命令在 Shell 程序内部完成运行。</li>
+<li>外部命令，是 Linux 系统中的实用应用程序，命令的可执行实体不在 Shell 内部，但是其执行过程由 Shell 控制。</li>
+</ul>
+<p><code>可以通过“which”命令来判断某个命令是否是外部命令</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226191706371.png#id=blg85&originHeight=198&originWidth=530&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>man 命令，用于查看外部命令的帮助手册。</li>
+<li>help 命令，用于查看内部命令的帮助手册</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226220920398.png#id=QfVvs&originHeight=289&originWidth=760&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h2><p>安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt install xxxx<br></code></pre></td></tr></table></figure>
+
+<p>卸载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt remove xxxx<br></code></pre></td></tr></table></figure>
+
+<h2 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a>Vim</h2><table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>命令</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>进入 vim</td>
+<td>vim</td>
+<td>启动 vim</td>
+</tr>
+<tr>
+<td>vim 文件名</td>
+<td>启动 vim 并打开或新建文件</td>
+<td></td>
+</tr>
+<tr>
+<td>光标移动</td>
+<td>h</td>
+<td>向左移动一个字符</td>
+</tr>
+<tr>
+<td>j</td>
+<td>向下移动一行</td>
+<td></td>
+</tr>
+<tr>
+<td>k</td>
+<td>向上移动一行</td>
+<td></td>
+</tr>
+<tr>
+<td>l</td>
+<td>向右移动以行</td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td>移动到行开始（注意是数字 0，不是字母 o）</td>
+<td></td>
+</tr>
+<tr>
+<td>$</td>
+<td>移动到行尾</td>
+<td></td>
+</tr>
+<tr>
+<td>屏幕翻滚</td>
+<td>Ctrl+u</td>
+<td>向文件首翻半屏</td>
+</tr>
+<tr>
+<td>Ctrl+d</td>
+<td>向文件尾翻半屏</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl+f</td>
+<td>向文件尾翻一屏</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl+b</td>
+<td>向文件首翻一屏</td>
+<td></td>
+</tr>
+<tr>
+<td>文本插入/追加</td>
+<td>a</td>
+<td>在光标后追加文本</td>
+</tr>
+<tr>
+<td>A</td>
+<td>在当前行尾追加</td>
+<td></td>
+</tr>
+<tr>
+<td>i</td>
+<td>在光标前插入</td>
+<td></td>
+</tr>
+<tr>
+<td>I</td>
+<td>在当前行首插入</td>
+<td></td>
+</tr>
+<tr>
+<td>o</td>
+<td>在当前行下面新开一行</td>
+<td></td>
+</tr>
+<tr>
+<td>O</td>
+<td>在当前行上面新开一行</td>
+<td></td>
+</tr>
+<tr>
+<td>文本删除</td>
+<td>dd</td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td>dw</td>
+<td>删除一个单词</td>
+<td></td>
+</tr>
+<tr>
+<td>nx</td>
+<td>删除光标后 n 个字符，例如 3x</td>
+<td></td>
+</tr>
+<tr>
+<td>nX</td>
+<td>删除光标前 n 个字符，例如 3X</td>
+<td></td>
+</tr>
+<tr>
+<td>撤销/重做</td>
+<td>u</td>
+<td>恢复上一个命令以前的状态，可以多次按下 u 命令</td>
+</tr>
+<tr>
+<td>.</td>
+<td>重复一条命令</td>
+<td></td>
+</tr>
+<tr>
+<td>搜索</td>
+<td>/字符串</td>
+<td>向下搜索字符串</td>
+</tr>
+<tr>
+<td>?字符串</td>
+<td>向上搜索字符串</td>
+<td></td>
+</tr>
+<tr>
+<td>n</td>
+<td>继续搜索</td>
+<td></td>
+</tr>
+<tr>
+<td>N</td>
+<td>继续向相反防线搜索</td>
+<td></td>
+</tr>
+<tr>
+<td>替换</td>
+<td>:s/p1/p2/g</td>
+<td>将当前行中所有 p1 均用 p2 替换</td>
+</tr>
+<tr>
+<td>:n1,n2s/p1/p2/g</td>
+<td>将底 n1 至 n2 行中所有 p1 均用 p2 替换</td>
+<td></td>
+</tr>
+<tr>
+<td>:g/p1/s//p2/g</td>
+<td>将文件中所有 p1 均用 p2 替换</td>
+<td></td>
+</tr>
+<tr>
+<td>复制/粘贴</td>
+<td>nyy</td>
+<td>将当前 n 行放入缓冲区</td>
+</tr>
+<tr>
+<td>p</td>
+<td>将缓冲区的内容放到当前行下面</td>
+<td></td>
+</tr>
+<tr>
+<td>保存文件</td>
+<td>w</td>
+<td>存盘</td>
+</tr>
+<tr>
+<td>w 文件名</td>
+<td>存盘至文件</td>
+<td></td>
+</tr>
+<tr>
+<td>退出 vim</td>
+<td>q</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>wq</td>
+<td>保存退出</td>
+<td></td>
+</tr>
+<tr>
+<td>q!</td>
+<td>强制退出</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="第-3-章-文件系统"><a href="#第-3-章-文件系统" class="headerlink" title="第 3 章 文件系统"></a>第 3 章 文件系统</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226223834451.png#id=RO3qt&originHeight=315&originWidth=823&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>命令行打开文件管理系统 GUI</p>
+<blockquote>
+<p>nautilus</p>
+</blockquote>
+<ul>
+<li>当用户登录 Linux 时或在 Ubuntu 上打开一个终端后，首先进入一个特殊目录，称为“用户主目录” ；</li>
+<li>Linux 规定可以用符号“~”表示当前登录用户的“用户主目录”。</li>
+<li>当前所在的目录称为“当前工作目录”。当前工作目录可以用“.”表示，当前工作目录的父目录可以用“..”表示。</li>
+</ul>
+<p>对每个执行的命令，Linux 系统都会自动打开 3 个文件，并且都有一个小的整数与之对应 ：</p>
+<ul>
+<li>stdin，标准输入文件，一般指键盘输入，用 0 表示；</li>
+<li>stdout，标准输出文件，一般指显示器，用 1 表示；</li>
+<li>stderr，标准错误输出文件，一般指显示器，用 2 表示。</li>
+</ul>
+<h2 id="比较文件"><a href="#比较文件" class="headerlink" title="比较文件"></a>比较文件</h2><p>diff 命令用来比较两个文件的内容，通过把其中一个文件转换成另一个文件的命令的形式来显示这两个文件之间的区别<br>示例 ：使用 Gedit 或 vim 在当前用户主目录下创建两个文件 t1.txt 和 t2.txt，然后使用命令比较两个文件的内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">diff t1.txt t2.txt<br></code></pre></td></tr></table></figure>
+
+<h2 id="删除重复行"><a href="#删除重复行" class="headerlink" title="删除重复行"></a>删除重复行</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226224321037.png#id=TspdU&originHeight=370&originWidth=723&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h2><p>1、访问权限的分类：</p>
+<ul>
+<li>可读（r）</li>
+<li>可写（w）</li>
+<li>可执行（x）三种</li>
+</ul>
+<p>2、访问权限的用户类别，有三种不同的类型的用户可对文件或目录进行访问：</p>
+<ul>
+<li>文件所有者</li>
+<li>同组用户</li>
+<li>其他用户</li>
+</ul>
+<p>3、访问权限的表示：<br>共有 10 个字符组成，第一个字符指定了文件类型。剩下的是文件或目录的访问权限，分为三组，每组用三位表示，分别为：</p>
+<ul>
+<li>文件所有者的读、写和执行权限</li>
+<li>与文件所有者同组的用户的读、写和执行权限</li>
+<li>系统中其他用户的读、写和执行权限</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226224517215.png#id=mXmwW&originHeight=234&originWidth=712&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>在 Linux 中，可以使用命令 chmod 来改变文件或目录的访问权限。<br>语法格式如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">chmod [选项] [mode] &lt;文件或目录&gt;<br></code></pre></td></tr></table></figure>
+
+<p>常用选项有 ：</p>
+<ul>
+<li>-c   若该档案权限确实已经更改，才显示其更改动作 ；</li>
+<li>-f   若该档案权限无法被更改也不要显示错误信息；</li>
+<li>-v   显示权限变更的详细资料；</li>
+<li>-R   对目前目录下的所有档案与子目录进行相同的权限变更（即以递归的方式逐个变更）；</li>
+<li>mode 是权限标记，可以有两种格式：符号标记和八进制数；</li>
+<li>文件或目录，是要设置的文件名或目录名，必须输入。</li>
+</ul>
+<p>使用符号标记法修改权限时，chmod 命令中的 mode 是由<code>[who] [operator] [permission]</code>三部分组成。其中：<br>操作对象[who]可以是下述字母中任何一个或者它们的组合：</p>
+<ul>
+<li>u，表示“用户（user）”，即文件或目录的所有者；</li>
+<li>g，表示“同组（group）用户”，即与文件所有者同组的所有者；</li>
+<li>o，表示“其他（other）用户”；</li>
+<li>a，表示“所有（all）用户”，它是系统默认值。</li>
+</ul>
+<p>其中：操作符<code>[operator]</code>可以是：</p>
+<ul>
+<li>+，添加某个权限；</li>
+<li>-，取消某个权限；</li>
+<li>=，赋予给定权限并取消其他权限,即设定唯一的权限；</li>
+</ul>
+<p>其中需要[permission]所表示的权限可用下述字母的任何一个或任意的组合：</p>
+<ul>
+<li>r，可读 ；</li>
+<li>w，可写 ；</li>
+<li>x，可执行 ；</li>
+</ul>
+<p>八进制数法修改权限<br>使用八进制数法修改权限时，chmod 命令中的 mode 用三个八进制数 abc 表示，其中：</p>
+<ul>
+<li>a 表示用户（user）的权限；</li>
+<li>b 表示同组（group）用户的权限；</li>
+<li>c 表示其他（other）的权限</li>
+</ul>
+<p>而八进制数是 4（可读）、2（可写）、1（可执行）的组合。因此：</p>
+<ul>
+<li>若要读、写、执行权限（rwx），则 4+2+1=7；</li>
+<li>若要读、写权限（rw-），则 4+2=6；</li>
+<li>若要读、执行权限（r-x），则 4+1=5</li>
+</ul>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p>正则表达式：描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等；<br>支持正则表达式的常用工具有 grep、egrep、vim 等，尤其是 egrep 能较好地支持正则表达式，而 grep 对正则表达式支持的较少</p>
+<p>| <strong>符号</strong> | <strong>含义</strong>                                                                                          |<br>| ——– | ————————————————————————————————- | ——————- | ————————- | ———————— |<br>| \       | 将下一字符标记为特殊字符、文本、八进制转义符。例如，“n”匹配字符“n”，“\n”匹配换行符               |<br>| ^        | 匹配输入字符串开始的位置。例如，“^st”匹配以 st 开始的行                                           |<br>| $        | 匹配输入字符串结尾的位置。例如，“st$”匹配以 st 结尾的行                                           |<br>| *       | 零次或多次匹配前面的字符或表达式，例如，“zo*”匹配“z”和“zoo”                                      |<br>| +        | 一次或多次匹配前面的字符或表达式，例如“zo+”与“zo”和“zoo”匹配，但与“z”不匹配                       |<br>| ？       | 零次或一次匹配与前面的字符或表达式，例如“do?”匹配“do”或“does”中的“do”                             |<br>| {n}      | n 是非负整数，正好匹配 n 次，例如，“o｛2｝”与“Bob”中的“o”不匹配，但与“food”中的两“o”匹配          |<br>| ｛n，m｝ | m 和 n 是非负整数，其中 n&lt;=m。匹配至少 n 次，至多 m 次，例如“o｛1，3｝”匹配“foooood”中的前三个“o” |<br>| x        | y                                                                                                 | 匹配 x 或 y。例如“z | food”匹配“z”或“food”，“(z | f)ood”匹配“zood”或“food” |<br>| [a-z]    | 字符范围，匹配指定范围内的任何字符，例如，“[a-z]”匹配“a”到“z”范围内的任何小写字母                 |<br>| [^a-z]   | 反向字符范围。匹配不在指定范围内的任何字符，例如“[^a-z]”匹配任何不在“a”到“z”范围内的任何字符      |<br>| \b      | 匹配一个字边界，例如，“er\b”匹配“never”中的“er”，但不匹配“verb”中的“er”                          |<br>| \B      | 非字边界匹配，例如，“er\B”匹配“verb”中的“er”，但不匹配“never”中的“er”                            |<br>| \f      | 换页符匹配                                                                                        |<br>| \f      | 换页符匹配                                                                                        |<br>| \d      | 数字字符匹配，等效于[0-9]                                                                         |<br>| \D      | 非数字字符匹配，等效于[^0-9]                                                                      |<br>| \n      | 换行符匹配                                                                                        |<br>| \r      | 匹配一个回车符                                                                                    |<br>| \s      | 匹配任何空白字符，包括空格，制表符，换页符等。                                                    |<br>| \t      | 制表符匹配                                                                                        |<br>| \w      | 匹配任何字类字符                                                                                  |<br>| \W      | 匹配任何非字类字符                                                                                |</p>
+<h2 id="文件内容查找"><a href="#文件内容查找" class="headerlink" title="文件内容查找"></a>文件内容查找</h2><p>搜索文件内容的命令有 grep、egrep 和 fgrep，三个命令中：</p>
+<ul>
+<li>fgrep 命令是执行速度最快的，不过有较多的限制；</li>
+<li>egrep 是最慢的，但却是最灵活的，完全支持正则表达式；</li>
+<li>grep 具有合理的速度和部分正则表达式支持</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226230830381.png#id=IFYKz&originHeight=178&originWidth=838&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>其中：<br>常用选项：<br>-c：显示匹配的行数；<br>-n：显示匹配内容所在的文档的行号；<br>-i：匹配时忽略大小写；<br>-v：输出不匹配内容；<br>-x：只选择能匹配完整一行的匹配。</p>
+<p>其中：<br>模式，可以使用正则表达式描述字符串匹配的模式。<br>常用的正则表达式操作符有：<br>‘’：匹配的字符串在行首，如：‘xyz’匹配所有以 xyz 开头的行<br>‘<img src="https://g.yuque.com/gr/latex?%E2%80%99%EF%BC%9A%E5%8C%B9%E9%85%8D%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8%E8%A1%8C%E5%B0%BE%EF%BC%8C%E5%A6%82%EF%BC%9A%E2%80%98xyz#card=math&code=%E2%80%99%EF%BC%9A%E5%8C%B9%E9%85%8D%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%A8%E8%A1%8C%E5%B0%BE%EF%BC%8C%E5%A6%82%EF%BC%9A%E2%80%98xyz&id=WqPb4" srcset="/img/loading.gif" lazyload>’匹配所有以 xyz 结尾的行<br>‘&lt;’：指匹配表达式的开始，如：‘&lt;man’匹配‘manic’ 等<br>。。。</p>
+<p>其中：<br>文件列表，是要查找的文件名列表。<br>如果没有文件列表，则从标准输入中读入数据<br>当使用“grep –E”等同于使用 egrep；<br>当使用“grep -F”等同于使用 fgrep。</p>
+<p>2、关于引号的使用<br>一般情况下当 grep 命令格式中的“模式”是一个不包含空格的简单字符串时，既可以使用单引号也可以使用双引号，或者甚至不适用引号<br>例如查找在 abn 文件中查找包含字符串 hello 的行，以下三个命令是等价的：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">grep  hello  abn<br>grep &#x27;hello&#x27; abn<br>grep &quot;hello&quot; abn<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">grep ‘$hello’ abn  #查找abn文件中包含字符串$hello的行<br>grep “$hello” abn  #查找abn文件中包含变量hello所代表的内容的行<br>grep  $hello  abn  #同上，与命令“grep  &quot;$hello&quot;  abn”意义相同<br></code></pre></td></tr></table></figure>
+
+<h2 id="文件排序"><a href="#文件排序" class="headerlink" title="文件排序"></a>文件排序</h2><p>Linux 中文件排序使用 sort 命令，该命令可以对文件内容进行排序输出，但不改变文件原有内容。其语法格式如下</p>
+<p><code>sort [选项] &lt;文件或目录&gt;</code></p>
+<p>其中：<br>常用选项有：<br>-r，以反向的顺序来排序<br>-u，排序输出时，去掉重复行<br>文件或目录，是需要排序的文件名或目录名。</p>
+<h2 id="文件压缩与解压缩"><a href="#文件压缩与解压缩" class="headerlink" title="文件压缩与解压缩"></a>文件压缩与解压缩</h2><p>文件压缩的命令有：<code>gzip</code>、<code>gzexe</code>、<code>zcat</code>。<br>本小结介绍 gzip 命令的应用。其语法格式如下</p>
+<p><code>gzip [选项] &lt;文件列表&gt;</code></p>
+<p>其中：<br>常用选项有：<br>-c 将输出写到标准输出上，并保留原有文档<br>-d 将压缩文件解压<br>-r 递归式地查找指定目录并压缩其中的所有文件或是解压缩</p>
+<h2 id="文件备份和还原"><a href="#文件备份和还原" class="headerlink" title="文件备份和还原"></a>文件备份和还原</h2><p><code>tar [选项] &lt;文件或目录&gt;</code></p>
+<p>其中“选项”是命令执行时可使用的参数，tar 命令选项分为：主选项和辅助选项。</p>
+<ul>
+<li>常用主选项有 ：<br>-c 创建新的档案文件；<br>-r 把要存档的文件追加到档案的末尾；<br>-t 列出档案文件的内容，查看已经备份了哪些文件<br>-u 更新文件；<br>-x 从档案文件中释放文件。</li>
+<li>常用辅助选项有 ：<br>-f 指定是要使用的文件名，这个选项通常是必选项，选项后面要有文件名；<br>-v 详细报告 tar 处理的文件信息；<br>-z 用 gzip 来压缩/解压缩文件，加上该选项后可以将档案文件进行压缩，但还原时也一定要使用该选项进行解压缩。</li>
+</ul>
+<h1 id="第-4-章-高级操作"><a href="#第-4-章-高级操作" class="headerlink" title="第 4 章 高级操作"></a>第 4 章 高级操作</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226231642366.png#id=skBT5&originHeight=311&originWidth=560&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>Linux 是多任务操作系统，每个运行着的程序实例就是一个进程。<br>在单 CPU 情况下，每个进程每次只执行很短的时间，执行过后 CPU 被 Linux 分配给另外一个进程，这种进程间的快速切换给用户的感觉就是可以同时运行多个程序。</li>
+<li>Linux 进程都需要从某个进程创建出来，此时创建者进程称为“父进程”，被创建的进程称为“子进程”。<br>进程可以具有多种状态中的一种，可以从一种状态切换到另一种状态，直到执行结束或非正常终止<table>
+<thead>
+<tr>
+<th><strong>状态</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>就绪</td>
+<td>进程准备执行，但没有得到 CPU</td>
+</tr>
+<tr>
+<td>执行</td>
+<td>进程正在执行（使用 CPU）</td>
+</tr>
+<tr>
+<td>等待</td>
+<td>进程等待事件发生。可能的事件包括 I/O（例如磁盘读写操作）完成，父进程等待一个或多个子进程退出</td>
+</tr>
+<tr>
+<td>交换</td>
+<td>进程准备运行，但是它暂时被放置到磁盘上；或者该进程需要很多内存但是系统现在没有足够的内存空间可用</td>
+</tr>
+<tr>
+<td>僵死</td>
+<td>进程执行退出操作之前其父进程已经终止，该进程就变成僵死进程</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<p>Linux 操作系统包括三种不同类型的进程：</p>
+<ul>
+<li>交互进程：由用户启动（通过桌面点击操作或在终端中运行命令），可以工作在前台或后台；</li>
+<li>批处理进程：和终端没有联系，是一个进程序列（提交给 Linux 进程等待队列的进程）；</li>
+<li>守护进程；也称监控进程，由 Shell 或 Linux 系统自动启动，工作在后台，用于监视特定任务；</li>
+</ul>
+<p>启动进程的方式有两种：</p>
+<ul>
+<li>手工启动：<br>前台启动：直接在终端中输入程序名（外部命令名），例如：vim ；<br>后台启动：输入程序名时加“&amp;”，例如：vim&amp;。</li>
+<li>调度启动 ：<br>指定系统在特定时间运行程序，可用 at，batch 和 cron 调度</li>
+</ul>
+<h2 id="作业机制"><a href="#作业机制" class="headerlink" title="作业机制"></a>作业机制</h2><p>事先进行调度安排，指定时间运行任务。<br>Linux 中常用 at、batch 和 crontab 命令进行作业控制，他们之间的区别如下：</p>
+<ul>
+<li><code>at命令</code>：在指定的精确时间执行；</li>
+</ul>
+<p>语法格式：<code>at [选项] &lt;时间&gt;</code></p>
+<p>其中，若省略选项，表示是设定作业，常用“选项”如下：<br>-d，删除指定的调度作业；<br>-f 文件名，从指定文件中读取执行的命令</p>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>时间表示法</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>举例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>绝对表示法</td>
+<td>midnight</td>
+<td>当天午夜</td>
+<td>at midnight</td>
+</tr>
+<tr>
+<td>moon</td>
+<td>当天中午</td>
+<td>at moon</td>
+<td></td>
+</tr>
+<tr>
+<td>hh:mm [mm/dd/yy]</td>
+<td>时:分 月/日/年</td>
+<td>at 12:23at 23:01 5/21/09</td>
+<td></td>
+</tr>
+<tr>
+<td>相对表示法</td>
+<td>now+n minutes</td>
+<td>现在起向后 n 分钟</td>
+<td>at now+30 minutes</td>
+</tr>
+<tr>
+<td>now+n hours</td>
+<td>现在起向后 n 小时</td>
+<td>at now +2 hours</td>
+<td></td>
+</tr>
+<tr>
+<td>now+n days</td>
+<td>现在起向后 n 天</td>
+<td>at now+5 days</td>
+<td></td>
+</tr>
+<tr>
+<td>now+n weeks</td>
+<td>现在起向后 n 周</td>
+<td>at now+1 weeks</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>与 at 命令相关的还有 atq 命令（显示队列中的作业信息）和 atrm 命令（删除队列作业）。下图所示为 atq 和 arm 命令的使用方法</p>
+<ul>
+<li><code>batch命令</code>：在系统负载较低的时候执；</li>
+</ul>
+<p>2、batcht 命令：设定完作业后，会等到系统载荷小于 0.8 的时候执行作业。<br>在使用 batch 时，不需要参数，batch 执行时依然是在 at 输入符下输入要执行的命令，最后输入 Ctrl+d 结束 batch 命令，如图所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226232157429.png#id=xSKRK&originHeight=214&originWidth=608&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>上述命令执行完毕后，立刻使用“ls”命令就可以看到“bt.txt”文件。如图所示 。这是因为此时系统负载较小，所以作业立即执行了 。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226232216555.png#id=fY31A&originHeight=309&originWidth=685&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><code>crontab命令</code>：用于创建周期运行的任务作业。</li>
+</ul>
+<p>crontab 命令：可以设定周期运行的任务作业 。<br>使用命令“crontab -e”，即可创建作业，该命令打开一个编辑窗口，用户需要将设定的任务写入文件中。<br>首次使用该命令时，系统要求选择默认的编辑器，如图所示。本例中选择“3”，使用 vim 作为默认编辑器。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226232247830.png#id=pfg46&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>3、crontab 命令：可以设定周期运行的任务作业 。<br>在打开的编辑器内，需要按照如下固定格式输入要执行的任务：</p>
+<p><code>分钟 小时 日期 月份 星期 命令</code></p>
+<p>可以使用通配符“*”表示任何时间，例如要设定在每日 10 点 20 分执行一次“touch test.txt”，可以输入以下内容：</p>
+<p><code>20 10 * * * touch test.txt</code></p>
+<p>入完 crontab 作业后，按下 ESC 键，输入“:wq”，保存退出，crontab 即可生效。若要编辑 crontab 作业，可以再次运行“crontab -e”命令；若要查询 crontab 作业，可以使用命令“crontab -l”，如图所示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226232419159.png#id=IaThG&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><p>Linux 的进程管理是通过进程管理工具实现的，主要有以下工具命令：</p>
+<ul>
+<li>ps，查询列举进程；</li>
+<li>pgrep，按名字查询进程；</li>
+<li>pstree，显示进程树；</li>
+<li>kill，杀死进程。</li>
+</ul>
+<h3 id="ps-命令：查询进程"><a href="#ps-命令：查询进程" class="headerlink" title="ps 命令：查询进程"></a>ps 命令：查询进程</h3><p>ps 用于查询进程，其语法格式如下：</p>
+<p><code>ps [选项] &lt;程序名&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th><strong>选项参数</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a</td>
+<td>显示终端上的所有进程，包括其他用户的进程</td>
+</tr>
+<tr>
+<td>u</td>
+<td>按用户名和启动时间的顺序来显示进程</td>
+</tr>
+<tr>
+<td>x</td>
+<td>显示无控制终端的进程</td>
+</tr>
+<tr>
+<td>l</td>
+<td>长格式显示</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>显示所有进程</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>全格式输出，即可以看到进程的命令行</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>有效使用者相关的进程</td>
+</tr>
+</tbody></table>
+<p>ps 命令常用的选项组合是“aux”、“-ef”等。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226232634201.png#id=fY0J5&originHeight=611&originWidth=771&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>ps 命令相关显示信息如下：<br>USER，运行进程的用户；<br>PID，进程的 ID 号；<br>%CPU，进程使用的 CPU 资源百分比；<br>%MEM，进程使用的内存资源百分比；<br>VSZ，进程使用的虚拟内存（Kbytes）；<br>RSS，进程所使用物理内存的大小；<br>TTY，进程关联的终端，如果没有终端显示“？”；<br>STAT，进程目前的状态，主要状态如表 4- 4 所示；<br>TIME，当前为止进程已经运行的时间，或休眠和停止之前运行的时间；<br>COMMAND，进程的程序名。</p>
+<p>其中进程状态（stat），如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th><strong>进程状态</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R</td>
+<td>正在运行，或等待被系统调度来使用 CPU</td>
+</tr>
+<tr>
+<td>S</td>
+<td>休眠</td>
+</tr>
+<tr>
+<td>T</td>
+<td>停止或正在被系统侦测</td>
+</tr>
+<tr>
+<td>Z</td>
+<td>僵死进程</td>
+</tr>
+</tbody></table>
+<h3 id="pgrep-命令"><a href="#pgrep-命令" class="headerlink" title="pgrep 命令"></a>pgrep 命令</h3><p>1、通过程序的名字来查询进程，一般用来判断程序是否正在运行，这在服务器的配置和管理中可以用到<br>语法格式如下：<code>pgrep [选项] &lt;程序名&gt;</code></p>
+<p>其中，常用选项如下 ：<br>-l，列出程序名和进程 ID；<br>-o，程序名匹配最早生成的进程；<br>-n，程序名匹配最新生成的进程。</p>
+<p>2、pgrep 命令：通过程序的名字来查询进程，一般用来判断程序是否正在运行，这在服务器的配置和管理中可以用到<br>例如，“/sbin/init”程序是一个系统进程，可以使用 pgrep 命令查看其进程 ID，如图所示 ：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226233323912.png#id=BIMrO&originHeight=163&originWidth=770&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h3 id="pstree-命令"><a href="#pstree-命令" class="headerlink" title="pstree 命令"></a>pstree 命令</h3><p>使用树形结构显示进程间的关系。pstree 有很多参数，一般情况下直接使用 pstree 命令获取进程间的关系情况。如图示 ：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226233435108.png#id=SxZYW&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h3 id="kill-命令"><a href="#kill-命令" class="headerlink" title="kill 命令"></a>kill 命令</h3><p>当某个进程由于某种原因（如死锁）需要用户干预以提前终止。一般结合 ps 或 pgrep 命令，找到进程的 ID，然后用 kill 终止它。<br>kill 命令语法格式如下：</p>
+<p><code>kill [信号代码] 进程ID</code></p>
+<p>其中，信号代码可以省略，常用的信号代码是-9，表示<code>强制终止</code>。</p>
+<h2 id="多用户和多任务"><a href="#多用户和多任务" class="headerlink" title="多用户和多任务"></a>多用户和多任务</h2><p>有两个概念需要理解：</p>
+<ul>
+<li>单用户多任务：单个用户可以同时执行多个进程（程序），例如单个用户可以同时运行 vim、gedit 等多个进程；</li>
+<li>多用户多任务：多个用户同时登录并使用系统，例如有本地用户、远程的网络用户同时登录系统。<br><code>Linux支持多用户同时使用系统，也支持单个用户运行多个任务</code></li>
+</ul>
+<h3 id="用户和组管理"><a href="#用户和组管理" class="headerlink" title="用户和组管理"></a>用户和组管理</h3><table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>useradd</td>
+<td>创建新用户</td>
+</tr>
+<tr>
+<td>userdel</td>
+<td>删除用户</td>
+</tr>
+<tr>
+<td>usermod</td>
+<td>修改用户账号</td>
+</tr>
+<tr>
+<td>passwd</td>
+<td>修改用户口令</td>
+</tr>
+<tr>
+<td>groupadd</td>
+<td>创建组</td>
+</tr>
+<tr>
+<td>groupdel</td>
+<td>删除组</td>
+</tr>
+</tbody></table>
+<h2 id="相关系统文件"><a href="#相关系统文件" class="headerlink" title="相关系统文件"></a>相关系统文件</h2><ul>
+<li>/etc/passwd<blockquote>
+<p>“/etc/passwd”是用户账号文件，该文件每行存放 1 个账户的一些信息，信息被“：”隔开成 7 个域，内容格式如下：</p>
+</blockquote>
+</li>
+</ul>
+<p><code>用户名:口令:用户ID:组ID:用户全名或描述:登录目录:登录Shell</code></p>
+<p>上述信息中的“口令”，其实只是个特殊字符，如“x”或“*”，真正的口令在/etc/shadow 文件中</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226234325106.png#id=t9l12&originHeight=613&originWidth=772&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>2、/etc/shadow<br>“/etc/shadow”是用户口令文件，其中存放已经加密的用户口令，每行一个用户信息，用“：”分割成 9 个域，包括：<br>用户名<br>加密后的口令<br>从 1970 年 1 月 1 日至今密码最近一次被修改的天数<br>从 1970 年 1 月 1 日起多少天内口令不能修改<br>从 1970 年 1 月 1 日多少天内口令必须修改<br>提前多少天警告用户口令将过期<br>在口令过期之后多少天禁用此用户<br>从 1970 年 1 月 1 日起多少天后口令失效<br>保留</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226234419850.png#id=J1MOj&originHeight=616&originWidth=770&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>3、/etc/group<br>“/etc/group”是组账号文件，每行存放一个组账号信息，用“：”分割成 4 个域：</p>
+<p><code>组名:组口令:组ID:组成员列表</code></p>
+<p>其中“组口令”一般的 Linux 系统都不使用，通常这个位置是一个特殊字符，例如“x”</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226234527544.png#id=fdH0I&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h2><h3 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h3><p>输出重定向用大于号“&gt;”，如果这条命令要往标准输出写入或者发送信息，那么都将写入输出文件中，而不是与命令所关联的显示器。<br>其语法格式有两条：</p>
+<p><code>命令 &gt; 文件</code><br><code>命令 &gt;&gt; 文件</code></p>
+<p>上述第一条命令，将命令的执行结果送至指定的文件中，若文件已存在，则<code>覆盖</code>；<br>第二条命令，将命令的执行结果<code>追加</code>到指定文件中。</p>
+<h3 id="输入重定向"><a href="#输入重定向" class="headerlink" title="输入重定向"></a>输入重定向</h3><p>输入重定向用小于号“&lt;”来表示，如果命令从标准输入中读取输入，这个输入就是来自输入文件，而不是和命令相关的键盘。<br>其语法格式如下：</p>
+<p>&lt;命令&gt;  &lt;  &lt;文件&gt;</p>
+<p>其中：</p>
+<ul>
+<li>命令，可以是任何一条 Shell 命令；</li>
+<li>文件，是要作为输入命令的文件</li>
+</ul>
+<h3 id="错误输出重定向"><a href="#错误输出重定向" class="headerlink" title="错误输出重定向"></a>错误输出重定向</h3><p>可以通过描述符（0、1、2）与操作符“&lt;”和“&gt;”相关联，来对标准输入、标准输出、错误输出重定向。<br>示例：通过使用“2&gt; ”对一条命令标准出错进行重定向</p>
+<p>$ cat a.c<br>$ cat a.c 2&gt; error.txt</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226234827588.png#id=RurYu&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><h3 id="管道的概念"><a href="#管道的概念" class="headerlink" title="管道的概念"></a>管道的概念</h3><p>Linux 系统允许通过管道操作将一条命令的输出作为另一条命令的标准输入。管道的操作符是一个竖杠“|”。下图说明了管道操作的含义</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210226235005809.png#id=Gr19j&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>简单的说就是利用管道符“|”将两个命令分开，管道符左边命令的输出就会作为管道符右边命令的输入；<br>连续使用管道意味着第一个命令的输出会作为第二个命令的输入，第二个命令的输出又会作为第三个命令的输入，依此类推。</p>
+<ul>
+<li>使用 ls 和 more 命令，利用管道操作分屏显示目录“/usr/include”里的内容。具体操作步骤如下：</li>
+</ul>
+<p>1、用 ls 命令查看目录“/usr/include”里的内容<code>ls /usr/include</code></p>
+<p>2、ls 命令通过管道将内容输出到 more 命令，从而可以进行分屏控<code>ls /usr/include | more</code></p>
+<ul>
+<li>使用 ls、grep 和 more 命令，利用管道操作查找“/usr/include”目录内以字符串“lib”开头的“.h”文件，并分屏显示</li>
+</ul>
+<p><code>ls /usr/include | grep &#39;^lib&#39; | more</code></p>
+<h1 id="第-5-章-Shell-编程"><a href="#第-5-章-Shell-编程" class="headerlink" title="第 5 章 Shell 编程"></a>第 5 章 Shell 编程</h1><ul>
+<li>在 Linux 系统中，虽然有各种各样的图形化操作工具，但是 Shell 仍然是一个非常灵活的工具：<br>Shell 不仅能够执行命令，而且是一门非常优秀的编程语言。</li>
+<li>通过使用 Shell 编程可以使大量的任务自动化。</li>
+<li>Shell 程序特别擅长系统管理任务，尤其适合那些易用性、可维护性和便携性比效率更重要的任务。</li>
+</ul>
+<h2 id="Shell-特点"><a href="#Shell-特点" class="headerlink" title="Shell 特点"></a>Shell 特点</h2><p>Linux 系统中的 Shell 脚本通常具备以下特点：</p>
+<ul>
+<li>Shell 脚本程序是由 Shell 环境解释执行的；</li>
+<li>Shell 脚本不需要编译、连接及生成可执行文件，直接由相应的解释器解释执行即可；</li>
+<li>执行 Shell 程序时，Shell 脚本文件需要具有可执行的权限；</li>
+<li>Shell 脚本可以使用变量、控制语句等比较复杂的结构；</li>
+<li>Shell 脚本是从上而下，顺序执行的。</li>
+</ul>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><table>
+<thead>
+<tr>
+<th><strong>环境变量</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$PATH</td>
+<td>以冒号分割的，统常用来搜索命令的目录列表</td>
+</tr>
+<tr>
+<td>$HOME</td>
+<td>当前用户的主目录</td>
+</tr>
+<tr>
+<td>$0</td>
+<td>shell 脚本程序的名字</td>
+</tr>
+<tr>
+<td>$#</td>
+<td>传递给脚本的参数个数，如果脚本程序在调用时没有传递任何参数，则$#的值是 0</td>
+</tr>
+<tr>
+<td>$IFS</td>
+<td>输入域分隔符。当 Shell 读取输入时，它给出用来分隔单词的一组字符，通常是空格、制表符和换行符等</td>
+</tr>
+<tr>
+<td>$1,$2,…</td>
+<td>脚本程序调用时传递过来的参数</td>
+</tr>
+<tr>
+<td>$*</td>
+<td>在一个变量中列出所有的参数，各个参数之间用$IFS 中的第一个字符分隔</td>
+</tr>
+</tbody></table>
+<p>参考资料</p>
+<h1 id="第-6-章-网络操作"><a href="#第-6-章-网络操作" class="headerlink" title="第 6 章 网络操作"></a>第 6 章 网络操作</h1><p>TCP/IP 协议应用层协议是直接为用户服务的网络协议，常见应用层协议如表所示：</p>
+<table>
+<thead>
+<tr>
+<th><strong>协议</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HTTP</td>
+<td>超文本传输协议，用于实现互联网中的 www 服务</td>
+</tr>
+<tr>
+<td>FTP</td>
+<td>文件传输协议，实现上传下载</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>域名解析服务，提供域名到 IP 地址之间的转换</td>
+</tr>
+<tr>
+<td>Telnet</td>
+<td>用户远程登录服务</td>
+</tr>
+</tbody></table>
+<h2 id="IP-地址"><a href="#IP-地址" class="headerlink" title="IP 地址"></a>IP 地址</h2><p>TCP/IP 协议中的网络层也称为 IP 层，按照该层协议的要求，为连接在 Internet 上的每个主机分配一个 32bit 长的地址，称之为 IP 地址。</p>
+<p>IP 地址用二进制表示，32bit 的 IP 地址可换算成 4 个字节。</p>
+<p>为了方便使用，IP 地址经常被写成十进制的形式，中间用“.”分开不同的字节，如“202.102.134.68”。</p>
+<h2 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h2><p>按照 TCP/IP 协议的要求，可以将 IP 地址划分成“网络地址”和“主机地址”两部分。</p>
+<p>为了方便计算，使用“子网掩码”来指明一个 IP 地址哪些位标示的是“主机”所在子网，哪些位标示的是主机的位掩码。</p>
+<p>与 IP 地址相同，子网掩码也用二进制来表示，长度也是 32 位，且有以下规律：<br>子网掩码的二进制位 1 和 0 分别连续；<br>左边是网络位，用二进制数“1”表示，“1”的数目等于网络位的长度；<br>右边是主机位，用二进制数“0”表示，“0”的数目等于主机位的长度。</p>
+<p>以上规则的设计目的是：<code>让子网掩码与IP地址做“与”运算时用“0”遮住原主机数，而不改变原网络段数字，且方便通过“0”的位数确定子网的主机数。</code></p>
+<h2 id="网络命令"><a href="#网络命令" class="headerlink" title="网络命令"></a>网络命令</h2><table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>功能</strong></th>
+<th><strong>备注</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ifconfig</td>
+<td>查看和配置网络接口的参数</td>
+<td></td>
+</tr>
+<tr>
+<td>ping</td>
+<td>用于查看网络上的主机是否在工作</td>
+<td></td>
+</tr>
+<tr>
+<td>ftp</td>
+<td>登录到 FTP 服务器，以利用 ftp 协议上传和下载文件</td>
+<td>需要安装 FTP 客户端软件，Ubuntu11.04 已默认安装</td>
+</tr>
+<tr>
+<td>telnet</td>
+<td>利用 telnet 协议访问主机</td>
+<td>需要安装 telnet 客户端软件，Ubuntu11.04 已默认安装</td>
+</tr>
+<tr>
+<td>ssh</td>
+<td>利用 ssh 协议登录对方主机</td>
+<td>需要 ssh 客户端软件，Ubuntu11.04 已默认安装</td>
+</tr>
+<tr>
+<td>iptables</td>
+<td>网络数据包过滤设置</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h3><p>1、查看网络配置情况<br>使用 ifconfig 查看当前系统网络配置情况的语法格式如下：</p>
+<p><code>ifconfig [网络接口]</code></p>
+<p>其中，“网络接口”是一个后跟单元号的驱动设备名，例如第一个以太网接口 eth0、第二个以太网接口 eth1 等 ；<br>使用以上命令时，若省略“网路接口”，则查询本机所有网络接口的配置情况。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210227000231844.png#id=rHrjg&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>2、配置指定接口参数<br>使用 ifconfig 命令配置指定接口（如 eth0、eth1）的参数（如 IP 地址、网络掩码、广播地址等），语法格式如下：</p>
+<p><code>ifocnifg &lt;网络接口&gt; [选项] &lt;IP地址&gt;</code></p>
+<p>其中，常用“选项”如下：<br>down，关闭指定的网络设备<br>up，启动指定的网络设备<br>netmask&lt;子网掩码&gt;</p>
+<p>示例：设置本机 eth0 的 IP 地址为“192.168.1.6”子网掩码为“255.255.255.0”。</p>
+<p><code>sudo ifconfig eth0 192.168.1.6 netmask 255.255.255.0</code></p>
+<h3 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h3><p>使用 ping 命令可以检查网络是否能够连通。<br>常用语法格式如下：</p>
+<p><code>ping &lt;IP地址&gt;</code></p>
+<p>其中，“IP 地址”是要测试能够通过网络到达的主机的 IP 地址。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210227000534701.png#id=vagKW&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h3 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h3><p>使用 ftp 命令可登录到 FTP 服务器，ftp 命令运行成功后，用户需要输入相应的用户名和密码，验证通过后，用户可以使用相关的 FTP 客户端命令进行远程文件操作。<br>FTP 登录命令常用语法格式如下：</p>
+<p><code>ftp &lt;IP地址&gt;</code></p>
+<p>其中，“IP 地址”是提供 FTP 服务的主机 IP 地址。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210227000626239.png#id=x6rwB&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>功能</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ls</td>
+<td>列举服务器上的文件</td>
+</tr>
+<tr>
+<td>get</td>
+<td>下载文件</td>
+</tr>
+<tr>
+<td>put</td>
+<td>上传文件</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>建立目录</td>
+</tr>
+<tr>
+<td>rmdir</td>
+<td>删除目录</td>
+</tr>
+<tr>
+<td>cd</td>
+<td>改变工作目录</td>
+</tr>
+<tr>
+<td>help</td>
+<td>查看帮助</td>
+</tr>
+<tr>
+<td>bye</td>
+<td>退出 FTP</td>
+</tr>
+</tbody></table>
+<h1 id="第-7-章-编程工具"><a href="#第-7-章-编程工具" class="headerlink" title="第 7 章 编程工具"></a>第 7 章 编程工具</h1><h2 id="编译链接"><a href="#编译链接" class="headerlink" title="编译链接"></a>编译链接</h2><p>在 Linux 中，C 程序的编译用 gcc 程序，链接用 ld 程序，gcc 编译完后可自动调用 ld 程序完成链接过程。因此这里重点介绍 gcc 程序。<br>调用 gcc 编译程序的的语法格式如下：</p>
+<p><code>gcc [选项] &lt;文件名&gt;</code></p>
+<p>其中，最常使用的选项有：<br>-c：只编译，不链接成为可执行文件<br>-o output_filename：确定输出文件,默认是 a.out<br>-g：产生符号调试工具（GNU 的 gdb）所必要的符号信息<br>l-pg：产生代码剖析工具 gprof 使用的信息<br>-w：忽略警告信息<br>文件名：需要编译程序的文件名</p>
+<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>Linux 上调试 C 语言程序，可使用 gdb 程序。<br>使用 gdb 调试程序前，需要先使用 gcc 的“-g”选项编译程序，而后通过 gdb 命令加载编译好的程序， gdb 会不断从键盘接收用户命令并完成相应的任务，直到输入 q 命令（quit 的简写）让它退出为止。</p>
+<p><code>&lt;gdb&gt; &lt;可执行程序&gt;</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210227000951646.png#id=PNbpQ&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>命令简写</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>list</td>
+<td>l</td>
+<td>列出程序的源代码</td>
+</tr>
+<tr>
+<td>break</td>
+<td>b</td>
+<td>b &lt;代码行号&gt;，在某代码行设置断点</td>
+</tr>
+<tr>
+<td>run</td>
+<td>r</td>
+<td>从头开始，全速运行程序至断点处</td>
+</tr>
+<tr>
+<td>step</td>
+<td>s</td>
+<td>单步执行</td>
+</tr>
+<tr>
+<td>continue</td>
+<td>c</td>
+<td>继续运行到下一个断点</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>d</td>
+<td>直接运行 d 命令，表示要删除所有断点；d &lt;代码行号&gt;，表示删除指定的断点</td>
+</tr>
+<tr>
+<td>print</td>
+<td>p</td>
+<td>p &lt;变量名&gt;，显示某个变量的值</td>
+</tr>
+<tr>
+<td>kill</td>
+<td>k</td>
+<td>停止被调试程序的运行</td>
+</tr>
+</tbody></table>
+<h2 id="make-工具"><a href="#make-工具" class="headerlink" title="make 工具"></a>make 工具</h2><p>make 工程管理器简称 make 工具，可以同时管理一个项目中多个文件的编译链接和生成。<br>make 工具其实是个“自动编译管理器”， “自动”是指它能够根据文件时间去自动发现更新过的文件而减少编译的工作量。<br>make 工具通过“Makefile”文件的内容自动执行大量的编译工作，而用户只需要编写一些简单的编辑语句，这极大地提高了实际项目的工作效率，几乎所有 Linux 下的项目均会使用它。</p>
+<p>使用 make 工具时的语法格式如下：<code>make [选项] [目标]</code></p>
+<p>其中，如果省略“选项”和“目标”，则 make 工具会寻找当前目录下的 Makefile 文件，解释执行其中的规则：<br>常用的“选项”如下<br>-f 文件，告诉 make 工具使用指定的文件作为 Makefile 文件<br>-d，显示调试信息<br>-n，测试模式，并不真正执行任何命令<br>-s，安静模式，不输出任何信息<br>“目标”：直接执行 Makefile 中的指定目标</p>
+<p>Makefile 文件由注释和一系列的“make 规则”组成。“make 规则”由以下格式组成</p>
+<p><code>&lt;目标文件列表&gt;:[依赖文件列表][&lt;Tab&gt;命令列表]</code></p>
+<p>其中：<br>目标文件列表：一系列文件名，文件之间要用空格隔开，是 make 最终需要创建的文件<br>依赖文件列表：一系列文件名，文件之间要用空格隔开，是生成目标文件所依赖的一个或多个其他文件<br>命令列表：必须有个前导 TAB 键操作。生成目标文件所需要执行的 shell 命令。一个 make 规则可以有多个命令行，每一条命令占一行。且每一个命令的第一个字符必须是制表符[Tab]。</p>
+<blockquote>
+<p>无论上述那个 Makefile 文件（本例假设使用上述第一个 Makefile 文件），都可以直接执行 make 命令，make 工具自动寻找当前目录下的 Makefile，并解释执行其中的规则：</p>
+</blockquote>
+<h2 id="gprof-工具"><a href="#gprof-工具" class="headerlink" title="gprof 工具"></a>gprof 工具</h2><p>gprof 常用语法格式如下</p>
+<p><code>gprof [选项] [可执行程序] [数据文件]</code></p>
+<p>其中，“选项”是命令执行时可使用的参数，常用“选项”有中：<br>-b：不再输出统计图表中每个字段的详细描述<br>-p：输出函数的调用图<br>-q：输出函数时间消耗列表<br>-z：显示从未使用过的函数<br>可执行程序，指 gcc 用“-pg”选项编译的程序，可以省略，默认是是当前目录下的 a.out 文件<br>目标文件，可以省略，默认是当前目录下的 gmon.out 文件</p>
+<p>使用 gprof 工具对程序进行静态分析。具体操作步骤如下<br>1、使用 gcc 的“-pg”选项编译程序</p>
+<p><code>gcc –pg –o hello.exe hello.c</code></p>
+<p>2、运行编译好的程序</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210227001247211.png#id=kMHZf&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>3、用 gprof 命令查看 gmon.out 保存的信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210227001258170.png#id=m7I5t&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="time-工具"><a href="#time-工具" class="headerlink" title="time 工具"></a>time 工具</h2><p>time 工具用于分析一个程序或任何 Shell 命令的运行效率。<br>Linux 下 time 命令可以获取一个程序的执行时间，包括程序的实际运行时间（real time），以及程序运行在用户态的时间（user time）和内核态的时间（sys time）。它们的意义如下：</p>
+<ul>
+<li>实际运行时间，是指程序从开始运行到结束所花费的时间</li>
+<li>用户态时间，是真正的代码执行时间</li>
+<li>内核态时间，是指程序执行时系统活动所花费的时间</li>
+</ul>
+<p>time 工具的常用语法格式如下：</p>
+<p><code>&lt;time&gt; [选项] [用户程序]</code></p>
+<p>其中，“选项”是命令执行时可使用的参数，常用“选项”有：<br>-o：将 time 的输出写入所指定的文件中，如果文件已经存在，系统将覆盖其内容<br>-a：配合-o 使用，将结果写到文件末端，而不会覆盖掉原来的内容<br>-p：把显示格式设定为百分比的形式<br>用户程序，要动态分析的程序名，需要包含路径</p>
+<p><code>time ./hello.exe</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210227001357047.png#id=z1MTp&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="http://www.xduph.com/">计算机组成与系统结构</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/" class="category-chain-item">服务器篇</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="category-chain-item">Linux服务器</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux篇-Linux操作系统教程</div>
+      <div>https://mikeygithub.github.io/2021/02/01/yuque/Linux篇-Linux操作系统教程/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年2月1日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/10/yuque/%E5%81%A5%E8%BA%AB%E7%AF%87-%E8%85%B9%E8%82%8C%E9%94%BB%E7%82%BC/" title="健身篇-腹肌锻炼">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">健身篇-腹肌锻炼</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/27/yuque/%E8%B5%84%E6%96%99%E7%AF%87-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3%E4%B9%A6%E7%B1%8D/" title="资料篇-计算机相关书籍">
+                        <span class="hidden-mobile">资料篇-计算机相关书籍</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,914 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="堆的定义堆（heap）是计算机科学中一类特殊的数据结构的统称。堆通常是一个可以被看做一棵树的数组对象。堆总是满足下列性质：  堆中某个结点的值总是不大于或不小于其父结点的值； 堆总是一棵完全二叉树。 插入、删除时间复杂度 O(log(n)) 获取最大或者最小的值时间复杂度 O(1)  将根结点最大的堆叫做最大堆或大根堆，根结点最小的堆叫做最小堆或小根堆。常见的堆有二叉堆、斐波那契堆等。 堆是非线">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-Heap 堆">
+<meta property="og:url" content="https://mikeygithub.github.io/2019/03/09/yuque/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-Heap%20%E5%A0%86/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="堆的定义堆（heap）是计算机科学中一类特殊的数据结构的统称。堆通常是一个可以被看做一棵树的数组对象。堆总是满足下列性质：  堆中某个结点的值总是不大于或不小于其父结点的值； 堆总是一棵完全二叉树。 插入、删除时间复杂度 O(log(n)) 获取最大或者最小的值时间复杂度 O(1)  将根结点最大的堆叫做最大堆或大根堆，根结点最小的堆叫做最小堆或小根堆。常见的堆有二叉堆、斐波那契堆等。 堆是非线">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655975505375-58760d8f-a90a-42b4-bd62-44405f37344d.png">
+<meta property="article:published_time" content="2019-03-09T09:24:22.000Z">
+<meta property="article:modified_time" content="2023-02-13T05:46:20.260Z">
+<meta property="article:author" content="Mikey">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655975505375-58760d8f-a90a-42b4-bd62-44405f37344d.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>数据结构-Heap 堆 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数据结构-Heap 堆"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-03-09 17:24" pubdate>
+          2019年3月9日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          6.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          55 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据结构-Heap 堆</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655975505375-58760d8f-a90a-42b4-bd62-44405f37344d.png#clientId=ue73b8f42-a9ac-4&from=ui&id=u849349c5&name=R-C.png&originHeight=599&originWidth=1000&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=80190&status=done&style=none&taskId=u065dbe9b-8c1f-4907-8f3d-83280d41d36&title=" srcset="/img/loading.gif" lazyload alt="R-C.png"></p>
+<h1 id="堆的定义"><a href="#堆的定义" class="headerlink" title="堆的定义"></a>堆的定义</h1><p>堆（heap）是计算机科学中一类特殊的数据结构的统称。堆通常是一个可以被看做一棵树的数组对象。堆总是满足下列性质：</p>
+<ul>
+<li>堆中某个结点的值总是不大于或不小于其父结点的值；</li>
+<li>堆总是一棵完全二叉树。</li>
+<li>插入、删除时间复杂度 O(log(n))</li>
+<li>获取最大或者最小的值时间复杂度 O(1)</li>
+</ul>
+<p>将根结点最大的堆叫做最大堆或大根堆，根结点最小的堆叫做最小堆或小根堆。常见的堆有二叉堆、斐波那契堆等。</p>
+<p>堆是非线性数据结构，相当于一维数组，有两个直接后继。</p>
+<blockquote>
+<p>优先队列是堆的一种实现</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1655977289601-c1cd634f-e8e7-427d-a972-a9173bac2b57.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="堆的操作"><a href="#堆的操作" class="headerlink" title="堆的操作"></a>堆的操作</h1><h2 id="堆的实现"><a href="#堆的实现" class="headerlink" title="堆的实现"></a>堆的实现</h2><h2 id="堆的插入"><a href="#堆的插入" class="headerlink" title="堆的插入"></a>堆的插入</h2><h2 id="堆的删除"><a href="#堆的删除" class="headerlink" title="堆的删除"></a>堆的删除</h2><h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><ul>
+<li>topk 问题</li>
+</ul>
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641612857518-de163c21-11eb-496c-84f6-cbbf0b9bd060.png#clientId=u246aca73-13fb-4&from=paste&height=657&id=u7e43dc98&name=image.png&originHeight=1314&originWidth=1210&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=261844&status=done&style=none&taskId=ub274a71c-cbd6-4f4d-8d14-22316e8819b&title=&width=605" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641612867278-1a48b24e-e1cb-430c-9a25-42d47ae687d4.png#clientId=u246aca73-13fb-4&from=paste&height=597&id=ude3ad7af&name=image.png&originHeight=1194&originWidth=1396&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=225933&status=done&style=none&taskId=uc5dcf383-e863-44bb-951c-8f4c73e7eaf&title=&width=698" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641612883313-54a4f784-0c54-4386-b09c-ff42a8373b58.png#clientId=u246aca73-13fb-4&from=paste&height=118&id=u02e2e275&name=image.png&originHeight=236&originWidth=1152&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=148644&status=done&style=none&taskId=u9c61a077-4410-42ae-b239-b74a392f714&title=&width=576" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//「最大堆」的实现</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MaxHeap</span> </span>&#123;<br>    <span class="hljs-comment">// 使用数组创建完全二叉树的结构，然后使用二叉树构建一个「堆」</span><br>    <span class="hljs-keyword">int</span>[] maxHeap;<br>    <span class="hljs-comment">// heapSize用于数组的大小，因为数组在创建的时候至少需要指明数组的元素个数</span><br>    <span class="hljs-keyword">int</span> heapSize;<br>    <span class="hljs-comment">// realSize用于记录「堆」的元素个数</span><br>    <span class="hljs-keyword">int</span> realSize = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MaxHeap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> heapSize)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.heapSize = heapSize;<br>        maxHeap = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[heapSize + <span class="hljs-number">1</span>];<br>        <span class="hljs-comment">// 为了便于完全二叉树的管理，数组的第0个索引的元素我们不会使用，请随便设置设置成任何一个值。</span><br>        maxHeap[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// 添加元素函数</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> element)</span> </span>&#123;<br>        realSize++;<br>        <span class="hljs-comment">// 如果「堆」中元素的个数大于一开始设定的数组的个数，则返回「Add too many elements」</span><br>        <span class="hljs-keyword">if</span> (realSize &gt; heapSize) &#123;<br>            System.out.println(<span class="hljs-string">&quot;Add too many elements!&quot;</span>);<br>            realSize--;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-comment">// 将添加的元素添加到数组中</span><br>        maxHeap[realSize] = element;<br>        <span class="hljs-comment">// 新增元素的索引位置</span><br>        <span class="hljs-keyword">int</span> index = realSize;<br>        <span class="hljs-comment">// 新增元素的父节点的索引位置</span><br>        <span class="hljs-comment">// 注意，如果用数组表示完全二叉树，并且根结点存储在数组的索引1的位置的时候，任何一个节点的父节点索引位置为「该节点的索引位置/2」，任何一个节点的左孩子节点的索引位置为「该节点的索引位置*2」，任何一个节点的右孩子节点的索引位置为「该节点的索引位置*2+1」</span><br>        <span class="hljs-keyword">int</span> parent = index / <span class="hljs-number">2</span>;<br>        <span class="hljs-comment">// 当添加的元素大于父节点时，需要将父节点的值和新增元素的值交换</span><br>        <span class="hljs-keyword">while</span> ( maxHeap[index] &gt; maxHeap[parent] &amp;&amp; index &gt; <span class="hljs-number">1</span> ) &#123;<br>            <span class="hljs-keyword">int</span> temp = maxHeap[index];<br>            maxHeap[index] = maxHeap[parent];<br>            maxHeap[parent] = temp;<br>            index = parent;<br>            parent = index / <span class="hljs-number">2</span>;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// 获取堆顶元素函数</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">peek</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> maxHeap[<span class="hljs-number">1</span>];<br>    &#125;<br><br>    <span class="hljs-comment">// 删除堆顶元素函数</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// 如果当前「堆」的元素个数为0， 则返回「Don&#x27;t have any element」</span><br>        <span class="hljs-keyword">if</span> (realSize &lt; <span class="hljs-number">1</span>) &#123;<br>            System.out.println(<span class="hljs-string">&quot;Don&#x27;t have any element!&quot;</span>);<br>            <span class="hljs-keyword">return</span> Integer.MIN_VALUE;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-comment">// 当前「堆」中含有元素</span><br>            <span class="hljs-comment">// realSize &gt;= 1</span><br>            <span class="hljs-keyword">int</span> removeElement = maxHeap[<span class="hljs-number">1</span>];<br>            <span class="hljs-comment">// 将「堆」中的最后一个元素赋值给堆顶元素</span><br>            maxHeap[<span class="hljs-number">1</span>] = maxHeap[realSize];<br>            realSize--;<br>            <span class="hljs-keyword">int</span> index = <span class="hljs-number">1</span>;<br>            <span class="hljs-comment">// 当删除的元素不是孩子节点时</span><br>            <span class="hljs-keyword">while</span> (index &lt; realSize &amp;&amp; index &lt;= realSize / <span class="hljs-number">2</span>) &#123;<br>                <span class="hljs-comment">// 被删除节点的左孩子节点</span><br>                <span class="hljs-keyword">int</span> left = index * <span class="hljs-number">2</span>;<br>                <span class="hljs-comment">// 被删除节点的右孩子节点</span><br>                <span class="hljs-keyword">int</span> right = (index * <span class="hljs-number">2</span>) + <span class="hljs-number">1</span>;<br>                <span class="hljs-comment">// 当删除节点的元素小于 左孩子节点或者右孩子节点，代表该元素的值小，此时需要将该元素与左、右孩子节点中最大的值进行交换</span><br>                <span class="hljs-keyword">if</span> (maxHeap[index] &lt; maxHeap[left] || maxHeap[index] &lt; maxHeap[right]) &#123;<br>                    <span class="hljs-keyword">if</span> (maxHeap[left] &gt; maxHeap[right]) &#123;<br>                        <span class="hljs-keyword">int</span> temp = maxHeap[left];<br>                        maxHeap[left] = maxHeap[index];<br>                        maxHeap[index] = temp;<br>                        index = left;<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-comment">// maxHeap[left] &lt;= maxHeap[right]</span><br>                        <span class="hljs-keyword">int</span> temp = maxHeap[right];<br>                        maxHeap[right] = maxHeap[index];<br>                        maxHeap[index] = temp;<br>                        index = right;<br>                    &#125;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">return</span> removeElement;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// 返回「堆」的元素个数</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> realSize;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (realSize == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;No element!&quot;</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder();<br>            sb.append(<span class="hljs-string">&#x27;[&#x27;</span>);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= realSize; i++) &#123;<br>                sb.append(maxHeap[i]);<br>                sb.append(<span class="hljs-string">&#x27;,&#x27;</span>);<br>            &#125;<br>            sb.deleteCharAt(sb.length() - <span class="hljs-number">1</span>);<br>            sb.append(<span class="hljs-string">&#x27;]&#x27;</span>);<br>            <span class="hljs-keyword">return</span> sb.toString();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-comment">// 测试用例</span><br>        MaxHeap maxheap = <span class="hljs-keyword">new</span> MaxHeap(<span class="hljs-number">5</span>);<br>        maxheap.add(<span class="hljs-number">1</span>);<br>        maxheap.add(<span class="hljs-number">2</span>);<br>        maxheap.add(<span class="hljs-number">3</span>);<br>        <span class="hljs-comment">// [3,1,2]</span><br>        System.out.println(maxheap.toString());<br>        <span class="hljs-comment">// 3</span><br>        System.out.println(maxheap.peek());<br>        <span class="hljs-comment">// 3</span><br>        System.out.println(maxheap.pop());<br>        System.out.println(maxheap.pop());<br>        System.out.println(maxheap.pop());<br>        <span class="hljs-comment">// No element</span><br>        System.out.println(maxheap.toString());<br>        maxheap.add(<span class="hljs-number">4</span>);<br>        <span class="hljs-comment">// Add too mant elements</span><br>        maxheap.add(<span class="hljs-number">5</span>);<br>        <span class="hljs-comment">// [4,1,2]</span><br>        System.out.println(maxheap.toString());<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//「最小堆」的实现</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MinHeap</span> </span>&#123;<br>    <span class="hljs-comment">// 使用数组创建完全二叉树的结构，然后使用二叉树构建一个「堆」</span><br>    <span class="hljs-keyword">int</span>[] minHeap;<br>    <span class="hljs-comment">// heapSize用于数组的大小，因为数组在创建的时候至少需要指明数组的元素个数</span><br>    <span class="hljs-keyword">int</span> heapSize;<br>    <span class="hljs-comment">// realSize用于记录「堆」的元素个数</span><br>    <span class="hljs-keyword">int</span> realSize = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MinHeap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> heapSize)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.heapSize = heapSize;<br>        minHeap = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[heapSize + <span class="hljs-number">1</span>];<br>        <span class="hljs-comment">// 为了便于完全二叉树的管理，数组的第0个索引的元素我们不会使用，请随便设置设置成任何一个值。</span><br>        minHeap[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// 添加元素函数</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> element)</span> </span>&#123;<br>        realSize++;<br>        <span class="hljs-comment">// 如果「堆」中元素的个数大于一开始设定的数组的个数，则返回「Add too many elements」</span><br>        <span class="hljs-keyword">if</span> (realSize &gt; heapSize) &#123;<br>            System.out.println(<span class="hljs-string">&quot;Add too many elements!&quot;</span>);<br>            realSize--;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-comment">// 将添加的元素添加到数组中</span><br>        minHeap[realSize] = element;<br>        <span class="hljs-comment">// 新增元素的索引位置</span><br>        <span class="hljs-keyword">int</span> index = realSize;<br>        <span class="hljs-comment">// 新增元素的父节点的索引位置</span><br>        <span class="hljs-comment">// 注意，如果用数组表示完全二叉树，并且根结点存储在数组的索引1的位置的时候，任何一个节点的父节点索引位置为「该节点的索引位置/2」，任何一个节点的左孩子节点的索引位置为「该节点的索引位置*2」，任何一个节点的右孩子节点的索引位置为「该节点的索引位置*2+1」</span><br>        <span class="hljs-keyword">int</span> parent = index / <span class="hljs-number">2</span>;<br>        <span class="hljs-comment">// 当添加的元素小于父节点时，需要将父节点的值和新增元素的值交换</span><br>        <span class="hljs-keyword">while</span> ( minHeap[index] &lt; minHeap[parent] &amp;&amp; index &gt; <span class="hljs-number">1</span> ) &#123;<br>            <span class="hljs-keyword">int</span> temp = minHeap[index];<br>            minHeap[index] = minHeap[parent];<br>            minHeap[parent] = temp;<br>            index = parent;<br>            parent = index / <span class="hljs-number">2</span>;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// 获取堆顶元素函数</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">peek</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> minHeap[<span class="hljs-number">1</span>];<br>    &#125;<br><br>    <span class="hljs-comment">// 删除堆顶元素函数</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// 如果当前「堆」的元素个数为0， 则返回「Don&#x27;t have any element」</span><br>        <span class="hljs-keyword">if</span> (realSize &lt; <span class="hljs-number">1</span>) &#123;<br>            System.out.println(<span class="hljs-string">&quot;Don&#x27;t have any element!&quot;</span>);<br>            <span class="hljs-keyword">return</span> Integer.MAX_VALUE;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-comment">// 当前「堆」中含有元素</span><br>            <span class="hljs-comment">// realSize &gt;= 1</span><br>            <span class="hljs-keyword">int</span> removeElement = minHeap[<span class="hljs-number">1</span>];<br>            <span class="hljs-comment">// 将「堆」中的最后一个元素赋值给堆顶元素</span><br>            minHeap[<span class="hljs-number">1</span>] = minHeap[realSize];<br>            realSize--;<br>            <span class="hljs-keyword">int</span> index = <span class="hljs-number">1</span>;<br>            <span class="hljs-comment">// 当删除的元素不是孩子节点时</span><br>            <span class="hljs-keyword">while</span> (index &lt; realSize &amp;&amp; index &lt;= realSize / <span class="hljs-number">2</span>) &#123;<br>                <span class="hljs-comment">// 被删除节点的左孩子节点</span><br>                <span class="hljs-keyword">int</span> left = index * <span class="hljs-number">2</span>;<br>                <span class="hljs-comment">// 被删除节点的右孩子节点</span><br>                <span class="hljs-keyword">int</span> right = (index * <span class="hljs-number">2</span>) + <span class="hljs-number">1</span>;<br>                <span class="hljs-comment">// 当删除节点的元素大于 左孩子节点或者右孩子节点，代表该元素的值大，此时需要将该元素与左、右孩子节点中最小的值进行交换</span><br>                <span class="hljs-keyword">if</span> (minHeap[index] &gt; minHeap[left] || minHeap[index] &gt; minHeap[right]) &#123;<br>                    <span class="hljs-keyword">if</span> (minHeap[left] &lt; minHeap[right]) &#123;<br>                        <span class="hljs-keyword">int</span> temp = minHeap[left];<br>                        minHeap[left] = minHeap[index];<br>                        minHeap[index] = temp;<br>                        index = left;<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-comment">// maxHeap[left] &gt;= maxHeap[right]</span><br>                        <span class="hljs-keyword">int</span> temp = minHeap[right];<br>                        minHeap[right] = minHeap[index];<br>                        minHeap[index] = temp;<br>                        index = right;<br>                    &#125;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">return</span> removeElement;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// 返回「堆」的元素个数</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> realSize;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (realSize == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;No element!&quot;</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder();<br>            sb.append(<span class="hljs-string">&#x27;[&#x27;</span>);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= realSize; i++) &#123;<br>                sb.append(minHeap[i]);<br>                sb.append(<span class="hljs-string">&#x27;,&#x27;</span>);<br>            &#125;<br>            sb.deleteCharAt(sb.length() - <span class="hljs-number">1</span>);<br>            sb.append(<span class="hljs-string">&#x27;]&#x27;</span>);<br>            <span class="hljs-keyword">return</span> sb.toString();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-comment">// 测试用例</span><br>        MinHeap minHeap = <span class="hljs-keyword">new</span> MinHeap(<span class="hljs-number">3</span>);<br>        minHeap.add(<span class="hljs-number">3</span>);<br>        minHeap.add(<span class="hljs-number">1</span>);<br>        minHeap.add(<span class="hljs-number">2</span>);<br>        <span class="hljs-comment">// [1,3,2]</span><br>        System.out.println(minHeap.toString());<br>        <span class="hljs-comment">// 1</span><br>        System.out.println(minHeap.peek());<br>        <span class="hljs-comment">// 1</span><br>        System.out.println(minHeap.pop());<br>        <span class="hljs-comment">// [2, 3]</span><br>        System.out.println(minHeap.toString());<br>        minHeap.add(<span class="hljs-number">4</span>);<br>        <span class="hljs-comment">// Add too mant elements</span><br>        minHeap.add(<span class="hljs-number">5</span>);<br>        <span class="hljs-comment">// [2,3,4]</span><br>        System.out.println(minHeap.toString());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641612942907-a6b9f6c8-d50a-4566-8290-e80815799f59.png#clientId=u246aca73-13fb-4&from=paste&height=2798&id=u23a6a5af&name=image.png&originHeight=5596&originWidth=3024&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=984776&status=done&style=none&taskId=uf18ba76a-1507-47f4-9d98-9b8f3879e66&title=&width=1512" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641612958543-1b417106-8169-441f-a13a-95e1ed2bf3d0.png#clientId=u246aca73-13fb-4&from=paste&height=500&id=u7f1ee504&name=image.png&originHeight=1000&originWidth=1236&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=366157&status=done&style=none&taskId=u67a2fc59-732f-453f-8bb2-396aaa02ff0&title=&width=618" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641612972648-7afb3a82-ed0d-4181-b32d-1857bb330698.png#clientId=u246aca73-13fb-4&from=paste&height=819&id=u330431c4&name=image.png&originHeight=1638&originWidth=1270&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=388934&status=done&style=none&taskId=u9f0c7e45-26a9-46cd-9538-c7bbcf181b9&title=&width=635" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641612986598-a6a34765-e44e-4257-92cf-b5a41698a962.png#clientId=u246aca73-13fb-4&from=paste&height=249&id=u49a21891&name=image.png&originHeight=498&originWidth=1188&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=176560&status=done&style=none&taskId=ua8748ee4-f603-4fd4-9b5f-043164906a0&title=&width=594" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641612994130-aeaf0959-9c1b-471f-971d-28dc2ee116cb.png#clientId=u246aca73-13fb-4&from=paste&height=277&id=u2a7e5438&name=image.png&originHeight=554&originWidth=1164&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=72077&status=done&style=none&taskId=u1c7dde8e-112f-4e26-8e04-683f24d58de&title=&width=582" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641613002577-6d3f258d-411f-47b8-aded-4a2be2444f2a.png#clientId=u246aca73-13fb-4&from=paste&height=256&id=ud35cb0de&name=image.png&originHeight=512&originWidth=1210&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=83668&status=done&style=none&taskId=u9f00bcbd-4f55-448d-a7f2-d355542b098&title=&width=605" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641613009689-78987661-04c1-407d-8a44-4340b373c269.png#clientId=u246aca73-13fb-4&from=paste&height=295&id=u40edc2c9&name=image.png&originHeight=590&originWidth=1314&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=113413&status=done&style=none&taskId=u95c118a2-31f5-4b5c-9670-54c03387108&title=&width=657" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641613018856-39cd00be-2ce5-40d4-8cdc-69cefb42193e.png#clientId=u246aca73-13fb-4&from=paste&height=683&id=u864c2633&name=image.png&originHeight=1366&originWidth=1254&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=247938&status=done&style=none&taskId=u500707cf-face-4345-a5ee-973c25ec0b5&title=&width=627" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641613028472-b4fd8695-f611-4ef8-98d9-87c8fabcb81e.png#clientId=u246aca73-13fb-4&from=paste&height=647&id=ua1f6912d&name=image.png&originHeight=1294&originWidth=1422&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=283816&status=done&style=none&taskId=u83441019-2208-44d7-a5ea-fcbc02041c6&title=&width=711" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641613038471-29807cec-ac4e-4bfb-bca2-6c8253127e24.png#clientId=u246aca73-13fb-4&from=paste&height=363&id=ubdddc206&name=image.png&originHeight=726&originWidth=1204&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=73009&status=done&style=none&taskId=u751afac5-bf6a-49f5-814d-7b575354658&title=&width=602" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641613048446-96e09b41-0cab-4e6e-a3f3-15e23aaff350.png#clientId=u246aca73-13fb-4&from=paste&height=274&id=u78e209f5&name=image.png&originHeight=548&originWidth=1304&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=60391&status=done&style=none&taskId=ufcd7eda7-d5ed-4417-a7bc-19962051302&title=&width=652" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>数据结构的堆和堆内存是什么关系 ？<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655974865858-e44c717e-e3f6-4b9d-af26-2a955de80207.png#clientId=ue73b8f42-a9ac-4&from=paste&height=101&id=u06744df6&name=image.png&originHeight=101&originWidth=636&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=13922&status=done&style=none&taskId=ua72a23b0-6c60-49ab-89bb-528802a33bb&title=&width=636" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>现在毛关系都没有，因为早期想 Lisp 就是使用数据结构堆来做内存池的，现在只是名字应用罢了</p>
+</blockquote>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数据结构-Heap 堆</div>
+      <div>https://mikeygithub.github.io/2019/03/09/yuque/数据结构-Heap 堆/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2019年3月9日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

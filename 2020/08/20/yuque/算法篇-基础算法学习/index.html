@@ -1,0 +1,1128 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="动态规划算法描述 动态规划算法通常用于求解具有某种最优性质的问题。在这类问题中，可能会有许多可行解。每一个解都对应于一个值，我们希望找到具有最优值的解。   动态规划问题的一般形式就是求最值。动态规划其实是运筹学的一种最优化方法，只不过在计算机问题上应用比较多，比如说让你求最长递增子序列呀，最小编辑距离呀等等。既然是要求最值，核心问题是什么呢？求解动态规划的核心问题是穷举。因为要求最值，肯定要把">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法篇-基础算法学习">
+<meta property="og:url" content="https://mikeygithub.github.io/2020/08/20/yuque/%E7%AE%97%E6%B3%95%E7%AF%87-%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="动态规划算法描述 动态规划算法通常用于求解具有某种最优性质的问题。在这类问题中，可能会有许多可行解。每一个解都对应于一个值，我们希望找到具有最优值的解。   动态规划问题的一般形式就是求最值。动态规划其实是运筹学的一种最优化方法，只不过在计算机问题上应用比较多，比如说让你求最长递增子序列呀，最小编辑距离呀等等。既然是要求最值，核心问题是什么呢？求解动态规划的核心问题是穷举。因为要求最值，肯定要把">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657520697552-aaecfb3c-740f-4704-89ca-98a032c10bde.png">
+<meta property="article:published_time" content="2020-08-20T01:16:13.000Z">
+<meta property="article:modified_time" content="2023-02-13T05:46:17.302Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657520697552-aaecfb3c-740f-4704-89ca-98a032c10bde.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>算法篇-基础算法学习 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="算法篇-基础算法学习"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-08-20 09:16" pubdate>
+          2020年8月20日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          10k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          84 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">算法篇-基础算法学习</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657520697552-aaecfb3c-740f-4704-89ca-98a032c10bde.png#averageHue=%23131313&clientId=ufcdd074b-7062-4&from=markdown&id=YbqWu&name=image.png&originHeight=545&originWidth=900&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=236250&status=done&style=none&taskId=u2ff19535-b7ee-40cf-95bd-1bdfeb72df6&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><h2 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h2><blockquote>
+<p>动态规划算法通常用于求解具有某种最优性质的问题。在这类问题中，可能会有许多可行解。每一个解都对应于一个值，我们希望找到具有最优值的解。</p>
+</blockquote>
+<blockquote>
+<p>动态规划问题的一般形式就是<code>求最值</code>。动态规划其实是运筹学的一种最优化方法，只不过在计算机问题上应用比较多，比如说让你求最长递增子序列呀，最小编辑距离呀等等。既然是要求最值，核心问题是什么呢？求解动态规划的核心问题是<code>穷举</code>。因为要求最值，肯定要把所有可行的答案穷举出来，然后在其中找最值呗。首先，动态规划的穷举有点特别，因为这类问题存在「重叠子问题」，如果暴力穷举的话效率会极其低下，所以需要<code>「备忘录」</code>或者<code>「DP table」</code>来优化穷举过程，避免不必要计算。 而且，动态规划问题一定会具备「最优子结构」，才能通过子问题的最值得到原问题的最值。<br>另外，虽然动态规划的核心思想就是穷举求最值，但是问题可以千变万化，穷举所有可行解其实并不是一件容易的事，只有列出正确的<code>「状态转移方程」</code>才能正确地穷举。</p>
+</blockquote>
+<blockquote>
+<p>以上提到的<code>重叠子问题</code>、<code>最优子结构</code>、<code>状态转移方程</code>就是动态规划三要素。</p>
+</blockquote>
+<h2 id="算法特点"><a href="#算法特点" class="headerlink" title="算法特点"></a>算法特点</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs latex">这个问题的base case(最简单情况)是什么？<br>这个问题有什么&quot;状态&quot;？<br>对于每个状态可以做什么选择使得状态发生改变？<br>如何定义dp数组/函数的含义来表现状态和选择？<br></code></pre></td></tr></table></figure>
+
+<h2 id="关键"><a href="#关键" class="headerlink" title="关键"></a>关键</h2><ul>
+<li>最优子结构 opt[n]=best_of(opt[n-1],opt[n-2])</li>
+<li>存储中间状态: opt[i]</li>
+<li>递推公式(状态转移方程或者 DP 方程) FIB: opt[i]=opt[n-1]+opt[n-2]   二位路径: opt[i,j]=opt[i-1][j]+opt[i][j+1]</li>
+</ul>
+<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 初始化base <span class="hljs-keyword">case</span></span><br>dp[0][0][...]=base case<br><span class="hljs-meta">#</span><span class="bash"> 进行状态转移</span><br>for 状态1 in 状态1所有值:<br>    for 状态2 in 状态2所有值:<br>        for ...<br>            dp[状态1][状态2][...] = 求最值(选择1,选择2,...)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>列出动态转移方程，就是在解决“如何穷举”的问题。之所以说它难，一是因为很多穷举需要递归实现，二是因为有的问题本身的解空间复杂，不那么容易穷举完整。</p>
+</blockquote>
+<h2 id="例子参考"><a href="#例子参考" class="headerlink" title="例子参考"></a>例子参考</h2><p><a href="http://mikeygithub.github.io/2020/11/19/interview/LeetCode-%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">参考例子</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/39948290/answer/612439961">如何理解动态规划？ - 牛岱的回答 - 知乎</a></p>
+<h1 id="回溯算法"><a href="#回溯算法" class="headerlink" title="回溯算法"></a>回溯算法</h1><h2 id="算法定义"><a href="#算法定义" class="headerlink" title="算法定义"></a>算法定义</h2><blockquote>
+<p>回溯算法实际上一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就“回溯”返回，尝试别的路径。回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为“回溯点”。</p>
+</blockquote>
+<blockquote>
+<p>解决一个回溯问题，实际上就是一个决策树的遍历过程</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs latex">路径：也就是已经做出的选择。<br>选择列表：也就是你当前可以做的选择。<br>结束条件：也就是到达决策树底层，无法再做选择的条件。<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/back.png#id=PDkLa&originHeight=1332&originWidth=2512&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="算法框架"><a href="#算法框架" class="headerlink" title="算法框架"></a>算法框架</h2><p>点击展开</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">result = []<br>def backtrack(路径, 选择列表):<br>    if 满足结束条件:<br>        result.add(路径)<br>        return<br><br>    for 选择 in 选择列表:<br>        做选择<br>        backtrack(路径, 选择列表)<br>        撤销选择<br></code></pre></td></tr></table></figure>
+
+<p>全排列问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span></span>&#123;<br>    <span class="hljs-comment">//存储结果</span><br>    List&lt;List&lt;Integer&gt;&gt; res = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();<br>    <span class="hljs-comment">//函数入口</span><br>    List&lt;List&lt;Integer&gt;&gt; permute(<span class="hljs-keyword">int</span>[] nums)&#123;<br>        <span class="hljs-comment">//记录走过的路径</span><br>        LinkedList&lt;Integer&gt; integers = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();<br>        <span class="hljs-comment">//入口</span><br>        backtrack(nums,integers);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>    <span class="hljs-comment">//回溯函数</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">backtrack</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, LinkedList&lt;Integer&gt; track)</span></span>&#123;<br>        <span class="hljs-comment">//如果走过的路径包含所有的选择则完成一轮</span><br>        <span class="hljs-keyword">if</span> (nums.length==track.size()) &#123;<br>            res.add(<span class="hljs-keyword">new</span> LinkedList(track));<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;nums.length; i++) &#123;<br>            <span class="hljs-comment">//排除不合法的选择</span><br>            <span class="hljs-keyword">if</span> (track.contains(nums[i]))<span class="hljs-keyword">continue</span>;<br>            <span class="hljs-comment">//做选择</span><br>            track.add(nums[i]);<br>            <span class="hljs-comment">//进入下一层决策树</span><br>            backtrack(nums,track);<br>            <span class="hljs-comment">//撤销选择</span><br>            track.removeLast();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="广度遍历"><a href="#广度遍历" class="headerlink" title="广度遍历"></a>广度遍历</h1><blockquote>
+<p>BFS 的核心思想应该不难理解的，就是把一些问题抽象成图，从一个点开始，向四周开始扩散。一般来说，我们写 BFS 算法都是用「队列」这种数据结构，每次将一个节点周围的所有节点加入队列。</p>
+</blockquote>
+<h2 id="算法框架-1"><a href="#算法框架-1" class="headerlink" title="算法框架"></a>算法框架</h2><p>点击展开</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">// 计算从起点 start 到终点 target 的最近距离</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">BFS</span><span class="hljs-params">(Node start, Node target)</span> </span>&#123;<br>    Queue&lt;Node&gt; q; <span class="hljs-comment">// 核心数据结构</span><br>    Set&lt;Node&gt; visited; <span class="hljs-comment">// 避免走回头路</span><br><br>    q.<span class="hljs-built_in">offer</span>(start); <span class="hljs-comment">// 将起点加入队列</span><br>    visited.<span class="hljs-built_in">add</span>(start);<br>    <span class="hljs-keyword">int</span> step = <span class="hljs-number">0</span>; <span class="hljs-comment">// 记录扩散的步数</span><br><br>    <span class="hljs-keyword">while</span> (q <span class="hljs-keyword">not</span> empty) &#123;<br>        <span class="hljs-keyword">int</span> sz = q.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-comment">/* 将当前队列中的所有节点向四周扩散 */</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; sz; i++) &#123;<br>            Node cur = q.<span class="hljs-built_in">poll</span>();<br>            <span class="hljs-comment">/* 划重点：这里判断是否到达终点 */</span><br>            <span class="hljs-keyword">if</span> (cur is target)<br>                <span class="hljs-keyword">return</span> step;<br>            <span class="hljs-comment">/* 将 cur 的相邻节点加入队列 */</span><br>            <span class="hljs-keyword">for</span> (Node x : cur.<span class="hljs-built_in">adj</span>())<br>                <span class="hljs-keyword">if</span> (x <span class="hljs-keyword">not</span> in visited) &#123;<br>                    q.<span class="hljs-built_in">offer</span>(x);<br>                    visited.<span class="hljs-built_in">add</span>(x);<br>                &#125;<br>        &#125;<br>        <span class="hljs-comment">/* 划重点：更新步数在这里 */</span><br>        step++;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="深度遍历"><a href="#深度遍历" class="headerlink" title="深度遍历"></a>深度遍历</h1><h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">DFS</span><span class="hljs-params">(TreeNode root)</span></span>&#123;<br>        List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>        Stack&lt;TreeNode&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();<br>        stack.push(root);<br>        <span class="hljs-keyword">while</span> (!stack.isEmpty())&#123;<br>            TreeNode tmp = stack.pop();<br>            list.add(tmp.val);<br>            <span class="hljs-keyword">if</span>(tmp.left!=<span class="hljs-keyword">null</span>)stack.push(tmp.left);<br>            <span class="hljs-keyword">if</span>(tmp.right!=<span class="hljs-keyword">null</span>)stack.push(tmp.right);<br>        &#125;<br>        <span class="hljs-keyword">return</span> list;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="窗口滑动"><a href="#窗口滑动" class="headerlink" title="窗口滑动"></a>窗口滑动</h1><blockquote>
+<p>一般采用队列来解决问题</p>
+</blockquote>
+<p>时间复杂度:  <code>T(n)=O(n)</code></p>
+<h2 id="算法框架-2"><a href="#算法框架-2" class="headerlink" title="算法框架"></a>算法框架</h2><p>点击展开</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">/* 滑动窗口算法框架 */</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">slidingWindow</span><span class="hljs-params">(string s, string t)</span> </span>&#123;<br>    unordered_map&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt; need, window;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> c : t) need[c]++;<span class="hljs-comment">//初始化</span><br>    <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>, right = <span class="hljs-number">0</span>;<span class="hljs-comment">//左右指针</span><br>    <span class="hljs-keyword">int</span> valid = <span class="hljs-number">0</span>;<span class="hljs-comment">//</span><br>    <span class="hljs-keyword">while</span> (right &lt; s.<span class="hljs-built_in">size</span>()) &#123;<br>        <span class="hljs-comment">// c 是将移入窗口的字符</span><br>        <span class="hljs-keyword">char</span> c = s[right];<br>        <span class="hljs-comment">// 右移窗口</span><br>        right++;<br>        <span class="hljs-comment">// 进行窗口内数据的一系列更新</span><br>        ...<br>        <span class="hljs-comment">/*** debug 输出的位置 ***/</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;window: [%d, %d)\n&quot;</span>, left, right);<br>        <span class="hljs-comment">// 判断左侧窗口是否要收缩</span><br>        <span class="hljs-keyword">while</span> (window needs shrink) &#123;<br>            <span class="hljs-comment">// d 是将移出窗口的字符</span><br>            <span class="hljs-keyword">char</span> d = s[left];<br>            <span class="hljs-comment">// 左移窗口</span><br>            left++;<br>            <span class="hljs-comment">// 进行窗口内数据的一系列更新</span><br>            ...<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h1><blockquote>
+<p>贪心算法是在每一步选择中都采取当前状态下最好或最优(即最有利)的选择，从而希望导致结果是全局最好或最优的算法。</p>
+</blockquote>
+<blockquote>
+<p>贪心法可以解决一些最优化问题，如:求图中的最小生成树、求哈夫曼树等。然而对于工程和生活中的问题，贪心法一般不能得到我们所求的答案。一旦一个问题可以通过贪心法来解决，那么贪心法一般是解决这个问题的最好办法。由于贪心法的高效性已经其所求得的答案比较接近最优解，贪心法也可以用作辅助算法或者直接解决一些要求结果不特别精确的问题。</p>
+</blockquote>
+<p>贪心、回溯、动态规划区别</p>
+<p>贪心算法与动态规划的不同在于他对每个子问题的解决方案都做出选择，不能回退。动态规划会保存以前的运算结果，并根据以前的结果对当前进行选择，有回退功能。</p>
+<p>贪心：<code>当下做局部最优判断</code><br>回溯:<code>能够回退</code><br>动态规划: <code>最优判断+回退</code></p>
+<h2 id="参考例子"><a href="#参考例子" class="headerlink" title="参考例子"></a>参考例子</h2><p>删除 k 个数后的最小值()<br>解题思路： 1.从左向右遍历,找到比自己右侧数字大的数字并删除   2.如果没有找到要删除的数字,则删除最后一个数字   3.如果整数的所有数字都被删除了,直接返回 0</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span></span>&#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 2. * 删除整数的k个数字,获得删除后的最小值</span><br><span class="hljs-comment">     * 3. * <span class="hljs-doctag">@param</span> num</span><br><span class="hljs-comment">     * 4. * <span class="hljs-doctag">@param</span> k</span><br><span class="hljs-comment">     * 5.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">removeKDigits</span><span class="hljs-params">(String num, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>        <span class="hljs-comment">//新整数的最终长度 =原整数长度-k</span><br>        <span class="hljs-keyword">int</span> newLength = num.length() - k;<br>        <span class="hljs-comment">//创建一个栈,用于接收所有的数字</span><br>        <span class="hljs-keyword">char</span>[] stack = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[num.length()];<br>        <span class="hljs-keyword">int</span> top = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; num.length(); ++i) &#123;<br>            <span class="hljs-comment">//遍历当前数字</span><br>            <span class="hljs-keyword">char</span> c = num.charAt(i);<br>            <span class="hljs-comment">//当栈顶数字大于遍历到的当前数字时,栈顶数字出栈(相当于删除数字</span><br>            <span class="hljs-keyword">while</span> (top &gt; <span class="hljs-number">0</span> &amp;&amp; stack[top - <span class="hljs-number">1</span>] &gt; c &amp;&amp; k &gt; <span class="hljs-number">0</span>) &#123;<br>                top -= <span class="hljs-number">1</span>;<br>                k -= <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-comment">//遍历到的当前数字入栈</span><br>            stack[top++] = c;<br>        &#125;<br>        <span class="hljs-comment">// 找到栈中第1个非零数字的位置,以此构建新的整数字符串</span><br>        <span class="hljs-keyword">int</span> offset = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (offset &lt; newLength &amp;&amp; stack[offset] == <span class="hljs-string">&#x27;0&#x27;</span>) &#123;<br>            offset++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> offset == newLength ? <span class="hljs-string">&quot;0&quot;</span> : <span class="hljs-keyword">new</span> String(stack, offset, newLength - offset);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        System.out.println(removeKDigits(<span class="hljs-string">&quot;1593212&quot;</span>, <span class="hljs-number">3</span>));<br>        System.out.println(removeKDigits(<span class="hljs-string">&quot;30200&quot;</span>, <span class="hljs-number">1</span>));<br>        System.out.println(removeKDigits(<span class="hljs-string">&quot;10&quot;</span>, <span class="hljs-number">2</span>));<br>        System.out.println(removeKDigits(<span class="hljs-string">&quot;541270936&quot;</span>, <span class="hljs-number">3</span>));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h2><h1 id="字典算法"><a href="#字典算法" class="headerlink" title="字典算法"></a>字典算法</h1><h2 id="算法定义-1"><a href="#算法定义-1" class="headerlink" title="算法定义"></a>算法定义</h2><p>字典树，即 Trie 树，又称单词查找树或键树，是一种树形结构。典型应用是用于统计和排序的字符串（但不仅限于字符串），所以经常被搜索引擎用于文本词频率统计</p>
+<p>优点:<code>最大限度的减少无谓的字符串比较，查询效率比 哈希表高。</code></p>
+<p>性质</p>
+<ul>
+<li>节点本身不存在完整单词</li>
+<li>从根节点到某一节点，路径上经过的字符串连接起来，为该结点对应的字符串</li>
+<li>每个结点的所有子结点代表的字符都不相同</li>
+</ul>
+<p>核心思想</p>
+<ul>
+<li>Trie 树的核心思想是空间换时间</li>
+<li>利用字符串的公共前缀来降低查询时间的开销以达到提高效率的目的</li>
+</ul>
+<h2 id="参考例子-1"><a href="#参考例子-1" class="headerlink" title="参考例子"></a>参考例子</h2><p>寻找全排列的下一个数()</p>
+<h2 id="参考资料-2"><a href="#参考资料-2" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/darklights/p/5285598.html">字典序算法</a></p>
+<h1 id="分治算法"><a href="#分治算法" class="headerlink" title="分治算法"></a>分治算法</h1><h2 id="算法定义-2"><a href="#算法定义-2" class="headerlink" title="算法定义"></a>算法定义</h2><p>将一个难以直接解决的大问题，分割成一些规模较小的相同问题，以便各个击破，分而治之</p>
+<p>对于一个规模为 n 的问题，若该问题可以容易地解决（比如说规模 n 较小）则直接解决，否则将其分解为 k 个规模较小的子问题，这些子问题互相独立且与原问题形式相同，递归地解这些子问题，然后将各子问题的解合并得到原问题的解。这种算法设计策略叫做分治法。</p>
+<p>分治算法的适用情况</p>
+<blockquote>
+<p>分治法所能解决的问题一般具有以下几个特征：</p>
+</blockquote>
+<ol>
+<li> 该问题的规模缩小到一定的程度就可以容易地解决</li>
+<li> 该问题可以分解为若干个规模较小的相同问题，即该问题具有最优子结构性质。</li>
+<li> 利用该问题分解出的子问题的解可以合并为该问题的解；</li>
+<li> 该问题所分解出的各个子问题是相互独立的，即子问题之间不包含公共的子子问题。</li>
+</ol>
+<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">divide_conquer</span><span class="hljs-params">(Problem problem)</span> </span>&#123;<br>        <span class="hljs-comment">//recursion terminator</span><br>        <span class="hljs-keyword">if</span> (problem == NULL) &#123;<br>            <span class="hljs-keyword">int</span> res = process_last_result();<br>            <span class="hljs-keyword">return</span> res;<br>        &#125;<br>        <span class="hljs-comment">//prepare data</span><br>        subProblems = split_problem(problem);<br>        <span class="hljs-comment">//conquer subproblems</span><br>        res0 = divide_conquer(subProblems[<span class="hljs-number">0</span>]);<br>        res1 = divide_conquer(subProblems[<span class="hljs-number">1</span>]);<br>        <span class="hljs-comment">//process and generate the final result</span><br>        result = process_result(res0, res1);<br>        <span class="hljs-comment">//revert the current level states</span><br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="排序类型"><a href="#排序类型" class="headerlink" title="排序类型"></a>排序类型</h1><p><a href="https://mikeygithub.github.io/2020/11/09/algorithm/%E7%AE%97%E6%B3%95%E7%AF%87-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">算法篇-排序算法</a></p>
+<blockquote>
+<p>nlogn 排序: 堆排序、快速排序、归并排序</p>
+</blockquote>
+<h2 id="初级排序"><a href="#初级排序" class="headerlink" title="初级排序"></a>初级排序</h2><blockquote>
+<p><code>O(n^2)</code></p>
+</blockquote>
+<ul>
+<li>选择排序(Select Sort)每次找最小值，然后放到待排序数组的起始位置。</li>
+<li>插入排序(Insert Sort)从前到后逐步构建有序序列；对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。</li>
+<li>冒泡排序(Bubble Sort)嵌套循环，每次查看相邻的元素如果逆序，则交换。</li>
+</ul>
+<h2 id="高级排序"><a href="#高级排序" class="headerlink" title="高级排序"></a>高级排序</h2><blockquote>
+<p><code>O(n*logn)</code></p>
+</blockquote>
+<ul>
+<li>快速排序(Quick Sort)数组取标杆 pivot，将小元素放 pivot 左边，大元素放右边，然后依次对右边和左边的子数组继续快排；以达到整个序列有序</li>
+<li>归并排序(Merge Sort) 1.把长度为 n 的输入序列分成两个长度位 n/2 的子序列; 2.把这两个子序列分别采用归并排序; 3.将两个排序好的子序列合并成一个最终的排序序列;</li>
+</ul>
+<p><code>归并排序和快速排序具有相似性，但步骤相反</code></p>
+<blockquote>
+<p>归并:先排序左右子数组，然后合并两个有序子数组</p>
+</blockquote>
+<blockquote>
+<p>快排:先调出左右子数组，然后对于左右数组进行排序</p>
+</blockquote>
+<ul>
+<li>对排序(heap Sort)　堆插入 O(logN)，取最大最小值 O(1) 1.数组元素依次建立小堆顶 2.依次取堆顶元素，并删除</li>
+</ul>
+<p>(满二叉搜索树进行实现)</p>
+<h2 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h2><blockquote>
+<p>对一个有向无环图(Directed Acyclic Graph 简称 DAG)G 进行拓扑排序，是将 G 中所有顶点排成一个线性序列，使得图中任意一对顶点 u 和 v，若边&lt;u,v&gt;∈E(G)，则 u 在线性序列中出现在 v 之前。通常，这样的线性序列称为满足拓扑次序(Topological Order)的序列，简称拓扑序列。简单的说，由某个集合上的一个偏序得到该集合上的一个全序，这个操作称之为拓扑排序。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp">queue&lt;<span class="hljs-keyword">int</span>&gt;q;<br><span class="hljs-comment">//priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt;&gt;q;</span><br><span class="hljs-comment">//优先队列的话，会按照数值大小有顺序的输出</span><br><span class="hljs-comment">//此处为了理解，暂时就用简单队列</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">topo</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">for</span>(inti=<span class="hljs-number">1</span>;i&lt;=n;i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(indegree[i]==<span class="hljs-number">0</span>)<br>        &#123;<br>            q.<span class="hljs-built_in">push</span>(i);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">int</span> temp;<br>    <span class="hljs-keyword">while</span>(!q.<span class="hljs-built_in">empty</span>())<br>    &#123;<br>        temp=q.<span class="hljs-built_in">front</span>();<span class="hljs-comment">//如果是优先队列，这里可以是top()</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d-&gt;&quot;</span>,temp);<br>        q.<span class="hljs-built_in">pop</span>();<br>        <span class="hljs-keyword">for</span>(inti=<span class="hljs-number">1</span>;i&lt;=n;i++)<span class="hljs-comment">//遍历从temp出发的每一条边，入度--</span><br>        &#123;<br>            <span class="hljs-keyword">if</span>(map[temp][i])<br>            &#123;<br>                indegree[i]--;<br>                <span class="hljs-keyword">if</span>(indegree[i]==<span class="hljs-number">0</span>)q.<span class="hljs-built_in">push</span>(i);<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="算法定义-3"><a href="#算法定义-3" class="headerlink" title="算法定义"></a>算法定义</h3><h1 id="并查集型"><a href="#并查集型" class="headerlink" title="并查集型"></a>并查集型</h1><p>定义</p>
+<blockquote>
+<p>并查集是一种树型的数据结构，用于处理一些不相交集合（disjoint sets）的合并及查询问题。常常在使用中以森林来表示。</p>
+</blockquote>
+<ul>
+<li>合并（Union）：把两个不相交的集合合并为一个集合。</li>
+<li>查询（Find）：查询两个元素是否在同一个集合中。</li>
+</ul>
+<p>适用场景</p>
+<ul>
+<li>组团、配对问题</li>
+<li>Group or not ?</li>
+</ul>
+<p>基本操作</p>
+<ul>
+<li>makeSet(s): 建立一个新的并查集，其中包含 s 个单元素集合。</li>
+<li>unionSet(x,y): 把元素 x 和元素 y 所在的集合合并，要求 x 和 y 所在的集合不相交，如果相交则不合并。</li>
+<li>find(x): 找到元素 x 所在的集合的代表，该操作也可以用于判断两个元素是否位于同一个集合，只要将他们各自代表比较一下就可以了。</li>
+</ul>
+<h2 id="图示演示"><a href="#图示演示" class="headerlink" title="图示演示"></a>图示演示</h2><blockquote>
+<p>查询、合并</p>
+</blockquote>
+<blockquote>
+<p>调用 find(d)时进行路劲压缩</p>
+</blockquote>
+<h2 id="代码模板-1"><a href="#代码模板-1" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UnionFind</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> count;<br>    <span class="hljs-keyword">int</span>[] parent;<br>    <span class="hljs-keyword">int</span>[] rank;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UnionFind</span><span class="hljs-params">(<span class="hljs-keyword">char</span>[][] grid)</span> </span>&#123;<br>        count = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> m = grid.length;<br>        <span class="hljs-keyword">int</span> n = grid[<span class="hljs-number">0</span>].length;<br>        parent = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m * n];<br>        rank = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[m * n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; ++i) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; n; ++j) &#123;<br>                <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                    parent[i * n + j] = i * n + j;<br>                    ++count;<br>                &#125;<br>                rank[i * n + j] = <span class="hljs-number">0</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (parent[i] != i) parent[i] = find(parent[i]);<br>        <span class="hljs-keyword">return</span> parent[i];<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">union</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> rootx = find(x);<br>        <span class="hljs-keyword">int</span> rooty = find(y);<br>        <span class="hljs-keyword">if</span> (rootx != rooty) &#123;<br>            <span class="hljs-keyword">if</span> (rank[rootx] &gt; rank[rooty]) &#123;<br>                parent[rooty] = rootx;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (rank[rootx] &lt; rank[rooty]) &#123;<br>                parent[rootx] = rooty;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                parent[rooty] = rootx;<br>                rank[rootx] += <span class="hljs-number">1</span>;<br>            &#125;<br>            --count;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getCount</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="参考例子-2"><a href="#参考例子-2" class="headerlink" title="参考例子"></a>参考例子</h2><ul>
+<li>朋友圈</li>
+<li>岛屿数量</li>
+</ul>
+<h1 id="递归算法"><a href="#递归算法" class="headerlink" title="递归算法"></a>递归算法</h1><h2 id="算法定义-4"><a href="#算法定义-4" class="headerlink" title="算法定义"></a>算法定义</h2><p>递归算法时间复杂度=子问题个数*解决一个子问题需要的时间</p>
+<h2 id="算法模板"><a href="#算法模板" class="headerlink" title="算法模板"></a>算法模板</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">recur</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level,<span class="hljs-keyword">int</span> param)</span></span>&#123;<br>       <span class="hljs-comment">//terminator</span><br>        <span class="hljs-keyword">if</span> (level&gt;MAX_LEVEL)&#123;<br>            <span class="hljs-comment">//procesws resutl</span><br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-comment">//process current logic</span><br>        process(level,param);<br>        <span class="hljs-comment">//drill down</span><br>        recur(level:level+<span class="hljs-number">1</span>,newParam);<br>        <span class="hljs-comment">//restore current status</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h1><blockquote>
+<p>有序、上下界、索引访问</p>
+</blockquote>
+<p>代码模板</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySearch</span></span>&#123;<br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] binarySearch(<span class="hljs-keyword">int</span>[] nums,<span class="hljs-keyword">int</span> target)&#123;<br>       <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>,right = ...;<br>       <span class="hljs-keyword">while</span> (...)&#123;<br>           <span class="hljs-keyword">int</span> mid = left+(right-left)/<span class="hljs-number">2</span>;<br>           <span class="hljs-keyword">if</span> (nums[mid]==target)&#123;<br>               ...<br>           &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nums[mid]&lt;target)&#123;<br>               left = ...;<br>           &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nums[mid]&gt;target)&#123;<br>               right = ...;<br>           &#125;<br>       &#125;<br>       <span class="hljs-keyword">return</span> ...;<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="高级搜索"><a href="#高级搜索" class="headerlink" title="高级搜索"></a>高级搜索</h1><h2 id="初级搜索"><a href="#初级搜索" class="headerlink" title="初级搜索"></a>初级搜索</h2><ul>
+<li>朴素搜索</li>
+<li>优化搜索：不重复(fibonacci)，剪枝(生成括号问题)</li>
+<li>搜索放心 DFS、BFS、双向搜索、启发式搜索</li>
+</ul>
+<h2 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h2><ul>
+<li>在回溯中将不满足的条件的直接过滤掉，提供算法的效率。</li>
+</ul>
+<h2 id="双向-BFS"><a href="#双向-BFS" class="headerlink" title="双向 BFS"></a>双向 BFS</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/double-bfs.png#id=zhXJW&originHeight=935&originWidth=1298&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="启发式搜索-A"><a href="#启发式搜索-A" class="headerlink" title="启发式搜索(A*)"></a>启发式搜索(A*)</h2><p>定义</p>
+<blockquote>
+<p>启发式搜索(Heuristically Search)又称为有信息搜索(Informed Search)，它是利用问题拥有的启发信息来引导搜索，达到减少搜索范围、降低问题复杂度的目的，这种利用启发信息的搜索过程称为启发式搜索。</p>
+</blockquote>
+<p>估价函数</p>
+<blockquote>
+<p>启发式函数：　 h(n),它用来评价哪些节点最有希望的是一个我们要找的结点，h(n)会返回一个非负实数，也可以认为是从结点 n 的目标结点路径的估计成本</p>
+</blockquote>
+<blockquote>
+<p>启发式函数是一种告知搜索方向的方法。它提供了一种明智的方法来猜测哪个邻居结点会导向一个目标。</p>
+</blockquote>
+<h1 id="位移运算"><a href="#位移运算" class="headerlink" title="位移运算"></a>位移运算</h1><ul>
+<li>位运算符</li>
+</ul>
+<blockquote>
+<p>机器里的数字存储格式是二进制方式</p>
+</blockquote>
+<p>| 含义                        | 运算符 | 示例                |<br>| ————————— | —— | ——————- | —- | ———— |<br>| 左移                        | &lt;&lt;     | 0011 -&gt; 0110        |<br>| 右移                        | &gt;&gt;     | 0110 -&gt; 0011        |<br>| 按位或                      |        |                     | 0011 | 1011 -&gt; 1011 |<br>| 按位与                      | &amp;      | 0110 &amp; 0011 -&gt; 0010 |<br>| 按位取反                    | ~      | ~0110 -&gt; 1001       |<br>| 按位异或(相同为 0 不同为 1) | ^      | 0011^0110 -&gt; 0101   |</p>
+<p>XOR-异或</p>
+<blockquote>
+<p>相同为 0 不同为 1，也可以用”不进位加法来理解”</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs latex">x^0=x<br>x^1s=~x //注意1s=~0<br>x^x=0<br>c=a^b -&gt; a^c=b , b^c=a //交换两个数<br>a^b^c=a^(b^c)=(a^b)^c //associative<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>算数位移与逻辑位移</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs latex">将x最右边的n位清零: x&amp;(~0&lt;&lt;n)<br>获取x的第n位值(0或者1): (x&gt;&gt;n)&amp;1<br>获取x的第n位的幂值: x&amp;(1&lt;&lt;(n-1))<br>仅将第n位置为1: x|(1&lt;&lt;n)<br>仅将第n位置为0: x&amp;(~(1&lt;&lt;n))<br>将x最高位至第n位(含)清零: x&amp;((1&lt;&lt;n)-1)<br>将第n位至第0位(含)清零: x&amp;(~((1&lt;&lt;(n+1))-1))<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>位运算的应用</li>
+</ul>
+<p>判断奇偶性:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs latex">x%2==1 --&gt; (x&amp;1)==1<br>x%2==0 --&gt; (x&amp;1)==0<br></code></pre></td></tr></table></figure>
+
+<p>乘除 2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs latex">x&gt;&gt;1 --&gt; x/2<br>x&lt;&lt;1 --&gt; x*2<br></code></pre></td></tr></table></figure>
+
+<p>清零</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs latex">x=x&amp;(x-1)清零最低位的1<br>x&amp;-x  得到最低位的1<br>x&amp;~x 等于0<br></code></pre></td></tr></table></figure>
+
+<h1 id="参考资料-3"><a href="#参考资料-3" class="headerlink" title="参考资料"></a>参考资料</h1><p>漫画算法:小灰的算法之旅</p>
+<p><a target="_blank" rel="noopener" href="https://labuladong.gitbook.io/algo/">fucking-algorithm</a></p>
+<p><a href="https://mikeygithub.github.io/2020/11/19/interview/%E9%9D%A2%E8%AF%95%E7%AF%87-LeetCode-%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">LeetCode-刷题记录</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">数据结构在线演示</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" class="category-chain-item">基础算法</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" class="category-chain-item">算法笔记</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>算法篇-基础算法学习</div>
+      <div>https://mikeygithub.github.io/2020/08/20/yuque/算法篇-基础算法学习/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年8月20日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

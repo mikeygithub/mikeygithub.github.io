@@ -1,0 +1,1166 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="栈(stack)栈(stack)是限制插入和删除只能在一 个位置上进行的表,该位置是表的末端,叫做栈顶(top)。它是后进先出(LIFO)的。对栈的基本操作只有 push(进栈)和 pop(出栈)两种,   前者相当于插入,后者相当于删除最后的元素。  特点: 先进后出   堆(heap)定义:完全二叉树的数组对象,将根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。 n 个元">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构篇-基础数据结构">
+<meta property="og:url" content="https://mikeygithub.github.io/2019/06/10/yuque/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="栈(stack)栈(stack)是限制插入和删除只能在一 个位置上进行的表,该位置是表的末端,叫做栈顶(top)。它是后进先出(LIFO)的。对栈的基本操作只有 push(进栈)和 pop(出栈)两种,   前者相当于插入,后者相当于删除最后的元素。  特点: 先进后出   堆(heap)定义:完全二叉树的数组对象,将根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。 n 个元">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657532982471-2a514390-b955-4ad0-a916-399f76acd018.png">
+<meta property="article:published_time" content="2019-06-10T14:15:45.000Z">
+<meta property="article:modified_time" content="2023-02-13T05:46:15.909Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657532982471-2a514390-b955-4ad0-a916-399f76acd018.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>数据结构篇-基础数据结构 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数据结构篇-基础数据结构"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-06-10 22:15" pubdate>
+          2019年6月10日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          19k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          162 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据结构篇-基础数据结构</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657532982471-2a514390-b955-4ad0-a916-399f76acd018.png#averageHue=%23293b60&clientId=uc964c08c-0c77-4&from=markdown&id=bJ5B1&name=image.png&originHeight=383&originWidth=900&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=127551&status=done&style=none&taskId=uf12a1ed3-655b-46ba-a2fb-e5a1c09e76a&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="栈-stack"><a href="#栈-stack" class="headerlink" title="栈(stack)"></a>栈(stack)</h1><p>栈(stack)是限制插入和删除只能在一 个位置上进行的表,该位置是表的末端,叫做栈顶(top)。它是后进先出(LIFO)的。对栈的基本操作只有 push(进栈)和 pop(出栈)两种,   前者相当于插入,后者相当于删除最后的元素。</p>
+<blockquote>
+<p>特点: <code>先进后出</code></p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/stack.png#id=irFpN&originHeight=300&originWidth=248&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="堆-heap"><a href="#堆-heap" class="headerlink" title="堆(heap)"></a>堆(heap)</h1><p>定义:完全二叉树的数组对象,将根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。 n 个元素的序列{k1,k2,ki,…,kn}当且仅当满足下关系时，称之为堆。(ki = k2i,ki &gt;= k2i+1), (i = 1,2,3,4…n/2)</p>
+<blockquote>
+<p>特点: 非线性数据结构，相当于一维数组，有两个直接后继。常见的堆有二叉堆、斐波那契堆等。</p>
+</blockquote>
+<p>堆上浮</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-comment">//堆上浮调整</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">upAdjust</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] array)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> childIndex = array.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> parentIndex = (childIndex - <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;<br>        <span class="hljs-comment">//temp保存插入的叶子节点值，用于最后的赋值</span><br>        <span class="hljs-keyword">int</span> temp = array[childIndex];<br>        <span class="hljs-keyword">while</span> (childIndex &gt; <span class="hljs-number">0</span> &amp;&amp; temp &lt; array[parentIndex]) &#123;<br>            <span class="hljs-comment">//无需真正交换，单向赋值即可</span><br>            array[childIndex] = array[parentIndex];<br>            childIndex = parentIndex;<br>            parentIndex = (parentIndex - <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;<br>        &#125;<br>        arr[childIndex] = temp;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>堆下沉</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 堆下沉调整</span><br><span class="hljs-comment">     * array 待调整的堆</span><br><span class="hljs-comment">     * parentIndex 要“下沉”的父节点</span><br><span class="hljs-comment">     * length 堆的有效大小</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">downAdjust</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] array, <span class="hljs-keyword">int</span> parentIndex, <span class="hljs-keyword">int</span> length)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> temp = array[parentIndex];<span class="hljs-comment">//保存父节点值，用于最后复制</span><br>        <span class="hljs-keyword">int</span> childIndex = <span class="hljs-number">2</span> * parentIndex + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (childIndex &lt; length) &#123;<br>            <span class="hljs-comment">//如果有右孩子，且右孩子小于左孩子的值，则定位到右孩子</span><br>            <span class="hljs-keyword">if</span> (childIndex + <span class="hljs-number">1</span> &lt; length &amp;&amp; array[childIndex + <span class="hljs-number">1</span>] &lt; array[childIndex]) &#123;<br>                childIndex++;<br>            &#125;<br>            <span class="hljs-comment">//如果父节点小于任何一个孩子的值，则直接跳出</span><br>            <span class="hljs-keyword">if</span> (temp &lt; array[childIndex]) <span class="hljs-keyword">break</span>;<br>            <span class="hljs-comment">//无需真正交换，单向赋值即可</span><br>            array[parentIndex] = array[childIndex];<br>            parentIndex = childIndex;<br>            childIndex = <span class="hljs-number">2</span> * childIndex + <span class="hljs-number">1</span>;<br>        &#125;<br>        array[parentIndex] = temp;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="普通队列-queue"><a href="#普通队列-queue" class="headerlink" title="普通队列(queue)"></a>普通队列(queue)</h1><p>队列是一种特殊的 线性表 ,特殊之处在于它只允许在表的前端(front)进行删除操作,而在表的后端(rear)进行插入操作,和栈一样,队列是一种操作受限制的线性表。进行插入操作的端称为队尾,进行删除操作的端称为队头。</p>
+<blockquote>
+<p>特点: <code>后进先出</code></p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/queue.png#id=FYEwe&originHeight=170&originWidth=814&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="优先队列-PriorityQueue"><a href="#优先队列-PriorityQueue" class="headerlink" title="优先队列(PriorityQueue)"></a>优先队列(PriorityQueue)</h1><ul>
+<li><p>最大优先队列</p>
+<p>无论入队顺序如何，都是当前最大的元素优先出队</p>
+</li>
+<li><p>最小优先队列</p>
+<p>无论入队顺序如何，都是当前最小的元素优先出队</p>
+</li>
+</ul>
+<p>优先队列代码实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PriorityQueue</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[] array;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> size;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PriorityQueue</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">//队列初始长度为32</span><br>        array = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">32</span>];<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 入队</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> key 入队元素</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">enQueue</span><span class="hljs-params">(<span class="hljs-keyword">int</span> key)</span> </span>&#123;<br>        <span class="hljs-comment">//队列长度超出范围，扩容</span><br>        <span class="hljs-keyword">if</span> (size &gt;= array.length) &#123;<br>            resize();<br>        &#125;<br>        array[size++] = key;<br>        upAdjust();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 出队</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">deQueue</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-keyword">if</span> (size &lt;= <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Exception(<span class="hljs-string">&quot;the queue is empty !&quot;</span>);<br>        &#125;<br>        <span class="hljs-comment">//获取堆顶元素</span><br>        <span class="hljs-keyword">int</span> head = array[<span class="hljs-number">0</span>];<br>        <span class="hljs-comment">//让最后一个元素移动到堆顶</span><br>        array[<span class="hljs-number">0</span>] = array[--size];<br>        downAdjust();<br>        <span class="hljs-keyword">return</span> head;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * “上浮”调整</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">upAdjust</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> childIndex = size - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> parentIndex = (childIndex - <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;<br>        <span class="hljs-comment">// temp 保存插入的叶子节点值，用于最后的赋值</span><br>        <span class="hljs-keyword">int</span> temp = array[childIndex];<br>        <span class="hljs-keyword">while</span> (childIndex &gt; <span class="hljs-number">0</span> &amp;&amp; temp &gt; array[parentIndex]) &#123;<br>        <span class="hljs-comment">//无须真正交换，单向赋值即可</span><br>            array[childIndex] = array[parentIndex];<br>            childIndex = parentIndex;<br>            parentIndex = parentIndex / <span class="hljs-number">2</span>;<br>        &#125;<br>        array[childIndex] = temp;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * “下沉”调整</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">downAdjust</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// temp 保存父节点的值，用于最后的赋值</span><br>        <span class="hljs-keyword">int</span> parentIndex = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> temp = array[parentIndex];<br>        <span class="hljs-keyword">int</span> childIndex = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (childIndex &lt; size) &#123;<br>        <span class="hljs-comment">// 如果有右孩子，且右孩子大于左孩子的值，则定位到右孩子</span><br>            <span class="hljs-keyword">if</span> (childIndex + <span class="hljs-number">1</span> &lt; size &amp;&amp; array[childIndex + <span class="hljs-number">1</span>] &gt; array[childIndex]) &#123;<br>                childIndex++;<br>            &#125;<br>        <span class="hljs-comment">// 如果父节点大于任何一个孩子的值，直接跳出</span><br>            <span class="hljs-keyword">if</span> (temp &gt;= array[childIndex])<br>                <span class="hljs-keyword">break</span>;<br>        <span class="hljs-comment">//无须真正交换，单向赋值即可</span><br>            array[parentIndex] = array[childIndex];<br>            parentIndex = childIndex;<br>            childIndex = <span class="hljs-number">2</span> * childIndex + <span class="hljs-number">1</span>;<br>        &#125;<br>        array[parentIndex] = temp;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 队列扩容</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">resize</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//队列容量翻倍</span><br>        <span class="hljs-keyword">int</span> newSize = <span class="hljs-keyword">this</span>.size * <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">this</span>.array = Arrays.copyOf(<span class="hljs-keyword">this</span>.array, newSize);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        PriorityQueue priorityQueue = <span class="hljs-keyword">new</span> PriorityQueue();<br>        priorityQueue.enQueue(<span class="hljs-number">3</span>);<br>        priorityQueue.enQueue(<span class="hljs-number">5</span>);<br>        priorityQueue.enQueue(<span class="hljs-number">10</span>);<br>        priorityQueue.enQueue(<span class="hljs-number">2</span>);<br>        priorityQueue.enQueue(<span class="hljs-number">7</span>);<br>        System.out.println(<span class="hljs-string">&quot; 出队元素：&quot;</span> + priorityQueue.deQueue());<br>        System.out.println(<span class="hljs-string">&quot; 出队元素：&quot;</span> + priorityQueue.deQueue());<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="链表-Link"><a href="#链表-Link" class="headerlink" title="链表(Link)"></a>链表(Link)</h1><p>链表是一种数据结构,和数组同级。比如,Java 中我们使用的 ArrayList,其实现原理是数组。而 LinkedList 的实现原理就是链表了。链表在进行循环遍历时效率不高,但是插入和删除时优势明显。</p>
+<blockquote>
+<p>特点: <code>插入、修改速度快、查询速度慢</code></p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/link.png#id=ly7OT&originHeight=181&originWidth=546&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="散列表-Hash-Table"><a href="#散列表-Hash-Table" class="headerlink" title="散列表(Hash Table)"></a>散列表(Hash Table)</h1><p>散列表(Hash table,也叫哈希表)是一种查找算法,与链表、树等算法不同的是,散列表算法在查找时不需要进行一系列和关键字(关键字是数据元素中某个数据项的值,用以标识一个数据元素)的比较操作。</p>
+<p>散列表算法希望能尽量做到不经过任何比较,通过一次存取就能得到所查找的数据元素,因而必须要在数据元素的存储位置和它的关键字(可用 key 表示)之间建立一个确定的对应关系,使每个关键字和散列表中一个唯一的存储位置相对应。因此在查找时,只要根据这个对应关系找到给定关键字在散列表中的位置即可。这种对应关系被称为散列函数(可用 h(key)表示)。</p>
+<p>用的构造散列函数的方法有:<br>(1)直接定址法: 取关键字或关键字的某个线性函数值为散列地址。即:h(key) = key 或 h(key) = a * key + b,其中 a 和 b 为常数。<br>(2)数字分析法<br>(3)平方取值法: 取关键字平方后的中间几位为散列地址。<br>(4)折叠法:将关键字分割成位数相同的几部分,然后取这几部分的叠加和作为散列地址。<br>(5)除留余数法:取关键字被某个不大于散列表表长 m 的数 p 除后所得的余数为散列地址,即:h(key) = key MOD p p ≤ m<br>(6)随机数法:选择一个随机函数,取关键字的随机函数值为它的散列地址,即:h(key) = random(key)</p>
+<h1 id="树结构-Tree"><a href="#树结构-Tree" class="headerlink" title="树结构(Tree)"></a>树结构(Tree)</h1><blockquote>
+<p>计算机科学中的树</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>二叉树</th>
+<th>二叉树/二叉查找树/笛卡尔树/Top tree</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>自平衡二叉查找树</td>
+<td>AA 树/AVL 树/红黑树/伸展树/树堆/节点大小平衡树</td>
+</tr>
+<tr>
+<td>B 树</td>
+<td>B 树/B+树/B*树/Bx 树/UB 树/2-3 树/2-3-4 树/(a,b)-树/Dancing tree/ H 树</td>
+</tr>
+<tr>
+<td>Trie</td>
+<td>前缀树/后缀树/基数树</td>
+</tr>
+<tr>
+<td>空间划分树</td>
+<td>四叉树/八叉树/k-d 树/vp-树/R 树/R*树/R+树/X 树/M 树/线段树/希尔伯特 R 树/优先 R 树</td>
+</tr>
+<tr>
+<td>非二叉树</td>
+<td>Exponential tree/Fusion tree/区间树/PQ tree/Range tree/SPQR tree/Van Emde Boas tree</td>
+</tr>
+<tr>
+<td>其他类型</td>
+<td>堆/散列树/Finger tree/Metric tree/Cover tree/BK-tree/Doubly-chained tree/iDistance/Link-cut tree/树状数组</td>
+</tr>
+</tbody></table>
+<p>两种存储结构：链表和数组</p>
+<ul>
+<li>数组表示</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wanquanerchashu-link.png#id=mTkSw&originHeight=387&originWidth=516&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>数组表示按照二叉树深度优先存入二维数组</p>
+</blockquote>
+<p>父节点下标=parent<br>左子树=2<em>parent+1<br>右子树=2</em>parent+2</p>
+<ul>
+<li>链表表示</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wanquanerchashu-array.png#id=no7Wg&originHeight=384&originWidth=543&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>left 指向左子树,right 指向右子树</p>
+</blockquote>
+<h1 id="二叉树-Binary-tree"><a href="#二叉树-Binary-tree" class="headerlink" title="二叉树(Binary tree)"></a>二叉树(Binary tree)</h1><p>定义: 由一个称为根（root）的元素及两个不相交的、被分别称为左子树和右子树的二叉树组成，是有序树</p>
+<h1 id="平衡二叉树-Balance-Tree"><a href="#平衡二叉树-Balance-Tree" class="headerlink" title="平衡二叉树(Balance Tree)"></a>平衡二叉树(Balance Tree)</h1><blockquote>
+<p>任意节点的子树的高度差都小于等于 1,并且左右两个子树都是一棵平衡二叉树。</p>
+</blockquote>
+<p><a href="/2020/12/23/datastructure/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/">详细内容</a></p>
+<h2 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h2><p>定义:叶子结点只能出现在最下层和次下层，且最下层的叶子结点集中在树的左部。</p>
+<blockquote>
+<p>特点：<br>具有 n 个结点的完全二叉树的深度[log2k]+1（注：[ ]表示向下取整）<br>满二叉树肯定是完全二叉树，而完全二叉树不一定是满二叉树</p>
+</blockquote>
+<p>完全二叉树判定算法思路</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs latex">判断一棵树是否是完全二叉树的思路<br>1 如果树为空，则直接返回错<br>2 如果树不为空：层序遍历二叉树<br>  2.1 如果一个结点左右孩子都不为空，则pop该节点，将其左右孩子入队列；<br>  2.1 如果遇到一个结点，左孩子为空，右孩子不为空，则该树一定不是完全二叉树；<br>  2.2 如果遇到一个结点，左孩子不为空，右孩子为空；或者左右孩子都为空；则该节点之后的队列中的结点都为叶子节点；<br>  该树才是完全二叉树，否则就不是完全二叉树；<br></code></pre></td></tr></table></figure>
+
+<h1 id="满二叉树-Full-Binary-Tree"><a href="#满二叉树-Full-Binary-Tree" class="headerlink" title="满二叉树(Full Binary Tree)"></a>满二叉树(Full Binary Tree)</h1><p>定义:一个二叉树，如果每一个层的结点数都达到最大值，则这个二叉树就是满二叉树。也就是说，如果一个二叉树的层数为 K，且结点总数是(2^k) -1 ，则它就是满二叉树。</p>
+<blockquote>
+<p>特点：一个层数为 k 的满二叉树的叶子结点个数（也就是最后一层）：2^(k-1)<br>结点总数是(2^k) -1</p>
+</blockquote>
+<h1 id="二叉排序树-Binary-Sort-Tree"><a href="#二叉排序树-Binary-Sort-Tree" class="headerlink" title="二叉排序树(Binary Sort Tree)"></a>二叉排序树(Binary Sort Tree)</h1><p>定义:左子树所有节点值小于它的根节点值,且右子树所有节点值大于它的根节点值,则这样的二叉树就是排序二叉树。</p>
+<p>插入操作<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/sort-2-tree.png#id=isbej&originHeight=447&originWidth=449&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>删除操作</p>
+<p>删除操作主要分为三种情况,即要删除的节点无子节点,要删除的节点只有一个子节点,要删除的节点有两个子节点。</p>
+<ol>
+<li>对于要删除的节点无子节点可以直接删除,即让其父节点将该子节点置空即可。</li>
+<li>对于要删除的节点只有一个子节点,则替换要删除的节点为其子节点。</li>
+<li>对于要删除的节点有两个子节点,则首先找该节点的替换节点(即右子树中最小的节点),接着替换要删除的节点为替换节点,然后删除替换节点。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/delete-2-tree.png#id=A5jSr&originHeight=378&originWidth=461&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>查询操作</p>
+<p>查找操作的主要流程为:先和根节点比较,如果相同就返回,如果小于根节点则到左子树中递归查找,如果大于根节点则到右子树中递归查找。因此在排序二叉树中可以很容易获取最大(最右最深子节点)和最小(最左最深子节点)值。</p>
+<blockquote>
+<p>它能确保任何一个结点的左右子树的<code>高度差小于两倍</code>。</p>
+</blockquote>
+<p><a href="https://mikeygithub.github.io/2020/12/27/datastructure/%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91/">详细参考</a></p>
+<h1 id="红黑树-Red-Black-Tree"><a href="#红黑树-Red-Black-Tree" class="headerlink" title="红黑树(Red-Black-Tree)"></a>红黑树(Red-Black-Tree)</h1><p>R-B Tree,全称是 Red-Black Tree,又称为“红黑树”,它一种特殊的二叉查找树(近似平衡的二叉搜索树)。红黑树的每个节点上都有存储位表示节点的颜色,可以是红(Red)或黑(Black)。</p>
+<p>红黑树的特性</p>
+<p>(1)每个节点或者是黑色,或者是红色。<br>(2)根节点是黑色。<br>(3)每个叶子节点(NIL)是黑色。 [注意:这里叶子节点,是指为空(NIL 或 NULL)的叶子节点!]<br>(4)如果一个节点是红色的,则它的子节点必须是黑色的。<br>(5)从一个节点到该节点的子孙节点的所有路径上包含相同数目的黑节点。</p>
+<p>左旋<br>对 x 进行左旋,意味着,将“x 的右孩子”设为“x 的父亲节点”;即,将 x 变成了一个左节点(x 成了为 z 的左孩子)!。 因此,左旋中的“左”,意味着“被旋转的节点将变成一个左节点”。<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/left-spin.png#id=W390V&originHeight=301&originWidth=550&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">LEFT-ROTATE</span><span class="hljs-params">(T, x)</span></span><br>y ← <span class="hljs-attribute">right</span>[x]<br><span class="hljs-comment">// 前提:这里假设 x 的右孩子为 y。下面开始正式操作</span><br><span class="hljs-attribute">right</span>[x] ← left[y]<br><span class="hljs-comment">// 将 “y 的左孩子” 设为 “x 的右孩子”,即 将β设为 x 的右孩子</span><br><span class="hljs-selector-tag">p</span><span class="hljs-selector-attr">[left[y]</span>] ← x <span class="hljs-comment">// 将 “x” 设为 “y 的左孩子的父亲”,即 将β的父亲设为 x</span><br><span class="hljs-selector-tag">p</span><span class="hljs-selector-attr">[y]</span> ← <span class="hljs-selector-tag">p</span><span class="hljs-selector-attr">[x]</span> <span class="hljs-comment">// 将 “x 的父亲” 设为 “y 的父亲”</span><br><span class="hljs-keyword">if</span> <span class="hljs-selector-tag">p</span><span class="hljs-selector-attr">[x]</span> = nil<span class="hljs-selector-attr">[T]</span><br>then root<span class="hljs-selector-attr">[T]</span> ← y<br><span class="hljs-comment">// 情况 1:如果 “x 的父亲” 是空节点,则将 y 设为根节点</span><br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> x = <span class="hljs-attribute">left</span>[p[x]]<br>then <span class="hljs-attribute">left</span>[p[x]] ← y<br><span class="hljs-comment">// 情况 2:如果 x 是它父节点的左孩子,则将 y 设为“x 的父节点</span><br>的左孩子”<br><span class="hljs-keyword">else</span> <span class="hljs-attribute">right</span>[p[x]] ← y // 情况 <span class="hljs-number">3</span>:(x 是它父节点的右孩子) 将 y 设为“x 的父节点的右孩<br>子”<br><span class="hljs-attribute">left</span>[y] ← x // 将 “x” 设为 “y 的左孩子”<br><span class="hljs-selector-tag">p</span><span class="hljs-selector-attr">[x]</span> ← y <span class="hljs-comment">// 将 “x 的父节点” 设为 “y”</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/left-spin-sub.png#id=dp7Tj&originHeight=357&originWidth=1438&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>右旋<br>对 x 进行右旋,意味着,将“x 的左孩子”设为“x 的父亲节点”;即,将 x 变成了一个右节点(x 成了为 y 的右孩子)! 因此,右旋中的“右”,意味着“被旋转的节点将变成一个右节点”。<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/right-spin.png#id=R7ohm&originHeight=301&originWidth=550&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">RIGHT-ROTATE</span><span class="hljs-params">(T, y)</span></span><br>x ← <span class="hljs-attribute">left</span>[y]<br><span class="hljs-comment">// 前提:这里假设 y 的左孩子为 x。下面开始正式操作</span><br><span class="hljs-attribute">left</span>[y] ← right[x] // 将 “x 的右孩子” 设为 “y 的左孩子”,即 将β设为 y 的左孩子<br><span class="hljs-selector-tag">p</span><span class="hljs-selector-attr">[right[x]</span>] ← y <span class="hljs-comment">// 将 “y” 设为 “x 的右孩子的父亲”,即 将β的父亲设为 y</span><br><span class="hljs-selector-tag">p</span><span class="hljs-selector-attr">[x]</span> ← <span class="hljs-selector-tag">p</span><span class="hljs-selector-attr">[y]</span><br><span class="hljs-comment">// 将 “y 的父亲” 设为 “x 的父亲”</span><br><span class="hljs-keyword">if</span> <span class="hljs-selector-tag">p</span><span class="hljs-selector-attr">[y]</span> = nil<span class="hljs-selector-attr">[T]</span><br>then root<span class="hljs-selector-attr">[T]</span> ← x<br><span class="hljs-comment">// 情况 1:如果 “y 的父亲” 是空节点,则将 x 设为根节点</span><br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> y = <span class="hljs-attribute">right</span>[p[y]]<br>then <span class="hljs-attribute">right</span>[p[y]] ← x<br><span class="hljs-comment">// 情况 2:如果 y 是它父节点的右孩子,则将 x 设为“y 的父节</span><br>点的左孩子”<br><span class="hljs-keyword">else</span> <span class="hljs-attribute">left</span>[p[y]] ← x<br><span class="hljs-comment">// 情况 3:(y 是它父节点的左孩子) 将 x 设为“y 的父节点的左孩</span><br>子”<br><span class="hljs-attribute">right</span>[x] ← y<br><span class="hljs-selector-tag">p</span><span class="hljs-selector-attr">[y]</span> ← x<br><span class="hljs-comment">// 将 “y” 设为 “x 的右孩子”</span><br><span class="hljs-comment">// 将 “y 的父节点” 设为 “x”</span><br></code></pre></td></tr></table></figure>
+
+<p>添加<br>第一步: 将红黑树当作一颗二叉查找树,将节点插入。<br>第二步:将插入的节点着色为”红色”。根据被插入节点的父节点的情况,可以将”当节点 z 被着色为红色节点,并插入二叉树”划分为三种情况来处理。<br>1 情况说明:被插入的节点是根节点。</p>
+<blockquote>
+<p>处理方法:直接把此节点涂为黑色。</p>
+</blockquote>
+<p>2 情况说明:被插入的节点的父节点是黑色。</p>
+<blockquote>
+<p>处理方法:什么也不需要做。节点被插入后,仍然是红黑树。</p>
+</blockquote>
+<p>3 情况说明:被插入的节点的父节点是红色。这种情况下,被插入节点是一定存在非空祖父节点的;进一步的讲,被插入节点也一定存在叔叔节点(即使叔叔节点为空,我们也视之为存在,空节点本身就是黑色节点)。理解这点之后,我们依据”叔叔节点的情况”,将这种情况进一步划分为 3 种情况(Case)。<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/case-1-3.png#id=YocZI&originHeight=355&originWidth=1169&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload><br>第三步: 通过一系列的旋转或着色等操作,使之重新成为一颗红黑树。</p>
+<p>删除<br>第一步:将红黑树当作一颗二叉查找树,将节点删除。这和”删除常规二叉查找树中删除节点的方法是一样的”。分 3 种情况:<br>1 被删除节点没有儿子,即为叶节点。那么,直接将该节点删除就 OK 了。<br>2 被删除节点只有一个儿子。那么,直接删除该节点,并用该节点的唯一子节点顶替它的位置。<br>3 被删除节点有两个儿子。那么,先找出它的后继节点;然后把“它的后继节点的内容”复制给“该节点的内容”;之后,删除“它的后继节点”。<br>第二步:通过”旋转和重新着色”等一系列来修正该树,使之重新成为一棵红黑树。<br>因为”第一步”中删除节点之后,可能会违背红黑树的特性。所以需要通过”旋转和重新着色”来修正该树,使之重新成为一棵红黑树。<br>选择重着色 3 种情况。<br>1 情况说明:x 是“红+黑”节点。</p>
+<blockquote>
+<p>处理方法:直接把 x 设为黑色,结束。此时红黑树性质全部恢复。</p>
+</blockquote>
+<p>2 情况说明:x 是“黑+黑”节点,且 x 是根。</p>
+<blockquote>
+<p>处理方法:什么都不做,结束。此时红黑树性质全部恢复。</p>
+</blockquote>
+<p>3 情况说明:x 是“黑+黑”节点,且 x 不是根。</p>
+<blockquote>
+<p>处理方法:这种情况又可以划分为 4 种子情况。这 4 种子情况如下表所示:</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/case-1-4.png#id=crsK3&originHeight=469&originWidth=1035&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>AVL VS Red Balck Tree</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/avl-vs-red-black-tree.png#id=Gk2sQ&originHeight=654&originWidth=1407&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/038585421b73">参考资料</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/skywang12345/p/3624343.html">代码实现</a></p>
+<h1 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B-Tree"></a>B-Tree</h1><p>B-tree 又叫平衡多路查找树。一棵 m 阶的 B-tree (m 叉树)的特性如下(其中 ceil(x)是一个取上限的函数):</p>
+<ol>
+<li> 树中每个结点至多有 m 个孩子;</li>
+<li> 除根结点和叶子结点外,其它每个结点至少有有 ceil(m / 2)个孩子;</li>
+<li> 若根结点不是叶子结点,则至少有 2 个孩子(特殊情况:没有孩子的根结点,即根结点为叶子结点,整棵树只有一个根节点);</li>
+<li> 所有叶子结点都出现在同一层,叶子结点不包含任何关键字信息(可以看做是外部结点或查询失败的结点,实际上这些结点不存在,指向这些结点的指针都为 null);</li>
+<li> 每个非终端结点中包含有 n 个关键字信息: (n,P0,K1,P1,K2,P2,……,Kn,Pn)。其中:</li>
+</ol>
+<p>a) Ki (i=1…n)为关键字,且关键字按顺序排序 K(i-1)&lt; Ki。<br>b) Pi 为指向子树根的接点,且指针 P(i-1)指向子树种所有结点的关键字均小于 Ki,但都大于 K(i-1)。<br>c) 关键字的个数 n 必须满足: ceil(m / 2)-1 &lt;= n &lt;= m-1。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/balance-tree.png#id=dFUO6&originHeight=300&originWidth=624&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>一棵 m 阶的 B+tree 和 m 阶的 B-tree 的差异在于: 1.有 n 棵子树的结点中含有 n 个关键字; (B-tree 是 n 棵子树有 n-1 个关键字) 2.所有的叶子结点中包含了全部关键字的信息,及指向含有这些关键字记录的指针,且叶子结点本身依关键字的大小自小而大的顺序链接。 (B-tree 的叶子节点并没有包括全部需要查找的信息) 3.所有的非终端结点可以看成是索引部分,结点中仅含有其子树根结点中最大(或最小)关键字。<br>(B-tree 的非终节点也包含需要查找的有效信息)</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/balance-tree-detail.png#id=hzUUt&originHeight=345&originWidth=569&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="B-树-B-Tree"><a href="#B-树-B-Tree" class="headerlink" title="B+树(B+Tree)"></a>B+树(B+Tree)</h1><p><a href="https://mikeygithub.github.io/2020/12/27/datastructure/B%E6%A0%91B+%E6%A0%91B*%E6%A0%91/">参考</a></p>
+<h1 id="B-树-B-Tree-1"><a href="#B-树-B-Tree-1" class="headerlink" title="B_树(B_Tree)"></a>B_树(B_Tree)</h1><p><a href="https://mikeygithub.github.io/2020/12/27/datastructure/B%E6%A0%91B+%E6%A0%91B*%E6%A0%91/">参考</a></p>
+<h1 id="哈夫曼树"><a href="#哈夫曼树" class="headerlink" title="哈夫曼树"></a>哈夫曼树</h1><blockquote>
+<p>给定 N 个权值作为 N 个叶子结点，构造一棵二叉树，若该树的带权路径长度达到最小，称这样的二叉树为最优二叉树，也称为哈夫曼树(Huffman Tree)。哈夫曼树是带权路径长度最短的树，权值较大的结点离根较近。</p>
+</blockquote>
+<blockquote>
+<p>设二叉树具有 n 个带权值的叶结点，那么从根结点到各个叶结点的路径长度与相应结点权值的乘积的和，叫做二叉树的带权路径长度。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hfms-gs.png#id=CvvQ5&originHeight=108&originWidth=225&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>对于具有 n 个叶子结点的哈夫曼树，共有 2n-1 个结点</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span>&#123;</span><br>    <span class="hljs-keyword">char</span> data;<span class="hljs-comment">//结点值</span><br>    <span class="hljs-keyword">double</span> weight;<span class="hljs-comment">//权重</span><br>    <span class="hljs-keyword">int</span> parent;<span class="hljs-comment">//双亲结点</span><br>    <span class="hljs-keyword">int</span> lchild;<span class="hljs-comment">//左孩子结点</span><br>    <span class="hljs-keyword">int</span> rchild;<span class="hljs-comment">//右孩子结点</span><br>&#125;HTNode;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/wpl.png#id=YOH2x&originHeight=455&originWidth=423&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>相同的叶结点构造出不同的二叉树</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hfm-1.png#id=wd64h&originHeight=604&originWidth=1224&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>具有最小带权路径长度的二叉树称为哈夫曼树（也称最优树）</p>
+</blockquote>
+<p>构造哈夫曼树的原则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs latex">权值越大的叶结点越靠近根结点。<br>权值越小的叶结点越远离根结点<br></code></pre></td></tr></table></figure>
+
+<p>构造哈夫曼树的过程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs latex">（1）给定的n个权值&#123;W1，W2，…，Wn&#125;构造n棵只有一个叶结点的二叉树，从而得到一个二叉树的集合F=&#123;T1，T2，…，Tn&#125;。<br>（2）在F中选取根结点的权值最小和次小的两棵二叉树作为左、右子树构造一棵新的二叉树，这棵新的二叉树根结点的权值为其左、右子树根结点权值之和。<br>（3）在集合F中删除作为左、右子树的两棵二叉树，并将新建立的二叉树加入到集合F中。<br>（4）重复（2）、（3）两步，当F中只剩下一棵二叉树时，这棵二叉树便是所要建立的哈夫曼树。<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hfm-demo.png#id=qXdoL&originHeight=785&originWidth=2116&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>哈夫曼树的特点:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs latex">n1 = 0：因为每次两棵树合并。<br>n = n0+n1+n2 = n0+n2 = 2n0-1<br></code></pre></td></tr></table></figure>
+
+<h2 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h2><blockquote>
+<p>规定哈夫曼树中的左分支为 0，右分支为 1，则从根结点到每个叶结点所经过的分支对应的 0 和 1 组成的序列便为该结点对应字符的编码。这样的编码称为哈夫曼编码。</p>
+</blockquote>
+<p>哈夫曼编码特点：权值越大的字符编码越短，反之越长。哈夫曼编码属 0、1 二进制编码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hfm-code-demo.png#id=CmU6K&originHeight=776&originWidth=879&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>在一组字符的哈夫曼编码中，不可能出现一个字符的哈夫曼编码是另一个字符哈夫曼编码的前缀。哈夫曼编码也称为前缀编码。</p>
+<h1 id="位图-graph"><a href="#位图-graph" class="headerlink" title="位图(graph)"></a>位图(graph)</h1><blockquote>
+<p>位图的原理就是用一个 bit 来标识一个数字是否存在,采用一个 bit 来存储一个数据,所以这样可以大大的节省空间。 bitmap 是很常用的数据结构,比如用于 Bloom Filter 中;用于无重复整数的排序等等。bitmap 通常基于数组来实现,数组中每个元素可以看成是一系列二进制数,所有元素组成更大的二进制集合。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/polly333/p/4760275.html">参考资料</a></p>
+<h1 id="布隆管理器-Bloom-Filter"><a href="#布隆管理器-Bloom-Filter" class="headerlink" title="布隆管理器(Bloom Filter)"></a>布隆管理器(Bloom Filter)</h1><p>布隆过滤器是 Bloom 于 1970 年提出的，其由二进制向量(或者位数组)和一系列随机映射函数(哈希函数)两个部分组成的数据结构。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/bloom.png#id=vE7yF&originHeight=120&originWidth=709&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>位数组中的每个元素都只占用 1 bit ，并且每个元素只能是 0 或者 1。这样申请一个 100w 个元素的位数组只占用 1000000Bit / 8 = 125000 Byte = 125000/1024 kb ≈ 122kb 的空间</p>
+<p>代码实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> main;<br><br><span class="hljs-keyword">import</span> java.io.Serializable;<br><span class="hljs-keyword">import</span> java.nio.charset.Charset;<br><span class="hljs-keyword">import</span> java.security.MessageDigest;<br><span class="hljs-keyword">import</span> java.security.NoSuchAlgorithmException;<br><span class="hljs-keyword">import</span> java.util.BitSet;<br><span class="hljs-keyword">import</span> java.util.Collection;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BloomFilter</span>&lt;<span class="hljs-title">E</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Serializable</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = -<span class="hljs-number">2326638072608273135L</span>;<br>    <span class="hljs-keyword">private</span> BitSet bitset;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bitSetSize;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> bitsPerElement;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> expectedNumberOfFilterElements;<span class="hljs-comment">//可以加入的元素的最大个数</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> numberOfAddedElements;<span class="hljs-comment">//过滤器容器中元素的实际数量</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> k; <span class="hljs-comment">// 哈希函数的个数</span><br><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Charset charset = Charset.forName(<span class="hljs-string">&quot;UTF-8&quot;</span>);<span class="hljs-comment">//存储哈希值的字符串的编码方式</span><br><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String hashName = <span class="hljs-string">&quot;MD5&quot;</span>; <span class="hljs-comment">//在大多数情况下，MD5提供了较好的散列准确度。如有必要，可以换成 SHA1算法</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> MessageDigest digestFunction;<span class="hljs-comment">//MessageDigest类用于为应用程序提供信息摘要算法的功能，如 MD5 或 SHA 算法</span><br>    <span class="hljs-keyword">static</span> &#123; <span class="hljs-comment">// 初始化 MessageDigest 的摘要算法对象</span><br>        MessageDigest tmp;<br>        <span class="hljs-keyword">try</span> &#123;<br>            tmp = java.security.MessageDigest.getInstance(hashName);<br>        &#125; <span class="hljs-keyword">catch</span> (NoSuchAlgorithmException e) &#123;<br>            tmp = <span class="hljs-keyword">null</span>;<br>        &#125;<br>        digestFunction = tmp;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 构造一个空的布隆过滤器. 过滤器的长度为c*n</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> c</span><br><span class="hljs-comment">     *            表示每一个元素占有多少位</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> n</span><br><span class="hljs-comment">     *            表示过滤器能加入的最大元素数量</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> k</span><br><span class="hljs-comment">     *            表示须要使用的哈希函数的个数</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BloomFilter</span><span class="hljs-params">(<span class="hljs-keyword">double</span> c, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.expectedNumberOfFilterElements = n;<br>        <span class="hljs-keyword">this</span>.k = k;<br>        <span class="hljs-keyword">this</span>.bitsPerElement = c;<br>        <span class="hljs-keyword">this</span>.bitSetSize = (<span class="hljs-keyword">int</span>) Math.ceil(c * n);<br>        numberOfAddedElements = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">this</span>.bitset = <span class="hljs-keyword">new</span> BitSet(bitSetSize);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 构造一个空的布隆过滤器。最优哈希函数的个数将由过滤器的总大小和期望元素个数来确定。</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> bitSetSize</span><br><span class="hljs-comment">     *            指定了过滤器的总大小</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> expectedNumberOElements</span><br><span class="hljs-comment">     *            指定了过滤器能加入的最大的元素数量</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BloomFilter</span><span class="hljs-params">(<span class="hljs-keyword">int</span> bitSetSize, <span class="hljs-keyword">int</span> expectedNumberOElements)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>(bitSetSize / (<span class="hljs-keyword">double</span>) expectedNumberOElements,  expectedNumberOElements, (<span class="hljs-keyword">int</span>) Math.round((bitSetSize / (<span class="hljs-keyword">double</span>) expectedNumberOElements)* Math.log(<span class="hljs-number">2.0</span>)));<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 通过指定误报率来构造一个过滤器。</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">     * 每一个元素所占的位数和哈希函数的数量会依据误报率来得出。</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> falsePositiveProbability</span><br><span class="hljs-comment">     *            所期望误报率.</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> expectedNumberOfElements</span><br><span class="hljs-comment">     *            要加入的元素的数量</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BloomFilter</span><span class="hljs-params">(<span class="hljs-keyword">double</span> falsePositiveProbability, <span class="hljs-keyword">int</span> expectedNumberOfElements)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>(Math.ceil(-(Math.log(falsePositiveProbability) / Math.log(<span class="hljs-number">2</span>)))/ Math.log(<span class="hljs-number">2</span>), <span class="hljs-comment">// c = k/ln(2)</span><br>                expectedNumberOfElements,<br>                (<span class="hljs-keyword">int</span>) Math.ceil(-(Math.log(falsePositiveProbability) / Math.log(<span class="hljs-number">2</span>)))); <span class="hljs-comment">// k = ln(2)m/n</span><br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 依据旧过滤器的数据。又一次构造一个新的过滤器</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> bitSetSize</span><br><span class="hljs-comment">     *            指定了过滤器所需位的大小</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> expectedNumberOfFilterElements</span><br><span class="hljs-comment">     *            指定了过滤器所能加入的元素的最大数量</span><br><span class="hljs-comment">     *            to contain.</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> actualNumberOfFilterElements</span><br><span class="hljs-comment">     *            指定了原来过滤器的数据的数量</span><br><span class="hljs-comment">     *            &lt;code&gt;filterData&lt;/code&gt; BitSet.</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> filterData</span><br><span class="hljs-comment">     *            原有过滤器中的BitSet对象</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BloomFilter</span><span class="hljs-params">(<span class="hljs-keyword">int</span> bitSetSize, <span class="hljs-keyword">int</span> expectedNumberOfFilterElements,</span></span><br><span class="hljs-params"><span class="hljs-function">                       <span class="hljs-keyword">int</span> actualNumberOfFilterElements, BitSet filterData)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>(bitSetSize, expectedNumberOfFilterElements);<br>        <span class="hljs-keyword">this</span>.bitset = filterData;<br>        <span class="hljs-keyword">this</span>.numberOfAddedElements = actualNumberOfFilterElements;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 依据字符串的内容生成摘要</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> val</span><br><span class="hljs-comment">     *            字符串的内容</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> charset</span><br><span class="hljs-comment">     *            输入数据的编码方式</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span>    输出为一个long类型</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> <span class="hljs-title">createHash</span><span class="hljs-params">(String val, Charset charset)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> createHash(val.getBytes(charset));<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 依据字符串内容生成摘要</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> val</span><br><span class="hljs-comment">     *            指定了输入的字符串。默认的编码为 UTF-8</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 输出为一个long类型</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> <span class="hljs-title">createHash</span><span class="hljs-params">(String val)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> createHash(val, charset);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 依据字节数组生成摘要</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> data</span><br><span class="hljs-comment">     *            输入数据</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 输出为long类型的摘要</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> <span class="hljs-title">createHash</span><span class="hljs-params">(<span class="hljs-keyword">byte</span>[] data)</span> </span>&#123;<br>        <span class="hljs-keyword">long</span> h = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">byte</span>[] res;<br><br>        <span class="hljs-keyword">synchronized</span> (digestFunction) &#123;<br>            res = digestFunction.digest(data);<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++) &#123;<br>            h &lt;&lt;= <span class="hljs-number">8</span>;<br>            h |= ((<span class="hljs-keyword">int</span>) res[i]) &amp; <span class="hljs-number">0xFF</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> h;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 重写equals方法</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object obj)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (obj == <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (getClass() != obj.getClass()) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">final</span> BloomFilter&lt;E&gt; other = (BloomFilter&lt;E&gt;) obj;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.expectedNumberOfFilterElements != other.expectedNumberOfFilterElements) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.k != other.k) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.bitSetSize != other.bitSetSize) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.bitset != other.bitset<br>                &amp;&amp; (<span class="hljs-keyword">this</span>.bitset == <span class="hljs-keyword">null</span> || !<span class="hljs-keyword">this</span>.bitset.equals(other.bitset))) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 重写了hashCode方法</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hashCode</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> hash = <span class="hljs-number">7</span>;<br>        hash = <span class="hljs-number">61</span> * hash + (<span class="hljs-keyword">this</span>.bitset != <span class="hljs-keyword">null</span> ? <span class="hljs-keyword">this</span>.bitset.hashCode() : <span class="hljs-number">0</span>);<br>        hash = <span class="hljs-number">61</span> * hash + <span class="hljs-keyword">this</span>.expectedNumberOfFilterElements;<br>        hash = <span class="hljs-number">61</span> * hash + <span class="hljs-keyword">this</span>.bitSetSize;<br>        hash = <span class="hljs-number">61</span> * hash + <span class="hljs-keyword">this</span>.k;<br>        <span class="hljs-keyword">return</span> hash;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 依据最大元素数量和过滤器的大小来计算误报率。</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"></span><br><span class="hljs-comment">     * 方法的返回值为误报率。假设插入的元素个数小于最大值，则误报率会比返回值要小。</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 期望的误报率.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">expectedFalsePositiveProbability</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> getFalsePositiveProbability(expectedNumberOfFilterElements);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 通过插入的元素数量和过滤器容器大小来计算实际的误报率。</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> numberOfElements</span><br><span class="hljs-comment">     *            插入的元素的个数.</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 误报率.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getFalsePositiveProbability</span><span class="hljs-params">(<span class="hljs-keyword">double</span> numberOfElements)</span> </span>&#123;<br>        <span class="hljs-comment">// (1 - e^(-k * n / m)) ^ k</span><br>        <span class="hljs-keyword">return</span> Math.pow((<span class="hljs-number">1</span> - Math.exp(-k * (<span class="hljs-keyword">double</span>) numberOfElements<br>                / (<span class="hljs-keyword">double</span>) bitSetSize)), k);<br><br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 通过实际插入的元素数量和过滤器容器大小来计算实际的误报率。</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"></span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 误报率.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getFalsePositiveProbability</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> getFalsePositiveProbability(numberOfAddedElements);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 返回哈希函数的个数 k</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span>  k.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getK</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> k;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 清空过滤器元素</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">clear</span><span class="hljs-params">()</span> </span>&#123;<br>        bitset.clear();<br>        numberOfAddedElements = <span class="hljs-number">0</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 向过滤器中加入元素。</span><br><span class="hljs-comment">     * 加入的元素的toString()方法将会被调用。返回的字符串作为哈希函数的输出。</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"></span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> element</span><br><span class="hljs-comment">     *            要加入的元素</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(E element)</span> </span>&#123;<br>        <span class="hljs-keyword">long</span> hash;<br>        String valString = element.toString();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>; x &lt; k; x++) &#123;<br>            hash = createHash(valString + Integer.toString(x));<br>            hash = hash % (<span class="hljs-keyword">long</span>) bitSetSize;<br>            bitset.set(Math.abs((<span class="hljs-keyword">int</span>) hash), <span class="hljs-keyword">true</span>);<br>        &#125;<br>        numberOfAddedElements++;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 加入一个元素集合到过滤器中</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> c</span><br><span class="hljs-comment">     *            元素集合.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addAll</span><span class="hljs-params">(Collection&lt;?</span></span><br><span class="hljs-params"><span class="hljs-function"></span></span><br><span class="hljs-params"><span class="hljs-function">            extends E&gt; c)</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (E element : c)<br>            add(element);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 用来推断元素是否在过滤器中。</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">     假设已存在。返回 true。</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> element</span><br><span class="hljs-comment">     *            要检查的元素.</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 假设预计该元素已存在。则返回true</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">contains</span><span class="hljs-params">(E element)</span> </span>&#123;<br>        <span class="hljs-keyword">long</span> hash;<br>        String valString = element.toString();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>; x &lt; k; x++) &#123;<br>            hash = createHash(valString + Integer.toString(x));<br>            hash = hash % (<span class="hljs-keyword">long</span>) bitSetSize;<br>            <span class="hljs-keyword">if</span> (!bitset.get(Math.abs((<span class="hljs-keyword">int</span>) hash)))<br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 推断一个集合中的元素是否都在过滤器中。</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"></span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> c</span><br><span class="hljs-comment">     *            要检查的元素集合</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 假设集合全部的元素都在过滤器中。则返回true。</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">containsAll</span><span class="hljs-params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (E element : c)<br>            <span class="hljs-keyword">if</span> (!contains(element))<br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 得到某一位的值</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> bit</span><br><span class="hljs-comment">     *            bit的位置.</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 假设该位被设置，则返回true。</span><br><span class="hljs-comment"></span><br><span class="hljs-comment"></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">getBit</span><span class="hljs-params">(<span class="hljs-keyword">int</span> bit)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> bitset.get(bit);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 设置过滤器某一位的值</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> bit</span><br><span class="hljs-comment">     *            要设置的位置.</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> value</span><br><span class="hljs-comment">     *            true表示已经成功设置。</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">    false表示改为被清除。</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBit</span><span class="hljs-params">(<span class="hljs-keyword">int</span> bit, <span class="hljs-keyword">boolean</span> value)</span> </span>&#123;<br>        bitset.set(bit, value);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 返回存放信息的位数组.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 位数组.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> BitSet <span class="hljs-title">getBitSet</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> bitset;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 得到过滤器中位数组个大小。</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 数组大小.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.bitSetSize;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 返回已加入的元素的个数</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 元素个数.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">count</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.numberOfAddedElements;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 得到能加入的元素的最大数量</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span>  最大数量.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getExpectedNumberOfElements</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> expectedNumberOfFilterElements;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 得到每一个元素占用的位的个数的期望值</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 每一个元素占用的位数</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getExpectedBitsPerElement</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.bitsPerElement;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 得到每一个元素占用位数的实际值</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 每一个元素占用的位数.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getBitsPerElement</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.bitSetSize / (<span class="hljs-keyword">double</span>) numberOfAddedElements;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>优点</p>
+<ol>
+<li>占用空间小，节省内存空间。</li>
+<li>查询效率高，相对于普通的容器结构。</li>
+</ol>
+<p>缺点 1.返回的数据结果是概率性的，并不是完全准确，在数据量越多误报可能性越大。</p>
+<p>原理</p>
+<p>1.当元素加入布隆过滤器的时候，会对元素进行哈希运算，得到其哈希值（有几个函数得到几个哈希值） 2.根据得到的哈希值，在位数组中把对应的下标的值设置为 1。 3.在对数据查询判断时对其取哈希如果每个哈希对应的元素的数组值都为 1 则该数据存在。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/bloom-hash.png#id=U3BeX&originHeight=440&originWidth=814&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>特点<br>布隆过滤器检测存在该元素其可能出现误判，布隆过滤器检测该元素不存在则该元素一定不存在。</p>
+<p>应用场景</p>
+<ol>
+<li>防止恶意请求，缓存穿透，垃圾邮件，黑名单。</li>
+<li>去重功能。</li>
+</ol>
+<p>实际应用</p>
+<ol>
+<li>比特币网络</li>
+<li>分布式系统(Map-Reduce) - Hadoop、Search engine</li>
+<li>Redis 缓存</li>
+<li>垃圾邮件、评论等的过滤</li>
+</ol>
+<h1 id="最近使用缓存-LRU-Cache"><a href="#最近使用缓存-LRU-Cache" class="headerlink" title="最近使用缓存(LRU Cache)"></a>最近使用缓存(LRU Cache)</h1><ul>
+<li>两个要素: 大小、替换策略</li>
+<li>HashTable + Double LinkedList</li>
+<li>O(1)查询、O(1)修改、更新</li>
+</ul>
+<p>LRU Cache</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LRUCache</span> </span>&#123;<br>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DLinkedNode</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> key;<br>        <span class="hljs-keyword">int</span> value;<br>        DLinkedNode prev;<br>        DLinkedNode next;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DLinkedNode</span><span class="hljs-params">()</span> </span>&#123;<br>        &#125;<br><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DLinkedNode</span><span class="hljs-params">(<span class="hljs-keyword">int</span> _key, <span class="hljs-keyword">int</span> _value)</span> </span>&#123;<br>            key = _key;<br>            value = _value;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> Map&lt;Integer, DLinkedNode&gt; cache = <span class="hljs-keyword">new</span> HashMap&lt;Integer, DLinkedNode&gt;();<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> size;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> capacity;<br>    <span class="hljs-keyword">private</span> DLinkedNode head, tail;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LRUCache</span><span class="hljs-params">(<span class="hljs-keyword">int</span> capacity)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.size = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">this</span>.capacity = capacity;<br>        <span class="hljs-comment">// 使用伪头部和伪尾部节点</span><br>        head = <span class="hljs-keyword">new</span> DLinkedNode();<br>        tail = <span class="hljs-keyword">new</span> DLinkedNode();<br>        head.next = tail;<br>        tail.prev = head;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-keyword">int</span> key)</span> </span>&#123;<br>        DLinkedNode node = cache.get(key);<br>        <span class="hljs-keyword">if</span> (node == <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-comment">// 如果 key 存在，先通过哈希表定位，再移到头部</span><br>        moveToHead(node);<br>        <span class="hljs-keyword">return</span> node.value;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">put</span><span class="hljs-params">(<span class="hljs-keyword">int</span> key, <span class="hljs-keyword">int</span> value)</span> </span>&#123;<br>        DLinkedNode node = cache.get(key);<br>        <span class="hljs-keyword">if</span> (node == <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-comment">// 如果 key 不存在，创建一个新的节点</span><br>            DLinkedNode newNode = <span class="hljs-keyword">new</span> DLinkedNode(key, value);<br>            <span class="hljs-comment">// 添加进哈希表</span><br>            cache.put(key, newNode);<br>            <span class="hljs-comment">// 添加至双向链表的头部</span><br>            addToHead(newNode);<br>            ++size;<br>            <span class="hljs-keyword">if</span> (size &gt; capacity) &#123;<br>                <span class="hljs-comment">// 如果超出容量，删除双向链表的尾部节点</span><br>                DLinkedNode tail = removeTail();<br>                <span class="hljs-comment">// 删除哈希表中对应的项</span><br>                cache.remove(tail.key);<br>                --size;<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-comment">// 如果 key 存在，先通过哈希表定位，再修改 value，并移到头部</span><br>            node.value = value;<br>            moveToHead(node);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addToHead</span><span class="hljs-params">(DLinkedNode node)</span> </span>&#123;<br>        node.prev = head;<br>        node.next = head.next;<br>        head.next.prev = node;<br>        head.next = node;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">removeNode</span><span class="hljs-params">(DLinkedNode node)</span> </span>&#123;<br>        node.prev.next = node.next;<br>        node.next.prev = node.prev;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">moveToHead</span><span class="hljs-params">(DLinkedNode node)</span> </span>&#123;<br>        removeNode(node);<br>        addToHead(node);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> DLinkedNode <span class="hljs-title">removeTail</span><span class="hljs-params">()</span> </span>&#123;<br>        DLinkedNode res = tail.prev;<br>        removeNode(res);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">数据结构-在线演示</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#数据结构</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数据结构篇-基础数据结构</div>
+      <div>https://mikeygithub.github.io/2019/06/10/yuque/数据结构-基础数据结构/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2019年6月10日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/07/25/yuque/%E7%AE%97%E6%B3%95%E7%AF%87-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" title="算法篇-排序算法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">算法篇-排序算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/05/23/yuque/Golang%E7%AF%87-Gin%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Golang篇-Gin学习笔记">
+                        <span class="hidden-mobile">Golang篇-Gin学习笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
