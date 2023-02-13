@@ -1,0 +1,1078 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简介是一种强一致性的分布式键值存储，它提供了一种可靠的方式来存储需要由分布式系统或机器集群访问的数据。它可以在网络分区期间优雅地处理领导者选举（Raft） 简单接口 读写使用标准HTTP工具，例如CURL  键值存储 将数据存储在分层组织的目录中，如标准文件系统中  观察变化监视特定键或目录的更改，并对值的更改做出反应 安装1.获取二进制文件 1wget https:&#x2F;&#x2F;github.com&#x2F;e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ETCD-高可用的 Key&#x2F;Value 存储系统">
+<meta property="og:url" content="https://mikeygithub.github.io/2022/12/19/yuque/dhgu5d/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="简介是一种强一致性的分布式键值存储，它提供了一种可靠的方式来存储需要由分布式系统或机器集群访问的数据。它可以在网络分区期间优雅地处理领导者选举（Raft） 简单接口 读写使用标准HTTP工具，例如CURL  键值存储 将数据存储在分层组织的目录中，如标准文件系统中  观察变化监视特定键或目录的更改，并对值的更改做出反应 安装1.获取二进制文件 1wget https:&#x2F;&#x2F;github.com&#x2F;e">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671452861647-b3dcb811-96e9-4c3b-a21a-52a6f58caa77.png">
+<meta property="article:published_time" content="2022-12-19T02:24:22.000Z">
+<meta property="article:modified_time" content="2023-02-13T14:42:02.269Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671452861647-b3dcb811-96e9-4c3b-a21a-52a6f58caa77.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>ETCD-高可用的 Key/Value 存储系统 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ETCD-高可用的 Key/Value 存储系统"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-19 10:24" pubdate>
+          2022年12月19日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          19k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          157 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ETCD-高可用的 Key/Value 存储系统</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671452861647-b3dcb811-96e9-4c3b-a21a-52a6f58caa77.png#averageHue=%233a5b7f&clientId=uc5f43ee2-b7a1-4&from=paste&height=228&id=ub8475457&name=image.png&originHeight=456&originWidth=1396&originalType=binary&ratio=1&rotation=0&showTitle=false&size=116113&status=done&style=none&taskId=u814d36ab-adb0-4e21-848d-c040e5d3607&title=&width=698" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>是一种强一致性的分布式键值存储，它提供了一种可靠的方式来存储需要由分布式系统或机器集群访问的数据。它可以在网络分区期间优雅地处理领导者选举（Raft）</p>
+<h3 id="简单接口"><a href="#简单接口" class="headerlink" title="简单接口"></a>简单接口</h3><blockquote>
+<p>读写使用标准HTTP工具，例如CURL</p>
+</blockquote>
+<h3 id="键值存储"><a href="#键值存储" class="headerlink" title="键值存储"></a>键值存储</h3><blockquote>
+<p>将数据存储在分层组织的目录中，如标准文件系统中</p>
+</blockquote>
+<h3 id="观察变化"><a href="#观察变化" class="headerlink" title="观察变化"></a>观察变化</h3><p>监视特定键或目录的更改，并对值的更改做出反应</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>1.获取二进制文件</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">wget https:<span class="hljs-comment">//github.com/etcd-io/etcd/releases/download/v3.5.0/etcd-v3.5.0-linux-arm64.tar.gz</span><br></code></pre></td></tr></table></figure>
+<p>2.解压</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">tar zxvf etcd-v3<span class="hljs-number">.5</span><span class="hljs-number">.0</span>-linux-arm64.tar.gz<br></code></pre></td></tr></table></figure>
+<p>3.移动二进制文件到指定目录</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go">mkdir /usr/local/bin/etcd<br>cd zxvf etcd-v3<span class="hljs-number">.5</span><span class="hljs-number">.0</span>-linux-arm64<br>mv mv etcd etcdctl etcdutl /usr/local/bin/etcd<br></code></pre></td></tr></table></figure>
+<p>4.查看帮助文档</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br></pre></td><td class="code"><pre><code class="hljs go">Usage:<br><br>  etcd [flags]<br>    Start an etcd server.<br><br>  etcd --version<br>    Show the version of etcd.<br><br>  etcd -h | --help<br>    Show the help information about etcd.<br><br>  etcd --config-file<br>    Path to the server configuration file. Note that <span class="hljs-keyword">if</span> a configuration file is provided, other command line flags and environment variables will be ignored.<br><br>  etcd gateway<br>    Run the stateless pass-through etcd TCP connection forwarding proxy.<br><br>  etcd grpc-proxy<br>    Run the stateless etcd v3 gRPC L7 reverse proxy.<br><br><br>Member:<br>  --name <span class="hljs-string">&#x27;default&#x27;</span><br>    Human-readable name <span class="hljs-keyword">for</span> this member.<br>  --data-dir <span class="hljs-string">&#x27;$&#123;name&#125;.etcd&#x27;</span><br>    Path to the data directory.<br>  --wal-dir <span class="hljs-string">&#x27;&#x27;</span><br>    Path to the dedicated wal directory.<br>  --snapshot-count <span class="hljs-string">&#x27;100000&#x27;</span><br>    Number of committed transactions to trigger a snapshot to disk.<br>  --heartbeat-interval <span class="hljs-string">&#x27;100&#x27;</span><br>    Time (in milliseconds) of a heartbeat interval.<br>  --election-timeout <span class="hljs-string">&#x27;1000&#x27;</span><br>    Time (in milliseconds) <span class="hljs-keyword">for</span> an election to timeout. See tuning documentation <span class="hljs-keyword">for</span> details.<br>  --initial-election-tick-advance <span class="hljs-string">&#x27;true&#x27;</span><br>    Whether to fast-forward initial election ticks on boot <span class="hljs-keyword">for</span> faster election.<br>  --listen-peer-urls <span class="hljs-string">&#x27;http://localhost:2380&#x27;</span><br>    List of URLs to listen on <span class="hljs-keyword">for</span> peer traffic.<br>  --listen-client-urls <span class="hljs-string">&#x27;http://localhost:2379&#x27;</span><br>    List of URLs to listen on <span class="hljs-keyword">for</span> client traffic.<br>  --max-snapshots <span class="hljs-string">&#x27;5&#x27;</span><br>    Maximum number of snapshot files to retain (<span class="hljs-number">0</span> is unlimited).<br>  --max-wals <span class="hljs-string">&#x27;5&#x27;</span><br>    Maximum number of wal files to retain (<span class="hljs-number">0</span> is unlimited).<br>  --quota-backend-bytes <span class="hljs-string">&#x27;0&#x27;</span><br>    Raise alarms when backend size exceeds the given quota (<span class="hljs-number">0</span> defaults to low space quota).<br>  --backend-bbolt-freelist-<span class="hljs-keyword">type</span> <span class="hljs-string">&#x27;map&#x27;</span><br>    BackendFreelistType specifies the <span class="hljs-keyword">type</span> of freelist that boltdb backend uses(array and <span class="hljs-keyword">map</span> are supported types).<br>  --backend-batch-interval <span class="hljs-string">&#x27;&#x27;</span><br>    BackendBatchInterval is the maximum time before commit the backend transaction.<br>  --backend-batch-limit <span class="hljs-string">&#x27;0&#x27;</span><br>    BackendBatchLimit is the maximum operations before commit the backend transaction.<br>  --max-txn-ops <span class="hljs-string">&#x27;128&#x27;</span><br>    Maximum number of operations permitted in a transaction.<br>  --max-request-bytes <span class="hljs-string">&#x27;1572864&#x27;</span><br>    Maximum client request size in bytes the server will accept.<br>  --grpc-keepalive-min-time <span class="hljs-string">&#x27;5s&#x27;</span><br>    Minimum duration interval that a client should wait before pinging server.<br>  --grpc-keepalive-interval <span class="hljs-string">&#x27;2h&#x27;</span><br>    Frequency duration of server-to-client ping to check <span class="hljs-keyword">if</span> a connection is alive (<span class="hljs-number">0</span> to disable).<br>  --grpc-keepalive-timeout <span class="hljs-string">&#x27;20s&#x27;</span><br>    Additional duration of wait before closing a non-responsive connection (<span class="hljs-number">0</span> to disable).<br>  --socket-reuse-port <span class="hljs-string">&#x27;false&#x27;</span><br>    Enable to set socket option SO_REUSEPORT on listeners allowing rebinding of a port already in use.<br>  --socket-reuse-address <span class="hljs-string">&#x27;false&#x27;</span><br>        Enable to set socket option SO_REUSEADDR on listeners allowing binding to an address in TIME_WAIT state.<br><br>Clustering:<br>  --initial-advertise-peer-urls <span class="hljs-string">&#x27;http://localhost:2380&#x27;</span><br>    List of this member<span class="hljs-string">&#x27;s peer URLs to advertise to the rest of the cluster.</span><br><span class="hljs-string">  --initial-cluster &#x27;</span><span class="hljs-keyword">default</span>=http:<span class="hljs-comment">//localhost:2380&#x27;</span><br>    Initial cluster configuration <span class="hljs-keyword">for</span> bootstrapping.<br>  --initial-cluster-state <span class="hljs-string">&#x27;new&#x27;</span><br>    Initial cluster state (<span class="hljs-string">&#x27;new&#x27;</span> or <span class="hljs-string">&#x27;existing&#x27;</span>).<br>  --initial-cluster-token <span class="hljs-string">&#x27;etcd-cluster&#x27;</span><br>    Initial cluster token <span class="hljs-keyword">for</span> the etcd cluster during bootstrap.<br>    Specifying this can protect you from unintended cross-cluster interaction when running multiple clusters.<br>  --advertise-client-urls <span class="hljs-string">&#x27;http://localhost:2379&#x27;</span><br>    List of this member<span class="hljs-string">&#x27;s client URLs to advertise to the public.</span><br><span class="hljs-string">    The client URLs advertised should be accessible to machines that talk to etcd cluster. etcd client libraries parse these URLs to connect to the cluster.</span><br><span class="hljs-string">  --discovery &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Discovery URL used to bootstrap the cluster.</span><br><span class="hljs-string">  --discovery-fallback &#x27;</span>proxy<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Expected behavior (&#x27;</span>exit<span class="hljs-string">&#x27; or &#x27;</span>proxy<span class="hljs-string">&#x27;) when discovery services fails.</span><br><span class="hljs-string">    &quot;proxy&quot; supports v2 API only.</span><br><span class="hljs-string">  --discovery-proxy &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    HTTP proxy to use for traffic to discovery service.</span><br><span class="hljs-string">  --discovery-srv &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    DNS srv domain used to bootstrap the cluster.</span><br><span class="hljs-string">  --discovery-srv-name &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Suffix to the dns srv name queried when bootstrapping.</span><br><span class="hljs-string">  --strict-reconfig-check &#x27;</span><span class="hljs-literal">true</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Reject reconfiguration requests that would cause quorum loss.</span><br><span class="hljs-string">  --pre-vote &#x27;</span><span class="hljs-literal">true</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Enable to run an additional Raft election phase.</span><br><span class="hljs-string">  --auto-compaction-retention &#x27;</span><span class="hljs-number">0</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Auto compaction retention length. 0 means disable auto compaction.</span><br><span class="hljs-string">  --auto-compaction-mode &#x27;</span>periodic<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Interpret &#x27;</span>auto-compaction-retention<span class="hljs-string">&#x27; one of: periodic|revision. &#x27;</span>periodic<span class="hljs-string">&#x27; for duration based retention, defaulting to hours if no time unit is provided (e.g. &#x27;</span><span class="hljs-number">5</span>m<span class="hljs-string">&#x27;). &#x27;</span>revision<span class="hljs-string">&#x27; for revision number based retention.</span><br><span class="hljs-string">  --enable-v2 &#x27;</span><span class="hljs-literal">false</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Accept etcd V2 client requests. Deprecated and to be decommissioned in v3.6.</span><br><span class="hljs-string">  --v2-deprecation &#x27;</span>not-yet<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Phase of v2store deprecation. Allows to opt-in for higher compatibility mode.</span><br><span class="hljs-string">    Supported values:</span><br><span class="hljs-string">      &#x27;</span>not-yet<span class="hljs-string">&#x27;                // Issues a warning if v2store have meaningful content (default in v3.5)</span><br><span class="hljs-string">      &#x27;</span>write-only<span class="hljs-string">&#x27;             // Custom v2 state is not allowed (planned default in v3.6)</span><br><span class="hljs-string">      &#x27;</span>write-only-drop-data<span class="hljs-string">&#x27;   // Custom v2 state will get DELETED !</span><br><span class="hljs-string">      &#x27;</span>gone<span class="hljs-string">&#x27;                   // v2store is not maintained any longer. (planned default in v3.7)</span><br><span class="hljs-string"></span><br><span class="hljs-string">Security:</span><br><span class="hljs-string">  --cert-file &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Path to the client server TLS cert file.</span><br><span class="hljs-string">  --key-file &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Path to the client server TLS key file.</span><br><span class="hljs-string">  --client-cert-auth &#x27;</span><span class="hljs-literal">false</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Enable client cert authentication.</span><br><span class="hljs-string">  --client-crl-file &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Path to the client certificate revocation list file.</span><br><span class="hljs-string">  --client-cert-allowed-hostname &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Allowed TLS hostname for client cert authentication.</span><br><span class="hljs-string">  --trusted-ca-file &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Path to the client server TLS trusted CA cert file.</span><br><span class="hljs-string">  --auto-tls &#x27;</span><span class="hljs-literal">false</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Client TLS using generated certificates.</span><br><span class="hljs-string">  --peer-cert-file &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Path to the peer server TLS cert file.</span><br><span class="hljs-string">  --peer-key-file &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Path to the peer server TLS key file.</span><br><span class="hljs-string">  --peer-client-cert-auth &#x27;</span><span class="hljs-literal">false</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Enable peer client cert authentication.</span><br><span class="hljs-string">  --peer-trusted-ca-file &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Path to the peer server TLS trusted CA file.</span><br><span class="hljs-string">  --peer-cert-allowed-cn &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Required CN for client certs connecting to the peer endpoint.</span><br><span class="hljs-string">  --peer-cert-allowed-hostname &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Allowed TLS hostname for inter peer authentication.</span><br><span class="hljs-string">  --peer-auto-tls &#x27;</span><span class="hljs-literal">false</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Peer TLS using self-generated certificates if --peer-key-file and --peer-cert-file are not provided.</span><br><span class="hljs-string">  --self-signed-cert-validity &#x27;</span><span class="hljs-number">1</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    The validity period of the client and peer certificates that are automatically generated by etcd when you specify ClientAutoTLS and PeerAutoTLS, the unit is year, and the default is 1.</span><br><span class="hljs-string">  --peer-crl-file &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Path to the peer certificate revocation list file.</span><br><span class="hljs-string">  --cipher-suites &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Comma-separated list of supported TLS cipher suites between client/server and peers (empty will be auto-populated by Go).</span><br><span class="hljs-string">  --cors &#x27;</span>*<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Comma-separated whitelist of origins for CORS, or cross-origin resource sharing, (empty or * means allow all).</span><br><span class="hljs-string">  --host-whitelist &#x27;</span>*<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Acceptable hostnames from HTTP client requests, if server is not secure (empty or * means allow all).</span><br><span class="hljs-string"></span><br><span class="hljs-string">Auth:</span><br><span class="hljs-string">  --auth-token &#x27;</span>simple<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Specify a v3 authentication token type and its options (&#x27;</span>simple<span class="hljs-string">&#x27; or &#x27;</span>jwt<span class="hljs-string">&#x27;).</span><br><span class="hljs-string">  --bcrypt-cost 10</span><br><span class="hljs-string">    Specify the cost / strength of the bcrypt algorithm for hashing auth passwords. Valid values are between 4 and 31.</span><br><span class="hljs-string">  --auth-token-ttl 300</span><br><span class="hljs-string">    Time (in seconds) of the auth-token-ttl.</span><br><span class="hljs-string"></span><br><span class="hljs-string">Profiling and Monitoring:</span><br><span class="hljs-string">  --enable-pprof &#x27;</span><span class="hljs-literal">false</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Enable runtime profiling data via HTTP server. Address is at client URL + &quot;/debug/pprof/&quot;</span><br><span class="hljs-string">  --metrics &#x27;</span>basic<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Set level of detail for exported metrics, specify &#x27;</span>extensive<span class="hljs-string">&#x27; to include server side grpc histogram metrics.</span><br><span class="hljs-string">  --listen-metrics-urls &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    List of URLs to listen on for the metrics and health endpoints.</span><br><span class="hljs-string"></span><br><span class="hljs-string">Logging:</span><br><span class="hljs-string">  --logger &#x27;</span>zap<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Currently only supports &#x27;</span>zap<span class="hljs-string">&#x27; for structured logging.</span><br><span class="hljs-string">  --log-outputs &#x27;</span><span class="hljs-keyword">default</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Specify &#x27;</span>stdout<span class="hljs-string">&#x27; or &#x27;</span>stderr<span class="hljs-string">&#x27; to skip journald logging even when running under systemd, or list of comma separated output targets.</span><br><span class="hljs-string">  --log-level &#x27;</span>info<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Configures log level. Only supports debug, info, warn, error, panic, or fatal.</span><br><span class="hljs-string">  --enable-log-rotation &#x27;</span><span class="hljs-literal">false</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Enable log rotation of a single log-outputs file target.</span><br><span class="hljs-string">  --log-rotation-config-json &#x27;</span>&#123;<span class="hljs-string">&quot;maxsize&quot;</span>: <span class="hljs-number">100</span>, <span class="hljs-string">&quot;maxage&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;maxbackups&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;localtime&quot;</span>: <span class="hljs-literal">false</span>, <span class="hljs-string">&quot;compress&quot;</span>: <span class="hljs-literal">false</span>&#125;<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Configures log rotation if enabled with a JSON logger config. MaxSize(MB), MaxAge(days,0=no limit), MaxBackups(0=no limit), LocalTime(use computers local time), Compress(gzip)&quot;. </span><br><span class="hljs-string"></span><br><span class="hljs-string">Experimental distributed tracing:</span><br><span class="hljs-string">  --experimental-enable-distributed-tracing &#x27;</span><span class="hljs-literal">false</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Enable experimental distributed tracing.</span><br><span class="hljs-string">  --experimental-distributed-tracing-address &#x27;</span>localhost:<span class="hljs-number">4317</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Distributed tracing collector address.</span><br><span class="hljs-string">  --experimental-distributed-tracing-service-name &#x27;</span>etcd<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Distributed tracing service name, must be same across all etcd instances.</span><br><span class="hljs-string">  --experimental-distributed-tracing-instance-id &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Distributed tracing instance ID, must be unique per each etcd instance.</span><br><span class="hljs-string"></span><br><span class="hljs-string">v2 Proxy (to be deprecated in v3.6):</span><br><span class="hljs-string">  --proxy &#x27;</span>off<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Proxy mode setting (&#x27;</span>off<span class="hljs-string">&#x27;, &#x27;</span>readonly<span class="hljs-string">&#x27; or &#x27;</span>on<span class="hljs-string">&#x27;).</span><br><span class="hljs-string">  --proxy-failure-wait 5000</span><br><span class="hljs-string">    Time (in milliseconds) an endpoint will be held in a failed state.</span><br><span class="hljs-string">  --proxy-refresh-interval 30000</span><br><span class="hljs-string">    Time (in milliseconds) of the endpoints refresh interval.</span><br><span class="hljs-string">  --proxy-dial-timeout 1000</span><br><span class="hljs-string">    Time (in milliseconds) for a dial to timeout.</span><br><span class="hljs-string">  --proxy-write-timeout 5000</span><br><span class="hljs-string">    Time (in milliseconds) for a write to timeout.</span><br><span class="hljs-string">  --proxy-read-timeout 0</span><br><span class="hljs-string">    Time (in milliseconds) for a read to timeout.</span><br><span class="hljs-string"></span><br><span class="hljs-string">Experimental feature:</span><br><span class="hljs-string">  --experimental-initial-corrupt-check &#x27;</span><span class="hljs-literal">false</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Enable to check data corruption before serving any client/peer traffic.</span><br><span class="hljs-string">  --experimental-corrupt-check-time &#x27;</span><span class="hljs-number">0</span>s<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Duration of time between cluster corruption check passes.</span><br><span class="hljs-string">  --experimental-enable-v2v3 &#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Serve v2 requests through the v3 backend under a given prefix. Deprecated and to be decommissioned in v3.6.</span><br><span class="hljs-string">  --experimental-enable-lease-checkpoint &#x27;</span><span class="hljs-literal">false</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    ExperimentalEnableLeaseCheckpoint enables primary lessor to persist lease remainingTTL to prevent indefinite auto-renewal of long lived leases.</span><br><span class="hljs-string">  --experimental-compaction-batch-limit 1000</span><br><span class="hljs-string">    ExperimentalCompactionBatchLimit sets the maximum revisions deleted in each compaction batch.</span><br><span class="hljs-string">  --experimental-peer-skip-client-san-verification &#x27;</span><span class="hljs-literal">false</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Skip verification of SAN field in client certificate for peer connections.</span><br><span class="hljs-string">  --experimental-watch-progress-notify-interval &#x27;</span><span class="hljs-number">10</span>m<span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Duration of periodical watch progress notification.</span><br><span class="hljs-string">  --experimental-warning-apply-duration &#x27;</span><span class="hljs-number">100</span>ms<span class="hljs-string">&#x27;</span><br><span class="hljs-string">        Warning is generated if requests take more than this duration.</span><br><span class="hljs-string">  --experimental-txn-mode-write-with-shared-buffer &#x27;</span><span class="hljs-literal">true</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Enable the write transaction to use a shared buffer in its readonly check operations.</span><br><span class="hljs-string">  --experimental-bootstrap-defrag-threshold-megabytes</span><br><span class="hljs-string">    Enable the defrag during etcd server bootstrap on condition that it will free at least the provided threshold of disk space. Needs to be set to non-zero value to take effect.</span><br><span class="hljs-string"></span><br><span class="hljs-string">Unsafe feature:</span><br><span class="hljs-string">  --force-new-cluster &#x27;</span><span class="hljs-literal">false</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Force to create a new one-member cluster.</span><br><span class="hljs-string">  --unsafe-no-fsync &#x27;</span><span class="hljs-literal">false</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">    Disables fsync, unsafe, will cause data loss.</span><br><span class="hljs-string"></span><br><span class="hljs-string">CAUTIOUS with unsafe flag! It may break the guarantees given by the consensus protocol!</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><ol>
+<li><p>启动服务</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">nohup etcd &gt;/dev/null <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span> &amp;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>通过ctl来与etcd交互</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">etcdctl help<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看节点状态</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go">[root@k8s-node03 ~]# etcdctl endpoint status --write-out=table<br>+----------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+<br>|    ENDPOINT    |        ID        | VERSION | DB SIZE | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS |<br>+----------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+<br>| <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">2379</span> | <span class="hljs-number">8e9</span>e05c52164694d |   <span class="hljs-number">3.5</span><span class="hljs-number">.5</span> |   <span class="hljs-number">20</span> kB |      <span class="hljs-literal">true</span> |      <span class="hljs-literal">false</span> |         <span class="hljs-number">4</span> |          <span class="hljs-number">9</span> |                  <span class="hljs-number">9</span> |        |<br>+----------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+<br>[root@k8s-node03 ~]# <br></code></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="插入和获取"><a href="#插入和获取" class="headerlink" title="插入和获取"></a>插入和获取</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go">[root@k8s-node03 ~]# etcdctl put mk <span class="hljs-string">&quot;hello world&quot;</span><br>OK<br>[root@k8s-node03 ~]# etcdctl get mk<br>mk<br>hello world<br></code></pre></td></tr></table></figure>
+
+<h2 id="前缀读取"><a href="#前缀读取" class="headerlink" title="前缀读取"></a>前缀读取</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">etcdctl get gsrde/org/hello-service/ --prefix<br></code></pre></td></tr></table></figure>
+
+<h2 id="监听key变化"><a href="#监听key变化" class="headerlink" title="监听key变化"></a>监听key变化</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">etcdctl watch key1<br></code></pre></td></tr></table></figure>
+
+<h2 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">etcdctl lock mutex1<br></code></pre></td></tr></table></figure>
+
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h1 id="类库"><a href="#类库" class="headerlink" title="类库"></a>类库</h1><p><a target="_blank" rel="noopener" href="https://etcd.io/docs/v3.5/integrations/">https://etcd.io/docs/v3.5/integrations/</a></p>
+<p>1.下载依赖</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> get <span class="hljs-keyword">go</span>.etcd.io/etcd/client/v3<br></code></pre></td></tr></table></figure>
+<p>2.启动服务</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">nohup etcd --listen-client-urls http:<span class="hljs-comment">//0.0.0.0:2379 --advertise-client-urls http://0.0.0.0:2379 &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></code></pre></td></tr></table></figure>
+<p>3.编写代码测试</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;context&quot;</span><br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	clientv3 <span class="hljs-string">&quot;go.etcd.io/etcd/client/v3&quot;</span><br>	<span class="hljs-string">&quot;log&quot;</span><br>	<span class="hljs-string">&quot;time&quot;</span><br>)<br><br><span class="hljs-keyword">const</span> timeout = <span class="hljs-number">5</span> * time.Second<br><br><span class="hljs-keyword">var</span> cli *clientv3.Client<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	initialize()<br>	Put(<span class="hljs-string">&quot;mykey&quot;</span>, <span class="hljs-string">&quot;simple value &quot;</span>)<br>	Get(<span class="hljs-string">&quot;mykey&quot;</span>)<br>	Get(<span class="hljs-string">&quot;mk&quot;</span>)<br>	Do()<br>	<span class="hljs-keyword">defer</span> cli.Close()<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">initialize</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> err error<br>	cli, err = clientv3.New(clientv3.Config&#123;<br>		Endpoints:   []<span class="hljs-keyword">string</span>&#123;<span class="hljs-string">&quot;192.168.100.24:2379&quot;</span>&#125;,<br>		DialTimeout: timeout,<br>	&#125;)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatalf(<span class="hljs-string">&quot;error : %v&quot;</span>, err)<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Get</span><span class="hljs-params">(key <span class="hljs-keyword">string</span>)</span> <span class="hljs-params">(ret []<span class="hljs-keyword">byte</span>)</span></span> &#123;<br>	ctx, cancel := context.WithTimeout(context.Background(), timeout)<br>	resp, err := cli.Get(ctx, key)<br>	cancel()<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatalf(<span class="hljs-string">&quot;error : %v&quot;</span>, err)<br>	&#125;<br>	<span class="hljs-keyword">for</span> _, ev := <span class="hljs-keyword">range</span> resp.Kvs &#123;<br>		fmt.Printf(<span class="hljs-string">&quot;%s : %s\n&quot;</span>, ev.Key, ev.Value)<br>		ret = ev.Value<br>		<span class="hljs-keyword">break</span><br>	&#125;<br>	<span class="hljs-keyword">return</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Put</span><span class="hljs-params">(key, val <span class="hljs-keyword">string</span>)</span></span> &#123;<br>	ctx, cancel := context.WithTimeout(context.Background(), timeout)<br>	resp, err := cli.Put(ctx, key, val)<br>	cancel()<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatalf(<span class="hljs-string">&quot;error : %v&quot;</span>, err)<br>	&#125;<br>	fmt.Println(resp)<br>&#125;<br><br><span class="hljs-comment">// Do 在创建任意操作时很有用</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Do</span><span class="hljs-params">()</span></span> &#123;<br>	ops := []clientv3.Op&#123;<br>		clientv3.OpPut(<span class="hljs-string">&quot;put-key&quot;</span>, <span class="hljs-string">&quot;123&quot;</span>),<br>		clientv3.OpGet(<span class="hljs-string">&quot;put-key&quot;</span>),<br>		clientv3.OpGet(<span class="hljs-string">&quot;put-key&quot;</span>),<br>		clientv3.OpPut(<span class="hljs-string">&quot;put-key&quot;</span>, <span class="hljs-string">&quot;456&quot;</span>),<br>		clientv3.OpPut(<span class="hljs-string">&quot;aaa&quot;</span>, <span class="hljs-string">&quot;bbbbbb&quot;</span>),<br>		clientv3.OpGet(<span class="hljs-string">&quot;aaa&quot;</span>),<br>	&#125;<br>	<span class="hljs-keyword">for</span> _, op := <span class="hljs-keyword">range</span> ops &#123;<br>		<span class="hljs-keyword">if</span> resp, err := cli.Do(context.TODO(), op); err != <span class="hljs-literal">nil</span> &#123;<br>			log.Fatal(err)<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			fmt.Println(resp.Get())<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h1><h2 id="Raft选举算法"><a href="#Raft选举算法" class="headerlink" title="Raft选举算法"></a>Raft选举算法</h2><p>Raft透过选举<strong>领袖</strong>（leader）的方式做共识算法。</p>
+<h3 id="名词"><a href="#名词" class="headerlink" title="名词"></a>名词</h3><ul>
+<li><p>节点类型：主节点（leader）、从节点（Follower）、候选者（candidate）正常情况下只会有一个leader，leader负责所有外部请求，如果不是leader的节点接收到请求会转给leader处理。</p>
+</li>
+<li><p>心跳：主节点会在固定时间内节点向其他节点发送消息，让从节点知道主节点正常，如果在一定时间内收不到消息，集群会进入选举状态。</p>
+</li>
+<li><p>任期：当集群leader节点宕机，需要进行选举，此时进入新的任期（term）。</p>
+</li>
+</ul>
+<h3 id="复制状态机"><a href="#复制状态机" class="headerlink" title="复制状态机"></a>复制状态机</h3><p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673325090459-fbe76dfe-20b4-4db9-af3d-de868a4ceac6.png#averageHue=%23d9d9c8&clientId=u4188c503-5e47-4&from=paste&height=332&id=u248e99b4&name=image.png&originHeight=664&originWidth=1076&originalType=binary&ratio=1&rotation=0&showTitle=false&size=116340&status=done&style=none&taskId=u595b9a75-571c-4c61-b340-d45815b9349&title=&width=538" srcset="/img/loading.gif" lazyload alt="image.png"><br>在多个节点上相同的初始化状态，在按序执行相同的输入后，返回相同的结果</p>
+<p>在Raft中，leader将客户端请求（command）封装到一个个log entry中，将这些log entries复制到所有follower节点，然后大家按相同顺序应用log entries中 command，根据复制状态机的理论，所有节点的结束状态肯定是一致的。</p>
+<h3 id="请求选举RPC"><a href="#请求选举RPC" class="headerlink" title="请求选举RPC"></a>请求选举RPC</h3><p>Raft算法中服务器节点之间使用<strong>RPC</strong>进行通信，并且Raft中只有两种主要的RPC:</p>
+<ul>
+<li><strong>RequestVoteRPC（请求投票）</strong>：由candidate在选举期间发起。</li>
+<li>**AppendEntriesRPC(追加条目)**：由leader发起，用来复制日志和提供一种心跳机制。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673277446062-a2b70bd4-b1d6-4704-be08-2ae531a80777.png#averageHue=%23f3f3f2&clientId=ua9ef6e06-8b0d-4&from=paste&height=506&id=u1ea620b3&name=image.png&originHeight=1218&originWidth=1010&originalType=binary&ratio=1&rotation=0&showTitle=false&size=653039&status=done&style=none&taskId=uc16caebc-e479-4b82-9e91-299d7775dc2&title=&width=420" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673277463482-93d32374-4950-4508-9616-f5553c68263d.png#averageHue=%23ebebeb&clientId=ua9ef6e06-8b0d-4&from=paste&height=531&id=uc36ea677&name=image.png&originHeight=1302&originWidth=1018&originalType=binary&ratio=1&rotation=0&showTitle=false&size=249828&status=done&style=none&taskId=u61fd5ae3-0872-42d0-a75a-51117bf8925&title=&width=415" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673277506427-d0c02254-b63a-4768-937e-9621c5b2351f.png#averageHue=%23ededed&clientId=ua9ef6e06-8b0d-4&from=paste&height=321&id=ue53723fc&name=image.png&originHeight=776&originWidth=1014&originalType=binary&ratio=1&rotation=0&showTitle=false&size=147324&status=done&style=none&taskId=u4318da49-11b9-487a-a500-0e1db68c5ac&title=&width=420" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673277575701-01d08a03-0253-4d6c-8bf3-6e347ecec985.png#averageHue=%23e8e8e8&clientId=ua9ef6e06-8b0d-4&from=paste&height=247&id=uc9b9f209&name=image.png&originHeight=1300&originWidth=2222&originalType=binary&ratio=1&rotation=270&showTitle=false&size=603260&status=done&style=none&taskId=ubb9f4817-4b48-4dad-b964-bc4ba8486aa&title=&width=422" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="领导人选举"><a href="#领导人选举" class="headerlink" title="领导人选举"></a>领导人选举</h3><p>选举是由候选人发动的。当领袖的心跳超时的时候，追随者就会把自己的任期编号（term counter）加一、宣告竞选（将自己变成candidate）、投自己一票、并向其他服务器拉票。每个服务器在每个任期只会投一票，固定投给最早拉票的服务器。</p>
+<p>在投票后可能会出现的三种情况</p>
+<ol>
+<li>当前节点获得的投票数过半，当前节点作为leader并向其他follower发送心跳包。</li>
+<li>其他节点赢得选举，当前节点收到心跳后判断其任期号是否大于等于当前节点任期号，如果满足当前节点candidate从进入follower状态。</li>
+<li>选举一段时间后没有获胜者（没有投票数过半的），每个候选节点将进入一个随机选举超时时间（150-300ms），进入下一局选举选举。</li>
+</ol>
+<p>Raft每个服务器的超时期限是随机的，这降低伺服务同时竞选的几率，也降低因两个竞选人得票都不过半而选举失败的几率</p>
+<h3 id="日志复制"><a href="#日志复制" class="headerlink" title="日志复制"></a>日志复制</h3><p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673278113373-1d8b394d-c0f1-447e-ac1a-4c4598376491.png#averageHue=%23dcefd0&clientId=u4188c503-5e47-4&from=paste&height=278&id=uc4b10723&name=image.png&originHeight=934&originWidth=1194&originalType=binary&ratio=1&rotation=0&showTitle=true&size=408265&status=done&style=none&taskId=ua841d160-0cc1-440a-b755-207c0ad00a8&title=%E4%B8%80%E4%B8%AA%E4%BB%BB%E6%9C%9F%E5%8F%B7%E7%94%A8%E4%B8%80%E7%A7%8D%E9%A2%9C%E8%89%B2%E8%A1%A8%E7%A4%BA&width=355" srcset="/img/loading.gif" lazyload alt="image.png" title="一个任期号用一种颜色表示"><br>Leader 并行发送 AppendEntries RPC给 follower，让它们复制该条目。当该条目被走过半数的follower复制后，leader就可以在本地执行该指令并把结果返回客户端。我们把本地执行指令，也就是leader应用日志与状态机这一步，称作<strong>提交</strong>。</p>
+<p>在日志复制的过程中可能会出现leader或者follower宕机或者延迟的情况，所以raft需要一系列的机制来支持日志的复制，保证日志的复制的顺序一致性</p>
+<ol>
+<li><p>follower宕机或者延迟响应：此时leader会重复的发送AppendEntries RPC给 follower，即使是leader已经响应了client。</p>
+</li>
+<li><p>follower宕机恢复：此时或做raft一致性检查，保证follower同步崩溃后缺失的日志</p>
+<blockquote>
+<p>raft一致性检查：leader在发往每个follower的AppendEntries RPC中会加入前一个日志的索引号和任期号，如果follower在它的日志中找不到前一个日志，那么它就会拒绝此日志，leader收到follower的拒绝后，会发送前一个日志条且，从而逐渐向前定位到follower第一个缺失的日志。</p>
+</blockquote>
+</li>
+</ol>
+<p>当然你可能说这种逐个定位的方式效率并不高，为何follower不直接返回最后的日志后给leader，然后leader直接查找返回其后面一个日志，这种方式是可行的，但是在实践中，认为这种优化是没有必要的，因为失败不经常发生并且也不可能有很多不一致的日志条目。</p>
+<ol start="3">
+<li>leader宕机：此时leader可能已经向部分follower发送日志，但是leader还没有提交就已经宕机了，而新一轮选出来的leader并没有前者的日志，导致部分follower中的日志和和新leader日志不相同。在这种情况下 raft 会强制follower<strong>复制</strong>新leader的日志来拒绝，这就意味着follower的冲突日志被新leader日志覆盖。因为没有提交，因此没有违法外部一致性。对于follower而言,接收到了leader的日志,并不能立即提交,因为这时候还没有确认这个日志是否被复制到了大多数节点，所以follower只能是等待下一个AppendEntries RPC：心跳 或者 新日志，才能完成提交。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673320908521-68ff7fee-c17b-4634-9039-586f65b03207.png#averageHue=%23e5e2df&clientId=u4188c503-5e47-4&from=paste&height=376&id=u7e06c066&name=image.png&originHeight=752&originWidth=1124&originalType=binary&ratio=1&rotation=0&showTitle=false&size=101220&status=done&style=none&taskId=ua5594e54-b2cc-4924-ae18-f471bb96ef5&title=&width=562" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>注意：leader从来不会覆盖或者删除自己的日志条目  (Append-Only)</p>
+<h3 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h3><blockquote>
+<p>为了保证每一个状态机都按照相同的顺序去执行相同的命令，还存在很多边界问题，Raft还添加以下一些限制</p>
+</blockquote>
+<h4 id="Leader宕机处理：选举限制"><a href="#Leader宕机处理：选举限制" class="headerlink" title="Leader宕机处理：选举限制"></a>Leader宕机处理：选举限制</h4><p><strong>如果两份日志最后条目的任期号不同，那么任期号大的日志更“新”。 **<br>**如果两份日志最后条目的任期号相同，那么日志较长的那个更“新”。</strong><br><strong>选民只会投票给任期比自己大，最后一条日志比自己新( 任期大于 或者 等于时索引更大)的候选人。</strong></p>
+<h4 id="Leader宕机处理：新leader是否提交之前任期内的日志条目"><a href="#Leader宕机处理：新leader是否提交之前任期内的日志条目" class="headerlink" title="Leader宕机处理：新leader是否提交之前任期内的日志条目"></a>Leader宕机处理：新leader是否提交之前任期内的日志条目</h4><blockquote>
+<p>如果某个leader在提交某个日志条目之前崩溃了，以后的leader会试图完成该日志条目的<strong>复制</strong>。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673326828205-983ef3ba-5570-4ea5-864c-4c480620d9c6.png#averageHue=%23e5e2df&clientId=u4188c503-5e47-4&from=paste&height=290&id=UJVly&name=image.png&originHeight=580&originWidth=1276&originalType=binary&ratio=1&rotation=0&showTitle=false&size=105441&status=done&style=none&taskId=ucdad6c35-e6d6-45af-ad94-b12c2492a73&title=&width=638" srcset="/img/loading.gif" lazyload alt="image.png"><br>leader为何无法使用旧任期的日志条目确定提交的时间序列</p>
+<ul>
+<li>（a）S1是leader；部分节点复制索引处的日志条目（复制到s2并提交了）。</li>
+<li>（b）S1发生宕机；S5以选票当选第3任期领导人从S3、S4和其自身获取选票。产生日志但还未来得及发送就宕机了。</li>
+<li>（c）S5发生宕机；此时S5未发生任何同步日志，S1重新启动，当选领导人继续复制日志。此时，任期2的日志条目已在大多数服务器上复制，但不是提交。</li>
+<li>（d）S1发生宕机；S5可以当选为领导人（由S2、S3和S4投票因为S5任期号最高）并用它自己从第3任期开始发送日志进行同步。此时因为之前S1同步日志2时未提交就已经宕机了，即使是大多数服务器上已经复制日志，S5在同步日志过程中会把日志2覆盖掉。就造成原本应该被提交的日志被覆盖了。</li>
+<li>（e）为了解决以上问题，增加了一个额外的限制：要求Leader在当前任期至少有一条日志被提交，即被超过半数的节点写盘。如（e）S1作为Leader．在崩溃之前，将3号位置的日志（任期号为4） 在大多数节点上复制了一条日志条目（指的是条目3，term 4），那么即使这时S1宕机了，S5也不可能赢得选举—因为S2和S3最新日志条目的任期号为4，比S5的3要大，S3无法获得超过半数的选。“无法赢得选举，这就意味着2号位置的日志条目不会被覆写。</li>
+</ul>
+<p><strong>所以新上任的领导者在接受客户端写入命令之前 需要提交一个no-op(空命令)，携带自己任期号的日志复制到大多数集群节点上才能真正的保证选举限制的成立。</strong></p>
+<h4 id="Follower和Candidate宕机处理"><a href="#Follower和Candidate宕机处理" class="headerlink" title="Follower和Candidate宕机处理"></a>Follower和Candidate宕机处理</h4><p>若follower和candidate宕机，此时leader方式的日志或者请求投票的RPC都会失败，但leader的日志通过无限重试的方式发送，如果该节点重新启动了就可接收到。</p>
+<h4 id="时间与可用性限制"><a href="#时间与可用性限制" class="headerlink" title="时间与可用性限制"></a>时间与可用性限制</h4><p>广播时间 broadcastTime ≪ 选举超时时间 electionTimeout ≪ 平均故障时间 MTBF</p>
+<h3 id="图文演示"><a href="#图文演示" class="headerlink" title="图文演示"></a>图文演示</h3><p><a target="_blank" rel="noopener" href="https://raft.github.io/raftscope-replay/">https://raft.github.io/raftscope-replay/</a></p>
+<h3 id="集群成员变更"><a href="#集群成员变更" class="headerlink" title="集群成员变更"></a>集群成员变更</h3><p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673346585666-17dc53fd-62f8-41b1-aa80-ee64f3a2bd92.png#averageHue=%23f7f7f7&clientId=u25f46783-0d1c-4&from=paste&height=347&id=u40d9b32e&name=image.png&originHeight=694&originWidth=1296&originalType=binary&ratio=1&rotation=0&showTitle=true&size=66740&status=done&style=none&taskId=u72f5b022-97d4-4df1-a78a-c32fca7ae41&title=%E4%B8%89%E8%8A%82%E7%82%B9%E6%89%A9%E5%AE%B9%E4%B8%BA%E4%BA%94%E8%8A%82%E7%82%B9%E5%87%BA%E7%8E%B0%E7%9A%84%E8%84%91%E8%A3%82%E9%97%AE%E9%A2%98&width=648" srcset="/img/loading.gif" lazyload alt="image.png" title="三节点扩容为五节点出现的脑裂问题"><br>在新增集群节点的过程中可能会出现新老配置共存的情况，导致选举出多个leader，出现了脑裂问题。</p>
+<p>Raft的解决方法是使用一种二阶段的方法</p>
+<ul>
+<li>集群先切换到一个过渡的配置，称之为联合一致(joint consensus) 。(这样我们只需要关注怎样避免在联合一致状态发生脑裂问题就可以了。)</li>
+<li>而配置信息作为一个日志体包装为一个普通的AppendEntries RPC,发送给所有的follower。<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//追加日志RPC Request</span><br><span class="hljs-keyword">type</span> AppendEntriesRequest <span class="hljs-keyword">struct</span> &#123;<br>    term			<span class="hljs-keyword">int</span>				<span class="hljs-comment">//自己当前的任期号</span><br>    leaderld 		<span class="hljs-keyword">int</span>				<span class="hljs-comment">//leader(也就是自己)的ID,告诉follower自己是谁</span><br>    prevLogIndex 	<span class="hljs-keyword">int</span> 			<span class="hljs-comment">//前一个日志的日志号		用于进行一致性检查</span><br>    prevLogTerm 	<span class="hljs-keyword">int</span> 			<span class="hljs-comment">//前一个日志的任期号		用于进行一致性检查,只有这两个都与follower中的相同,follower才会认为日志是一致的</span><br>    <span class="hljs-comment">//如果只有日志号相同,这可能就是上图中f的情况,依旧需要向前回溯</span><br>    entries 		[]<span class="hljs-keyword">byte</span>			<span class="hljs-comment">//当前日志体,也就是命令内容</span><br>    leaderCommit 	<span class="hljs-keyword">int</span>				<span class="hljs-comment">//leader的已提交日志号</span><br>&#125;<br></code></pre></td></tr></table></figure>
+第一阶段，leader发起<img src="https://cdn.nlark.com/yuque/__latex/7b0d86ec1d63c936c63cfb657308c78c.svg#card=math&code=C_%7Bold%2Cnew%7D&id=Cw8Mj" srcset="/img/loading.gif" lazyload>,使整个集群进入联合一致状态。这时，所有RPC都要在新旧两个配置中都达到大多数才算成功。这个限制是联合一致能够避免脑裂问题的核心点。<br>第二阶段，leader发起<img src="https://cdn.nlark.com/yuque/__latex/4d5184f44df9eb3aefac92955a593778.svg#card=math&code=C_%7Bnew%7D&id=Bez3z" srcset="/img/loading.gif" lazyload>，作使整个集群进入新配置状态。这时，所有RPC只要在新配置下能达到大多数就算成功。</li>
+</ul>
+<p>一旦某个服务器将该新配置日志条目增加到自己的日志中，他就会用该配置来做出未来所有的决策（服务器总是使用它日志中最新的配置，无论该配置日志是否已经被提交）。</p>
+<p>这意味着Leader不用等待 <img src="https://cdn.nlark.com/yuque/__latex/7b0d86ec1d63c936c63cfb657308c78c.svg#card=math&code=C_%7Bold%2Cnew%7D&id=VzvfU" srcset="/img/loading.gif" lazyload>和<img src="https://cdn.nlark.com/yuque/__latex/4d5184f44df9eb3aefac92955a593778.svg#card=math&code=C_%7Bnew%7D&id=HuaUz" srcset="/img/loading.gif" lazyload> 返回，就会直接使用其中的新规则来作出决策。</p>
+<p>我们假设leader可以在集群成员变更任何时候宕机，大概有以下几种可能：</p>
+<ol>
+<li>leader在 <img src="https://cdn.nlark.com/yuque/__latex/7b0d86ec1d63c936c63cfb657308c78c.svg#card=math&code=C_%7Bold%2Cnew%7D&id=SikFB" srcset="/img/loading.gif" lazyload> 未提交时宕机</li>
+<li>leader在<img src="https://cdn.nlark.com/yuque/__latex/7b0d86ec1d63c936c63cfb657308c78c.svg#card=math&code=C_%7Bold%2Cnew%7D&id=ikhhL" srcset="/img/loading.gif" lazyload>已提交但 <img src="https://cdn.nlark.com/yuque/__latex/4d5184f44df9eb3aefac92955a593778.svg#card=math&code=C_%7Bnew%7D&id=w0DWH" srcset="/img/loading.gif" lazyload>未发起时宕机</li>
+<li>leader在<img src="https://cdn.nlark.com/yuque/__latex/f3873884455c4f4df0947348eb5e32b1.svg#card=math&code=%20C_%7Bnew%7D&id=Swo22" srcset="/img/loading.gif" lazyload>已发起时宕机</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673346751838-24ec6b84-533d-4dba-9907-ab84de2fe121.png#averageHue=%23f2f2f2&clientId=u25f46783-0d1c-4&from=paste&height=310&id=u5312767f&name=image.png&originHeight=620&originWidth=1208&originalType=binary&ratio=1&rotation=0&showTitle=false&size=83329&status=done&style=none&taskId=uce6fee87-e84e-4a6b-937b-66e6339f556&title=&width=604" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="日志压缩"><a href="#日志压缩" class="headerlink" title="日志压缩"></a>日志压缩</h3><h2 id="Etcd-Raft-源码分析"><a href="#Etcd-Raft-源码分析" class="headerlink" title="Etcd Raft 源码分析"></a>Etcd Raft 源码分析</h2><p><a target="_blank" rel="noopener" href="https://github.com/etcd-io/etcd/blob/108cd9abaa947bf3e6f606ed57715ee26ed57087/server/etcdserver/raft.go">https://github.com/etcd-io/etcd/blob/108cd9abaa947bf3e6f606ed57715ee26ed57087/server/etcdserver/raft.go</a></p>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/etcd-io/etcd/tree/master/etcdctl">etcdctl</a> - etcd命令行工具</li>
+<li><a target="_blank" rel="noopener" href="https://npmjs.org/package/etcd-dump">etcd-dump</a> - etcd存储和恢复工具</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/xetorthio/etcd-fs">etcd-fs</a> - etcd 的 FUSE 文件系统 </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/rekby/etcddir">etcddir</a> - 实时同步etcd和本地目录。使用windows和linux。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/henszey/etcd-browser">etcd-browser</a> - 基于web的键/值编辑器，用于使用AngularJS的etcd</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/datawisesystems/etcd-lock">etcd-lock</a> - 主选择和使用etcd的分布式r/w锁实现-支持v2</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/matishsiao/etcd-console">etcd-console</a> - 使用PHP的etcd的web基密钥/值编辑器</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/nikfoundas/etcd-viewer">etcd-viewer</a> - 用Java编写的etcd键值存储编辑器/查看器</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mickep76/etcdtool">etcdtool</a> - 将etcd目录导出/导入/编辑为JSON/YAML/TOML，并使用JSON模式验证目录</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/sinsharat/etcdloadtest">etcdloadtest</a> - etcd 3.0及以上版本的命令行负载测试客户端。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ringtail/lucas">lucas</a> - kubernetes etcd3.0+集群的基于web的键值查看器。</li>
+<li><a target="_blank" rel="noopener" href="https://etcdmanager.io/">etcd-manager</a> - 一个现代、高效、多平台和免费etcd 3.x GUI和客户端工具。适用于Windows、Linux和Mac。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/gardener/etcd-backup-restore">etcd-backup-restore</a> - 用于定期和增量备份和恢复etcd的实用程序。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/kubernetes-sigs/etcdadm">etcdadm</a> - 用于操作etcd集群的命令行工具。</li>
+</ul>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://etcd.io/docs/v3.5/tutorials/">https://etcd.io/docs/v3.5/tutorials/</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://etcd.io/">https://etcd.io/</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/etcd-io/etcd">https://github.com/etcd-io/etcd</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2023/pdf/2630542/1673237030542-1f1af6fb-f469-43d2-8282-4a0ed911f68c.pdf?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2023/pdf/2630542/1673237030542-1f1af6fb-f469-43d2-8282-4a0ed911f68c.pdf%22,%22name%22:%22raft.pdf%22,%22size%22:567533,%22ext%22:%22pdf%22,%22source%22:%22%22,%22status%22:%22done%22,%22download%22:true,%22type%22:%22application/pdf%22,%22mode%22:%22title%22,%22taskId%22:%22u4bd76558-097e-4e7b-b407-dfef246299f%22,%22taskType%22:%22upload%22,%22__spacing%22:%22both%22,%22id%22:%22u5c34e42e%22,%22margin%22:%7B%22top%22:true,%22bottom%22:true%7D,%22card%22:%22file%22%7D">raft.pdf</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2023/pdf/2630542/1673252913015-d525c19d-2b7e-4784-9773-22958c6d693c.pdf?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2023/pdf/2630542/1673252913015-d525c19d-2b7e-4784-9773-22958c6d693c.pdf%22,%22name%22:%22buildstuff2015.pdf%22,%22size%22:694744,%22ext%22:%22pdf%22,%22source%22:%22%22,%22status%22:%22done%22,%22download%22:true,%22type%22:%22application/pdf%22,%22mode%22:%22title%22,%22taskId%22:%22ua72e0a69-0155-4d4b-bc2a-c83ded1b47d%22,%22taskType%22:%22upload%22,%22__spacing%22:%22both%22,%22id%22:%22u5d0c4b4b%22,%22margin%22:%7B%22top%22:true,%22bottom%22:true%7D,%22card%22:%22file%22%7D">buildstuff2015.pdf</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://raft.github.io/">https://raft.github.io/</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://raft.github.io/raftscope-replay/">https://raft.github.io/raftscope-replay/</a></p>
+</li>
+</ol>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ETCD/" class="category-chain-item">ETCD</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">#数据库</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ETCD-高可用的 Key/Value 存储系统</div>
+      <div>https://mikeygithub.github.io/2022/12/19/yuque/dhgu5d/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年12月19日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/12/20/yuque/luiivx/" title="Golang篇-深入理解GMP调度模型">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Golang篇-深入理解GMP调度模型</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/12/15/yuque/gb4k14/" title="Golang篇-pprof性能调优工具">
+                        <span class="hidden-mobile">Golang篇-pprof性能调优工具</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

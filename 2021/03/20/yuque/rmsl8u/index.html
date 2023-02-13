@@ -1,0 +1,1022 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Kafka 概念Kafka 是一种高吞吐量、分布式、基于发布&#x2F;订阅的消息系统,最初由 LinkedIn 公司开发,使用Scala 语言编写,目前是 Apache 的开源项目。   Broker: Kafka 服务器,负责消息存储和转发   Topic: 消息类别,Kafka 按照 topic 来分类消息   Partition: topic 的分区,一个 topic 可以包含多个 partiti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中间件篇-Kafka分布式发布订阅消息系统">
+<meta property="og:url" content="https://mikeygithub.github.io/2021/03/20/yuque/rmsl8u/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="Kafka 概念Kafka 是一种高吞吐量、分布式、基于发布&#x2F;订阅的消息系统,最初由 LinkedIn 公司开发,使用Scala 语言编写,目前是 Apache 的开源项目。   Broker: Kafka 服务器,负责消息存储和转发   Topic: 消息类别,Kafka 按照 topic 来分类消息   Partition: topic 的分区,一个 topic 可以包含多个 partiti">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657549183891-1eab0338-fc78-4048-968f-6399a1dad536.png">
+<meta property="article:published_time" content="2021-03-20T15:02:58.000Z">
+<meta property="article:modified_time" content="2023-02-13T14:42:02.261Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="kafka">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657549183891-1eab0338-fc78-4048-968f-6399a1dad536.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>中间件篇-Kafka分布式发布订阅消息系统 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="中间件篇-Kafka分布式发布订阅消息系统"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-03-20 23:02" pubdate>
+          2021年3月20日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          39k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          325 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">中间件篇-Kafka分布式发布订阅消息系统</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657549183891-1eab0338-fc78-4048-968f-6399a1dad536.png#clientId=u0f971649-ac3d-4&from=markdown&id=poWeU&name=image.png&originHeight=185&originWidth=351&originalType=url&ratio=1&rotation=0&showTitle=false&size=23816&status=done&style=none&taskId=u0b6ba386-4d1e-4f71-bdaf-970d12eabba&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="Kafka-概念"><a href="#Kafka-概念" class="headerlink" title="Kafka 概念"></a>Kafka 概念</h1><p>Kafka 是一种高吞吐量、分布式、基于发布/订阅的消息系统,最初由 LinkedIn 公司开发,使用Scala 语言编写,目前是 Apache 的开源项目。</p>
+<ol>
+<li> <code>Broker</code>: Kafka 服务器,负责消息存储和转发 </li>
+<li> <code>Topic</code>: 消息类别,Kafka 按照 topic 来分类消息 </li>
+<li> <code>Partition</code>: topic 的分区,一个 topic 可以包含多个 partition,topic 消息保存在各个partition 上 </li>
+<li> <code>Offset</code>: 消息在日志中的位置,可以理解是消息在 partition 上的偏移量,也是代表该消息的唯一序号 </li>
+<li> <code>Producer</code>: 消息生产者 </li>
+<li> <code>Consumer</code>: 消息消费者 </li>
+<li> <code>Consumer</code> Group: 消费者分组,每个 Consumer 必须属于一个 group </li>
+<li> <code>Zookeeper</code>: 保存着集群 broker、topic、partition 等 meta 数据;另外,还负责 broker 故障发现,partition leader 选举,负载均衡等功能 </li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/kafka.png#id=wEWI0&originHeight=442&originWidth=700&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="Kafka-数据存储设计"><a href="#Kafka-数据存储设计" class="headerlink" title="Kafka 数据存储设计"></a>Kafka 数据存储设计</h1><h2 id="partition-的数据文件-offset-MessageSize-data"><a href="#partition-的数据文件-offset-MessageSize-data" class="headerlink" title="partition 的数据文件( offset,MessageSize,data )"></a>partition 的数据文件( offset,MessageSize,data )</h2><p>partition 中的每条 Message 包含了以下三个属性:offset,MessageSize,data,其中 offset 表示 Message 在这个 partition 中的偏移量,offset 不是该 Message 在 partition 数据文件中的实</p>
+<p>际存储位置,而是逻辑上一个值,它唯一确定了 partition 中的一条 Message,可以认为 offset 是partition 中 Message 的 id;MessageSize 表示消息内容 data 的大小;data 为 Message 的具体内容。</p>
+<h2 id="数据文件分段-segment-顺序读写、分段命令、二分查找"><a href="#数据文件分段-segment-顺序读写、分段命令、二分查找" class="headerlink" title="数据文件分段 segment(顺序读写、分段命令、二分查找)"></a>数据文件分段 segment(顺序读写、分段命令、二分查找)</h2><p>partition 物理上由多个 segment 文件组成,每个 segment 大小相等,顺序读写。每个 segment数据文件以该段中最小的 offset 命名,文件扩展名为.log。这样在查找指定 offset 的 Message 的时候,用二分查找就可以定位到该 Message 在哪个 segment 数据文件中。</p>
+<h2 id="数据文件索引-分段索引、稀疏存储"><a href="#数据文件索引-分段索引、稀疏存储" class="headerlink" title="数据文件索引(分段索引、稀疏存储)"></a>数据文件索引(分段索引、稀疏存储)</h2><p>Kafka 为每个分段后的数据文件建立了索引文件,文件名与数据文件的名字是一样的,只是文件扩展名为.index。index 文件中并没有为数据文件中的每条 Message 建立索引,而是采用了稀疏存储的方式,每隔一定字节的数据建立一条索引。这样避免了索引文件占用过多的空间,从而可以将索引文件保留在内存中。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/kafka-data-file-index.png#id=AHsC1&originHeight=370&originWidth=663&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>生产者设计</p>
+<p>负载均衡(partition 会均衡分布到不同 broker 上)</p>
+<p>由于消息 topic 由多个 partition 组成,且 partition 会均衡分布到不同 broker 上,因此,为了有效利用 broker 集群的性能,提高消息的吞吐量,producer 可以通过随机或者 hash 等方式,将消息平均发送到多个 partition 上,以实现负载均衡。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/kafka-loadblance.png#id=AvPJb&originHeight=346&originWidth=700&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="批量发送"><a href="#批量发送" class="headerlink" title="批量发送"></a>批量发送</h2><p>是提高消息吞吐量重要的方式,Producer 端可以在内存中合并多条消息后,以一次请求的方式发送了批量的消息给 broker,从而大大减少 broker 存储消息的 IO 操作次数。但也一定程度上影响了消息的实时性,相当于以时延代价,换取更好的吞吐量。</p>
+<h2 id="压缩-GZIP-或-Snappy"><a href="#压缩-GZIP-或-Snappy" class="headerlink" title="压缩( GZIP 或 Snappy )"></a>压缩( GZIP 或 Snappy )</h2><p>Producer 端可以通过 GZIP 或 Snappy 格式对消息集合进行压缩。Producer 端进行压缩之后,在Consumer 端需进行解压。压缩的好处就是减少传输的数据量,减轻对网络传输的压力,在对大数据处理上,瓶颈往往体现在网络上而不是 CPU(压缩和解压会耗掉部分 CPU 资源)。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/kafka-gzip.png#id=IO0Mm&originHeight=436&originWidth=700&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Consumer-Group"><a href="#Consumer-Group" class="headerlink" title="Consumer Group"></a>Consumer Group</h2><p>同一 Consumer Group 中的多个 Consumer 实例,不同时消费同一个 partition,等效于队列模式。partition 内消息是有序的,Consumer 通过 pull 方式消费消息。Kafka 不删除已消费的消息对于 partition,顺序读写磁盘数据,以时间复杂度 O(1)方式提供消息持久化能力。</p>
+<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><p>1.下载Kafka</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://mirrors.bfsu.edu.cn/apache/kafka/2.7.0/kafka_2.13-2.7.0.tgz<br></code></pre></td></tr></table></figure>
+
+<p>2.进行解压</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">tar -zxvf kafka_2.13-2.7.0.tgz<br></code></pre></td></tr></table></figure>
+
+<p>3.启动zk</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./bin/zookeeper-server-start.sh config/zookeeper.properties<br></code></pre></td></tr></table></figure>
+
+<p>4.启动kafka</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./bin/kafka-server-start.sh config/server.properties<br></code></pre></td></tr></table></figure>
+
+<p>5.创建Topic</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./bin/kafka-topics.sh --create --topic quickstart-events --bootstrap-server localhost:9092<br></code></pre></td></tr></table></figure>
+
+<p>6.查看创建的Topic</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">./bin/kafka-topics.sh --describe --topic quickstart-events --bootstrap-server localhost:9092<br>Topic: quickstart-events	PartitionCount: 1	ReplicationFactor: 1	Configs: segment.bytes=1073741824<br>	Topic: quickstart-events	Partition: 0	Leader: 0	Replicas: 0	Isr: 0<br></code></pre></td></tr></table></figure>
+
+<p>7.写入事件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">./bin/kafka-console-producer.sh --topic quickstart-events --bootstrap-server localhost:9092<br>This is my first event<br>This is my second event<br></code></pre></td></tr></table></figure>
+
+<p>写入完成后按住 <code>Ctrl-C</code> 完成操作.</p>
+<p>8.获取事件</p>
+<p>Open another terminal session and run the console consumer client to read the events you just created:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">./bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092<br>This is my first event<br>This is my second event<br></code></pre></td></tr></table></figure>
+
+<p>读取完成后按住 <code>Ctrl-C</code> 完成操作.</p>
+<p>9.使用KAFKA CONNECT将数据导入/导出为事件流</p>
+<blockquote>
+<p>您可能在现有系统（如关系数据库或传统消息传递系统）中拥有大量数据，以及许多已经使用这些系统的应用程序。<a target="_blank" rel="noopener" href="http://kafka.apache.org/documentation/#%E8%BF%9E%E6%8E%A5">卡夫卡连接</a>允许您不断地从外部系统摄取数据到Kafka，反之亦然。因此，很容易将现有系统与卡夫卡结合起来。为了使这个过程更容易，有数百个这样的连接器随时可用。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="http://kafka.apache.org/documentation/#connect">Kafka Connect section</a></p>
+<p>10.用卡夫卡流处理事件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">KStream&lt;String, String&gt; textLines = builder.stream(<span class="hljs-string">&quot;quickstart-events&quot;</span>);<br><br>KTable&lt;String, Long&gt; wordCounts = textLines<br>            .flatMapValues(line -&gt; Arrays.asList(line.toLowerCase().split(<span class="hljs-string">&quot; &quot;</span>)))<br>            .groupBy((keyIgnored, word) -&gt; word)<br>            .count();<br><br>wordCounts.toStream().to(<span class="hljs-string">&quot;output-topic&quot;</span>), Produced.with(Serdes.String(), Serdes.Long()));<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://kafka.apache.org/25/documentation/streams/quickstart">Kafka Streams demo</a></p>
+<p><a target="_blank" rel="noopener" href="http://kafka.apache.org/25/documentation/streams/tutorial">app development tutorial</a></p>
+<p>11.清理环境<br>如果还希望删除本地Kafka环境的任何数据，包括沿途创建的任何事件，请运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rm -rf /tmp/kafka-logs /tmp/zookeeper<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="脚本详解"><a href="#脚本详解" class="headerlink" title="脚本详解"></a>脚本详解</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs latex">./<br>├── connect-distributed.sh									连接分布式<br>├── connect-mirror-maker.sh									连接集群镜像<br>├── connect-standalone.sh										连接单机模式<br>├── kafka-acls.sh														权限相关<br>├── kafka-broker-api-versions.sh						broker相关信息					<br>├── kafka-configs.sh												卡夫卡配置<br>├── kafka-console-consumer.sh								控制台消费<br>├── kafka-console-producer.sh								控制台生产<br>├── kafka-consumer-groups.sh								消费组<br>├── kafka-consumer-perf-test.sh							消费指标测试<br>├── kafka-delegation-tokens.sh							委托令牌<br>├── kafka-delete-records.sh									删除记录<br>├── kafka-dump-log.sh												保存日志<br>├── kafka-features.sh												特性<br>├── kafka-leader-election.sh							  领导者选举		<br>├── kafka-log-dirs.sh												日志目录<br>├── kafka-mirror-maker.sh										集群镜像制作<br>├── kafka-preferred-replica-election.sh			触发指定分区进行“优先副本”选举					<br>├── kafka-producer-perf-test.sh							生产者指标测试			<br>├── kafka-reassign-partitions.sh						分区副本迁移功能				<br>├── kafka-replica-verification.sh						副本验证<br>├── kafka-run-class.sh											卡夫卡核心脚本<br>├── kafka-server-start.sh										启动服务<br>├── kafka-server-stop.sh										停止服务<br>├── kafka-streams-application-reset.sh			流应用重置相关			<br>├── kafka-topics.sh													topic管理<br>├── kafka-verifiable-consumer.sh						验证消费者			<br>├── kafka-verifiable-producer.sh						验证生产者<br>├── trogdor.sh															代理相关<br>├── windows																	windows下的相关脚本<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h1><h1 id="Kafka-为何如此之快"><a href="#Kafka-为何如此之快" class="headerlink" title="Kafka 为何如此之快"></a>Kafka 为何如此之快</h1><p>Kafka 实现了<code>零拷贝</code>原理来快速移动数据，避免了内核之间的切换。Kafka 可以将数据记录分批发送，从生产者到文件系统（Kafka 主题日志）到消费者，可以端到端的查看这些批次的数据。</p>
+<p>批处理能够进行更有效的数据压缩并减少 I/O 延迟，Kafka 采取顺序写入磁盘的方式，避免了随机磁盘寻址的浪费，更多关于磁盘寻址的了解，请参阅 程序员需要了解的硬核知识之磁盘 。</p>
+<p>总结一下其实就是四个要点</p>
+<ul>
+<li>顺序读写；</li>
+<li>零拷贝；</li>
+<li>消息压缩；</li>
+<li>分批发送。</li>
+</ul>
+<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p>配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Licensed to the Apache Software Foundation (ASF) under one or more</span><br><span class="hljs-meta">#</span><span class="bash"> contributor license agreements.  See the NOTICE file distributed with</span><br><span class="hljs-meta">#</span><span class="bash"> this work <span class="hljs-keyword">for</span> additional information regarding copyright ownership.</span><br><span class="hljs-meta">#</span><span class="bash"> The ASF licenses this file to You under the Apache License, Version 2.0</span><br><span class="hljs-meta">#</span><span class="bash"> (the <span class="hljs-string">&quot;License&quot;</span>); you may not use this file except <span class="hljs-keyword">in</span> compliance with</span><br><span class="hljs-meta">#</span><span class="bash"> the License.  You may obtain a copy of the License at</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment">#    http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment"># Unless required by applicable law or agreed to in writing, software</span></span><br><span class="hljs-meta">#</span><span class="bash"> distributed under the License is distributed on an <span class="hljs-string">&quot;AS IS&quot;</span> BASIS,</span><br><span class="hljs-meta">#</span><span class="bash"> WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><br><span class="hljs-meta">#</span><span class="bash"> See the License <span class="hljs-keyword">for</span> the specific language governing permissions and</span><br><span class="hljs-meta">#</span><span class="bash"> limitations under the License.</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> see kafka.server.KafkaConfig <span class="hljs-keyword">for</span> additional details and defaults</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">############################ Server Basics #############################</span></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The id of the broker. This must be <span class="hljs-built_in">set</span> to a unique <span class="hljs-built_in">integer</span> <span class="hljs-keyword">for</span> each broker.</span><br>broker.id=0<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">############################ Socket Server Settings #############################</span></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The address the socket server listens on. It will get the value returned from</span> <br><span class="hljs-meta">#</span><span class="bash"> java.net.InetAddress.getCanonicalHostName() <span class="hljs-keyword">if</span> not configured.</span><br><span class="hljs-meta">#</span><span class="bash">   FORMAT:</span><br><span class="hljs-meta">#</span><span class="bash">     listeners = listener_name://host_name:port</span><br><span class="hljs-meta">#</span><span class="bash">   EXAMPLE:</span><br><span class="hljs-meta">#</span><span class="bash">     listeners = PLAINTEXT://your.host.name:9092</span><br><span class="hljs-meta">#</span><span class="bash">listeners=PLAINTEXT://:9092</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> Hostname and port the broker will advertise to producers and consumers. If not <span class="hljs-built_in">set</span>,</span> <br><span class="hljs-meta">#</span><span class="bash"> it uses the value <span class="hljs-keyword">for</span> <span class="hljs-string">&quot;listeners&quot;</span> <span class="hljs-keyword">if</span> configured.  Otherwise, it will use the value</span><br><span class="hljs-meta">#</span><span class="bash"> returned from java.net.InetAddress.getCanonicalHostName().</span><br><span class="hljs-meta">#</span><span class="bash">advertised.listeners=PLAINTEXT://your.host.name:9092</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> Maps listener names to security protocols, the default is <span class="hljs-keyword">for</span> them to be the same. See the config documentation <span class="hljs-keyword">for</span> more details</span><br><span class="hljs-meta">#</span><span class="bash">listener.security.protocol.map=PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The number of threads that the server uses <span class="hljs-keyword">for</span> receiving requests from the network and sending responses to the network</span><br>num.network.threads=3<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The number of threads that the server uses <span class="hljs-keyword">for</span> processing requests, <span class="hljs-built_in">which</span> may include disk I/O</span><br>num.io.threads=8<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The send buffer (SO_SNDBUF) used by the socket server</span><br>socket.send.buffer.bytes=102400<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The receive buffer (SO_RCVBUF) used by the socket server</span><br>socket.receive.buffer.bytes=102400<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The maximum size of a request that the socket server will accept (protection against OOM)</span><br>socket.request.max.bytes=104857600<br><span class="hljs-meta"></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">############################ Log Basics #############################</span></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> A comma separated list of directories under <span class="hljs-built_in">which</span> to store <span class="hljs-built_in">log</span> files</span><br>log.dirs=/tmp/kafka-logs<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The default number of <span class="hljs-built_in">log</span> partitions per topic. More partitions allow greater</span><br><span class="hljs-meta">#</span><span class="bash"> parallelism <span class="hljs-keyword">for</span> consumption, but this will also result <span class="hljs-keyword">in</span> more files across</span><br><span class="hljs-meta">#</span><span class="bash"> the brokers.</span><br>num.partitions=1<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The number of threads per data directory to be used <span class="hljs-keyword">for</span> <span class="hljs-built_in">log</span> recovery at startup and flushing at shutdown.</span><br><span class="hljs-meta">#</span><span class="bash"> This value is recommended to be increased <span class="hljs-keyword">for</span> installations with data <span class="hljs-built_in">dirs</span> located <span class="hljs-keyword">in</span> RAID array.</span><br>num.recovery.threads.per.data.dir=1<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">############################ Internal Topic Settings  #############################</span></span><br><span class="hljs-meta">#</span><span class="bash"> The replication factor <span class="hljs-keyword">for</span> the group metadata internal topics <span class="hljs-string">&quot;__consumer_offsets&quot;</span> and <span class="hljs-string">&quot;__transaction_state&quot;</span></span><br><span class="hljs-meta">#</span><span class="bash"> For anything other than development testing, a value greater than 1 is recommended to ensure availability such as 3.</span><br>offsets.topic.replication.factor=1<br>transaction.state.log.replication.factor=1<br>transaction.state.log.min.isr=1<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">############################ Log Flush Policy #############################</span></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> Messages are immediately written to the filesystem but by default we only fsync() to sync</span><br><span class="hljs-meta">#</span><span class="bash"> the OS cache lazily. The following configurations control the flush of data to disk.</span><br><span class="hljs-meta">#</span><span class="bash"> There are a few important trade-offs here:</span><br><span class="hljs-meta">#</span><span class="bash">    1. Durability: Unflushed data may be lost <span class="hljs-keyword">if</span> you are not using replication.</span><br><span class="hljs-meta">#</span><span class="bash">    2. Latency: Very large flush intervals may lead to latency spikes when the flush does occur as there will be a lot of data to flush.</span><br><span class="hljs-meta">#</span><span class="bash">    3. Throughput: The flush is generally the most expensive operation, and a small flush interval may lead to excessive seeks.</span><br><span class="hljs-meta">#</span><span class="bash"> The settings below allow one to configure the flush policy to flush data after a period of time or</span><br><span class="hljs-meta">#</span><span class="bash"> every N messages (or both). This can be <span class="hljs-keyword">done</span> globally and overridden on a per-topic basis.</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The number of messages to accept before forcing a flush of data to disk</span><br><span class="hljs-meta">#</span><span class="bash">log.flush.interval.messages=10000</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The maximum amount of time a message can sit <span class="hljs-keyword">in</span> a <span class="hljs-built_in">log</span> before we force a flush</span><br><span class="hljs-meta">#</span><span class="bash">log.flush.interval.ms=1000</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">############################ Log Retention Policy #############################</span></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The following configurations control the disposal of <span class="hljs-built_in">log</span> segments. The policy can</span><br><span class="hljs-meta">#</span><span class="bash"> be <span class="hljs-built_in">set</span> to delete segments after a period of time, or after a given size has accumulated.</span><br><span class="hljs-meta">#</span><span class="bash"> A segment will be deleted whenever *either* of these criteria are met. Deletion always happens</span><br><span class="hljs-meta">#</span><span class="bash"> from the end of the <span class="hljs-built_in">log</span>.</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The minimum age of a <span class="hljs-built_in">log</span> file to be eligible <span class="hljs-keyword">for</span> deletion due to age</span><br>log.retention.hours=168<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> A size-based retention policy <span class="hljs-keyword">for</span> logs. Segments are pruned from the <span class="hljs-built_in">log</span> unless the remaining</span><br><span class="hljs-meta">#</span><span class="bash"> segments drop below log.retention.bytes. Functions independently of log.retention.hours.</span><br><span class="hljs-meta">#</span><span class="bash">log.retention.bytes=1073741824</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The maximum size of a <span class="hljs-built_in">log</span> segment file. When this size is reached a new <span class="hljs-built_in">log</span> segment will be created.</span><br>log.segment.bytes=1073741824<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The interval at <span class="hljs-built_in">which</span> <span class="hljs-built_in">log</span> segments are checked to see <span class="hljs-keyword">if</span> they can be deleted according</span><br><span class="hljs-meta">#</span><span class="bash"> to the retention policies</span><br>log.retention.check.interval.ms=300000<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">############################ Zookeeper #############################</span></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> Zookeeper connection string (see zookeeper docs <span class="hljs-keyword">for</span> details).</span><br><span class="hljs-meta">#</span><span class="bash"> This is a comma separated host:port pairs, each corresponding to a zk</span><br><span class="hljs-meta">#</span><span class="bash"> server. e.g. <span class="hljs-string">&quot;127.0.0.1:3000,127.0.0.1:3001,127.0.0.1:3002&quot;</span>.</span><br><span class="hljs-meta">#</span><span class="bash"> You can also append an optional chroot string to the urls to specify the</span><br><span class="hljs-meta">#</span><span class="bash"> root directory <span class="hljs-keyword">for</span> all kafka znodes.</span><br>zookeeper.connect=localhost:2181<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> Timeout <span class="hljs-keyword">in</span> ms <span class="hljs-keyword">for</span> connecting to zookeeper</span><br>zookeeper.connection.timeout.ms=18000<br><span class="hljs-meta"></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-comment">############################ Group Coordinator Settings #############################</span></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> The following configuration specifies the time, <span class="hljs-keyword">in</span> milliseconds, that the GroupCoordinator will delay the initial consumer rebalance.</span><br><span class="hljs-meta">#</span><span class="bash"> The rebalance will be further delayed by the value of group.initial.rebalance.delay.ms as new members join the group, up to a maximum of max.poll.interval.ms.</span><br><span class="hljs-meta">#</span><span class="bash"> The default value <span class="hljs-keyword">for</span> this is 3 seconds.</span><br><span class="hljs-meta">#</span><span class="bash"> We override this to 0 here as it makes <span class="hljs-keyword">for</span> a better out-of-the-box experience <span class="hljs-keyword">for</span> development and testing.</span><br><span class="hljs-meta">#</span><span class="bash"> However, <span class="hljs-keyword">in</span> production environments the default value of 3 seconds is more suitable as this will <span class="hljs-built_in">help</span> to avoid unnecessary, and potentially expensive, rebalances during application startup.</span><br>group.initial.rebalance.delay.ms=0<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="Simple-Example"><a href="#Simple-Example" class="headerlink" title="Simple Example"></a>Simple Example</h1><p>1.配置类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KafkaProperties</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String TOPIC = <span class="hljs-string">&quot;topic1&quot;</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String KAFKA_SERVER_URL = <span class="hljs-string">&quot;localhost&quot;</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> KAFKA_SERVER_PORT = <span class="hljs-number">9092</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">KafkaProperties</span><span class="hljs-params">()</span> </span>&#123;&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>2.消费者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> example;<br><span class="hljs-keyword">import</span> kafka.utils.ShutdownableThread;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.consumer.ConsumerConfig;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.consumer.ConsumerRecord;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.consumer.ConsumerRecords;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.consumer.KafkaConsumer;<br><br><span class="hljs-keyword">import</span> java.time.Duration;<br><span class="hljs-keyword">import</span> java.util.Collections;<br><span class="hljs-keyword">import</span> java.util.Optional;<br><span class="hljs-keyword">import</span> java.util.Properties;<br><span class="hljs-keyword">import</span> java.util.concurrent.CountDownLatch;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 消费者</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Consumer</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ShutdownableThread</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> KafkaConsumer&lt;Integer, String&gt; consumer;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String topic;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String groupId;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> numMessageToConsume;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> messageRemaining;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> CountDownLatch latch;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> topic               主题</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> groupId             　分组</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> instanceId          　实例id</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> readCommitted       是否读提交</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> numMessageToConsume 消费数量</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> latch               同步屏障</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Consumer</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String topic, <span class="hljs-keyword">final</span> String groupId, <span class="hljs-keyword">final</span> Optional&lt;String&gt; instanceId, <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> readCommitted, <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> numMessageToConsume, <span class="hljs-keyword">final</span> CountDownLatch latch)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>(<span class="hljs-string">&quot;KafkaConsumerExample&quot;</span>, <span class="hljs-keyword">false</span>);<br>        <span class="hljs-keyword">this</span>.groupId = groupId;<br>        Properties props = <span class="hljs-keyword">new</span> Properties();<br>        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaProperties.KAFKA_SERVER_URL + <span class="hljs-string">&quot;:&quot;</span> + KafkaProperties.KAFKA_SERVER_PORT);<br>        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);<br>        instanceId.ifPresent(id -&gt; props.put(ConsumerConfig.GROUP_INSTANCE_ID_CONFIG, id));<br>        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, <span class="hljs-string">&quot;true&quot;</span>);<br>        props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, <span class="hljs-string">&quot;1000&quot;</span>);<br>        props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, <span class="hljs-string">&quot;30000&quot;</span>);<br>        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, <span class="hljs-string">&quot;org.apache.kafka.common.serialization.IntegerDeserializer&quot;</span>);<br>        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, <span class="hljs-string">&quot;org.apache.kafka.common.serialization.StringDeserializer&quot;</span>);<br>        <span class="hljs-keyword">if</span> (readCommitted) &#123;<br>            props.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, <span class="hljs-string">&quot;read_committed&quot;</span>);<br>        &#125;<br>        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, <span class="hljs-string">&quot;earliest&quot;</span>);<br><br>        consumer = <span class="hljs-keyword">new</span> KafkaConsumer&lt;&gt;(props);<br>        <span class="hljs-keyword">this</span>.topic = topic;<br>        <span class="hljs-keyword">this</span>.numMessageToConsume = numMessageToConsume;<br>        <span class="hljs-keyword">this</span>.messageRemaining = numMessageToConsume;<br>        <span class="hljs-keyword">this</span>.latch = latch;<br>    &#125;<br><br>    <span class="hljs-function">KafkaConsumer&lt;Integer, String&gt; <span class="hljs-title">get</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> consumer;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 处理消费的数据</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doWork</span><span class="hljs-params">()</span> </span>&#123;<br>        consumer.subscribe(Collections.singletonList(<span class="hljs-keyword">this</span>.topic));<br>        ConsumerRecords&lt;Integer, String&gt; records = consumer.poll(Duration.ofSeconds(<span class="hljs-number">1</span>));<br>        <span class="hljs-keyword">for</span> (ConsumerRecord&lt;Integer, String&gt; record : records) &#123;<br>            System.out.println(groupId + <span class="hljs-string">&quot; received message : from partition &quot;</span> + record.partition() + <span class="hljs-string">&quot;, (&quot;</span> + record.key() + <span class="hljs-string">&quot;, &quot;</span> + record.value() + <span class="hljs-string">&quot;) at offset &quot;</span> + record.offset());<br>        &#125;<br>        messageRemaining -= records.count();<br>        <span class="hljs-keyword">if</span> (messageRemaining &lt;= <span class="hljs-number">0</span>) &#123;<br>            System.out.println(groupId + <span class="hljs-string">&quot; finished reading &quot;</span> + numMessageToConsume + <span class="hljs-string">&quot; messages&quot;</span>);<br>            latch.countDown();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>3.消费者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> example;<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Licensed to the Apache Software Foundation (ASF) under one or more</span><br><span class="hljs-comment"> * contributor license agreements. See the NOTICE file distributed with</span><br><span class="hljs-comment"> * this work for additional information regarding copyright ownership.</span><br><span class="hljs-comment"> * The ASF licenses this file to You under the Apache License, Version 2.0</span><br><span class="hljs-comment"> * (the &quot;License&quot;); you may not use this file except in compliance with</span><br><span class="hljs-comment"> * the License. You may obtain a copy of the License at</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> *    http://www.apache.org/licenses/LICENSE-2.0</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * Unless required by applicable law or agreed to in writing, software</span><br><span class="hljs-comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span><br><span class="hljs-comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><br><span class="hljs-comment"> * See the License for the specific language governing permissions and</span><br><span class="hljs-comment"> * limitations under the License.</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-keyword">import</span> org.apache.kafka.clients.producer.Callback;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.producer.KafkaProducer;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.producer.ProducerRecord;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.producer.RecordMetadata;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.producer.ProducerConfig;<br><span class="hljs-keyword">import</span> org.apache.kafka.common.serialization.IntegerSerializer;<br><span class="hljs-keyword">import</span> org.apache.kafka.common.serialization.StringSerializer;<br><br><span class="hljs-keyword">import</span> java.util.Properties;<br><span class="hljs-keyword">import</span> java.util.concurrent.CountDownLatch;<br><span class="hljs-keyword">import</span> java.util.concurrent.ExecutionException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Producer</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> KafkaProducer&lt;Integer, String&gt; producer;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String topic;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Boolean isAsync;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> numRecords;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> CountDownLatch latch;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Producer</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String topic,</span></span><br><span class="hljs-params"><span class="hljs-function">                    <span class="hljs-keyword">final</span> Boolean isAsync,</span></span><br><span class="hljs-params"><span class="hljs-function">                    <span class="hljs-keyword">final</span> String transactionalId,</span></span><br><span class="hljs-params"><span class="hljs-function">                    <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> enableIdempotency,</span></span><br><span class="hljs-params"><span class="hljs-function">                    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> numRecords,</span></span><br><span class="hljs-params"><span class="hljs-function">                    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> transactionTimeoutMs,</span></span><br><span class="hljs-params"><span class="hljs-function">                    <span class="hljs-keyword">final</span> CountDownLatch latch)</span> </span>&#123;<br>        Properties props = <span class="hljs-keyword">new</span> Properties();<br>        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaProperties.KAFKA_SERVER_URL + <span class="hljs-string">&quot;:&quot;</span> + KafkaProperties.KAFKA_SERVER_PORT);<br>        props.put(ProducerConfig.CLIENT_ID_CONFIG, <span class="hljs-string">&quot;DemoProducer&quot;</span>);<br>        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class.getName());<br>        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());<br>        <span class="hljs-keyword">if</span> (transactionTimeoutMs &gt; <span class="hljs-number">0</span>) &#123;<br>            props.put(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG, transactionTimeoutMs);<br>        &#125;<br>        <span class="hljs-keyword">if</span> (transactionalId != <span class="hljs-keyword">null</span>) &#123;<br>            props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, transactionalId);<br>        &#125;<br>        props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, enableIdempotency);<br><br>        producer = <span class="hljs-keyword">new</span> KafkaProducer&lt;&gt;(props);<br>        <span class="hljs-keyword">this</span>.topic = topic;<br>        <span class="hljs-keyword">this</span>.isAsync = isAsync;<br>        <span class="hljs-keyword">this</span>.numRecords = numRecords;<br>        <span class="hljs-keyword">this</span>.latch = latch;<br>    &#125;<br><br>    <span class="hljs-function">KafkaProducer&lt;Integer, String&gt; <span class="hljs-title">get</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> producer;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> messageKey = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> recordsSent = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (recordsSent &lt; numRecords) &#123;<br>            String messageStr = <span class="hljs-string">&quot;Message_&quot;</span> + messageKey;<br>            <span class="hljs-keyword">long</span> startTime = System.currentTimeMillis();<br>            <span class="hljs-keyword">if</span> (isAsync) &#123; <span class="hljs-comment">// Send asynchronously</span><br>                producer.send(<span class="hljs-keyword">new</span> ProducerRecord&lt;&gt;(topic,<br>                        messageKey,<br>                        messageStr), <span class="hljs-keyword">new</span> DemoCallBack(startTime, messageKey, messageStr));<br>            &#125; <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// Send synchronously</span><br>                <span class="hljs-keyword">try</span> &#123;<br>                    producer.send(<span class="hljs-keyword">new</span> ProducerRecord&lt;&gt;(topic,<br>                            messageKey,<br>                            messageStr)).get();<br>                    System.out.println(<span class="hljs-string">&quot;Sent message: (&quot;</span> + messageKey + <span class="hljs-string">&quot;, &quot;</span> + messageStr + <span class="hljs-string">&quot;)&quot;</span>);<br>                &#125; <span class="hljs-keyword">catch</span> (InterruptedException | ExecutionException e) &#123;<br>                    e.printStackTrace();<br>                &#125;<br>            &#125;<br>            messageKey += <span class="hljs-number">2</span>;<br>            recordsSent += <span class="hljs-number">1</span>;<br>        &#125;<br>        System.out.println(<span class="hljs-string">&quot;Producer sent &quot;</span> + numRecords + <span class="hljs-string">&quot; records successfully&quot;</span>);<br>        latch.countDown();<br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoCallBack</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Callback</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> startTime;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> key;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String message;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">DemoCallBack</span><span class="hljs-params">(<span class="hljs-keyword">long</span> startTime, <span class="hljs-keyword">int</span> key, String message)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.startTime = startTime;<br>        <span class="hljs-keyword">this</span>.key = key;<br>        <span class="hljs-keyword">this</span>.message = message;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * A callback method the user can implement to provide asynchronous handling of request completion. This method will</span><br><span class="hljs-comment">     * be called when the record sent to the server has been acknowledged. When exception is not null in the callback,</span><br><span class="hljs-comment">     * metadata will contain the special -1 value for all fields except for topicPartition, which will be valid.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> metadata  The metadata for the record that was sent (i.e. the partition and offset). An empty metadata</span><br><span class="hljs-comment">     *                  with -1 value for all fields except for topicPartition will be returned if an error occurred.</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> exception The exception thrown during processing of this record. Null if no error occurred.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCompletion</span><span class="hljs-params">(RecordMetadata metadata, Exception exception)</span> </span>&#123;<br>        <span class="hljs-keyword">long</span> elapsedTime = System.currentTimeMillis() - startTime;<br>        <span class="hljs-keyword">if</span> (metadata != <span class="hljs-keyword">null</span>) &#123;<br>            System.out.println(<br>                    <span class="hljs-string">&quot;message(&quot;</span> + key + <span class="hljs-string">&quot;, &quot;</span> + message + <span class="hljs-string">&quot;) sent to partition(&quot;</span> + metadata.partition() +<br>                            <span class="hljs-string">&quot;), &quot;</span> +<br>                            <span class="hljs-string">&quot;offset(&quot;</span> + metadata.offset() + <span class="hljs-string">&quot;) in &quot;</span> + elapsedTime + <span class="hljs-string">&quot; ms&quot;</span>);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            exception.printStackTrace();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>4.消息处理器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> example;<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Licensed to the Apache Software Foundation (ASF) under one or more</span><br><span class="hljs-comment"> * contributor license agreements. See the NOTICE file distributed with</span><br><span class="hljs-comment"> * this work for additional information regarding copyright ownership.</span><br><span class="hljs-comment"> * The ASF licenses this file to You under the Apache License, Version 2.0</span><br><span class="hljs-comment"> * (the &quot;License&quot;); you may not use this file except in compliance with</span><br><span class="hljs-comment"> * the License. You may obtain a copy of the License at</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> *    http://www.apache.org/licenses/LICENSE-2.0</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * Unless required by applicable law or agreed to in writing, software</span><br><span class="hljs-comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span><br><span class="hljs-comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><br><span class="hljs-comment"> * See the License for the specific language governing permissions and</span><br><span class="hljs-comment"> * limitations under the License.</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-keyword">import</span> org.apache.kafka.clients.consumer.ConsumerRebalanceListener;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.consumer.ConsumerRecord;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.consumer.ConsumerRecords;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.consumer.KafkaConsumer;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.consumer.OffsetAndMetadata;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.producer.KafkaProducer;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.producer.ProducerRecord;<br><span class="hljs-keyword">import</span> org.apache.kafka.common.KafkaException;<br><span class="hljs-keyword">import</span> org.apache.kafka.common.TopicPartition;<br><span class="hljs-keyword">import</span> org.apache.kafka.common.errors.FencedInstanceIdException;<br><span class="hljs-keyword">import</span> org.apache.kafka.common.errors.ProducerFencedException;<br><br><span class="hljs-keyword">import</span> java.time.Duration;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.Collection;<br><span class="hljs-keyword">import</span> java.util.Collections;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.Map;<br><span class="hljs-keyword">import</span> java.util.Optional;<br><span class="hljs-keyword">import</span> java.util.concurrent.CountDownLatch;<br><span class="hljs-keyword">import</span> java.util.concurrent.atomic.AtomicLong;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * A demo class for how to write a customized EOS app. It takes a consume-process-produce loop.</span><br><span class="hljs-comment"> * Important configurations and APIs are commented.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ExactlyOnceMessageProcessor</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> READ_COMMITTED = <span class="hljs-keyword">true</span>;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String inputTopic;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String outputTopic;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String transactionalId;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String groupInstanceId;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> KafkaProducer&lt;Integer, String&gt; producer;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> KafkaConsumer&lt;Integer, String&gt; consumer;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> CountDownLatch latch;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ExactlyOnceMessageProcessor</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String inputTopic,</span></span><br><span class="hljs-params"><span class="hljs-function">                                       <span class="hljs-keyword">final</span> String outputTopic,</span></span><br><span class="hljs-params"><span class="hljs-function">                                       <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> instanceIdx,</span></span><br><span class="hljs-params"><span class="hljs-function">                                       <span class="hljs-keyword">final</span> CountDownLatch latch)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.inputTopic = inputTopic;<br>        <span class="hljs-keyword">this</span>.outputTopic = outputTopic;<br>        <span class="hljs-keyword">this</span>.transactionalId = <span class="hljs-string">&quot;Processor-&quot;</span> + instanceIdx;<br>        <span class="hljs-comment">// It is recommended to have a relatively short txn timeout in order to clear pending offsets faster.</span><br>        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> transactionTimeoutMs = <span class="hljs-number">10000</span>;<br>        <span class="hljs-comment">// A unique transactional.id must be provided in order to properly use EOS.</span><br>        producer = <span class="hljs-keyword">new</span> Producer(outputTopic, <span class="hljs-keyword">true</span>, transactionalId, <span class="hljs-keyword">true</span>, -<span class="hljs-number">1</span>, transactionTimeoutMs, <span class="hljs-keyword">null</span>).get();<br>        <span class="hljs-comment">// Consumer must be in read_committed mode, which means it won&#x27;t be able to read uncommitted data.</span><br>        <span class="hljs-comment">// Consumer could optionally configure groupInstanceId to avoid unnecessary rebalances.</span><br>        <span class="hljs-keyword">this</span>.groupInstanceId = <span class="hljs-string">&quot;Txn-consumer-&quot;</span> + instanceIdx;<br>        consumer = <span class="hljs-keyword">new</span> Consumer(inputTopic, <span class="hljs-string">&quot;Eos-consumer&quot;</span>,<br>                Optional.of(groupInstanceId), READ_COMMITTED, -<span class="hljs-number">1</span>, <span class="hljs-keyword">null</span>).get();<br>        <span class="hljs-keyword">this</span>.latch = latch;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// Init transactions call should always happen first in order to clear zombie transactions from previous generation.</span><br>        producer.initTransactions();<br><br>        <span class="hljs-keyword">final</span> AtomicLong messageRemaining = <span class="hljs-keyword">new</span> AtomicLong(Long.MAX_VALUE);<br><br>        consumer.subscribe(Collections.singleton(inputTopic), <span class="hljs-keyword">new</span> ConsumerRebalanceListener() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPartitionsRevoked</span><span class="hljs-params">(Collection&lt;TopicPartition&gt; partitions)</span> </span>&#123;<br>                printWithTxnId(<span class="hljs-string">&quot;Revoked partition assignment to kick-off rebalancing: &quot;</span> + partitions);<br>            &#125;<br><br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPartitionsAssigned</span><span class="hljs-params">(Collection&lt;TopicPartition&gt; partitions)</span> </span>&#123;<br>                printWithTxnId(<span class="hljs-string">&quot;Received partition assignment after rebalancing: &quot;</span> + partitions);<br>                messageRemaining.set(messagesRemaining(consumer));<br>            &#125;<br>        &#125;);<br><br>        <span class="hljs-keyword">int</span> messageProcessed = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (messageRemaining.get() &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                ConsumerRecords&lt;Integer, String&gt; records = consumer.poll(Duration.ofMillis(<span class="hljs-number">200</span>));<br>                <span class="hljs-keyword">if</span> (records.count() &gt; <span class="hljs-number">0</span>) &#123;<br>                    <span class="hljs-comment">// Begin a new transaction session.</span><br>                    producer.beginTransaction();<br>                    <span class="hljs-keyword">for</span> (ConsumerRecord&lt;Integer, String&gt; record : records) &#123;<br>                        <span class="hljs-comment">// Process the record and send to downstream.</span><br>                        ProducerRecord&lt;Integer, String&gt; customizedRecord = transform(record);<br>                        producer.send(customizedRecord);<br>                    &#125;<br><br>                    Map&lt;TopicPartition, OffsetAndMetadata&gt; offsets = consumerOffsets();<br><br>                    <span class="hljs-comment">// Checkpoint the progress by sending offsets to group coordinator broker.</span><br>                    <span class="hljs-comment">// Note that this API is only available for broker &gt;= 2.5.</span><br>                    producer.sendOffsetsToTransaction(offsets, consumer.groupMetadata());<br><br>                    <span class="hljs-comment">// Finish the transaction. All sent records should be visible for consumption now.</span><br>                    producer.commitTransaction();<br>                    messageProcessed += records.count();<br>                &#125;<br>            &#125; <span class="hljs-keyword">catch</span> (ProducerFencedException e) &#123;<br>                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> KafkaException(String.format(<span class="hljs-string">&quot;The transactional.id %s has been claimed by another process&quot;</span>, transactionalId));<br>            &#125; <span class="hljs-keyword">catch</span> (FencedInstanceIdException e) &#123;<br>                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> KafkaException(String.format(<span class="hljs-string">&quot;The group.instance.id %s has been claimed by another process&quot;</span>, groupInstanceId));<br>            &#125; <span class="hljs-keyword">catch</span> (KafkaException e) &#123;<br>                <span class="hljs-comment">// If we have not been fenced, try to abort the transaction and continue. This will raise immediately</span><br>                <span class="hljs-comment">// if the producer has hit a fatal error.</span><br>                producer.abortTransaction();<br><br>                <span class="hljs-comment">// The consumer fetch position needs to be restored to the committed offset</span><br>                <span class="hljs-comment">// before the transaction started.</span><br>                resetToLastCommittedPositions(consumer);<br>            &#125;<br><br>            messageRemaining.set(messagesRemaining(consumer));<br>            printWithTxnId(<span class="hljs-string">&quot;Message remaining: &quot;</span> + messageRemaining);<br>        &#125;<br><br>        printWithTxnId(<span class="hljs-string">&quot;Finished processing &quot;</span> + messageProcessed + <span class="hljs-string">&quot; records&quot;</span>);<br>        latch.countDown();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> Map&lt;TopicPartition, OffsetAndMetadata&gt; <span class="hljs-title">consumerOffsets</span><span class="hljs-params">()</span> </span>&#123;<br>        Map&lt;TopicPartition, OffsetAndMetadata&gt; offsets = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (TopicPartition topicPartition : consumer.assignment()) &#123;<br>            offsets.put(topicPartition, <span class="hljs-keyword">new</span> OffsetAndMetadata(consumer.position(topicPartition), <span class="hljs-keyword">null</span>));<br>        &#125;<br>        <span class="hljs-keyword">return</span> offsets;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printWithTxnId</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String message)</span> </span>&#123;<br>        System.out.println(transactionalId + <span class="hljs-string">&quot;: &quot;</span> + message);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> ProducerRecord&lt;Integer, String&gt; <span class="hljs-title">transform</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ConsumerRecord&lt;Integer, String&gt; record)</span> </span>&#123;<br>        printWithTxnId(<span class="hljs-string">&quot;Transformed record (&quot;</span> + record.key() + <span class="hljs-string">&quot;,&quot;</span> + record.value() + <span class="hljs-string">&quot;)&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ProducerRecord&lt;&gt;(outputTopic, record.key() / <span class="hljs-number">2</span>, <span class="hljs-string">&quot;Transformed_&quot;</span> + record.value());<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">long</span> <span class="hljs-title">messagesRemaining</span><span class="hljs-params">(<span class="hljs-keyword">final</span> KafkaConsumer&lt;Integer, String&gt; consumer)</span> </span>&#123;<br>        <span class="hljs-keyword">final</span> Map&lt;TopicPartition, Long&gt; fullEndOffsets = consumer.endOffsets(<span class="hljs-keyword">new</span> ArrayList&lt;&gt;(consumer.assignment()));<br>        <span class="hljs-comment">// If we couldn&#x27;t detect any end offset, that means we are still not able to fetch offsets.</span><br>        <span class="hljs-keyword">if</span> (fullEndOffsets.isEmpty()) &#123;<br>            <span class="hljs-keyword">return</span> Long.MAX_VALUE;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> consumer.assignment().stream().mapToLong(partition -&gt; &#123;<br>            <span class="hljs-keyword">long</span> currentPosition = consumer.position(partition);<br>            printWithTxnId(<span class="hljs-string">&quot;Processing partition &quot;</span> + partition + <span class="hljs-string">&quot; with full offsets &quot;</span> + fullEndOffsets);<br>            <span class="hljs-keyword">if</span> (fullEndOffsets.containsKey(partition)) &#123;<br>                <span class="hljs-keyword">return</span> fullEndOffsets.get(partition) - currentPosition;<br>            &#125;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;).sum();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">resetToLastCommittedPositions</span><span class="hljs-params">(KafkaConsumer&lt;Integer, String&gt; consumer)</span> </span>&#123;<br>        <span class="hljs-keyword">final</span> Map&lt;TopicPartition, OffsetAndMetadata&gt; committed = consumer.committed(consumer.assignment());<br>        consumer.assignment().forEach(tp -&gt; &#123;<br>            OffsetAndMetadata offsetAndMetadata = committed.get(tp);<br>            <span class="hljs-keyword">if</span> (offsetAndMetadata != <span class="hljs-keyword">null</span>)<br>                consumer.seek(tp, offsetAndMetadata.offset());<br>            <span class="hljs-keyword">else</span><br>                consumer.seekToBeginning(Collections.singleton(tp));<br>        &#125;);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>5.启动生产者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.apache.kafka.common.errors.TimeoutException;<br><br><span class="hljs-keyword">import</span> java.util.Optional;<br><span class="hljs-keyword">import</span> java.util.concurrent.CountDownLatch;<br><span class="hljs-keyword">import</span> java.util.concurrent.TimeUnit;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KafkaConsumerProducerDemo</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>        <span class="hljs-keyword">boolean</span> isAsync = args.length == <span class="hljs-number">0</span> || !args[<span class="hljs-number">0</span>].trim().equalsIgnoreCase(<span class="hljs-string">&quot;sync&quot;</span>);<br>        CountDownLatch latch = <span class="hljs-keyword">new</span> CountDownLatch(<span class="hljs-number">2</span>);<br>        Producer producerThread = <span class="hljs-keyword">new</span> Producer(KafkaProperties.TOPIC, isAsync, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">false</span>, <span class="hljs-number">10000</span>, -<span class="hljs-number">1</span>, latch);<br>        producerThread.start();<br><br>        Consumer consumerThread = <span class="hljs-keyword">new</span> Consumer(KafkaProperties.TOPIC, <span class="hljs-string">&quot;DemoConsumer&quot;</span>, Optional.empty(), <span class="hljs-keyword">false</span>, <span class="hljs-number">10000</span>, latch);<br>        consumerThread.start();<br><br>        <span class="hljs-keyword">if</span> (!latch.await(<span class="hljs-number">5</span>, TimeUnit.MINUTES)) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> TimeoutException(<span class="hljs-string">&quot;Timeout after 5 minutes waiting for demo producer and consumer to finish&quot;</span>);<br>        &#125;<br><br>        consumerThread.shutdown();<br>        System.out.println(<span class="hljs-string">&quot;All finished!&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>6.启动消费者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> example;<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * Licensed to the Apache Software Foundation (ASF) under one or more</span><br><span class="hljs-comment"> * contributor license agreements. See the NOTICE file distributed with</span><br><span class="hljs-comment"> * this work for additional information regarding copyright ownership.</span><br><span class="hljs-comment"> * The ASF licenses this file to You under the Apache License, Version 2.0</span><br><span class="hljs-comment"> * (the &quot;License&quot;); you may not use this file except in compliance with</span><br><span class="hljs-comment"> * the License. You may obtain a copy of the License at</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> *    http://www.apache.org/licenses/LICENSE-2.0</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * Unless required by applicable law or agreed to in writing, software</span><br><span class="hljs-comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span><br><span class="hljs-comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span><br><span class="hljs-comment"> * See the License for the specific language governing permissions and</span><br><span class="hljs-comment"> * limitations under the License.</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-keyword">import</span> org.apache.kafka.clients.admin.Admin;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.admin.NewTopic;<br><span class="hljs-keyword">import</span> org.apache.kafka.clients.consumer.ConsumerConfig;<br><span class="hljs-keyword">import</span> org.apache.kafka.common.errors.TimeoutException;<br><span class="hljs-keyword">import</span> org.apache.kafka.common.errors.TopicExistsException;<br><span class="hljs-keyword">import</span> org.apache.kafka.common.errors.UnknownTopicOrPartitionException;<br><br><span class="hljs-keyword">import</span> java.util.Arrays;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">import</span> java.util.Optional;<br><span class="hljs-keyword">import</span> java.util.Properties;<br><span class="hljs-keyword">import</span> java.util.Set;<br><span class="hljs-keyword">import</span> java.util.concurrent.CountDownLatch;<br><span class="hljs-keyword">import</span> java.util.concurrent.ExecutionException;<br><span class="hljs-keyword">import</span> java.util.concurrent.TimeUnit;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * This exactly once demo driver takes 3 arguments:</span><br><span class="hljs-comment"> *   - partition: number of partitions for input/output topic</span><br><span class="hljs-comment"> *   - instances: number of instances</span><br><span class="hljs-comment"> *   - records: number of records</span><br><span class="hljs-comment"> * An example argument list would be `6 3 50000`.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * If you are using Intellij, the above arguments should be put in the configuration&#x27;s `Program Arguments`.</span><br><span class="hljs-comment"> * Also recommended to set an output log file by `Edit Configuration -&gt; Logs -&gt; Save console</span><br><span class="hljs-comment"> * output to file` to record all the log output together.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * The driver could be decomposed as following stages:</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 1. Cleanup any topic whose name conflicts with input and output topic, so that we have a clean-start.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 2. Set up a producer in a separate thread to pre-populate a set of records with even number keys into</span><br><span class="hljs-comment"> *    the input topic. The driver will block for the record generation to finish, so the producer</span><br><span class="hljs-comment"> *    must be in synchronous sending mode.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 3. Set up transactional instances in separate threads which does a consume-process-produce loop,</span><br><span class="hljs-comment"> *    tailing data from input topic (See &#123;<span class="hljs-doctag">@link</span> ExactlyOnceMessageProcessor&#125;). Each EOS instance will</span><br><span class="hljs-comment"> *    drain all the records from either given partitions or auto assigned partitions by actively</span><br><span class="hljs-comment"> *    comparing log end offset with committed offset. Each record will be processed exactly once</span><br><span class="hljs-comment"> *    as dividing the key by 2, and extend the value message. The driver will block for all the record</span><br><span class="hljs-comment"> *    processing to finish. The transformed record shall be written to the output topic, with</span><br><span class="hljs-comment"> *    transactional guarantee.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 4. Set up a read committed consumer in a separate thread to verify we have all records within</span><br><span class="hljs-comment"> *    the output topic, while the message ordering on partition level is maintained.</span><br><span class="hljs-comment"> *    The driver will block for the consumption of all committed records.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * From this demo, you could see that all the records from pre-population are processed exactly once,</span><br><span class="hljs-comment"> * with strong partition level ordering guarantee.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * Note: please start the kafka broker and zookeeper in local first. The broker version must be &gt;= 2.5</span><br><span class="hljs-comment"> * in order to run, otherwise the app could throw</span><br><span class="hljs-comment"> * &#123;<span class="hljs-doctag">@link</span> org.apache.kafka.common.errors.UnsupportedVersionException&#125;.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">KafkaExactlyOnceDemo</span> </span>&#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String INPUT_TOPIC = <span class="hljs-string">&quot;input-topic&quot;</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String OUTPUT_TOPIC = <span class="hljs-string">&quot;output-topic&quot;</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException </span>&#123;<br>        <span class="hljs-keyword">if</span> (args.length != <span class="hljs-number">3</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Should accept 3 parameters: &quot;</span> +<br>                    <span class="hljs-string">&quot;[number of partitions], [number of instances], [number of records]&quot;</span>);<br>        &#125;<br><br>        <span class="hljs-keyword">int</span> numPartitions = Integer.parseInt(args[<span class="hljs-number">0</span>]);<br>        <span class="hljs-keyword">int</span> numInstances = Integer.parseInt(args[<span class="hljs-number">1</span>]);<br>        <span class="hljs-keyword">int</span> numRecords = Integer.parseInt(args[<span class="hljs-number">2</span>]);<br><br>        <span class="hljs-comment">/* Stage 1: topic cleanup and recreation */</span><br>        recreateTopics(numPartitions);<br><br>        CountDownLatch prePopulateLatch = <span class="hljs-keyword">new</span> CountDownLatch(<span class="hljs-number">1</span>);<br><br>        <span class="hljs-comment">/* Stage 2: pre-populate records */</span><br>        Producer producerThread = <span class="hljs-keyword">new</span> Producer(INPUT_TOPIC, <span class="hljs-keyword">false</span>, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">true</span>, numRecords, -<span class="hljs-number">1</span>, prePopulateLatch);<br>        producerThread.start();<br><br>        <span class="hljs-keyword">if</span> (!prePopulateLatch.await(<span class="hljs-number">5</span>, TimeUnit.MINUTES)) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> TimeoutException(<span class="hljs-string">&quot;Timeout after 5 minutes waiting for data pre-population&quot;</span>);<br>        &#125;<br><br>        CountDownLatch transactionalCopyLatch = <span class="hljs-keyword">new</span> CountDownLatch(numInstances);<br><br>        <span class="hljs-comment">/* Stage 3: transactionally process all messages */</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> instanceIdx = <span class="hljs-number">0</span>; instanceIdx &lt; numInstances; instanceIdx++) &#123;<br>            ExactlyOnceMessageProcessor messageProcessor = <span class="hljs-keyword">new</span> ExactlyOnceMessageProcessor(<br>                    INPUT_TOPIC, OUTPUT_TOPIC, instanceIdx, transactionalCopyLatch);<br>            messageProcessor.start();<br>        &#125;<br><br>        <span class="hljs-keyword">if</span> (!transactionalCopyLatch.await(<span class="hljs-number">5</span>, TimeUnit.MINUTES)) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> TimeoutException(<span class="hljs-string">&quot;Timeout after 5 minutes waiting for transactionally message copy&quot;</span>);<br>        &#125;<br><br>        CountDownLatch consumeLatch = <span class="hljs-keyword">new</span> CountDownLatch(<span class="hljs-number">1</span>);<br><br>        <span class="hljs-comment">/* Stage 4: consume all processed messages to verify exactly once */</span><br>        Consumer consumerThread = <span class="hljs-keyword">new</span> Consumer(OUTPUT_TOPIC, <span class="hljs-string">&quot;Verify-consumer&quot;</span>, Optional.empty(), <span class="hljs-keyword">true</span>, numRecords, consumeLatch);<br>        consumerThread.start();<br><br>        <span class="hljs-keyword">if</span> (!consumeLatch.await(<span class="hljs-number">5</span>, TimeUnit.MINUTES)) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> TimeoutException(<span class="hljs-string">&quot;Timeout after 5 minutes waiting for output data consumption&quot;</span>);<br>        &#125;<br><br>        consumerThread.shutdown();<br>        System.out.println(<span class="hljs-string">&quot;All finished!&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">recreateTopics</span><span class="hljs-params">(<span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> numPartitions)</span></span><br><span class="hljs-function">            <span class="hljs-keyword">throws</span> ExecutionException, InterruptedException </span>&#123;<br>        Properties props = <span class="hljs-keyword">new</span> Properties();<br>        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,<br>                KafkaProperties.KAFKA_SERVER_URL + <span class="hljs-string">&quot;:&quot;</span> + KafkaProperties.KAFKA_SERVER_PORT);<br><br>        Admin adminClient = Admin.create(props);<br><br>        List&lt;String&gt; topicsToDelete = Arrays.asList(INPUT_TOPIC, OUTPUT_TOPIC);<br><br>        deleteTopic(adminClient, topicsToDelete);<br><br>        <span class="hljs-comment">// Check topic existence in a retry loop</span><br>        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;<br>            System.out.println(<span class="hljs-string">&quot;Making sure the topics are deleted successfully: &quot;</span> + topicsToDelete);<br><br>            Set&lt;String&gt; listedTopics = adminClient.listTopics().names().get();<br>            System.out.println(<span class="hljs-string">&quot;Current list of topics: &quot;</span> + listedTopics);<br><br>            <span class="hljs-keyword">boolean</span> hasTopicInfo = <span class="hljs-keyword">false</span>;<br>            <span class="hljs-keyword">for</span> (String listedTopic : listedTopics) &#123;<br>                <span class="hljs-keyword">if</span> (topicsToDelete.contains(listedTopic)) &#123;<br>                    hasTopicInfo = <span class="hljs-keyword">true</span>;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (!hasTopicInfo) &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>            Thread.sleep(<span class="hljs-number">1000</span>);<br>        &#125;<br><br>        <span class="hljs-comment">// Create topics in a retry loop</span><br>        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;<br>            <span class="hljs-keyword">final</span> <span class="hljs-keyword">short</span> replicationFactor = <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">final</span> List&lt;NewTopic&gt; newTopics = Arrays.asList(<br>                    <span class="hljs-keyword">new</span> NewTopic(INPUT_TOPIC, numPartitions, replicationFactor),<br>                    <span class="hljs-keyword">new</span> NewTopic(OUTPUT_TOPIC, numPartitions, replicationFactor));<br>            <span class="hljs-keyword">try</span> &#123;<br>                adminClient.createTopics(newTopics).all().get();<br>                System.out.println(<span class="hljs-string">&quot;Created new topics: &quot;</span> + newTopics);<br>                <span class="hljs-keyword">break</span>;<br>            &#125; <span class="hljs-keyword">catch</span> (ExecutionException e) &#123;<br>                <span class="hljs-keyword">if</span> (!(e.getCause() <span class="hljs-keyword">instanceof</span> TopicExistsException)) &#123;<br>                    <span class="hljs-keyword">throw</span> e;<br>                &#125;<br>                System.out.println(<span class="hljs-string">&quot;Metadata of the old topics are not cleared yet...&quot;</span>);<br><br>                deleteTopic(adminClient, topicsToDelete);<br><br>                Thread.sleep(<span class="hljs-number">1000</span>);<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">deleteTopic</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Admin adminClient, <span class="hljs-keyword">final</span> List&lt;String&gt; topicsToDelete)</span></span><br><span class="hljs-function">            <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException </span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            adminClient.deleteTopics(topicsToDelete).all().get();<br>        &#125; <span class="hljs-keyword">catch</span> (ExecutionException e) &#123;<br>            <span class="hljs-keyword">if</span> (!(e.getCause() <span class="hljs-keyword">instanceof</span> UnknownTopicOrPartitionException)) &#123;<br>                <span class="hljs-keyword">throw</span> e;<br>            &#125;<br>            System.out.println(<span class="hljs-string">&quot;Encountered exception during topic deletion: &quot;</span> + e.getCause());<br>        &#125;<br>        System.out.println(<span class="hljs-string">&quot;Deleted old topics: &quot;</span> + topicsToDelete);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="Stream-Example"><a href="#Stream-Example" class="headerlink" title="Stream Example"></a>Stream Example</h1><p>1.生成项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">mvn archetype:generate \<br>    -DarchetypeGroupId=org.apache.kafka \<br>    -DarchetypeArtifactId=streams-quickstart-java \<br>    -DarchetypeVersion=2.5.0 \<br>    -DgroupId=streams.examples \<br>    -DartifactId=streams.examples \<br>    -Dversion=0.1 \<br>    -Dpackage=myapps<br></code></pre></td></tr></table></figure>
+
+<p>2.创建topic</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash">bin/kafka-topics.sh --create \<br>    --bootstrap-server localhost:9092 \<br>    --replication-factor 1 \<br>    --partitions 1 \<br>    --topic streams-plaintext-input<br>    <br>bin/kafka-topics.sh --create \<br>    --bootstrap-server localhost:9092 \<br>    --replication-factor 1 \<br>    --partitions 1 \<br>    --topic streams-wordcount-output \<br>    --config cleanup.policy=compact<br></code></pre></td></tr></table></figure>
+
+<p>3.应用代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> myapps;<br><br><span class="hljs-keyword">import</span> org.apache.kafka.common.serialization.Serdes;<br><span class="hljs-keyword">import</span> org.apache.kafka.common.utils.Bytes;<br><span class="hljs-keyword">import</span> org.apache.kafka.streams.KafkaStreams;<br><span class="hljs-keyword">import</span> org.apache.kafka.streams.StreamsBuilder;<br><span class="hljs-keyword">import</span> org.apache.kafka.streams.StreamsConfig;<br><span class="hljs-keyword">import</span> org.apache.kafka.streams.Topology;<br><span class="hljs-keyword">import</span> org.apache.kafka.streams.kstream.KeyValueMapper;<br><span class="hljs-keyword">import</span> org.apache.kafka.streams.kstream.Materialized;<br><span class="hljs-keyword">import</span> org.apache.kafka.streams.kstream.Produced;<br><span class="hljs-keyword">import</span> org.apache.kafka.streams.kstream.ValueMapper;<br><span class="hljs-keyword">import</span> org.apache.kafka.streams.state.KeyValueStore;<br><br><span class="hljs-keyword">import</span> java.util.Arrays;<br><span class="hljs-keyword">import</span> java.util.Locale;<br><span class="hljs-keyword">import</span> java.util.Properties;<br><span class="hljs-keyword">import</span> java.util.concurrent.CountDownLatch;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * In this example, we implement a simple WordCount program using the high-level Streams DSL</span><br><span class="hljs-comment"> * that reads from a source topic &quot;streams-plaintext-input&quot;, where the values of messages represent lines of text,</span><br><span class="hljs-comment"> * split each text line into words and then compute the word occurence histogram, write the continuous updated histogram</span><br><span class="hljs-comment"> * into a topic &quot;streams-wordcount-output&quot; where each record is an updated count of a single word.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WordCount</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        Properties props = <span class="hljs-keyword">new</span> Properties();<br>        props.put(StreamsConfig.APPLICATION_ID_CONFIG, <span class="hljs-string">&quot;streams-wordcount&quot;</span>);<br>        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, <span class="hljs-string">&quot;localhost:9092&quot;</span>);<br>        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());<br>        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());<br><br>        <span class="hljs-keyword">final</span> StreamsBuilder builder = <span class="hljs-keyword">new</span> StreamsBuilder();<br><br>        builder.&lt;String, String&gt;stream(<span class="hljs-string">&quot;streams-plaintext-input&quot;</span>)<br>               .flatMapValues(value -&gt; Arrays.asList(value.toLowerCase(Locale.getDefault()).split(<span class="hljs-string">&quot;\\W+&quot;</span>)))<br>               .groupBy((key, value) -&gt; value)<br>               .count(Materialized.&lt;String, Long, KeyValueStore&lt;Bytes, <span class="hljs-keyword">byte</span>[]&gt;&gt;as(<span class="hljs-string">&quot;counts-store&quot;</span>))<br>               .toStream()<br>               .to(<span class="hljs-string">&quot;streams-wordcount-output&quot;</span>, Produced.with(Serdes.String(), Serdes.Long()));<br><br>        <span class="hljs-keyword">final</span> Topology topology = builder.build();<br>        <span class="hljs-keyword">final</span> KafkaStreams streams = <span class="hljs-keyword">new</span> KafkaStreams(topology, props);<br>        <span class="hljs-keyword">final</span> CountDownLatch latch = <span class="hljs-keyword">new</span> CountDownLatch(<span class="hljs-number">1</span>);<br><br>        <span class="hljs-comment">// attach shutdown handler to catch control-c</span><br>        Runtime.getRuntime().addShutdownHook(<span class="hljs-keyword">new</span> Thread(<span class="hljs-string">&quot;streams-shutdown-hook&quot;</span>) &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>                streams.close();<br>                latch.countDown();<br>            &#125;<br>        &#125;);<br><br>        <span class="hljs-keyword">try</span> &#123;<br>            streams.start();<br>            latch.await();<br>        &#125; <span class="hljs-keyword">catch</span> (Throwable e) &#123;<br>            System.exit(<span class="hljs-number">1</span>);<br>        &#125;<br>        System.exit(<span class="hljs-number">0</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://kafka.apache.org/25/documentation/streams/developer-guide/">参考资料</a></p>
+<h1 id="集群配置"><a href="#集群配置" class="headerlink" title="集群配置"></a>集群配置</h1><p>配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 结点id/监听地址</span><br>broker.id=0<br>listeners=PLAINTEXT://192.168.182.131:9092<br>broker.id=1<br>listeners=PLAINTEXT://192.168.182.131:9092<br>broker.id=2<br>listeners=PLAINTEXT://192.168.182.132:9092<br><span class="hljs-meta">#</span><span class="bash"> 网络连接线程数</span><br>num.network.threads=3<br><span class="hljs-meta">#</span><span class="bash"> io线程数</span><br>num.io.threads=8<br><span class="hljs-meta">#</span><span class="bash"> 缓冲区大小</span><br>socket.send.buffer.bytes=102400<br>socket.receive.buffer.bytes=102400<br>socket.request.max.bytes=104857600<br><span class="hljs-meta">#</span><span class="bash"> 日志</span><br>log.dirs=/tmp/kafka-logs<br><span class="hljs-meta">#</span><span class="bash"> 分区</span><br>num.partitions=1<br>num.recovery.threads.per.data.dir=1<br>offsets.topic.replication.factor=1<br>transaction.state.log.replication.factor=1<br>transaction.state.log.min.isr=1<br>log.retention.hours=168<br>log.segment.bytes=1073741824<br>log.retention.check.interval.ms=300000<br>zookeeper.connect=localhost:2181<br>zookeeper.connection.timeout.ms=18000<br>group.initial.rebalance.delay.ms=0<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="Kafka-Manager"><a href="#Kafka-Manager" class="headerlink" title="Kafka Manager"></a>Kafka Manager</h1><blockquote>
+<p>滴滴Logi-KafkaManager脱胎于滴滴内部多年的Kafka运营实践经验，是面向Kafka用户、Kafka运维人员打造的共享多租户Kafka云平台。专注于Kafka运维管控、监控告警、资源治理等核心场景，经历过大规模集群、海量大数据的考验。内部满意度高达90%的同时，还与多家知名企业达成商业化合作。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/didi/Logi-KafkaManager.git">更多内容</a></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="http://kafka.apache.org/quickstart">官方文档-快速开始</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.w3cschool.cn/apache_kafka">Apache Kafka 教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1651919282506404758&wfr=spider&for=pc">真的，关于 Kafka 入门看这一篇就够了</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/kafka">Kafka Github地址</a></p>
+<p><a target="_blank" rel="noopener" href="http://kafka.apache.org/25/documentation/streams/developer-guide/">DEVELOPER GUIDE FOR KAFKA STREAMS</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/" class="category-chain-item">中间件篇</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/kafka/">#kafka</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>中间件篇-Kafka分布式发布订阅消息系统</div>
+      <div>https://mikeygithub.github.io/2021/03/20/yuque/rmsl8u/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年3月20日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

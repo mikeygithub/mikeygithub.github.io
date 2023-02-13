@@ -1,0 +1,965 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="理论知识 有向图&#x2F;无向图  在图中，若节点的边用箭头标明了边是有方向性的，则称这样的图为有向图，否则称为无向图。   出入度  在有向图中边的箭头指入的节点数量则为该节点的入度，从该节点指出的边则称为出度。   权重  图中边所标记的数    图的遍历 和多叉树的遍历很相似   bfs&#x2F;dfs1234567891011121314151617181920212223242526272829303">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法笔记-图论类型">
+<meta property="og:url" content="https://mikeygithub.github.io/2020/08/20/yuque/cxcifg/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="理论知识 有向图&#x2F;无向图  在图中，若节点的边用箭头标明了边是有方向性的，则称这样的图为有向图，否则称为无向图。   出入度  在有向图中边的箭头指入的节点数量则为该节点的入度，从该节点指出的边则称为出度。   权重  图中边所标记的数    图的遍历 和多叉树的遍历很相似   bfs&#x2F;dfs1234567891011121314151617181920212223242526272829303">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1642992656437-a1a19e07-0093-4dda-8bd8-1526d7288bfe.png">
+<meta property="article:published_time" content="2020-08-20T11:24:22.000Z">
+<meta property="article:modified_time" content="2023-02-13T14:42:02.309Z">
+<meta property="article:author" content="Mikey">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1642992656437-a1a19e07-0093-4dda-8bd8-1526d7288bfe.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>算法笔记-图论类型 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="算法笔记-图论类型"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-08-20 19:24" pubdate>
+          2020年8月20日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          68 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">算法笔记-图论类型</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1642992656437-a1a19e07-0093-4dda-8bd8-1526d7288bfe.png#averageHue=%23eeeae8&clientId=uaa0a8922-4640-4&from=paste&height=180&id=udf767d6f&name=image.png&originHeight=360&originWidth=728&originalType=binary&ratio=1&rotation=0&showTitle=false&size=110070&status=done&style=none&taskId=u3d815807-a70c-4bbe-9c96-2624c582106&title=&width=364" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="理论知识"><a href="#理论知识" class="headerlink" title="理论知识"></a>理论知识</h1><ul>
+<li><p>有向图/无向图</p>
+<blockquote>
+<p>在图中，若节点的边用箭头标明了边是有方向性的，则称这样的图为有向图，否则称为无向图。</p>
+</blockquote>
+</li>
+<li><p>出入度</p>
+<blockquote>
+<p>在有向图中边的箭头指入的节点数量则为该节点的入度，从该节点指出的边则称为出度。</p>
+</blockquote>
+</li>
+<li><p>权重</p>
+<blockquote>
+<p>图中边所标记的数</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="图的遍历"><a href="#图的遍历" class="headerlink" title="图的遍历"></a>图的遍历</h2><blockquote>
+<p>和多叉树的遍历很相似</p>
+</blockquote>
+<ul>
+<li>bfs/dfs<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs sql">class Graph&#123;<br>    <span class="hljs-type">int</span> v;<br>    private List<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> adj[];<br>    public Graph(<span class="hljs-type">int</span> num)&#123;<br>        v <span class="hljs-operator">=</span> num;<br>        adj <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> LinkedList[v];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i <span class="hljs-operator">&lt;</span> num; i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>) adj[i] <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> LinkedList<span class="hljs-operator">&lt;&gt;</span>();<br>    &#125;<br>    public void addEdge(<span class="hljs-type">int</span> v,<span class="hljs-type">int</span> w)&#123;<br>        adj[v].<span class="hljs-keyword">add</span>(w);<br>    &#125;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>借助队列:每轮将当前轮遍历，将自节点入队列<br>    void bfs(<span class="hljs-type">int</span> s)&#123;<br>        <span class="hljs-type">boolean</span>[] visited <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-type">boolean</span>[v];<br>        LinkedList<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> queue <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> LinkedList<span class="hljs-operator">&lt;&gt;</span>();<br>        visited[s]<span class="hljs-operator">=</span><span class="hljs-literal">true</span>;<br>        queue.add(s);<br>        while (<span class="hljs-operator">!</span>queue.isEmpty())&#123;<br>            <span class="hljs-type">Integer</span> poll <span class="hljs-operator">=</span> queue.poll();<br>            System.out.println(poll);<span class="hljs-operator">/</span><span class="hljs-operator">/</span>输出遍历的节点<br>            List<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> edges <span class="hljs-operator">=</span> adj[poll];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">Integer</span> edge : edges) &#123;<br>                if (<span class="hljs-operator">!</span>visited[edge])&#123;<br>                    visited[edge]<span class="hljs-operator">=</span><span class="hljs-literal">true</span>;<br>                    queue.offer(edge);<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>借助栈:一直压栈直到，弹栈后遇到没遍历过的再次压栈，如此反复<br>    void dfs(<span class="hljs-type">int</span> s)&#123;<br>        <span class="hljs-type">boolean</span>[] visited <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-type">boolean</span>[v];<br>        Stack<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> stack <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> Stack<span class="hljs-operator">&lt;&gt;</span>();<br>        visited[s]<span class="hljs-operator">=</span><span class="hljs-literal">true</span>;<br>        stack.push(s);<br>        while (<span class="hljs-operator">!</span>stack.isEmpty())&#123;<br>            <span class="hljs-type">Integer</span> poll <span class="hljs-operator">=</span> stack.pop();<br>            System.out.println(poll);<br>            List<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> edges <span class="hljs-operator">=</span> adj[poll];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">Integer</span> edge : edges) &#123;<br>                if (<span class="hljs-operator">!</span>visited[edge])&#123;<br>                    visited[edge]<span class="hljs-operator">=</span><span class="hljs-literal">true</span>;<br>                    stack.push(edge);<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br><br>public <span class="hljs-keyword">static</span> void main(String[] args) &#123;<br>    Graph g <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> Graph(<span class="hljs-number">4</span>);<br>    g.addEdge(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);<br>    g.addEdge(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>);<br>    g.addEdge(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);<br>    g.addEdge(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>);<br>    g.addEdge(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>);<br>    g.addEdge(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>);<br>    System.out.println(&quot;Following is Breadth First Traversal (starting from vertex 2)&quot;);<br>    g.bfs(<span class="hljs-number">2</span>);<br>    g.dfs(<span class="hljs-number">2</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h2><p>对一个<strong>有向无环图</strong>(Directed Acyclic Graph简称DAG)G进行拓扑排序，是<strong>将G中所有顶点排成一个线性序列，使得图中任意一对顶点u和v，若边&lt;u,v&gt;∈E(G)，则u在线性序列中出现在v之前</strong>。通常，这样的线性序列称为满足拓扑次序(Topological Order)的序列，简称拓扑序列。简单的说，<strong>由某个集合上的一个偏序得到该集合上的一个全序，这个操作称之为拓扑排序。</strong></p>
+<p>实现拓扑的步骤</p>
+<ul>
+<li>选择一个无前驱的节点开始（入度为0的节点）</li>
+<li>从图中删除此顶点及所有出边。</li>
+</ul>
+<p>重复上述两个步骤</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1658666894332-aa2534f2-2add-4d8e-b4e2-4a68e508bd28.jpeg" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Graph</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> V;<br>    <span class="hljs-keyword">private</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt; adj;<br>    <br>    Graph(<span class="hljs-keyword">int</span> v) &#123;<br>        V = v;<br>        adj = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;(v);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; v; ++i) adj.add(<span class="hljs-keyword">new</span> ArrayList&lt;&gt;());<span class="hljs-comment">//边,下标-&gt;目标节点List[]</span><br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     *  添加边</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> v 源节点</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> w 目标节点</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">addEdge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> v, <span class="hljs-keyword">int</span> w)</span> </span>&#123;<br>        adj.get(v).add(w);<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">topologicalSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> v, <span class="hljs-keyword">boolean</span> visited[], Stack&lt;Integer&gt; stack)</span> </span>&#123;<br>        <span class="hljs-comment">// 标记为已访问</span><br>        visited[v] = <span class="hljs-keyword">true</span>;<br>        Integer i;<br>        <span class="hljs-comment">//获取当前节点的所有后继节点</span><br>        Iterator&lt;Integer&gt; it = adj.get(v).iterator();<br>        <span class="hljs-keyword">while</span> (it.hasNext()) &#123;<br>            i = it.next();<br>            <span class="hljs-comment">//未访问过可继续访问</span><br>            <span class="hljs-keyword">if</span> (!visited[i]) topologicalSort(i, visited, stack);<br>        &#125;<br>        <span class="hljs-comment">//添加</span><br>        stack.push(<span class="hljs-keyword">new</span> Integer(v));<br>    &#125;<br>    <span class="hljs-comment">//拓扑排序</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">topologicalSort</span><span class="hljs-params">()</span> </span>&#123;<br>        Stack&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();<br>        <span class="hljs-comment">// 已访问标记</span><br>        <span class="hljs-keyword">boolean</span> visited[] = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[V];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; V; i++) &#123;<br>            <span class="hljs-keyword">if</span> (visited[i] == <span class="hljs-keyword">false</span>) &#123;<span class="hljs-comment">//未访问过的才需要访问</span><br>                topologicalSort(i, visited, stack);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">//打印结果</span><br>        <span class="hljs-keyword">while</span> (stack.empty() == <span class="hljs-keyword">false</span>) System.out.print(stack.pop() + <span class="hljs-string">&quot; &quot;</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;<br>        <span class="hljs-comment">//创建一个6个节点的图</span><br>        Graph g = <span class="hljs-keyword">new</span> Graph(<span class="hljs-number">6</span>);<br>        <span class="hljs-comment">//添加边</span><br>        g.addEdge(<span class="hljs-number">5</span>, <span class="hljs-number">2</span>);<br>        g.addEdge(<span class="hljs-number">5</span>, <span class="hljs-number">0</span>);<br>        g.addEdge(<span class="hljs-number">4</span>, <span class="hljs-number">0</span>);<br>        g.addEdge(<span class="hljs-number">4</span>, <span class="hljs-number">1</span>);<br>        g.addEdge(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>);<br>        g.addEdge(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>);<br>        g.topologicalSort();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>如何维护字典序最小的拓扑序?什么是最小子典序？</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1658667195958-315e043e-4c01-45a9-b24f-9f760d8e6114.jpeg" srcset="/img/loading.gif" lazyload></p>
+<p>简单的理解方法是，把两种解看作两个数字1243 和 2143，小的那个数对应的排列就是字典序偏小的。</p>
+<h2 id="相关算法"><a href="#相关算法" class="headerlink" title="相关算法"></a>相关算法</h2><h3 id="Dijkstra-算法"><a href="#Dijkstra-算法" class="headerlink" title="Dijkstra 算法"></a>Dijkstra 算法</h3><blockquote>
+<p>最短路径算法</p>
+</blockquote>
+<h3 id="Prim-算法"><a href="#Prim-算法" class="headerlink" title="Prim 算法"></a>Prim 算法</h3><h3 id="Kruskal-算法"><a href="#Kruskal-算法" class="headerlink" title="Kruskal 算法"></a>Kruskal 算法</h3><h3 id="Bellman-Ford-算法"><a href="#Bellman-Ford-算法" class="headerlink" title="Bellman-Ford 算法"></a>Bellman-Ford 算法</h3><h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>基于「队列」优化的 Bellman-Ford 算法 — SPFA 算法</p>
+<h3 id="拓扑排序之-Kahn-算法"><a href="#拓扑排序之-Kahn-算法" class="headerlink" title="拓扑排序之 Kahn 算法"></a>拓扑排序之 Kahn 算法</h3><h1 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h1><h2 id="到达目的地的第二短时间（hard"><a href="#到达目的地的第二短时间（hard" class="headerlink" title="到达目的地的第二短时间（hard)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/second-minimum-time-to-reach-destination/">到达目的地的第二短时间</a>（hard)</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs sql">class Solution &#123;<br>    public <span class="hljs-type">int</span> secondMinimum(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[][] edges, <span class="hljs-type">int</span> <span class="hljs-type">time</span>, <span class="hljs-type">int</span> change) &#123;<br>        List<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span>[] graph <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> List[n <span class="hljs-operator">+</span> <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i <span class="hljs-operator">&lt;=</span> n; i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>) &#123;<br>            graph[i] <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> ArrayList<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span>();<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] edge : edges) &#123;<br>            graph[edge[<span class="hljs-number">0</span>]].<span class="hljs-keyword">add</span>(edge[<span class="hljs-number">1</span>]);<br>            graph[edge[<span class="hljs-number">1</span>]].<span class="hljs-keyword">add</span>(edge[<span class="hljs-number">0</span>]);<br>        &#125;<br><br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> path[i][<span class="hljs-number">0</span>] 表示从 <span class="hljs-number">1</span> 到 i 的最短路长度，path[i][<span class="hljs-number">1</span>] 表示从 <span class="hljs-number">1</span> 到 i 的严格次短路长度<br>        <span class="hljs-type">int</span>[][] path <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[n <span class="hljs-operator">+</span> <span class="hljs-number">1</span>][<span class="hljs-number">2</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i <span class="hljs-operator">&lt;=</span> n; i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>) &#123;<br>            Arrays.fill(path[i], Integer.MAX_VALUE);<br>        &#125;<br>        path[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>] <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        Queue<span class="hljs-operator">&lt;</span><span class="hljs-type">int</span>[]<span class="hljs-operator">&gt;</span> queue <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> ArrayDeque<span class="hljs-operator">&lt;</span><span class="hljs-type">int</span>[]<span class="hljs-operator">&gt;</span>();<br>        queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[]&#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;);<br>        while (path[n][<span class="hljs-number">1</span>] <span class="hljs-operator">=</span><span class="hljs-operator">=</span> Integer.MAX_VALUE) &#123;<br>            <span class="hljs-type">int</span>[] arr <span class="hljs-operator">=</span> queue.poll();<br>            <span class="hljs-type">int</span> cur <span class="hljs-operator">=</span> arr[<span class="hljs-number">0</span>], len <span class="hljs-operator">=</span> arr[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> next : graph[cur]) &#123;<br>                if (len <span class="hljs-operator">+</span> <span class="hljs-number">1</span> <span class="hljs-operator">&lt;</span> path[next][<span class="hljs-number">0</span>]) &#123;<br>                    path[next][<span class="hljs-number">0</span>] <span class="hljs-operator">=</span> len <span class="hljs-operator">+</span> <span class="hljs-number">1</span>;<br>                    queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[]&#123;next, len <span class="hljs-operator">+</span> <span class="hljs-number">1</span>&#125;);<br>                &#125; <span class="hljs-keyword">else</span> if (len <span class="hljs-operator">+</span> <span class="hljs-number">1</span> <span class="hljs-operator">&gt;</span> path[next][<span class="hljs-number">0</span>] <span class="hljs-operator">&amp;&amp;</span> len <span class="hljs-operator">+</span> <span class="hljs-number">1</span> <span class="hljs-operator">&lt;</span> path[next][<span class="hljs-number">1</span>]) &#123;<br>                    path[next][<span class="hljs-number">1</span>] <span class="hljs-operator">=</span> len <span class="hljs-operator">+</span> <span class="hljs-number">1</span>;<br>                    queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[]&#123;next, len <span class="hljs-operator">+</span> <span class="hljs-number">1</span>&#125;);<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> ret <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i <span class="hljs-operator">&lt;</span> path[n][<span class="hljs-number">1</span>]; i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>) &#123;<br>            if (ret <span class="hljs-operator">%</span> (<span class="hljs-number">2</span> <span class="hljs-operator">*</span> change) <span class="hljs-operator">&gt;=</span> change) &#123;<br>                ret <span class="hljs-operator">=</span> ret <span class="hljs-operator">+</span> (<span class="hljs-number">2</span> <span class="hljs-operator">*</span> change <span class="hljs-operator">-</span> ret <span class="hljs-operator">%</span> (<span class="hljs-number">2</span> <span class="hljs-operator">*</span> change));<br>            &#125;<br>            ret <span class="hljs-operator">=</span> ret <span class="hljs-operator">+</span> <span class="hljs-type">time</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="克隆图（medium）"><a href="#克隆图（medium）" class="headerlink" title="克隆图（medium）"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/clone-graph/">克隆图</a>（medium）</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs sql">class Solution &#123;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>bfs<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>记录节点是否已经克隆:key<span class="hljs-operator">=</span>旧节点，<span class="hljs-keyword">value</span><span class="hljs-operator">=</span>新clone的节点<br>    private HashMap <span class="hljs-operator">&lt;</span>Node, Node<span class="hljs-operator">&gt;</span> visited <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> HashMap <span class="hljs-operator">&lt;&gt;</span> ();<br>    public Node cloneGraphDFS(Node node) &#123;<br>        if (node <span class="hljs-operator">=</span><span class="hljs-operator">=</span> <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> node;<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 如果该节点已经被访问过了，则直接从哈希表中取出对应的克隆节点返回<br>        if (visited.containsKey(node)) <span class="hljs-keyword">return</span> visited.get(node);<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 克隆节点，注意到为了深拷贝我们不会克隆它的邻居的列表<br>        Node cloneNode <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> Node(node.val, <span class="hljs-keyword">new</span> ArrayList());<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 哈希表存储<br>        visited.put(node, cloneNode);<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 遍历该节点的邻居并更新克隆节点的邻居列表<br>        <span class="hljs-keyword">for</span> (Node neighbor: node.neighbors) &#123;<br>            cloneNode.neighbors.add(cloneGraph(neighbor));<br>        &#125;<br>        <span class="hljs-keyword">return</span> cloneNode;<br>    &#125;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><br>    public Node cloneGraphBFS(Node node) &#123;<br>        if (node <span class="hljs-operator">=</span><span class="hljs-operator">=</span> <span class="hljs-keyword">null</span>)  <span class="hljs-keyword">return</span> node;<br>        HashMap<span class="hljs-operator">&lt;</span>Node, Node<span class="hljs-operator">&gt;</span> visited <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> HashMap();<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 将题目给定的节点添加到队列<br>        LinkedList<span class="hljs-operator">&lt;</span>Node<span class="hljs-operator">&gt;</span> queue <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> LinkedList<span class="hljs-operator">&lt;</span>Node<span class="hljs-operator">&gt;</span> ();<br>        queue.add(node);<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 克隆第一个节点并存储到哈希表中<br>        visited.put(node, <span class="hljs-keyword">new</span> Node(node.val, <span class="hljs-keyword">new</span> ArrayList()));<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 广度优先搜索<br>        while (<span class="hljs-operator">!</span>queue.isEmpty()) &#123;<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 取出队列的头节点<br>            Node n <span class="hljs-operator">=</span> queue.remove();<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 遍历该节点的邻居<br>            <span class="hljs-keyword">for</span> (Node neighbor: n.neighbors) &#123;<br>                if (<span class="hljs-operator">!</span>visited.containsKey(neighbor)) &#123;<br>                    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 如果没有被访问过，就克隆并存储在哈希表中<br>                    visited.put(neighbor, <span class="hljs-keyword">new</span> Node(neighbor.val, <span class="hljs-keyword">new</span> ArrayList()));<br>                    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 将邻居节点加入队列中<br>                    queue.add(neighbor);<br>                &#125;<br>                <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 更新当前节点的邻居列表<br>                visited.get(n).neighbors.add(visited.get(neighbor));<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> visited.get(node);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="课程表（mid"><a href="#课程表（mid" class="headerlink" title="课程表（mid)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/course-schedule/">课程表</a>（mid)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-comment">//思路:有向图</span><br>    List&lt;List&lt;Integer&gt;&gt; edges;<br>    <span class="hljs-keyword">int</span>[] visited;<br>    <span class="hljs-keyword">boolean</span> valid = <span class="hljs-keyword">true</span>;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">canFinish</span><span class="hljs-params">(<span class="hljs-keyword">int</span> numCourses, <span class="hljs-keyword">int</span>[][] prerequisites)</span> </span>&#123;<br>        edges = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>        visited = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[numCourses];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;numCourses;i++)edges.add(<span class="hljs-keyword">new</span> ArrayList&lt;&gt;());<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span>[] pre:prerequisites)edges.get(pre[<span class="hljs-number">1</span>]).add(pre[<span class="hljs-number">0</span>]);<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;numCourses&amp;&amp;valid;i++)<span class="hljs-keyword">if</span>(visited[i]==<span class="hljs-number">0</span>)dfs(i);<br>        <span class="hljs-keyword">return</span> valid;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span></span>&#123;<br>        visited[index] = <span class="hljs-number">1</span>;<span class="hljs-comment">//搜索中</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i:edges.get(index))&#123;<br>            <span class="hljs-keyword">if</span>(visited[i]==<span class="hljs-number">0</span>)&#123;<br>                dfs(i);<br>                <span class="hljs-keyword">if</span>(!valid)<span class="hljs-keyword">return</span>;<br>            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(visited[i]==<span class="hljs-number">1</span>)&#123;<br>                valid = <span class="hljs-keyword">false</span>;<br>                <span class="hljs-keyword">return</span>;<br>            &#125;<br>        &#125;<br>        visited[index] = <span class="hljs-number">2</span>;<span class="hljs-comment">//搜索完成</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="课程表-II（mid）"><a href="#课程表-II（mid）" class="headerlink" title="课程表 II（mid）"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/course-schedule-ii/">课程表 II</a>（mid）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-comment">// 存储有向图</span><br>    List&lt;List&lt;Integer&gt;&gt; edges;<br>    <span class="hljs-comment">// 标记每个节点的状态：0=未搜索，1=搜索中，2=已完成</span><br>    <span class="hljs-keyword">int</span>[] visited;<br>    <span class="hljs-comment">// 用数组来模拟栈，下标 n-1 为栈底，0 为栈顶</span><br>    <span class="hljs-keyword">int</span>[] result;<br>    <span class="hljs-comment">// 判断有向图中是否有环</span><br>    <span class="hljs-keyword">boolean</span> valid = <span class="hljs-keyword">true</span>;<br>    <span class="hljs-comment">// 栈下标</span><br>    <span class="hljs-keyword">int</span> index;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] findOrder(<span class="hljs-keyword">int</span> numCourses, <span class="hljs-keyword">int</span>[][] prerequisites) &#123;<br>        edges = <span class="hljs-keyword">new</span> ArrayList&lt;List&lt;Integer&gt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; numCourses; ++i) &#123;<br>            edges.add(<span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;());<br>        &#125;<br>        visited = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[numCourses];<br>        result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[numCourses];<br>        index = numCourses - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span>[] info : prerequisites) &#123;<br>            edges.get(info[<span class="hljs-number">1</span>]).add(info[<span class="hljs-number">0</span>]);<br>        &#125;<br>        <span class="hljs-comment">// 每次挑选一个「未搜索」的节点，开始进行深度优先搜索</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; numCourses &amp;&amp; valid; ++i) &#123;<br>            <span class="hljs-keyword">if</span> (visited[i] == <span class="hljs-number">0</span>) &#123;<br>                dfs(i);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (!valid) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">0</span>];<br>        &#125;<br>        <span class="hljs-comment">// 如果没有环，那么就有拓扑排序</span><br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span> </span>&#123;<br>        <span class="hljs-comment">// 将节点标记为「搜索中」</span><br>        visited[u] = <span class="hljs-number">1</span>;<br>        <span class="hljs-comment">// 搜索其相邻节点</span><br>        <span class="hljs-comment">// 只要发现有环，立刻停止搜索</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> v: edges.get(u)) &#123;<br>            <span class="hljs-comment">// 如果「未搜索」那么搜索相邻节点</span><br>            <span class="hljs-keyword">if</span> (visited[v] == <span class="hljs-number">0</span>) &#123;<br>                dfs(v);<br>                <span class="hljs-keyword">if</span> (!valid) &#123;<br>                    <span class="hljs-keyword">return</span>;<br>                &#125;<br>            &#125;<br>            <span class="hljs-comment">// 如果「搜索中」说明找到了环</span><br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (visited[v] == <span class="hljs-number">1</span>) &#123;<br>                valid = <span class="hljs-keyword">false</span>;<br>                <span class="hljs-keyword">return</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 将节点标记为「已完成」</span><br>        visited[u] = <span class="hljs-number">2</span>;<br>        <span class="hljs-comment">// 将节点入栈</span><br>        result[index--] = u;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="课程表-III（hard）"><a href="#课程表-III（hard）" class="headerlink" title="课程表 III（hard）"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/course-schedule-iii/">课程表 III</a>（hard）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-comment">//优先队列排序lastDayi</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">scheduleCourse</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] courses)</span> </span>&#123;<br>        Arrays.sort(courses, (a, b) -&gt; a[<span class="hljs-number">1</span>] - b[<span class="hljs-number">1</span>]);<br>        PriorityQueue&lt;Integer&gt; q = <span class="hljs-keyword">new</span> PriorityQueue&lt;Integer&gt;((a, b) -&gt; b - a);<br>        <span class="hljs-comment">// 优先队列中所有课程的总时间</span><br>        <span class="hljs-keyword">int</span> total = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span>[] course : courses) &#123;<br>            <span class="hljs-keyword">int</span> ti = course[<span class="hljs-number">0</span>], di = course[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (total + ti &lt;= di) &#123;<br>                total += ti;<br>                q.offer(ti);<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!q.isEmpty() &amp;&amp; q.peek() &gt; ti) &#123;<br>                total -= q.poll() - ti;<br>                q.offer(ti);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> q.size();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/leetbook/detail/graph/">https://leetcode-cn.com/leetbook/detail/graph/</a><br><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/">https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3/" class="category-chain-item">算法相关</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>算法笔记-图论类型</div>
+      <div>https://mikeygithub.github.io/2020/08/20/yuque/cxcifg/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年8月20日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/26/yuque/spgw25/" title="数据库篇-MongoDB分布式文档存储数据库">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据库篇-MongoDB分布式文档存储数据库</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/10/yuque/gi04co/" title="算法笔记-查并集类">
+                        <span class="hidden-mobile">算法笔记-查并集类</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

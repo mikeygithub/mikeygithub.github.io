@@ -1,0 +1,1094 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Hyperledger Iroha 简介1.1 Iroha的主要特征是什么？ 简单的部署和维护 面向开发人员的各种库 基于角色的访问控制 化设计，由命令-查询分离原理驱动 和身份管理  在我们的质量模型中，我们专注于并不断改进：  性（容错性，可恢复性） 效率（尤其是时间行为和资源利用） 性（易学性，用户错误保护，适当性可识别性）  在哪里可以使用Iroha？Hyperledger Iroha是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hyperledger Iroha">
+<meta property="og:url" content="https://mikeygithub.github.io/2020/03/18/yuque/hwm62f/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="Hyperledger Iroha 简介1.1 Iroha的主要特征是什么？ 简单的部署和维护 面向开发人员的各种库 基于角色的访问控制 化设计，由命令-查询分离原理驱动 和身份管理  在我们的质量模型中，我们专注于并不断改进：  性（容错性，可恢复性） 效率（尤其是时间行为和资源利用） 性（易学性，用户错误保护，适当性可识别性）  在哪里可以使用Iroha？Hyperledger Iroha是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657526426143-2dddee8b-91d2-434d-8fa1-6c1b943f6caf.png">
+<meta property="article:published_time" content="2020-03-17T16:36:27.000Z">
+<meta property="article:modified_time" content="2023-02-13T14:42:02.285Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="Hyperledger-Iroha">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657526426143-2dddee8b-91d2-434d-8fa1-6c1b943f6caf.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>Hyperledger Iroha - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Hyperledger Iroha"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-03-18 00:36" pubdate>
+          2020年3月18日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          14k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          116 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Hyperledger Iroha</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657526426143-2dddee8b-91d2-434d-8fa1-6c1b943f6caf.png#clientId=u2fc621d9-2a98-4&from=markdown&id=n4Zh7&name=image.png&originHeight=1679&originWidth=4671&originalType=url&ratio=1&rotation=0&showTitle=false&size=343029&status=done&style=none&taskId=u658101df-fefe-4e8f-928d-35e85ba031a&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="Hyperledger-Iroha-简介"><a href="#Hyperledger-Iroha-简介" class="headerlink" title="Hyperledger Iroha 简介"></a>Hyperledger Iroha 简介</h1><h2 id="1-1-Iroha的主要特征是什么？"><a href="#1-1-Iroha的主要特征是什么？" class="headerlink" title="1.1 Iroha的主要特征是什么？"></a>1.1 Iroha的主要特征是什么？</h2><ul>
+<li>简单的部署和维护</li>
+<li>面向开发人员的各种库</li>
+<li>基于角色的访问控制</li>
+<li>化设计，由命令-查询分离原理驱动</li>
+<li>和身份管理</li>
+</ul>
+<p>在我们的质量模型中，我们专注于并不断改进：</p>
+<ul>
+<li>性（容错性，可恢复性）</li>
+<li>效率（尤其是时间行为和资源利用）</li>
+<li>性（易学性，用户错误保护，适当性可识别性）</li>
+</ul>
+<h2 id="在哪里可以使用Iroha？"><a href="#在哪里可以使用Iroha？" class="headerlink" title="在哪里可以使用Iroha？"></a>在哪里可以使用Iroha？</h2><p>Hyperledger Iroha是通用许可的区块链系统，可用于管理数字资产，身份和序列化数据。这对于银行间结算，中央银行数字货币，支付系统，国家ID和物流等应用可能很有用。</p>
+<p>有关详细说明，请检查我们的用例场景部分。</p>
+<p>1.3 它与比特币或以太坊有何不同？<br>比特币和以太坊被设计为无人允许的分类帐，任何人都可以加入并访问所有数据。它们还具有与系统交互所需的本机加密货币。</p>
+<p>在Iroha中，没有本机加密货币。相反，为了满足企业的需求，允许进行系统交互，这意味着只有具有必需访问权限的人才能与系统交互。此外，还允许查询，以便可以控制对所有数据的访问。</p>
+<p>与以太坊的主要区别尤其在于，Hyperledger Iroha允许用户通过使用系统中的预构建命令来执行常见功能，例如创建和传输数字资产。这就消除了编写繁琐且难以测试的智能合约的需要，从而使开发人员能够更快，风险更低地完成简单的任务。</p>
+<p>1.4 它与其他Hyperledger框架或其他许可的区块链有何不同？<br>Iroha具有一种新颖的，具有Crash容错能力的共识算法（称为YAC [1]），该算法具有很高的性能，并允许以低延迟完成事务。</p>
+<p>此外，与其他平台相比，Iroha的内置命令是一个主要优点，因为执行诸如创建数字资产，注册帐户以及在帐户之间转移资产之类的常见任务非常简单。此外，由于故障少，它缩小了攻击媒介，提高了系统的整体安全性。</p>
+<p>最后，Iroha是唯一具有强大权限系统的分类帐，允许为所有命令，查询和网络加入设置权限。</p>
+<p>[1]    另一个共识<br>1.5 如何围绕Iroha创建应用程序？<br>为了将区块链的功能带入您的应用程序，您应该首先考虑它如何与Iroha同行进行接口。一个好的开始是检查“ 概念和体系结构”部分，解释什么是事务和查询，以及应用程序的用户应该如何与之交互。</p>
+<p>我们也有几个客户端库，这些库为开发人员提供了形成构建块的工具，例如签名，命令，向Iroha对等方发送消息并检查状态。</p>
+<p>Hyperledger Iroha 核心概念<br>Why Iroha runs in a network? How to understand the objects inside and outside the system? How peers in the network collaborate and decide which data to put into the blockchain? We will look through the basics of Iroha in this section.</p>
+<ul>
+<li>2.1.1. Account</li>
+<li>2.1.2. Asset</li>
+<li>2.1.3. Block</li>
+<li>2.1.4. Client</li>
+<li>2.1.5. Command</li>
+<li>2.1.6. Consensus</li>
+<li>2.1.7. Domain</li>
+<li>2.1.8. Peer</li>
+<li>2.1.9. Permission</li>
+<li>2.1.10. Proposal</li>
+<li>2.1.11. Query</li>
+<li>2.1.12. Quorum</li>
+<li>2.1.13. Role</li>
+<li>2.1.14. Signatory</li>
+<li>2.1.15. Transaction</li>
+<li>2.1.16. Batch of Transactions</li>
+<li>2.1.17. Multisignature Transactions</li>
+<li>2.1.18. Validation</li>
+<li>2.1.19. Entity-relationship model</li>
+</ul>
+<h1 id="Hyperledger-Iroha-内部组成"><a href="#Hyperledger-Iroha-内部组成" class="headerlink" title="Hyperledger Iroha 内部组成"></a>Hyperledger Iroha 内部组成</h1><p>HL Iroha网络由几个基本组件组成，这些组件提供节点之间的通信。您可以在下面了解它们。</p>
+<h1 id="Iroha体系结构图"><a href="#Iroha体系结构图" class="headerlink" title="Iroha体系结构图"></a>Iroha体系结构图</h1><p>2.2.1。Torii<br>客户的切入点。使用gRPC作为传输。为了与Iroha进行交互，任何人都可以使用gRPC端点（如“ 命令和查询”部分中所述）或使用客户端库。</p>
+<p>2.2.2。MST处理器<br>多签名交易处理器</p>
+<p>这是一项内部gRPC服务，可通过Gossip协议发送和接收来自其他对等方的消息。它的任务是发出尚未收到足够签名以达到法定人数的多重签名交易。</p>
+<p>2.2.3。对等通信服务<br>Iroha的内部组件- 通过MstProcessor将交易从Torii 传输到Ordering Gate的中介。PCS的主要目标是隐藏与共识实现交互的复杂性。</p>
+<p>2.2.4。订购门<br>它是内部Iroha组件（gRPC客户端），可将事务从对等通信服务中继到订购服务。Ordering Gate 从Ordering Service 接收提案（链中的潜在模块），并将其发送到Simulator进行状态验证。它还根据共识回合要求订购服务提供建议。</p>
+<p>2.2.5。订购服务<br>内部Iroha组件（gRPC服务器），该组件从其他对等方接收消息，并将已通过无状态验证传递的多个交易合并到投标中。每个节点都有其自己的订购服务。提案创建可以由以下事件之一触发：</p>
+<p>专用于交易收集的期限已到期。<br>订购服务已收到单个提案允许的最大交易量。<br>这两个参数（超时和建议的最大大小）都是可配置的（请检查特定于环境的参数页面）。</p>
+<p>这两个触发器的共同先决条件是至少一项交易应到达订购服务。否则，将不会形成任何建议。</p>
+<p>订购服务还对提案进行初步验证（例如，从提案中清除无状态拒绝的交易）。</p>
+<p>2.2.6。经过验证的提案创建者<br>内部Iroha组件，对订购服务收到的投标中包含的交易执行状态验证。基于已通过状态验证的事务，将创建经过验证的提议并将其传递给Block Creator。所有未通过状态验证的交易都将被删除，并且不包含在已验证的投标中。</p>
+<p>2.2.7。块造物主<br>系统组件，它通过一系列已通过无状态和有状态验证的事务构成块，以便进一步传播到共识。</p>
+<p>区块创建者与“ 验证提议创建者”一起构成了一个名为Simulator的组件。</p>
+<p>2.2.8。区块共识（YAC）<br>共识，作为一个组成部分</p>
+<p>共识是区块链的核心-它在对等网络中的对等之间保持一致的状态。Iroha使用自己的共识算法，称为“另一个共识”（又名YAC）。</p>
+<p>您可以在此处观看视频，其中对共识和YAC的原理进行了详尽的解释。</p>
+<p>YAC算法的显着特征是它的可伸缩性，性能和崩溃容错能力。</p>
+<p>为了确保网络的一致性，如果缺少块，将通过Synchronizer从另一个对等方下载它们。提交的块存储在Ametsuchi块存储中。</p>
+<p>有关共识的一般定义，请检查此链接。</p>
+<p>2.2.9。同步器<br>是共识的一部分。将缺失的块添加到对等方的链中（从其他对等方下载它们以保持一致性）。</p>
+<p>2.2.10。Ametsuchi Blockstore<br>Iroha存储组件，用于存储块和从块生成的状态，称为World State View。有没有办法让客户端直接与Ametsuchi互动。</p>
+<p>2.2.11。世界状态视图<br>WSV反映了系统的当前状态，可以视为快照。例如，WSV保留有关帐户当前拥有的资产数量的信息 ，但不包含任何交易流的信息历史记录。</p>
+<h1 id="Hyperledger-Iroha-快速入门"><a href="#Hyperledger-Iroha-快速入门" class="headerlink" title="Hyperledger Iroha 快速入门"></a>Hyperledger Iroha 快速入门</h1><p>在本指南中，我们将创建一个非常基本的Iroha网络，启动它，创建几个事务，并检查写入分类帐中的数据。为简单起见，我们将使用Docker。</p>
+<p>注意</p>
+<p>Ledger是区块链的代名词，Hyperledger Iroha也被称为分布式Ledger技术框架-本质上与“区块链框架”相同。您可以检查“ 核心概念”部分中使用的其余术语。</p>
+<p>3.1。前提条件<br>对于本指南，您需要一台Docker已安装的机器。您可以阅读如何在Docker网站上安装它。</p>
+<p>注意</p>
+<p>当然，您可以从头开始构建Iroha，修改其代码并启动自定义节点！如果您想知道如何做–您可以查看Building Iroha部分。在本指南中，我们将使用Iroha的标准发行版作为docker映像。</p>
+<p>3.2。启动Iroha</p>
+<p>3.2.1。创建一个Docker网络<br>要进行操作，Iroha需要一个PostgreSQL数据库。让我们从创建Docker网络开始，以便Postgres和Iroha的容器可以在同一虚拟网络上运行并成功通信。在本指南中，我们将其称为iroha-network，但您可以使用任何名称。在您的终端中输入以下命令：</p>
+<p>泊坞窗网络创建iroha-network<br>3.2.2。启动PostgreSQL容器<br>现在，我们需要PostgreSQL在容器中运行，将其附加到之前创建的网络，并公开用于通信的端口：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs haml">docker--name some-postgres\ <br>-<span class="ruby">e POSTGRES_USER = postgres\ </span><br><span class="ruby"></span>-<span class="ruby">e POSTGRES_PASSWORD = mysecretpassword \ </span><br><span class="ruby"></span>-<span class="ruby">p <span class="hljs-number">5432</span>：<span class="hljs-number">5432</span> \ </span><br><span class="ruby"></span>-<span class="ruby">-network =iroha-network\ </span><br><span class="ruby"></span>-<span class="ruby">d postgres：<span class="hljs-number">9.5</span> \ </span><br><span class="ruby"></span>-<span class="ruby">c <span class="hljs-string">&#x27;max_prepared_transactions = 100&#x27;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>注意</p>
+<p>如果已经在主机系统上的默认端口（5432）上运行了Postgres，则应选择另一个将被占用的空闲端口。例如5433：-p 5433:5432</p>
+<p>3.2.3。创建Blockstore<br>在运行Iroha容器之前，我们可能会创建一个持久卷来存储文件，并为该链存储块。通过以下命令完成：</p>
+<p>码头工人卷创建块存储<br>3.2.4。准备配置文件<br>注意</p>
+<p>为简单起见，在本指南中，我们将创建一个仅包含单个节点的网络。要了解如何运行多个对等节点，请遵循部署</p>
+<p>现在，我们需要配置Iroha网络。这包括创建配置文件，为用户生成密钥对，编写对等方列表以及创建创世块。</p>
+<p>不要害怕-我们已经为本指南准备了一个示例配置，因此您可以立即开始测试Iroha节点。为了获取这些文件，您需要 从Github 克隆Iroha存储库或手动复制它们（不过克隆速度更快）。</p>
+<p><code>git clone -b master https://github.com/hyperledger/iroha --depth = 1</code></p>
+<p>暗示</p>
+<p>–depth=1选项允许我们仅下载最新的提交并节省一些时间和带宽。如果要获取完整的提交历史记录，则可以忽略此选项。</p>
+<p>关于如何设置参数以及如何根据您的环境和负载期望对其进行调整的指南：配置。目前我们不需要这样做。</p>
+<p>3.2.5。启动Iroha容器<br>我们几乎准备启动我们的Iroha集装箱。您只需要知道配置文件的路径（从上述步骤开始）。</p>
+<p>让我们使用以下命令在Docker容器中启动Iroha节点：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs haml">docker run --name iroha \ <br>-<span class="ruby">d \ </span><br><span class="ruby"></span>-<span class="ruby">p <span class="hljs-number">50051</span>：<span class="hljs-number">50051</span> \ </span><br><span class="ruby"></span>-<span class="ruby">v <span class="hljs-variable">$ </span>&#123; pwd ） / iroha / example：/ opt / iroha_data \ </span><br><span class="ruby"></span>-<span class="ruby">v blockstore：/ tmp / block_store \ </span><br><span class="ruby"></span>-<span class="ruby">-network = iroha-network \ </span><br><span class="ruby"></span>-<span class="ruby"> e KEY = <span class="hljs-string">&#x27;node0&#x27;</span>  \</span><br><span class="ruby"></span>hyperledger / iroha：latest<br></code></pre></td></tr></table></figure>
+
+<p>如果成功启动节点，您将在启动容器的同一控制台中看到容器ID。</p>
+<p>让我们详细了解一下此命令的作用：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run --name iroha <span class="hljs-string">\</span> 创建一个容器 iroha<br>-d <span class="hljs-string">\</span> 在后台运行容器<br>-p <span class="hljs-number">50051</span>:<span class="hljs-number">50051</span> <span class="hljs-string">\</span> 公开用于与客户端通信的端口（我们将在以后使用）<br>-v YOUR_PATH_TO_CONF_FILES:/opt/iroha_data <span class="hljs-string">\这就是我们如何将配置文件传递到docker容器的方法。示例目录在上面的代码块中指示。</span><br>-v blockstore:/tmp/block_store <span class="hljs-string">\</span> 将持久性块存储（Docker卷）添加到容器中，以便在我们停止容器后不会丢失块<br>--network=iroha-network <span class="hljs-string">\将我们的容器添加到先前创建的iroha-network</span> 用于与PostgreSQL服务器通信的容器<br>-e KEY=<span class="hljs-string">&#x27;node0&#x27;</span> <span class="hljs-string">\-在此请指出一个密钥名称，该名称将标识允许其确认操作的节点。密钥应与上述配置文件一起放在目录中。</span><br>hyperledger/iroha:latest是指向最新版本的图像的引用<br></code></pre></td></tr></table></figure>
+
+<p>您可以通过运行查看日志。docker logs iroha</p>
+<p>您可以尝试使用示例指南之一，以便将一些事务发送到Iroha并查询其状态。</p>
+<h3 id="3-3。尝试其他指南"><a href="#3-3。尝试其他指南" class="headerlink" title="3.3。尝试其他指南"></a>3.3。尝试其他指南</h3><p>3.3.1。CLI指南：发送您的第一笔交易和查询<br>3.3.1.1。创建第一笔交易<br>3.3.1.2。创建第一个查询<br>3.3.1.3。成为坏蛋<br>3.3.2。使用Python库发送交易<br>3.3.2.1。先决条件<br>3.3.2.2。运行示例交易<br>3.3.2.3。定义命令<br>3.3.2.4。运行命令<br>Hyperledger 综合项目<br>Hyperledger联盟的想法之一是创建可以一起工作以提供最佳区块链体验的解决方案。在Iroha中，我们相信其他出色的Hyperledger工具和解决方案的集成是使Iroha更好地适合您的用例的一种方式。因此，我们致力于与多个项目的集成，并希望向您详细介绍Iroha可以与之合作的内容。</p>
+<h3 id="4-1。Hyperledger-Ursa"><a href="#4-1。Hyperledger-Ursa" class="headerlink" title="4.1。Hyperledger Ursa"></a>4.1。Hyperledger Ursa</h3><p>Hyperledger Ursa是一个共享的密码库，使人们（和项目）可以避免重复其他密码工作，并希望在此过程中提高安全性。该库将是供项目（以及可能还有其他项目）放置和使用加密货币的可选存储库。Hyperledger Ursa由子项目组成，这些子项目是密码代码或密码代码接口的内聚实现。</p>
+<p>通过在构建过程中仅添加一个标志，可以轻松地使用Ursa库构建Iroha 。它将允许您使用Ursa库中的加密算法代替标准的Iroha加密技术。随着Ursa中新图书馆的发展，将为您提供越来越多的选择！</p>
+<h3 id="4-2。Hyperledger-Explorer"><a href="#4-2。Hyperledger-Explorer" class="headerlink" title="4.2。Hyperledger Explorer"></a>4.2。Hyperledger Explorer</h3><p>Hyperledger Explorer是一个区块链模块，是The Linux Foundation托管的Hyperledger项目之一。Hyperledger Explorer旨在创建一个用户友好的Web应用程序，可以查看，调用，部署或查询块，事务和相关数据，网络信息（名称，状态，节点列表），链代码和事务族，以及任何其他相关信息存储在分类帐中。</p>
+<p>在这里，您可以了解如何将Explorer与Iroha结合使用。</p>
+<h3 id="4-3。Hyperledger-Burrow"><a href="#4-3。Hyperledger-Burrow" class="headerlink" title="4.3。Hyperledger Burrow"></a>4.3。Hyperledger Burrow</h3><p>Hyperledger Burrow为模块化区块链客户端提供了一个经过许可的智能合约解释器，该解释器部分已按照以太坊虚拟机（EVM）的规范进行开发。</p>
+<p>我们将很快准备有关如何使用Iroha中集成的Burrow的说明。</p>
+<h1 id="绑定-Iroha"><a href="#绑定-Iroha" class="headerlink" title="绑定 Iroha"></a>绑定 Iroha</h1><p>In this guide we will learn how to install all dependencies, required to build Iroha and how to actually build it.</p>
+<p>There will be 3 steps:</p>
+<p>1.Installing environment prerequisites<br>2.Installing Iroha dependencies (will be performed automatically for Docker)<br>3.Building Iroha</p>
+<p>Note</p>
+<p>You don’t need to build Iroha to start using it. Instead, you can download prepared Docker image from the Hub, this process explained in details in the Quick Start Guide page of this documentation.</p>
+<p>5.1. Prerequisites<br>In order to successfully build Iroha, we need to configure the environment. There are several ways to do it and we will describe all of them.</p>
+<p>Currently, we support Unix-like systems (we are basically targeting popular Linux distros and MacOS). If you happen to have Windows or you don’t want to spend time installing all dependencies you might want to consider using Docker environment. Also, Windows users might consider using WSL</p>
+<p>Technically Iroha can be built under Windows natively in experimental mode. This guide covers that way too. All the stages related to native Windows build are separated from the main flow due to its significant differences.</p>
+<p>Please choose your preferred platform below for a quick access:</p>
+<ul>
+<li>docker</li>
+<li>linux</li>
+<li>macOS</li>
+<li>windows</li>
+<li>Hint</li>
+</ul>
+<p>Having troubles? Check FAQ section or communicate to us directly, in case you were stuck on something. We don’t expect this to happen, but some issues with an environment are possible.</p>
+<p>5.1.1. Docker<br>First of all, you need to install docker and docker-compose. You can read how to install it on the Docker’s website</p>
+<p>Note</p>
+<p>Please, use the latest available docker daemon and docker-compose.</p>
+<p>Then you should clone the Iroha repository to the directory of your choice:</p>
+<p><code>git clone -b master https://github.com/hyperledger/iroha --depth=1</code></p>
+<p>Hint</p>
+<p>–depth=1 option allows us to download only latest commit and save some time and bandwidth. If you want to get a full commit history, you can omit this option.</p>
+<p>When it is done, you need to run the development environment. Run the scripts/run-iroha-dev.sh script:</p>
+<p>bash scripts/run-iroha-dev.sh<br>Hint</p>
+<p>Please make sure that Docker is running before executing the script. MacOS users could find a Docker icon in system tray, Linux users can use systemctl start docker</p>
+<p>After you execute this script, the following things will happen:</p>
+<p>The script will check whether you have containers with Iroha already running. Successful completion finishes with the new container shell.<br>The script will download hyperledger/iroha:develop-build and postgres images. hyperledger/iroha:develop-build image contains all development dependencies and is based on top of ubuntu:18.04. postgres image is required for starting and running Iroha.<br>Two containers are created and launched.<br>The user is attached to the interactive environment for development and testing with iroha folder mounted from the host machine. Iroha folder is mounted to /opt/iroha in Docker container.<br>Now your are ready to build Iroha! Please go directly to Building Iroha section.</p>
+<p>5.1.2. Linux<br>To build Iroha, you will need the following packages:</p>
+<p>build-essential git ca-certificates tar ninja-build curl unzip cmake</p>
+<p>Use this code to install environment dependencies on Debian-based Linux distro.</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">apt-get update<span class="hljs-comment">; \</span><br>apt-get -y --no-<span class="hljs-keyword">install-recommends </span><span class="hljs-keyword">install </span>\<br><span class="hljs-keyword">build-essential </span>ninja-<span class="hljs-keyword">build </span>\<br>git ca-certificates tar curl unzip cmake<br></code></pre></td></tr></table></figure>
+
+<p>Note</p>
+<p>If you are willing to actively develop Iroha and to build shared libraries, please consider installing the latest release of CMake.</p>
+<p>Now you are ready to install Iroha dependencies.</p>
+<p>5.1.3. MacOS<br>If you want to build Iroha from scratch and actively develop it, please use the following code to install all environment dependencies with Homebrew:</p>
+<p><code>xcode-select --install</code><br><code>brew install cmake ninja git gcc@7</code></p>
+<p>Hint</p>
+<p>To install the Homebrew itself please run</p>
+<p><code>ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/homebrew/install/master/install)&quot;</code></p>
+<p>Now you are ready to install Iroha dependencies.</p>
+<p>5.1.4. Windows<br>Note</p>
+<p>All the listed commands are designed for building 64-bit version of Iroha.</p>
+<p>5.1.4.1. Chocolatey Package Manager<br>First of all you need Chocolatey package manager installed. Please refer the guide for chocolatey installation.</p>
+<p>5.1.4.2. Building the Toolset<br>Install CMake, Git, Microsoft compilers via chocolatey being in Administrative mode of command prompt:</p>
+<p>choco install cmake git visualstudio2019-workload-vctools ninja<br>PostgreSQL is not a build dependency, but it is recommended to install it now for the testing later:</p>
+<p>choco install postgresql<br>Don’t forget the password you set!<br>Now you are ready to install Iroha dependencies.</p>
+<p>5.2. Installing dependencies with Vcpkg Dependency Manager<br>Currently we use Vcpkg as a dependency manager for all platforms - Linux, Windows and MacOS. We use a fixed version of Vcpkg to ensure the patches we need will work.</p>
+<p>That stable version can only be found inside the Iroha repository, so we will need to clone Iroha. The whole process is pretty similar for all platforms but the exact commands are slightly different.</p>
+<p>5.2.1. Linux and MacOS<br>Run in terminal:</p>
+<p><code>git clone https://github.com/hyperledger/iroha.git</code><br><code>iroha/vcpkg/build_iroha_deps.sh</code><br><code>vcpkg/vcpkg integrate install</code></p>
+<p>After the installation of vcpkg you will be provided with a CMake build parameter like -DCMAKE_TOOLCHAIN_FILE=/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake. Save it somewhere for later use and move to Building Iroha section.</p>
+<p>5.2.2. Windows<br>Execute from Power Shell:</p>
+<p><code>git clone https://github.com/hyperledger/iroha.git</code><br><code>powershell -ExecutionPolicy ByPass -File .\iroha\.packer\win\scripts\vcpkg.ps1 .\vcpkg .\iroha\vcpkg</code></p>
+<p>After the installation of vcpkg you will be provided with a CMake build parameter like -DCMAKE_TOOLCHAIN_FILE=C:/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake. Save it somewhere for later use and move to Building Iroha section.</p>
+<p>Note</p>
+<p>If you plan to build 32-bit version of Iroha - you will need to install all the mentioned librares above prefixed with x86 term instead of x64.</p>
+<p>5.3. Build Process<br>5.3.1. Cloning the Repository<br>This step is currently unnecessary since you have already cloned Iroha in the previous step. But if you want, you can clone the Iroha repository to the directory of your choice.</p>
+<p><code>git clone -b master https://github.com/hyperledger/iroha</code><br><code>cd iroha</code></p>
+<p>Hint</p>
+<p>If you have installed the prerequisites with Docker, you don’t need to clone Iroha again, because when you run run-iroha-dev.sh it attaches to Iroha source code folder. Feel free to edit source code files with your host environment and build it within docker container.</p>
+<p>5.3.2. Building Iroha<br>To build Iroha, use these commands:</p>
+<p><code>cmake -H. -Bbuild -DCMAKE_TOOLCHAIN_FILE=/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake -G &quot;Ninja&quot;</code><br><code>cmake --build build --target irohad -- -j&lt;number of threads&gt;</code></p>
+<p>Note</p>
+<p>On Docker the path to a toolchain file is /opt/dependencies/scripts/buildsystems/vcpkg.cmake. In other environment please use the path you have got in previous steps.</p>
+<p>Number of threads will be defined differently depending on the platform: - On Linux: via nproc. - On MacOS: with sysctl -n hw.ncpu. - On Windows: use echo %NUMBER_OF_PROCESSORS%.</p>
+<p>Note</p>
+<p>When building on Windows do not execute this from the Power Shell. Better use x64 Native tools command prompt.</p>
+<p>Now Iroha is built. Although, if you like, you can build it with additional parameters described below.</p>
+<p>5.3.3. CMake Parameters<br>We use CMake to generate platform-dependent build files. It has numerous flags for configuring the final build. Note that besides the listed parameters cmake’s variables can be useful as well. Also as long as this page can be deprecated (or just not complete) you can browse custom flags via cmake -L, cmake-gui, or ccmake.</p>
+<p>Hint</p>
+<blockquote>
+<p>You can specify parameters at the cmake configuring stage (e.g cmake -DTESTING=ON).</p>
+</blockquote>
+<p>5.3.3.1. Main Parameters<br>Parameter    Possible values    Default    Description<br>TESTING    ON/OFF    ON    Enables or disables build of the tests<br>BENCHMARKING    OFF    Enables or disables build of the Google Benchmarks library<br>COVERAGE    OFF    Enables or disables lcov setting for code coverage generation<br>USE_LIBURSA    OFF    Enables usage of the HL Ursa cryptography instead of the standard one<br>Note</p>
+<blockquote>
+<p>If you would like to use HL Ursa cryptography for your build, please install Rust in addition to other dependencies. Learn more about HL Ursa integration here.</p>
+</blockquote>
+<p>5.3.3.2. Packaging Specific Parameters<br>Parameter    Possible values    Default    Description<br>PACKAGE_ZIP    ON/OFF    OFF    Enables or disables zip packaging<br>PACKAGE_TGZ    OFF    Enables or disables tar.gz packaging<br>PACKAGE_RPM    OFF    Enables or disables rpm packaging<br>PACKAGE_DEB    OFF    Enables or disables deb packaging<br>5.3.4. Running Tests (optional)<br>After building Iroha, it is a good idea to run tests to check the operability of the daemon. You can run tests with this code:</p>
+<p><code>cmake --build build --target test</code><br>Alternatively, you can run the following command in the build folder</p>
+<p><code>cd build</code><br><code>ctest . --output-on-failure</code><br>Note</p>
+<blockquote>
+<p>Some of the tests will fail without PostgreSQL storage running, so if you are not using scripts/run-iroha-dev.sh script please run Docker container or create a local connection with following parameters:</p>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros">docker <span class="hljs-builtin-name">run</span> --name some-postgres \<br>-e <span class="hljs-attribute">POSTGRES_USER</span>=postgres \<br>-e <span class="hljs-attribute">POSTGRES_PASSWORD</span>=mysecretpassword \<br>-p 5432:5432 \<br>-d postgres:9.5 \<br>-c <span class="hljs-string">&#x27;max_prepared_transactions=100&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
+<h1 id="Hyperledger-Iroha-相关资料"><a href="#Hyperledger-Iroha-相关资料" class="headerlink" title="Hyperledger Iroha 相关资料"></a>Hyperledger Iroha 相关资料</h1><p><a target="_blank" rel="noopener" href="https://iroha.readthedocs.io/en/latest/">官方文档</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE%E7%AF%87/" class="category-chain-item">区块链篇</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Hyperledger-Iroha/">#Hyperledger-Iroha</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Hyperledger Iroha</div>
+      <div>https://mikeygithub.github.io/2020/03/18/yuque/hwm62f/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年3月18日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

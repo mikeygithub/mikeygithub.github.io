@@ -1,0 +1,1018 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简单案例接口查询列表在公司的系统中有一个接口查询耗时非常久大概每次查询十多秒看了一下该数据库表的记录只有八十多万行，理论上不应该这么慢，开始查看对应的查询SQL 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL篇-MySQL查询优化">
+<meta property="og:url" content="https://mikeygithub.github.io/2022/03/09/yuque/xn0by7/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="简单案例接口查询列表在公司的系统中有一个接口查询耗时非常久大概每次查询十多秒看了一下该数据库表的记录只有八十多万行，理论上不应该这么慢，开始查看对应的查询SQL 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1657555691464-15b0abf2-327b-4053-885d-6201b40d7115.jpeg">
+<meta property="article:published_time" content="2022-03-09T14:24:22.000Z">
+<meta property="article:modified_time" content="2023-02-13T14:42:02.305Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="SQL优化">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1657555691464-15b0abf2-327b-4053-885d-6201b40d7115.jpeg">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>MySQL篇-MySQL查询优化 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="MySQL篇-MySQL查询优化"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-03-09 22:24" pubdate>
+          2022年3月9日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          95 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL篇-MySQL查询优化</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1657555691464-15b0abf2-327b-4053-885d-6201b40d7115.jpeg#averageHue=%2370a3d1&clientId=ucd81ca79-89b6-4&from=markdown&id=e8UWy&originHeight=260&originWidth=480&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u9fee7ada-8250-497c-a628-079c5a95d93&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="简单案例"><a href="#简单案例" class="headerlink" title="简单案例"></a>简单案例</h1><p>接口查询列表<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1662521905669-6f3ef4f3-2f9f-48b2-b1b1-0b2d1ef55d38.png#averageHue=%23f7f7f6&clientId=ubd7b4773-81c6-4&from=paste&height=463&id=u5160d6db&name=image.png&originHeight=1490&originWidth=2576&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1005235&status=done&style=none&taskId=u2cfe9128-310f-4095-81d7-60dd7e36fad&title=&width=801" srcset="/img/loading.gif" lazyload alt="image.png"><br>在公司的系统中有一个接口查询耗时非常久大概每次查询十多秒<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1662521413364-a149af81-4ee7-44ab-b3e3-c861d90d036c.png#averageHue=%23fefefe&clientId=ubd7b4773-81c6-4&from=paste&height=354&id=u60c0b10b&name=image.png&originHeight=720&originWidth=1626&originalType=binary&ratio=1&rotation=0&showTitle=false&size=146204&status=done&style=none&taskId=ud3a57e0a-1364-4ca9-957b-2261077b43e&title=&width=799" srcset="/img/loading.gif" lazyload alt="image.png"><br>看了一下该数据库表的记录只有八十多万行，理论上不应该这么慢，开始查看对应的查询SQL</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> as_jz_user_info.id <span class="hljs-string">&#x27;id&#x27;</span>, as_jz_user_info.user_name <span class="hljs-string">&#x27;userName&#x27;</span>,<br>    as_jz_user_info.mobile <span class="hljs-string">&#x27;mobile&#x27;</span>, as_jz_cooperation_company_info.id <span class="hljs-string">&#x27;companyId&#x27;</span>,<br>    as_jz_cooperation_company_info.coperrate_state <span class="hljs-string">&#x27;coperrateState&#x27;</span>,<br>    as_jz_cooperation_company_info.estimate_order_num <span class="hljs-string">&#x27;estimateOrderNum&#x27;</span>,<br>    as_jz_cooperation_company_info.estimate_order_amount <span class="hljs-string">&#x27;estimateOrderAmount&#x27;</span>,<br>    as_jz_cooperation_company_sales.customer_level_id <span class="hljs-string">&#x27;customerLevelId&#x27;</span>,<br>    as_jz_cooperation_company_sales.customer_level_name <span class="hljs-string">&#x27;customerLevelName&#x27;</span>,<br>    as_jz_user_info.company <span class="hljs-string">&#x27;company&#x27;</span>, as_inv_industry_classification<br>    .level_one <span class="hljs-string">&#x27;levelOne&#x27;</span>, as_inv_industry_classification.level_one_name <span class="hljs-string">&#x27;levelOneName&#x27;</span>,<br>    as_inv_industry_classification.level_three <span class="hljs-string">&#x27;levelThree&#x27;</span>,<br>    as_inv_industry_classification.level_three_name <span class="hljs-string">&#x27;levelThreeName&#x27;</span>,<br>    as_jz_cooperation_company_info.<br>`customer_logo`<br><span class="hljs-string">&#x27;logo&#x27;</span>, as_jz_user_info.create_time <span class="hljs-string">&#x27;createTime&#x27;</span>,<br>    as_jz_cooperation_company_info.contract_date <span class="hljs-string">&#x27;contractDate&#x27;</span>,<br>    as_jz_cooperation_company_info.contract_deadline <span class="hljs-string">&#x27;contractDeadline&#x27;</span>,<br>    as_jz_cooperation_company_info.STATUS <span class="hljs-string">&#x27;signStatus&#x27;</span>,<br>    as_jz_cooperation_company_sales.sign_up_name <span class="hljs-string">&#x27;signName&#x27;</span>,<br>    as_jz_cooperation_company_sales.follow_up_name <span class="hljs-string">&#x27;followName&#x27;</span>,<br>    as_tb_users_info.user_name <span class="hljs-string">&#x27;followManageName&#x27;</span>, as_jz_user_info.customer_source <span class="hljs-string">&#x27;customerSource&#x27;</span>,<br>    q.orderNum <span class="hljs-string">&#x27;orderNum&#x27;</span>, q.orderAmount <span class="hljs-string">&#x27;orderAmount&#x27;</span>, last_q.lastOrderNum <span class="hljs-string">&#x27;lastOrderNum&#x27;</span>,<br>    last_q.lastOrderAmount <span class="hljs-string">&#x27;lastOrderAmount&#x27;</span><br><span class="hljs-keyword">FROM</span> jz_user_info as_jz_user_info<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> jz_cooperation_company_info as_jz_cooperation_company_info<br><span class="hljs-keyword">ON</span> as_jz_user_info.company <span class="hljs-operator">=</span> as_jz_cooperation_company_info.company<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> jz_cooperation_company_sales as_jz_cooperation_company_sales<br><span class="hljs-keyword">ON</span> as_jz_cooperation_company_sales.company_id <span class="hljs-operator">=</span><br>    as_jz_cooperation_company_info.id<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> tb_users_info as_tb_users_info<br><span class="hljs-keyword">ON</span> as_tb_users_info.fbi_user <span class="hljs-operator">=</span> as_jz_cooperation_company_info.manager_id<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> inv_industry_classification as_inv_industry_classification<br><span class="hljs-keyword">ON</span> as_inv_industry_classification.id <span class="hljs-operator">=</span> as_jz_cooperation_company_info<br>    .industry_id<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span><br>    (<span class="hljs-keyword">SELECT</span> as_jz_user_info.company <span class="hljs-string">&#x27;company&#x27;</span>, <span class="hljs-built_in">COUNT</span>(as_jz_order_info<br>            .id)<br>        <span class="hljs-string">&#x27;orderNum&#x27;</span>, <span class="hljs-built_in">SUM</span>(as_jz_order_info.payment_amount)<br>        <span class="hljs-string">&#x27;orderAmount&#x27;</span><br>        <span class="hljs-keyword">FROM</span> jz_user_info as_jz_user_info <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> jz_cooperation_company_info as_jz_cooperation_company_info <span class="hljs-keyword">ON</span> as_jz_user_info<br>        .company <span class="hljs-operator">=</span> as_jz_cooperation_company_info.company <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> jz_order_info as_jz_order_info <span class="hljs-keyword">ON</span> as_jz_order_info<br>        .user_id <span class="hljs-operator">=</span> as_jz_user_info.id <span class="hljs-keyword">WHERE</span> <span class="hljs-number">1</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> <span class="hljs-keyword">AND</span> as_jz_order_info<br>        .payment_status <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;1&#x27;</span><br>        <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> as_jz_user_info.company) q<br><span class="hljs-keyword">ON</span> q.company <span class="hljs-operator">=</span> as_jz_user_info.company<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span><br>    (<span class="hljs-keyword">SELECT</span> as_jz_user_info.company <span class="hljs-string">&#x27;company&#x27;</span>, <span class="hljs-built_in">COUNT</span>(as_jz_order_info<br>            .id)<br>        <span class="hljs-string">&#x27;lastOrderNum&#x27;</span>, <span class="hljs-built_in">SUM</span>(as_jz_order_info.payment_amount)<br>        <span class="hljs-string">&#x27;lastOrderAmount&#x27;</span><br>        <span class="hljs-keyword">FROM</span> jz_user_info as_jz_user_info <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> jz_cooperation_company_info as_jz_cooperation_company_info <span class="hljs-keyword">ON</span> as_jz_user_info<br>        .company <span class="hljs-operator">=</span> as_jz_cooperation_company_info.company <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> jz_order_info as_jz_order_info <span class="hljs-keyword">ON</span> as_jz_order_info<br>        .user_id <span class="hljs-operator">=</span> as_jz_user_info.id <span class="hljs-keyword">WHERE</span> <span class="hljs-number">1</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> <span class="hljs-keyword">AND</span> as_jz_order_info<br>        .create_time <span class="hljs-operator">&gt;=</span> ?<br>        <span class="hljs-keyword">AND</span> as_jz_order_info.create_time <span class="hljs-operator">&lt;=</span> ?<br>        <span class="hljs-keyword">AND</span> as_jz_order_info.payment_status <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;1&#x27;</span><br>        <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> as_jz_user_info.company) last_q<br><span class="hljs-keyword">ON</span> last_q.company <span class="hljs-operator">=</span> as_jz_user_info.company<br><span class="hljs-keyword">WHERE</span> <span class="hljs-number">1</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span><br><span class="hljs-keyword">AND</span> as_jz_user_info.company_id <span class="hljs-operator">&gt;</span> <span class="hljs-number">0</span><br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> as_jz_user_info.id<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> as_jz_cooperation_company_info.manager_time <span class="hljs-keyword">desc</span>,<br>    as_jz_user_info.id <span class="hljs-keyword">DESC</span> limit ? , ? sg] <span class="hljs-operator">=</span><span class="hljs-operator">=</span> <span class="hljs-operator">&gt;</span> Preparing: <span class="hljs-keyword">SELECT</span> as_jz_user_info<br>    .id <span class="hljs-string">&#x27;id&#x27;</span>, as_jz_user_info.user_name <span class="hljs-string">&#x27;userName&#x27;</span>, as_jz_user_info.mobile <span class="hljs-string">&#x27;mobile&#x27;</span>,<br>    as_jz_cooperation_company_info.id <span class="hljs-string">&#x27;companyId&#x27;</span>,<br>    as_jz_cooperation_company_info.coperrate_state <span class="hljs-string">&#x27;coperrateState&#x27;</span>,<br>    as_jz_cooperation_company_info.estimate_order_num <span class="hljs-string">&#x27;estimateOrderNum&#x27;</span>,<br>    as_jz_cooperation_company_info.estimate_order_amount <span class="hljs-string">&#x27;estimateOrderAmount&#x27;</span>,<br>    as_jz_cooperation_company_sales.customer_level_id <span class="hljs-string">&#x27;customerLevelId&#x27;</span>,<br>    as_jz_cooperation_company_sales.customer_level_name <span class="hljs-string">&#x27;customerLevelName&#x27;</span>,<br>    as_jz_user_info.company <span class="hljs-string">&#x27;company&#x27;</span>, as_inv_industry_classification<br>    .level_one <span class="hljs-string">&#x27;levelOne&#x27;</span>, as_inv_industry_classification.level_one_name <span class="hljs-string">&#x27;levelOneName&#x27;</span>,<br>    as_inv_industry_classification.level_three <span class="hljs-string">&#x27;levelThree&#x27;</span>,<br>    as_inv_industry_classification.level_three_name <span class="hljs-string">&#x27;levelThreeName&#x27;</span>,<br>    as_jz_cooperation_company_info.<br>`customer_logo`<br><span class="hljs-string">&#x27;logo&#x27;</span>, as_jz_user_info.create_time <span class="hljs-string">&#x27;createTime&#x27;</span>,<br>    as_jz_cooperation_company_info.contract_date <span class="hljs-string">&#x27;contractDate&#x27;</span>,<br>    as_jz_cooperation_company_info.contract_deadline <span class="hljs-string">&#x27;contractDeadline&#x27;</span>,<br>    as_jz_cooperation_company_info.STATUS <span class="hljs-string">&#x27;signStatus&#x27;</span>,<br>    as_jz_cooperation_company_sales.sign_up_name <span class="hljs-string">&#x27;signName&#x27;</span>,<br>    as_jz_cooperation_company_sales.follow_up_name <span class="hljs-string">&#x27;followName&#x27;</span>,<br>    as_tb_users_info.user_name <span class="hljs-string">&#x27;followManageName&#x27;</span>, as_jz_user_info.customer_source <span class="hljs-string">&#x27;customerSource&#x27;</span>,<br>    q.orderNum <span class="hljs-string">&#x27;orderNum&#x27;</span>, q.orderAmount <span class="hljs-string">&#x27;orderAmount&#x27;</span>, last_q.lastOrderNum <span class="hljs-string">&#x27;lastOrderNum&#x27;</span>,<br>    last_q.lastOrderAmount <span class="hljs-string">&#x27;lastOrderAmount&#x27;</span><br><span class="hljs-keyword">FROM</span> jz_user_info as_jz_user_info<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> jz_cooperation_company_info as_jz_cooperation_company_info<br><span class="hljs-keyword">ON</span> as_jz_user_info.company <span class="hljs-operator">=</span> as_jz_cooperation_company_info.company<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> jz_cooperation_company_sales as_jz_cooperation_company_sales<br><span class="hljs-keyword">ON</span> as_jz_cooperation_company_sales.company_id <span class="hljs-operator">=</span><br>    as_jz_cooperation_company_info.id<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> tb_users_info as_tb_users_info<br><span class="hljs-keyword">ON</span> as_tb_users_info.fbi_user <span class="hljs-operator">=</span> as_jz_cooperation_company_info.manager_id<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> inv_industry_classification as_inv_industry_classification<br><span class="hljs-keyword">ON</span> as_inv_industry_classification.id <span class="hljs-operator">=</span> as_jz_cooperation_company_info<br>    .industry_id<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span><br>    (<span class="hljs-keyword">SELECT</span> as_jz_user_info.company <span class="hljs-string">&#x27;company&#x27;</span>, <span class="hljs-built_in">COUNT</span>(as_jz_order_info<br>            .id)<br>        <span class="hljs-string">&#x27;orderNum&#x27;</span>, <span class="hljs-built_in">SUM</span>(as_jz_order_info.payment_amount)<br>        <span class="hljs-string">&#x27;orderAmount&#x27;</span><br>        <span class="hljs-keyword">FROM</span> jz_user_info as_jz_user_info <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> jz_cooperation_company_info as_jz_cooperation_company_info <span class="hljs-keyword">ON</span> as_jz_user_info<br>        .company <span class="hljs-operator">=</span> as_jz_cooperation_company_info.company <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> jz_order_info as_jz_order_info <span class="hljs-keyword">ON</span> as_jz_order_info<br>        .user_id <span class="hljs-operator">=</span> as_jz_user_info.id <span class="hljs-keyword">WHERE</span> <span class="hljs-number">1</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> <span class="hljs-keyword">AND</span> as_jz_order_info<br>        .payment_status <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;1&#x27;</span><br>        <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> as_jz_user_info.company) q<br><span class="hljs-keyword">ON</span> q.company <span class="hljs-operator">=</span> as_jz_user_info.company<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span><br>    (<span class="hljs-keyword">SELECT</span> as_jz_user_info.company <span class="hljs-string">&#x27;company&#x27;</span>, <span class="hljs-built_in">COUNT</span>(as_jz_order_info<br>            .id)<br>        <span class="hljs-string">&#x27;lastOrderNum&#x27;</span>, <span class="hljs-built_in">SUM</span>(as_jz_order_info.payment_amount)<br>        <span class="hljs-string">&#x27;lastOrderAmount&#x27;</span><br>        <span class="hljs-keyword">FROM</span> jz_user_info as_jz_user_info <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> jz_cooperation_company_info as_jz_cooperation_company_info <span class="hljs-keyword">ON</span> as_jz_user_info<br>        .company <span class="hljs-operator">=</span> as_jz_cooperation_company_info.company <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> jz_order_info as_jz_order_info <span class="hljs-keyword">ON</span> as_jz_order_info<br>        .user_id <span class="hljs-operator">=</span> as_jz_user_info.id <span class="hljs-keyword">WHERE</span> <span class="hljs-number">1</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> <span class="hljs-keyword">AND</span> as_jz_order_info<br>        .create_time <span class="hljs-operator">&gt;=</span> ?<br>        <span class="hljs-keyword">AND</span> as_jz_order_info.create_time <span class="hljs-operator">&lt;=</span> ?<br>        <span class="hljs-keyword">AND</span> as_jz_order_info.payment_status <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;1&#x27;</span><br>        <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> as_jz_user_info.company) last_q<br><span class="hljs-keyword">ON</span> last_q.company <span class="hljs-operator">=</span> as_jz_user_info.company<br><span class="hljs-keyword">WHERE</span> <span class="hljs-number">1</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span><br><span class="hljs-keyword">AND</span> as_jz_user_info.company_id <span class="hljs-operator">&gt;</span> <span class="hljs-number">0</span><br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> as_jz_user_info.id<br><span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> as_jz_cooperation_company_info.manager_time <span class="hljs-keyword">desc</span>,<br>    as_jz_user_info.id <span class="hljs-keyword">DESC</span> limit ? , ?<br></code></pre></td></tr></table></figure>
+<p>该需要还需要有条件进行查询<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1662521759947-56ef6474-26d5-4f37-b8e4-e3bebdf1c676.png#averageHue=%23eff0ef&clientId=ubd7b4773-81c6-4&from=paste&height=86&id=ud9ba6a93&name=image.png&originHeight=172&originWidth=1790&originalType=binary&ratio=1&rotation=0&showTitle=false&size=106169&status=done&style=none&taskId=uc3ef8c77-44ce-4f17-bc39-1b54f43b394&title=&width=895" srcset="/img/loading.gif" lazyload alt="image.png"><br>通过分析发现耗时主要几种在订单金额、数量的统计中，和与订单表进行连接查询，其造成笛卡尔积较大导致查询效率低下</p>
+<p>业务上的优化</p>
+<blockquote>
+<p>经过和产品经理沟通，其上一年订单量、金额都是固定的，不以查询时间改动，所以对表进行添加两个字段进行记录，使用定时任务进行每一年统计一次，无需实时统计</p>
+</blockquote>
+<p>使用子查询代替连接查询</p>
+<blockquote>
+<p>以先查小表再连接大表</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> jcci.company,<br>jcci.id,<br>industry_id,<br>contract_date,<br>contract_deadline,<br>estimate_order_num,<br>estimate_order_amount,<br>prev_year_order_num,<br>prev_year_order_amount<br><span class="hljs-keyword">from</span> jz_cooperation_company_info jcci<br><span class="hljs-keyword">where</span> <span class="hljs-number">1</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span><br><span class="hljs-keyword">and</span> manager_id <span class="hljs-operator">=</span> <span class="hljs-number">76</span>) jcci<br></code></pre></td></tr></table></figure>
+
+<p>建立索引</p>
+<blockquote>
+<p>为连接条件，查询条件的字段建立索引</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"># 添加上一年统计字段<br>alter table jz_cooperation_company_info add prev_year_order_num bigint <span class="hljs-keyword">default</span> <span class="hljs-number">0</span> null comment <span class="hljs-string">&#x27;上一年订单数量&#x27;</span>;<br>alter table jz_cooperation_company_info add prev_year_order_amount <span class="hljs-keyword">double</span> <span class="hljs-keyword">default</span> <span class="hljs-number">0</span> null comment <span class="hljs-string">&#x27;上一年订单金额&#x27;</span>;<br># 添加索引<br><span class="hljs-function">create index jz_user_info_company_id_index on <span class="hljs-title">jz_user_info</span> <span class="hljs-params">(company_id)</span></span><br><span class="hljs-function">create index jz_order_info_create_time_index	on <span class="hljs-title">jz_order_info</span> <span class="hljs-params">(create_time)</span></span><br><span class="hljs-function"># 添加订单状态、时间索引</span><br><span class="hljs-function">create index jz_order_info_payment_status_index on <span class="hljs-title">jz_order_info</span> <span class="hljs-params">(payment_status)</span></span>;<br><span class="hljs-function">create index jz_cooperation_company_info_manager_id_index on <span class="hljs-title">jz_cooperation_company_info</span> <span class="hljs-params">(manager_id)</span></span>;<br><span class="hljs-function">create index jz_user_info_company_index on <span class="hljs-title">jz_user_info</span> <span class="hljs-params">(company)</span></span>;<br># 创建查询条件索引<br><span class="hljs-function">create index jz_user_info_mobile_index on <span class="hljs-title">jz_user_info</span> <span class="hljs-params">(mobile)</span></span>;<br><span class="hljs-function">create index jz_user_info_user_name_index on <span class="hljs-title">jz_user_info</span> <span class="hljs-params">(user_name)</span></span>;<br><br></code></pre></td></tr></table></figure>
+<p>改进后完整的SQL</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs sql">explain<br><span class="hljs-keyword">SELECT</span> jcci.company                    company,<br>jcci.id                                companyId,<br>jcci.contract_date                     contractDate,<br>jcci.contract_deadline                 contractDeadline,<br>ifnull(jcci.estimate_order_num, <span class="hljs-number">0</span>)     estimateOrderNum,<br>ifnull(jcci.estimate_order_amount, <span class="hljs-number">0</span>)  estimateOrderAmount,<br>ifnull(jcci.prev_year_order_num, <span class="hljs-number">0</span>)    lastOrderNum,<br>ifnull(jcci.prev_year_order_amount, <span class="hljs-number">0</span>) lastOrderAmount,<br>jui.user_name                          userName,<br>jui.mobile                             mobile,<br>jui.customer_source                    customerSource,<br>iic.level_one                          levelOne,<br>iic.level_one_name                     levelOneName,<br>iic.level_three                        levelThree,<br>iic.level_three_name                   levelThreeName,<br>ifnull(<span class="hljs-built_in">COUNT</span>(joi.id), <span class="hljs-number">0</span>)               <span class="hljs-string">&#x27;orderNum&#x27;</span>,<br>ifnull(<span class="hljs-built_in">SUM</span>(joi.payment_amount), <span class="hljs-number">0</span>)     <span class="hljs-string">&#x27;orderAmount&#x27;</span><br><span class="hljs-keyword">FROM</span> (<span class="hljs-keyword">select</span> jcci.company,<br>      jcci.id,<br>      industry_id,<br>      contract_date,<br>      contract_deadline,<br>      estimate_order_num,<br>      estimate_order_amount,<br>      prev_year_order_num,<br>      prev_year_order_amount<br>      <span class="hljs-keyword">from</span> jz_cooperation_company_info jcci<br>      <span class="hljs-keyword">where</span> <span class="hljs-number">1</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span><br>      <span class="hljs-keyword">and</span> manager_id <span class="hljs-operator">=</span> <span class="hljs-number">76</span>) jcci<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> jz_user_info jui <span class="hljs-keyword">on</span> jui.company <span class="hljs-operator">=</span> jcci.company<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> jz_order_info joi<br><span class="hljs-keyword">ON</span> joi.payment_status <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;1&#x27;</span> <span class="hljs-keyword">and</span> joi.create_time <span class="hljs-keyword">between</span> <span class="hljs-string">&#x27;2022-01-01&#x27;</span> <span class="hljs-keyword">and</span> <span class="hljs-string">&#x27;2022-08-30&#x27;</span> <span class="hljs-keyword">and</span> joi.user_id <span class="hljs-operator">=</span> jui.id<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> inv_industry_classification iic <span class="hljs-keyword">on</span> iic.id <span class="hljs-operator">=</span> jcci.industry_id<br><span class="hljs-keyword">where</span> <span class="hljs-number">1</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span><br><span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> jui.company<br><span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> <span class="hljs-keyword">null</span><br>LIMIT <span class="hljs-number">10</span><br></code></pre></td></tr></table></figure>
+<p>经优化后查询稳定在1秒左右</p>
+<h1 id="分析工具"><a href="#分析工具" class="headerlink" title="分析工具"></a>分析工具</h1><blockquote>
+<p>explain分析工具</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql">explain <span class="hljs-keyword">select</span> jcci.id company_id, jcci.company<br><span class="hljs-keyword">from</span> jz_cooperation_company_info jcci<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> jz_user_info jui <span class="hljs-keyword">on</span> jui.company <span class="hljs-operator">=</span> jcci.company<br><span class="hljs-keyword">where</span> jui.id <span class="hljs-keyword">in</span> (<br>          <span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span>(user_id)<br>          <span class="hljs-keyword">from</span> jz_order_info joi<br>          <span class="hljs-keyword">where</span> joi.payment_status <span class="hljs-operator">=</span> <span class="hljs-number">1</span><br>          <span class="hljs-keyword">and</span> joi.user_id <span class="hljs-keyword">in</span> (<br>              <span class="hljs-keyword">select</span> jui.id <span class="hljs-keyword">from</span> jz_user_info jui<br>              <span class="hljs-keyword">where</span> company <span class="hljs-keyword">in</span> (<br>                  <span class="hljs-keyword">select</span> jci.company <span class="hljs-keyword">from</span> jz_cooperation_company_info jci <span class="hljs-keyword">where</span> sales_id <span class="hljs-operator">=</span> <span class="hljs-number">38</span><br>                )<br>            )<br>          <span class="hljs-keyword">and</span> <span class="hljs-keyword">year</span>(joi.payment_time) <span class="hljs-operator">=</span> <span class="hljs-number">2022</span>)<br></code></pre></td></tr></table></figure>
+<p>分析结果<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1646882642140-0368a492-12b7-42c5-865e-451c87b36f96.png#averageHue=%232d2e2d&clientId=u176f588e-5edf-4&from=paste&height=592&id=u8d8c93e5&name=image.png&originHeight=592&originWidth=2506&originalType=binary&ratio=1&rotation=0&showTitle=false&size=359636&status=done&style=none&taskId=uab5951b2-5a4a-4709-bb8e-41d351d9e9e&title=&width=2506" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h2><h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><blockquote>
+<p>选择标识符</p>
+</blockquote>
+<h3 id="select-type"><a href="#select-type" class="headerlink" title="select_type"></a>select_type</h3><blockquote>
+<p>select_type:表示查询的类型。</p>
+</blockquote>
+<ul>
+<li>SIMPLE：简单的select查询，查询中不包含子查询或者UNION</li>
+<li>PRIMARY：查询中若包含任何复杂的子部分，最外层查询则被标记为</li>
+<li>SUBQUERY：在SELECT或WHERE列表中包含了子查询</li>
+<li>DERIVED：在FROM列表中包含的子查询被标记为DERIVED（衍生）MYSQL会递归执行这些子查询，把结果放在临时表里</li>
+<li>UNION：若第二个SELECT出现在UNION之后，则被标记为UNION若UNION包含在FROM子句的子查询中，外层SELECT将被标记为：DERIVED</li>
+<li>UNION RESULT：从UNION表获取结果的SELECT</li>
+</ul>
+<h3 id="table"><a href="#table" class="headerlink" title="table"></a>table</h3><p>查询对应的表名或别名</p>
+<h3 id="type"><a href="#type" class="headerlink" title="type"></a>type</h3><blockquote>
+<p>type:表示表的连接类型</p>
+</blockquote>
+<p>（从上到下，性能从差到好）</p>
+<ul>
+<li>all 全表查询</li>
+<li>index 索引全扫描</li>
+<li>range 索引范围扫描</li>
+<li>ref 使用非唯一或唯一索引的前缀扫描,返回相同值的记录</li>
+<li>eq_ref 使用唯一索引，只返回一条记录</li>
+<li>const,system 单表中最多只有一行匹配,根据唯一索引或主键进行查询</li>
+<li>null 不访问表或索引就可以直接得到结果</li>
+</ul>
+<h3 id="possible-keys"><a href="#possible-keys" class="headerlink" title="possible_keys"></a>possible_keys</h3><blockquote>
+<p>表示查询时，可能使用的索引</p>
+</blockquote>
+<h3 id="key"><a href="#key" class="headerlink" title="key"></a>key</h3><blockquote>
+<p>表示实际使用的索引</p>
+</blockquote>
+<h3 id="key-len"><a href="#key-len" class="headerlink" title="key_len"></a>key_len</h3><blockquote>
+<p>索引字段的长度</p>
+</blockquote>
+<h3 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h3><blockquote>
+<p>列与索引的比较</p>
+</blockquote>
+<h3 id="rows"><a href="#rows" class="headerlink" title="rows"></a>rows</h3><blockquote>
+<p>扫描出的行数(估算的行数)</p>
+</blockquote>
+<h3 id="filtered"><a href="#filtered" class="headerlink" title="filtered"></a>filtered</h3><blockquote>
+<p>按表条件过滤的行百分比</p>
+</blockquote>
+<h3 id="Extra"><a href="#Extra" class="headerlink" title="Extra"></a>Extra</h3><blockquote>
+<p>执行情况的描述和说明</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">Using</span> temporary（临时表,表示由于排序没有走索引）<br><span class="hljs-keyword">Using</span> filesort（没有使用索引的排序）<br><span class="hljs-keyword">Using</span> <span class="hljs-keyword">where</span>（使用了索引）<br></code></pre></td></tr></table></figure>
+
+<h2 id="耗时分析"><a href="#耗时分析" class="headerlink" title="耗时分析"></a>耗时分析</h2><p>查看MySQL对应的版本</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function">select <span class="hljs-title">version</span><span class="hljs-params">()</span></span>;<br>show variables like <span class="hljs-string">&#x27;%version%&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<p>开启profiling记录SQL耗时</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"># 查看是否已经开启<br>show variables like <span class="hljs-string">&#x27;%profiling%&#x27;</span>;<br># 开启<br><span class="hljs-built_in">set</span> profiling  = <span class="hljs-number">1</span>;<br># 设置记录条数<br><span class="hljs-built_in">set</span> profiling_history_size  = <span class="hljs-number">50</span>;<br># 查看所有记录<br>show profiles;<br># 查看指定记录的所有属性<br>show profile all <span class="hljs-keyword">for</span> query <span class="hljs-number">367</span>;<br># 关闭记录<br><span class="hljs-built_in">set</span> profiling  = <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="总结建议"><a href="#总结建议" class="headerlink" title="总结建议"></a>总结建议</h1><ol>
+<li>有时候在对一些时间字段建立索引但是查询并没有走索引，很大可能是事件量过多，导致全表扫描</li>
+</ol>
+<ul>
+<li><p>如果相同的查询比较频繁，尽量开启查询缓存</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"># 查看是否开启查询缓存<br>show variables like <span class="hljs-string">&#x27;%cache%&#x27;</span>;<br># 开启缓存 修改 /usr/my.cnf 重启MySQL<br>query_cache_type = <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>连接时条件尽量走索引</p>
+</li>
+<li><p>尽量使用group by 的分组利用到联合索引</p>
+</li>
+<li><p>尽量添加order by null避免filesort</p>
+</li>
+</ul>
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1>
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AF%87/" class="category-chain-item">数据库篇</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/SQL%E4%BC%98%E5%8C%96/">#SQL优化</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MySQL篇-MySQL查询优化</div>
+      <div>https://mikeygithub.github.io/2022/03/09/yuque/xn0by7/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年3月9日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/17/yuque/carc8e/" title="源码学习-Dubbo SPI 源码分析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">源码学习-Dubbo SPI 源码分析</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/01/yuque/pi1xft/" title="学习笔记-GraphQL">
+                        <span class="hidden-mobile">学习笔记-GraphQL</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

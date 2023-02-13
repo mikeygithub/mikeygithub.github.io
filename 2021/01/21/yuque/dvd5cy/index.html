@@ -1,0 +1,1133 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="软件简介 Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。 作为 Elastic Stack 的核心。其底层是基于Lucene  基础概念1、索引ElasticSearch将数据存储在一个或多个索引（index）中，这里的索引就像SQL领域的数据库，例如：MySQL里的一个database。 ElasticSearch内部使用Ap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中间件篇-Elasticsearch分布式搜索和分析引擎">
+<meta property="og:url" content="https://mikeygithub.github.io/2021/01/21/yuque/dvd5cy/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="软件简介 Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。 作为 Elastic Stack 的核心。其底层是基于Lucene  基础概念1、索引ElasticSearch将数据存储在一个或多个索引（index）中，这里的索引就像SQL领域的数据库，例如：MySQL里的一个database。 ElasticSearch内部使用Ap">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657549227818-4acd3ae2-1aab-424a-80ad-70952dfa0505.png">
+<meta property="article:published_time" content="2021-01-21T14:36:59.000Z">
+<meta property="article:modified_time" content="2023-02-13T14:42:02.261Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="搜索引擎">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657549227818-4acd3ae2-1aab-424a-80ad-70952dfa0505.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>中间件篇-Elasticsearch分布式搜索和分析引擎 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="中间件篇-Elasticsearch分布式搜索和分析引擎"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-01-21 22:36" pubdate>
+          2021年1月21日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          13k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          110 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">中间件篇-Elasticsearch分布式搜索和分析引擎</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657549227818-4acd3ae2-1aab-424a-80ad-70952dfa0505.png#clientId=u4c895fcc-003b-4&from=markdown&id=Fc8JH&name=image.png&originHeight=296&originWidth=556&originalType=url&ratio=1&rotation=0&showTitle=false&size=50344&status=done&style=none&taskId=ub1b9a38a-08c2-40f2-9f02-c0c768ae1d6&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="软件简介"><a href="#软件简介" class="headerlink" title="软件简介"></a>软件简介</h1><blockquote>
+<p>Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。 作为 Elastic Stack 的核心。其底层是基于Lucene</p>
+</blockquote>
+<h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><h2 id="1、索引"><a href="#1、索引" class="headerlink" title="1、索引"></a>1、索引</h2><p>ElasticSearch将数据存储在一个或多个索引（index）中，这里的索引就像SQL领域的数据库，例如：MySQL里的一个database。</p>
+<p>ElasticSearch内部使用Apache Lucenu将数据写入索引或从索引中读取数据。需要注意的是，ElasticSearch中的索引可能有一个或多个Lucene索引构成，具体由索引分片（shard）、复制（replica）机制及其配置决定。</p>
+<h2 id="2、文档"><a href="#2、文档" class="headerlink" title="2、文档"></a>2、文档</h2><p>文档（document）是ElasticSearch中的主要实体。对于所有使用ElasticSearch的场景，最终都会归结到对文档的搜索之上。</p>
+<p>文档由字段构成，每个字段包含字段和一个或多个字段值（这种情况下，该字段被称为是多值的，即文档中有多个同名字段）。文档之间可能有各自不同的字段集合，文档没有固定的结构或模式。</p>
+<p>从客户端的视角来看，文档就是一个json对象。</p>
+<h2 id="3、类型"><a href="#3、类型" class="headerlink" title="3、类型"></a>3、类型</h2><p>ElasticSearch中每个文档都有自己的类型（type）定义。一个索引中允许存储多种类型的文档，并为不同文档类型提供不同的映射。</p>
+<p>类型就像SQL数据库中的一个数据表。</p>
+<h2 id="4、映射"><a href="#4、映射" class="headerlink" title="4、映射"></a>4、映射</h2><p>所有文档在写入索引前都将被分析，而映射则存储着所有分析链所需要的全部信息。例如，如何将输入文本分割为词条，哪些词条应该被过滤掉，或哪些附加处理有必要被调用（例如处理HTML标签）等。</p>
+<h2 id="5、节点"><a href="#5、节点" class="headerlink" title="5、节点"></a>5、节点</h2><p>单个的ElasticSearch服务实例被称为节点（node）。大多数情况下，一个ElasticSearch节点就能够满足我们大多数的需求，但是考虑到容错性和数据快速膨胀，我们需要搭建ElasticSearch集群。</p>
+<p>ElasticSearch节点可以按用途分为3类。</p>
+<ul>
+<li><code>数据（data）节点：</code>用来存放数据，提供数据的搜索能力。</li>
+<li><code>主（master）节点：</code>作为监控节点负责控制其他节点的工作。</li>
+<li><code>部落（tribe）节点：</code>负责串联起多个集群，使得我们在多个集群上执行几乎所有可以在单集群ElasticSearch上执行的功能。</li>
+</ul>
+<h2 id="6、集群"><a href="#6、集群" class="headerlink" title="6、集群"></a>6、集群</h2><p>多个协同工作的ElasticSearch节点的集合被称为集群（cluster）。</p>
+<p>ElasticSearch的分布式属性使得我们可以轻松处理超过单机负载能力的数据量。同时，集群也是一种无间断提供服务的一种解决方案，即便当某些节点因为宕机或执行管理任务（例如升级）不可用时，ElasticSearch几乎是无缝继承了集群功能。</p>
+<h2 id="7、分片"><a href="#7、分片" class="headerlink" title="7、分片"></a>7、分片</h2><p>ElasticSearch集群允许系统存储的数据总量超过单机容量，为了实现这个功能，ES将数据散布到多个物理的Lucene索引上去，这些Lucene索引被称为分片（shard)，散布这些分片的过程叫做分片处理（sharding）。ElasticSearch会自动完成分片工作，对用户来说分片更像是一个大的索引。</p>
+<p>当然，除了ElasticSearch自动进行分片处理外，用户为具体的应用进行参数调优也至关重要，因为分片的数量在索引创建时就被配置好了，之后无法改变，除非创建一个新索引并重新索引全部数据。</p>
+<h2 id="8、副本"><a href="#8、副本" class="headerlink" title="8、副本"></a>8、副本</h2><p>分片处理允许用户推送超过单机容量的数据至ElasticSearch集群。副本（replica）则解决了访问压力过大时单机无法处理所有请求的问题。</p>
+<p>实现方法很简单，为每个分片创建冗余的副本，处理查询时可以把这些副本当做最初的主分片（primary shard）使用。</p>
+<p>如果主分片所在的主机宕机了，ElasticSearch会自动从该分片的副本中选出一个当做新的主分片，不会中断索引和搜索服务，并且可以在任意时间节点添加或删除副本，可随时调整副本的数量。</p>
+<h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/downloads/elasticsearch">下载软件</a></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl -L -O https:<span class="hljs-regexp">//</span>artifacts.elastic.co<span class="hljs-regexp">/downloads/</span>elasticsearch/elasticsearch-<span class="hljs-number">7.10</span>.<span class="hljs-number">2</span>-linux-x86_64.tar.gz<br>tar -xzvf elasticsearch-<span class="hljs-number">7.10</span>.<span class="hljs-number">2</span>-linux-x86_64.tar.gz<br>cd elasticsearch-<span class="hljs-number">7.10</span>.<span class="hljs-number">2</span><br>.<span class="hljs-regexp">/bin/</span>elasticsearch<br></code></pre></td></tr></table></figure>
+
+<p>华为云加速<code>wget https://mirrors.huaweicloud.com/elasticsearch/7.9.3/elasticsearch-7.9.3-linux-x86_64.tar.gz</code></p>
+<p> 无法使用root启动 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex">can not run elasticsearch as root<br></code></pre></td></tr></table></figure>
+
+<p>1、创建用户：elasticsearch</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">adduser elasticsearch</span><br></code></pre></td></tr></table></figure>
+
+<p>2、创建用户密码，需要输入两次</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">passwd elasticsearch</span><br></code></pre></td></tr></table></figure>
+
+<p>3、将对应的文件夹权限赋给该用户</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">chown</span> -R elasticsearch elasticsearch-<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<p>4、切换至elasticsearch用户</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">su elasticsearch</span><br></code></pre></td></tr></table></figure>
+
+<p>5、进入启动目录启动 /usr/local/elasticsearch-6.0.0/bin  使用后台启动方式：./elasticsearch -d</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">./elasticsearch</span> -d<br></code></pre></td></tr></table></figure>
+
+<p>6、启动后测试</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">curl</span> ip:<span class="hljs-number">9200</span><br></code></pre></td></tr></table></figure>
+
+<p>如果返回一个json数据说明启动成功</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;name&quot;</span> : <span class="hljs-string">&quot;mikey&quot;</span>,<br>  <span class="hljs-attr">&quot;cluster_name&quot;</span> : <span class="hljs-string">&quot;elasticsearch&quot;</span>,<br>  <span class="hljs-attr">&quot;cluster_uuid&quot;</span> : <span class="hljs-string">&quot;02UVRTOaS7mSdfs2oRc43A&quot;</span>,<br>  <span class="hljs-attr">&quot;version&quot;</span> : &#123;<br>    <span class="hljs-attr">&quot;number&quot;</span> : <span class="hljs-string">&quot;7.9.3&quot;</span>,<br>    <span class="hljs-attr">&quot;build_flavor&quot;</span> : <span class="hljs-string">&quot;default&quot;</span>,<br>    <span class="hljs-attr">&quot;build_type&quot;</span> : <span class="hljs-string">&quot;tar&quot;</span>,<br>    <span class="hljs-attr">&quot;build_hash&quot;</span> : <span class="hljs-string">&quot;c4138e51121ef06a6404866cddc601906fe5c868&quot;</span>,<br>    <span class="hljs-attr">&quot;build_date&quot;</span> : <span class="hljs-string">&quot;2020-10-16T10:36:16.141335Z&quot;</span>,<br>    <span class="hljs-attr">&quot;build_snapshot&quot;</span> : <span class="hljs-literal">false</span>,<br>    <span class="hljs-attr">&quot;lucene_version&quot;</span> : <span class="hljs-string">&quot;8.6.2&quot;</span>,<br>    <span class="hljs-attr">&quot;minimum_wire_compatibility_version&quot;</span> : <span class="hljs-string">&quot;6.8.0&quot;</span>,<br>    <span class="hljs-attr">&quot;minimum_index_compatibility_version&quot;</span> : <span class="hljs-string">&quot;6.0.0-beta1&quot;</span><br>  &#125;,<br>  <span class="hljs-attr">&quot;tagline&quot;</span> : <span class="hljs-string">&quot;You Know, for Search&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h1><blockquote>
+<p>Kibana是一个开源分析和可视化平台，旨在与Elasticsearch合作。您可以使用Kibana来搜索、查看和交互存储在Elasticsearch索引中的数据。您可以轻松地执行高级数据分析，并在各种图表、表格和地图中可视化数据。</p>
+</blockquote>
+<p>下载</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">curl</span> -L -O https://artifacts.elastic.co/downloads/kibana/kibana-<span class="hljs-number">7</span>.<span class="hljs-number">10</span>.<span class="hljs-number">2</span>-linux-x<span class="hljs-number">86</span>_<span class="hljs-number">64</span>.tar.gz<br><span class="hljs-attribute">tar</span> xzvf kibana-<span class="hljs-number">7</span>.<span class="hljs-number">10</span>.<span class="hljs-number">2</span>-linux-x<span class="hljs-number">86</span>_<span class="hljs-number">64</span>.tar.gz<br><span class="hljs-attribute">cd</span> kibana-<span class="hljs-number">7</span>.<span class="hljs-number">10</span>.<span class="hljs-number">2</span>-linux-x<span class="hljs-number">86</span>_<span class="hljs-number">64</span>/<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 修改配置文件</span><br>vim config/kibana.yml<br><span class="hljs-meta"># 添加任何ip都可以访问</span><br>server.host: <span class="hljs-string">&quot;0.0.0.0&quot;</span><br><span class="hljs-meta"># 默认语言改为中文</span><br>i18n.locale: <span class="hljs-string">&quot;zh-CN&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>启动</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">.<span class="hljs-regexp">/bin/</span>kibana<br></code></pre></td></tr></table></figure>
+
+<p>打开<code>http://localhost:5601/</code>，进入控制台即可对数据进行操作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210318215614354.png#id=fQvQt&originHeight=1080&originWidth=1920&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>华为云加速<code>wget https://mirrors.huaweicloud.com/kibana/7.9.3/kibana-7.9.3-linux-x86_64.tar.gz</code></p>
+<h1 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.x/getting-started-index.html">QUICK START</a></p>
+<h2 id="请求格式"><a href="#请求格式" class="headerlink" title="请求格式"></a>请求格式</h2><p><code>curl -X&lt;VERB&gt; &#39;&lt;PROTOCOL&gt;://&lt;HOST&gt;:&lt;PORT&gt;/&lt;PATH&gt;?&lt;QUERY_STRING&gt;&#39; -d &#39;&lt;BODY&gt;&#39;</code></p>
+<p>| <code>VERB</code> | 适当的 HTTP <em>方法</em> 或 <em>谓词</em> : <code>GET</code><br>、 <code>POST</code><br>、 <code>PUT</code><br>、 <code>HEAD</code><br> 或者 <code>DELETE</code><br>。 |<br>| — | — |<br>| <code>PROTOCOL</code> | <code>http</code><br> 或者 <code>https</code><br>（如果你在 Elasticsearch 前面有一个 <code>https</code><br> 代理） |<br>| <code>HOST</code> | Elasticsearch 集群中任意节点的主机名，或者用 <code>localhost</code><br> 代表本地机器上的节点。 |<br>| <code>PORT</code> | 运行 Elasticsearch HTTP 服务的端口号，默认是 <code>9200</code><br> 。 |<br>| <code>PATH</code> | API 的终端路径（例如 <code>_count</code><br> 将返回集群中文档数量）。Path 可能包含多个组件，例如：<code>_cluster/stats</code><br> 和 <code>_nodes/stats/jvm</code><br> 。 |<br>| <code>QUERY_STRING</code> | 任意可选的查询字符串参数 (例如 <code>?pretty</code><br> 将格式化地输出 JSON 返回值，使其更容易阅读) |<br>| <code>BODY</code> | 一个 JSON 格式的请求体 (如果请求需要的话) |</p>
+<h2 id="创建Mapping"><a href="#创建Mapping" class="headerlink" title="创建Mapping"></a>创建Mapping</h2><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs http">PUT /post<br>&#123;<br>  &quot;settings&quot;:&#123;<br>    &quot;number_of_shards&quot;:3,<br>    &quot;number_of_replicas&quot;:2<br>  &#125;,<br>  &quot;mappings&quot;:&#123;<br>    &quot;properties&quot;:&#123;<br>      &quot;id&quot;:&#123;&quot;type&quot;:&quot;long&quot;&#125;,<br>      &quot;title&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;,<br>      &quot;context&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;<br>    &#125;<br>  &#125;<br> <br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><p>格式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript">PUT /&#123;index&#125;/&#123;type&#125;/&#123;id&#125;<br>&#123;<br>  <span class="hljs-string">&quot;field&quot;</span>: <span class="hljs-string">&quot;value&quot;</span>,<br>  ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>实例</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">PUT <span class="hljs-regexp">/post/</span>_doc/<span class="hljs-number">1</span><br>&#123;<br>  <span class="hljs-string">&quot;id&quot;</span>:<span class="hljs-string">&quot;1&quot;</span>,<br>  <span class="hljs-string">&quot;title&quot;</span>:<span class="hljs-string">&quot;麦奇的文章&quot;</span>,<br>  <span class="hljs-string">&quot;conttext&quot;</span>:<span class="hljs-string">&quot;按价格卡机是发动机案件发到付件阿里山的房间爱看书的积分&quot;</span><br>&#125;<br><span class="hljs-string">&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">GET /post/_doc/1<br></code></pre></td></tr></table></figure>
+
+<p>返回数据</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;_index&quot;</span> : <span class="hljs-string">&quot;post&quot;</span>,<br>  <span class="hljs-attr">&quot;_type&quot;</span> : <span class="hljs-string">&quot;_doc&quot;</span>,<br>  <span class="hljs-attr">&quot;_id&quot;</span> : <span class="hljs-string">&quot;1&quot;</span>,<br>  <span class="hljs-attr">&quot;_version&quot;</span> : <span class="hljs-number">1</span>,<br>  <span class="hljs-attr">&quot;_seq_no&quot;</span> : <span class="hljs-number">0</span>,<br>  <span class="hljs-attr">&quot;_primary_term&quot;</span> : <span class="hljs-number">1</span>,<br>  <span class="hljs-attr">&quot;found&quot;</span> : <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">&quot;_source&quot;</span> : &#123;<br>    <span class="hljs-attr">&quot;id&quot;</span> : <span class="hljs-string">&quot;1&quot;</span>,<br>    <span class="hljs-attr">&quot;title&quot;</span> : <span class="hljs-string">&quot;麦奇的文章&quot;</span>,<br>    <span class="hljs-attr">&quot;conttext&quot;</span> : <span class="hljs-string">&quot;按价格卡机是发动机案件发到付件阿里山的房间爱看书的积分&quot;</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>curl参考</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">curl -X GET <span class="hljs-string">&quot;localhost:9200/customer/doc/1?pretty&amp;pretty&quot;</span> -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> -d<span class="hljs-string">&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="过滤查询"><a href="#过滤查询" class="headerlink" title="过滤查询"></a>过滤查询</h2><p>查询last_name=Leo的记录</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">GET /employee/_search?q=last_name:Leo<br></code></pre></td></tr></table></figure>
+
+<p>表达式查询</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match&quot; : &#123;<br>            &quot;last_name&quot; : &quot;Smith&quot;<br>        &#125;<br>    &#125;<br>&#125;<br>&#x27;<br></code></pre></td></tr></table></figure>
+
+<p>过滤查询</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;bool&quot;: &#123;<br>            &quot;must&quot;: &#123;<br>                &quot;match&quot; : &#123;<br>                    &quot;last_name&quot; : &quot;smith&quot; <br>                &#125;<br>            &#125;,<br>            &quot;filter&quot;: &#123;<br>                &quot;range&quot; : &#123;<br>                    &quot;age&quot; : &#123; &quot;gt&quot; : 30 &#125; <br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br>&#x27;<br></code></pre></td></tr></table></figure>
+
+<p>全文搜索</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match&quot; : &#123;<br>            &quot;about&quot; : &quot;rock climbing&quot;<br>        &#125;<br>    &#125;<br>&#125;<br>&#x27;<br></code></pre></td></tr></table></figure>
+
+<p>精确查询</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match_phrase&quot; : &#123;<br>            &quot;about&quot; : &quot;rock climbing&quot;<br>        &#125;<br>    &#125;<br>&#125;&#x27;<br></code></pre></td></tr></table></figure>
+
+<p>高亮搜索</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match_phrase&quot; : &#123;<br>            &quot;about&quot; : &quot;rock climbing&quot;<br>        &#125;<br>    &#125;,<br>    &quot;highlight&quot;: &#123;<br>        &quot;fields&quot; : &#123;<br>            &quot;about&quot; : &#123;&#125;<br>        &#125;<br>    &#125;<br>&#125;&#x27;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="统计查询"><a href="#统计查询" class="headerlink" title="统计查询"></a>统计查询</h2><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>  &quot;aggs&quot;: &#123;<br>    &quot;all_interests&quot;: &#123;<br>      &quot;terms&quot;: &#123; &quot;field&quot;: &quot;interests&quot; &#125;<br>    &#125;<br>  &#125;<br>&#125;&#x27;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h2><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs http">PUT /blog/_doc/123<br>&#123;<br>  &quot;title&quot;: &quot;My first blog entry update&quot;,<br>  &quot;text&quot;:  &quot;I am starting to get the hang of this...&quot;,<br>  &quot;date&quot;:  &quot;2014/01/02&quot;,<br>  &quot;remark&quot;: &quot;hhhhhhhhhhhhhhhhhh&quot;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>CURL</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs latex">curl -X POST &quot;localhost:9200/customer/doc/1/_update?pretty&amp;pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>  &quot;doc&quot;: &#123; &quot;name&quot;: &quot;Jane Doe&quot; &#125;<br>&#125;<br>&#x27;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">DELETE /blog/_doc/123<br></code></pre></td></tr></table></figure>
+
+<p>CURL</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex">curl -X DELETE &quot;localhost:9200/customer/doc/2?pretty&amp;pretty&quot;<br></code></pre></td></tr></table></figure>
+
+<p>批处理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs latex">curl -X POST &quot;localhost:9200/customer/doc/_bulk?pretty&amp;pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;&quot;index&quot;:&#123;&quot;_id&quot;:&quot;1&quot;&#125;&#125;<br>&#123;&quot;name&quot;: &quot;John Doe&quot; &#125;<br>&#123;&quot;index&quot;:&#123;&quot;_id&quot;:&quot;2&quot;&#125;&#125;<br>&#123;&quot;name&quot;: &quot;Jane Doe&quot; &#125;<br>&#x27;<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="代码实操"><a href="#代码实操" class="headerlink" title="代码实操"></a>代码实操</h1><p>依赖添加</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.elasticsearch.client<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>elasticsearch-rest-client<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>7.11.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>在使用前先创建其对应的<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.x/mapping.html">Mapping</a></p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs http">PUT /consumer<br>&#123;<br>  &quot;settings&quot;:&#123;<br>    &quot;number_of_shards&quot;:3,<br>    &quot;number_of_replicas&quot;:2<br>  &#125;,<br>  &quot;mappings&quot;:&#123;<br>    &quot;properties&quot;:&#123;<br>      &quot;first_name&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;,<br>      &quot;last_name&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;,<br>      &quot;age&quot;:&#123;&quot;type&quot;:&quot;long&quot;&#125;,<br>      &quot;about&quot;:&#123;&quot;type&quot;: &quot;text&quot;&#125;,<br>      &quot;interests&quot;:&#123;&quot;type&quot;: &quot;text&quot;&#125;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>初始化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">RestClient restClient = RestClient.builder(<span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">9200</span>, <span class="hljs-string">&quot;http&quot;</span>)).build();<br></code></pre></td></tr></table></figure>
+
+<p>简单查询操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Elasticsearch</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;<br>        RestClient restClient = RestClient.builder(<span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">9200</span>, <span class="hljs-string">&quot;http&quot;</span>)).build();<br>        Response response = restClient.performRequest(<span class="hljs-keyword">new</span> Request(<span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-string">&quot;/customer/_doc/1&quot;</span>));<br>        RequestLine requestLine = response.getRequestLine();<br>        HttpHost host = response.getHost();<br>        <span class="hljs-keyword">int</span> statusCode = response.getStatusLine().getStatusCode();<br>        Header[] headers = response.getHeaders();<br>        String responseBody = EntityUtils.toString(response.getEntity());<br>        System.out.println(responseBody.toString());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>异步调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">get</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;<br>    RestClient restClient = RestClient.builder(<span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">9200</span>, <span class="hljs-string">&quot;http&quot;</span>)).build();<br>    Request request = <span class="hljs-keyword">new</span> Request(<br>            <span class="hljs-string">&quot;GET&quot;</span>,<br>            <span class="hljs-string">&quot;/customer/_doc/1&quot;</span>);<br>    Cancellable cancellable = restClient.performRequestAsync(request,<br>            <span class="hljs-keyword">new</span> ResponseListener() &#123;<br>                <span class="hljs-meta">@Override</span><br>                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSuccess</span><span class="hljs-params">(Response response)</span> </span>&#123;<br>                    <span class="hljs-keyword">try</span> &#123;<br>                        System.out.println(<span class="hljs-string">&quot;请求成功：&quot;</span>+ EntityUtils.toString(response.getEntity()).toString());<br>                    &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>                        e.printStackTrace();<br>                    &#125;<br>                &#125;<br><br>                <span class="hljs-meta">@Override</span><br>                <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onFailure</span><span class="hljs-params">(Exception exception)</span> </span>&#123;<br>                    System.out.println(<span class="hljs-string">&quot;请求异常：&quot;</span>+exception.getStackTrace());<br>                &#125;<br>            &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="详细介绍"><a href="#详细介绍" class="headerlink" title="详细介绍"></a>详细介绍</h1><p><strong>Index Versus Index Versus Index</strong></p>
+<p>你也许已经注意到 <em>索引</em> 这个词在 Elasticsearch 语境中有多种含义， 这里有必要做一些说明：</p>
+<p>索引（名词）：</p>
+<p>如前所述，一个 <em>索引</em> 类似于传统关系数据库中的一个 <em>数据库</em> ，是一个存储关系型文档的地方。 <em>索引</em> (<em>index</em>) 的复数词为 <em>indices</em> 或 <em>indexes</em> 。</p>
+<p>索引（动词）：</p>
+<p><em>索引一个文档</em> 就是存储一个文档到一个 <em>索引</em> （名词）中以便被检索和查询。这非常类似于 SQL 语句中的 <code>INSERT</code> 关键词，除了文档已存在时，新文档会替换旧文档情况之外。</p>
+<p>倒排索引：</p>
+<p>关系型数据库通过增加一个 <em>索引</em> 比如一个 B树（B-tree）索引 到指定的列上，以便提升数据检索速度。Elasticsearch 和 Lucene 使用了一个叫做 <em>倒排索引</em> 的结构来达到相同的目的。</p>
+<ul>
+<li>默认的，一个文档中的每一个属性都是 <em>被索引</em> 的（有一个倒排索引）和可搜索的。一个没有倒排索引的属性是不能被搜索到的。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html">Elasticsearch: 权威指南</a></p>
+<h1 id="相关工具"><a href="#相关工具" class="headerlink" title="相关工具"></a>相关工具</h1><p>一、基础类工具</p>
+<p>1、Head插件</p>
+<p>ES集群状态查看、索引数据查看、ES DSL实现（增、删、改、查），比较适用json串的格式化</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="http://mobz.github.io/elasticsearch-head/">http://mobz.github.io/elasticsearch-head/</a></p>
+<p>2、kibana工具</p>
+<p>除了支持各种数据的可视化之外，最重要的是：支持Dev Tool进行RESTFUL API增删改查操作。<br>——比Postman工具和curl都方便很多。</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://www.elastic.co/products/kibana">https://www.elastic.co/products/kibana</a></p>
+<p>3、ElasticHD工具</p>
+<p>支持sql转DSL</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://github.com/360EntSecGroup-Skylar/ElasticHD">https://github.com/360EntSecGroup-Skylar/ElasticHD</a></p>
+<p>4、cerebro工具</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://github.com/lmenezes/cerebro">https://github.com/lmenezes/cerebro</a></p>
+<p>5、Elaticsearch-HQ工具</p>
+<p>管理elasticsearch集群以及通过web界面来进行查询操作</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://github.com/royrusso/elasticsearch-HQ">https://github.com/royrusso/elasticsearch-HQ</a></p>
+<p>6、Elaticsearch-migration工具</p>
+<p>支持多版本间数据迁移，使用sroll + bulk</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://github.com/medcl/elasticsearch-migration">https://github.com/medcl/elasticsearch-migration</a></p>
+<p>7、Elaticsearch-Exporter</p>
+<p>将ES中的数据向其它导出的脚本实现</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://github.com/mallocator/Elasticsearch-Exporter">https://github.com/mallocator/Elasticsearch-Exporter</a></p>
+<p>8、Elaticsearch-dump</p>
+<p>移动和保存索引的工具</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://github.com/taskrabbit/elasticsearch-dump">https://github.com/taskrabbit/elasticsearch-dump</a></p>
+<p>二、集群数据处理工具</p>
+<p>1、Elaticsearch-curator</p>
+<p>es官方工具，可以管理索引数据保留时间</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/elasticsearch-curator">https://pypi.python.org/pypi/elasticsearch-curator</a></p>
+<p>ES6.3有Index LifeCycle Management ，可以管理索引的保存期限</p>
+<p>三、安全类工具</p>
+<p>1、x-pack工具</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://www.elastic.co/downloads/x-pack">https://www.elastic.co/downloads/x-pack</a></p>
+<p>2、search-guard第三方工具</p>
+<p>Search Guard  是 Elasticsearch 的安全插件。它为后端系统（如LDAP或Kerberos）提供身份验证和授权，并向Elasticsearch添加审核日志记录和文档/字段级安全性。</p>
+<p>Search Guard所有基本安全功能（非全部）都是免费的，并且内置在Search Guard中。  Search Guard支持OpenSSL并与Kibana和logstash配合使用。</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://github.com/floragunncom/search-guard">https://github.com/floragunncom/search-guard</a></p>
+<p>四、可视化类工具</p>
+<p>1、grafana工具</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://grafana.com/grafana">https://grafana.com/grafana</a></p>
+<p>grafana工具与kibana可视化区别：</p>
+<p>如果你的业务线数据较少且单一，可以用kibana做出很棒很直观的数据分析。</p>
+<p>而如果你的数据源很多并且业务线也多，建议使用grafana，可以减少你的工作量</p>
+<p>对比：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/54388690">https://www.zhihu.com/question/54388690</a></p>
+<p>五、自动化运维工具</p>
+<p>1、ansible</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://github.com/elastic/ansible-elasticsearch">https://github.com/elastic/ansible-elasticsearch</a></p>
+<p>2、puppet</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://github.com/elastic/puppet-elasticsearch">https://github.com/elastic/puppet-elasticsearch</a></p>
+<p>3、cookbook</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://github.com/elastic/cookbook-elasticsearch">https://github.com/elastic/cookbook-elasticsearch</a></p>
+<p>六、类SQL查询工具</p>
+<p>1、Elaticsearch-SQL工具</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://github.com/NLPchina/elasticsearch-sql">https://github.com/NLPchina/elasticsearch-sql</a></p>
+<p>ES8.3+会集成SQL</p>
+<p>七、增强类工具</p>
+<p>1、conveyor工具</p>
+<p>kibna插件——图形化数据导入工具</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="http://t.cn/REOhwGT">http://t.cn/REOhwGT</a></p>
+<p>2、kibana_markdown_doc_view工具</p>
+<p>Kibana文档查看强化插件，以markdown格式展示文档</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="http://t.cn/REOhKgB">http://t.cn/REOhKgB</a></p>
+<p>3、indices_view工具</p>
+<p>indices_view 是新蛋网开源的一个 kibana APP 插件项目，可以安装在 kibana 中，快速、高效、便捷的查看elasticsearch 中 indices 相关信息</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://gitee.com/newegg/indices_view">https://gitee.com/newegg/indices_view</a></p>
+<p>4、dremio工具</p>
+<p>支持sql转DSL，</p>
+<p>支持elasticsearch、mysql、oracle、mongo、csv等多种格式可视化处理；</p>
+<p>支持ES多表的Join操作</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://www.dremio.com/">https://www.dremio.com/</a></p>
+<p>八、报警类工具</p>
+<p>1、elastalert</p>
+<p>ElastAlert 是 Yelp 公司开源的一套用 Python2.6 写的报警框架。属于后来 Elastic.co 公司出品的 Watcher 同类产品。</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="http://elastalert.readthedocs.org/">http://elastalert.readthedocs.org/</a></p>
+<p>2、sentinl</p>
+<p>SENTINL 6扩展了Siren Investigate和Kibana的警报和报告功能，使用标准查询，可编程验证器和各种可配置操作来监控，通知和报告数据系列更改 - 将其视为一个独立的“Watcher” “报告”功能（支持PNG / PDF快照）。</p>
+<p>SENTINL还旨在简化在Siren Investigate / Kibana 6.x中通过其本地应用程序界面创建和管理警报和报告的过程，或通过在Kibana 6.x +中使用本地监视工具来创建和管理警报和报告的过程。</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://github.com/sirensolutions/sentinl">https://github.com/sirensolutions/sentinl</a></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/index.html">官方文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d48c32423789">Elasticsearch简介与实战</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/inverted-index.html">倒排索引</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/" class="category-chain-item">中间件篇</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/">#搜索引擎</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>中间件篇-Elasticsearch分布式搜索和分析引擎</div>
+      <div>https://mikeygithub.github.io/2021/01/21/yuque/dvd5cy/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年1月21日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

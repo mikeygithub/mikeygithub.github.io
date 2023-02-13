@@ -1,0 +1,1411 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="概览  一些顶尖的软件设计人员就已经认识到领域建模和设计的重要性，但令人惊讶 的是，这么长时间以来几乎没有人写出点儿什么，告诉大家应该做哪些工作或如何去做。尽管这 些工作还没有被清楚地表述出来，但一种新的思潮已经形成，它像一股暗流一样在对象社区中涌 动，我把这种思潮称为领域驱动设计（domain-driven design）。  领域驱动设计是一种思维方式，也是一组优先任务，它旨在加速那些必须处">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读书笔记-领域驱动设计:软件核心复杂性因对之道">
+<meta property="og:url" content="https://mikeygithub.github.io/2021/09/09/yuque/alqlio/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="概览  一些顶尖的软件设计人员就已经认识到领域建模和设计的重要性，但令人惊讶 的是，这么长时间以来几乎没有人写出点儿什么，告诉大家应该做哪些工作或如何去做。尽管这 些工作还没有被清楚地表述出来，但一种新的思潮已经形成，它像一股暗流一样在对象社区中涌 动，我把这种思潮称为领域驱动设计（domain-driven design）。  领域驱动设计是一种思维方式，也是一组优先任务，它旨在加速那些必须处">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1631194807627-d70f765b-0b5f-4ba0-b3b7-7fa537eb13f3.png">
+<meta property="article:published_time" content="2021-09-09T14:24:22.000Z">
+<meta property="article:modified_time" content="2023-02-13T14:42:02.325Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="领域驱动">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1631194807627-d70f765b-0b5f-4ba0-b3b7-7fa537eb13f3.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>读书笔记-领域驱动设计:软件核心复杂性因对之道 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="读书笔记-领域驱动设计:软件核心复杂性因对之道"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-09-09 22:24" pubdate>
+          2021年9月9日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          25k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          213 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">读书笔记-领域驱动设计:软件核心复杂性因对之道</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1631194807627-d70f765b-0b5f-4ba0-b3b7-7fa537eb13f3.png#clientId=u18f804b4-e3a9-4&from=paste&height=549&id=udef23ee0&name=image.png&originHeight=549&originWidth=620&originalType=binary&ratio=1&rotation=0&showTitle=false&size=194396&status=done&style=none&taskId=u8b7ab0ed-fd97-4705-adc6-f8b0b748be1&title=&width=620" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632238233986-670d0534-a045-48ab-9015-486559981ec4.png#clientId=u1d4e5566-631c-4&from=paste&height=694&id=u0e9834d1&name=image.png&originHeight=694&originWidth=601&originalType=binary&ratio=1&rotation=0&showTitle=false&size=90425&status=done&style=none&taskId=u0c630fef-8128-4f75-a616-e50dc08df7d&title=&width=601" srcset="/img/loading.gif" lazyload alt="image.png"><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632238265780-dbb88dfc-3724-4175-8693-25599453bf49.png#clientId=u1d4e5566-631c-4&from=paste&height=603&id=u5fdae1b5&name=image.png&originHeight=603&originWidth=662&originalType=binary&ratio=1&rotation=0&showTitle=false&size=77989&status=done&style=none&taskId=u4c5f3bc9-4429-4fec-bf82-0018db1303c&title=&width=662" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>一些顶尖的软件设计人员就已经认识到领域建模和设计的重要性，但令人惊讶 的是，这么长时间以来几乎没有人写出点儿什么，告诉大家应该做哪些工作或如何去做。尽管这 些工作还没有被清楚地表述出来，但一种新的思潮已经形成，它像一股暗流一样在对象社区中涌 动，我把这种思潮称为领域驱动设计（domain-driven design）。</p>
+</blockquote>
+<p>领域驱动设计是一种思维方式，也是一组优先任务，它旨在加速那些必须处理复杂领域的软 件项目的开发。为了实现这个目标，本书给出了一整套完整的设计实践、技术和原则。</p>
+<h1 id="第一部分-运用领域模型"><a href="#第一部分-运用领域模型" class="headerlink" title="第一部分 运用领域模型"></a>第一部分 运用领域模型</h1><h2 id="第1章消化知识"><a href="#第1章消化知识" class="headerlink" title="第1章消化知识"></a>第1章消化知识</h2><p>1.1 有效建模的要素：</p>
+<ul>
+<li>模型和实现的绑定</li>
+<li>建立了一种基于模型的语言</li>
+<li>开发一个蕴含丰富知识的模型</li>
+<li>提炼模型</li>
+<li>头脑风暴和实验</li>
+</ul>
+<p>1.2 知识消化：</p>
+<ul>
+<li>一般由开发人员和领域专家组成的团队共同协作。共同收集信息。</li>
+<li>传统瀑布方法只是由专家和分析员进行讨论，分析员传递程序员，这种方法缺失反馈。</li>
+<li>在团队所有成员一起消化理解模型的过程中，他们之间的交互也会发生变化。领域模型的不断精化迫使开发人员学习重要的业务原理，而不是机械地进行功能开发。领域专家被迫提炼自己已知道的重要知识的过程往往也是完善其自身理解的过程，而且他们会渐渐理解软件项目所必需的概念严谨性。</li>
+</ul>
+<p>1.3 持续学习</p>
+<ul>
+<li>我们并没意识到不知道的东西究竟有多少。这种无知往往会导致我们做出错误的假设。</li>
+<li>当知识只是口头传递的话，很容易丢失</li>
+</ul>
+<p>1.4 知识丰富的设计</p>
+<ul>
+<li><p>提取一个隐藏的概念<br><img src="https://cdn.nlark.com/yuque/__mermaid_v3/03072d020aecc6708abc8e26df8bce42.svg#lake_card_v2=eyJ0eXBlIjoibWVybWFpZCIsImNvZGUiOiJncmFwaCBMUlxuICAgIEFb6Iiq56iLXSAtLT4gQlvotKfnialdOyIsInVybCI6Imh0dHBzOi8vY2RuLm5sYXJrLmNvbS95dXF1ZS9fX21lcm1haWRfdjMvMDMwNzJkMDIwYWVjYzY3MDhhYmM4ZTI2ZGY4YmNlNDIuc3ZnIiwiaWQiOiJvNTRIMyIsIm1hcmdpbiI6eyJ0b3AiOnRydWUsImJvdHRvbSI6dHJ1ZX0sImhlaWdodCI6MTIwLCJjYXJkIjoiZGlhZ3JhbSJ9" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>对应的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">makeBooking</span><span class="hljs-params">(Cargo cargo,Voyage voyage)</span></span>&#123;<br>	<span class="hljs-keyword">int</span> confirmation = orderConfirmationSequence.next();<br>    voyage.addCargo(cargo,confirmation);<br>    <span class="hljs-keyword">return</span> confirmation;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>总会有人在最后一刻取消订单，运行10%的超订</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">makeBooking</span><span class="hljs-params">(Cargo cargo,Voyage voyage)</span></span>&#123;<br>    <span class="hljs-keyword">double</span> maxBooking = vayage.capacity() * <span class="hljs-number">1.1</span>;<br>    <span class="hljs-keyword">if</span> ((voyage.bookedCargoSize() + cargo.size()) &gt; maxBooking)&#123;<br>    	<span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>	<span class="hljs-keyword">int</span> confirmation = orderConfirmationSequence.next();<br>    voyage.addCargo(cargo,confirmation);<br>    <span class="hljs-keyword">return</span> confirmation;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/__mermaid_v3/6e6f3670ade96737ba95d2f025a2f668.svg#lake_card_v2=eyJ0eXBlIjoibWVybWFpZCIsImNvZGUiOiJjbGFzc0RpYWdyYW1cbiAgICBWb3lhZ2UgXCJcIi0tXCIqXCIgQ2FyZ29cbiAgICBjbGFzcyBWb3lhZ2V7XG4gICAgICAgICtjYXBhY2l0eSgpXG4gICAgfVxuICAgIGNsYXNzIENhcmdve1xuICAgICAgICAtaW50IHNpemVcbiAgICB9IiwidXJsIjoiaHR0cHM6Ly9jZG4ubmxhcmsuY29tL3l1cXVlL19fbWVybWFpZF92My82ZTZmMzY3MGFkZTk2NzM3YmE5NWQyZjAyNWEyZjY2OC5zdmciLCJpZCI6Ikg4dzEzIiwibWFyZ2luIjp7InRvcCI6dHJ1ZSwiYm90dG9tIjp0cnVlfSwiY2FyZCI6ImRpYWdyYW0ifQ==" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>如果业务规则如上述代码所写，不可能有业务专家会通过阅读这段代码来检验规则，即使在开发人员的帮助下也无法完成。 </p>
+</li>
+<li><p>非业务的技术人员很难将需求文本与代码联系起来。如果规则更复杂，情况将更糟。我们可以改变一下设计来更好地捕获这个知识。超订规则是一个策略</p>
+</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632576325826-ff95ac0e-eb7f-4733-8077-d3bdb59635c3.png#clientId=udc3c2957-53cc-4&from=paste&height=144&id=u96758e97&name=image.png&originHeight=144&originWidth=259&originalType=binary&ratio=1&rotation=0&showTitle=false&size=12421&status=done&style=none&taskId=u1de6be53-d1c4-455a-9735-a4ebb94bde0&title=&width=259" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<ul>
+<li>修改后的代码<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">makeBooking</span><span class="hljs-params">(Cargo cargo,Voyage voyage)</span></span>&#123;<br>    <span class="hljs-keyword">if</span> (!overbookingpolicy.isAllowed(cargo,voyage))&#123;<br>    	<span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>    &#125;<br>	<span class="hljs-keyword">int</span> confirmation = orderConfirmationSequence.next();<br>    voyage.addCargo(cargo,confirmation);<br>    <span class="hljs-keyword">return</span> confirmation;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OverbookingPolicy</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isAllowed</span><span class="hljs-params">(Cargo cargo,Voyage voyage)</span></span>&#123;<br>		<span class="hljs-keyword">return</span> (voyage.bookedCargoSize() + cargo.size()) &lt;= vayage.capacity() * <span class="hljs-number">1.1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>1.5 深层模型</p>
+<h2 id="第2章交流与语言的使用"><a href="#第2章交流与语言的使用" class="headerlink" title="第2章交流与语言的使用"></a>第2章交流与语言的使用</h2><blockquote>
+<p>域模型可成为软件项目通用语言的核心。该模型是一组得自于项目人员头脑中的概念，以及反映了领域深层含义的术语和关系。</p>
+</blockquote>
+<p>2.1 模式 UBIQUITOUS LANGUAGE</p>
+<blockquote>
+<p>虽然领域专家对软件开发的技术术语所知有限，但他们能熟练使用自己领域的术语——可能还具有各种不同的风格。另一方面，开发人员可能会用一些描述性的、功能性的术语来理解和讨论系统，而这些术语并不具备领域专家的语言所要传达的意思。</p>
+</blockquote>
+<blockquote>
+<p>将模型作为语言的支柱。确保团队在内部的所有交流中以及代码中坚持使用这种语言。在画图、写东西，特别是讲话时也要使用这种语言。 通过尝试不同的表示方法（它们反映了备选模型）来消除难点。然后重构代码，重新命名类、 方法和模块，以便与新模型保持一致。解决交谈中的术语混淆问题，就像我们对普通词汇形成一致的理解一样。 要认识到，UBIQUITOUS LANGUAGE的更改就是对模型的更改。 领域专家应该抵制不合适或无法充分表达领域理解的术语或结构，开发人员应该密切关注那些将会妨碍设计的有歧义和不一致的地方。</p>
+</blockquote>
+<p>场景1：最小化的领域抽象<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632754204253-da897ab7-5e11-4c65-9bfb-245ef574549f.png#clientId=uc7df35fc-dcfa-4&from=paste&height=419&id=u7ffdb92a&name=image.png&originHeight=419&originWidth=940&originalType=binary&ratio=1&rotation=0&showTitle=false&size=45791&status=done&style=none&taskId=uf0286286-7baa-4650-b349-445ad31db2a&title=&width=940" srcset="/img/loading.gif" lazyload alt="image.png"><br>场景2：用领域模型进行讨论<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632755011100-cc349dbd-8255-4c1a-8b39-23e660ae6265.png#clientId=uc7df35fc-dcfa-4&from=paste&height=295&id=u0d1af4d1&name=image.png&originHeight=295&originWidth=620&originalType=binary&ratio=1&rotation=0&showTitle=false&size=27011&status=done&style=none&taskId=u6e6dbdfe-af01-475f-b3b0-568a1b218f1&title=&width=620" srcset="/img/loading.gif" lazyload alt="image.png"><br>讨论系统时要结合模型。使用模型元素及其交互来大声描述场景，并且按照模型允许的方式 将各种概念结合到一起。找到更简单的表达方式来讲出你要讲的话，然后将这些新的想法应用到 图和代码中<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632756558035-a9e318be-f607-4391-bdba-f92fb215c076.png#clientId=uc7df35fc-dcfa-4&from=paste&height=337&id=u4837eced&name=image.png&originHeight=337&originWidth=598&originalType=binary&ratio=1&rotation=0&showTitle=false&size=44381&status=done&style=none&taskId=u85686fd4-89b6-48ca-91e2-2f304a6b9d1&title=&width=598" srcset="/img/loading.gif" lazyload alt="image.png"><br>文档应作为代码和口头交流的补充</p>
+<p>解释性模型：<br>1.类图对于一个外行人理解不是很友好。在这种情况下，解释性模型可以帮助团队成员理解类图的实际含义。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632757178311-c32c517a-33d9-44aa-b2dc-625cd78cfe7f.png#clientId=uc7df35fc-dcfa-4&from=paste&height=214&id=uf2ec880e&name=image.png&originHeight=214&originWidth=518&originalType=binary&ratio=1&rotation=0&showTitle=false&size=20759&status=done&style=none&taskId=u238d8ca9-425d-43a2-a058-8c5512e7cf0&title=&width=518" srcset="/img/loading.gif" lazyload alt="image.png"><br>图中的每根线段都表示货物的一种状态——或者正在港口装卸（装货或卸货），或者停放在 仓库里，或者正在运输途中。这个图并没有与类图中的细节一一对应，但强调了领域的要点。 这种图连同对它所表示的模型的自然语言解释，能够帮助开发人员和领域专家理解更严格的 软件模型图。综合使用这两种图要比单独使用一种图更容易理解。</p>
+<h2 id="第3章绑定模型和实现"><a href="#第3章绑定模型和实现" class="headerlink" title="第3章绑定模型和实现"></a>第3章绑定模型和实现</h2><p>模式：MODEL-DRIVEN DESIGN</p>
+<blockquote>
+<p>模型和程序设计之间的联系可能很多情况下被破坏，往往都是有意为之，很多设计方法都提倡使用完全脱离于程序设计的分析模型，并且通常这两者是由不同的人员开发的，所以称为分析模型。</p>
+</blockquote>
+<p>如果整个程序设计或者其核心部分没有与领域模型相对应，那么这个模型就是没有价值的， 软件的正确性也值得怀疑。同时，模型和设计功能之间过于复杂的对应关系也是难于理解的，在 实际项目中，当设计改变时也无法维护这种关系。若分析与和设计之间产生严重分歧，那么在分 析和设计活动中所获得的知识就无法彼此共享。</p>
+<blockquote>
+<p>MODEL-DRIVEN DESIGN（模型驱动设计）不再将分析模型和程序设计分离开，而是寻求一种 能够满足这两方面需求的单一模型。不考虑纯粹的技术问题，程序设计中的每个对象都反映了模 型中所描述的相应概念。这就要求我们以更高的标准来选择模型，因为它必须同时满足两种完全 不同的目标。</p>
+</blockquote>
+<p>软件系统各个部分的设计应该忠实地反映领域模型，以便体现出这二者之间的明确对应关 系。我们应该反复检查并修改模型，以便软件可以更加自然地实现模型，即使想让模型反映出更 深层次的领域概念时也应如此。我们需要的模型不但应该满足这两种需求，还应该能够支持健壮 的UBIQUITOUS LANGUAGE（通用语言）。 从模型中获取用于程序设计和基本职责分配的术语。让程序代码成为模型的表达，代码的改 变可能会是模型的改变。而其影响势必要波及接下来相应的项目活动。 完全依赖模型的实现通常需要支持建模范式的软件开发工具和语言，比如面向对象的编程。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632845645895-e81c6990-7ee2-42e4-bd93-bc097571d280.png#clientId=u97bda82d-211b-4&from=paste&height=189&id=u78f8c977&name=image.png&originHeight=189&originWidth=243&originalType=binary&ratio=1&rotation=0&showTitle=false&size=13144&status=done&style=none&taskId=u299c2be9-9bb9-47a1-abe7-e3eebc28e66&title=&width=243" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>Prolog语言并不像面向对象语言那样被广泛使用，但是它却非常适合MODEL-DRIVEN DESIGN。</p>
+</blockquote>
+<p>模式：HANDS-ON MODELER </p>
+<blockquote>
+<p>人们总是把软件开发比喻成制造业。这个比喻的一个推论是：经验丰富的工程师做设计工作， 而技能水平较低的劳动力负责组装产品。这种做法使许多项目陷入困境，原因很简单——软件开 发就是设计。虽然开发团队中的每个成员都有自己的职责，但是将分析、建模、设计和编程工作 过度分离会对MODEL-DRIVEN DESIGN产生不良影响。</p>
+</blockquote>
+<ul>
+<li>模型的一些意图在其传递过程中丢失了</li>
+<li>模型与程序实现及技术互相影响，而领域专家无法直接获得这种反馈</li>
+</ul>
+<blockquote>
+<p>模型要支持有效的实现并抽象出关键的领域知识</p>
+</blockquote>
+<blockquote>
+<p>任何参与建模的技术人员，不管在项目中的主要职责是什么，都必须花时间了解代码。任何 负责修改代码的人员则必须学会用代码来表达模型。每一个开发人员都必须不同程度地参与模型 讨论并且与领域专家保持联系。参与不同工作的人都必须有意识地通过UBIQUITOUS LANGUAGE 与接触代码的人及时交换关于模型的想法。</p>
+</blockquote>
+<blockquote>
+<p>MODEL-DRIVEN DESIGN利用模型来为应用程序解决问题。项目组通过知识消化将大量杂乱无 章的信息提炼成实用的模型。而MODEL-DRIVEN DESIGN将模型和程序实现过程紧密结合。 UBIQUITOUS LANGUAGE则成为开发人员、领域专家和软件产品之间传递信息的渠道。</p>
+</blockquote>
+<h1 id="第二部分-模型驱动设计的构造块"><a href="#第二部分-模型驱动设计的构造块" class="headerlink" title="第二部分 模型驱动设计的构造块"></a>第二部分 模型驱动设计的构造块</h1><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633012459325-899fd36f-ef27-4a5d-a9d1-daf62bc4bc5d.png#clientId=uc2bd3301-5f20-4&from=paste&height=440&id=u7a56a025&name=image.png&originHeight=440&originWidth=630&originalType=binary&ratio=1&rotation=0&showTitle=false&size=56507&status=done&style=none&taskId=ue3a3687c-736e-4398-85ba-de5bee01fae&title=&width=630" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="第4章分离领域"><a href="#第4章分离领域" class="headerlink" title="第4章分离领域"></a>第4章分离领域</h2><h3 id="模式：LAYERED-ARCHITECTURE"><a href="#模式：LAYERED-ARCHITECTURE" class="headerlink" title="模式：LAYERED ARCHITECTURE"></a>模式：LAYERED ARCHITECTURE</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633012496362-b3373473-e4b5-435d-bc94-1d0e7b48d4d6.png#clientId=uc2bd3301-5f20-4&from=paste&height=323&id=u3937a2fb&name=image.png&originHeight=323&originWidth=347&originalType=binary&ratio=1&rotation=0&showTitle=false&size=16992&status=done&style=none&taskId=uf109ab9f-6a1d-4ac6-820e-0c25aa2e39d&title=&width=347" srcset="/img/loading.gif" lazyload alt="image.png"><br>在面向对象的程序中，常常会在业务对象中直接写入用户界面、数据库访问等支持代码。而 一些业务逻辑则会被嵌入到用户界面组件和数据库脚本中。这么做是为了以最简单的方式在短期 内完成开发工作。 如果与领域有关的代码分散在大量的其他代码之中，那么查看和分析领域代码就会变得异常 困难。对用户界面的简单修改实际上很可能会改变业务逻辑，而要想调整业务规则也很可能需要 对用户界面代码、数据库操作代码或者其他的程序元素进行仔细的筛查。这样就不太可能实现一 致的、模型驱动的对象了，同时也会给自动化测试带来困难。考虑到程序中各个活动所涉及的大量逻辑和技术，程序本身必须简单明了，否则就会让人无法理解。</p>
+<blockquote>
+<p>分层的价值在于每一层都只代表程序中的某一特定方面。这种限制使每个方面的设计都更具 内聚性，更容易解释。</p>
+</blockquote>
+<ul>
+<li><p>用户界面层（或表示层） </p>
+<blockquote>
+<p>负责向用户显示信息和解释用户指令。这里指的用户可以是另一个计算机系统， 不一定是使用用户界面的人 </p>
+</blockquote>
+</li>
+<li><p>应用层 </p>
+<blockquote>
+<p>定义软件要完成的任务，并且指挥表达领域概念的对象来解决问题。这一层所负 责的工作对业务来说意义重大，也是与其他系统的应用层进行交互的必要渠道 应用层要尽量简单，不包含业务规则或者知识，而只为下一层中的领域对象协调 任务，分配工作，使它们互相协作。它没有反映业务情况的状态，但是却可以具有 另外一种状态，为用户或程序显示某个任务的进度 </p>
+</blockquote>
+</li>
+<li><p>领域层（模型层）</p>
+<blockquote>
+<p>负责表达业务概念，业务状态信息以及业务规则。尽管保存业务状态的技术细节 是由基础设施层实现的，但是反映业务情况的状态是由本层控制并且使用的。领域 层是业务软件的核心 </p>
+</blockquote>
+</li>
+<li><p>基础设施层</p>
+<blockquote>
+<p>为上面各层提供通用的技术能力：为应用层传递消息，为领域层提供持久化机制， 为用户界面层绘制屏幕组件，等等。基础设施层还能够通过架构框架来支持4个层次 间的交互模式</p>
+</blockquote>
+</li>
+</ul>
+<p>给复杂的应用程序划分层次。在每一层内分别进行设计，使其具有内聚性并且只依赖于 它的下层。采用标准的架构模式，只与上层进行松散的耦合。将所有与领域模型相关的代码 放在一个层中，并把它与用户界面层、应用层以及基础设施层的代码分开。领域对象应该将 重点放在如何表达领域模型上，而不需要考虑自己的显示和存储问题，也无需管理应用任务 等内容。这使得模型的含义足够丰富，结构足够清晰，可以捕捉到基本的业务知识，并有效 地使用这些知识。</p>
+<p>领域层是模型的精髓</p>
+<blockquote>
+<p>领域模型是一系列概念的集合。“领域层”则是领域模型以及所有与其直接相关的设计元素 的表现，它由业务逻辑的设计和实现组成。在MODEL-DRIVEN DESIGN中，领域层的软件构造反映 出了模型概念。</p>
+</blockquote>
+<p>模式：THE SMART UI“反模式”</p>
+<blockquote>
+<p>领域驱动设计只有应用在大型项目上才能产生最大的收益，而这也确实需 要高超的技巧。不是所有的项目都是大型项目；也不是所有的项目团队都能掌握那些技巧。</p>
+</blockquote>
+<p>SMART UI 的优点</p>
+<ul>
+<li>效率高，能在短时间内实现简单的应用程序。  </li>
+<li>能力较差的开发人员可以几乎不经过培训就采用它。  </li>
+<li>甚至可以克服需求分析上的不足，只要把原型发布给用户，然后根据用户反馈快速修改 软件产品即可。  程序之间彼此独立，这样，可以相对准确地安排小模块交付的日期。</li>
+<li>额外扩展简单的功 能也很容易。  </li>
+<li>可以很顺利地使用关系数据库，能够提供数据级的整合。  </li>
+<li>可以使用第四代语言工具。  </li>
+<li>移交应用程序后，维护程序员可以迅速重写他们不明白的代码段，因为修改代码只会影 响到代码所在的用户界面。 </li>
+</ul>
+<p>缺点  </p>
+<ul>
+<li>不通过数据库很难集成应用模块。  </li>
+<li>没有对行为的重用，也没有对业务问题的抽象。</li>
+<li>每当操作用到业务规则时，都必须重复这些规则。  </li>
+<li>快速的原型建立和迭代很快会达到其极限，因为抽象的缺乏限制了重构的选择。  复杂的功能很快会让你无所适从，所以程序的扩展只能是增加简单的应用模块，没有很 好的办法来实现更丰富的功能。</li>
+</ul>
+<blockquote>
+<p>在项目中使用智能用户界面后，除非重写全部的应用模块，否则不能改用其他的设计方法。</p>
+</blockquote>
+<blockquote>
+<p>如果一个架构能够把那些与领域相关的代码隔离出来，得到一个内聚的领域 设计，同时又使领域与系统其他部分保持松散耦合，那么这种架构也许可以支持领域驱动设计。</p>
+</blockquote>
+<h2 id="第5章软件中所表示的模型"><a href="#第5章软件中所表示的模型" class="headerlink" title="第5章软件中所表示的模型"></a>第5章软件中所表示的模型</h2><h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><p>领域中还有一些方面适合用动作或操作来表示，这比用对象表示更加清楚。这些方面最好用 SERVICE来表示，而不应把操作的责任强加到ENTITY或VALUE OBJECT上，尽管这样做稍微违背了 面向对象的建模传统。SERVICE是应客户端请求来完成某事。在软件的技术层中有很多SERVICE。 在领域中也可以使用SERVICE，当对软件要做的某项无状态的活动进行建模时，就可以将该活动 作为一项SERVICE。</p>
+<h3 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h3><blockquote>
+<p>模型中每个可遍历的关联，软件中都要有同样属性的机制。</p>
+</blockquote>
+<p>例如，一对多关联可以用一个集合类型的实例变量来实现。但设计无需如此直接。可能没有 集合，这时可以使用一个访问方法（accessor method）来查询数据库，找到相应的记录，并用这 些记录来实例化对象。这两种设计方法反映了同一个模型。设计必须指定一种具体的遍历机制， 这种遍历的行为应该与模型中的关联一致。</p>
+<p>至少有3种方法可以使得关联更易于控制。 </p>
+<ul>
+<li>规定一个遍历方向。 </li>
+<li>添加一个限定符，以便有效地减少多重关联。 </li>
+<li>消除不必要的关联。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633048187878-2037d0f2-00af-4a8f-83d9-db10501420fb.png#clientId=uc2bd3301-5f20-4&from=paste&height=225&id=ue970ab8d&name=image.png&originHeight=225&originWidth=627&originalType=binary&ratio=1&rotation=0&showTitle=false&size=33346&status=done&style=none&taskId=uc72d2a0c-1c8d-43e4-8d64-41d3945c600&title=&width=627" srcset="/img/loading.gif" lazyload alt="image.png"><br>Brokerage Account（经纪账户）中的关联<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633048460780-8765c700-4e26-4f65-97d1-867367121c95.png#clientId=uc2bd3301-5f20-4&from=paste&height=230&id=uf0018647&name=image.png&originHeight=230&originWidth=464&originalType=binary&ratio=1&rotation=0&showTitle=false&size=14497&status=done&style=none&taskId=u74557b68-b737-4619-85f0-8970ba9334f&title=&width=464" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql">public class BrokerageAccount &#123;<br>		String accountNumber;<br>    Customer customer;<br>    <span class="hljs-keyword">Set</span> investments;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>构造函数...<br>    public Customer <span class="hljs-keyword">get</span> Customer()&#123;<br>    	<span class="hljs-keyword">return</span> customer;<br>    &#125;<br>    public <span class="hljs-keyword">Set</span> getInvestments() &#123;<br>    	<span class="hljs-keyword">return</span> investments;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>但是，如果需要从关系数据库取回数据，那么就可以使用另一种实现（它同样也符合模型）：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql">public class BrokerageAccount &#123;<br>		String accountNumber;<br>    Customer customer;<br>    <span class="hljs-keyword">Set</span> investments;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>构造函数...<br>    public Customer <span class="hljs-keyword">get</span> Customer()&#123;<br>    	<span class="hljs-keyword">return</span> &quot;SELECT * FROM CUSTOMER WHERE XXXXX&quot;;<br>    &#125;<br>    public <span class="hljs-keyword">Set</span> getInvestments() &#123;<br>    	<span class="hljs-keyword">return</span> &quot;SELECT * FROM INVESTMENTS WHERE XXXXX&quot;;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="模式：ENTITY（又称为REFERENCE-OBJECT）"><a href="#模式：ENTITY（又称为REFERENCE-OBJECT）" class="headerlink" title="模式：ENTITY（又称为REFERENCE OBJECT）"></a>模式：ENTITY（又称为REFERENCE OBJECT）</h3><blockquote>
+<p>很多对象不是通过它们的属性定义的，而是通过连续性和标识定义的。</p>
+</blockquote>
+<p>一些对象主要不是由它们的属性定义的。它们实际上表示了一条“标识线”（A Thread of Identity），这条线跨越时间，而且常常经历多种不同的表示。有时，这样的对象必须与另一个具 有不同属性的对象相匹配。而有时一个对象必须与具有相同属性的另一个对象区分开。错误的标 识可能会破坏数据。</p>
+<blockquote>
+<p>模型ENTITY与Java的‚实体bean‛并不是一回事。实体bean本打算成为一种用于实现ENTITY的框架，但它实际上 并没有做到。大多数ENTITY都被实现为普通对象。不管它们是如何实现的，ENTITY都是领域模型中的一个根本 特征。</p>
+</blockquote>
+<p>当对一个对象进行建模时，我们自然而然会考虑它的属性，而且考虑它的行为也显得非常重 要。但ENTITY最基本的职责是确保连续性，以便使其行为更清楚且可预测。保持实体的简练是实现这一责任的关键。<strong>不要将注意力集中在属性或行为上，应该摆脱这些细枝末节，抓住ENTITY 对象定义的最基本特征，尤其是那些用于识别、查找或匹配对象的特征。只添加那些对概念至关 重要的行为和这些行为所必需的属性</strong>。此外，应该将行为和属性转移到与核心实体关联的其他对 象中。这些对象中，有些可能是ENTITY，有些可能是VALUE OBJECT</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633051190201-239e0ce1-edc1-4c3e-b166-4dd31a8ebccb.png#clientId=uc2bd3301-5f20-4&from=paste&height=293&id=u429a145a&name=image.png&originHeight=293&originWidth=615&originalType=binary&ratio=1&rotation=0&showTitle=false&size=36602&status=done&style=none&taskId=u53934f6b-8cd0-4a40-9771-c9302d81f88&title=&width=615" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="模式：VALUE-OBJECT"><a href="#模式：VALUE-OBJECT" class="headerlink" title="模式：VALUE OBJECT"></a>模式：VALUE OBJECT</h3><p>跟踪ENTITY的标识是非常重要的，但为其他对象也加上标识会影响系统性能并增加分析工 作，而且会使模型变得混乱，因为所有对象看起来都是相同的。 软件设计要时刻与复杂性做斗争。我们必须区别对待问题，仅在真正需要的地方进行特殊 处理。 然而，如果仅仅把这类对象当作没有标识的对象，那么就忽略了它们的工具价值或术语价 值。事实上，这些对象有其自己的特征，对模型也有着自己的重要意义。这些是用来描述事物 的对象</p>
+<blockquote>
+<p>当我们只关心一个模型元素的属性时，应把它归类为VALUE OBJECT。我们应该使这个模型 元素能够表示出其属性的意义，并为它提供相关功能。VALUE OBJECT应该是不可变的。不要为 它分配任何标识，而且不要把它设计成像ENTITY那么复杂。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633061605986-f8927be5-1639-444c-9ce6-68750fb6c2f1.png#clientId=uc2bd3301-5f20-4&from=paste&height=250&id=uedae009c&name=image.png&originHeight=250&originWidth=488&originalType=binary&ratio=1&rotation=0&showTitle=false&size=22962&status=done&style=none&taskId=u467b34c3-ab10-4284-ba32-a70b1cc8369&title=&width=488" srcset="/img/loading.gif" lazyload alt="image.png"><br>复制和共享哪个更划算取决于实现环境。虽然复制有可能导致系统被大量的对象阻塞，但共 享可能会减慢分布式系统的速度。当在两个机器之间传递一个副本时，只需发送一条消息，而且 副本到达接收端后是独立存在的。但如果共享一个实例，那么只会传递一个引用，这要求每次交 互都要向发送方返回一条消息。 </p>
+<p>以下几种情况最好使用共享，这样可以发挥共享的最大价值并最大限度地减少麻烦：  </p>
+<ul>
+<li>节省数据库空间或减少对象数量是一个关键要求时；  </li>
+<li>通信开销很低时（如在中央服务器中）；  </li>
+<li>共享的对象被严格限定为不可变时。</li>
+</ul>
+<h3 id="模式：SERVICE"><a href="#模式：SERVICE" class="headerlink" title="模式：SERVICE"></a>模式：SERVICE</h3><blockquote>
+<p>有时，对象不是一个事物。 在某些情况下，最清楚、最实用的设计会包含一些特殊的操作，这些操作从概念上讲不属于 任何对象。与其把它们强制地归于哪一类，不如顺其自然地在模型中引入一种新的元素，这就是 SERVICE（服务）。</p>
+</blockquote>
+<p>有些重要的领域操作无法放到ENTITY或VALUE OBJECT中。这当中有些操作从本质上讲是一些 活动或动作，而不是事物，但由于我们的建模范式是对象，因此要想办法将它们划归到对象这个 范畴里。</p>
+<p>有时，一些SERVICE看上去就像是模型对象，它们以对象的形式出现，但除了执行一些操作 之外并没有其他意义。这些‚实干家‛（Doer）的名字通常以‚<strong>Manager</strong>‛之类的名字结尾。它们 没有自己的状态，而且除了所承载的操作之外在领域中也没有其他意义。尽管如此，该方法至少 为这些特立独行的行为找到了一个容身之所，避免它们扰乱真正的模型对象。 </p>
+<p><strong>一些领域概念不适合被建模为对象。如果勉强把这些重要的领域功能归为ENTITY或VALUE OBJECT的职责，那么不是歪曲了基于模型的对象的定义，就是人为地增加了一些无意义的对象。</strong></p>
+<p>好的SERVICE有以下3个特征:</p>
+<ul>
+<li>(1) 与领域概念相关的操作不是ENTITY或VALUE OBJECT的一个自然组成部分。 </li>
+<li>(2) 接口是根据领域模型的其他元素定义的。 </li>
+<li>(3) 操作是无状态的。</li>
+</ul>
+<blockquote>
+<p>当领域中的某个重要的过程或转换操作不是ENTITY或VALUE OBJECT的自然职责时，应该 在模型中添加一个作为独立接口的操作，并将其声明为SERVICE。定义接口时要使用模型语言， 并确保操作名称是UBIQUITOUS LANGUAGE中的术语。此外，应该使SERVICE成为无状态的。</p>
+</blockquote>
+<p>应用层SERVICE和领域层SERVICE可能很难区分。应用层负责通知的设臵，而领域层负责确定 是否满足临界值，尽管这项任务可能并不需要使用SERVICE，因为它可以作为‚account‛（账户） 对象的职责中。</p>
+<blockquote>
+<p>很多领域或应用层SERVICE是在ENTITY和VALUE OBJECT的基础上建立起来的，它们的行为类 似于将领域的一些潜在功能组织起来以执行某种任务的脚本。ENTITY和VALUE OBJECT往往由于粒 度过细而无法提供对领域层功能的便捷访问。</p>
+</blockquote>
+<p><strong>在大多数开发系统中，在一个领域对象和外部资源之间直接建立一个接口是很别扭的。我们可以利用一 个FACADE（外观）将这样的外部SERVICE包装起来，这个外观可能以模型作为输入，并返回一个 ‚Funds Transfer‛对象（作为它的结果）</strong></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633190308256-f2a0d243-56ed-4bd1-8429-0095be084f3c.png#clientId=ufc2ec145-3162-4&from=paste&height=247&id=u44687c18&name=image.png&originHeight=247&originWidth=677&originalType=binary&ratio=1&rotation=0&showTitle=false&size=136241&status=done&style=none&taskId=u02e3458d-4b06-462e-b577-b271b381001&title=&width=677" srcset="/img/loading.gif" lazyload alt="image.png"><br>SERVICE还有其他 有用的功能，它可以控制领域层中的接口的粒度，并且避免客户端与ENTITY和VALUE OBJECT 耦合。 在大型系统中，中等粒度的、无状态的SERVICE更容易被复用，因为它们在简单的接口背后 封装了重要的功能。此外，细粒度的对象可能导致分布式系统的消息传递的效率低下。</p>
+<h3 id="模式：MODULE（也称为PACKAGE）"><a href="#模式：MODULE（也称为PACKAGE）" class="headerlink" title="模式：ＭODULE（也称为PACKAGE）"></a>模式：ＭODULE（也称为PACKAGE）</h3><blockquote>
+<p>每个人都会使用MODULE，但却很少有人把它们当做模型中的一个成熟的组成部分。代码按 照各种各样的类别进行分解，有时是按照技术架构来分割的，有时是按照开发人员的任务分工来 分割的。甚至那些从事大量重构工作的开发人员也倾向于使用项目早期形成的一些MODULE。 众所周知，MODULE之间应该是低耦合的，而在MODULE的内部则是高内聚的。耦合和内聚的 解释使得MODULE听上去像是一种技术指标，仿佛是根据关联和交互的分布情况来机械地判断它 们。然而，MODULE并不仅仅是代码的划分，而且也是概念的划分。一个人一次考虑的事情是有限 的（因此才要低耦合）。不连贯的思想和“一锅粥”似的思想同样难于理解（因此才要高内聚）。</p>
+</blockquote>
+<p>精巧的技术打包方案会产生如下两个代价。  </p>
+<ul>
+<li>如果框架的分层惯例把实现概念对象的元素分得很零散，那么代码将无法再清楚地表示 模型。  </li>
+<li>人的大脑把划分后的东西还原成原样的能力是有限的，如果框架把人的这种能力都耗尽 了，那么领域开发人员就无法再把模型还原成有意义的部分了。<blockquote>
+<p>除非真正有必要将代码分布到不同的服务器上，否则就把实现单一概念对象的所有代码放在 同一个模块中（如果不能放在同一个对象中的话）。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>利用打包把领域层从其他代码中分离出来。否则，就尽可能让领域开发人员自由地决定领域 对象的打包方式，以便支持他们的模型和设计选择。</p>
+</blockquote>
+<p><strong>不要在领域对象中添加任何与领域对象所表示的概念没有紧密关系的元素。领域对象的职责 是表示模型。当然，其他一些与领域有关的职责也是必须要实现的，而且为了使系统工作，也必 须管理其他数据，但它们不属于领域对象。</strong></p>
+<h3 id="建模规范"><a href="#建模规范" class="headerlink" title="建模规范"></a>建模规范</h3><blockquote>
+<p>目前，主流的范式是面向对象设计，而且现 在的大部分复杂项目都开始使用对象。</p>
+</blockquote>
+<p>当将非对象元素混合到以面向对象为主的系统中时，需要遵循以下4条经验规则。 </p>
+<ul>
+<li>不要和实现范式对抗。我们总是可以用别的方式来考虑领域。找到适合于范式的模型概 念。  </li>
+<li>把通用语言作为依靠的基础。即使工具之间没有严格联系时，语言使用上的高度一致性 也能防止各个设计部分分裂。  </li>
+<li>不要一味依赖UML。有时固定使用某种工具（如UML绘图工具）将导致人们通过歪曲模 型来使它更容易画出来。例如，UML确实有一些特性很适合表达约束，但它并不是在所 有情况下都适用。有时使用其他风格的图形（可能适用于其他范式）或者简单的语言描 述比牵强附会地适应某种对象视图更好。  </li>
+<li>保持怀疑态度。工具是否真正有用武之地？不能因为存在一些规则，就必须使用规则引 擎。</li>
+</ul>
+<h2 id="第6章领域对象的生命周期"><a href="#第6章领域对象的生命周期" class="headerlink" title="第6章领域对象的生命周期"></a>第6章领域对象的生命周期</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633225953314-84925b19-00c4-45b2-b320-0a82bdcf6257.png#clientId=ufc2ec145-3162-4&from=paste&height=355&id=u9e72fa75&name=image.png&originHeight=355&originWidth=507&originalType=binary&ratio=1&rotation=0&showTitle=false&size=44175&status=done&style=none&taskId=ud7cb6d97-ab80-4ba4-b405-dc62dbdfb80&title=&width=507" srcset="/img/loading.gif" lazyload alt="image.png"><br>主要的挑战有以下两类。<br>(1) 在整个生命周期中维护完整性。<br>(2) 防止模型陷入管理生命周期复杂性造成的困境当中。</p>
+<h3 id="模式：AGGREGATE"><a href="#模式：AGGREGATE" class="headerlink" title="模式：AGGREGATE"></a>模式：AGGREGATE</h3><blockquote>
+<p>在具有复杂关联的模型中，要想保证对象更改的一致性是很困难的。不仅互不关联的对象需 要遵守一些固定规则，而且紧密关联的各组对象也要遵守一些固定规则。然而，过于谨慎的锁定 机制又会导致多个用户之间毫无意义地互相干扰，从而使系统不可用。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633227215878-37fde61b-1bbb-424c-b145-f3da15413320.png#clientId=ufc2ec145-3162-4&from=paste&height=309&id=u19b7bd19&name=image.png&originHeight=309&originWidth=698&originalType=binary&ratio=1&rotation=0&showTitle=false&size=61551&status=done&style=none&taskId=u564b35ec-d440-463b-814d-46f182d098a&title=&width=698" srcset="/img/loading.gif" lazyload alt="image.png"><br>为了实现这个概念上的AGGREGATE，需要对所有事务应用一组规则。  </p>
+<ul>
+<li>根ENTITY具有全局标识，它最终负责检查固定规则。  </li>
+<li>根ENTITY具有全局标识。边界内的ENTITY具有本地标识，这些标识只在AGGREGATE内部 才是唯一的。  </li>
+<li>AGGREGATE外部的对象不能引用除根ENTITY之外的任何内部对象。根ENTITY可以把对内 部ENTITY的引用传递给它们，但这些对象只能临时使用这些引用，而不能保持引用。根 可以把一个VALUE OBJECT的副本传递给另一个对象，而不必关心它发生什么变化，因为 它只是一个VALUE，不再与AGGREGATE有任何关联。  </li>
+<li>作为上一条规则的推论，只有AGGREGATE的根才能直接通过数据库查询获取。所有其他 对象必须通过遍历关联来发现。</li>
+<li>AGGREGATE内部的对象可以保持对其他AGGREGATE根的引用。  </li>
+<li>删除操作必须一次删除AGGREGATE边界之内的所有对象。（利用垃圾收集机制，这很容易 做到。由于除根以外的其他对象都没有外部引用，因此删除了根以后，其他对象均会被 回收。）  </li>
+<li>当提交对AGGREGATE边界内部的任何对象的修改时，整个AGGREGATE的所有固定规则都必 须被满足</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633229376283-3604d622-b126-4398-a380-71139064e3bb.png#clientId=ufc2ec145-3162-4&from=paste&height=447&id=uc514dfab&name=image.png&originHeight=447&originWidth=689&originalType=binary&ratio=1&rotation=0&showTitle=false&size=95549&status=done&style=none&taskId=u3ed0b269-a952-4bb1-88b5-303a2caead7&title=&width=689" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><strong>我们应该将 ENTITY和 VALUE OBJECT分 门 别 类地 聚集 到 AGGREGATE中 ， 并定义每个AGGREGATE的边界。在每个AGGREGATE中，选择一个ENTITY作为根，并通过根来控制对边界内 其他对象的所有访问。只允许外部对象保持对根的引用。对内部成员的临时引用可以被传递出去， 但仅在一次操作中有效。由于根控制访问，因此不能绕过它来修改内部对象。这种设计有利于确 保AGGREGATE中的对象满足所有固定规则，也可以确保在任何状态变化时AGGREGATE作为一个 整体满足固定规则。</strong></p>
+<h3 id="模式：FACTORY"><a href="#模式：FACTORY" class="headerlink" title="模式：FACTORY"></a>模式：FACTORY</h3><blockquote>
+<p>当创建一个对象或创建整个AGGREGATE时，如果创建工作很复杂，或者暴露了过多的内部结 构，则可以使用FACTORY进行封装。</p>
+</blockquote>
+<p>对象的创建本身可以是一个主要操作，但被创建的对象并不适合承担复杂的装配操作。将这 些职责混在一起可能产生难以理解的拙劣设计。让客户直接负责创建对象又会使客户的设计陷入 混乱，并且破坏被装配对象或AGGREGATE的封装，而且导致客户与被创建对象的实现之间产生 过于紧密的耦合。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633230494691-9ea4ccae-55bb-4af1-a5b7-60e5deeef1a4.png#clientId=ufc2ec145-3162-4&from=paste&height=226&id=ud149c146&name=image.png&originHeight=226&originWidth=690&originalType=binary&ratio=1&rotation=0&showTitle=false&size=39634&status=done&style=none&taskId=u60db82d2-3b12-420a-b05b-ab9bca59d27&title=&width=690" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>应该将创建复杂对象的实例和AGGREGATE的职责转移给单独的对象，这个对象本身可能没有 承担领域模型中的职责，但它仍是领域设计的一部分。提供一个封装所有复杂装配操作的接口， 而且这个接口不需要客户引用要被实例化的对象的具体类。在创建AGGREGATE时要把它作为一 个整体，并确保它满足固定规则。</p>
+</blockquote>
+<p><strong>接口的设计</strong></p>
+<ul>
+<li>每个操作都必须是原子的</li>
+<li>Factory将与参数发生耦合</li>
+</ul>
+<p>**ENTITY FACTORY与VALUE OBJECT FACTORY **</p>
+<blockquote>
+<p>ENTITY FACTORY与VALUE OBJECT FACTORY有两个方面的不同。由于VALUE OBJECT是不可变的，因此，FACTORY所生成的对象就是最终形式。因此FACTORY操作必须得到被创建对象的完整描述。而ENTITY FACTORY则只需具有构造有效AGGREGATE所需的那些属性。对于固定规则不关心的细节，可以之后再添加。</p>
+</blockquote>
+<h3 id="模式：REPOSITORY"><a href="#模式：REPOSITORY" class="headerlink" title="模式：REPOSITORY"></a>模式：REPOSITORY</h3><blockquote>
+<p>客户需要一种有效的方式来获取对已存在的领域对象的引用。如果基础设施提供了这方面的 便利，那么开发人员可能会增加很多可遍历的关联，这会使模型变得非常混乱。另一方面，开发 人员可能使用查询从数据库中提取他们所需的数据，或是直接提取具体的对象，而不是通过 AGGREGATE的根来得到这些对象。这样就导致领域逻辑进入查询和客户代码中，而ENTITY和 VALUE OBJECT则变成单纯的数据容器。采用大多数处理数据库访问的技术复杂性很快就会使客 户代码变得混乱，这将导致开发人员简化领域层，最终使模型变得无关紧要。</p>
+</blockquote>
+<p>在所有持久化对象中，有一小部分必须通过基于对象属性的搜索来全局访问。当很难通过遍 历方式来访问某些AGGREGATE根的时候，就需要使用这种访问方式。它们通常是ENTITY，有时 是具有复杂内部结构的VALUE OBJECT，还可能是枚举VALUE。而其他对象则不宜使用这种访问方 式，因为这会混淆它们之间的重要区别。随意的数据库查询会破坏领域对象的封装和 AGGREGATE。技术基础设施和数据库访问机制的暴露会增加客户的复杂度，并妨碍模型驱动的 设计。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633232261242-29f96771-b56d-4d7e-8eec-164c7c739185.png#clientId=ufc2ec145-3162-4&from=paste&height=236&id=u3805583e&name=image.png&originHeight=236&originWidth=679&originalType=binary&ratio=1&rotation=0&showTitle=false&size=50077&status=done&style=none&taskId=u203e4e54-b431-4cd3-9765-f442c7c7e8a&title=&width=679" srcset="/img/loading.gif" lazyload alt="image.png"><br>为每种需要全局访问的对象类型创建一个对象，这个对象相当于该类型的所有对象在内存中 的一个集合的“替身”。通过一个众所周知的全局接口来提供访问。提供添加和删除对象的方法， 用这些方法来封装在数据存储中实际插入或删除数据的操作。提供根据具体条件来挑选对象的方 法，并返回属性值满足查询条件的对象或对象集合（所返回的对象是完全实例化的），从而将实 际的存储和查询技术封装起来。只为那些确实需要直接访问的AGGREGATE根提供REPOSITORY。 让客户始终聚焦于模型，而将所有对象的存储和访问操作交给REPOSITORY来完成。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633232641946-4debca66-1284-405e-b5ff-043f47d2b3f8.png#clientId=ufc2ec145-3162-4&from=paste&height=263&id=u2512bc7a&name=image.png&originHeight=263&originWidth=695&originalType=binary&ratio=1&rotation=0&showTitle=false&size=66269&status=done&style=none&taskId=u191099bc-d926-42b4-a6c9-68a5a9f293a&title=&width=695" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>**REPOSITORY与FACTORY的关系 **</p>
+<blockquote>
+<p>FACTORY负责处理对象生命周期的开始，而REPOSITORY帮助管理生命周期的中间和结束。当 对象驻留在内存中或存储在对象数据库中时，这是很好理解的。但通常至少有一部分对象存储在 关系数据库、文件或其他非面向对象的系统中。在这些情况下，检索出来的数据必须被重建为对象形式。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633232971105-3e0add4f-a4bf-457c-a17d-9c209f2d19c2.png#clientId=ufc2ec145-3162-4&from=paste&height=231&id=udd13cabc&name=image.png&originHeight=231&originWidth=603&originalType=binary&ratio=1&rotation=0&showTitle=false&size=35027&status=done&style=none&taskId=udbd0da94-9cdd-4207-aac6-538b299904b&title=&width=603" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>这种职责上的明确区分还有助于FACTORY摆脱所有持久化职责。FACTORY的工作是用数据来 实例化一个可能很复杂的对象。如果产品是一个新对象，那么客户将知道在创建完成之后应该把 它添加到REPOSITORY中，由REPOSITORY来封装对象在数据库中的存储<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633233011087-4ceececb-04ec-43f9-be03-2f4b348c5c46.png#clientId=ufc2ec145-3162-4&from=paste&height=353&id=uaa7935d7&name=image.png&originHeight=353&originWidth=469&originalType=binary&ratio=1&rotation=0&showTitle=false&size=33497&status=done&style=none&taskId=uebc48573-2abc-42c9-ade4-55d1552a992&title=&width=469" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="第7章使用语言-一个扩展的示例"><a href="#第7章使用语言-一个扩展的示例" class="headerlink" title="第7章使用语言: 一个扩展的示例"></a>第7章使用语言: 一个扩展的示例</h2><h3 id="货物运输系统简介"><a href="#货物运输系统简介" class="headerlink" title="货物运输系统简介"></a>货物运输系统简介</h3><blockquote>
+<p>假设我们正在为一家货运公司开发新软件。最初的需求包括3项基本功能：<br>(1) 跟踪客户货物的主要处理；<br>(2) 事先预约货物；<br>(3) 当货物到达其处理过程中的某个位臵时，自动向客户寄送发票。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633233174522-cdee1b03-a1fc-4056-b77e-8c8d1a4bcaef.png#clientId=ufc2ec145-3162-4&from=paste&height=438&id=u989b4e78&name=image.png&originHeight=438&originWidth=586&originalType=binary&ratio=1&rotation=0&showTitle=false&size=65310&status=done&style=none&taskId=u27c99305-fab7-49ce-b5bc-e609c71483a&title=&width=586" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="隔离领域：引入应用层"><a href="#隔离领域：引入应用层" class="headerlink" title="隔离领域：引入应用层"></a>隔离领域：引入应用层</h3><p>为了防止领域的职责与系统的其他部分混杂在一起，我们应用LAYERED ARCHITECTURE把领 域层划分出来。 无需深入分析，就可以识别出三个用户级别的应用程序功能，我们可以将这三个功能分配给 三个应用层类。 </p>
+<ul>
+<li>第一个类是Tracking Query（跟踪查询），它可以访问某个 Cargo过去和现在的处理情况。 </li>
+<li>第二个类是Booking Application（预订应用），它允许注册一个新的Cargo，并使系统准备 好处理它。 </li>
+<li>第三个类是Incident Logging Application（事件日志应用），它记录对Cargo的每次处理（提 供通过Tracking Query查找的信息）。 </li>
+</ul>
+<p>这些应用层类是协调者，它们只是负责提问，而不负责回答，回答是领域层的工作。</p>
+<h3 id="将ENTITY和VALUE-OBJECT区别开"><a href="#将ENTITY和VALUE-OBJECT区别开" class="headerlink" title="将ENTITY和VALUE OBJECT区别开"></a>将ENTITY和VALUE OBJECT区别开</h3><blockquote>
+<p>依次考虑每个对象，看看这个对象是必须被跟踪的实体还是仅表示一个基本值。首先，我们 来看一些比较明显的情况，然后考虑更含糊的情况。</p>
+</blockquote>
+<h3 id="设计运输领域中的关联"><a href="#设计运输领域中的关联" class="headerlink" title="设计运输领域中的关联"></a>设计运输领域中的关联</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633233443253-b2c3b47e-34b6-457d-9152-15d65bf2fcd7.png#clientId=ufc2ec145-3162-4&from=paste&height=515&id=ue9d490cb&name=image.png&originHeight=515&originWidth=649&originalType=binary&ratio=1&rotation=0&showTitle=false&size=113479&status=done&style=none&taskId=u66099852-32de-450b-aa42-e043560a132&title=&width=649" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="AGGREGATE边界"><a href="#AGGREGATE边界" class="headerlink" title="AGGREGATE边界"></a>AGGREGATE边界</h3><p>Customer、Location和Carrier Movement都有自己的标识，而且被许多Cargo共享，因此，它 们在各自的AGGREGATE中必须是根，这些聚合除了包含各自的属性之外，可能还包含其他比这里 讨论的细节级别更低层的对象。Cargo也是一个明显的AGGREGATE根，但把它的边界画在哪里还 需要仔细思考一下。</p>
+<h3 id="选择REPOSITORY"><a href="#选择REPOSITORY" class="headerlink" title="选择REPOSITORY"></a>选择REPOSITORY</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633233555702-cbcbfce4-a417-4b22-9a58-2fd52428cbe2.png#clientId=ufc2ec145-3162-4&from=paste&height=674&id=u56d66fdc&name=image.png&originHeight=674&originWidth=702&originalType=binary&ratio=1&rotation=0&showTitle=false&size=133757&status=done&style=none&taskId=uaf7b329f-3198-4ffb-88f4-833fd1a123e&title=&width=702" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="对象的创建"><a href="#对象的创建" class="headerlink" title="对象的创建"></a>对象的创建</h3><p>即使为Cargo创建了复杂而精致的FACTORY，或像“重复业务”一节那样使用另一个Cargo作 为FACTORY，我们仍然需要有一个基本的构造函数。我们希望用构造函数来生成一个满足固定规 则的对象，或者，就ENTITY而言，至少保持其标识不变。 考虑到这些因素，我们可以在Cargo上创建一个FACTORY方法，如下所示： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> Cargo <span class="hljs-title">copyPrototype</span><span class="hljs-params">(String newTrackingId)</span></span><br></code></pre></td></tr></table></figure>
+<p>或者可以为一个独立的FACTORY添加以下方法： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> Cargo <span class="hljs-title">newCargo</span><span class="hljs-params">(Cargo prototype,String newTrackingId)</span></span><br></code></pre></td></tr></table></figure>
+<p>独立FACTORY还可以把为新Cargo获取新（自动生成的）ID的过程封装起来，这样它就只需 要一个参数： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> Cargo <span class="hljs-title">newCargo</span><span class="hljs-params">(Cargo prototype)</span></span><br></code></pre></td></tr></table></figure>
+<p>这些FACTORY返回的结果是完全相同的，都是一个Cargo，其Delivery History为空，且Delivery Specification为null。</p>
+<p><strong>Handling Event</strong><br>模型中的Handling Event是一个抽象，它可以把各种具体的Handling Event类封装起来，包括 装货、卸货、密封、存放以及其他与Carrier无关的活动。它们可以被实现为多个子类，或者通过 复杂的初始化过程来实现，也可以将这两种方法结合起来使用。通过在基类（Handling Event） 中为每个类型添加FACTORY METHOD，可以将实例创建的工作抽象出来，这样客户就不必了解实 现的知识。FACTORY会知道哪个类需要被实例化，以及应该如何对它初始化。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633237617661-8cfd4f0b-fd07-4a91-b229-980afd7b0311.png#clientId=ufc2ec145-3162-4&from=paste&height=476&id=u7cb0eab4&name=image.png&originHeight=476&originWidth=692&originalType=binary&ratio=1&rotation=0&showTitle=false&size=82535&status=done&style=none&taskId=u478d5999-f775-4b8d-b078-7ca18de8bc9&title=&width=692" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="第三部-分通过重构来加深理解"><a href="#第三部-分通过重构来加深理解" class="headerlink" title="第三部 分通过重构来加深理解"></a>第三部 分通过重构来加深理解</h1><h2 id="第8章突破"><a href="#第8章突破" class="headerlink" title="第8章突破"></a>第8章突破</h2><p>Loan Investment（贷款投资）是一个派生 对象，用来表示某一投资者在Loan（贷款）中所承担的股份，它与投资者在Facility（信贷）中所 持有的股份成正比。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633251788635-b64a8415-c0a9-4025-a168-d85247f94494.png#clientId=ufc2ec145-3162-4&from=paste&height=260&id=ub7f6c5e7&name=image.png&originHeight=260&originWidth=407&originalType=binary&ratio=1&rotation=0&showTitle=false&size=42799&status=done&style=none&taskId=u6f09fe78-0aed-47c5-be4c-a9e0364f594&title=&width=407" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633252679722-49bce65b-c7ac-4441-b9b3-de6dbd0227f7.png#clientId=ufc2ec145-3162-4&from=paste&height=372&id=u93deb917&name=image.png&originHeight=372&originWidth=620&originalType=binary&ratio=1&rotation=0&showTitle=false&size=101776&status=done&style=none&taskId=u11d7e4a2-8d83-43f5-b0fa-18774ec50b2&title=&width=620" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633254239039-aa5a246f-0870-42f6-b3a8-bcf23e0ba8b1.png#clientId=ufc2ec145-3162-4&from=paste&height=404&id=u2caabf8a&name=image.png&originHeight=404&originWidth=692&originalType=binary&ratio=1&rotation=0&showTitle=false&size=114847&status=done&style=none&taskId=u63668f35-f140-4ee7-8213-7be4a59560e&title=&width=692" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="第9章将隐式概念转变为-显式概念"><a href="#第9章将隐式概念转变为-显式概念" class="headerlink" title="第9章将隐式概念转变为 显式概念"></a>第9章将隐式概念转变为 显式概念</h2><blockquote>
+<p>若开发人员识别出设计中隐含的某个概念或是在讨论中受到启发而发现一个概念时，就会对 领域模型和相应的代码进行许多转换，在模型中加入一个或多个对象或关系，从而将此概念显式 地表达出来</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633254706350-0f21c612-ad19-44cf-8b47-90de9bd9f2e6.png#clientId=ufc2ec145-3162-4&from=paste&height=277&id=ue418e4b6&name=image.png&originHeight=277&originWidth=590&originalType=binary&ratio=1&rotation=0&showTitle=false&size=41326&status=done&style=none&taskId=u4177771c-ff2b-46f6-b54b-7fcd6ec11f0&title=&width=590" srcset="/img/loading.gif" lazyload alt="image.png"><br>沟通后得出的模型<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633254775856-ee706e6a-ca10-40be-b2f9-dd8ddd948fd1.png#clientId=ufc2ec145-3162-4&from=paste&height=494&id=ua8b85b4b&name=image.png&originHeight=494&originWidth=603&originalType=binary&ratio=1&rotation=0&showTitle=false&size=59081&status=done&style=none&taskId=u5b14f0b6-7511-4f1d-9b61-5f754a0a183&title=&width=603" srcset="/img/loading.gif" lazyload alt="image.png"><br><strong>模式：SPECIFICATION</strong><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633255892298-23405287-014c-49ca-a2bc-2fd14bda375b.png#clientId=ufc2ec145-3162-4&from=paste&height=93&id=ub2466bc4&name=image.png&originHeight=93&originWidth=441&originalType=binary&ratio=1&rotation=0&showTitle=false&size=8798&status=done&style=none&taskId=u6f13161d-5a4e-40e7-a34e-26bb7e5b06e&title=&width=441" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>业务规则通常不适合作为ENTITY或VALUE OBJECT的职责，而且规则的变化和组合也会掩盖 领域对象的基本含义。但是将规则移出领域层的结果会更糟糕，因为这样一来，领域代码就不再 表达模型了。 逻辑编程提供了一种概念，即“谓词”这种可分离、可组合的规则对象，但是要把这种概念 用对象完全实现是很麻烦的。同时，这种概念过于通用，在表达设计意图方面，它的针对性不如 专门的设计那么好。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633256280899-56461846-72bb-44ff-93f9-7122cd41f888.png#clientId=ufc2ec145-3162-4&from=paste&height=138&id=u89103c64&name=image.png&originHeight=138&originWidth=673&originalType=binary&ratio=1&rotation=0&showTitle=false&size=20920&status=done&style=none&taskId=u3fe1c275-cde1-41ed-b129-f0fbbbc6f36&title=&width=673" srcset="/img/loading.gif" lazyload alt="image.png"><br>为特殊目的创建谓词形式的显式的VALUE OBJECT。SPECIFICATION就是一个谓词，可用来确 定对象是否满足某些标准。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633256426128-3309afc6-9521-4ca8-9011-96e71f770951.png#clientId=ufc2ec145-3162-4&from=paste&height=316&id=u48b7c354&name=image.png&originHeight=316&originWidth=704&originalType=binary&ratio=1&rotation=0&showTitle=false&size=63223&status=done&style=none&taskId=uc99c9f7f-028e-4c66-a76a-f7daf4a7945&title=&width=704" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="第10章柔性设计"><a href="#第10章柔性设计" class="headerlink" title="第10章柔性设计"></a>第10章柔性设计</h2><h3 id="模式：INTENTION-REVEALING-INTERFACES"><a href="#模式：INTENTION-REVEALING-INTERFACES" class="headerlink" title="模式：INTENTION-REVEALING INTERFACES"></a>模式：INTENTION-REVEALING INTERFACES</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633257705525-d4911d9c-6a34-4a0e-a891-5f65d0034e41.png#clientId=ufc2ec145-3162-4&from=paste&height=470&id=u012b127d&name=image.png&originHeight=470&originWidth=684&originalType=binary&ratio=1&rotation=0&showTitle=false&size=107946&status=done&style=none&taskId=u492bddbd-6adf-42c5-abbf-4e78f57deb3&title=&width=684" srcset="/img/loading.gif" lazyload alt="image.png"><br>在命名类和操作时要描述它们的效果和目的，而不要表露它们是通过何种方式达到目的的。 这样可以使客户开发人员不必去理解内部细节。这些名称应该与UBIQUITOUS LANGUAGE保持一 致，以便团队成员可以迅速推断出它们的意义。在创建一个行为之前先为它编写一个测试，这样 可以促使你站在客户开发人员的角度上来思考它。</p>
+<h3 id="模式：SIDE-EFFECT-FREE-FUNCTION"><a href="#模式：SIDE-EFFECT-FREE-FUNCTION" class="headerlink" title="模式：SIDE-EFFECT-FREE FUNCTION"></a>模式：SIDE-EFFECT-FREE FUNCTION</h3><p>我们可以宽泛地把操作分为两个大的类别：命令和查询。查询是从系统获取信息，查询的方 式可能只是简单地访问变量中的数据，也可能是用这些数据执行计算。命令（也称为修改器)是 修改系统的操作（举一个简单的例子，设臵变量）。</p>
+<blockquote>
+<p>多个规则的相互作用或计算的组合所产生的结果是很难预测的。开发人员在调用一个操作 时，为了预测操作的结果，必须理解它的实现以及它所调用的其他方法的实现。如果开发人员不 得不“揭开接口的面纱”，那么接口的抽象作用就受到了限制。如果没有了可以安全地预见到结 果的抽象，开发人员就必须限制“组合爆炸”，这就限制了系统行为的丰富性。</p>
+</blockquote>
+<p>尽可能把程序的逻辑放到函数中，因为函数是只返回结果而不产生明显副作用的操作。严格 地把命令（引起明显的状态改变的方法）隔离到不返回领域信息的、非常简单的操作中。当发现 了一个非常适合承担复杂逻辑职责的概念时，就可以把这个复杂逻辑移到VALUE OBJECT中，这 样可以进一步控制副作用。</p>
+<h3 id="模式：ASSERTION"><a href="#模式：ASSERTION" class="headerlink" title="模式：ASSERTION"></a>模式：ASSERTION</h3><blockquote>
+<p>把复杂的计算封装到SIDE-EFFECT-FREE FUNCTION中可以简化问题，但实体仍然会留有一些有 副作用的命令，使用这些ENTITY的人必须了解使用这些命令的后果。在这种情况下，使用 ASSERTION（断言）可以把副作用明确地表示出来，使它们更易于处理。</p>
+</blockquote>
+<p>如果操作的副作用仅仅是由它们的实现隐式定义的，那么在一个具有大量相互调用关系的系统中，起因和结果会变得一团糟。理解程序的唯一方式就是沿着分支路径来跟踪程序的执行。封装完全失去了价值。跟踪具体的执行也使抽象失去了意义。</p>
+<blockquote>
+<p>把操作的后置条件和类及AGGREGATE的固定规则表述清楚。如果在你的编程语言中不能直 接编写ASSERTION，那么就把它们编写成自动的单元测试。还可以把它们写到文档或图中（如果 符合项目开发风格的话）。 </p>
+</blockquote>
+<blockquote>
+<p>寻找在概念上内聚的模型，以便使开发人员更容易推断出预期的ASSERTION，从而加快学习 过程并避免代码矛盾。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633268611756-c8a6d193-e7f0-4315-958c-373b47a217b9.png#clientId=ufc2ec145-3162-4&from=paste&height=412&id=u8ff2a527&name=image.png&originHeight=412&originWidth=552&originalType=binary&ratio=1&rotation=0&showTitle=false&size=60093&status=done&style=none&taskId=u0acc8d13-ff05-4f67-8c34-d5f237417f2&title=&width=552" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="模式：CONCEPTUAL-CONTOUR"><a href="#模式：CONCEPTUAL-CONTOUR" class="headerlink" title="模式：CONCEPTUAL CONTOUR"></a>模式：CONCEPTUAL CONTOUR</h3><p>如果把模型或设计的所有元素都放在一个整体的大结构中，那么它们的功能就会发生重复。 外部接口无法给出客户可能关心的全部信息。由于不同的概念被混合在一起，它们的意义变得很 难理解。 </p>
+<p>而另一方面，把类和方法分解开也可能是毫无意义的，这会使客户更复杂，迫使客户对象去 理解各个细微部分是如何组合在一起的。更糟的是，有的概念可能会完全丢失。铀原子的一半并 不是铀。而且，粒度的大小并不是唯一要考虑的问题，我们还要考虑粒度是在哪种场合下使用的。</p>
+<blockquote>
+<p>把设计元素（操作、接口、类和AGGREGATE）分解为内聚的单元，在这个过程中，你对领 域中一切重要划分的直观认识也要考虑在内。在连续的重构过程中观察发生变化和保证稳定的规 律性，并寻找能够解释这些变化模式的底层CONCEPTUAL CONTOUR。使模型与领域中那些一致的 方面（正是这些方面使得领域成为一个有用的知识体系）相匹配。</p>
+</blockquote>
+<p>互相依赖使模型和设计变得难以理解、测试和维护。而且，互相依赖很容易越积越多。 当然，每个关联都是一种依赖，要想理解一个类，必须理解它与哪些对象有联系。与这个类 有联系的其他对象还会与更多的对象发生联系，而这些联系也是必须要弄清楚的。每个方法的每 个参数的类型也是一个依赖，每个返回值也都是一个依赖。</p>
+<h3 id="模式：STANDALONE-CLASS"><a href="#模式：STANDALONE-CLASS" class="headerlink" title="模式：STANDALONE CLASS"></a>模式：STANDALONE CLASS</h3><blockquote>
+<p>即使是在ＭODULE内部，设计也会随着依赖关系的增加而变得越来越难以理解。这加重了 我们的思考负担，从而限制了开发人员能处理的设计复杂度。隐式概念比显式引用增加的负担 更大。</p>
+</blockquote>
+<p>低耦合是对象设计的一个基本要素。尽一切可能保持低耦合。把其他所有无关概念提取到对 象之外。这样类就变得完全独立了，这就使得我们可以单独地研究和理解它。每个这样的独立类 都极大地减轻了因理解ＭODULE而带来的负担。</p>
+<h3 id="模式：CLOSURE-OF-OPERATION"><a href="#模式：CLOSURE-OF-OPERATION" class="headerlink" title="模式：CLOSURE OF OPERATION"></a>模式：CLOSURE OF OPERATION</h3><p>在适当的情况下，在定义操作时让它的返回类型与其参数的类型相同。如果实现者 （implementer）的状态在计算中会被用到，那么实现者实际上就是操作的一个参数，因此参数和返回值应该与实现者有相同的类型。这样的操作就是在该类型的实例集合中的闭合操作。闭合 操作提供了一个高层接口，同时又不会引入对其他概念的任何依赖。</p>
+<h3 id="声明式设计"><a href="#声明式设计" class="headerlink" title="声明式设计"></a>声明式设计</h3><p>使用ASSERTION可以得到更好的设计，虽然我们只是用一些相对非正式的方式来检查这些 ASSERTION。但实际上我们无法保证手写软件的正确性。举个简单例子，只要代码还有其他一些 没有被ASSERTION专门排除在外的副作用，断言就失去了作用。无论我们的设计多么遵守 MODEL-DRIVEN开发方法，最后仍要通过编写过程代码来实现概念交互的结果。</p>
+<h2 id="第11章应用分析模式"><a href="#第11章应用分析模式" class="headerlink" title="第11章应用分析模式"></a>第11章应用分析模式</h2><blockquote>
+<p>深层模型和柔性设计并非唾手可得。要想取得进展，必须学习大量领域知识并进行充分 的讨论，还需要经历大量的尝试和失败。但有时我们也能从中获得一些优势。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633270875993-cefd6983-e60d-4fed-b7d3-4d6844c7b8b7.png#clientId=ufc2ec145-3162-4&from=paste&height=403&id=u3b9cac3a&name=image.png&originHeight=403&originWidth=683&originalType=binary&ratio=1&rotation=0&showTitle=false&size=67518&status=done&style=none&taskId=u73efed8c-8b48-499a-a68c-7a469a6aab2&title=&width=683" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="第12章将设计模式应用于模型"><a href="#第12章将设计模式应用于模型" class="headerlink" title="第12章将设计模式应用于模型"></a>第12章将设计模式应用于模型</h2><h3 id="模式：STRATEGY（也称为POLICY）"><a href="#模式：STRATEGY（也称为POLICY）" class="headerlink" title="模式：STRATEGY（也称为POLICY）"></a>模式：STRATEGY（也称为POLICY）</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633271027461-ae70e642-195f-4f76-85e5-a15062902b1f.png#clientId=ufc2ec145-3162-4&from=paste&height=349&id=u1ec196ca&name=image.png&originHeight=349&originWidth=657&originalType=binary&ratio=1&rotation=0&showTitle=false&size=29091&status=done&style=none&taskId=ub93f262e-0f0d-41cf-8975-d0927f0a41c&title=&width=657" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>定义了一组算法，将每个算法封装起来，并使它们可以互换。STRATEGY允许算法独立于使用它的客户而变化。</p>
+</blockquote>
+<p>领域模型包含一些并非用于解决技术问题的过程，将它们包含进来是因为它们对处理问题领 域具有实际的价值。当必须从多个过程中进行选择时，选择的复杂性再加上多个过程本身的复杂 性会使局面失去控制。</p>
+<blockquote>
+<p>我们需要把过程中的易变部分提取到模型的一个单独的“策略”对象中。将规则与它所控制 的行为区分开。按照STRATEGY设计模式来实现规则或可替换的过程。策略对象的多个版本表示 了完成过程的不同方式。</p>
+</blockquote>
+<h3 id="模式：COMPOSITE"><a href="#模式：COMPOSITE" class="headerlink" title="模式：COMPOSITE"></a>模式：COMPOSITE</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633271882788-6e2d146a-6ad6-4c40-abab-2538ac855bb6.png#clientId=ufc2ec145-3162-4&from=paste&height=347&id=u67d6181a&name=image.png&originHeight=347&originWidth=645&originalType=binary&ratio=1&rotation=0&showTitle=false&size=33206&status=done&style=none&taskId=u15b13d0c-d5f8-4407-a13a-16b23556e8c&title=&width=645" srcset="/img/loading.gif" lazyload alt="image.png"><br>将对象组织为树来表示部分—整体的层次结构。利用COMPOSITE，客户可以对单独 的对象和对象组合进行同样的处理。</p>
+<blockquote>
+<p>当嵌套容器的关联性没有在模型中反映出来时，公共行为必然会在层次结构的每一层重复出 现，而且嵌套也变得僵化（例如，容器通常不能包含同一层中的其他容器，而且嵌套的层数也是 固定的）。客户必须通过不同的接口来处理层次结构中的不同层，尽管这些层在概念上可能没有 区别。通过层次结构来递归地收集信息也变得非常复杂。</p>
+</blockquote>
+<p>定义一个把COMPOSITE的所有成员都包含在内的抽象类型。在容器上实现那些查询信息的方 法时，这些方法返回由容器内容所汇总的信息。而“叶”节点则基于它们自己的值来实现这些方 法。客户只需使用抽象类型，而无需区分“叶”和容器。</p>
+<h2 id="第13章通过重构得到更深层的理解"><a href="#第13章通过重构得到更深层的理解" class="headerlink" title="第13章通过重构得到更深层的理解"></a>第13章通过重构得到更深层的理解</h2><p>(1) 以领域为本；<br>(2) 用一种不同的方式来看待事物；<br>(3) 始终坚持与领域专家对话。</p>
+<h3 id="重构的时机"><a href="#重构的时机" class="headerlink" title="重构的时机"></a>重构的时机</h3><p>持续重构渐渐被认为是一种“最佳实践”，但大部分项目团队仍然对它抱有很大的戒心。人 们虽然看到了修改代码会有风险，还要花费开发时间，但却不容易看到维持一个拙劣设计也有风 险，而且迁就这种设计也要付出代价。</p>
+<h1 id="第四部分-战略设计"><a href="#第四部分-战略设计" class="headerlink" title="第四部分 战略设计"></a>第四部分 战略设计</h1><h2 id="第14章保持模型的完整性"><a href="#第14章保持模型的完整性" class="headerlink" title="第14章保持模型的完整性"></a>第14章保持模型的完整性</h2><blockquote>
+<p>大型系统领域模型的完全统一即不可行，也不划算。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633273027623-a806c9f7-bdef-4bb6-bdda-13294ec07f71.png#clientId=ufc2ec145-3162-4&from=paste&height=406&id=u5229923c&name=image.png&originHeight=406&originWidth=668&originalType=binary&ratio=1&rotation=0&showTitle=false&size=69380&status=done&style=none&taskId=u442eb40e-33ef-4bc5-a596-3e0b9a7ef5a&title=&width=668" srcset="/img/loading.gif" lazyload alt="image.png"><br>任何大型项目都会存在多个模型。而当基于不同模型的代码被组合到一起后，软件就会出现 bug、变得不可靠和难以理解。团队成员之间的沟通变得混乱。人们往往弄不清楚一个模型不应 该在哪个上下文中使用。</p>
+<blockquote>
+<p>明确地定义模型所应用的上下文。根据团队的组织、软件系统的各个部分的用法以及物理表 现（代码和数据库模式等）来设臵模型的边界。在这些边界中严格保持模型的一致性，而不要受 到边界之外问题的干扰和混淆。</p>
+</blockquote>
+<p>BOUNDED CONTEXT不是MODULE 有时这两个概念易引起混淆，但它们是具有不同动机的不同模式。确实，当两组对象组 成两个不同模型时，人们几乎总是把它们放在不同的MODULE中。这样做的确提供了不同的命 名空间（对不同的CONTEXT很重要）和一些划分方法。 但人们也会在一个模型中用MODULE来组织元素，它们不一定要表达划分CONTEXT的意图。 MODULE在BOUNDED CONTEXT内部创建的独立命名空间实际上使人们很难发现意外产生的模 型分裂。</p>
+<h3 id="模式：CONTINUOUS-INTEGRATION"><a href="#模式：CONTINUOUS-INTEGRATION" class="headerlink" title="模式：CONTINUOUS INTEGRATION"></a>模式：CONTINUOUS INTEGRATION</h3><blockquote>
+<p>当很多人在同一个BOUNDED CONTEXT中工作时，模型很容易发生分裂。团队越大，问题就 越大，但即使是3、4个人的团队也有可能会遇到严重的问题。然而，如果将系统分解为更小的 CONTEXT，最终又难以保持集成度和一致性。</p>
+</blockquote>
+<p>建立一个把所有代码和其他实现工件频繁地合并到一起的过程，并通过自动化测试来快速查 明模型的分裂问题。严格坚持使用UBIQUITOUS LANGUAGE，以便在不同人的头脑中演变出不同的 概念时，使所有人对模型都能达成一个共识。</p>
+<h3 id="模式：CONTEXT-MAP"><a href="#模式：CONTEXT-MAP" class="headerlink" title="模式：CONTEXT MAP"></a>模式：CONTEXT MAP</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633276311570-b318d64a-f814-4cd1-ad84-27e1d7d13c15.png#clientId=ufc2ec145-3162-4&from=paste&height=242&id=uc2815278&name=image.png&originHeight=242&originWidth=513&originalType=binary&ratio=1&rotation=0&showTitle=false&size=19110&status=done&style=none&taskId=u81c860af-a76f-4bae-b05d-b59a2718729&title=&width=513" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>其他团队中的人员并不是十分清楚CONTEXT的边界，他们会不知不觉地做出一些更改，从而 使边界变得模糊或者使互连变得复杂。当不同的上下文必须互相连接时，它们可能会互相重叠。</p>
+</blockquote>
+<p>识别在项目中起作用的每个模型，并定义其BOUNDED CONTEXT。这包括非面向对象子系统 的隐含模型。为每个BOUNDED CONTEXT命名，并把名称添加到UBIQUITOUS LANGUAGE中。 描述模型之间的联系点，明确所有通信需要的转换，并突出任何共享的内容。 先将当前的情况描绘出来。以后再做改变。</p>
+<h3 id="模式：SHARED-KERNEL"><a href="#模式：SHARED-KERNEL" class="headerlink" title="模式：SHARED KERNEL"></a>模式：SHARED KERNEL</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633276646598-d281afbf-96ee-4d84-a64e-add503221676.png#clientId=ufc2ec145-3162-4&from=paste&height=259&id=uadc9e48e&name=image.png&originHeight=259&originWidth=458&originalType=binary&ratio=1&rotation=0&showTitle=false&size=18441&status=done&style=none&taskId=u0f1cefb3-cb0f-4582-bde7-644969a1931&title=&width=458" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>当功能集成受到局限，CONTINUOUS INTEGRATION的开销可能会变得非常高。尤其是当团队的 技能水平或行政组织不能保持持续集成，或者只有一个庞大的、笨拙的团队时，更容易发生这种 情况。在这种情况下就要定义单独的BOUNDED CONTEXT，并组织多个团队。</p>
+</blockquote>
+<p>当不同团队开发一些紧密相关的应用程序时，如果团队之间不进行协调，即使短时间内能够 取得快速进展，但他们开发出的产品可能无法结合到一起。最后可能不得不耗费大量精力在转换 层上，并且频繁地进行改动，不如一开始就使用CONTINUOUS INTEGRATION那么省心省力，同时 这也造成重复工作，并且无法实现公共的UBIQUITOUS LANGUAGE所带来的好处。</p>
+<blockquote>
+<p>从领域模型中选出两个团队都同意共享的一个子集。当然，除了这个模型子集以外，还包括 与该模型部分相关的代码子集，或数据库设计的子集。这部分明确共享的内容具有特殊的地位， 一个团队在没与另一个团队商量的情况下不应擅自更改它。 功能系统要经常进行集成，但集成的频率应该比团队中CONTINUOUS INTEGRATION的频率低 一些。在进行这些集成的时候，两个团队都要运行测试。</p>
+</blockquote>
+<h3 id="模式：CUSTOMER-SUPPLIER-DEVELOPMENT-TEAM"><a href="#模式：CUSTOMER-SUPPLIER-DEVELOPMENT-TEAM" class="headerlink" title="模式：CUSTOMER/SUPPLIER DEVELOPMENT TEAM"></a>模式：CUSTOMER/SUPPLIER DEVELOPMENT TEAM</h3><blockquote>
+<p>我们常常会碰到这样的情况：一个子系统主要服务于另一个子系统；“下游”组件执行分析 或其他功能，这些功能向“上游”组件反馈的信息非常少，所有依赖都是单向的。两个子系统通 常服务于完全不同的用户群，其执行的任务也不同，在这种情况下使用不同的模型会很有帮助。 工具集可能也不相同，因此无法共享程序代码。</p>
+</blockquote>
+<p>如果下游团队对变更具有否决权，或请求变更的程序太复杂，那么上游团队的开发自由度就 会受到限制。由于担心破坏下游系统，上游团队甚至会受到抑制。同时，由于上游团队掌握优先 权，下游团队有时也会无能为力。</p>
+<h3 id="模式：CONFORMIST"><a href="#模式：CONFORMIST" class="headerlink" title="模式：CONFORMIST"></a>模式：CONFORMIST</h3><blockquote>
+<p>当两个具有上游/下游关系的团队不归同一个管理者指挥时，CUSTOMER/SUPPLIER TEAM这样 的合作模式就不会奏效。勉强应用这种模式会给下游团队带来麻烦。大公司可能会发生这种情况， 其中两个团队在管理层次中相隔很远，或者两个团队的共同主管不关心它们之间的关系。</p>
+</blockquote>
+<p>当两个开发团队具有上/下游关系时，如果上游团队没有动力来满足下游团队的需求，那么 下游团队将无能为力。出于利他主义的考虑，上游开发人员可能会做出承诺，但他们可能不会履行承诺。下游团队出于良好的意愿会相信这些承诺，从而根据一些永远不会实现的特性来制定计 划。下游项目只能被搁臵，直到团队最终学会利用现有条件自力更生为止。下游团队不会得到根 据他们的需求而量身定做的接口。</p>
+<blockquote>
+<p>通过严格遵从上游团队的模型，可以消除在BOUNDED CONTEXT之间进行转换的复杂性。尽 管这会限制下游设计人员的风格，而且可能不会得到理想的应用程序模型，但选择CONFORMITY 模式可以极大地简化集成。此外，这样还可以与供应商团队共享UBIQUITOUS LANGUAGE。供应商 处于统治地位，因此最好使沟通变容易。他们从利他主义的角度出发，会与你分享信息。</p>
+</blockquote>
+<h3 id="模式：ANTICORRUPTION-LAYER"><a href="#模式：ANTICORRUPTION-LAYER" class="headerlink" title="模式：ANTICORRUPTION LAYER"></a>模式：ANTICORRUPTION LAYER</h3><blockquote>
+<p>新系统几乎总是需要与遗留系统或其他系统进行集成，这些系统具有其自己的模型。当把参 与集成的BOUNDED CONTEXT设计完善并且团队相互合作时，转换层可能很简单，甚至很优雅。但 是，当边界那侧发生渗透时，转换层就要承担起更多的防护职责</p>
+</blockquote>
+<p><strong>当正在构建的新系统与另一个系统的接口很大时，为了克服连接两个模型而带来的困难，新 模型所表达的意图可能会被完全改变，最终导致它被修改得像是另一个系统的模型了（以一种特 定的风格）。遗留系统的模型通常很弱。即使对于那些模型开发得很好的例外情况，它们可能也 不符合当前项目的需要。然而，集成遗留系统仍然具有很大的价值，而且有时还是绝对必要的。</strong></p>
+<blockquote>
+<p>创建一个隔离层，以便根据客户自己的领域模型来为客户提供相关功能。这个层通过另一个 系统现有接口与其进行对话，而只需对那个系统作出很少的修改，甚至无需修改。在内部,这个 层在两个模型之间进行必要的双向转换。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633276936406-3fa15192-bf9f-40c8-a418-67add954d8fd.png#clientId=ufc2ec145-3162-4&from=paste&height=254&id=u6702e4d0&name=image.png&originHeight=254&originWidth=683&originalType=binary&ratio=1&rotation=0&showTitle=false&size=38998&status=done&style=none&taskId=u5f8e486b-f4ab-4bc0-960e-bbd24d8a213&title=&width=683" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="模式：SEPARATE-WAY"><a href="#模式：SEPARATE-WAY" class="headerlink" title="模式：SEPARATE WAY"></a>模式：SEPARATE WAY</h3><blockquote>
+<p>我们必须严格划定需求的范围。如果两组功能之间的关系并非必不可少，那么二者完全可以彼此独立。</p>
+</blockquote>
+<p>声明一个与其他上下文毫无关联的BOUNDED CONTEXT，使开发人员能够在这个小范围内找 到简单、专用的解决方案。</p>
+<h3 id="模式：OPEN-HOST-SERVICE"><a href="#模式：OPEN-HOST-SERVICE" class="headerlink" title="模式：OPEN HOST SERVICE"></a>模式：OPEN HOST SERVICE</h3><blockquote>
+<p>当一个子系统必须与大量其他系统进行集成时，为每个集成都定制一个转换层可能会减慢团队的工作速度。需要维护的东西会越来越多，而且进行修改的时候担心的事情也会越来越多。</p>
+</blockquote>
+<p>定义一个协议，把你的子系统作为一组SERVICE供其他系统访问。开放这个协议，以便所有 需要与你的子系统集成的人都可以使用它。当有新的集成需求时，就增强并扩展这个协议，但个 别团队的特殊需求除外。满足这种特殊需求的方法是使用一次性的转换器来扩充协议，以便使共 享协议简单且内聚。</p>
+<h3 id="模式：PUBLISHED-LANGUAGE"><a href="#模式：PUBLISHED-LANGUAGE" class="headerlink" title="模式：PUBLISHED LANGUAGE"></a>模式：PUBLISHED LANGUAGE</h3><blockquote>
+<p>两个BOUNDED CONTEXT之间的模型转换需要一种公共的语言。</p>
+</blockquote>
+<p>与现有领域模型进行直接的转换可能不是一种好的解决方案。这些模型可能过于复杂或设计 得较差。它们可能没有被很好地文档化。如果把其中一个模型作为数据交换语言，它实质上就被 固定住了，而无法满足新的开发需求。</p>
+<p>首选较大的BOUNDED CONTEXT  </p>
+<ul>
+<li>当用一个统一模型来处理更多任务时，用户任务之间的流动更顺畅。  </li>
+<li>一个内聚模型比两个不同模型再加它们之间的映射更容易理解。  </li>
+<li>两个模型之间的转换可能会很难（有时甚至是不可能的）。  </li>
+<li>共享语言可以使团队沟通起来更清楚。 </li>
+</ul>
+<p>首选较小的BOUNDED CONTEXT  </p>
+<ul>
+<li>开发人员之间的沟通开销减少了。  </li>
+<li>由于团队和代码规模较小，CONTINUOUS INTEGRATION更容易了。  </li>
+<li>较大的上下文要求更加通用的抽象模型，而掌握所需技巧的人员会出现短缺 </li>
+<li>不同的模型可以满足一些特殊需求，或者是能够把一些特殊用户群的专门术语和 UBIQUITOUS LANGUAGE的专门术语包括进来。</li>
+</ul>
+<p>权衡<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633277281899-65dd819c-ae31-4b46-8918-3771a37e3d11.png#clientId=ufc2ec145-3162-4&from=paste&height=408&id=uf2d5054a&name=image.png&originHeight=408&originWidth=652&originalType=binary&ratio=1&rotation=0&showTitle=false&size=39642&status=done&style=none&taskId=u832f84c5-d12f-4fa8-a079-bb9998413df&title=&width=652" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="第15章精炼"><a href="#第15章精炼" class="headerlink" title="第15章精炼"></a>第15章精炼</h2><p>领域模型的战略精炼包括以下部分：<br>(1) 帮助所有团队成员掌握系统的总体设计以及各部分如何协调工作；<br>(2) 找到一个具有适度规模的核心模型并把它添加到通用语言中，从而促进沟通； (3) 指导重构；<br>(4) 专注于模型中最有价值的那部分；<br>(5) 指导外包、现成组件的使用以及任务委派。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633277397575-7a7d7db9-acf1-4ab2-a322-bdbaecc3a522.png#clientId=ufc2ec145-3162-4&from=paste&height=424&id=u6d319975&name=image.png&originHeight=424&originWidth=650&originalType=binary&ratio=1&rotation=0&showTitle=false&size=58077&status=done&style=none&taskId=ua2c94249-5a09-474b-9fec-6fec725f660&title=&width=650" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="模式-CORE-DOMAIN"><a href="#模式-CORE-DOMAIN" class="headerlink" title="模式: CORE DOMAIN"></a>模式: CORE DOMAIN</h3><blockquote>
+<p>一个严峻的现实是我们不可能对所有设计部分进行同等的精化，而是必须分出优先级。为了 使领域模型成为有价值的资产，必须整齐地梳理出模型的真正核心，并完全根据这个核心来创建 应用程序的功能。但本来就稀缺的高水平开发人员往往会把工作重点放在技术基础设施上，或者 只是去解决那些不需要专门领域知识就能理解的领域问题</p>
+</blockquote>
+<p><strong>对模型进行提炼。找到CORE DOMAIN并提供一种易于区分的方法把它与那些起辅助作用的模 型和代码分开。最有价值和最专业的概念要轮廓分明。尽量压缩CORE DOMAIN。 让最有才能的人来开发CORE DOMAIN，并据此要求进行相应的招聘。在CORE DOMAIN中努力 开发能够确保实现系统蓝图的深层模型和柔性设计。仔细判断任何其他部分的投入，看它是否能 够支持这个提炼出来的CORE。</strong></p>
+<h3 id="模式：GENERIC-SUBDOMAIN"><a href="#模式：GENERIC-SUBDOMAIN" class="headerlink" title="模式：GENERIC SUBDOMAIN"></a>模式：GENERIC SUBDOMAIN</h3><blockquote>
+<p>模型中有些部分除了增加复杂性以外并没有捕捉或传递任何专门的知识。任何外来因素都会 使CORE DOMAIN愈发的难以分辨和理解。模型中充斥着大量众所周知的一般原则，或者是专门的 细节，这些细节并不是我们的主要关注点，而只是起到支持作用。然而，无论它们是多么通用的 元素，它们对实现系统功能和充分表达模型都是极为重要的。</p>
+</blockquote>
+<p>识别出那些与项目意图无关的内聚子领域。把这些子领域的通用模型提取出来，并放到单独 的MODULE中。任何专有的东西都不应放在这些模块中。 把它们分离出来以后，在继续开发的过程中，它们的优先级应低于CORE DOMAIN的优先级， 并且不要分派核心开发人员来完成这些任务（因为他们很少能够从这些任务中获得领域知识）。 此外，还可以考虑为这些GENERIC SUBDOMAIN使用现成的解决方案或“公开发布的模型” （PUBLISHED MODEL）。</p>
+<h3 id="模式：DOMAIN-VISION-STATEMENT"><a href="#模式：DOMAIN-VISION-STATEMENT" class="headerlink" title="模式：DOMAIN VISION STATEMENT"></a>模式：DOMAIN VISION STATEMENT</h3><blockquote>
+<p>在项目开始时，模型通常并不存在，但是模型开发的需求是早就确定下来的重点。在后面的 开发阶段，我们需要解释清楚系统的价值，但这并不需要深入地分析模型。此外，领域模型的关 键方面可能跨越多个BOUNDED CONTEXT，而且从定义上看，无法将这些彼此不同的模型组织起 来表明其共同的关注点。</p>
+</blockquote>
+<p>写一份CORE DOMAIN的简短描述（大约一页纸）以及它将会创造的价值，也就是“价值主张”。 那些不能将你的领域模型与其他领域模型区分开的方面就不要写了。展示出领域模型是如何实现 和均衡各方利益的。这份描述要尽量精简。尽早把它写出来，随着新的理解随时修改它。</p>
+<h3 id="模式：HIGHLIGHTED-CORE"><a href="#模式：HIGHLIGHTED-CORE" class="headerlink" title="模式：HIGHLIGHTED CORE"></a>模式：HIGHLIGHTED CORE</h3><blockquote>
+<p>DOMAIN VISION STATEMENT从宽泛的角度对CORE DOMAIN进行了说明，但它把什么是具体核 心模型元素留给人们自己去解释和猜测。除非团队的沟通极其充分，否则单靠VISION STATEMENT 是很难产生什么效果的。</p>
+</blockquote>
+<p>尽管团队成员可能大体上知道核心领域是由什么构成的，但CORE DOMAIN中到底包含哪些元 素，不同的人会有不同的理解，甚至同一个人在不同的时间也会有不同的理解。如果我们总是要 不断过滤模型以便识别出关键部分，那么就会分散本应该投入到设计上的精力，而且这还需要广 泛的模型知识。因此，CORE DOMAIN必须要很容易被分辨出来。 对代码所做的重大结构性改动是识别CORE DOMAIN的理想方式，但这些改动往往无法在短期 内完成。事实上，如果团队的认识还不够全面，这样的重大代码修改是很难进行的。</p>
+<h3 id="模式：COHESIVE-MECHANISM"><a href="#模式：COHESIVE-MECHANISM" class="headerlink" title="模式：COHESIVE MECHANISM"></a>模式：COHESIVE MECHANISM</h3><blockquote>
+<p>计算有时会非常复杂，使设计开始变得膨胀。机械性的“如何做”大量增加，把概念性的“做 什么”完全掩盖了。为解决问题提供算法的大量方法掩盖了那些用于表达问题的方法。</p>
+</blockquote>
+<p>把概念上的COHESIVE MECHANISM（内聚机制）分离到一个单独的轻量级框架中。要特别注 意公式或那些有完备文档的算法。用一个INTENTION-REVEALING INTERFACE来暴露这个框架的功 能。现在，领域中的其他元素就可以只专注于如何表达问题（做什么）了，而把解决方案的复杂 细节（如何做）转移给了框架。</p>
+<h3 id="模式：SEGREGATED-CORE"><a href="#模式：SEGREGATED-CORE" class="headerlink" title="模式：SEGREGATED CORE"></a>模式：SEGREGATED CORE</h3><blockquote>
+<p>模型中的元素可能有一部分属于CORE DOMAIN，而另一部分起支持作用。核心元素可能与一 般元素紧密耦合在一起。CORE的概念内聚性可能不是很强，看上去也不明显。这种混乱性和耦 合关系抑制了CORE。设计人员如果无法清晰地看到最重要的关系，就会开发出脆弱的设计。</p>
+</blockquote>
+<p>对模型进行重构，把核心概念从支持性元素（包括定义得不清楚的那些元素）中分离出来， 并增强CORE的内聚性，同时减少它与其他代码的耦合。把所有通用元素或支持性元素提取到其 他对象中，并把这些对象放到其他的包中——即使这会把一些紧密耦合的元素分开。</p>
+<h3 id="模式：ABSTRACT-CORE"><a href="#模式：ABSTRACT-CORE" class="headerlink" title="模式：ABSTRACT CORE"></a>模式：ABSTRACT CORE</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633278600180-8cf9e02d-9072-4075-9e14-b640e682bf75.png#clientId=ufc2ec145-3162-4&from=paste&height=289&id=ud21636c3&name=image.png&originHeight=289&originWidth=397&originalType=binary&ratio=1&rotation=0&showTitle=false&size=13186&status=done&style=none&taskId=u3ec9a551-1906-451e-ad9f-a8173c26b51&title=&width=397" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>当不同MODULE的子领域之间有大量交互时，要么需要在MODULE之间创建很多引用，这在 很大程度上抵消了划分模块的价值；要么就必须间接地实现这些交互，而后者会使模型变得晦涩 难懂。</p>
+</blockquote>
+<p>把模型中最基本的概念识别出来，并分离到不同的类、抽象类或接口中。设计这个抽象模型， 使之能够表达出重要组件之间的大部分交互。把这个完整的抽象模型放到它自己的MODULE中， 而专用的、详细的实现类则留在由子领域定义的MODULE中。</p>
+<h2 id="第16章大型结构"><a href="#第16章大型结构" class="headerlink" title="第16章大型结构"></a>第16章大型结构</h2><blockquote>
+<p>在一个大的系统中，如果因为缺少一种全局性的原则而使人们无法根据元素在模式（这些模 式被应用于整个设计）中的角色来解释这些元素，那么开发人员就会陷入“只见树木，不见森林” 的境地。</p>
+</blockquote>
+<p>设计一种应用于整个系统的规则（或角色和关系）模式，使人们可以通过它在一定程度上了 解各个部分在整体中所处的位臵（即使是在不知道各个部分的详细职责的情况下）。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633278741104-f093dd21-58cc-4892-9482-d0442dd4f52d.png#clientId=ufc2ec145-3162-4&from=paste&height=351&id=u0bf6a464&name=image.png&originHeight=351&originWidth=664&originalType=binary&ratio=1&rotation=0&showTitle=false&size=48077&status=done&style=none&taskId=ua710f4eb-96e6-4381-a026-36af9d2bbf9&title=&width=664" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="模式：EVOLVING-ORDER"><a href="#模式：EVOLVING-ORDER" class="headerlink" title="模式：EVOLVING ORDER"></a>模式：EVOLVING ORDER</h3><blockquote>
+<p>一个没有任何规则的随意设计会产生一些无法理解整体含义且很难维护的系统。但架构中早 期的设计假设又会使项目变得束手束脚，而且会极大地限制应用程序中某些特定部分的开发人员 /设计人员的能力。很快，开发人员就会为适应结构而不得不在应用程序的开发上委曲求全，要 么就是完全推翻架构而又回到没有协调的开发老路上来。</p>
+</blockquote>
+<ul>
+<li>让这种概念上的大型结构随着应用程序一起演变，甚至可以变成一种完全不同的结构风格。 不要依此过分限制详细的设计和模型决策，这些决策和模型决策必须在掌握了详细知识之后才能确定。</li>
+<li>当发现一种大型结构可以明显使系统变得更清晰， 而又没有对模型开发施加一些不自然的约束时，就应该采用这种结构。使用不合适的结构还不如 不使用它，因此最好不要为了追求设计的完整性而勉强去使用一种结构，而应该找到尽可能精简 的方式解决所出现问题。要记住宁缺勿滥的原则。</li>
+</ul>
+<h3 id="模式：SYSTEM-METAPHOR"><a href="#模式：SYSTEM-METAPHOR" class="headerlink" title="模式：SYSTEM METAPHOR"></a>模式：SYSTEM METAPHOR</h3><blockquote>
+<p>软件设计往往非常抽象且难于掌握。开发人员和用户都需要一些切实可行的方式来理解系 统，并共享系统的一个整体视图。</p>
+</blockquote>
+<p>当系统的一个具体类比正好符合团队成员对系统的想象，并且能够引导他们向着一个有用的 方向进行思考时，就应该把这个类比用作一种大型结构。围绕这个隐喻来组织设计，并把它吸收 到UBIQUITOUS LANGUAGE中。SYSTEM METAPHOR应该既能促进系统的交流，又能指导系统的开 发。它可以增加系统不同部分之间的一致性，甚至可以跨越不同的BOUNDED CONTEXT。但所有 隐喻都不是完全精确的，因此应不断检查隐喻是否过度或不恰当，当发现它起到妨碍作用时，要 随时准备放弃它。</p>
+<h3 id="模式：RESPONSIBILITY-LAYER"><a href="#模式：RESPONSIBILITY-LAYER" class="headerlink" title="模式：RESPONSIBILITY LAYER"></a>模式：RESPONSIBILITY LAYER</h3><blockquote>
+<p>从头至尾的讨论中，单独的对象被分配了一组相关的、范围较窄的职责。职责驱动的 设计在更大的规模上也适用。 如果每个对象的职责都是人为分配的，将没有统一的指导原则和一致性，也无法把领域作为 一个整体来处理。为了保持大模型的一致，有必要在职责分配上实施一定的结构化控制。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633278902618-b6eacb9d-64c4-4521-a006-5898f1f9f119.png#clientId=ufc2ec145-3162-4&from=paste&height=395&id=ua0868c08&name=image.png&originHeight=395&originWidth=646&originalType=binary&ratio=1&rotation=0&showTitle=false&size=37569&status=done&style=none&taskId=ube6a75bc-12e9-414d-9b8d-e4510bd29c8&title=&width=646" srcset="/img/loading.gif" lazyload alt="image.png"><br>注意观察模型中的概念依赖性，以及领域中不同部分的变化频率和变化的原因。如果在领域 中发现了自然的层次结构，就把它们转换为宽泛的抽象职责。这些职责应该描述系统的高层目的 和设计。对模型进行重构，使得每个领域对象、AGGREGATE和MODULE的职责都清晰地位于一个 职责层当中。</p>
+<h3 id="模式：KNOWLEDGE-LEVEL"><a href="#模式：KNOWLEDGE-LEVEL" class="headerlink" title="模式：KNOWLEDGE LEVEL"></a>模式：KNOWLEDGE LEVEL</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633279009969-9362567b-495b-43d5-b381-130ecbfd8f16.png#clientId=ufc2ec145-3162-4&from=paste&height=213&id=u1e2e2d48&name=image.png&originHeight=213&originWidth=576&originalType=binary&ratio=1&rotation=0&showTitle=false&size=31383&status=done&style=none&taskId=u7f224956-77d4-44ee-834e-ecafecea4f5&title=&width=576" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>当我们需要让用户对模型的一部分有所控制，而模型又必须满足更大的一组规则时，可以利 用KNOWLEDGE LEVEL（知识级别）来处理这种情况。它可以使软件具有可配臵的行为，其中实体 中的角色和关系必须在安装时（甚至在运行时）进行修改。</p>
+</blockquote>
+<h3 id="模式：PLUGGABLE-COMPONENT-FRAMEWORK"><a href="#模式：PLUGGABLE-COMPONENT-FRAMEWORK" class="headerlink" title="模式：PLUGGABLE COMPONENT FRAMEWORK"></a>模式：PLUGGABLE COMPONENT FRAMEWORK</h3><blockquote>
+<p>在深入理解和反复精炼基础上得到的成熟模型中，会出现很多机会。通常只有在同一个领域 中实现了多个应用程序之后，才有机会使用PLUGGABLE COMPONENT FRAMEWORK（可插入式组件 框架）。</p>
+</blockquote>
+<ul>
+<li>当很多应用程序需要进行互操作时，如果所有应用程序都基于相同的一些抽象，但它们是独 立设计的，那么在多个BOUNDED CONTEXT之间的转换会限制它们的集成。各个团队之间如果不 能紧密地协作，就无法形成一个SHARED KERNEL。重复和分裂将会增加开发和安装的成本，而且互操作会变得很难实现。</li>
+<li>从接口和交互中提炼出一个ABSTRACT CORE，并创建一个框架，这个框架要允许这些接口的 各种不同实现被自由替换。同样，无论是什么应用程序，只要它严格地通过ABSTRACT CORE的接 口进行操作，那么就可以允许它使用这些组件。</li>
+</ul>
+<h2 id="第17章-领域驱动设计的综合运用"><a href="#第17章-领域驱动设计的综合运用" class="headerlink" title="第17章 领域驱动设计的综合运用"></a>第17章 领域驱动设计的综合运用</h2><h3 id="把大型结构与BOUNDED-CONTEXT结合起来使用"><a href="#把大型结构与BOUNDED-CONTEXT结合起来使用" class="headerlink" title="把大型结构与BOUNDED CONTEXT结合起来使用"></a>把大型结构与BOUNDED CONTEXT结合起来使用</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633279192211-c39628fc-0bc9-4bbb-aafe-44d1474df148.png#clientId=ufc2ec145-3162-4&from=paste&height=443&id=ud543001d&name=image.png&originHeight=443&originWidth=670&originalType=binary&ratio=1&rotation=0&showTitle=false&size=59351&status=done&style=none&taskId=u3b7e6412-8118-466a-9d39-d48686fd06a&title=&width=670" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>战略设计的3个基本原则（上下文、精炼和大型结构）并不是可以互相代替的，而是互为补充，并且以多种方式进行互动。例如，一种大型结构可以存在于一个BOUNDED CONTEXT中，也可 以跨越多个BOUNDED CONTEXT存在，并用于组织CONTEXT MAP。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633279244463-73050a0d-f728-4cfc-9160-fc4ea316cc5b.png#clientId=ufc2ec145-3162-4&from=paste&height=298&id=ue2f30694&name=image.png&originHeight=298&originWidth=613&originalType=binary&ratio=1&rotation=0&showTitle=false&size=44327&status=done&style=none&taskId=u0eafc398-1a5c-4e52-9033-0c42d35cdc1&title=&width=613" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="将大型结构与精炼结合起来使用"><a href="#将大型结构与精炼结合起来使用" class="headerlink" title="将大型结构与精炼结合起来使用"></a>将大型结构与精炼结合起来使用</h3><p>大型结构和精炼的概念也是互为补充的。大型结构可以帮助解释CORE DOMAIN内部的关系以 及GENERIC SUBDOMAIN之间的关系，如图17-6所示。 同时，大型结构本身可能也是CORE DOMAIN的一个重要部分。例如，把潜能层、作业层、策 略层和决策支持层区分开，能够提炼出对软件所要解决的业务问题的基本理解。当项目被划分为 多个BOUNDED CONTEXT时，这种理解尤其有用，这样CORE DOMAIN的模型对象就不会具有过多的含义。</p>
+<h3 id="首先评估"><a href="#首先评估" class="headerlink" title="首先评估"></a>首先评估</h3><p>当对一个项目进行战略设计时，首先需要清晰地评估现状。<br>(1) 画出CONTEXT MAP。你能画出一个一致的图吗？有没有一些模棱两可的情况？ (2) 注意项目上的语言使用。有没有UBIQUITOUS LANGUAGE？这种语言是否足够丰富，以便 帮助开发？<br>(3) 理解重点所在。CORE DOMAIN被识别出来了吗？有没有DOMAIN VISION STATEMENT？你能 写一个吗？<br>(4) 项目所采用的技术是遵循MODEL-DRIVEN DESIGN，还是与之相悖？<br>(5) 团队开发人员是否具备必要的技能？<br>(6) 开发人员是否了解领域知识？他们对领域是否感兴趣？<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633279358805-6a2b71f3-829d-428a-a4c4-859a755c1d6c.png#clientId=ufc2ec145-3162-4&from=paste&height=632&id=ue210f7b8&name=image.png&originHeight=632&originWidth=626&originalType=binary&ratio=1&rotation=0&showTitle=false&size=64581&status=done&style=none&taskId=u4d1d89d0-a59b-417b-9d29-d84085e8195&title=&width=626" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>PDF:<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/pdf/2630542/1631194951951-21597bc0-adff-49ca-85ef-3f97626a1791.pdf?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2021/pdf/2630542/1631194951951-21597bc0-adff-49ca-85ef-3f97626a1791.pdf%22,%22name%22:%22%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%EF%BC%9A%E8%BD%AF%E4%BB%B6%E6%A0%B8%E5%BF%83%E5%A4%8D%E6%9D%82%E6%80%A7%E5%BA%94%E5%AF%B9%E4%B9%8B%E9%81%93.pdf%22,%22size%22:61991326,%22type%22:%22application/pdf%22,%22ext%22:%22pdf%22,%22source%22:%22%22,%22status%22:%22done%22,%22mode%22:%22title%22,%22download%22:true,%22taskId%22:%22uc9704e80-842a-41fb-832c-461d331d557%22,%22taskType%22:%22upload%22,%22id%22:%22u769109fa%22,%22card%22:%22file%22%7D">领域驱动设计：软件核心复杂性应对之道.pdf</a><br>基于 DDD 的微服务设计和开发实战: <a target="_blank" rel="noopener" href="https://www.infoq.cn/article/s_lfulu6zqodd030rbh9">https://www.infoq.cn/article/s_lfulu6zqodd030rbh9</a><br>当中台遇上 DDD，我们该如何设计微服务?: <a target="_blank" rel="noopener" href="https://www.infoq.cn/article/7QgXyp4Jh3-5Pk6LydWw">https://www.infoq.cn/article/7QgXyp4Jh3-5Pk6LydWw</a><br>IBM云架构: <a target="_blank" rel="noopener" href="https://ibm-cloud-architecture.github.io/refarch-eda/methodology/domain-driven-design/">https://ibm-cloud-architecture.github.io/refarch-eda/methodology/domain-driven-design/</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="category-chain-item">读书笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8/">#领域驱动</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>读书笔记-领域驱动设计:软件核心复杂性因对之道</div>
+      <div>https://mikeygithub.github.io/2021/09/09/yuque/alqlio/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年9月9日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/20/yuque/kfmzrl/" title="笔记篇-关于DDD的相关笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记篇-关于DDD的相关笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/08/yuque/rl7ely/" title="笔记篇-Java开发代码规范手册">
+                        <span class="hidden-mobile">笔记篇-Java开发代码规范手册</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

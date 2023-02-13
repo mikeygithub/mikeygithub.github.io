@@ -1,0 +1,1010 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="概览DDD总览早些时候，我讲到了DDD的通用语言(Ubiquitous Language, 1)。通用语言作用于某个限界上下文(Bounded Context, 2) ,它对于领域建模是非常重要的，你应该好好地熟悉一下。 请记住,不管你是在战术上还是战略上设计软件模型，你都应该保证:在一一个特定的限界上下文中只使用一套通用语言,并且保证它的清晰性和简洁性。战略建模限界上下文是一-种概念上的边界,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读书笔记-实现领域驱动设计">
+<meta property="og:url" content="https://mikeygithub.github.io/2021/10/06/yuque/xclu9z/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="概览DDD总览早些时候，我讲到了DDD的通用语言(Ubiquitous Language, 1)。通用语言作用于某个限界上下文(Bounded Context, 2) ,它对于领域建模是非常重要的，你应该好好地熟悉一下。 请记住,不管你是在战术上还是战略上设计软件模型，你都应该保证:在一一个特定的限界上下文中只使用一套通用语言,并且保证它的清晰性和简洁性。战略建模限界上下文是一-种概念上的边界,">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633487879743-c0976e07-b5a3-490b-b6a5-2ffd69f8b2f5.png">
+<meta property="article:published_time" content="2021-10-06T09:24:22.000Z">
+<meta property="article:modified_time" content="2023-02-13T14:42:02.325Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="领域驱动设计">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633487879743-c0976e07-b5a3-490b-b6a5-2ffd69f8b2f5.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>读书笔记-实现领域驱动设计 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="读书笔记-实现领域驱动设计"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-10-06 17:24" pubdate>
+          2021年10月6日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          38 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">读书笔记-实现领域驱动设计</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633487879743-c0976e07-b5a3-490b-b6a5-2ffd69f8b2f5.png#clientId=u95910973-8fd5-4&from=paste&height=472&id=u931b87ff&name=image.png&originHeight=472&originWidth=647&originalType=binary&ratio=1&rotation=0&showTitle=false&size=506767&status=done&style=none&taskId=u0373ec7c-3046-4fd6-8655-61f361c2db0&title=&width=647" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p><strong>DDD总览</strong><br>早些时候，我讲到了DDD的通用语言(Ubiquitous Language, 1)。通用语言作用于某个限界上下文(Bounded Context, 2) ,它对于领域建模是非常重要的，你应该好好地熟悉一下。 请记住,不管你是在战术上还是战略上设计软件模型，你都应该保证:在一一个特定的限界上下文中只使用一套通用语言,并且保证它的清晰性和简洁性。<br><strong>战略建模</strong><br>限界上下文是一-种概念上的边界,领域模型便工作于其中。同时，限界上下文为通用语言提供了一°套环境,项目成员便通过通用语言来表达软件模型,如图G.1所示。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633619107181-99c14284-30a2-49c1-aca8-1af720f6bb74.png#clientId=u203cfbfd-0f9f-4&from=paste&height=310&id=u0a13a19b&name=image.png&originHeight=310&originWidth=601&originalType=binary&ratio=1&rotation=0&showTitle=false&size=56426&status=done&style=none&taskId=u0a571d1c-2791-4ce5-9d31-84cd74c1e0b&title=&width=601" srcset="/img/loading.gif" lazyload alt="image.png"><br>上下文映射<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633619198691-f3157bd9-688a-43da-b572-38d80e42aacc.png#clientId=u203cfbfd-0f9f-4&from=paste&height=478&id=ube879fcb&name=image.png&originHeight=478&originWidth=675&originalType=binary&ratio=1&rotation=0&showTitle=false&size=88663&status=done&style=none&taskId=u545d8278-613b-4d1c-8516-23ea4c3db27&title=&width=675" srcset="/img/loading.gif" lazyload alt="image.png"><br>六边形架构<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633619588798-548ecef2-212d-45cd-a068-32949537c6bc.png#clientId=u203cfbfd-0f9f-4&from=paste&height=502&id=uf80cda5f&name=image.png&originHeight=502&originWidth=622&originalType=binary&ratio=1&rotation=0&showTitle=false&size=92368&status=done&style=none&taskId=u65adb775-a6fe-41fd-adc6-3afd62b42d4&title=&width=622" srcset="/img/loading.gif" lazyload alt="image.png"><br>聚合<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633619718189-ef1eeea7-60f8-4854-be26-94b3b80f6b0e.png#clientId=u203cfbfd-0f9f-4&from=paste&height=411&id=u66647337&name=image.png&originHeight=411&originWidth=708&originalType=binary&ratio=1&rotation=0&showTitle=false&size=100680&status=done&style=none&taskId=u1cbcf99e-dfc6-43bc-b8e0-26ff17b33a6&title=&width=708" srcset="/img/loading.gif" lazyload alt="image.png"><br>在领域模型中,有些业务操作并不能自然地放在实体或值对象上,此时我们可以使用无状态的领域服务(Domain Service) ,如图G.5所示。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633619796636-b26dd7c2-9082-4878-aecb-af286a8d54b0.png#clientId=u203cfbfd-0f9f-4&from=paste&height=229&id=ue1c11656&name=image.png&originHeight=229&originWidth=525&originalType=binary&ratio=1&rotation=0&showTitle=false&size=38297&status=done&style=none&taskId=u40e8e2f4-b8d9-4b9b-8591-a6b0e4607c1&title=&width=525" srcset="/img/loading.gif" lazyload alt="image.png"><br>领域事件(Domain Event, 8)表示领域模型中发生的重要事件。有多种方式可以对领域事件进行建模。在对聚合进行命令操作时,聚合本身将发布领域事件,如图G.6所示。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633619954755-cb27e6f3-d316-4de1-a669-ba0706f9eee3.png#clientId=u203cfbfd-0f9f-4&from=paste&height=246&id=u96059a2f&name=image.png&originHeight=246&originWidth=556&originalType=binary&ratio=1&rotation=0&showTitle=false&size=32226&status=done&style=none&taskId=u940f2fa8-a664-4bd7-a91c-fcd3a7104b5&title=&width=556" srcset="/img/loading.gif" lazyload alt="image.png"><br>我们通常忽略了模块(Module, 9)，但是正确地设计模块同样是重要的。简单来讲，我们可以将模块看成是Java中的包或C#中的命名空间。请记住,如果只是机械式地设计模块,而不是根据通用语言,那么我们将得不偿失。模块中包含的领域对象应该是内聚在一起的，如图G.7所示。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633620023176-b925c0ce-749d-4611-aa68-8437923ec9ae.png#clientId=u203cfbfd-0f9f-4&from=paste&height=264&id=uc535558e&name=image.png&originHeight=264&originWidth=552&originalType=binary&ratio=1&rotation=0&showTitle=false&size=43187&status=done&style=none&taskId=uaf74127e-bfa4-446e-80be-13f86a268bb&title=&width=552" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="第一章-DDD入门"><a href="#第一章-DDD入门" class="headerlink" title="第一章 DDD入门"></a>第一章 DDD入门</h1><p>什么是领域模型?</p>
+<blockquote>
+<p>领域模型是关于某个特定业务领域的软件模型。通常,领域模型通过对象模型来实现，这些对象同时包含了数据和行为,并且表达了准确的业务含义。</p>
+</blockquote>
+<p>将领域专家引入到团队是大有好处的。</p>
+<blockquote>
+<p>在实施DDD的过程中，你最好将那些不怎么使用技术语言的人加进自己的团队。就像你会向他们学习一样,他们也会向你学习。</p>
+</blockquote>
+<p>为什么需要DDD?</p>
+<blockquote>
+<ul>
+<li>使领域专家和开发者在一起工作，这样开发出来的软件能够准确地传达业务规则。当然,对于领域专家和开发者来说，这并不表示单单地包容对方,而是将他们组成-个密切协作的团队。</li>
+<li>“准确传达业务规则”的意思是说，此时的软件就像如果领域专家是编码人员时所开发出来的一样。</li>
+<li>可以帮助业务人员自我提高。没有任何一个领域专家或者管理者敢说他对业务已经了如指掌了，业务知识也需要- -个长期的学习过程。在DDD中,每个人都在学习,同时每个人又是知识的贡献者。</li>
+<li>关键在于对知识的集中，因为这样可以确保软件知识并不只是掌握在少数人手中。</li>
+<li>在领域专家、开发者和软件本身之间不存在“翻译”,意思是当大家都使用相同的语言进行交流时,每人都能听懂他人所说。</li>
+<li>设计就是代码,代码就是设计。设计是关于软件如何工作的,最好的编码设计来自于多次试验,这得益于敏捷的发现过程。</li>
+<li>DDD同时提供了战略设计和战术设计两种方式。战略设计帮助我们理解哪些投人是最重要的;哪些既有软件资产是可以重新拿来使用的;哪些人应.该被加到团队中?战术设计则帮助我们创建DDD模型中各个部件。</li>
+</ul>
+</blockquote>
+<p>正如[Fowler, Anemic]所说,贫血领域对象是不好的，因为你花了很大的成本来开发领域对象，但是从中却获益甚少。比如，由于存在对象-关系阻抗失配(Object- Relational Impedance) ,开发者需要将很多时间花在对象和数据存储之间的映射上。这样的代价太大,而收益太小。我得说，你所说的领域对象根本就不是领域对象，而只是将关系型数据库中的模型映射到了对象.上而已。这样的领域对象更像是活动记录(Active Record) [Fowler, P of EAA],此时你可以对架构做个简化,然后使用事务脚本(Transaction Script) [Fowler, P of EAA]进行开发。</p>
+<h2 id="通用语言"><a href="#通用语言" class="headerlink" title="通用语言"></a>通用语言</h2><p>通用语言是团队共享的语言。领域专家和开发者使用相同的通用语言进行交流。事实上,团队中每个人都使用相同的通用语言。不管你在团队中的角色如何，只要你是团队的一员，你都将使用通用语言。</p>
+<ul>
+<li><p>同时绘制物理模型图和概念模型图,并标以名字和行为。虽然这些图并不是正式的设计图,但它们却包含了软件建模的某些方面。即使你的团队在使用统一建模语言(Unified Modeling Language, UML )来完成正式建模，也不要得意忘形，因为这样可能反而不利于团队的讨论，最终将阻碍通用语言的产生。</p>
+</li>
+<li><p>创建一个包含简单定义的术语表。将你能想到的术语都罗列出来,包括好的和不好的，并注明好与不好的原因。在你给术语下定义时,你在不经意间就会创造出一些可 重用的词汇,因为此时你使用的是领域中的通用语言。</p>
+</li>
+<li><p>如果你不喜欢术语表,可以采用其他类型的文档,但记得将那些“不正式”的模型图也包含进去。同样,这里最终的目的也是发现通用语言中的术语和词组。</p>
+</li>
+<li><p>由于团队中有些人工作在术语表上,还有些人工作在文档上,此时你需要找到团队的其他人员来检查你的成果。分歧肯定是有的,你应该对此有所准备。</p>
+</li>
+</ul>
+<h2 id="是通用，不是万能"><a href="#是通用，不是万能" class="headerlink" title="是通用，不是万能"></a>是通用，不是万能</h2><ul>
+<li>这里的“通用”意思是“普遍的”，或者“到处都存在的”。通用语言在团队范围内使用,并且只表达一个单一的领域模型。</li>
+<li>“通用语言”并不表示全企业、全公司或者全球性的万能的领域语言。</li>
+<li>限界上下文和通用语言间存在一对一的关系。</li>
+<li>限界上下文是一个相对较小的概念,通常比我们起初想象的要小。限界上下文刚好能够容纳下一个独立的业务领域所使用的通用语言。</li>
+<li>只有当团队工作在一个独立的限界上下文中时，通用语言才是“通用”的。</li>
+<li>虽然我们只工作在-一个限界上下文中,但是通常我们还需要和其他限界上下文打交道，这时可以通过上下文映射图(3)对这些限界上下文进行集成。</li>
+<li>每个限界上下文都有自己的通用语言,而有时语言间的术语可能有重叠的地方。</li>
+<li>如果你试图将某个通用语言运用在整个企业范围之内，或者更大的、夸企业的范围内，你将失败。</li>
+</ul>
+<h2 id="DDD业务价值"><a href="#DDD业务价值" class="headerlink" title="DDD业务价值"></a>DDD业务价值</h2><ul>
+<li>你获得了一个非常有用的领域模型</li>
+<li>你的业务得到了更准确的定义和理解</li>
+<li>领域专家可以为软件设计做出贡献</li>
+<li>更好的用户体验</li>
+<li>清晰的模型边界</li>
+<li>更好的企业架构</li>
+<li>敏捷、迭代式和持续建模</li>
+<li>使用战略和战术新工具</li>
+</ul>
+<h2 id="战术建模工具"><a href="#战术建模工具" class="headerlink" title="战术建模工具"></a>战术建模工具</h2><ul>
+<li>聚合(Aggregate, 10)、</li>
+<li>实体(Entity, 5)、</li>
+<li>值对象(Value Object, 6)、</li>
+<li>领域服务(Domain Service, 7)</li>
+<li>领域事件(Domain Event, 8)等。</li>
+</ul>
+<h2 id="实施DDD所面临的挑战"><a href="#实施DDD所面临的挑战" class="headerlink" title="实施DDD所面临的挑战"></a>实施DDD所面临的挑战</h2><ul>
+<li>为创建通用语言腾出时间和精力</li>
+<li>持续地将领域专家引入项目</li>
+<li>改变开发者对领域的思考方式</li>
+</ul>
+<p>第一个例子，通常的做法，使用属性访问的方式:<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633849068521-723a9fc5-9ba6-4c8c-a103-4bc20a90f097.png#clientId=ud3e10a8e-99c9-4&from=paste&height=238&id=u8083e9c7&name=image.png&originHeight=238&originWidth=595&originalType=binary&ratio=1&rotation=0&showTitle=false&size=38507&status=done&style=none&taskId=u3c81b790-a3d0-4762-8096-64593e36051&title=&width=595" srcset="/img/loading.gif" lazyload alt="image.png"><br>客户端代码<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633849112070-a93dce70-8d44-461d-a09a-7fc80661d51c.png#clientId=ud3e10a8e-99c9-4&from=paste&height=116&id=u4077b3a0&name=image.png&originHeight=116&originWidth=573&originalType=binary&ratio=1&rotation=0&showTitle=false&size=25115&status=done&style=none&taskId=ud38ddcb9-acea-40b6-a13d-f97ff65cfa4&title=&width=573" srcset="/img/loading.gif" lazyload alt="image.png"><br>第二个例子使用了领域对象的行为,这种行为表达出了领域中的通用语言:<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633849183700-78d039af-5481-4bef-9e84-62d4b20a6ff1.png#clientId=ud3e10a8e-99c9-4&from=paste&height=576&id=u0915e756&name=image.png&originHeight=576&originWidth=495&originalType=binary&ratio=1&rotation=0&showTitle=false&size=56917&status=done&style=none&taskId=uc9c22a7e-411f-4504-9f42-42a831f1fae&title=&width=495" srcset="/img/loading.gif" lazyload alt="image.png"><br>客户端代码<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1633849221184-530f2c2b-626f-4a5c-9bc7-7f13cd65d6ec.png#clientId=ud3e10a8e-99c9-4&from=paste&height=69&id=ud859b3a2&name=image.png&originHeight=69&originWidth=461&originalType=binary&ratio=1&rotation=0&showTitle=false&size=10901&status=done&style=none&taskId=ue94f7647-c3f4-476c-a86d-221e42bef24&title=&width=461" srcset="/img/loading.gif" lazyload alt="image.png"><br>第一个例子采用的是以数据为中心的方式，此时客户代码必须知道如何正确地将-个待定项提交到冲刺中。这样的模型是不能称为领域模型的。如果客户代码错误地修改了sprintld,而没有修改status会发生什么呢?或者,如果在将来有另外一个属性需要设值时又该怎么办?我们需婴认真分析客户代码来完成从客户数据到Backlogltem属性的映射。</p>
+<p>这种方式同时也暴露了BacklogItem的数据结构,并且将关注点集中在数据属性上，而不是对象行为。你可能会反驳道:“setSprintld()和setStatus( )就是行为啊。”问题在于,这里的“行为”没有真正的业务价值,它并没有表明领城模型中的概念。此处即“将待定项提交到冲刺中”。开发者在开发客户代码时，他并不清楚到底需要为Backlogltem的哪些属性设值，而这样的属性有可能存在很多,因为这是一个以数据为中心的模型。</p>
+<p>现在，我们来看看第二个例子。有别于第-个例子，它将行为暴露给客户，行为方法的名字清楚地表明了业务含义。这个领域的专家在建模时讨论了以下需求:</p>
+<blockquote>
+<p>允许将每一个待定项提交到冲刺中。只有在一个待定项位于发布计划(Release) 中时才能进行提交。如果-个待定项已经提交到了另外一个冲刺中。那么需要先将其回收。提交完成时，通知相关客户方。</p>
+</blockquote>
+<p>在第二个例子中,客户代码并不需要知道提交Backlogtem的实现细节。实现代码所表达的逻辑恰好能够描述业务行为。我们很容易地添加了几行代码，以确保在发布计划之外的待定项是不能被提交的。诚然，在第-个例子中,你可以修改setter以达到同样的目的，但此时该eter的职责便不单-了它需要了解Backlogltem对象的内部状态,而不再只是对sprintld和Istatus属性赋值。</p>
+<h2 id="为领域建模正名"><a href="#为领域建模正名" class="headerlink" title="为领域建模正名"></a>为领域建模正名</h2><ul>
+<li>如果一个限界上下文被当成核心域来开发,那么从战略上来说，这个限界上下文对业务的成功是极其重要的。核心模型是不易理解的,需要不断地尝试和重构。通过持续改进,我们可以延长它的效用生命,这样的做法显然是值得的。当然,这个限界上下文不见得始终是你的核心域。即便如此,如果它是复杂的,创新性的,并且需要在不断的变化中持续存在很长时间,我们还是建议在该限界上下文中使用战术模式。这里,我们假设你的核心域是值得配置最好的开发者的。</li>
+<li>一个领域,对于消费方来说有可能成为通用子域(Generic Subdomain, 2)或者支撑子域,但是却有可能成为你自己的核心域。我们并不站在最终消费方的角度来评价一个领域。如果你正在开发的限界上下文是你主要的业务,那么它便是你的核心域，而不管消费方是如何看待的。此时,一定记得使用战术模式。</li>
+<li>如果你正开发一个支撑子域，但是由于种种原因，该支撑子域不能从第三方的通用子域直接获得,那么此时战术模式将帮上你大忙。在这种情况下，你需要考虑团队成员的技能水平,还有模型是否具有创新性。如果此时的模型增加了特定的业务价值,而且不只是拥有技术上的绚丽，那么该模型就可以认为是创新性的。如果团队有能力实施战术设计,这个支撑子域又是创新性的,并且将持续存在很长时间,那么此时便是采用战术设计的大好时机。尽管如此,这并不能使该子域称为核心域，因为在业务人士眼中,这样的领域只是支撑性的。</li>
+</ul>
+<h2 id="DDD并不笨重"><a href="#DDD并不笨重" class="headerlink" title="DDD并不笨重"></a>DDD并不笨重</h2><p>在我看来，DDD绝非是充满繁文缛节的笨重开发过程。事实上, DDD能够很好地与敏捷项目框架结合起来,比如Scrum。DDD也倾向于“测试先行,逐步改进”的设计思路。在你开发一个新的领域对象时,比如实体或值对象,你可以采用以下步骤进行:</p>
+<ul>
+<li>1.编写测试代码以模拟客户代码是如何使用该领域对象的。</li>
+<li>2.创建该领域对象以使测试代码能够编译通过。</li>
+<li>3.同时对测试和领域对象进行重构，直到测试代码能够正确地模拟客户代码，同时领域对 象拥有能够表明业务行为的方法签名。</li>
+<li>4.实现领域对象的行为，直到测试通过为止,再对实现代码进行重构。</li>
+<li>5.向你的团队成员展示代码,包括领域专家,以保证领域对象能够正确地反映通用语言。</li>
+</ul>
+<h1 id="第二章-领域、子域和限界上下文"><a href="#第二章-领域、子域和限界上下文" class="headerlink" title="第二章 领域、子域和限界上下文"></a>第二章 领域、子域和限界上下文</h1><h2 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h2><p>从广义上讲,<strong>领域(Domain)即是一个组织所做的事情以及其中所包含的一切</strong>。商业机构通常会确定一个市场，然后在这个市场中销售产品和服务。每个组织都有它自己的业务范围和做事方式。这个业务范围以及在其中所进行的活动便是领域。当你为某个组织开发软件时,你面对的便是这个组织的领域。这个领域对于你来说应该是明晰的,因为你在这个领域中工作。</p>
+<p>p77</p>
+<h1 id="第三章-上下文映射图"><a href="#第三章-上下文映射图" class="headerlink" title="第三章 上下文映射图"></a>第三章 上下文映射图</h1><h1 id="第四章-架构"><a href="#第四章-架构" class="headerlink" title="第四章 架构"></a>第四章 架构</h1><h1 id="第五章-实体"><a href="#第五章-实体" class="headerlink" title="第五章 实体"></a>第五章 实体</h1><h1 id="第六章-值对象"><a href="#第六章-值对象" class="headerlink" title="第六章 值对象"></a>第六章 值对象</h1><h1 id="第七章-领域服务"><a href="#第七章-领域服务" class="headerlink" title="第七章 领域服务"></a>第七章 领域服务</h1><h1 id="第八章-领域事件"><a href="#第八章-领域事件" class="headerlink" title="第八章 领域事件"></a>第八章 领域事件</h1><h1 id="第九章-模块"><a href="#第九章-模块" class="headerlink" title="第九章 模块"></a>第九章 模块</h1><h1 id="第十章-聚合"><a href="#第十章-聚合" class="headerlink" title="第十章 聚合"></a>第十章 聚合</h1><h1 id="第十一章-工厂"><a href="#第十一章-工厂" class="headerlink" title="第十一章 工厂"></a>第十一章 工厂</h1><h1 id="第十二章-资源库"><a href="#第十二章-资源库" class="headerlink" title="第十二章 资源库"></a>第十二章 资源库</h1><h1 id="第十三章-集成限界上下文"><a href="#第十三章-集成限界上下文" class="headerlink" title="第十三章 集成限界上下文"></a>第十三章 集成限界上下文</h1><h1 id="第十四章-应用程序"><a href="#第十四章-应用程序" class="headerlink" title="第十四章 应用程序"></a>第十四章 应用程序</h1><h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1yCZcsPFHyBlkRDVEKP05Fw">https://pan.baidu.com/s/1yCZcsPFHyBlkRDVEKP05Fw</a>  密码: s8fo</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">学习笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/">#领域驱动设计</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>读书笔记-实现领域驱动设计</div>
+      <div>https://mikeygithub.github.io/2021/10/06/yuque/xclu9z/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年10月6日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/15/yuque/vn1qa3/" title="Java篇-Java新特性概览">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java篇-Java新特性概览</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/20/yuque/kfmzrl/" title="笔记篇-关于DDD的相关笔记">
+                        <span class="hidden-mobile">笔记篇-关于DDD的相关笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

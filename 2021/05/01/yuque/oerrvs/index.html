@@ -1,0 +1,1242 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="书籍地址链接 https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;1fwgY32mqQGy6v0WrdswJiQ  密码: svse 第一章 Java 程序设计概述 本章主要在总体上对Java展开介绍，包括其Java主要特性、发展历史等内容。  第二章 Java 程序设计环镜 JDK的环境配置、集成开发环境、简单Demo应用开始、   第三章 Java 的基本程序设计结构 讲述了Java的一些规范、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读书笔记-Java核心技术卷一">
+<meta property="og:url" content="https://mikeygithub.github.io/2021/05/01/yuque/oerrvs/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="书籍地址链接 https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;1fwgY32mqQGy6v0WrdswJiQ  密码: svse 第一章 Java 程序设计概述 本章主要在总体上对Java展开介绍，包括其Java主要特性、发展历史等内容。  第二章 Java 程序设计环镜 JDK的环境配置、集成开发环境、简单Demo应用开始、   第三章 Java 的基本程序设计结构 讲述了Java的一些规范、">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550541284-8b31ae97-74ee-4f85-949c-a9b2348c496b.png">
+<meta property="article:published_time" content="2021-05-01T08:12:25.000Z">
+<meta property="article:modified_time" content="2023-02-13T14:42:02.285Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="Java核心技术">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550541284-8b31ae97-74ee-4f85-949c-a9b2348c496b.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>读书笔记-Java核心技术卷一 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="读书笔记-Java核心技术卷一"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-05-01 16:12" pubdate>
+          2021年5月1日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          15k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          129 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">读书笔记-Java核心技术卷一</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550541284-8b31ae97-74ee-4f85-949c-a9b2348c496b.png#clientId=u161b087a-51a5-4&from=markdown&id=CKvLc&name=image.png&originHeight=390&originWidth=750&originalType=url&ratio=1&rotation=0&showTitle=false&size=404814&status=done&style=none&taskId=ua045b8f8-d31c-4d85-a81d-4f67980f198&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="书籍地址"><a href="#书籍地址" class="headerlink" title="书籍地址"></a>书籍地址</h1><p>链接 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1fwgY32mqQGy6v0WrdswJiQ">https://pan.baidu.com/s/1fwgY32mqQGy6v0WrdswJiQ</a>  密码: svse</p>
+<h1 id="第一章-Java-程序设计概述"><a href="#第一章-Java-程序设计概述" class="headerlink" title="第一章 Java 程序设计概述"></a>第一章 Java 程序设计概述</h1><blockquote>
+<p>本章主要在总体上对Java展开介绍，包括其Java主要特性、发展历史等内容。</p>
+</blockquote>
+<h1 id="第二章-Java-程序设计环镜"><a href="#第二章-Java-程序设计环镜" class="headerlink" title="第二章 Java 程序设计环镜"></a>第二章 Java 程序设计环镜</h1><blockquote>
+<p>JDK的环境配置、集成开发环境、简单Demo应用开始、</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/05/02/4skEcjo8xnFpTOJ.png#id=lV5MP&originHeight=313&originWidth=813&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="第三章-Java-的基本程序设计结构"><a href="#第三章-Java-的基本程序设计结构" class="headerlink" title="第三章 Java 的基本程序设计结构"></a>第三章 Java 的基本程序设计结构</h1><blockquote>
+<p>讲述了Java的一些规范、各个数据类型的详细介绍、基本的使用操作、文件、流程控制</p>
+</blockquote>
+<h1 id="第四章-对象与类"><a href="#第四章-对象与类" class="headerlink" title="第四章 对象与类"></a>第四章 对象与类</h1><blockquote>
+<p>面向对象程序设计概述、使用预定义类、用户自定义类、静态域与静态方法、方法参数、面向对象程序设计、对象构造 、类路径、文档注释、类设计技巧</p>
+</blockquote>
+<blockquote>
+<p>面向对象程序设计（简称 OOP ）是当今主流 程序设计范型 ，它已经取代了 70 代的“结构化”过程 程序设计开发技术 Java 是完全面向对象的 ，必须熟悉 OOP 才能 够编写 Java 程序<br>面向对象的程序是由对象组成的 每个对象包含对用户公开的特定功能部分和隐藏的 现部分。程序中的很多对象来自标准库，还有一些是自定义的 究竟是自己构造对象，还 从外界购买对象完全取决于开发项目的预算和时间 但是，从根本上说，只要对象能够满足 要求，就不必关心其功能的具体实现过程 在OOP 中，不必关心对象的具体实现，只要能 够满足用户 的需求即可</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/05/02/l6AvfHe2hODYB5K.png#id=bFuUH&originHeight=278&originWidth=416&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>要想使用 OOP 定要清楚对象的 个主要特性：</p>
+<ul>
+<li>对象的行为（behavior ）一一－可以对对象施加哪些操作，或可以对对象施加哪些方法？</li>
+<li>对象的状态（ state ）一一一当施加那些方法时，对象如何响应？</li>
+<li>对象标识（ identity 一一如何辨别具有相同行为与状态的不同对象？<br>同一个类的所有对象实例，由于支持相同的行为而具有家族式的相似性 对象的行为是 用可调用的方法定义的</li>
+</ul>
+<h2 id="对象析构与-finalize-方法"><a href="#对象析构与-finalize-方法" class="headerlink" title="对象析构与 finalize 方法"></a>对象析构与 finalize 方法</h2><p>有些面向对象的程序设计语言，特别是C++，有显式的析构器方法，其中放置- -些当对<br>象不再使用时需要执行的清理代码。在析构器中，最常见的操作是回收分配给对象的存储空<br>间。由于Java有自动的垃圾回收器，不需要人工回收内存，所以Java不支持析构器。<br>当然，某些对象使用了内存之外的其他资源，例如，文件或使用了系统资源的另一个对<br>象的句柄。在这种情况下，当资源不再需要时，将其回收和再利用将显得十分重要。<br>可以为任何一个类添加finalize方法。finalize方法将在垃圾回收器清除对象之前调用。<br>在实际应用中，不要依赖于使用finalize方法回收任何短缺的资源，这是因为很难知道这个<br>方法什么时候才能够调用。</p>
+<h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><p>Java允许使用包( package)将类组织起来。借助于包可以方便地组织自己的代码，并将 自已的代码与别人提供的代码库分开管理。<br>标准的Java类库分布在多个包中，包括java.lang、java.util 和java.net等。标准的Java 包具有一个层次结构。如同硬盘的目录嵌套- -样， 也可以使用嵌套层次组织包。所有标准的<br>Java包都处于java和javax包层次中。</p>
+<p>使用包的主要原因是确保类名的唯一-性。假如两个程序员不约而同地建立了Employee类。只要将这些类放置在不同的包中，就不会产生冲突。事实上，为了保证包名的绝对<br>唯一性，Sun公司建议将公司的因特网域名(这显然是独–无二的)以逆序的形式作为包 名，并且对于不同的项目使用不同的子包。例如，horstmann.com 是本书作者之一注册 的城名。逆序形式为com.horstmann。这个包还可以被进一步 地划分成子包，如com.horstmann.corejava。</p>
+<p>从编译器的角度来看，嵌套的包之间没有任何关系。例如, java.util包与java.utiljar包<br>毫无关系。每一个都拥有独立的类集合。</p>
+<h2 id="类的设计技巧"><a href="#类的设计技巧" class="headerlink" title="类的设计技巧"></a>类的设计技巧</h2><p>1.一定要保证数据私有</p>
+<p>这是最重要的;绝对不要破坏封装性。有时候，需要编写-个访问器 方法或更改器方法，<br>但是最好还是保持实例域的私有性。很多惨痛的经验告诉我们，数据的表示形式很可能会改<br>变，但它们的使用方式却不会经常发生变化。当数据保持私有时，它们的表示形式的变化不<br>会对类的使用者产生影响，即使出现bug也易于检测。.</p>
+<p>2.一定要对数据初始化</p>
+<p>Java不对局部变量进行初始化,但是会对对象的实例域进行初始化。最好不要依赖于系<br>统的默认值，而是应该显式地初始化所有的数据，具体的初始化方式可以是提供默认值，也<br>可以是在所有构造器中设置默认值。</p>
+<p>3.不要在类中使用过多的基本类型</p>
+<p>就是说，用其他的类代替多个相关的基本类型的使用。这样会使类更加易于理解且易于<br>修改。例如，用一个称为Address的新的类替换- -个Customer类中以下的实例域:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> String street;<br><span class="hljs-keyword">private</span> String city;<br><span class="hljs-keyword">private</span> String state;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> zip;<br></code></pre></td></tr></table></figure>
+
+<p>这样，可以很容易处理地址的变化，例如，需要增加对国际地址的处理。</p>
+<p>4.不是所有的域都需要独立的域访问器和域更改器</p>
+<p>或许，需要获得或设置雇员的薪金。而一旦构造了雇员对象，就应该禁止更改雇用日<br>期，并且在对象中，常常包含一些不希望别人获得或设置的实例域，例如，在Address类中，<br>存放州缩写的数组。</p>
+<p>5.将职责过多的类进行分解:</p>
+<p>这样说似乎有点含糊不清，究竟多少算是“过多”?每个人的看法不同。但是，如果明<br>显地可以将一个复杂的类分解成两个更为简单的类，就应该将其分解(但另一方面，也不要<br>走极端。设计10个类，每个类只有一个方法，显然有些矫枉过正了)。</p>
+<p>6.类名和方法名要能够体现它们的职责</p>
+<p>与变量应该有一-个能够反映其含义的名字一样， 类也应该如此(在标准类库中，也存在<br>着一些含义不明确的例子，如: Date类实际上是-一个用于描述时间的类)。<br>命名类名的良好习惯是采用一个名词(Order)、前面有形容词修饰的名词(RushOrder)<br>或动名词(有“-ing”后缀)修饰名词(例如，BillingAddress)。 对于方法来说，习惯是访问<br>器方法用小写get 开头(getSalary), 更改器方法用小写的set开头(setSalary)。</p>
+<p>7.优先使用不可变的类</p>
+<p>LocalDate类以及java.time 包中的其他类是不可变的一没 有方法能修改对象的状态。<br>类似plusDays的方法并不是更改对象，而是返回状态已修改的新对象。<br>更改对象的问题在于，如果多个线程试图同时更新-一个对象，就会发生并发更改。其结<br>果是不可预料的。如果类是不可变的，就可以安全地在多个线程间共享其对象。<br>因此，要尽可能让类是不可变的，这是-一个很好的想法。对于表示值的类，如一个字符<br>串或-一个时间点，这尤其容易。计算会生成新值，而不是更新原来的值。<br>当然，并不是所有类都应当是不可变的。如果员工加薪时让raiseSalary方法返回一个新<br>的Employee对象，这会很奇怪。</p>
+<h1 id="第五章-继承"><a href="#第五章-继承" class="headerlink" title="第五章 继承"></a>第五章 继承</h1><h2 id="类、超类和子类"><a href="#类、超类和子类" class="headerlink" title="类、超类和子类"></a>类、超类和子类</h2><p>关键字<code>extends</code>表明正在构造的新类派生于一个已存在的类。已存在的类称为超类( superclass)、基类(base class)或父类( parent class);新类称为子类( subclass)、派生类(derived class)或孩子类(child cass)。超类和子类是Java程序员最常用的两个术语，而了解 其他语言的程序员可能更加偏爱使用父类和孩子类，这些都是继承时使用的术语。</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>有一个用来判断是否应该设计为继承 关系的简单规则，这就是“is-a” 规则，它 表明子类的每个对象也是超类的对象。例Employee 继承层次 如，每个经理都是雇员，因此，将Manager类设计为Employee类的子类是显而易见的，反之不然，并不是每一- 名雇员都是经理。 “is-a” 规则的另- -种表述法是置换法则。它表明程序中出现超类对象的任何地方都可以用子类对象置换。</p>
+<p>例如，可以将-一个子类的对象赋给超类变量。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Employee e;<br>e= <span class="hljs-keyword">new</span> Employee(...); <span class="hljs-comment">//1 Employee object expected</span><br>e= <span class="hljs-keyword">new</span> Manager(...); <span class="hljs-comment">// OK，Manager can bhe used as well</span><br></code></pre></td></tr></table></figure>
+
+<p>在Java程序设计语言中，对象变量是多态的。一个Employee变量既可以引用一个 Employee类对象，也可以引用一个Employee类的任何-个子类的对象(例如，Manager. Executive、Secretary 等)。</p>
+<h2 id="参数数量可变的方法"><a href="#参数数量可变的方法" class="headerlink" title="参数数量可变的方法"></a>参数数量可变的方法</h2><p>用户自己也可以定义可变参数的方法，并将参数指定为任意类型 ，甚至是基本类型下面是 个简单的示例：其功能为计算若干个数值的最大值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function">pub1ic <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">double</span>... values)</span></span>&#123;<br>    <span class="hljs-keyword">double</span> largest=Double.NEGATIVE_INFINITY;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">double</span> v:values)<span class="hljs-keyword">if</span>(v&gt;largest)largest=v;<br>    <span class="hljs-keyword">return</span> largest;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="Object-所有类的超类"><a href="#Object-所有类的超类" class="headerlink" title="Object:所有类的超类"></a>Object:所有类的超类</h2><p>Object类是Java中所有类的始祖，在Java中每个类都是由它扩展而来的。但是并不需要这样写:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> <span class="hljs-keyword">extends</span> 0<span class="hljs-title">bject</span></span><br></code></pre></td></tr></table></figure>
+
+<p>如果没有明确地指出超类，Object 就被认为是这个类的超类。由于在Java中，每个类都是由Object类扩展而来的，所以，熟悉这个类提供的所有服务十分重要。<br>可以使用Object 类型的变量引用任何类型的对象:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Object obj = <span class="hljs-keyword">new</span> Employee(<span class="hljs-string">&quot;Harry Hacker&quot;</span>, <span class="hljs-number">3000</span>;<br></code></pre></td></tr></table></figure>
+
+<p>当然，Object类型的变量只能用于作为各种值的通用持有者。要想对其中的内容进行具体的操作，还需要清楚对象的原始类型，并进行相应的类型转换:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Employee e = (Employee) obj;<br></code></pre></td></tr></table></figure>
+
+<p>在Java中，只有基本类型( primitive types)不是对象，例如，数值、字符和布尔类型的值都不是对象。所有的数组类型，不管是对象数组还是基本类型的数组都扩展了Object 类。</p>
+<h2 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h2><p>下面是一个典型的例子:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Size</span> </span>&#123; SMALL, MEDIUM, LARGE, EXTRA_ LARGE &#125;;<br></code></pre></td></tr></table></figure>
+
+<p>实际上，这个声明定义的类型是-个类，它刚好有4个实例，在此尽量不要构造新对象。因此，在比较两个枚举类型的值时，永远不需要调用equals,而直接使用“==”就可以了。<br>如果需要的话，可以在枚举类型中添加一-些构造器、方法和域。当然，构造器只是在构 造枚举常量的时候被调用。下面是一个示例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Size</span> </span>&#123;<br>    SMALL(<span class="hljs-string">&quot;S&quot;</span>), MEDIUM(<span class="hljs-string">&quot;M&quot;</span>), LARGE(<span class="hljs-string">&quot;L&quot;</span>), EXTRALRE(<span class="hljs-string">&quot;X&quot;</span>);<br>    <span class="hljs-keyword">private</span> String abbreviation;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Size</span><span class="hljs-params">(String abbreviation)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.abbreviation = abbreviation;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getAbbreviation</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> abbreviation;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>所有的枚举类型都是Enum类的子类。它们继承了这个类的许多方法。其中最有用的一个是toString,这个方法能够返回枚举常量名。例如，Size.SMALL.toString( )将返回字符串 SMALL</p>
+<h2 id="泛型数组列表"><a href="#泛型数组列表" class="headerlink" title="泛型数组列表"></a>泛型数组列表</h2><p>ArrayList 是一个采用类型参数（ type parameter ）的泛型类（ generic class ）。为了指定数组列表保存的元素对象类型，需要用一对尖括号将类名括起来加在后面，例如， ArrayList</p>
+<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><p>反射库( reflection library)提供了一个非常丰富且精心设计的工具集，以便编写能够动态操纵Java代码的程序。这项功能被大量地应用于JavaBeans中，它是Java组件的体系结构(有关JavaBeans的详细内容在卷II中阐述)。使用反射，Java可以支持Visual Basic用户习惯使用的工具。特别是在设计或运行中添加新类时，能够快速地应用开发工具动态地查询新添加类的能力。</p>
+<p>能够分析类能力的程序称为反射( reflective)。反射机制的功能极其强大，在下面可以看 到，反射机制可以用来:</p>
+<ul>
+<li>在运行时分析类的能力。</li>
+<li>在运行时查看对象，例如，编写一个toString方法供所有类使用。</li>
+<li>实现通用的数组操作代码。</li>
+<li>利用Method对象，这个对象很像C++中的函数指针。</li>
+</ul>
+<p>反射是一种功能强大且复杂的机制。使用它的主要人员是工具构造者，而不是应用程序员。</p>
+<blockquote>
+<p>在java.lang.reflect包中有三个类Field、Method 和Constructor分别用于描述类的域、方<br>法和构造器。这三个类都有-个叫做getName的方法，用来返回项目的名称。Field 类有一<br>个getType方法，用来返回描述域所属类型的Class对象。Method和Constructor类有能够<br>报告参数类型的方法，Method类还有一个可以报告返回类型的方法。这三个类还有一个叫<br>做getModifiers的方法，它将返回一个整型数值，用不同的位开关描述public和static这样<br>的修饰符使用状况。另外，还可以利用java.lang.reflect包中的Modifier类的静态方法分析<br>getModifiers返回的整型数值。例如，可以使用Modifier类中的isPublic、 isPrivate 或isFinal<br>判断方法或构造器是否是public、private 或final。我们需要做的全部工作就是调用Modifier<br>类的相应方法，并对返回的整型数值进行分析，另外，还可以利用Modifier.toString方法将<br>修饰符打印出来。</p>
+</blockquote>
+<blockquote>
+<p>Class类中的getFields、getMethods 和getConstructors方法将分别返回类提供的<br>public域、方法和构造器数组，其中包括超类的公有成员。Class 类的getDeclareFields、<br>getDeclareMethods和getDeclaredConstructors方法将分别返回类中声明的全部域、方法和构<br>造器，其中包括私有和受保护成员，但不包括超类的成员。</p>
+</blockquote>
+<h2 id="对象包装器与自动装箱"><a href="#对象包装器与自动装箱" class="headerlink" title="对象包装器与自动装箱"></a>对象包装器与自动装箱</h2><p>有时，需要将int这样的基本类型转换为对象。所有的基本类型都有-一个与之对应的类。 例如，Integer 类对应基本类型int。通常，这些类称为包装器( wrapper)。这些对象包装器类拥有很明显的名字: Integer 、Long、Float、Double、Short、Byte、Character、Void和Boolean (前6个类派生于公共的超类Number)。对象包装器类是不可变的，即一旦构造了 包装器，就不.<br>允许更改包装在其中的值。同时，对象包装器类还是final,因此不能定义它们的子类。<br>假设想定义一个整型数组列表。而尖括号中的类型参数不允许是基本类型，也就是说，<br>不允许写成ArrayList。这里就用到了Integer 对象包装器类。我们可以声明一个Integer<br>对象的数组列表。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">ArrayList&lt;Integer&gt; list = <span class="hljs-keyword">new</span> Arraylist&lt;&gt;();<br></code></pre></td></tr></table></figure>
+
+<p>注释: 自动装箱规范要求boolean、 byte、char≤ 127,介于-128 ~ 127 之间的short和int被包装到固定的对象中。例如，如果在前面的例子中将a和b初始化为100，对它们进行比较的结果一定成立。</p>
+<h2 id="继承的设计技巧"><a href="#继承的设计技巧" class="headerlink" title="继承的设计技巧"></a>继承的设计技巧</h2><p>1.将公共操作和域放在超类<br>这就是为什么将姓名域放在Person类中，而没有将它放在Employee和Student类中的原因。<br>2.不要使用受保护的域<br>有些程序员认为，将大多数的实例域定义为protected 是-一个不错的主意，只有这样，子<br>类才能够在需要的时候直接访问它们。然而，protected 机制并不能够带来更好的保护，其原</p>
+<p>3.使用继承实现“is-a” 关系<br>使用继承很容易达到节省代码的目的，但有时候也被人们滥用了。例如，假设需要定义<br>一个钟点工类。钟点工的信息包含姓名和雇佣日期，但是没有薪水。他们按小时计薪，并且<br>不会因为拖延时间而获得加薪。这似乎在诱导人们由Employee派生出子类Contractor,然后<br>再增加一个hourlyWage域。</p>
+<p>4.除非所有继承的方法都有意义，否则不要使用继承假设想编写-一个Holiday类。毫无疑问，每个假日也是一日，并且一日可以用Gregorian Calendar类的实例表示，因此可以使用继承。</p>
+<p>5.在覆盖方法时，不要改变预期的行为<br>置换原则不仅应用于语法，而且也可以应用于行为，这似乎更加重要。在覆盖-一个方法<br>的时候，不应该毫无原由地改变行为的内涵。就这一- 点而言，编译器不会提供任何帮助，即<br>编译器不会检查重新定义的方法是否有意义。例如，可以重定义Holiday类中add方法“修<br>正”原方法的问题，或什么也不做，或抛出一个异常，或继续到下一一个假日。</p>
+<p>6.使用多态，而非类型信息<br>无论什么时候，对于下面这种形式的代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(x is of type <span class="hljs-number">1</span>)<br>action1(x);<br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x is of type <span class="hljs-number">2</span>)<br>action2(x);<br></code></pre></td></tr></table></figure>
+
+<p>都应该考虑使用多态性。<br>action,与action2表示的是相同的概念吗?如果是相同的概念，就应该为这个概念定义一<br>个方法，并将其放置在两个类的超类或接口中，然后，就可以调用<br><code>x.action();</code><br>以便使用多态性提供的动态分派机制执行相应的动作。<br>使用多态方法或接口编写的代码比使用对多种类型进行检测的代码更加易于维护和扩展。</p>
+<p>7.不要过多地使用反射<br>反射机制使得人们可以通过在运行时查看域和方法，让人们编写出更具有通用性的程序。<br>这种功能对于编写系统程序来说极其实用，但是通常不适于编写应用程序。反射是很脆弱的，<br>即编译器很难帮助人们发现程序中的错误，因此只有在运行时才发现错误并导致异常。</p>
+<h1 id="第六章-接口、-lambda-表达式与内部类"><a href="#第六章-接口、-lambda-表达式与内部类" class="headerlink" title="第六章 接口、 lambda 表达式与内部类"></a>第六章 接口、 lambda 表达式与内部类</h1><p>接口 interface 技术，这种技术主要用来描述类具有什么功能，而并不给出每个功能的具体实现</p>
+<h2 id="接口与抽象类"><a href="#接口与抽象类" class="headerlink" title="接口与抽象类"></a>接口与抽象类</h2><p>使用抽象类表示通用属性存在这样一-个问题: 每个类只能扩展于一个类。假设Employee类已经扩展于-个类，例如Person,它就不能再像下面这样扩展第二个类了:<br><code>class Employee extends Person, Comparable // Error</code><br>但每个类可以像下面这样实现多个接口: .<br><code>class Employee extends Person implements Comparable // OK</code><br>有些程序设计语言允许一个类有多个超类，例如C++。我们将此特性称为多重继承( multiple inheritance)。而Java的设计者选择了不支持多继承，其主要原因是多继承会让语言本身变得非常复杂(如同C++),效率也会降低(如同Eiffel)。 实际上，接口可以提供多重继承的大多数好处，同时还能避免多重继承的复杂性和低效性。</p>
+<h2 id="接口与回调"><a href="#接口与回调" class="headerlink" title="接口与回调"></a>接口与回调</h2><p>回调( callback)是一-种常见的程序设计模式。在这种模式中，可以指出某个特定事件发 生时应该采取的动作。例如，可以指出在按下鼠标或选择某个菜单项时应该采取什么行动。</p>
+<p>在java.swing包中有一个Timer类，可以使用它在到达给定的时间间隔时发出通告。例如，假如程序中有一个时钟，就可以请求每秒钟获得一个通告， 以便更新时钟的表盘。<br>在构造定时器时，需要设置–个时间间隔，并告之定时器，当到达时间间隔时需要做些什么操作。</p>
+<p>如何告之定时器做什么呢?在很多程序设计语言中，可以提供一个函数名， 定时器周期性地调用它。但是，在Java标准类库中的类采用的是面向对象方法。它将某个类的对象传递给定时器，然后，定时器调用这个对象的方法。由于对象可以携带一些附加的信息， 所以传递一个对象比传递一个函数要灵活得多。<br>当然，定时器需要知道调用哪一个方法，并要求传递的对象所属的类实现了java.awt.event包的ActionListener 接口。</p>
+<h2 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h2><p>lambda 表达式是 个可传递的代码块，可以在以后执行 次或多次</p>
+<p><img src="https://i.loli.net/2021/05/03/Qrm4Vn71JAElfMx.png#id=K9ZGK&originHeight=341&originWidth=833&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>![基本类型的函数式接口](/Users/mikey/Library/Application Support/typora-user-images/image-20210503170120244.png)</p>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><p>内部类( inner class)是定义在另-一个类中的类。为什么需要使用内部类呢?其主要原因有以下三点:</p>
+<ul>
+<li>内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。</li>
+<li>内部类可以对同一个包中的其他类隐藏起来。</li>
+<li>当想要定义一个回调函数且不想编写大量代码时，使用匿名(anonymous) 内部类比较便捷。<br>这个比较复杂的内容分几部分介绍。 <ul>
+<li>给出一个简单的内部类，它将访问外围类的实例域。</li>
+<li>给出内部类的特殊语法规则。</li>
+<li>领略一下内部类的内部，探讨一下如何将其转换成常规类。</li>
+<li>讨论局部内部类，它可以访问外围作用域中的局部变量。</li>
+<li>介绍匿名内部类，说明在Java有lambda表达式之前用于实现回调的基<br>本方法。</li>
+</ul>
+</li>
+</ul>
+<h2 id="局部类"><a href="#局部类" class="headerlink" title="局部类"></a>局部类</h2><blockquote>
+<p>局部类不能用public 或private访问说明符进行声明。它的作用域被限定在声明这个局部类的块中。<br>局部类有- 个优势 ，即对外部世界可以完全地隐藏起来。即使TalkingClock类中的其他代码也不能访问它。除start方法之外，没有任何方法知道TimePrinter类的存在。</p>
+</blockquote>
+<p>由外 部方法访问变量</p>
+<blockquote>
+<p>与其他内部类相比较，局部类还有一个优点。它们不仅能够访问包含它们的外部类，还可以访问局部变量。不过，那些局部变量必须事实上为final。这说明，它们- -旦赋值就绝不会改变。</p>
+</blockquote>
+<h2 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h2><p>将局部内部类的使用再深入一步 假如只创建这个类的 个对象，就不必命名了 这种类被称为匿名内部类（ nonymous inner class )</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function">pub1ic <span class="hljs-keyword">void</span> <span class="hljs-title">start</span><span class="hljs-params">(<span class="hljs-keyword">int</span> interval, <span class="hljs-keyword">boolean</span> beep)</span></span>&#123;<br>	ActionListener 1istener = <span class="hljs-keyword">new</span> ActionListener()<br>  &#123;<br>		<span class="hljs-function">pub1ic <span class="hljs-keyword">void</span> <span class="hljs-title">actionPerformed</span><span class="hljs-params">(ActionEvent event)</span></span><br><span class="hljs-function">    </span>&#123;<br>			System.out.print1n(<span class="hljs-string">&quot;At the tone, the time is &quot;</span> + <span class="hljs-keyword">new</span> Date0);<br>			<span class="hljs-keyword">if</span> (beep) Too1kit.getDefaultTookit0.beep0);<br>    &#125;<br>	&#125;;<br>		Timer t = <span class="hljs-keyword">new</span> Timer(interval, 1istener);<br>		t.start();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>含义是：创建一个实现 ActionListener 接口的类的新对象，需要实现的方法 ctionPerformed 定义在括号｛｝内</p>
+<p>通常的语法格式为:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">new</span> SuperType(construction parametrs)<br>&#123;<br>  imner <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">methods</span> <span class="hljs-title">and</span> <span class="hljs-title">data</span></span><br><span class="hljs-class">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>其中, SuperType 可以是ActionListener这样的接口，于是内部类就要实现这个接口。SuperType也可以是-个类， 于是内部类就要扩展它。</p>
+<p>由于构造器的名字必须与类名相同，而匿名类没有类名，所以，匿名类不能有构造器。<br>取而代之的是，将构造器参数传递给超类( superclass)构造器。尤其是在内部类实现接口的时候，不能有任何构造参数。不仅如此，还要像下面这样提供组括号:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">new</span> ItetfaceType&#123;<br>	methods and data<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>请仔细研究-下， 看看构造一个类的新对象 与构造-个扩 展了那个类的匿名内部类的对象之间有什么差别。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Person queen = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">&quot;Mary);</span><br><span class="hljs-string">// a Person object</span><br><span class="hljs-string">Person count = new Person(&quot;</span>Dracula<span class="hljs-string">&quot;) &#123; . .. &#125;;</span><br><span class="hljs-string">// an olbject of an inner class extending Person</span><br></code></pre></td></tr></table></figure>
+
+<p>如果构造参数的闭小括号后面跟一个开大括号, 正在定义的就是匿名内部类。</p>
+<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2><p>有时候，使用内部类只是为了把- -个类隐藏在另外- -个类的内部，并不需要内部类引用外围类对象。为此，可以将内部类声明为static, 以便取消产生的引用。<br>下面是一个使用静态内部类的典型例子。考虑-下计算数组中最小值和最大值的问题。当然，可以编写两个方法，一个方法用于计算最小值，另一个方法用于计算最大值。在调用这两个方法的时候，数组被遍历两次。如果只遍历数组一次，并能够同时计算出最小值和最<br>大值，那么就可以大大地提高效率了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">double</span> min = Double.POSITIVE;<br><span class="hljs-keyword">double</span> max = Double.NEATIVE;<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">double</span> v : values)&#123;<br>	<span class="hljs-keyword">if</span> (v&lt;min)min = v;<br>	<span class="hljs-keyword">if</span> (v&gt;max)max = v;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>然而，这个方法必须返回两个数值，为此，可以定义-个包含两个值的类Pair:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span></span>&#123;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> first;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">double</span> second;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Pair</span><span class="hljs-params">(<span class="hljs-keyword">double</span> f, <span class="hljs-keyword">double</span> s)</span></span>&#123;<br>	first=f; <br>	second=s;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> getFirst &#123; <span class="hljs-keyword">return</span> first; &#125;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getSecond</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-keyword">return</span> second; &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>minmax方法可以返回一个Pair类型的对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayA1g</span></span>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Pair <span class="hljs-title">minax</span><span class="hljs-params">(<span class="hljs-keyword">double</span>[] vales)</span></span>&#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-function">ner <span class="hljs-title">Pair</span><span class="hljs-params">(min, max)</span></span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这个方法的调用者可以使用getFirst和getSecond方法获得答案:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Pair p = AryAg,inax();<br>Syste.out.printin(<span class="hljs-string">&quot;min.，+ p.getFirst0);</span><br><span class="hljs-string">Systev.out.printn.(&quot;</span>nax= <span class="hljs-string">&#x27; + p.getSecond0);</span><br></code></pre></td></tr></table></figure>
+
+<p>当然，Pair 是一个十分大众化的名字。在大型项目中，除了定义包含一对字符串的Pair类之外，其他程序员也很可能使用这个名字。这样就会产生名字冲突。解决这个问题的办法是将Pair定义为ArrayAlg的内部公有类。此后，通过ArrayAlg.Pair访问它:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">rraylgPair p = Arayaygrginax(); .<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><blockquote>
+<p>利用代理可以在运行时创建一个实 了一组给定接口的新类 这种功能只有在编译时无法确定需要实现哪个接口 时才有必要使用。</p>
+</blockquote>
+<p>代理类是在程序运行过程中创建的 然而，一旦被创建，就变成了常规类，与虚拟机中的任何其他类没有什么区别所有的代理类都拓展基于Proxy类。</p>
+<h1 id="第七章-异常、断言和日志"><a href="#第七章-异常、断言和日志" class="headerlink" title="第七章 异常、断言和日志"></a>第七章 异常、断言和日志</h1><p>在Java语言中，给出了3种处理系统错误的机制:</p>
+<ul>
+<li>抛出一个异常</li>
+<li>日志</li>
+<li>使用断言</li>
+</ul>
+<h2 id="处理错误"><a href="#处理错误" class="headerlink" title="处理错误"></a>处理错误</h2><p>假设在一个Java程序运行期间出现了一个错误。这个错误可能是由于文件包含了错误信息，或者网络连接出现问题造成的，也有可能是因为使用无效的数组下标，或者试图使用一个没有被赋值的对象引用而造成的。用户期望在出现错误时,程序能够采用一-些理智的行为。如果由于出现错误而使得某些操作没有完成，程序应该:</p>
+<ul>
+<li>返回到一种安全状态，并能够让用户执行一些 其他的命令;或者</li>
+<li>允许用户保存所有操作的结果，并以妥善的方式终止程序。</li>
+</ul>
+<h2 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h2><p><img src="https://i.loli.net/2021/05/03/v26siHt1RwKYuOD.png#id=kRdV7&originHeight=316&originWidth=513&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>注释： RuntimeExc ti on 这个名字很容易让人混淆 实际上，现在讨论的所有错误都发生在运行时</p>
+</blockquote>
+<blockquote>
+<p>警告：如果在子类中覆盖了超类的一个方法，子类方法中声明的受查异常不能比起类方法中声明的异常更通用（也就是说，子类方法 中可以抛出更特定的异常， 或者根本不抛出任何异常） 特别需要说明的是，如果超类方法没有抛 出任何受查异常，子类也不能抛出任何受查异常 例如，如果覆盖 JComponent.paintComponent 方法，由于超类中这个方法没有抛出任何异常，所以，自定义paintComponent 也不能抛出任何受查异常。</p>
+</blockquote>
+<p>Finally代码块</p>
+<blockquote>
+<p>当 finally 子句包含 return 语句时，将会出现一种意想不到的结果 假设利用 return语句从町语句块中退出 在方法返回前， finally 子句的内容将被执行 如果 finally 子句中也有一个 return 语句，这个返回值将会覆盖房、始的返回值。</p>
+</blockquote>
+<h2 id="断言的概念"><a href="#断言的概念" class="headerlink" title="断言的概念"></a>断言的概念</h2><p>假设确信某个属性符合要求，并且代码的执行依赖于这个属性 例如，需要计算<code>double y = Math.sqrt(x)</code>我们确信，这里的x是一个非负数值。原因是: x是另外一个计算的结果，而这个结果不可能是负值;或者x是个方法的参数,而这个方法要求它的调用者只能提供一个正数。<br>然而，还是希望进行检查，以避免让“不是一个数”的数值参与计算操作。当然，也可以抛出一个异常:<br><code>if (x&lt; 0) throw new IlegalArgumentException(&quot;x &lt; 0&quot;);</code><br>但是这段代码会一直保 留在程序中，即使测试完毕也不会自动地删除。如果在程序中含有大量的这种检查，程序运行起来会相当慢。<br>断言机制允许在测试期间向代码中插入一些检查语句。当代码发布时，这些插入的检测语句将会被自动地移走。<br>Java语言引入了关键字assert。这个关键字有两种形式:</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-keyword">assert</span>条件;<br><span class="hljs-keyword">assert</span>条件:表达式;<br></code></pre></td></tr></table></figure>
+
+<p>这两种形式都会对条件进行检测，如果结果为false,则抛出一个AsertionError异常。在第二种形式中，表达式将被传人AstionError的构造器，并转换成一个消息字符串。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (x &lt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> AssertionError(x);<br></code></pre></td></tr></table></figure>
+
+<p>在默认情况下，断言被禁用。可以在运行程序时用-eablassertiors或-ea选项启用:<code>java -enableassertions MyApp</code></p>
+<h2 id="断言的使用选择"><a href="#断言的使用选择" class="headerlink" title="断言的使用选择"></a>断言的使用选择</h2><p>什么时候应该选择使用断言呢?请记住下面几点:</p>
+<ul>
+<li>断言失败是致命的、不可恢复的错误。</li>
+<li>断言检查只用于开发和测阶段(这种做法有时候被戏称为“在靠近海岸时穿上救生衣，但在海中央时就把救生衣抛掉吧”)。<br>因此，不应该使用断言向程序的其他部分通告发生了可恢复性的错误，或者，不应该作为程序向用户通告问题的手段。断言只应该用于在测试阶段确定程序内部的错误位置。</li>
+</ul>
+<h2 id="日志的使用"><a href="#日志的使用" class="headerlink" title="日志的使用"></a>日志的使用</h2><p>优点：</p>
+<ul>
+<li>可以很容易地取消全部日志记录，或者仅仅取消某个级别的日志，而且打开和关闭这个操作也很容易。</li>
+<li>可以很简单地禁止日志记录的输出，因此，将这些日志代码留在程序中的开销很小。</li>
+<li>日志记录可以被定向到不同的处理器，用于在控制台中显示，用于存储在文件中等。</li>
+<li>日志记录器和处理器都可以对记录进行过滤。过滤器可以根据过滤实现器制定的标准丟弃那些无用的记录项。</li>
+<li>日志记录可以采用不同的方式格式化，例如，纯文本或XML。</li>
+<li>应用程序可以使用多个日志记录器，它们使用类似包名的这种具有层次结构的名字，例如，com.mycompany.myapp。</li>
+<li>在默认情况下，日志系统的配置由配置文件控制。如果需要的话，应用程序可以替换<br>这个配置。</li>
+</ul>
+<p>基本：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Logger.getG1oba().info(<span class="hljs-string">&quot;File-&gt;0pen menu item selected&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>高级：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Logger myLogger = Logger. getLogger(<span class="hljs-string">&#x27;com.mycompany.myapp&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>日志级别：</p>
+<ul>
+<li> SEVERE </li>
+<li> WARNING </li>
+<li> INFO </li>
+<li> CONFIG </li>
+<li> FINE </li>
+<li> FINER </li>
+<li> FINEST </li>
+</ul>
+<p><img src="https://i.loli.net/2021/05/16/ogdBR3ZvYuym6kK.png#id=UldlA&originHeight=219&originWidth=622&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="第八章-范型程序设计"><a href="#第八章-范型程序设计" class="headerlink" title="第八章 范型程序设计"></a>第八章 范型程序设计</h1><p>简单案例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span>&lt;<span class="hljs-title">T</span>&gt;</span>&#123;<br>    <span class="hljs-keyword">private</span> T first;<br>    <span class="hljs-keyword">private</span> T second;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Pair</span><span class="hljs-params">()</span></span>&#123;<br>        first = <span class="hljs-keyword">null</span>;<br>        second= <span class="hljs-keyword">null</span>; <br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Pair</span><span class="hljs-params">(T first, T second)</span> </span>&#123; <br>        <span class="hljs-keyword">this</span>.first = first; <br>        <span class="hljs-keyword">this</span>.second = second; <br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getFirst</span><span class="hljs-params">()</span></span>&#123; <br>        <span class="hljs-keyword">return</span> first; <br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getSecond</span><span class="hljs-params">()</span></span>&#123; <br>        <span class="hljs-keyword">return</span> second; <br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setFirst</span><span class="hljs-params">(T newValue)</span></span>&#123;<br>        first = newValue;<br>    &#125; <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setSecond</span><span class="hljs-params">(T newValue)</span> </span>&#123;<br>        second = newValue; <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>类型擦除</p>
+<blockquote>
+<p>无论何时定义-一个泛型类型，都自动提供了-.个相应的原始类型(rawtype)。原始类型的名字就是删去类型参数后的泛型类型名。擦除( erased)类型变量，并替换为限定类型(无限定的变量用Object)。</p>
+</blockquote>
+<p>约束与局限性</p>
+<ul>
+<li>不能用基本类型实例化类型参数</li>
+<li>运行时类型查询只适用于原始类型</li>
+<li>不能创建参数化类型的数组</li>
+<li>不能实例化类型变量</li>
+<li>不能构造泛型数组</li>
+<li>泛型类的静态上下文中类型变量无效</li>
+<li>不能抛出或捕获泛型类的实例</li>
+<li>可以消除对受查异常的检查</li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">class</span> <span class="hljs-symbol">A</span>&lt;<span class="hljs-symbol">T</span> <span class="hljs-symbol">extends</span> <span class="hljs-symbol">B</span>&gt;<br>//这个边界声明了<span class="hljs-symbol">T</span>必须具有类型<span class="hljs-symbol">B</span>或者从<span class="hljs-symbol">B</span>导出的类型。<br><span class="hljs-symbol">class</span> <span class="hljs-symbol">A</span>&lt;<span class="hljs-symbol">T</span> <span class="hljs-symbol">super</span> <span class="hljs-symbol">B</span>&gt;<br>//&lt; ? <span class="hljs-symbol">super</span> <span class="hljs-symbol">Class</span>&gt;表示，指定类的基类。<br></code></pre></td></tr></table></figure>
+
+<p>直观地讲， 带有超类型限定的通配柯 可以向泛型对象写人，带有子类型限定的通配符可以从泛型对象读取</p>
+<p><strong>PECS原则</strong></p>
+<p>如果要从集合中读取类型T的数据，并且不能写入，可以使用 ? extends 通配符；(Producer Extends)</p>
+<p>如果要从集合中写入类型T的数据，并且不需要读取，可以使用 ? super 通配符；(Consumer Super)</p>
+<p>如果既要存又要取，那么就不要使用任何通配符。</p>
+<h1 id="第九章-集合"><a href="#第九章-集合" class="headerlink" title="第九章 集合"></a>第九章 集合</h1><p>Java中的具体集合</p>
+<p><img src="https://i.loli.net/2021/05/18/UbS2ugKyonEcQTL.png#id=AiWL6&originHeight=221&originWidth=544&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="第十章-图形程序设计"><a href="#第十章-图形程序设计" class="headerlink" title="第十章 图形程序设计"></a>第十章 图形程序设计</h1><p>略</p>
+<h1 id="第十一章-事件处理"><a href="#第十一章-事件处理" class="headerlink" title="第十一章 事件处理"></a>第十一章 事件处理</h1><p>略</p>
+<h1 id="第十二章-Swing用户界面组件"><a href="#第十二章-Swing用户界面组件" class="headerlink" title="第十二章 Swing用户界面组件"></a>第十二章 Swing用户界面组件</h1><p>略</p>
+<h1 id="第十三章-部署Java应用"><a href="#第十三章-部署Java应用" class="headerlink" title="第十三章 部署Java应用"></a>第十三章 部署Java应用</h1><p>略</p>
+<h1 id="第十四章-并发"><a href="#第十四章-并发" class="headerlink" title="第十四章 并发"></a>第十四章 并发</h1><h2 id="线程、进程、携程、程序"><a href="#线程、进程、携程、程序" class="headerlink" title="线程、进程、携程、程序"></a>线程、进程、携程、程序</h2><ul>
+<li>线程</li>
+</ul>
+<blockquote>
+<p>线程是计算机独立调度的基本单位</p>
+</blockquote>
+<ul>
+<li>进程</li>
+</ul>
+<blockquote>
+<p>计算机分配资源的最小单位</p>
+</blockquote>
+<ul>
+<li>协程</li>
+</ul>
+<blockquote>
+<p>微线程、英文Coroutines，是一种比线程更加轻量级的存在。正如一个进程可以拥有多个线程一样，一个线程也可以拥有多个协程。</p>
+</blockquote>
+<ul>
+<li>程序</li>
+</ul>
+<blockquote>
+<p>程序是一组计算机能识别和执行的指令</p>
+</blockquote>
+<p>线程五种状态</p>
+<h2 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h2><blockquote>
+<p>在Java程序设计语言中，每一个线程有一一个优先级。 默认情况下，一个线程继承它的父线程的优先级。可以用setPriority方法提高或降低任何-个线程的优先级。可以将优先级设置为在MIN PRIORITY (在Thread类中定义为1)与MAX PRIORITY (定义为10)之间的任何值。NORM_PRIORITY被定义为5。</p>
+</blockquote>
+<h2 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h2><blockquote>
+<p>可以通过调用<code>setDaemon(true);</code>将线程转换为守护线程(daemon thread)。这样- -个线程没有什么神奇。</p>
+</blockquote>
+<p>守护线程的唯一用途:</p>
+<blockquote>
+<p>是为其他线程提供服务。计时线程就是一个例子， 它定时地发送“计时器嘀嗒”信号给其他线程或清空过时的高速缓存项的线程。当只剩下守护线程时，虚拟机就退出了，由于如果只剩下守护线程，就没必要继续运行程序了。</p>
+</blockquote>
+<blockquote>
+<p>守护线程有时会被初学者错误地使用，他们不打算考虑关机( shutdown)动作。但是，这是很危险的。守护线程应该永远不去访问固有资源，如文件、数据库,因为它会在任何时候甚至在一个操作的中间发生中断。</p>
+</blockquote>
+<h2 id="未捕获异常处理器"><a href="#未捕获异常处理器" class="headerlink" title="未捕获异常处理器"></a>未捕获异常处理器</h2><blockquote>
+<p>线程的run方法不能抛出任何受查异常，但是，非受查异常会导致线程终止。在这种情况下，线程就死亡了。但是不需要任何catch子句来处理可以被传播的异常。相反，就在线程死亡之前，异常被传递到一个用于未捕获异常的处理器。该处理器必须属于一个实现<code>Thread.UncaughtExceptionHandler</code>接口的类。这个接口只有一个方法。<code>void uncaughtException(Threaed t, Trowable e)</code><br>可以用setUncaughtExceptionHandler方法为任何线程安装-一个处理器。也可以用Thread类的静态方法setDefaultUncaughtExceptionHandler为所有线程安装一个默认的处理器。替换处理器可以使用日志API发送未捕获异常的报告到日志文件。</p>
+</blockquote>
+<p>如果不安装默认的处理器，默认的处理器为空。但是，如果不为独立的线程安装处理器，此时的处理器就是该线程的ThreadGroup对象。</p>
+<h2 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h2><h3 id="锁对象"><a href="#锁对象" class="headerlink" title="锁对象"></a>锁对象</h3><ul>
+<li>synchronized</li>
+</ul>
+<blockquote>
+<p>关键字锁，JVM级别</p>
+</blockquote>
+<p>锁用来保护代码片段，任何时刻只能有一个线程执行被保护的代码。<br>锁可以管理试图进人被保护代码段的线程。<br>锁可以拥有一-个或多个相关的条件对象。<br>每个条件对象管理那些已经进人被保护的代码段但还不能运行的线程。</p>
+<ul>
+<li>ReetrantLock</li>
+</ul>
+<blockquote>
+<p>显式锁，API级别</p>
+</blockquote>
+<ul>
+<li>可重入性</li>
+</ul>
+<p>锁是可重入的，因为线程可以重复地获得已经持有的锁。锁保持一个持有计数( hold count)来跟踪对lock方法的嵌套调用。线程在每-.次调用lock都要调用unlock来释放锁。由于这-特性，被一个锁保护的代码可以调用另一个使用相同的锁的方法。</p>
+<h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><blockquote>
+<p>假设对共享变量除了赋值之外并不完成其他操作，那么可以将这些共享变量声明为volatile，java.util.concurrent. omic 包中有很多类使用了很高效的机器级指令（而不是使用锁）</p>
+</blockquote>
+<h3 id="锁测试与超时"><a href="#锁测试与超时" class="headerlink" title="锁测试与超时"></a>锁测试与超时</h3><blockquote>
+<p>线程在调用lock方法来获得另一个线程所持有的锁的时候，很可能发生阻塞。应该更加谨慎地申请锁。tryLock 方法试图申请一个锁，在成功获得锁后返回true,否则，立即返回false,而且线程可以立即离开去做其他事情。</p>
+</blockquote>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="category-chain-item">读书笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Java%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF/">#Java核心技术</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>读书笔记-Java核心技术卷一</div>
+      <div>https://mikeygithub.github.io/2021/05/01/yuque/oerrvs/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年5月1日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/03/yuque/llvgen/" title="工具篇-Jmeter压力测试">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">工具篇-Jmeter压力测试</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/30/yuque/agh2bl/" title="工具篇-MAC常用软件">
+                        <span class="hidden-mobile">工具篇-MAC常用软件</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
