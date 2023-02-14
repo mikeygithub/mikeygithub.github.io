@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676114757025-d4f6eae4-cebc-45af-9a74-6fea5ec092f8.png">
 <meta property="article:published_time" content="2020-05-30T09:24:22.000Z">
-<meta property="article:modified_time" content="2023-02-13T16:11:06.267Z">
+<meta property="article:modified_time" content="2023-02-14T12:53:19.673Z">
 <meta property="article:author" content="Mikey">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676114757025-d4f6eae4-cebc-45af-9a74-6fea5ec092f8.png">
@@ -280,7 +280,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          642 字
+          1.1k 字
         
       </span>
     
@@ -292,7 +292,7 @@
         
         
           <!-- compatible with older versions-->
-          6 分钟
+          10 分钟
         
       </span>
     
@@ -352,18 +352,34 @@
 <li>警报：直观地定义最重要指标的警报规则。</li>
 <li>混合数据源：在同一图表中混合不同的数据源，可以基于每个查询指定数据源。适用于自定义数据源。</li>
 </ul>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">wget</span> <span class="hljs-string">https://dl.grafana.com/enterprise/release/grafana-enterprise-9.3.6.linux-arm64.tar.gz</span><br><span class="hljs-comment">#国内源 https://repo.huaweicloud.com/grafana/9.3.6/grafana-enterprise-9.3.6.linux-arm64.tar.gz</span><br><span class="hljs-string">tar</span> <span class="hljs-string">-zxvf</span> <span class="hljs-string">grafana-enterprise-9.3.6.linux-arm64.tar.gz</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><ol>
-<li><p>安装granfan</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">./</span><br></code></pre></td></tr></table></figure>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ol>
+<li><p>下载granfan</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">wget</span> <span class="hljs-string">https://dl.grafana.com/enterprise/release/grafana-enterprise-9.3.6.linux-arm64.tar.gz</span><br><span class="hljs-comment">#国内源 https://repo.huaweicloud.com/grafana/9.3.6/grafana-enterprise-9.3.6.linux-arm64.tar.gz</span><br><span class="hljs-string">tar</span> <span class="hljs-string">-zxvf</span> <span class="hljs-string">grafana-enterprise-9.3.6.linux-arm64.tar.gz</span><br></code></pre></td></tr></table></figure>
 </li>
-<li><p>安装Prometheus</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">wget</span><br></code></pre></td></tr></table></figure>
-
+<li><p>下载Prometheus <a target="_blank" rel="noopener" href="https://prometheus.io/download/">https://prometheus.io/download/</a></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">wget</span> <span class="hljs-string">https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://github.com/prometheus/alertmanager/releases/download/v0.25.0/alertmanager-0.25.0.linux-amd64.tar.gz</span><br></code></pre></td></tr></table></figure>
 
 </li>
 </ol>
+<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><ol>
+<li><p>启动 granfan</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">./granfan-server</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>启动Prometheus </p>
+</li>
+</ol>
+<h1 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h1><ol>
+<li>configuration</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676340994455-7ff3b49d-abd4-4a3a-aa49-f2efa92da34c.png#averageHue=%231a1c21&clientId=uace567df-16c1-4&from=paste&height=820&id=uc51c66a6&name=image.png&originHeight=1640&originWidth=2876&originalType=binary&ratio=2&rotation=0&showTitle=false&size=207110&status=done&style=none&taskId=uc413bfd4-94f8-4cee-b008-3d83bb0200e&title=&width=1438" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<ol start="2">
+<li>add data source 选择 Prometheus</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676341080419-fe84d1c8-d087-4da1-ad2e-986d81254c54.png#averageHue=%231f2127&clientId=uace567df-16c1-4&from=paste&height=821&id=u2d2d4879&name=image.png&originHeight=1642&originWidth=2874&originalType=binary&ratio=2&rotation=0&showTitle=false&size=280197&status=done&style=none&taskId=ua9775ecc-bab1-4de2-8f35-343a2b004dc&title=&width=1437" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<ol start="3">
+<li>输入url 进行保存和测试</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676341165355-24589cbc-7eb1-4b6b-a271-2a48a4df7a94.png#averageHue=%23191b1f&clientId=uace567df-16c1-4&from=paste&height=821&id=u5fb24893&name=image.png&originHeight=1642&originWidth=2878&originalType=binary&ratio=2&rotation=0&showTitle=false&size=251287&status=done&style=none&taskId=ub3df225f-c520-44f3-9d25-4ed6c5d2df1&title=&width=1439" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h1 id="指标"><a href="#指标" class="headerlink" title="指标"></a>指标</h1><h1 id="预警"><a href="#预警" class="headerlink" title="预警"></a>预警</h1><h2 id="创建预警规则"><a href="#创建预警规则" class="headerlink" title="创建预警规则"></a>创建预警规则</h2><ol>
 <li>进入预警菜单创建预警规则</li>
 </ol>
@@ -375,6 +391,7 @@
 <h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><ol>
 <li>github：<a target="_blank" rel="noopener" href="https://github.com/grafana/grafana">https://github.com/grafana/grafana</a></li>
 <li>官网：<a target="_blank" rel="noopener" href="https://grafana.com/">https://grafana.com/</a></li>
+<li>prometheus：<a target="_blank" rel="noopener" href="https://prometheus.io/download/">https://prometheus.io/download/</a></li>
 </ol>
 
               
