@@ -1,0 +1,906 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="必备知识有些问题的描述和解决方法已经很清楚，只需要按照描述去一步一步的执行即可，这种方法就是计算机解决问题的一种最普遍最直接的方法—-模拟法。 模拟法并不是程序，只是我们依赖计算机的运算速度解决问题的一种方法或模式，针对具体问题要设计具体的程序。 模拟法适用于问题求解清晰、运算规模较小的问题。如果问题求解的时空代价很大，就要考虑是否有其它更好的解决方案。 相关题目推多米诺（mid)1234567">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法笔记-模拟法">
+<meta property="og:url" content="https://mikeygithub.github.io/2021/01/18/yuque/ghyttm/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="必备知识有些问题的描述和解决方法已经很清楚，只需要按照描述去一步一步的执行即可，这种方法就是计算机解决问题的一种最普遍最直接的方法—-模拟法。 模拟法并不是程序，只是我们依赖计算机的运算速度解决问题的一种方法或模式，针对具体问题要设计具体的程序。 模拟法适用于问题求解清晰、运算规模较小的问题。如果问题求解的时空代价很大，就要考虑是否有其它更好的解决方案。 相关题目推多米诺（mid)1234567">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1644543503994-b88b4bf9-319d-4eae-8115-5d18983ce948.png">
+<meta property="article:published_time" content="2021-01-18T13:24:22.000Z">
+<meta property="article:modified_time" content="2023-02-28T10:30:33.367Z">
+<meta property="article:author" content="Mikey">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1644543503994-b88b4bf9-319d-4eae-8115-5d18983ce948.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>算法笔记-模拟法 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="算法笔记-模拟法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-01-18 21:24" pubdate>
+          2021年1月18日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          6.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          57 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">算法笔记-模拟法</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1644543503994-b88b4bf9-319d-4eae-8115-5d18983ce948.png#averageHue=%23fec003&clientId=ub398dc1a-5d56-4&from=ui&id=u8d95f0b3&name=%E5%9B%BE%E6%80%AA%E5%85%BD_1c0d7e7f12c31bb6d16bd88fddb324ab_47277.png&originHeight=383&originWidth=900&originalType=binary&ratio=1&rotation=0&showTitle=false&size=27389&status=done&style=none&taskId=u7e84c75f-61f0-48f5-bfff-a726b6d2890&title=" srcset="/img/loading.gif" lazyload alt="图怪兽_1c0d7e7f12c31bb6d16bd88fddb324ab_47277.png"></p>
+<h1 id="必备知识"><a href="#必备知识" class="headerlink" title="必备知识"></a>必备知识</h1><p>有些问题的描述和解决方法已经很清楚，只需要按照描述去一步一步的执行即可，这种方法就是计算机解决问题的一种最普遍最直接的方法—-模拟法。<br> 模拟法并不是程序，只是我们依赖计算机的运算速度解决问题的一种方法或模式，针对具体问题要设计具体的程序。<br> 模拟法适用于问题求解清晰、运算规模较小的问题。如果问题求解的时空代价很大，就要考虑是否有其它更好的解决方案。</p>
+<h1 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h1><h4 id="推多米诺（mid"><a href="#推多米诺（mid" class="headerlink" title="推多米诺（mid)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/push-dominoes/">推多米诺</a>（mid)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-comment">//思路:模拟</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">pushDominoes</span><span class="hljs-params">(String dominoes)</span> &#123;<br>        <span class="hljs-type">char</span>[] s = dominoes.toCharArray();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length, i = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">char</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;L&#x27;</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; n) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> i;<br>            <span class="hljs-keyword">while</span> (j &lt; n &amp;&amp; s[j] == <span class="hljs-string">&#x27;.&#x27;</span>) &#123; <span class="hljs-comment">// 找到一段连续的没有被推动的骨牌</span><br>                j++;<br>            &#125;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> j &lt; n ? s[j] : <span class="hljs-string">&#x27;R&#x27;</span>;<br>            <span class="hljs-keyword">if</span> (left == right) &#123; <span class="hljs-comment">// 方向相同，那么这些竖立骨牌也会倒向同一方向</span><br>                <span class="hljs-keyword">while</span> (i &lt; j) &#123;<br>                    s[i++] = right;<br>                &#125;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (left == <span class="hljs-string">&#x27;R&#x27;</span> &amp;&amp; right == <span class="hljs-string">&#x27;L&#x27;</span>) &#123; <span class="hljs-comment">// 方向相对，那么就从两侧向中间倒</span><br>                <span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> j - <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">while</span> (i &lt; k) &#123;<br>                    s[i++] = <span class="hljs-string">&#x27;R&#x27;</span>;<br>                    s[k--] = <span class="hljs-string">&#x27;L&#x27;</span>;<br>                &#125;<br>            &#125;<br>            left = right;<br>            i = j + <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(s);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="球会落何处（mid）"><a href="#球会落何处（mid）" class="headerlink" title="球会落何处（mid）"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/where-will-the-ball-fall/">球会落何处</a>（mid）</h4><p>我们依次判断每个球的最终位置。对于每个球，从上至下判断球位置的移动方向。在对应的位置，如果挡板向右偏，则球会往右移动；如果挡板往左偏，则球会往左移动。若移动过程中碰到侧边或者 V 型，则球会停止移动，卡在箱子里。如果可以完成本层的移动，则继续判断下一层的移动方向，直到落出箱子或者卡住。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] findBall(<span class="hljs-type">int</span>[][] grid) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> grid[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span>[] ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        Arrays.fill(ans, -<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; j++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">col</span> <span class="hljs-operator">=</span> j;  <span class="hljs-comment">// 球的初始列</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] row : grid) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">dir</span> <span class="hljs-operator">=</span> row[col];<br>                col += dir;  <span class="hljs-comment">// 移动球</span><br>                <span class="hljs-keyword">if</span> (col &lt; <span class="hljs-number">0</span> || col == n || row[col] != dir) &#123;  <span class="hljs-comment">// 到达侧边或 V 形</span><br>                    col = -<span class="hljs-number">1</span>;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (col &gt;= <span class="hljs-number">0</span>) &#123;  <span class="hljs-comment">// 成功到达底部</span><br>                ans[j] = col;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="复数乘法（mid"><a href="#复数乘法（mid" class="headerlink" title="复数乘法（mid)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/complex-number-multiplication/">复数乘法</a>（mid)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-comment">//模拟:先移除i进行运算,再添加</span><br>    <span class="hljs-comment">//(1+1i)*(1+1i)=1+1i+1i-1=0+2i</span><br>    <span class="hljs-comment">//(1+1)*(1+1)=1+1i+1i-1=0+2i</span><br>    <span class="hljs-comment">//(1+-i)*(1+-i)=1-i-i-1=0+-2i</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">complexNumberMultiply</span><span class="hljs-params">(String num1, String num2)</span> &#123;<br>        <span class="hljs-comment">//解析</span><br>        String[] n1 = num1.split(<span class="hljs-string">&quot;\\+&quot;</span>);<br>        String[] n2 = num2.split(<span class="hljs-string">&quot;\\+&quot;</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n1Real</span> <span class="hljs-operator">=</span> Integer.valueOf(n1[<span class="hljs-number">0</span>]);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n2Real</span> <span class="hljs-operator">=</span> Integer.valueOf(n2[<span class="hljs-number">0</span>]);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">n1rs</span> <span class="hljs-operator">=</span> n1[<span class="hljs-number">1</span>].replace(<span class="hljs-string">&quot;i&quot;</span>, <span class="hljs-string">&quot;&quot;</span>);<br>        <span class="hljs-keyword">if</span>(n1rs==<span class="hljs-string">&quot;-&quot;</span>||n1rs==<span class="hljs-string">&quot;&quot;</span>)n1rs+=<span class="hljs-string">&quot;1&quot;</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n1Imaginary</span> <span class="hljs-operator">=</span> Integer.valueOf(n1rs);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">n2rs</span> <span class="hljs-operator">=</span> n2[<span class="hljs-number">1</span>].replace(<span class="hljs-string">&quot;i&quot;</span>, <span class="hljs-string">&quot;&quot;</span>);<br>        <span class="hljs-keyword">if</span>(n2rs==<span class="hljs-string">&quot;-&quot;</span>||n2rs==<span class="hljs-string">&quot;&quot;</span>)n2rs+=<span class="hljs-string">&quot;1&quot;</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n2Imaginary</span> <span class="hljs-operator">=</span> Integer.valueOf(n2rs);<br>        <span class="hljs-comment">//运算</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">real</span> <span class="hljs-operator">=</span> n1Real*n2Real+n1Imaginary*n2Imaginary*-<span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">imaginary</span> <span class="hljs-operator">=</span> n1Imaginary*n2Real+n2Imaginary*n1Real;<br>        <span class="hljs-keyword">return</span> real+<span class="hljs-string">&quot;+&quot;</span>+imaginary+<span class="hljs-string">&quot;i&quot;</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">complexNumberMultiply</span><span class="hljs-params">(String num1, String num2)</span> &#123;<br>        String[] complex1 = num1.split(<span class="hljs-string">&quot;\\+|i&quot;</span>);<br>        String[] complex2 = num2.split(<span class="hljs-string">&quot;\\+|i&quot;</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">real1</span> <span class="hljs-operator">=</span> Integer.parseInt(complex1[<span class="hljs-number">0</span>]);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">imag1</span> <span class="hljs-operator">=</span> Integer.parseInt(complex1[<span class="hljs-number">1</span>]);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">real2</span> <span class="hljs-operator">=</span> Integer.parseInt(complex2[<span class="hljs-number">0</span>]);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">imag2</span> <span class="hljs-operator">=</span> Integer.parseInt(complex2[<span class="hljs-number">1</span>]);<br>        <span class="hljs-keyword">return</span> String.format(<span class="hljs-string">&quot;%d+%di&quot;</span>, real1 * real2 - imag1 * imag2, real1 * imag2 + imag1 * real2);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="寻找最近的回文数"><a href="#寻找最近的回文数" class="headerlink" title="寻找最近的回文数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-closest-palindrome/">寻找最近的回文数</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-comment">//模拟</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">nearestPalindromic</span><span class="hljs-params">(String n)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">selfNumber</span> <span class="hljs-operator">=</span> Long.parseLong(n), ans = -<span class="hljs-number">1</span>;<br>        List&lt;Long&gt; candidates = getCandidates(n);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">long</span> candidate : candidates) &#123;<br>            <span class="hljs-keyword">if</span> (candidate != selfNumber) &#123;<br>                <span class="hljs-keyword">if</span> (ans == -<span class="hljs-number">1</span> ||<br>                    Math.abs(candidate - selfNumber) &lt; Math.abs(ans - selfNumber) ||<br>                    Math.abs(candidate - selfNumber) == Math.abs(ans - selfNumber) &amp;&amp; candidate &lt; ans) &#123;<br>                    ans = candidate;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> Long.toString(ans);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> List&lt;Long&gt; <span class="hljs-title function_">getCandidates</span><span class="hljs-params">(String n)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> n.length();<br>        List&lt;Long&gt; candidates = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Long&gt;() &#123;&#123;<br>            add((<span class="hljs-type">long</span>) Math.pow(<span class="hljs-number">10</span>, len - <span class="hljs-number">1</span>) - <span class="hljs-number">1</span>);<br>            add((<span class="hljs-type">long</span>) Math.pow(<span class="hljs-number">10</span>, len) + <span class="hljs-number">1</span>);<br>        &#125;&#125;;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">selfPrefix</span> <span class="hljs-operator">=</span> Long.parseLong(n.substring(<span class="hljs-number">0</span>, (len + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>));<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">long</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> selfPrefix - <span class="hljs-number">1</span>; i &lt;= selfPrefix + <span class="hljs-number">1</span>; i++) &#123;<br>            <span class="hljs-type">StringBuffer</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>();<br>            <span class="hljs-type">String</span> <span class="hljs-variable">prefix</span> <span class="hljs-operator">=</span> String.valueOf(i);<br>            sb.append(prefix);<br>            <span class="hljs-type">StringBuffer</span> <span class="hljs-variable">suffix</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>(prefix).reverse();<br>            sb.append(suffix.substring(len &amp; <span class="hljs-number">1</span>));<br>            <span class="hljs-type">String</span> <span class="hljs-variable">candidate</span> <span class="hljs-operator">=</span> sb.toString();<br>            candidates.add(Long.parseLong(candidate));<br>        &#125;<br>        <span class="hljs-keyword">return</span> candidates;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="1424-对角线遍历-II（mid"><a href="#1424-对角线遍历-II（mid" class="headerlink" title="1424. 对角线遍历 II（mid)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/diagonal-traverse-ii/">1424. 对角线遍历 II</a>（mid)</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs sql">class Solution &#123;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>模拟：根据条件:同一斜线x<span class="hljs-operator">+</span>y相等<br>    public <span class="hljs-type">int</span>[] findDiagonalOrder(List<span class="hljs-operator">&lt;</span>List<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;&gt;</span> nums) &#123;<br>        <span class="hljs-type">int</span> n <span class="hljs-operator">=</span> nums.size();<br>        <span class="hljs-type">int</span> total <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        Map<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span>,ArrayList<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;&gt;</span> map <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> HashMap<span class="hljs-operator">&lt;&gt;</span>();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i<span class="hljs-operator">=</span><span class="hljs-number">0</span>;i<span class="hljs-operator">&lt;</span>n;i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)&#123;<br>            <span class="hljs-type">int</span> length <span class="hljs-operator">=</span> nums.get(i).size();<br>            total<span class="hljs-operator">+</span><span class="hljs-operator">=</span>length;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j<span class="hljs-operator">=</span><span class="hljs-number">0</span>;j<span class="hljs-operator">&lt;</span>length;j<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)&#123;<br>                <span class="hljs-type">int</span> key <span class="hljs-operator">=</span> i<span class="hljs-operator">+</span>j;<br>                ArrayList<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> list <span class="hljs-operator">=</span> map.getOrDefault(key,<span class="hljs-keyword">new</span> ArrayList<span class="hljs-operator">&lt;&gt;</span>());<br>                list.add(nums.get(i).<span class="hljs-keyword">get</span>(j));<br>                map.put(key,list);<br>            &#125;<br>        &#125;<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span>逆序输出map里的list<br>        <span class="hljs-type">int</span>[] ret <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[total];<br>        <span class="hljs-type">int</span> index <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i<span class="hljs-operator">=</span><span class="hljs-number">0</span>;i<span class="hljs-operator">&lt;</span>map.size();i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)&#123;<br>            ArrayList<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> list <span class="hljs-operator">=</span> map.get(i);<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j<span class="hljs-operator">=</span>list.size()<span class="hljs-number">-1</span>;j<span class="hljs-operator">&gt;=</span><span class="hljs-number">0</span>;j<span class="hljs-comment">--)ret[index++]=list.get(j);</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>模拟(超时)<br>    public <span class="hljs-type">int</span>[] findDiagonalOrder0(List<span class="hljs-operator">&lt;</span>List<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;&gt;</span> nums) &#123;<br>        <span class="hljs-type">int</span> n <span class="hljs-operator">=</span> nums.size();<br>        List<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> list <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> ArrayList<span class="hljs-operator">&lt;&gt;</span>();<br>        <span class="hljs-type">int</span> m <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i<span class="hljs-operator">=</span><span class="hljs-number">0</span>;i<span class="hljs-operator">&lt;</span>n;i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)&#123;<br>            <span class="hljs-type">int</span> length <span class="hljs-operator">=</span> nums.get(i).size();<br>            if(length<span class="hljs-operator">&gt;</span>m)m<span class="hljs-operator">=</span>length;<br>            <span class="hljs-type">int</span> x <span class="hljs-operator">=</span> i,y <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            while(x<span class="hljs-operator">&gt;=</span><span class="hljs-number">0</span><span class="hljs-operator">&amp;&amp;</span>y<span class="hljs-operator">&lt;</span>m)&#123;<br>                if(nums.get(x).size()<span class="hljs-operator">&gt;</span>y)&#123;<br>                    list.add(nums.get(x).<span class="hljs-keyword">get</span>(y));<br>                &#125;<br>                x<span class="hljs-comment">--;</span><br>                y<span class="hljs-operator">+</span><span class="hljs-operator">+</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i<span class="hljs-operator">=</span><span class="hljs-number">1</span>;i<span class="hljs-operator">&lt;</span>m;i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)&#123;<br>            <span class="hljs-type">int</span> x <span class="hljs-operator">=</span> n <span class="hljs-operator">-</span> <span class="hljs-number">1</span>,y <span class="hljs-operator">=</span> i;<br>            while(x<span class="hljs-operator">&gt;=</span><span class="hljs-number">0</span><span class="hljs-operator">&amp;&amp;</span>y<span class="hljs-operator">&lt;</span>m)&#123;<br>                if(nums.get(x).size()<span class="hljs-operator">&gt;</span>y)&#123;<br>                    list.add(nums.get(x).<span class="hljs-keyword">get</span>(y));<br>                &#125;<br>                x<span class="hljs-comment">--;</span><br>                y<span class="hljs-operator">+</span><span class="hljs-operator">+</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span>[] ret <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[list.size()];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i<span class="hljs-operator">=</span><span class="hljs-number">0</span>;i<span class="hljs-operator">&lt;</span>list.size();i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)ret[i]<span class="hljs-operator">=</span>list.get(i);<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="57-插入区间（mid）"><a href="#57-插入区间（mid）" class="headerlink" title="57. 插入区间（mid）"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/insert-interval/">57. 插入区间</a>（mid）</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs sql">class Solution &#123;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>模拟:<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">1.</span>插入的区间在首尾<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> <span class="hljs-number">1.1</span> 首部分区间 [l0,r0] l0<span class="hljs-operator">&gt;</span>newR<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> <span class="hljs-number">1.2</span> 尾部区间，新区间大于旧区间所有区间。<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">2.</span>插入的区间在中间<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> <span class="hljs-number">2.1</span> 没有重叠区间 [l0,r0] r0<span class="hljs-operator">&lt;</span>newl [l1,r1], newr<span class="hljs-operator">&lt;</span>l1<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> <span class="hljs-number">2.2</span> 有区间重叠，判断是否可以合并,l1,r1,如果newl<span class="hljs-operator">&lt;=</span>r1则可以合并,合并后[<span class="hljs-built_in">min</span>(l1,newl),<span class="hljs-built_in">max</span>(r1,newr)]<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>   <span class="hljs-number">2.2</span><span class="hljs-number">.1</span> 新区间覆盖旧区间<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>   <span class="hljs-number">2.2</span><span class="hljs-number">.2</span> 旧区间覆盖新区间<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>   <span class="hljs-number">2.2</span><span class="hljs-number">.3</span> 新区间和旧区间正好接上<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>   <span class="hljs-number">2.2</span><span class="hljs-number">.4</span> 新区间和旧区间有交集<br><span class="hljs-operator">/</span><span class="hljs-operator">/</span>    [[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>],[<span class="hljs-number">3</span>,<span class="hljs-number">5</span>],[<span class="hljs-number">6</span>,<span class="hljs-number">7</span>],[<span class="hljs-number">8</span>,<span class="hljs-number">10</span>],[<span class="hljs-number">12</span>,<span class="hljs-number">16</span>]]<br><span class="hljs-operator">/</span><span class="hljs-operator">/</span>            [<span class="hljs-number">4</span>,<span class="hljs-number">8</span>]<br>    public <span class="hljs-type">int</span>[][] <span class="hljs-keyword">insert</span>(<span class="hljs-type">int</span>[][] intervals, <span class="hljs-type">int</span>[] newInterval) &#123;<br>        <span class="hljs-type">int</span> n <span class="hljs-operator">=</span> intervals.length;<br>        List<span class="hljs-operator">&lt;</span><span class="hljs-type">int</span>[]<span class="hljs-operator">&gt;</span> ret <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> ArrayList<span class="hljs-operator">&lt;&gt;</span>();<br>        if(n<span class="hljs-operator">&lt;=</span><span class="hljs-number">0</span>)<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[][]&#123;&#123;newInterval[<span class="hljs-number">0</span>],newInterval[<span class="hljs-number">1</span>]&#125;&#125;;<br>        <span class="hljs-type">int</span> newStart <span class="hljs-operator">=</span> newInterval[<span class="hljs-number">0</span>];<br>        <span class="hljs-type">int</span> newEnd <span class="hljs-operator">=</span> newInterval[<span class="hljs-number">1</span>];<br>        <span class="hljs-type">boolean</span> hasAdd <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>        if(newEnd<span class="hljs-operator">&lt;</span>intervals[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>])&#123;<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">1.1</span>情况：插入到首区间<br>            ret.add(<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[]&#123;newStart,newEnd&#125;);<br>            hasAdd <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span>[] <span class="hljs-type">interval</span>:intervals)&#123;<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">2.</span>情况:需要判断是否有重合的区间<br>            <span class="hljs-type">int</span> <span class="hljs-keyword">start</span> <span class="hljs-operator">=</span> <span class="hljs-type">interval</span>[<span class="hljs-number">0</span>];<br>            <span class="hljs-type">int</span> <span class="hljs-keyword">end</span> <span class="hljs-operator">=</span> <span class="hljs-type">interval</span>[<span class="hljs-number">1</span>];<span class="hljs-operator">/</span><span class="hljs-operator">/</span>System.out.println(<span class="hljs-keyword">start</span><span class="hljs-operator">+</span>&quot;|&quot;<span class="hljs-operator">+</span><span class="hljs-keyword">end</span><span class="hljs-operator">+</span>&quot;|&quot;<span class="hljs-operator">+</span>hasAdd<span class="hljs-operator">+</span>&quot;|&quot;<span class="hljs-operator">+</span>newEnd<span class="hljs-operator">+</span>&quot;|&quot;<span class="hljs-operator">+</span>newStart);<br>            if (hasAdd)&#123;<span class="hljs-operator">/</span><span class="hljs-operator">/</span>已经添加过了<br>                ret.add(<span class="hljs-type">interval</span>);<br>                continue;<br>            &#125;<br>            if (<span class="hljs-keyword">end</span><span class="hljs-operator">&lt;</span>newStart)&#123;<span class="hljs-operator">/</span><span class="hljs-operator">/</span>没有交集<br>                ret.add(<span class="hljs-type">interval</span>);<br>            &#125; <span class="hljs-keyword">else</span> if(newEnd<span class="hljs-operator">&lt;</span><span class="hljs-keyword">start</span>)&#123;<span class="hljs-operator">/</span><span class="hljs-operator">/</span>与新区间没有交集了<br>                if(<span class="hljs-operator">!</span>hasAdd)&#123;<br>                    ret.add(<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[]&#123;newStart,newEnd&#125;);<br>                    hasAdd <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>                &#125;<br>                ret.add(<span class="hljs-type">interval</span>);<br>            &#125;<span class="hljs-keyword">else</span> if(<span class="hljs-keyword">end</span><span class="hljs-operator">&gt;=</span>newStart<span class="hljs-operator">||</span>(newStart<span class="hljs-operator">&lt;</span><span class="hljs-type">interval</span>[<span class="hljs-number">0</span>]<span class="hljs-operator">&amp;&amp;</span>newEnd<span class="hljs-operator">&gt;</span><span class="hljs-type">interval</span>[<span class="hljs-number">1</span>]))&#123;<span class="hljs-operator">/</span><span class="hljs-operator">/</span>有交集<br>                newStart <span class="hljs-operator">=</span> Math.<span class="hljs-built_in">min</span>(<span class="hljs-keyword">start</span>,newStart);<br>                newEnd <span class="hljs-operator">=</span> Math.<span class="hljs-built_in">max</span>(<span class="hljs-keyword">end</span>,newEnd);<br>            &#125;<br>        &#125;<br>        if(<span class="hljs-operator">!</span>hasAdd)ret.add(<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[]&#123;newStart,newEnd&#125;);<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">1.2</span>情况：插到末尾区间<br>        <span class="hljs-keyword">return</span> ret.toArray(<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[ret.size()][]);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1>
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>算法笔记-模拟法</div>
+      <div>https://mikeygithub.github.io/2021/01/18/yuque/ghyttm/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年1月18日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/22/yuque/pdutpf/" title="Java篇-高性能的Dubbo框架">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java篇-高性能的Dubbo框架</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/11/yuque/fv8pzn/" title="MySQL篇-MySQL之COUNT函数详解">
+                        <span class="hidden-mobile">MySQL篇-MySQL之COUNT函数详解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

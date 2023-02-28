@@ -1,0 +1,1151 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Bee 工具的使用bee 工具简介bee 工具是一个为了协助快速开发 beego 项目而创建的项目，通过 bee 您可以很容易的进行 beego 项目的创建、热编译、开发、测试、和部署。 bee 工具的安装您可以通过如下的方式安装 bee 工具： 1go get github.com&#x2F;beego&#x2F;bee  安装完之后，bee 可执行文件默认存放在 $GOPATH&#x2F;bin 里面，所以您需要把 $G">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang篇-Beego学习笔记">
+<meta property="og:url" content="https://mikeygithub.github.io/2019/05/21/yuque/dbdnm0/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="Bee 工具的使用bee 工具简介bee 工具是一个为了协助快速开发 beego 项目而创建的项目，通过 bee 您可以很容易的进行 beego 项目的创建、热编译、开发、测试、和部署。 bee 工具的安装您可以通过如下的方式安装 bee 工具： 1go get github.com&#x2F;beego&#x2F;bee  安装完之后，bee 可执行文件默认存放在 $GOPATH&#x2F;bin 里面，所以您需要把 $G">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657534994728-5f3df722-dc94-4cb9-a358-c726b79f460b.png">
+<meta property="article:published_time" content="2019-05-21T08:49:03.000Z">
+<meta property="article:modified_time" content="2023-02-28T10:30:33.343Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="Beego">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657534994728-5f3df722-dc94-4cb9-a358-c726b79f460b.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>Golang篇-Beego学习笔记 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Golang篇-Beego学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2019-05-21 16:49" pubdate>
+          2019年5月21日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          19k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          162 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Golang篇-Beego学习笔记</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657534994728-5f3df722-dc94-4cb9-a358-c726b79f460b.png#clientId=ua88ff39d-636b-4&from=markdown&id=wXfOf&name=image.png&originHeight=341&originWidth=499&originalType=url&ratio=1&rotation=0&showTitle=false&size=104244&status=done&style=none&taskId=uea0f4af9-6742-4faf-a2b0-7e763a91f38&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="Bee-工具的使用"><a href="#Bee-工具的使用" class="headerlink" title="Bee 工具的使用"></a>Bee 工具的使用</h1><h2 id="bee-工具简介"><a href="#bee-工具简介" class="headerlink" title="bee 工具简介"></a>bee 工具简介</h2><p>bee 工具是一个为了协助快速开发 beego 项目而创建的项目，通过 bee 您可以很容易的进行 beego 项目的创建、热编译、开发、测试、和部署。</p>
+<h2 id="bee-工具的安装"><a href="#bee-工具的安装" class="headerlink" title="bee 工具的安装"></a>bee 工具的安装</h2><p>您可以通过如下的方式安装 bee 工具：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">go</span> <span class="hljs-built_in">get</span> github.<span class="hljs-keyword">com</span>/beego/bee<br></code></pre></td></tr></table></figure>
+
+<p>安装完之后，<code>bee</code> 可执行文件默认存放在 <code>$GOPATH/bin</code> 里面，所以您需要把 <code>$GOPATH/bin</code> 添加到您的环境变量中，才可以进行下一步。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>如何添加环境变量，请自行搜索<br>如果你本机设置了 <code>GOBIN</code>，那么上面的命令就会安装到 <code>GOBIN</code> 下，请添加 GOBIN 到你的环境变量中</p>
+</blockquote>
+<h2 id="bee-工具命令详解"><a href="#bee-工具命令详解" class="headerlink" title="bee 工具命令详解"></a>bee 工具命令详解</h2><p>我们在命令行输入 <code>bee</code>，可以看到如下的信息：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs applescript">Bee <span class="hljs-keyword">is</span> a Fast <span class="hljs-keyword">and</span> Flexible tool <span class="hljs-keyword">for</span> managing your Beego Web Application.<br><br>Usage:<br><br>	bee command [arguments]<br><br>The commands are:<br><br>    <span class="hljs-built_in">version</span>     show <span class="hljs-keyword">the</span> bee &amp; beego <span class="hljs-built_in">version</span><br>    migrate     <span class="hljs-built_in">run</span> database migrations<br>    api         create an api <span class="hljs-built_in">application</span> base <span class="hljs-keyword">on</span> beego framework<br>    bale        packs non-Go files <span class="hljs-keyword">to</span> Go source files    <br>    new         create an <span class="hljs-built_in">application</span> base <span class="hljs-keyword">on</span> beego framework<br>    <span class="hljs-built_in">run</span>         <span class="hljs-built_in">run</span> <span class="hljs-keyword">the</span> app which can hot compile<br>    pack        compress an beego project<br>    fix         Fixes your <span class="hljs-built_in">application</span> <span class="hljs-keyword">by</span> making <span class="hljs-keyword">it</span> compatible <span class="hljs-keyword">with</span> newer versions <span class="hljs-keyword">of</span> Beego<br>    dlv         Start a debugging session using Delve<br>    dockerize   Generates a Dockerfile <span class="hljs-keyword">for</span> your Beego <span class="hljs-built_in">application</span><br>    generate    Source code generator<br>    hprose      Creates an RPC <span class="hljs-built_in">application</span> based <span class="hljs-keyword">on</span> Hprose <span class="hljs-keyword">and</span> Beego frameworks<br>    pack        Compresses a Beego <span class="hljs-built_in">application</span> <span class="hljs-keyword">into</span> a single <span class="hljs-built_in">file</span><br>    rs          Run customized scripts<br>    <span class="hljs-built_in">run</span>         Run <span class="hljs-keyword">the</span> <span class="hljs-built_in">application</span> <span class="hljs-keyword">by</span> starting a <span class="hljs-keyword">local</span> development server<br>    server      serving static content <span class="hljs-keyword">over</span> HTTP <span class="hljs-keyword">on</span> port<br>    <br>Use bee help [command] <span class="hljs-keyword">for</span> more information <span class="hljs-keyword">about</span> a command.<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="new-命令"><a href="#new-命令" class="headerlink" title="new 命令"></a><code>new</code> 命令</h3><p><code>new</code> 命令是新建一个 Web 项目，我们在命令行下执行 <code>bee new &lt;项目名&gt;</code> 就可以创建一个新的项目。但是注意该命令必须在 <code>$GOPATH/src</code> 下执行。最后会在 <code>$GOPATH/src</code> 相应目录下生成如下目录结构的项目：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs gradle">bee <span class="hljs-keyword">new</span> myproject<br>[INFO] Creating application...<br><span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/myproject/</span><br><span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/myproject/</span>conf/<br><span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/myproject/</span>controllers/<br><span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/myproject/m</span>odels/<br><span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/myproject/</span><span class="hljs-keyword">static</span>/<br><span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/myproject/</span><span class="hljs-keyword">static</span><span class="hljs-regexp">/js/</span><br><span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/myproject/</span><span class="hljs-keyword">static</span><span class="hljs-regexp">/css/</span><br><span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/myproject/</span><span class="hljs-keyword">static</span><span class="hljs-regexp">/img/</span><br><span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/myproject/</span>views/<br><span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/myproject/</span>conf/app.conf<br><span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/myproject/</span>controllers/<span class="hljs-keyword">default</span>.go<br><span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/myproject/</span>views/index.tpl<br><span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/myproject/m</span>ain.go<br><span class="hljs-number">13</span>-<span class="hljs-number">11</span>-<span class="hljs-number">25</span> <span class="hljs-number">09</span>:<span class="hljs-number">50</span>:<span class="hljs-number">39</span> [SUCC] <span class="hljs-keyword">New</span> application successfully created!<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs stylus">myproject<br>├── conf<br>│   └── app<span class="hljs-selector-class">.conf</span><br>├── controllers<br>│   └── default<span class="hljs-selector-class">.go</span><br>├── <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.go</span><br>├── models<br>├── routers<br>│   └── router<span class="hljs-selector-class">.go</span><br>├── static<br>│   ├── css<br>│   ├── <span class="hljs-selector-tag">img</span><br>│   └── js<br>├── tests<br>│   └── default_test<span class="hljs-selector-class">.go</span><br>└── views<br>    └── index<span class="hljs-selector-class">.tpl</span><br><br><span class="hljs-number">8</span> directories, <span class="hljs-number">4</span> files<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="api-命令"><a href="#api-命令" class="headerlink" title="api 命令"></a><code>api</code> 命令</h3><p>上面的 <code>new</code> 命令是用来新建 Web 项目，不过很多用户使用 beego 来开发 API 应用。所以这个 <code>api</code> 命令就是用来创建 API 应用的，执行命令之后如下所示：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs gradle">bee api apiproject<br>create app folder: <span class="hljs-regexp">/gopath/</span>src/apiproject<br>create conf: <span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/apiproject/</span>conf<br>create controllers: <span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/apiproject/</span>controllers<br>create models: <span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/apiproject/m</span>odels<br>create tests: <span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/apiproject/</span>tests<br>create conf app.conf: <span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/apiproject/</span>conf/app.conf<br>create controllers <span class="hljs-keyword">default</span>.go: <span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/apiproject/</span>controllers/<span class="hljs-keyword">default</span>.go<br>create tests <span class="hljs-keyword">default</span>.go: <span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/apiproject/</span>tests/default_test.go<br>create models object.go: <span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/apiproject/m</span>odels/object.go<br>create main.go: <span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/apiproject/m</span>ain.go<br></code></pre></td></tr></table></figure>
+
+<p>这个项目的目录结构如下：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs stylus">apiproject<br>├── conf<br>│   └── app<span class="hljs-selector-class">.conf</span><br>├── controllers<br>│   └── <span class="hljs-selector-tag">object</span><span class="hljs-selector-class">.go</span><br>│   └── user<span class="hljs-selector-class">.go</span><br>├── docs<br>│   └── doc<span class="hljs-selector-class">.go</span><br>├── <span class="hljs-selector-tag">main</span><span class="hljs-selector-class">.go</span><br>├── models<br>│   └── <span class="hljs-selector-tag">object</span><span class="hljs-selector-class">.go</span><br>│   └── user<span class="hljs-selector-class">.go</span><br>├── routers<br>│   └── router<span class="hljs-selector-class">.go</span><br>└── tests<br>    └── default_test.go<br></code></pre></td></tr></table></figure>
+
+<p>从上面的目录我们可以看到和 Web 项目相比，少了 static 和 views 目录，多了一个 test 模块，用来做单元测试的。</p>
+<p>同时，该命令还支持一些自定义参数自动连接数据库创建相关 model 和 controller:<br><code>bee api [appname] [-tables=&quot;&quot;] [-driver=mysql] [-conn=&quot;root:&lt;password&gt;@tcp(127.0.0.1:3306)/test&quot;]</code><br>如果 conn 参数为空则创建一个示例项目，否则将基于链接信息链接数据库创建项目。</p>
+<h3 id="run-命令"><a href="#run-命令" class="headerlink" title="run 命令"></a><code>run</code> 命令</h3><p>我们在开发 Go 项目的时候最大的问题是经常需要自己手动去编译再运行，<code>bee run</code> 命令是监控 beego 的项目，通过 <a target="_blank" rel="noopener" href="https://github.com/howeyc/fsnotify">fsnotify</a>监控文件系统。但是注意该命令必须在 <code>$GOPATH/src/appname</code> 下执行。<br>这样我们在开发过程中就可以实时的看到项目修改之后的效果：</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs subunit">bee run<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 09:53:04 [INFO] Uses &#x27;myproject&#x27; as &#x27;appname&#x27;<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 09:53:04 [INFO] Initializing watcher...<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 09:53:04 [TRAC] Directory(/gopath/src/myproject/controllers)<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 09:53:04 [TRAC] Directory(/gopath/src/myproject/models)<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 09:53:04 [TRAC] Directory(/gopath/src/myproject)<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 09:53:04 [INFO] Start building...<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 09:53:16 [SUCC] Build was successful<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 09:53:16 [INFO] Restarting myproject ...<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 09:53:16 [INFO] ./myproject is running...<br></code></pre></td></tr></table></figure>
+
+<p>我们打开浏览器就可以看到效果 <code>http://localhost:8080/</code>:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/beerun.png#id=raZwL&originHeight=694&originWidth=1153&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>如果我们修改了 <code>Controller</code> 下面的 <code>default.go</code> 文件，我们就可以看到命令行输出：</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs subunit">13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 10:11:20 [EVEN] &quot;/gopath/src/myproject/controllers/default.go&quot;: DELETE|MODIFY<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 10:11:20 [INFO] Start building...<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 10:11:20 [SKIP] &quot;/gopath/src/myproject/controllers/default.go&quot;: CREATE<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 10:11:23 [SKIP] &quot;/gopath/src/myproject/controllers/default.go&quot;: MODIFY<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 10:11:23 [SUCC] Build was successful<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 10:11:23 [INFO] Restarting myproject ...<br>13<span class="hljs-string">-11</span><span class="hljs-string">-25</span> 10:11:23 [INFO] ./myproject is running...<br></code></pre></td></tr></table></figure>
+
+<p>刷新浏览器我们看到新的修改内容已经输出。</p>
+<h3 id="pack-命令"><a href="#pack-命令" class="headerlink" title="pack 命令"></a><code>pack</code> 命令</h3><p><code>pack</code> 目录用来发布应用的时候打包，会把项目打包成 zip 包，这样我们部署的时候直接把打包之后的项目上传，解压就可以部署了：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs gradle">bee pack<br>app path: <span class="hljs-regexp">/gopath/</span>src/apiproject<br>GOOS darwin GOARCH amd64<br>build apiproject<br>build success<br><span class="hljs-keyword">exclude</span> prefix:<br><span class="hljs-keyword">exclude</span> suffix: .go:.DS_Store:.tmp<br><span class="hljs-keyword">file</span> <span class="hljs-keyword">write</span> to `<span class="hljs-regexp">/gopath/</span>src<span class="hljs-regexp">/apiproject/</span>apiproject.tar.gz`<br></code></pre></td></tr></table></figure>
+
+<p>我们可以看到目录下有如下的压缩文件：</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs tap">rwxr-xr-x <span class="hljs-number"> 1 </span>astaxie  staff <span class="hljs-number"> 8995376 </span>11<span class="hljs-number"> 25 </span>22:46 apiproject<br>-rw-r--r-- <span class="hljs-number"> 1 </span>astaxie  staff <span class="hljs-number"> 2240288 </span>11<span class="hljs-number"> 25 </span>22:58 apiproject.tar.gz<br>drwxr-xr-x <span class="hljs-number"> 3 </span>astaxie  staff     <span class="hljs-number"> 102 </span>11<span class="hljs-number"> 25 </span>22:31 conf<br>drwxr-xr-x <span class="hljs-number"> 3 </span>astaxie  staff     <span class="hljs-number"> 102 </span>11<span class="hljs-number"> 25 </span>22:31 controllers<br>-rw-r--r-- <span class="hljs-number"> 1 </span>astaxie  staff     <span class="hljs-number"> 509 </span>11<span class="hljs-number"> 25 </span>22:31 main.go<br>drwxr-xr-x <span class="hljs-number"> 3 </span>astaxie  staff     <span class="hljs-number"> 102 </span>11<span class="hljs-number"> 25 </span>22:31 models<br>drwxr-xr-x <span class="hljs-number"> 3 </span>astaxie  staff     <span class="hljs-number"> 102 </span>11<span class="hljs-number"> 25 </span>22:31 tests<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="bale-命令"><a href="#bale-命令" class="headerlink" title="bale 命令"></a><code>bale</code> 命令</h3><p>这个命令目前仅限内部使用，具体实现方案未完善，主要用来压缩所有的静态文件变成一个变量申明文件，全部编译到二进制文件里面，用户发布的时候携带静态文件，包括 js、css、img 和 views。最后在启动运行时进行非覆盖式的自解压。</p>
+<h3 id="version-命令"><a href="#version-命令" class="headerlink" title="version 命令"></a><code>version</code> 命令</h3><p>这个命令是动态获取 bee、beego 和 Go 的版本，这样一旦用户出现错误，可以通过该命令来查看当前的版本</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim">$ bee <span class="hljs-keyword">version</span><br>bee   :<span class="hljs-number">1.2</span>.<span class="hljs-number">2</span><br>beego :<span class="hljs-number">1.4</span>.<span class="hljs-number">2</span><br>Go    :<span class="hljs-keyword">go</span> <span class="hljs-keyword">version</span> go1.<span class="hljs-number">3.3</span> darwin/amd64<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="generate-命令"><a href="#generate-命令" class="headerlink" title="generate 命令"></a><code>generate</code> 命令</h3><p>这个命令是用来自动化的生成代码的，包含了从数据库一键生成 model，还包含了 scaffold 的，通过这个命令，让大家开发代码不再慢</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs verilog">bee <span class="hljs-keyword">generate</span> scaffold [scaffoldname] [-fields=<span class="hljs-string">&quot;&quot;</span>] [-driver=mysql] [-conn=<span class="hljs-string">&quot;root:@tcp(127.0.0.1:3306)/test&quot;</span>]<br>    The <span class="hljs-keyword">generate</span> scaffold command will <span class="hljs-keyword">do</span> a number of things <span class="hljs-keyword">for</span> you.<br>    -fields: a list of <span class="hljs-keyword">table</span> fields. Format: field:<span class="hljs-keyword">type</span>, ...<br>    -driver: [mysql | postgres | sqlite], the <span class="hljs-keyword">default</span> is mysql<br>    -conn:   the connection <span class="hljs-keyword">string</span> used by the driver, the <span class="hljs-keyword">default</span> is root:@tcp(<span class="hljs-number">127</span><span class="hljs-variable">.0</span><span class="hljs-variable">.0</span><span class="hljs-variable">.1</span>:<span class="hljs-number">3306</span>)/test<br>    example: bee <span class="hljs-keyword">generate</span> scaffold post -fields=<span class="hljs-string">&quot;title:string,body:text&quot;</span><br><br>bee <span class="hljs-keyword">generate</span> model [modelname] [-fields=<span class="hljs-string">&quot;&quot;</span>]<br>    <span class="hljs-keyword">generate</span> RESTful model based on fields<br>    -fields: a list of <span class="hljs-keyword">table</span> fields. Format: field:<span class="hljs-keyword">type</span>, ...<br><br>bee <span class="hljs-keyword">generate</span> controller [controllerfile]<br>    <span class="hljs-keyword">generate</span> RESTful controllers<br><br>bee <span class="hljs-keyword">generate</span> view [viewpath]<br>    <span class="hljs-keyword">generate</span> CRUD view in viewpath<br><br>bee <span class="hljs-keyword">generate</span> migration [migrationfile] [-fields=<span class="hljs-string">&quot;&quot;</span>]<br>    <span class="hljs-keyword">generate</span> migration file <span class="hljs-keyword">for</span> making database schema update<br>    -fields: a list of <span class="hljs-keyword">table</span> fields. Format: field:<span class="hljs-keyword">type</span>, ...<br><br>bee <span class="hljs-keyword">generate</span> docs<br>    <span class="hljs-keyword">generate</span> swagger doc file<br><br>bee <span class="hljs-keyword">generate</span> test [routerfile]<br>    <span class="hljs-keyword">generate</span> testcase<br><br>bee <span class="hljs-keyword">generate</span> appcode [-tables=<span class="hljs-string">&quot;&quot;</span>] [-driver=mysql] [-conn=<span class="hljs-string">&quot;root:@tcp(127.0.0.1:3306)/test&quot;</span>] [-level=<span class="hljs-number">3</span>]<br>    <span class="hljs-keyword">generate</span> appcode based on an existing database<br>    -tables: a list of <span class="hljs-keyword">table</span> names separated by &#x27;,&#x27;, <span class="hljs-keyword">default</span> is empty, indicating all tables<br>    -driver: [mysql | postgres | sqlite], the <span class="hljs-keyword">default</span> is mysql<br>    -conn:   the connection <span class="hljs-keyword">string</span> used by the driver.<br>             <span class="hljs-keyword">default</span> <span class="hljs-keyword">for</span> mysql:    root:@tcp(<span class="hljs-number">127</span><span class="hljs-variable">.0</span><span class="hljs-variable">.0</span><span class="hljs-variable">.1</span>:<span class="hljs-number">3306</span>)/test<br>             <span class="hljs-keyword">default</span> <span class="hljs-keyword">for</span> postgres: postgres:<span class="hljs-comment">//postgres:postgres@127.0.0.1:5432/postgres</span><br>    -level:  [<span class="hljs-number">1</span> | <span class="hljs-number">2</span> | <span class="hljs-number">3</span>], <span class="hljs-number">1</span> = models; <span class="hljs-number">2</span> = models,controllers; <span class="hljs-number">3</span> = models,controllers,router<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="migrate-命令"><a href="#migrate-命令" class="headerlink" title="migrate 命令"></a><code>migrate</code> 命令</h3><p>这个命令是应用的数据库迁移命令，主要是用来每次应用升级，降级的SQL管理。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">bee migrate [-driver=mysql] [-conn=&quot;root:@tcp(127.0.0.1:3306)/test&quot;]<br>    run <span class="hljs-keyword">all</span> outstanding migrations<br>    -driver: [mysql | postgresql | sqlite], the <span class="hljs-keyword">default</span> <span class="hljs-keyword">is</span> mysql<br>    -conn:   the <span class="hljs-keyword">connection</span> string used <span class="hljs-keyword">by</span> the driver, the <span class="hljs-keyword">default</span> <span class="hljs-keyword">is</span> root:@tcp(<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">3306</span>)/test<br><br>bee migrate <span class="hljs-keyword">rollback</span> [-driver=mysql] [-conn=&quot;root:@tcp(127.0.0.1:3306)/test&quot;]<br>    <span class="hljs-keyword">rollback</span> the last migration operation<br>    -driver: [mysql | postgresql | sqlite], the <span class="hljs-keyword">default</span> <span class="hljs-keyword">is</span> mysql<br>    -conn:   the <span class="hljs-keyword">connection</span> string used <span class="hljs-keyword">by</span> the driver, the <span class="hljs-keyword">default</span> <span class="hljs-keyword">is</span> root:@tcp(<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">3306</span>)/test<br><br>bee migrate <span class="hljs-keyword">reset</span> [-driver=mysql] [-conn=&quot;root:@tcp(127.0.0.1:3306)/test&quot;]<br>    <span class="hljs-keyword">rollback</span> <span class="hljs-keyword">all</span> migrations<br>    -driver: [mysql | postgresql | sqlite], the <span class="hljs-keyword">default</span> <span class="hljs-keyword">is</span> mysql<br>    -conn:   the <span class="hljs-keyword">connection</span> string used <span class="hljs-keyword">by</span> the driver, the <span class="hljs-keyword">default</span> <span class="hljs-keyword">is</span> root:@tcp(<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">3306</span>)/test<br><br>bee migrate <span class="hljs-keyword">refresh</span> [-driver=mysql] [-conn=&quot;root:@tcp(127.0.0.1:3306)/test&quot;]<br>    <span class="hljs-keyword">rollback</span> <span class="hljs-keyword">all</span> migrations <span class="hljs-keyword">and</span> run them <span class="hljs-keyword">all</span> again<br>    -driver: [mysql | postgresql | sqlite], the <span class="hljs-keyword">default</span> <span class="hljs-keyword">is</span> mysql<br>    -conn:   the <span class="hljs-keyword">connection</span> string used <span class="hljs-keyword">by</span> the driver, the <span class="hljs-keyword">default</span> <span class="hljs-keyword">is</span> root:@tcp(<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">3306</span>)/test<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="dockerize-命令"><a href="#dockerize-命令" class="headerlink" title="dockerize 命令"></a><code>dockerize</code> 命令</h3><p>这个命令可以通过生成Dockerfile文件来实现docker化你的应用。</p>
+<p>例子:<br>生成一个以1.6.4版本Go环境为基础镜像的Dockerfile,并暴露9000端口:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk">$ bee dockerize -image=<span class="hljs-string">&quot;library/golang:1.6.4&quot;</span> -expose=<span class="hljs-number">9000</span><br>______<br>| ___ \<br>| |_<span class="hljs-regexp">/ /</span>  ___   ___<br>| ___ \ <span class="hljs-regexp">/ _ \ /</span> _ \<br>| |_<span class="hljs-regexp">/ /</span>|  __<span class="hljs-regexp">/|  __/</span><br>\____/  \___| \___| v1.<span class="hljs-number">6.2</span><br><span class="hljs-number">2016</span><span class="hljs-regexp">/12/</span><span class="hljs-number">26</span> <span class="hljs-number">22</span>:<span class="hljs-number">34</span>:<span class="hljs-number">54</span> INFO     ▶ <span class="hljs-number">0001</span> Generating Dockerfile...<br><span class="hljs-number">2016</span><span class="hljs-regexp">/12/</span><span class="hljs-number">26</span> <span class="hljs-number">22</span>:<span class="hljs-number">34</span>:<span class="hljs-number">54</span> SUCCESS  ▶ <span class="hljs-number">0002</span> Dockerfile generated.<br></code></pre></td></tr></table></figure>
+
+<p>更多帮助信息可执行<code>bee help dockerize</code>.</p>
+<h2 id="bee-工具配置文件"><a href="#bee-工具配置文件" class="headerlink" title="bee 工具配置文件"></a>bee 工具配置文件</h2><p>您可能已经注意到，在 bee 工具的源码目录下有一个 <code>bee.json</code> 文件，这个文件是针对 bee 工具的一些行为进行配置。该功能还未完全开发完成，不过其中的一些选项已经可以使用：</p>
+<ul>
+<li><code>&quot;version&quot;: 0</code>：配置文件版本，用于对比是否发生不兼容的配置格式版本。</li>
+<li><code>&quot;go_install&quot;: false</code>：如果您的包均使用完整的导入路径（例如：<code>github.com/user/repo/subpkg</code>）,则可以启用该选项来进行 <code>go install</code> 操作，加快构建操作。</li>
+<li><code>&quot;watch_ext&quot;: []</code>：用于监控其它类型的文件（默认只监控后缀为 <code>.go</code> 的文件）。</li>
+<li><code>&quot;dir_structure&quot;:&#123;&#125;</code>：如果您的目录名与默认的 MVC 架构的不同，则可以使用该选项进行修改。</li>
+<li><code>&quot;cmd_args&quot;: []</code>：如果您需要在每次启动时加入启动参数，则可以使用该选项。</li>
+<li><code>&quot;envs&quot;: []</code>：如果您需要在每次启动时设置临时环境变量参数，则可以使用该选项。</li>
+</ul>
+<h1 id="路由设置"><a href="#路由设置" class="headerlink" title="路由设置"></a>路由设置</h1><p>什么是路由设置呢？前面介绍的 MVC 结构执行时，介绍过 beego 存在三种方式的路由:固定路由、正则路由、自动路由，接下来详细的讲解如何使用这三种路由。</p>
+<h2 id="基础路由"><a href="#基础路由" class="headerlink" title="基础路由"></a>基础路由</h2><p>从 beego 1.2 版本开始支持了基本的 RESTful 函数式路由,应用中的大多数路由都会定义在 <code>routers/router.go</code> 文件中。最简单的 beego 路由由 URI 和闭包函数组成。</p>
+<h3 id="基本-GET-路由"><a href="#基本-GET-路由" class="headerlink" title="基本 GET 路由"></a>基本 GET 路由</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">beego.<span class="hljs-constructor">Get(<span class="hljs-string">&quot;/&quot;</span>,<span class="hljs-params">func</span>(<span class="hljs-params">ctx</span> <span class="hljs-operator">*</span><span class="hljs-params">context</span>.Context)</span>&#123;<br>     ctx.Output.<span class="hljs-constructor">Body([]<span class="hljs-params">byte</span>(<span class="hljs-string">&quot;hello world&quot;</span>)</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="基本-POST-路由"><a href="#基本-POST-路由" class="headerlink" title="基本 POST 路由"></a>基本 POST 路由</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">beego.<span class="hljs-constructor">Post(<span class="hljs-string">&quot;/alice&quot;</span>,<span class="hljs-params">func</span>(<span class="hljs-params">ctx</span> <span class="hljs-operator">*</span><span class="hljs-params">context</span>.Context)</span>&#123;<br>     ctx.Output.<span class="hljs-constructor">Body([]<span class="hljs-params">byte</span>(<span class="hljs-string">&quot;bob&quot;</span>)</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="注册一个可以响应任何-HTTP-的路由"><a href="#注册一个可以响应任何-HTTP-的路由" class="headerlink" title="注册一个可以响应任何 HTTP 的路由"></a>注册一个可以响应任何 HTTP 的路由</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">beego.<span class="hljs-constructor">Any(<span class="hljs-string">&quot;/foo&quot;</span>,<span class="hljs-params">func</span>(<span class="hljs-params">ctx</span> <span class="hljs-operator">*</span><span class="hljs-params">context</span>.Context)</span>&#123;<br>     ctx.Output.<span class="hljs-constructor">Body([]<span class="hljs-params">byte</span>(<span class="hljs-string">&quot;bar&quot;</span>)</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="所有的支持的基础函数如下所示"><a href="#所有的支持的基础函数如下所示" class="headerlink" title="所有的支持的基础函数如下所示"></a>所有的支持的基础函数如下所示</h3><ul>
+<li>beego.Get(router, beego.FilterFunc)</li>
+<li>beego.Post(router, beego.FilterFunc)</li>
+<li>beego.Put(router, beego.FilterFunc)</li>
+<li>beego.Patch(router, beego.FilterFunc)</li>
+<li>beego.Head(router, beego.FilterFunc)</li>
+<li>beego.Options(router, beego.FilterFunc)</li>
+<li>beego.Delete(router, beego.FilterFunc)</li>
+<li>beego.Any(router, beego.FilterFunc)</li>
+</ul>
+<h3 id="支持自定义的-handler-实现"><a href="#支持自定义的-handler-实现" class="headerlink" title="支持自定义的 handler 实现"></a>支持自定义的 handler 实现</h3><p>有些时候我们已经实现了一些 rpc 的应用,但是想要集成到 beego 中,或者其他的 httpserver 应用,集成到 beego 中来.现在可以很方便的集成:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css">s := rpc.<span class="hljs-built_in">NewServer</span>()<br>s.<span class="hljs-built_in">RegisterCodec</span>(json.<span class="hljs-built_in">NewCodec</span>(), <span class="hljs-string">&quot;application/json&quot;</span>)<br>s.<span class="hljs-built_in">RegisterService</span>(<span class="hljs-built_in">new</span>(HelloService), <span class="hljs-string">&quot;&quot;</span>)<br>beego.<span class="hljs-built_in">Handler</span>(<span class="hljs-string">&quot;/rpc&quot;</span>, s)<br></code></pre></td></tr></table></figure>
+
+<p><code>beego.Handler(router, http.Handler)</code> 这个函数是关键,第一个参数表示路由 URI, 第二个就是你自己实现的 <code>http.Handler</code>, 注册之后就会把所有 rpc 作为前缀的请求分发到 <code>http.Handler</code> 中进行处理.</p>
+<p>这个函数其实还有第三个参数就是是否是前缀匹配,默认是 false, 如果设置了 true, 那么就会在路由匹配的时候前缀匹配,即 <code>/rpc/user</code> 这样的也会匹配去运行</p>
+<h3 id="路由参数"><a href="#路由参数" class="headerlink" title="路由参数"></a>路由参数</h3><p>后面会讲到固定路由,正则路由,这些参数一样适用于上面的这些函数</p>
+<h2 id="RESTful-Controller-路由"><a href="#RESTful-Controller-路由" class="headerlink" title="RESTful Controller 路由"></a>RESTful Controller 路由</h2><p>在介绍这三种 beego 的路由实现之前先介绍 RESTful，我们知道 RESTful 是一种目前 API 开发中广泛采用的形式，beego 默认就是支持这样的请求方法，也就是用户 Get 请求就执行 Get 方法，Post 请求就执行 Post 方法。因此默认的路由是这样 RESTful 的请求方式。</p>
+<h2 id="固定路由"><a href="#固定路由" class="headerlink" title="固定路由"></a>固定路由</h2><p>固定路由也就是全匹配的路由，如下所示：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">beego.<span class="hljs-constructor">Router(<span class="hljs-string">&quot;/&quot;</span>, &amp;<span class="hljs-params">controllers</span>.MainController&#123;&#125;)</span><br>beego.<span class="hljs-constructor">Router(<span class="hljs-string">&quot;/admin&quot;</span>, &amp;<span class="hljs-params">admin</span>.UserController&#123;&#125;)</span><br>beego.<span class="hljs-constructor">Router(<span class="hljs-string">&quot;/admin/index&quot;</span>, &amp;<span class="hljs-params">admin</span>.ArticleController&#123;&#125;)</span><br>beego.<span class="hljs-constructor">Router(<span class="hljs-string">&quot;/admin/addpkg&quot;</span>, &amp;<span class="hljs-params">admin</span>.AddController&#123;&#125;)</span><br></code></pre></td></tr></table></figure>
+
+<p>如上所示的路由就是我们最常用的路由方式，一个固定的路由，一个控制器，然后根据用户请求方法不同请求控制器中对应的方法，典型的 RESTful 方式。</p>
+<h2 id="正则路由"><a href="#正则路由" class="headerlink" title="正则路由"></a>正则路由</h2><p>为了用户更加方便的路由设置，beego 参考了 sinatra 的路由实现，支持多种方式的路由：</p>
+<ul>
+<li> beego.Router(“/api/?:id”, &amp;controllers.RController{})<br>默认匹配   //例如对于URL”/api/123”可以匹配成功，此时变量”:id”值为”123” </li>
+<li> beego.Router(“/api/:id”, &amp;controllers.RController{})<br>默认匹配   //例如对于URL”/api/123”可以匹配成功，此时变量”:id”值为”123”，但URL”/api/“匹配失败 </li>
+<li> beego.Router(“/api/:id([0-9]+)”, &amp;controllers.RController{})<br>自定义正则匹配 //例如对于URL”/api/123”可以匹配成功，此时变量”:id”值为”123” </li>
+<li> beego.Router(“/user/:username([\w]+)”, &amp;controllers.RController{})<br>正则字符串匹配 //例如对于URL”/user/astaxie”可以匹配成功，此时变量”:username”值为”astaxie” </li>
+<li> beego.Router(“/download/<em>.</em>“, &amp;controllers.RController{})</li>
+</ul>
+<p>*匹配方式 //例如对于URL”/download/file/api.xml”可以匹配成功，此时变量”:path”值为”file/api”， “:ext”值为”xml” </p>
+<ul>
+<li> beego.Router(“/download/ceshi/*”, &amp;controllers.RController{})</li>
+</ul>
+<p>*全匹配方式 //例如对于URL”/download/ceshi/file/api.json”可以匹配成功，此时变量”:splat”值为”file/api.json” </p>
+<ul>
+<li> beego.Router(“/<img src="https://gw.alipayobjects.com/os/lib/twemoji/11.2.0/2/svg/1f194.svg#height=18&id=KX7GC&originHeight=150&originWidth=150&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=&width=18" srcset="/img/loading.gif" lazyload>int”, &amp;controllers.RController{})<br>int 类型设置方式，匹配 :id为int 类型，框架帮你实现了正则 ([0-9]+) </li>
+<li> beego.Router(“/:hi:string”, &amp;controllers.RController{})<br>string 类型设置方式，匹配 :hi 为 string 类型。框架帮你实现了正则 ([\w]+) </li>
+<li> beego.Router(“/cms_:id([0-9]+).html”, &amp;controllers.CmsController{})<br>带有前缀的自定义正则 //匹配 :id 为正则类型。匹配 cms_123.html 这样的 url :id = 123 </li>
+</ul>
+<p>可以在 Controller 中通过如下方式获取上面的变量：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">this<span class="hljs-selector-class">.Ctx</span><span class="hljs-selector-class">.Input</span><span class="hljs-selector-class">.Param</span>(<span class="hljs-string">&quot;:id&quot;</span>)<br>this<span class="hljs-selector-class">.Ctx</span><span class="hljs-selector-class">.Input</span><span class="hljs-selector-class">.Param</span>(<span class="hljs-string">&quot;:username&quot;</span>)<br>this<span class="hljs-selector-class">.Ctx</span><span class="hljs-selector-class">.Input</span><span class="hljs-selector-class">.Param</span>(<span class="hljs-string">&quot;:splat&quot;</span>)<br>this<span class="hljs-selector-class">.Ctx</span><span class="hljs-selector-class">.Input</span><span class="hljs-selector-class">.Param</span>(<span class="hljs-string">&quot;:path&quot;</span>)<br>this<span class="hljs-selector-class">.Ctx</span><span class="hljs-selector-class">.Input</span><span class="hljs-selector-class">.Param</span>(<span class="hljs-string">&quot;:ext&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="自定义方法及-RESTful-规则"><a href="#自定义方法及-RESTful-规则" class="headerlink" title="自定义方法及 RESTful 规则"></a>自定义方法及 RESTful 规则</h2><p>上面列举的是默认的请求方法名（请求的 method 和函数名一致，例如 <code>GET</code> 请求执行 <code>Get</code> 函数，<code>POST</code> 请求执行 <code>Post</code> 函数），如果用户期望自定义函数名，那么可以使用如下方式：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts">beego.Router(<span class="hljs-string">&quot;/&quot;</span>,<span class="hljs-variable">&amp;</span>IndexController<span class="hljs-punctuation">&#123;</span><span class="hljs-punctuation">&#125;</span>,<span class="hljs-string">&quot;*:Index&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>使用第三个参数，第三个参数就是用来设置对应 method 到函数名，定义如下</p>
+<ul>
+<li><code>*</code>表示任意的 method 都执行该函数</li>
+<li>使用 httpmethod:funcname 格式来展示</li>
+<li>多个不同的格式使用 <code>;</code> 分割</li>
+<li>多个 method 对应同一个 funcname，method 之间通过 <code>,</code> 来分割</li>
+</ul>
+<p>以下是一个 RESTful 的设计示例：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts">beego.Router(<span class="hljs-string">&quot;/api/list&quot;</span>,<span class="hljs-variable">&amp;</span>RestController<span class="hljs-punctuation">&#123;</span><span class="hljs-punctuation">&#125;</span>,<span class="hljs-string">&quot;*:ListFood&quot;</span>)<br>beego.Router(<span class="hljs-string">&quot;/api/create&quot;</span>,<span class="hljs-variable">&amp;</span>RestController<span class="hljs-punctuation">&#123;</span><span class="hljs-punctuation">&#125;</span>,<span class="hljs-string">&quot;post:CreateFood&quot;</span>)<br>beego.Router(<span class="hljs-string">&quot;/api/update&quot;</span>,<span class="hljs-variable">&amp;</span>RestController<span class="hljs-punctuation">&#123;</span><span class="hljs-punctuation">&#125;</span>,<span class="hljs-string">&quot;put:UpdateFood&quot;</span>)<br>beego.Router(<span class="hljs-string">&quot;/api/delete&quot;</span>,<span class="hljs-variable">&amp;</span>RestController<span class="hljs-punctuation">&#123;</span><span class="hljs-punctuation">&#125;</span>,<span class="hljs-string">&quot;delete:DeleteFood&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>以下是多个 HTTP Method 指向同一个函数的示例：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts">beego.Router(<span class="hljs-string">&quot;/api&quot;</span>,<span class="hljs-variable">&amp;</span>RestController<span class="hljs-punctuation">&#123;</span><span class="hljs-punctuation">&#125;</span>,<span class="hljs-string">&quot;get,post:ApiFunc&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>以下是不同的 method 对应不同的函数，通过 ; 进行分割的示例：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts">beego.Router(<span class="hljs-string">&quot;/simple&quot;</span>,<span class="hljs-variable">&amp;</span>SimpleController<span class="hljs-punctuation">&#123;</span><span class="hljs-punctuation">&#125;</span>,<span class="hljs-string">&quot;get:GetFunc;post:PostFunc&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>可用的 HTTP Method：</p>
+<ul>
+<li>*: 包含以下所有的函数</li>
+<li>get: GET 请求</li>
+<li>post: POST 请求</li>
+<li>put: PUT 请求</li>
+<li>delete: DELETE 请求</li>
+<li>patch: PATCH 请求</li>
+<li>options: OPTIONS 请求</li>
+<li>head: HEAD 请求</li>
+</ul>
+<p>如果同时存在 * 和对应的 HTTP Method，那么优先执行 HTTP Method 的方法，例如同时注册了如下所示的路由：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts">beego.Router(<span class="hljs-string">&quot;/simple&quot;</span>,<span class="hljs-variable">&amp;</span>SimpleController<span class="hljs-punctuation">&#123;</span><span class="hljs-punctuation">&#125;</span>,<span class="hljs-string">&quot;*:AllFunc;post:PostFunc&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>那么执行 <code>POST</code> 请求的时候，执行 <code>PostFunc</code> 而不执行 <code>AllFunc</code>。</p>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>自定义函数的路由默认不支持 RESTful 的方法，也就是如果你设置了 <code>beego.Router(&quot;/api&quot;,&amp;RestController&#123;&#125;,&quot;post:ApiFunc&quot;)</code> 这样的路由，如果请求的方法是 <code>POST</code>，那么不会默认去执行 <code>Post</code> 函数。</p>
+</blockquote>
+<h2 id="自动匹配"><a href="#自动匹配" class="headerlink" title="自动匹配"></a>自动匹配</h2><p>用户首先需要把需要路由的控制器注册到自动路由中：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">beego.<span class="hljs-constructor">AutoRouter(&amp;<span class="hljs-params">controllers</span>.ObjectController&#123;&#125;)</span><br></code></pre></td></tr></table></figure>
+
+<p>那么 beego 就会通过反射获取该结构体中所有的实现方法，你就可以通过如下的方式访问到对应的方法中：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/object/</span>login   调用 ObjectController 中的 Login 方法<br><span class="hljs-regexp">/object/</span>logout  调用 ObjectController 中的 Logout 方法<br></code></pre></td></tr></table></figure>
+
+<p>除了前缀两个 <code>/:controller/:method</code> 的匹配之外，剩下的 url beego 会帮你自动化解析为参数，保存在 <code>this.Ctx.Input.Params</code> 当中：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/object/</span>blog<span class="hljs-regexp">/2013/</span><span class="hljs-number">09</span>/<span class="hljs-number">12</span>  调用 ObjectController 中的 Blog 方法，参数如下：map[<span class="hljs-number">0</span>:<span class="hljs-number">2013</span> <span class="hljs-number">1</span>:<span class="hljs-number">09</span> <span class="hljs-number">2</span>:<span class="hljs-number">12</span>]<br></code></pre></td></tr></table></figure>
+
+<p>方法名在内部是保存了用户设置的，例如 Login，url 匹配的时候都会转化为小写，所以，<code>/object/LOGIN</code> 这样的 <code>url</code> 也一样可以路由到用户定义的 <code>Login</code> 方法中。</p>
+<p>现在已经可以通过自动识别出来下面类似的所有 url，都会把请求分发到 <code>controller</code> 的 <code>simple</code> 方法：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/controller/</span>simple<br><span class="hljs-regexp">/controller/</span>simple.html<br><span class="hljs-regexp">/controller/</span>simple.json<br><span class="hljs-regexp">/controller/</span>simple.xml<br></code></pre></td></tr></table></figure>
+
+<p>可以通过 <code>this.Ctx.Input.Param(&quot;:ext&quot;)</code> 获取后缀名。</p>
+<h2 id="注解路由"><a href="#注解路由" class="headerlink" title="注解路由"></a>注解路由</h2><p>从 beego 1.3 版本开始支持了注解路由，用户无需在 router 中注册路由，只需要 Include 相应地 controller，然后在 controller 的 method 方法上面写上 router 注释（// @router）就可以了，详细的使用请看下面的例子：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> CMS API<br>type CMSController struct &#123;<br>	beego.Controller<br>&#125;<br><br><span class="hljs-keyword">func</span> (c *CMSController) URLMapping() &#123;<br>	c.Mapping(<span class="hljs-string">&quot;StaticBlock&quot;</span>, c.StaticBlock)<br>	c.Mapping(<span class="hljs-string">&quot;AllBlock&quot;</span>, c.AllBlock)<br>&#125;<br><br><br><span class="hljs-regexp">//</span> @router <span class="hljs-regexp">/staticblock/</span>:key [get]<br><span class="hljs-keyword">func</span> (this *CMSController) StaticBlock() &#123;<br><br>&#125;<br><br><span class="hljs-regexp">//</span> @router <span class="hljs-regexp">/all/</span>:key [get]<br><span class="hljs-keyword">func</span> (this *CMSController) AllBlock() &#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以在 <code>router.go</code> 中通过如下方式注册路由：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">beego.<span class="hljs-keyword">Include</span>(&amp;CMSController&#123;&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>beego 自动会进行源码分析，注意只会在 dev 模式下进行生成，生成的路由放在 “/routers/commentsRouter.go” 文件中。</p>
+<p>这样上面的路由就支持了如下的路由：</p>
+<ul>
+<li>GET /staticblock/:key</li>
+<li>GET /all/:key</li>
+</ul>
+<p>其实效果和自己通过 Router 函数注册是一样的：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dts">beego.Router(<span class="hljs-string">&quot;/staticblock/:key&quot;</span>, <span class="hljs-variable">&amp;</span>CMSController<span class="hljs-punctuation">&#123;</span><span class="hljs-punctuation">&#125;</span>, <span class="hljs-string">&quot;get:StaticBlock&quot;</span>)<br>beego.Router(<span class="hljs-string">&quot;/all/:key&quot;</span>, <span class="hljs-variable">&amp;</span>CMSController<span class="hljs-punctuation">&#123;</span><span class="hljs-punctuation">&#125;</span>, <span class="hljs-string">&quot;get:AllBlock&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>同时大家注意到新版本里面增加了 URLMapping 这个函数，这是新增加的函数，用户如果没有进行注册，那么就会通过反射来执行对应的函数，如果注册了就会通过 interface 来进行执行函数，性能上面会提升很多。</p>
+<h2 id="namespace"><a href="#namespace" class="headerlink" title="namespace"></a>namespace</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-comment">//初始化 namespace</span><br>ns :=<br>beego<span class="hljs-selector-class">.NewNamespace</span>(<span class="hljs-string">&quot;/v1&quot;</span>,<br>	beego<span class="hljs-selector-class">.NSCond</span>(<span class="hljs-built_in">func</span>(ctx *context.Context) bool &#123;<br>		<span class="hljs-keyword">if</span> ctx<span class="hljs-selector-class">.Input</span><span class="hljs-selector-class">.Domain</span>() == <span class="hljs-string">&quot;api.beego.me&quot;</span> &#123;<br>			return true<br>		&#125;<br>		return false<br>	&#125;),<br>	beego<span class="hljs-selector-class">.NSBefore</span>(auth),<br>	beego<span class="hljs-selector-class">.NSGet</span>(<span class="hljs-string">&quot;/notallowed&quot;</span>, <span class="hljs-built_in">func</span>(ctx *context.Context) &#123;<br>		ctx<span class="hljs-selector-class">.Output</span><span class="hljs-selector-class">.Body</span>(<span class="hljs-selector-attr">[]</span><span class="hljs-built_in">byte</span>(<span class="hljs-string">&quot;notAllowed&quot;</span>))<br>	&#125;),<br>	beego<span class="hljs-selector-class">.NSRouter</span>(<span class="hljs-string">&quot;/version&quot;</span>, &amp;AdminController&#123;&#125;, <span class="hljs-string">&quot;get:ShowAPIVersion&quot;</span>),<br>	beego<span class="hljs-selector-class">.NSRouter</span>(<span class="hljs-string">&quot;/changepassword&quot;</span>, &amp;UserController&#123;&#125;),<br>	beego<span class="hljs-selector-class">.NSNamespace</span>(<span class="hljs-string">&quot;/shop&quot;</span>,<br>		beego<span class="hljs-selector-class">.NSBefore</span>(sentry),<br>		beego<span class="hljs-selector-class">.NSGet</span>(<span class="hljs-string">&quot;/:id&quot;</span>, <span class="hljs-built_in">func</span>(ctx *context.Context) &#123;<br>			ctx<span class="hljs-selector-class">.Output</span><span class="hljs-selector-class">.Body</span>(<span class="hljs-selector-attr">[]</span><span class="hljs-built_in">byte</span>(<span class="hljs-string">&quot;notAllowed&quot;</span>))<br>		&#125;),<br>	),<br>	beego<span class="hljs-selector-class">.NSNamespace</span>(<span class="hljs-string">&quot;/cms&quot;</span>,<br>		beego<span class="hljs-selector-class">.NSInclude</span>(<br>			&amp;controllers.MainController&#123;&#125;,<br>			&amp;controllers.CMSController&#123;&#125;,<br>			&amp;controllers.BlockController&#123;&#125;,<br>		),<br>	),<br>)<br><span class="hljs-comment">//注册 namespace</span><br>beego<span class="hljs-selector-class">.AddNamespace</span>(ns)<br></code></pre></td></tr></table></figure>
+
+<p>上面这个代码支持了如下这样的请求 URL</p>
+<ul>
+<li>GET /v1/notallowed</li>
+<li>GET /v1/version</li>
+<li>GET /v1/changepassword</li>
+<li>POST /v1/changepassword</li>
+<li>GET /v1/shop/123</li>
+<li>GET /v1/cms/ 对应 MainController、CMSController、BlockController 中得注解路由</li>
+</ul>
+<p>而且还支持前置过滤,条件判断,无限嵌套 namespace</p>
+<p>namespace 的接口如下:</p>
+<ul>
+<li> NewNamespace(prefix string, funcs …interface{})<br>初始化 namespace 对象,下面这些函数都是 namespace 对象的方法,但是强烈推荐使用 NS 开头的相应函数注册，因为这样更容易通过 gofmt 工具看的更清楚路由的级别关系 </li>
+<li> NSCond(cond namespaceCond)<br>支持满足条件的就执行该 namespace, 不满足就不执行 </li>
+<li> NSBefore(filiterList …FilterFunc) </li>
+<li> NSAfter(filiterList …FilterFunc)<br>上面分别对应 beforeRouter 和 FinishRouter 两个过滤器，可以同时注册多个过滤器 </li>
+<li> NSInclude(cList …ControllerInterface) </li>
+<li> NSRouter(rootpath string, c ControllerInterface, mappingMethods …string) </li>
+<li> NSGet(rootpath string, f FilterFunc) </li>
+<li> NSPost(rootpath string, f FilterFunc) </li>
+<li> NSDelete(rootpath string, f FilterFunc) </li>
+<li> NSPut(rootpath string, f FilterFunc) </li>
+<li> NSHead(rootpath string, f FilterFunc) </li>
+<li> NSOptions(rootpath string, f FilterFunc) </li>
+<li> NSPatch(rootpath string, f FilterFunc) </li>
+<li> NSAny(rootpath string, f FilterFunc) </li>
+<li> NSHandler(rootpath string, h http.Handler) </li>
+<li> NSAutoRouter(c ControllerInterface) </li>
+<li> NSAutoPrefix(prefix string, c ControllerInterface)<br>上面这些都是设置路由的函数,详细的使用和上面 beego 的对应函数是一样的 </li>
+<li>NSNamespace(prefix string, params …innnerNamespace)<br>嵌套其他 namespace <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs stylus">ns :=<br>beego<span class="hljs-selector-class">.NewNamespace</span>(<span class="hljs-string">&quot;/v1&quot;</span>,<br>	beego<span class="hljs-selector-class">.NSNamespace</span>(<span class="hljs-string">&quot;/shop&quot;</span>,<br>		beego<span class="hljs-selector-class">.NSGet</span>(<span class="hljs-string">&quot;/:id&quot;</span>, <span class="hljs-built_in">func</span>(ctx *context.Context) &#123;<br>			ctx<span class="hljs-selector-class">.Output</span><span class="hljs-selector-class">.Body</span>(<span class="hljs-selector-attr">[]</span><span class="hljs-built_in">byte</span>(<span class="hljs-string">&quot;shopinfo&quot;</span>))<br>		&#125;),<br>	),<br>	beego<span class="hljs-selector-class">.NSNamespace</span>(<span class="hljs-string">&quot;/order&quot;</span>,<br>		beego<span class="hljs-selector-class">.NSGet</span>(<span class="hljs-string">&quot;/:id&quot;</span>, <span class="hljs-built_in">func</span>(ctx *context.Context) &#123;<br>			ctx<span class="hljs-selector-class">.Output</span><span class="hljs-selector-class">.Body</span>(<span class="hljs-selector-attr">[]</span><span class="hljs-built_in">byte</span>(<span class="hljs-string">&quot;orderinfo&quot;</span>))<br>		&#125;),<br>	),<br>	beego<span class="hljs-selector-class">.NSNamespace</span>(<span class="hljs-string">&quot;/crm&quot;</span>,<br>		beego<span class="hljs-selector-class">.NSGet</span>(<span class="hljs-string">&quot;/:id&quot;</span>, <span class="hljs-built_in">func</span>(ctx *context.Context) &#123;<br>			ctx<span class="hljs-selector-class">.Output</span><span class="hljs-selector-class">.Body</span>(<span class="hljs-selector-attr">[]</span><span class="hljs-built_in">byte</span>(<span class="hljs-string">&quot;crminfo&quot;</span>))<br>		&#125;),<br>	),<br>)<br></code></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<p>下面这些函数都是属于 *Namespace 对象的方法：不建议直接使用，当然效果和上面的 NS 开头的函数是一样的，只是上面的方式更优雅，写出来的代码更容易看得懂</p>
+<ul>
+<li> Cond(cond namespaceCond)<br>支持满足条件的就执行该 namespace, 不满足就不执行,例如你可以根据域名来控制 namespace </li>
+<li> Filter(action string, filter FilterFunc)<br>action 表示你需要执行的位置, before 和 after 分别表示执行逻辑之前和执行逻辑之后的 filter </li>
+<li> Router(rootpath string, c ControllerInterface, mappingMethods …string) </li>
+<li> AutoRouter(c ControllerInterface) </li>
+<li> AutoPrefix(prefix string, c ControllerInterface) </li>
+<li> Get(rootpath string, f FilterFunc) </li>
+<li> Post(rootpath string, f FilterFunc) </li>
+<li> Delete(rootpath string, f FilterFunc) </li>
+<li> Put(rootpath string, f FilterFunc) </li>
+<li> Head(rootpath string, f FilterFunc) </li>
+<li> Options(rootpath string, f FilterFunc) </li>
+<li> Patch(rootpath string, f FilterFunc) </li>
+<li> Any(rootpath string, f FilterFunc) </li>
+<li> Handler(rootpath string, h http.Handler)<br>上面这些都是设置路由的函数,详细的使用和上面 beego 的对应函数是一样的 </li>
+<li> Namespace(ns …*Namespace) </li>
+</ul>
+<p>更多的例子代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-comment">//APIS</span><br>ns :<span class="hljs-operator">=</span><br>	beego.<span class="hljs-type">NewNamespace</span>(<span class="hljs-string">&quot;/api&quot;</span>,<br>		<span class="hljs-comment">//此处正式版时改为验证加密请求</span><br>		beego.<span class="hljs-type">NSCond</span>(<span class="hljs-keyword">func</span>(ctx <span class="hljs-operator">*</span>context.<span class="hljs-type">Context</span>) bool &#123;<br>			<span class="hljs-keyword">if</span> ua :<span class="hljs-operator">=</span> ctx.<span class="hljs-type">Input</span>.<span class="hljs-type">Request</span>.<span class="hljs-type">UserAgent</span>(); ua <span class="hljs-operator">!=</span> <span class="hljs-string">&quot;&quot;</span> &#123;<br>				<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>			&#125;<br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>		&#125;),<br>		beego.<span class="hljs-type">NSNamespace</span>(<span class="hljs-string">&quot;/ios&quot;</span>,<br>			<span class="hljs-comment">//CRUD Create(创建)、Read(读取)、Update(更新)和Delete(删除)</span><br>			beego.<span class="hljs-type">NSNamespace</span>(<span class="hljs-string">&quot;/create&quot;</span>,<br>				<span class="hljs-comment">// /api/ios/create/node/</span><br>				beego.<span class="hljs-type">NSRouter</span>(<span class="hljs-string">&quot;/node&quot;</span>, <span class="hljs-operator">&amp;</span>apis.<span class="hljs-type">CreateNodeHandler</span>&#123;&#125;),<br>				<span class="hljs-comment">// /api/ios/create/topic/</span><br>				beego.<span class="hljs-type">NSRouter</span>(<span class="hljs-string">&quot;/topic&quot;</span>, <span class="hljs-operator">&amp;</span>apis.<span class="hljs-type">CreateTopicHandler</span>&#123;&#125;),<br>			),<br>			beego.<span class="hljs-type">NSNamespace</span>(<span class="hljs-string">&quot;/read&quot;</span>,<br>				beego.<span class="hljs-type">NSRouter</span>(<span class="hljs-string">&quot;/node&quot;</span>, <span class="hljs-operator">&amp;</span>apis.<span class="hljs-type">ReadNodeHandler</span>&#123;&#125;),<br>				beego.<span class="hljs-type">NSRouter</span>(<span class="hljs-string">&quot;/topic&quot;</span>, <span class="hljs-operator">&amp;</span>apis.<span class="hljs-type">ReadTopicHandler</span>&#123;&#125;),<br>			),<br>			beego.<span class="hljs-type">NSNamespace</span>(<span class="hljs-string">&quot;/update&quot;</span>,<br>				beego.<span class="hljs-type">NSRouter</span>(<span class="hljs-string">&quot;/node&quot;</span>, <span class="hljs-operator">&amp;</span>apis.<span class="hljs-type">UpdateNodeHandler</span>&#123;&#125;),<br>				beego.<span class="hljs-type">NSRouter</span>(<span class="hljs-string">&quot;/topic&quot;</span>, <span class="hljs-operator">&amp;</span>apis.<span class="hljs-type">UpdateTopicHandler</span>&#123;&#125;),<br>			),<br>			beego.<span class="hljs-type">NSNamespace</span>(<span class="hljs-string">&quot;/delete&quot;</span>,<br>				beego.<span class="hljs-type">NSRouter</span>(<span class="hljs-string">&quot;/node&quot;</span>, <span class="hljs-operator">&amp;</span>apis.<span class="hljs-type">DeleteNodeHandler</span>&#123;&#125;),<br>				beego.<span class="hljs-type">NSRouter</span>(<span class="hljs-string">&quot;/topic&quot;</span>, <span class="hljs-operator">&amp;</span>apis.<span class="hljs-type">DeleteTopicHandler</span>&#123;&#125;),<br>			)<br>		),<br>	)<br><br>beego.<span class="hljs-type">AddNamespace</span>(ns)<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p><a target="_blank" rel="noopener" href="https://beego.me/">Beego官网</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Golang/" class="category-chain-item">Golang</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Beego/">#Beego</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Golang篇-Beego学习笔记</div>
+      <div>https://mikeygithub.github.io/2019/05/21/yuque/dbdnm0/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2019年5月21日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

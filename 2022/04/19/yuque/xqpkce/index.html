@@ -1,0 +1,974 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简介 线段树（Segment Tree）主要用于维护区间信息（要求满足结合律）。与树状数组相比，它可以实现 O(logn)的区间修改，还可以同时支持多种操作（加、乘），更具通用性。   应用线段树 segmentTree 是一个二叉树，每个结点保存数组 nums 在区间 [s,e] 的最小值、最大值或者总和等信息。线段树可以用树也可以用数组（堆式存储）来实现。对于数组实现，假设根结点的下标为 0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-Segment Tree 线段树">
+<meta property="og:url" content="https://mikeygithub.github.io/2022/04/19/yuque/xqpkce/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="简介 线段树（Segment Tree）主要用于维护区间信息（要求满足结合律）。与树状数组相比，它可以实现 O(logn)的区间修改，还可以同时支持多种操作（加、乘），更具通用性。   应用线段树 segmentTree 是一个二叉树，每个结点保存数组 nums 在区间 [s,e] 的最小值、最大值或者总和等信息。线段树可以用树也可以用数组（堆式存储）来实现。对于数组实现，假设根结点的下标为 0">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1650201709956-7f51962f-5a39-4a51-94bd-de9adeffe9bb.png">
+<meta property="article:published_time" content="2022-04-19T09:24:22.000Z">
+<meta property="article:modified_time" content="2023-02-28T10:30:33.359Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="线段树">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1650201709956-7f51962f-5a39-4a51-94bd-de9adeffe9bb.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>数据结构-Segment Tree 线段树 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数据结构-Segment Tree 线段树"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-19 17:24" pubdate>
+          2022年4月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          14k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          118 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据结构-Segment Tree 线段树</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1650201709956-7f51962f-5a39-4a51-94bd-de9adeffe9bb.png#averageHue=%23f9f9f9&clientId=uefa18619-d6ea-4&from=paste&height=635&id=u638d6cc2&name=image.png&originHeight=1270&originWidth=1986&originalType=binary&ratio=1&rotation=0&showTitle=false&size=434991&status=done&style=none&taskId=u06a52b3f-bd61-4d90-b6e9-d6969e78055&title=&width=993" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
+<p>线段树（Segment Tree）主要用于维护区间信息（要求满足结合律）。与树状数组相比，它可以实现 O(logn)的区间修改，还可以同时支持多种操作（加、乘），更具通用性。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1651034471702-9e449f0b-2cba-4307-90dc-dbc8a9757a7d.png#averageHue=%232f2f2f&clientId=u96420fca-e12b-4&from=paste&height=190&id=u8b4dd52c&name=image.png&originHeight=380&originWidth=516&originalType=binary&ratio=1&rotation=0&showTitle=false&size=27981&status=done&style=none&taskId=u0564d0e6-3289-45e5-b6b2-b436510074a&title=&width=258" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>线段树 segmentTree 是一个二叉树，每个结点保存数组 nums 在区间 [s,e] 的最小值、最大值或者总和等信息。线段树可以用树也可以用数组（堆式存储）来实现。对于数组实现，假设根结点的下标为 0，如果一个结点在数组的下标为 node，那么它的左子结点下标为 node×2+1，右子结点下标为 node×2+2。</p>
+<blockquote>
+<p> [s,e] =&gt;[start,end]</p>
+</blockquote>
+<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><blockquote>
+<p>线段树的创建通过给定的数组开辟一个四倍数组来存储（参考二叉堆），左子结点下标为 node×2+1，右子结点下标为 node×2+2，递归构建。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1651217994782-00e39cc0-8458-4bcd-ab7f-ae23fe5fd30c.jpeg" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SegmentTree</span> &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] segmentTree;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> n;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">SegmentTree</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        n = nums.length;<br>        segmentTree = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[nums.length * <span class="hljs-number">4</span>];<span class="hljs-comment">//一般需要4倍数组大小</span><br>        build(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>, nums);<span class="hljs-comment">//构建线段树</span><br>    &#125;<br>    <span class="hljs-comment">//[1, 2, 3, 4, 5]</span><br>    <span class="hljs-comment">//[15, 6, 9, 3, 3, 4, 5, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">build</span><span class="hljs-params">(<span class="hljs-type">int</span> node, <span class="hljs-type">int</span> s, <span class="hljs-type">int</span> e, <span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-keyword">if</span> (s == e) &#123;<span class="hljs-comment">// 如果 start==end 那递归结束，当前区间只有一个数(节点),segmentTree[node] = nums[s]</span><br>            segmentTree[node] = nums[s];<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> s + (e - s) / <span class="hljs-number">2</span>;<span class="hljs-comment">//取中点（防止溢出）</span><br>        build(node * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>, s, m, nums);<span class="hljs-comment">//构建左子树</span><br>        build(node * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>, m + <span class="hljs-number">1</span>, e, nums);<span class="hljs-comment">//构建右子树</span><br>        segmentTree[node] = segmentTree[node * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>] + segmentTree[node * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>];<span class="hljs-comment">//当前数节点</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>关于线段树的空间：如果采用堆式存储（ 2p是 p 的左儿子，2p+1 是  p 的右儿子），若有 m 个叶子结点，则 d 数组的范围最大为 <img src="https://cdn.nlark.com/yuque/__latex/16973e00f36243dc105048d9ddaf564e.svg#card=math&code=2%5E%7B%28logn%29%2B1%29%7D&id=FTt7m" srcset="/img/loading.gif" lazyload>。<br>分析：容易知道线段树的深度是 <img src="https://cdn.nlark.com/yuque/__latex/ff4edff51773a4560f25e8eab96349ff.svg#card=math&code=logn&id=gMAQR" srcset="/img/loading.gif" lazyload> 的，则在堆式储存情况下叶子节点（包括无用的叶子节点）数量为  <img src="https://cdn.nlark.com/yuque/__latex/0c4f0c92a36b0fcfdc913f580647447f.svg#card=math&code=2%5E%7Blogn%7D&id=JIncz" srcset="/img/loading.gif" lazyload> 个，又由于其为一棵完全二叉树，则其总节点个数 <img src="https://cdn.nlark.com/yuque/__latex/d3d41d3c9974c0920f08c5992e7f8b9a.svg#card=math&code=2%5E%7B%28logn%29%2B1%7D-1&id=qIGCv" srcset="/img/loading.gif" lazyload>。当然如果你懒得计算的话可以直接把数组长度设为 4n，因为 <img src="https://cdn.nlark.com/yuque/__latex/50688c36d16cef7a201c131f7228b07b.svg#card=math&code=%5Cfrac%7B2%5E%7B%28logn%29%2B1%7D-1%7D%7Bn%7D&id=KqS5K" srcset="/img/loading.gif" lazyload> 的最大值在 <img src="https://cdn.nlark.com/yuque/__latex/f2258df51ea36f4cfdb4aa328d0d78a8.svg#card=math&code=n%3D2%5Ex%2B1%20%28x%20%5Cin%20N_%2B%29%0A&id=LGhjK" srcset="/img/loading.gif" lazyload> 时取到，此时节点数为4n 。</p>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><blockquote>
+<p>更新节点主要是递归+二分（根据下标）查找指定的节点，将其替换为最新值，递归更新其父节点即可</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> val)</span> &#123;<br>    change(index, val, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);<br>&#125;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">change</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> val, <span class="hljs-type">int</span> node, <span class="hljs-type">int</span> s, <span class="hljs-type">int</span> e)</span> &#123;<br>    <span class="hljs-keyword">if</span> (s == e) &#123;<span class="hljs-comment">//递归结束（查找到对应的下标）</span><br>        segmentTree[node] = val;<span class="hljs-comment">//更新最新值</span><br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> s + (e - s) / <span class="hljs-number">2</span>;<span class="hljs-comment">//获取中点</span><br>    <span class="hljs-keyword">if</span> (index &lt;= m) &#123;<span class="hljs-comment">//如果m&gt;=index说明在左边区间</span><br>        change(index, val, node * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>, s, m);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<span class="hljs-comment">//否则在右边区间</span><br>        change(index, val, node * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>, m + <span class="hljs-number">1</span>, e);<br>    &#125;<br>    <span class="hljs-comment">//更新父节点</span><br>    segmentTree[node] = segmentTree[node * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>] + segmentTree[node * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h2><blockquote>
+<p>根据指定的下标left、right求该区间arr[left…right]的数据和。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumRange</span><span class="hljs-params">(<span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right)</span> &#123;<br>    <span class="hljs-keyword">return</span> range(left, right, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 范围求和 range 函数</span><br><span class="hljs-comment"> * 给定区间 [left,right] 时，我们将区间 [left,right] 拆成多个结点对应的区间。</span><br><span class="hljs-comment"> * 如果结点 node 对应的区间与 [left,right] 相同，可以直接返回该结点的值，即当前区间和。</span><br><span class="hljs-comment"> * 如果结点 node 对应的区间与 [left,right] 不同，设左子结点对应的区间的右端点为 m，那么将区间 [left,right] 沿点 m 拆成两个区间，分别计算左子结点和右子结点。</span><br><span class="hljs-comment"> * 我们从根结点开始递归地拆分区间 [left,right]</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> left 目标范围左索引</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> right 目标范围右索引</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> node 当前索引</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> s 开始左区间</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> e 结束右区间</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return</span> 返回[left,right]数值之和</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-title function_">range</span><span class="hljs-params">(<span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right, <span class="hljs-type">int</span> node, <span class="hljs-type">int</span> s, <span class="hljs-type">int</span> e)</span> &#123;<br>    <span class="hljs-comment">//（递归结束）没有重叠范围，返回当前节点</span><br>    <span class="hljs-keyword">if</span> (left == s &amp;&amp; right == e) <span class="hljs-keyword">return</span> segmentTree[node];<br>    <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> s + (e - s) / <span class="hljs-number">2</span>;<span class="hljs-comment">//获取中点</span><br>    <span class="hljs-keyword">if</span> (right &lt;= m) &#123;<span class="hljs-comment">//如果right &lt;= m说明[left,right]在全部左区间</span><br>        <span class="hljs-keyword">return</span> range(left, right, node * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>, s, m);<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (left &gt; m) &#123;<span class="hljs-comment">//如果right &lt;= m说明[left,right]在全部在右区间</span><br>        <span class="hljs-keyword">return</span> range(left, right, node * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>, m + <span class="hljs-number">1</span>, e);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<span class="hljs-comment">//否则[left,right]有部分在左区间有部分在右区间，把两者相加即可</span><br>        <span class="hljs-keyword">return</span> range(left, m, node * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>, s, m) + range(m + <span class="hljs-number">1</span>, right, node * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>, m + <span class="hljs-number">1</span>, e);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><h2 id="线段树的惰性传播-Lazy-Propagation-in-Segment-Tree"><a href="#线段树的惰性传播-Lazy-Propagation-in-Segment-Tree" class="headerlink" title="线段树的惰性传播 (Lazy Propagation in Segment Tree)"></a>线段树的惰性传播 (Lazy Propagation in Segment Tree)</h2><blockquote>
+<p>惰性传播 (Lazy Propagation in Segment Tree)很多地方又叫做【懒标记】</p>
+</blockquote>
+<p>当我们对某个区间 [left,right] 值进行修改时需要遍历 [left,right]所有节点进行更新。在这种情况引入【懒标记】可以有效降低复杂度。</p>
+<blockquote>
+<p>懒标记：每次执行修改操作时，通过打标记的方式表明该节点对应的区间在某一次操作中被更改，但不更新该节点的子节点信息。正在的修改在下一次访问带有标记的节点时才进行。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1651246809839-006050e3-516b-40ac-a608-88b2a69b3e63.jpeg" srcset="/img/loading.gif" lazyload><br>对 [2,4] 区间的每个节点进行 +5 的修改操作，可知 [2,4] 包含的节点共有 [2…2], [3…3], [4…4] 共三个节点，其中 [3…3], [4…4] 属于 t[2] 的子节点所以我们可以直接在 t[2] 打上一个懒标记 tag[2] = 5,不对其子节点进行改动，但不影响查询结果。</p>
+<p>那什么时候进行更新其子节点呢？当我们进行查询 [3,4] 区间范围和时，发现 [3,4] 区间还存在有懒标记，此时对懒标记进行下放，更新节点值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> io.example.algorithm.tree.segmenttree;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">LazySegmentTree</span> &#123;<br><br>    <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MAX</span> <span class="hljs-operator">=</span> <span class="hljs-number">1000</span>;     <span class="hljs-comment">// 树的最大节点</span><br>    <span class="hljs-type">int</span> tree[] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[MAX]; <span class="hljs-comment">// 存储树节点</span><br>    <span class="hljs-type">int</span> lazy[] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[MAX]; <span class="hljs-comment">// 存储节点懒标记值</span><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 更新给定范围的值</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> curSegmentIndex 线段树中当前节点的索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> segmentStart 当前节点存储和的元素的开始索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> segmentEnd 当前节点存储和的元素的结束索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> updateStart 更新的开始索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> updateEnd 更新的结束索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> diff 更新的值</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">updateRangeUtil</span><span class="hljs-params">(<span class="hljs-type">int</span> curSegmentIndex, <span class="hljs-type">int</span> segmentStart, <span class="hljs-type">int</span> segmentEnd, <span class="hljs-type">int</span> updateStart, <span class="hljs-type">int</span> updateEnd, <span class="hljs-type">int</span> diff)</span> &#123;<br>        <span class="hljs-comment">// 如果段树的当前节点的懒标记值不为零，则存在一些挂起的更新。</span><br>        <span class="hljs-comment">// 因此，我们需要确保在进行新的更新之前完成待定的更新。</span><br>        <span class="hljs-comment">// 因为在递归调用之后，父级可能会使用该值（请参阅此函数的最后一行）</span><br>        <span class="hljs-keyword">if</span> (lazy[curSegmentIndex] != <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-comment">// 使用惰性节点中存储的值进行挂起的更新</span><br>            tree[curSegmentIndex] += (segmentEnd - segmentStart + <span class="hljs-number">1</span>) * lazy[curSegmentIndex];<br>            <span class="hljs-comment">// 检查它是否不是叶节点，因为如果这是叶节点，无需再向下执行</span><br>            <span class="hljs-keyword">if</span> (segmentStart != segmentEnd) &#123;<br>                <span class="hljs-comment">//我们可以推迟更新孩子们，因为我们现在不需要他们的新价值观。</span><br>                <span class="hljs-comment">//因为我们还没有更新si的子级，所以我们需要为这些子级设置懒惰标志</span><br>                lazy[curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>] += lazy[curSegmentIndex];<br>                lazy[curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>] += lazy[curSegmentIndex];<br>            &#125;<br>            <span class="hljs-comment">//将当前节点的延迟值设置为0表示已经更新</span><br>            lazy[curSegmentIndex] = <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-comment">// 超出下标，递归结束</span><br>        <span class="hljs-keyword">if</span> (segmentStart &gt; segmentEnd || segmentStart &gt; updateEnd || segmentEnd &lt; updateStart) <span class="hljs-keyword">return</span>;<br>        <span class="hljs-comment">// 当前段完全在范围内</span><br>        <span class="hljs-keyword">if</span> (segmentStart &gt;= updateStart &amp;&amp; segmentEnd &lt;= updateEnd) &#123;<br>            <span class="hljs-comment">// Add the difference to current node</span><br>            <span class="hljs-comment">// 将差异添加到当前节点</span><br>            tree[curSegmentIndex] += (segmentEnd - segmentStart + <span class="hljs-number">1</span>) * diff;<br>            <span class="hljs-comment">// 检查叶节点与否的逻辑相同</span><br>            <span class="hljs-keyword">if</span> (segmentStart != segmentEnd) &#123;<br>                <span class="hljs-comment">// 这是我们在惰性节点中存储值的地方，而不是更新段树本身</span><br>                <span class="hljs-comment">// 因为我们现在不需要这些更新的值，我们通过在lazy[]中存储值来推迟更新</span><br>                lazy[curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>] += diff;<br>                lazy[curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>] += diff;<br>            &#125;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-comment">//如果不完全在范围内，但重叠，进入子递归</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> (segmentStart + segmentEnd) / <span class="hljs-number">2</span>;<br>        updateRangeUtil(curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>, segmentStart, mid, updateStart, updateEnd, diff);<br>        updateRangeUtil(curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>, mid + <span class="hljs-number">1</span>, segmentEnd, updateStart, updateEnd, diff);<br>        <span class="hljs-comment">// 并使用子节点调用的结果更新此节点</span><br>        tree[curSegmentIndex] = tree[curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>] + tree[curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>];<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 更新函数入口</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> n 数组长度</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> updateStart 更新的开始下标</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> updateEnd 更新的结束下标</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> diff 更新的数值</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">updateRange</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> updateStart, <span class="hljs-type">int</span> updateEnd, <span class="hljs-type">int</span> diff)</span> &#123;<br>        updateRangeUtil(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>, updateStart, updateEnd, diff);<br>    &#125;<br>    <br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 求区间和</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> segmentStart 线段树开始索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> segmentEnd 线段树结束索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> queryStart 查询开始索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> queryEnd 查询结束索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> curSegmentIndex 当前节点下标</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 返回当前[queryStart,queryEnd]区间和</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getSum</span><span class="hljs-params">(<span class="hljs-type">int</span> segmentStart, <span class="hljs-type">int</span> segmentEnd, <span class="hljs-type">int</span> queryStart, <span class="hljs-type">int</span> queryEnd, <span class="hljs-type">int</span> curSegmentIndex)</span> &#123;<br>        <span class="hljs-comment">// 如果懒标记不为零需要进行下推</span><br>        <span class="hljs-keyword">if</span> (lazy[curSegmentIndex] != <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-comment">// 更新当前节点</span><br>            tree[curSegmentIndex] += (segmentEnd - segmentStart + <span class="hljs-number">1</span>) * lazy[curSegmentIndex];<br>            <span class="hljs-comment">//检查它是否不是叶节点，因为如果这是叶节点，我们不需要再往下递归</span><br>            <span class="hljs-keyword">if</span> (segmentStart != segmentEnd) &#123;<br>                <span class="hljs-comment">// 进入子节点递归</span><br>                lazy[curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>] += lazy[curSegmentIndex];<br>                lazy[curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>] += lazy[curSegmentIndex];<br>            &#125;<br>            <span class="hljs-comment">//取消设置当前节点的延迟值/已更新</span><br>            lazy[curSegmentIndex] = <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-comment">// 超出范围</span><br>        <span class="hljs-keyword">if</span> (segmentStart &gt; segmentEnd || segmentStart &gt; queryEnd || segmentEnd &lt; queryStart) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 如果该段位于范围内</span><br>        <span class="hljs-keyword">if</span> (segmentStart &gt;= queryStart &amp;&amp; segmentEnd &lt;= queryEnd) <span class="hljs-keyword">return</span> tree[curSegmentIndex];<br>        <span class="hljs-comment">//如果部分重合</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> (segmentStart + segmentEnd) / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">return</span> getSum(segmentStart, mid, queryStart, queryEnd, <span class="hljs-number">2</span> * curSegmentIndex + <span class="hljs-number">1</span>) + getSum(mid + <span class="hljs-number">1</span>, segmentEnd, queryStart, queryEnd, <span class="hljs-number">2</span> * curSegmentIndex + <span class="hljs-number">2</span>);<br>    &#125;<br>    <br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 求和函数入口</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> n 数组长度</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> queryStart 查询开始下标</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> queryEnd 查询结束下标</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 返回当前[queryStart,queryEnd]区间和</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-type">int</span> <span class="hljs-title function_">getSum</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> queryStart, <span class="hljs-type">int</span> queryEnd)</span> &#123;<br>        <span class="hljs-comment">// 检查错误的输入值</span><br>        <span class="hljs-keyword">if</span> (queryStart &lt; <span class="hljs-number">0</span> || queryEnd &gt; n - <span class="hljs-number">1</span> || queryStart &gt; queryEnd) &#123;<br>            System.out.println(<span class="hljs-string">&quot;Invalid Input&quot;</span>);<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> getSum(<span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>, queryStart, queryEnd, <span class="hljs-number">0</span>);<br>    &#125;<br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 构建线段树</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> arr 数组</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> segmentStart 线段树开始索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> segmentEnd 线段树结束索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> curSegmentIndex 当前索引</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">build</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> segmentStart, <span class="hljs-type">int</span> segmentEnd, <span class="hljs-type">int</span> curSegmentIndex)</span> &#123;<br>        <span class="hljs-comment">// 超出范围，因为start永远不能大于end</span><br>        <span class="hljs-keyword">if</span> (segmentStart &gt; segmentEnd) <span class="hljs-keyword">return</span>;<br>        <span class="hljs-comment">//start==end只有一个数直接设置值结束递归</span><br>        <span class="hljs-keyword">if</span> (segmentStart == segmentEnd) &#123;<br>            tree[curSegmentIndex] = arr[segmentStart];<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-comment">//递归构建子树</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> (segmentStart + segmentEnd) / <span class="hljs-number">2</span>;<br>        build(arr, segmentStart, mid, curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>);<br>        build(arr, mid + <span class="hljs-number">1</span>, segmentEnd, curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>);<br>        tree[curSegmentIndex] = tree[curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>] + tree[curSegmentIndex * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>];<br>    &#125;<br>    <br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 构造线段树</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> arr</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">build</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[])</span> &#123;<br>        build(arr, <span class="hljs-number">0</span>, arr.length - <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String args[])</span> &#123;<br>        <span class="hljs-type">int</span> arr[] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>&#125;;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        <span class="hljs-type">LazySegmentTree</span> <span class="hljs-variable">tree</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">LazySegmentTree</span>();<br>        <span class="hljs-comment">// 构建线段树</span><br>        tree.build(arr);<br>        <span class="hljs-comment">// 打印下标[1,3]的范围和</span><br>        System.out.println(<span class="hljs-string">&quot;Sum of values in given range = &quot;</span> + tree.getSum(n, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>));<br>        <span class="hljs-comment">// 在索引从1到5的所有节点上添加10</span><br>        tree.updateRange(n, <span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>);<br>        <span class="hljs-comment">// 更新值后查找总和</span><br>        System.out.println(<span class="hljs-string">&quot;Updated sum of values in given range = &quot;</span> + tree.getSum(n, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="线段树的区间求和-Sum-of-given-range"><a href="#线段树的区间求和-Sum-of-given-range" class="headerlink" title="线段树的区间求和 (Sum of given range)"></a>线段树的区间求和 (Sum of given range)</h2><blockquote>
+<p>在给定的区间 [left,right] 范围内如果存在节点的范围恰好是 [left,right] 那直接返回当前节点值即可，否则需要将 [left,right] 切割成两部分递归查找所属范围在求和即可。</p>
+</blockquote>
+<p>如果要查询的区间为 [2,4]，此时就不能直接获取区间的值[2,4]，但是  可以拆成 [2,2] 和 [3,4]，可以通过合并这两个区间的答案来求得这个区间的答案。</p>
+<h2 id="带节点更新的范围最大查询-Range-Maximum-Query-with-Node-Update"><a href="#带节点更新的范围最大查询-Range-Maximum-Query-with-Node-Update" class="headerlink" title="带节点更新的范围最大查询 (Range Maximum Query with Node Update)"></a>带节点更新的范围最大查询 (Range Maximum Query with Node Update)</h2><blockquote>
+<p>查询最大值主要是直接获取存储的最大值，当更新时递归的获取当前范围的节点的最大值进行比较进行更新</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> io.example.algorithm.tree.segmenttree;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">GFG</span> &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 获取[l,r]范围的最大值</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> st</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ss</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> se</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> l</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> r</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> node</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">MaxUtil</span><span class="hljs-params">(<span class="hljs-type">int</span>[] st, <span class="hljs-type">int</span> ss, <span class="hljs-type">int</span> se, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> node)</span> &#123;<br>        <span class="hljs-comment">//如果该节点的段完全覆盖给定范围的一部分，直接返回线段的最大值</span><br>        <span class="hljs-keyword">if</span> (l &lt;= ss &amp;&amp; r &gt;= se) <span class="hljs-keyword">return</span> st[node];<br>        <span class="hljs-comment">//如果此节点的段不存在属于给定范围</span><br>        <span class="hljs-keyword">if</span> (se &lt; l || ss &gt; r) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-comment">//如果该节点的部分在给定范围内</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> ss + (se - ss) / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">return</span> Math.max(MaxUtil(st, ss, mid, l, r, <span class="hljs-number">2</span> * node + <span class="hljs-number">1</span>), MaxUtil(st, mid + <span class="hljs-number">1</span>, se, l, r, <span class="hljs-number">2</span> * node + <span class="hljs-number">2</span>));<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 一个递归函数来更新节点中包含给定索引的节点</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> arr   数组</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> st    线段树存储数组</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ss    线段树开始索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> se    线段树结束索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> index 要更新的元素的索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> value 更新的值</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> node</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">updateValue</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span>[] st, <span class="hljs-type">int</span> ss, <span class="hljs-type">int</span> se, <span class="hljs-type">int</span> index, <span class="hljs-type">int</span> value, <span class="hljs-type">int</span> node)</span> &#123;<br>        <span class="hljs-keyword">if</span> (index &lt; ss || index &gt; se) &#123;<br>            System.out.println(<span class="hljs-string">&quot;Invalid Input&quot;</span>);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (ss == se) &#123;<br>            <span class="hljs-comment">///更新数组和中的值</span><br>            arr[index] = value;<br>            st[node] = value;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> ss + (se - ss) / <span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span> (index &gt;= ss &amp;&amp; index &lt;= mid) &#123;<br>                updateValue(arr, st, ss, mid, index, value, <span class="hljs-number">2</span> * node + <span class="hljs-number">1</span>);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                updateValue(arr, st, mid + <span class="hljs-number">1</span>, se, index, value, <span class="hljs-number">2</span> * node + <span class="hljs-number">2</span>);<br>            &#125;<br>            st[node] = Math.max(st[<span class="hljs-number">2</span> * node + <span class="hljs-number">1</span>], st[<span class="hljs-number">2</span> * node + <span class="hljs-number">2</span>]);<br>        &#125;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br><br>    <span class="hljs-comment">//返回范围为的最大元素数索引l（查询开始）到r（查询结束）</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getMax</span><span class="hljs-params">(<span class="hljs-type">int</span>[] st, <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br><br>        <span class="hljs-comment">// 检查错误的输入值</span><br>        <span class="hljs-keyword">if</span> (l &lt; <span class="hljs-number">0</span> || r &gt; n - <span class="hljs-number">1</span> || l &gt; r) &#123;<br>            System.out.printf(<span class="hljs-string">&quot;Invalid Input\n&quot;</span>);<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> MaxUtil(st, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>, l, r, <span class="hljs-number">0</span>);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 构建线段树</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> arr 数组</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ss  线段树开始索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> se  线段树结束索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> st  线段树存储数组</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> si  当前节点线段树索引</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">build</span><span class="hljs-params">(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> ss, <span class="hljs-type">int</span> se, <span class="hljs-type">int</span>[] st, <span class="hljs-type">int</span> si)</span> &#123;<br><br>        <span class="hljs-comment">//如果数组中有一个元素，则存储它位于段树的当前节点中并返回</span><br>        <span class="hljs-keyword">if</span> (ss == se) &#123;<br>            st[si] = arr[ss];<br>            <span class="hljs-keyword">return</span> arr[ss];<br>        &#125;<br><br>        <span class="hljs-comment">//依次构建左右子树</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> ss + (se - ss) / <span class="hljs-number">2</span>;<br><br>        st[si] = Math.max(build(arr, ss, mid, st, si * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>), build(arr, mid + <span class="hljs-number">1</span>, se, st, si * <span class="hljs-number">2</span> + <span class="hljs-number">2</span>));<br><br>        <span class="hljs-keyword">return</span> st[si];<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 构建线段树入口</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> arr 数组</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> n   长度</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] build(<span class="hljs-type">int</span> arr[], <span class="hljs-type">int</span> n) &#123;<br>        <span class="hljs-comment">// 线段树的高度</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>) Math.ceil(Math.log(n) / Math.log(<span class="hljs-number">2</span>));<br>        <span class="hljs-comment">// 线段树的最大大小</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">max_size</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span> * (<span class="hljs-type">int</span>) Math.pow(<span class="hljs-number">2</span>, x) - <span class="hljs-number">1</span>;<br>        <span class="hljs-comment">// 分配数组大小</span><br>        <span class="hljs-type">int</span>[] st = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[max_size];<br>        <span class="hljs-comment">// 构建</span><br>        build(arr, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>, st, <span class="hljs-number">0</span>);<br>        <span class="hljs-comment">// 返回构造的段树</span><br>        <span class="hljs-keyword">return</span> st;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">int</span>[] arr = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>&#125;;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> arr.length;<br>        <span class="hljs-comment">// 构建线段树</span><br>        <span class="hljs-type">int</span>[] st = build(arr, n);<br>        <span class="hljs-comment">// 获取[1,3]范围最大值</span><br>        System.out.println(<span class="hljs-string">&quot;Max of values in given range = &quot;</span> + getMax(st, n, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>));<br>        <span class="hljs-comment">// 更新: 设置 arr[1] = 8</span><br>        updateValue(arr, st, <span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">8</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-comment">// 找到更新后的最大值</span><br>        System.out.println(<span class="hljs-string">&quot;Updated max of values in given range = &quot;</span> + getMax(st, n, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><h2 id="线段树的高效实现-Segment-Tree-Efficient-Implementation"><a href="#线段树的高效实现-Segment-Tree-Efficient-Implementation" class="headerlink" title="线段树的高效实现 (Segment Tree Efficient Implementation)"></a>线段树的高效实现 (Segment Tree Efficient Implementation)</h2><blockquote>
+<p>线段树的高效实现</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SegmentTree</span> &#123;<br>    <span class="hljs-comment">//线段数（叶子节点都是数组的元素）</span><br>    <span class="hljs-comment">//[1,3,5]       [1,3,5,7]        ......</span><br>    <span class="hljs-comment">//      9           16</span><br>    <span class="hljs-comment">//     / \         /  \</span><br>    <span class="hljs-comment">//    4   5       4    12</span><br>    <span class="hljs-comment">//   / \         / \   / \</span><br>    <span class="hljs-comment">//  1   3       1   3 5   7      ......</span><br>    <span class="hljs-comment">// n=3 node=6   n=4 node=7     n=5 node=9  n=6 node=12  node&lt;=2*n</span><br>    <span class="hljs-type">int</span>[] tree;<br>    <span class="hljs-type">int</span> n;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">SegmentTree</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        n = nums.length;<br>        tree = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">2</span>*n];<br>        buildTree(nums);<br>    &#125;<br>    <span class="hljs-comment">//构建线段树</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">buildTree</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span>&#123;<br>        <span class="hljs-comment">//nums=[1,3,5,7] tree = [0,0,0,0,1,3,5,7] </span><br>        <span class="hljs-comment">//将所有叶子节点放置在[n,2n)数组中</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n, j = <span class="hljs-number">0</span>;  i &lt; <span class="hljs-number">2</span> * n; i++,  j++)tree[i] = nums[j];<br>        <span class="hljs-comment">//tree = [0,16,4,12,1,3,5,7] </span><br>        <span class="hljs-comment">//把父节点放置在[1,n)数组中 , tree[i] = tree[i * 2] + tree[i * 2 + 1]</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">0</span>; --i)tree[i] = tree[i * <span class="hljs-number">2</span>] + tree[i * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>];<br>    &#125;<br>    <span class="hljs-comment">//更新某个下标同时需要更新其父节点的值</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">update</span><span class="hljs-params">(<span class="hljs-type">int</span> index, <span class="hljs-type">int</span> val)</span> &#123;<br>        index+=n;<span class="hljs-comment">//下标的位置,n+下标</span><br>        tree[index] = val;<br>        <span class="hljs-comment">//更新父亲节点,因为tree[i] = tree[i * 2] + tree[i * 2 + 1];所以index如果是奇数则为右子树，index是偶数则为左子树</span><br>        <span class="hljs-keyword">while</span>(index&gt;<span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> index;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> index;<br>            <span class="hljs-keyword">if</span>(index % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) right = index+<span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">else</span> left = index - <span class="hljs-number">1</span>;<br>            <span class="hljs-comment">//更新父节点值</span><br>            tree[index / <span class="hljs-number">2</span>] = tree[left] + tree[right];<br>            <span class="hljs-comment">//更新下标</span><br>            index /= <span class="hljs-number">2</span>;<br>        &#125;<br><br>    &#125;<br>    <span class="hljs-comment">//求和只需要获取其父节点</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sumRange</span><span class="hljs-params">(<span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right)</span> &#123;<span class="hljs-comment">//left，right为下标</span><br>        <span class="hljs-comment">//确认在数组中的下标</span><br>        left+=n;<br>        right+=n;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ret</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">//[1,3,5,7]</span><br>        <span class="hljs-keyword">while</span>(left&lt;=right)&#123;<br>            <span class="hljs-comment">//1.如果left是左子树可以直接取根节点,如果是右子树那只取右节点</span><br>            <span class="hljs-keyword">if</span>(left % <span class="hljs-number">2</span> == <span class="hljs-number">1</span> )&#123;<br>                ret+=tree[left];<br>                left++;<br>            &#125;<br>            <span class="hljs-comment">//2.如果right是右子树可以直接取根节点,如果是左子树那只取左节点</span><br>            <span class="hljs-keyword">if</span>(right % <span class="hljs-number">2</span> == <span class="hljs-number">0</span> )&#123;<br>                ret+=tree[right];<br>                right--;<br>            &#125;<br>            left/=<span class="hljs-number">2</span>;<br>            right/=<span class="hljs-number">2</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>采用位运算加速</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> io.example.algorithm.tree;<br><br><span class="hljs-comment">//线段数（叶子节点都是数组的元素）</span><br><span class="hljs-comment">//   [1,3,5]    [1,3,5,7]        ......</span><br><span class="hljs-comment">//      9           16</span><br><span class="hljs-comment">//     / \         /  \</span><br><span class="hljs-comment">//    4   5       4    12</span><br><span class="hljs-comment">//   / \         / \   / \</span><br><span class="hljs-comment">//  1   3       1   3 5   7      ......</span><br><span class="hljs-comment">// n=3 node=5   n=4 node=7   n=5 node=9  n=6 node=12  node&lt;=2*n</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SegmentTree</span> &#123;<br><br>    <span class="hljs-comment">// 设置数组的最大值</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> <span class="hljs-number">100000</span>;<br>    <span class="hljs-type">int</span> n; <span class="hljs-comment">//节点个数</span><br>    <span class="hljs-comment">// 设置数组的最大值</span><br>    <span class="hljs-type">int</span>[] tree = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">2</span> * N];<br><br>    <span class="hljs-comment">//                                           |--------|</span><br>    <span class="hljs-comment">//                                           |       +-+</span><br>    <span class="hljs-comment">// 构建线段树                                  v       | |</span><br>    <span class="hljs-comment">//[1,3,5,7] -&gt; [0,0,0,0][1,3,5,7] -&gt; [0,16,4,12][1,3,5,7]</span><br>    <span class="hljs-comment">//                                         ^     | |</span><br>    <span class="hljs-comment">//                                         |     +-+</span><br>    <span class="hljs-comment">//                                         |------|</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">buildTree</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr)</span> &#123;<br>        <span class="hljs-comment">// [n,2n)按照顺序存储节点</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) tree[n + i] = arr[i];<br>        <span class="hljs-comment">// 构建父节点(0,n) 父节点等于 tree[i] = tree[i * 2] + tree[i * 2 + 1];</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> n - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">0</span>; --i) tree[i] = tree[i &lt;&lt; <span class="hljs-number">1</span>] + tree[i &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>];<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 更新树节点</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> p 下标</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> value 值</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">updateTreeNode</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> value)</span> &#123;<br>        <span class="hljs-comment">// 直接更新值</span><br>        tree[p + n] = value;<br>        p = p + n;<br>        <span class="hljs-comment">// 同时需要更新其父亲节点</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> p; i &gt; <span class="hljs-number">1</span>; i = i / <span class="hljs-number">2</span>) tree[i / <span class="hljs-number">2</span>] = tree[i] + tree[i ^ <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> p; i &gt; <span class="hljs-number">1</span>; i &gt;&gt;= <span class="hljs-number">1</span>) tree[i &gt;&gt; <span class="hljs-number">1</span>] = tree[i] + tree[i ^ <span class="hljs-number">1</span>];<br>    &#125;<br><br>    <span class="hljs-comment">// function to get sum on</span><br>    <span class="hljs-comment">// interval [l, r)</span><br>    <span class="hljs-type">int</span> <span class="hljs-title function_">query</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// loop to find the sum in the range</span><br>        <span class="hljs-comment">// for (l += n, r += n; l &lt; r; l = l / 2, r = r / 2) &#123;</span><br>        <span class="hljs-keyword">for</span> (l += n, r += n; l &lt; r; l &gt;&gt;= <span class="hljs-number">1</span>, r &gt;&gt;= <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">if</span> ((l &amp; <span class="hljs-number">1</span>) &gt; <span class="hljs-number">0</span>) res += tree[l++];<br>            <span class="hljs-keyword">if</span> ((r &amp; <span class="hljs-number">1</span>) &gt; <span class="hljs-number">0</span>) res += tree[--r];<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">SegmentTree</span> <span class="hljs-variable">segmentTree</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SegmentTree</span>();<br>        <span class="hljs-type">int</span>[] a = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>&#125;;<br>        <span class="hljs-comment">// n is global</span><br>        segmentTree.n = a.length;<br>        <span class="hljs-comment">// 构建数</span><br>        segmentTree.buildTree(a);<br>        <span class="hljs-comment">// print the sum in range(1,2)</span><br>        <span class="hljs-comment">// index-based</span><br>        System.out.println(segmentTree.query(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>));<br>        <span class="hljs-comment">// modify element at 2nd index</span><br>        segmentTree.updateTreeNode(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>);<br>        <span class="hljs-comment">// print the sum in range(1,2)</span><br>        <span class="hljs-comment">// index-based</span><br>        System.out.println(segmentTree.query(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a target="_blank" rel="noopener" href="https://oi-wiki.org/ds/seg/">https://oi-wiki.org/ds/seg/</a><br><a target="_blank" rel="noopener" href="https://cp-algorithms.com/data_structures/segment_tree.html">https://cp-algorithms.com/data_structures/segment_tree.html</a><br>可视化 ：<a target="_blank" rel="noopener" href="https://visualgo.net/zh/segmenttree?slide=1">https://visualgo.net/zh/segmenttree?slide=1</a><br>给定范围之和：<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/?ref=gcse">https://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/?ref=gcse</a><br>在线段树中懒标记：<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/lazy-propagation-in-segment-tree/?ref=gcse">https://www.geeksforgeeks.org/lazy-propagation-in-segment-tree/?ref=gcse</a><br>线段树的高效实现：<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/segment-tree-efficient-implementation/?ref=lbp">https://www.geeksforgeeks.org/segment-tree-efficient-implementation/?ref=lbp</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/">#线段树</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数据结构-Segment Tree 线段树</div>
+      <div>https://mikeygithub.github.io/2022/04/19/yuque/xqpkce/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年4月19日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/25/yuque/ygs4dc/" title="算法篇-Reservoir Sampling 蓄水池抽样">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">算法篇-Reservoir Sampling 蓄水池抽样</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/17/yuque/carc8e/" title="源码学习-Dubbo SPI 源码分析">
+                        <span class="hidden-mobile">源码学习-Dubbo SPI 源码分析</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

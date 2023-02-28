@@ -1,0 +1,1022 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="背景本文是阅读《深度探索Go语言——对象模型与runtime的原理、特性及应用》书籍所做的一些笔记 汇编寄存器寄存器是CPU用来暂存指令、地址和数据的电脑存储器。寄存器是CPU内部的元件，包括通用寄存器、专用寄存器和控制寄存器。寄存器拥有非常高的读写速度，所以在寄存器之间的数据传送非常快。  通用寄存器通用寄存器可用于传送和暂存数据，也可参与算术逻辑运算，并保存运算结果。通用寄存器组包括AX、B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读书笔记-《深度探索Go语言》">
+<meta property="og:url" content="https://mikeygithub.github.io/2023/01/15/yuque/zr4pgh/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="背景本文是阅读《深度探索Go语言——对象模型与runtime的原理、特性及应用》书籍所做的一些笔记 汇编寄存器寄存器是CPU用来暂存指令、地址和数据的电脑存储器。寄存器是CPU内部的元件，包括通用寄存器、专用寄存器和控制寄存器。寄存器拥有非常高的读写速度，所以在寄存器之间的数据传送非常快。  通用寄存器通用寄存器可用于传送和暂存数据，也可参与算术逻辑运算，并保存运算结果。通用寄存器组包括AX、B">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673836715512-c4068634-f8a4-4826-ad4b-5f9c3a7ca037.png">
+<meta property="article:published_time" content="2023-01-15T10:44:12.000Z">
+<meta property="article:modified_time" content="2023-02-28T10:30:33.387Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="Go">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673836715512-c4068634-f8a4-4826-ad4b-5f9c3a7ca037.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>读书笔记-《深度探索Go语言》 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="读书笔记-《深度探索Go语言》"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-01-15 18:44" pubdate>
+          2023年1月15日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          37 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">读书笔记-《深度探索Go语言》</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673836715512-c4068634-f8a4-4826-ad4b-5f9c3a7ca037.png#averageHue=%23dfe2e4&clientId=u19de1ec5-be06-4&from=paste&height=378&id=u43b9801e&name=image.png&originHeight=1704&originWidth=1882&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1365150&status=done&style=none&taskId=ue11b78b4-d1c0-4674-a5ff-ea177fcb1d9&title=&width=418" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>本文是阅读《深度探索Go语言——对象模型与runtime的原理、特性及应用》书籍所做的一些笔记</p>
+<h1 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h1><h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><p><strong>寄存器</strong>是CPU用来暂存指令、地址和数据的电脑存储器。寄存器是CPU内部的元件，包括<strong>通用寄存器</strong>、<strong>专用寄存器</strong>和<strong>控制寄存器</strong>。寄存器拥有非常高的读写速度，所以在寄存器之间的数据传送非常快。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673846481991-d8967b1a-d40a-4043-9f54-cc9f6b0f3b75.png#averageHue=%23fcfcfb&clientId=u19de1ec5-be06-4&from=paste&height=192&id=u87d8d3e2&name=image.png&originHeight=384&originWidth=848&originalType=binary&ratio=1&rotation=0&showTitle=false&size=44759&status=done&style=none&taskId=u842e8278-b999-4be8-8745-2256aa42ac6&title=&width=424" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h3><p>通用寄存器可用于<strong>传送</strong>和<strong>暂存数据</strong>，也可参与算术逻辑运算，并保存运算结果。通用寄存器组包括AX、BX、CX、DX<strong>4</strong>个<strong>16位</strong>寄存器，用以存放16位数据或地址。也可用作8位寄存器。用作8位寄存器时分别记为AH、AL、BH、BL、CH、CL、DH、DL。只能存放8位数据，不能存放地址。它们分别是AX、BX、CX、DX的高八位和低八位。若AX=1234H，则AH=12H，AL=34H。通用寄存器通用性强，对任何指令，它们具有相同的功能。</p>
+<ul>
+<li>AX(AH、AL)：累加器。有些指令约定以AX(或AL)为源或目的寄存器。输入/输出指令必须通过AX或AL实现，例如：端口地址为43H的内容读入CPU的指令为INAL，43H或INAX，43H。目的操作数只能是AL/AX，而不能是其他的寄存器。</li>
+<li>BX(BH、BL)：基址寄存器。BX可用作间接寻址的地址寄存器和基地址寄存器，BH、BL可用作8位通用数据寄存器。</li>
+<li>CX(CH、CL)：计数寄存器。CX在循环和串操作中充当计数器，指令执行后CX内容自动修改，因此称为计数寄存器。 </li>
+<li>DX(DH、DL)：数据寄存器。除用作通用寄存器外，在I/O指令中可用作端口地址寄存器，乘除指令中用作辅助累加器。</li>
+</ul>
+<h4 id="x86的通用寄存器"><a href="#x86的通用寄存器" class="headerlink" title="x86的通用寄存器"></a>x86的通用寄存器</h4><h5 id="32位架构寄存器"><a href="#32位架构寄存器" class="headerlink" title="32位架构寄存器"></a>32位架构寄存器</h5><p>32位x86架构的CPU拥有8个32位的通用寄存器，在汇编语言中可以直接通过名字引用这八个寄存器</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673846810886-f633d616-e4f0-4d4c-9913-4ecd27288706.png#averageHue=%23edeeed&clientId=u19de1ec5-be06-4&from=paste&height=134&id=u287c450a&name=image.png&originHeight=268&originWidth=974&originalType=binary&ratio=1&rotation=0&showTitle=false&size=107714&status=done&style=none&taskId=uad2ca079-c835-483e-b9c6-1189ca53718&title=&width=487" srcset="/img/loading.gif" lazyload alt="image.png"><br>0-3号寄存器可以拆分为如下图<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673846537562-efa5af17-5287-43bc-a506-d0535ab37646.png#averageHue=%23f7f7f6&clientId=u19de1ec5-be06-4&from=paste&height=295&id=ue380f2b5&name=image.png&originHeight=590&originWidth=964&originalType=binary&ratio=1&rotation=0&showTitle=false&size=184078&status=done&style=none&taskId=ufe876744-6293-4c27-ba35-84278364de1&title=&width=482" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673846868631-2f5f7bf8-829a-49de-a2c8-a97f24b64401.png#averageHue=%23ebebea&clientId=u19de1ec5-be06-4&from=paste&height=132&id=ua6386efd&name=image.png&originHeight=264&originWidth=970&originalType=binary&ratio=1&rotation=0&showTitle=false&size=107340&status=done&style=none&taskId=uc98d3448-2add-49ca-8ac8-8d8fbb2f3b4&title=&width=485" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h5 id="64位架构寄存器"><a href="#64位架构寄存器" class="headerlink" title="64位架构寄存器"></a>64位架构寄存器</h5><p>64位x86架构的CPU拥有16个64位的通用寄存器<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673846973793-69d02ae1-f7d1-40ec-93eb-b3c1eae11174.png#averageHue=%23f3f3f3&clientId=u19de1ec5-be06-4&from=paste&height=187&id=uabcff008&name=image.png&originHeight=374&originWidth=1012&originalType=binary&ratio=1&rotation=0&showTitle=false&size=76436&status=done&style=none&taskId=u4e00ef22-9d2c-403e-825f-02bede4c21f&title=&width=506" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="常用汇编指令"><a href="#常用汇编指令" class="headerlink" title="常用汇编指令"></a>常用汇编指令</h2><h3 id="整数加减法"><a href="#整数加减法" class="headerlink" title="整数加减法"></a>整数加减法</h3><ol>
+<li><p>将寄存器EAX的值加上16并把值存入EAX中</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">ADD EAX,<span class="hljs-number">16</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>减法</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">SUB ESP,<span class="hljs-number">16</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>两个8位int相加</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">ADD AL,CL<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>两个int16相加</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">ADD AX,CX<br></code></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="数据传输指令"><a href="#数据传输指令" class="headerlink" title="数据传输指令"></a>数据传输指令</h3><blockquote>
+<p>注意：mov[d,q]实际上是两个指令：movd和movq，前者是DWORD类型数据的转移指令，后者是QWORD类型数据的转移指令。</p>
+</blockquote>
+<ol>
+<li><p>把ECX的寄存器的值复制到EAX寄存器中</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">MOV EAX,ECX<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>把数字1234复制给EDX</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">MOV EDX,<span class="hljs-number">1234</span><br></code></pre></td></tr></table></figure>
+<p>在指令中可以直接给出内存地址的偏移量（位移），可以通过下方计算方式进行计算</p>
+</li>
+</ol>
+<p>（1）Displacement：位移，是一个8位、16位或32位的值。<br>（2）Base：基址，存放在某个通用寄存器中。<br>（3）Index：索引，存放在某个通用寄存器中，ESP不可用作索引。<br>（4）Scale：比例因子，用来与索引相乘，可以取值1、2、4、8。</p>
+<p>经过计算得到的地址称为有效地址<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673847577612-9d2eca0e-3f43-4261-a07e-6ab172831580.png#averageHue=%23f2f2f2&clientId=u19de1ec5-be06-4&from=paste&height=34&id=u524fbc68&name=image.png&originHeight=75&originWidth=1449&originalType=binary&ratio=1&rotation=0&showTitle=false&size=38056&status=done&style=none&taskId=u81d45acb-010f-4adc-a597-d929dcc4a00&title=&width=653" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go">MOV EAX,[<span class="hljs-number">16</span>]<br>MOV EAX,[ESP]<br>MOV EAX,[ESP+<span class="hljs-number">16</span>]<br></code></pre></td></tr></table></figure>
+
+<h3 id="入栈和出栈"><a href="#入栈和出栈" class="headerlink" title="入栈和出栈"></a>入栈和出栈</h3><blockquote>
+<p>ESP的特殊用途就是当做CPU的栈指针</p>
+</blockquote>
+<ol>
+<li><p>入栈操作</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go">PUSH EAX<br><span class="hljs-comment">//等价于</span><br>SUB ESP,<span class="hljs-number">4</span><br>MOV [ESP],EAX<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>出栈操作</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go">POP EAX<br><span class="hljs-comment">//等价于</span><br>MOV EAX,[ESP]<br>ADD ESP,<span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="分支跳转"><a href="#分支跳转" class="headerlink" title="分支跳转"></a>分支跳转</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//跳转到地址32处</span><br>JMP <span class="hljs-number">32</span><br><span class="hljs-comment">//跳转目的地址由EAX给出</span><br>JMP EAX<br><span class="hljs-comment">//跳转目的地址由内存地址给出</span><br>JMP [EAX+<span class="hljs-number">32</span>]<br></code></pre></td></tr></table></figure>
+
+<h3 id="过程调用"><a href="#过程调用" class="headerlink" title="过程调用"></a>过程调用</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go">CALL EAX<br><span class="hljs-comment">//等价于</span><br>PUSH <span class="hljs-number">32</span><br>JUM EAX<br></code></pre></td></tr></table></figure>
+
+<h2 id="go中的汇编"><a href="#go中的汇编" class="headerlink" title="go中的汇编"></a>go中的汇编</h2><blockquote>
+<p>注意：通过指令的后缀来判断操作宽度</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//intel汇编风格</span><br>INC EAX<br>INC REX<br><span class="hljs-comment">//go汇编风格,L表示32位,Q表示64位</span><br>INCL AX<br>INCQ EX<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>go中的汇编正好和上面操作顺序相反，原地址在前，目的地址在后</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//intel汇编风格,将ECX复制到EAX</span><br>MOV EAX,ECX<br><span class="hljs-comment">//go汇编风格</span><br>MOV CX,AX<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>地址表示</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//intel汇编风格,将ECX复制到EAX</span><br>[EXP+EBX * + <span class="hljs-number">16</span>]<br><span class="hljs-comment">//go汇编风格</span><br><span class="hljs-number">16</span>(SP)(BX * <span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>立即数格式，Go立即数类似AT&amp;T风格，前面都需要加上$前缀</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//intel汇编风格,将ECX复制到EAX</span><br>MOV EAX,<span class="hljs-number">1234</span><br><span class="hljs-comment">//go汇编风格</span><br>MOV $ <span class="hljs-number">1234</span>,AX<br></code></pre></td></tr></table></figure>
+
+<h2 id="arm寄存器分类"><a href="#arm寄存器分类" class="headerlink" title="arm寄存器分类"></a>arm寄存器分类</h2><blockquote>
+<p>arm一共37个寄存器</p>
+</blockquote>
+<p>1.系统模式和用户模式可访问的寄存器<br>    r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,pc,cpsr<br>2.快速中断模式可访问的寄存器<br>    r0,r1,r2,r3,r4,r5,r6,r7,r8_fiq,r9_fiq,r10_fiq,r11_fiq,r12_fiq,r13_fiq,r14_fiq,pc,cpsr,spsr_fiq<br>3.管理模式可访问的寄存器<br>    r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13_svc,r14_svc,pc,cpsr,spsr_und<br>4.中止模式可访问的寄存器<br>    r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13_abt,r14_abt,pc,cpsr,spsr_abt<br>5.中断模式可访问的寄存器<br>    r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13_irq,r14_irq,pc,cpsr,spsr_irq<br>6.未定义模式可访问的寄存器<br>    r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13_und,r14_und,pc,cpsr,spsr_und</p>
+<h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><h2 id="指针构成"><a href="#指针构成" class="headerlink" title="指针构成"></a>指针构成</h2><ol>
+<li><p>声明指针</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> [pointName] *&#123;pointType&#125;<br><span class="hljs-keyword">var</span> p *<span class="hljs-type">int</span><br></code></pre></td></tr></table></figure>
+<p>这是一个指向int的指针，p是存储指向数据的内存地址，指针的大小与指向的类型无关和我们的平台有关</p>
+</li>
+<li><p>简单案例</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	n := <span class="hljs-number">0</span><br>	<span class="hljs-built_in">println</span>(Read(&amp;n))<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Read</span><span class="hljs-params">(p *<span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>	v := *p<br>	fmt.Println(v)<br>	<span class="hljs-keyword">return</span> v<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看汇编</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> tool objdump -S -s <span class="hljs-string">&quot;Read&quot;</span> code<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>注意笔者使用的是ARM64处理器，所以反汇编结果和书里的会有些不同</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs go">TEXT main.Read(SB) /Users/biaoyang/<span class="hljs-keyword">go</span>/src/hello/book/code.<span class="hljs-keyword">go</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Read</span><span class="hljs-params">(p *<span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>  <span class="hljs-number">0x100089f80</span>           f9400b90                MOVD <span class="hljs-number">16</span>(R28), R16       <br>  <span class="hljs-number">0x100089f84</span>           eb3063ff                CMP R16, RSP            <br>  <span class="hljs-number">0x100089f88</span>           <span class="hljs-number">54000329</span>                BLS <span class="hljs-number">25</span>(PC)              <br>  <span class="hljs-number">0x100089f8c</span>           f81b0ffe                MOVD.W R30, <span class="hljs-number">-80</span>(RSP)    <br>  <span class="hljs-number">0x100089f90</span>           f81f83fd                MOVD R29, <span class="hljs-number">-8</span>(RSP)       <br>  <span class="hljs-number">0x100089f94</span>           d10023fd                SUB $<span class="hljs-number">8</span>, RSP, R29        <br>        v := *p<br>  <span class="hljs-number">0x100089f98</span>           f9400000                MOVD (R0), R0   <span class="hljs-comment">//将参数存储的值复制给寄存器R0       </span><br>  <span class="hljs-number">0x100089f9c</span>           f9001be0                MOVD R0, <span class="hljs-number">48</span>(RSP) <span class="hljs-comment">//rsp是栈指针寄存器64位,将R0复制给栈指针寄存器       </span><br>        fmt.Println(v)<br>  <span class="hljs-number">0x100089fa0</span>           a903ffff                STP (ZR, ZR), <span class="hljs-number">56</span>(RSP)           <br>  <span class="hljs-number">0x100089fa4</span>           <span class="hljs-number">97</span>fdfa37                CALL runtime.convT64(SB)        <br>  <span class="hljs-number">0x100089fa8</span>           d0000141                ADRP <span class="hljs-number">172032</span>(PC), R1             <br>  <span class="hljs-number">0x100089fac</span>           <span class="hljs-number">910</span>f8021                ADD $<span class="hljs-number">992</span>, R1, R1                <br>  <span class="hljs-number">0x100089fb0</span>           f9001fe1                MOVD R1, <span class="hljs-number">56</span>(RSP)                <br>  <span class="hljs-number">0x100089fb4</span>           f90023e0                MOVD R0, <span class="hljs-number">64</span>(RSP)                <br>        <span class="hljs-keyword">return</span> Fprintln(os.Stdout, a...)<br>  <span class="hljs-number">0x100089fb8</span>           d0000581                ADRP <span class="hljs-number">729088</span>(PC), R1     <br>  <span class="hljs-number">0x100089fbc</span>           <span class="hljs-number">9137</span>c021                ADD $<span class="hljs-number">3568</span>, R1, R1       <br>  <span class="hljs-number">0x100089fc0</span>           f9400021                MOVD (R1), R1           <br>  <span class="hljs-number">0x100089fc4</span>           f00001c0                ADRP <span class="hljs-number">241664</span>(PC), R0     <br>  <span class="hljs-number">0x100089fc8</span>           <span class="hljs-number">912e6000</span>                ADD $<span class="hljs-number">2968</span>, R0, R0       <br>  <span class="hljs-number">0x100089fcc</span>           <span class="hljs-number">9100e3</span>e2                ADD $<span class="hljs-number">56</span>, RSP, R2        <br>  <span class="hljs-number">0x100089fd0</span>           b24003e3                ORR $<span class="hljs-number">1</span>, ZR, R3          <br>  <span class="hljs-number">0x100089fd4</span>           aa0303e4                MOVD R3, R4             <br>  <span class="hljs-number">0x100089fd8</span>           <span class="hljs-number">97</span>ffeb12                CALL fmt.Fprintln(SB)   <br>        <span class="hljs-keyword">return</span> v<br>  <span class="hljs-number">0x100089fdc</span>           f9401be0                MOVD <span class="hljs-number">48</span>(RSP), R0        <br>  <span class="hljs-number">0x100089fe0</span>           a97ffbfd                LDP <span class="hljs-number">-8</span>(RSP), (R29, R30) <br>  <span class="hljs-number">0x100089fe4</span>           <span class="hljs-number">910143</span>ff                ADD $<span class="hljs-number">80</span>, RSP, RSP       <br>  <span class="hljs-number">0x100089fe8</span>           d65f03c0                RET                     <br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Read</span><span class="hljs-params">(p *<span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br>  <span class="hljs-number">0x100089fec</span>           f90007e0                MOVD R0, <span class="hljs-number">8</span>(RSP)                         <br>  <span class="hljs-number">0x100089ff0</span>           aa1e03e3                MOVD R30, R3                            <br>  <span class="hljs-number">0x100089ff4</span>           <span class="hljs-number">97</span>ff3e0f                CALL runtime.morestack_noctxt.abi0(SB)  <br>  <span class="hljs-number">0x100089ff8</span>           f94007e0                MOVD <span class="hljs-number">8</span>(RSP), R0                         <br>  <span class="hljs-number">0x100089ffc</span>           <span class="hljs-number">17</span>ffffe1                JMP main.Read(SB)  <br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>指针的元素类型，当我们修改p为其他类型的指针时，反汇编后发现其并没有什么变化，可知其类型是固定的。</li>
+</ol>
+<h2 id="取地址"><a href="#取地址" class="headerlink" title="取地址"></a>取地址</h2><ul>
+<li><p>空指针：地址为0的指针</p>
+</li>
+<li><p>野指针：指针变量未初始化，go变量默认会初始化为对应的零值，指针都会指向nil，避免了野指针问题</p>
+</li>
+<li><p>悬挂指针：程序内存过早释放，后续代码又通过指针对内存数据进行访问，造成异常</p>
+</li>
+</ul>
+<h2 id="unsafe包"><a href="#unsafe包" class="headerlink" title="unsafe包"></a>unsafe包</h2><ol>
+<li><p>强转</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">convert</span><span class="hljs-params">(bytes []<span class="hljs-type">byte</span>)</span></span> <span class="hljs-type">string</span> &#123;<br>	<span class="hljs-keyword">return</span> *(*<span class="hljs-type">string</span>)(unsafe.Pointer(&amp;bytes))<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673879925184-dc93a9f5-c7d4-478f-8283-4a6607687181.png#averageHue=%23f5f5f5&clientId=u19de1ec5-be06-4&from=paste&height=260&id=zTiOo&name=image.png&originHeight=520&originWidth=864&originalType=binary&ratio=1&rotation=0&showTitle=false&size=90930&status=done&style=none&taskId=u6d185e0a-5408-4dcc-b5be-9b0060cd9f5&title=&width=432" srcset="/img/loading.gif" lazyload alt="image.png"><br>但是官方并不推荐这种unsafe的用法，虽然其效率更高但其跳过了go的安全验证，包括其移植性都会有影响</p>
+</li>
+<li><p>uintptr</p>
+<blockquote>
+<p>uintprt是一个uint用于存储地址，注意不要使用uintprt指向堆对象会影响GC工作</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h2><p>go的内存对齐参考了两个因素：1.数据类型自身大小，复合类型会参考最大的成员大小；2.硬件机器字长<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1673880279181-3bab0a71-b90a-4a77-8bf8-757b22832b25.png#averageHue=%23f3f3f2&clientId=u19de1ec5-be06-4&from=paste&height=393&id=u0d7adf66&name=image.png&originHeight=786&originWidth=1704&originalType=binary&ratio=1&rotation=0&showTitle=false&size=502603&status=done&style=none&taskId=uc233fa4f-58d1-479b-b3c1-a5c2b31367b&title=&width=852" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><h1 id="携程"><a href="#携程" class="headerlink" title="携程"></a>携程</h1><h1 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h1><h1 id="堆栈"><a href="#堆栈" class="headerlink" title="堆栈"></a>堆栈</h1><h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><ol>
+<li>《深度探索Go语言——对象模型与runtime的原理、特性及应用》</li>
+</ol>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="category-chain-item">读书笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Go/">#Go</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>读书笔记-《深度探索Go语言》</div>
+      <div>https://mikeygithub.github.io/2023/01/15/yuque/zr4pgh/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年1月15日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

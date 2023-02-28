@@ -1,0 +1,1377 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第1章部署虚拟环境安装Linux系统 Linux 系统内核指的是一个由 Linus Torvalds 负责维护,提供硬件抽象层、硬盘及文件系统控制及多任务功能的系统核心程序。  Linux 发行套件系统是我们常说的 Linux 操作系统,也即是由 Linux 内核与各种常用软件的集合产品。   安装Linux安装过程不在累赘，主要记录一下一些易错点  安装的时候不要选择最小安装，最小安装会将一些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux篇-Linux就该这么学">
+<meta property="og:url" content="https://mikeygithub.github.io/2021/07/07/yuque/hmar21/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="第1章部署虚拟环境安装Linux系统 Linux 系统内核指的是一个由 Linus Torvalds 负责维护,提供硬件抽象层、硬盘及文件系统控制及多任务功能的系统核心程序。  Linux 发行套件系统是我们常说的 Linux 操作系统,也即是由 Linux 内核与各种常用软件的集合产品。   安装Linux安装过程不在累赘，主要记录一下一些易错点  安装的时候不要选择最小安装，最小安装会将一些">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625580182503-579d1f5d-c755-4bfd-8cda-3c1b1933beb3.png?x-oss-process=image%2Fresize%2Cw_702">
+<meta property="article:published_time" content="2021-07-07T09:24:22.000Z">
+<meta property="article:modified_time" content="2023-02-28T10:30:33.383Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625580182503-579d1f5d-c755-4bfd-8cda-3c1b1933beb3.png?x-oss-process=image%2Fresize%2Cw_702">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>Linux篇-Linux就该这么学 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux篇-Linux就该这么学"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-07-07 17:24" pubdate>
+          2021年7月7日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          26k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          218 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Linux篇-Linux就该这么学</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625580182503-579d1f5d-c755-4bfd-8cda-3c1b1933beb3.png#clientId=u06585560-4b2d-4&from=paste&height=302&id=u32a19539&name=image.png&originHeight=604&originWidth=703&originalType=binary&ratio=1&rotation=0&showTitle=false&size=494581&status=done&style=none&taskId=u1ff08f6b-771a-492a-b824-4c28a7457b1&title=&width=351.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="第1章部署虚拟环境安装Linux系统"><a href="#第1章部署虚拟环境安装Linux系统" class="headerlink" title="第1章部署虚拟环境安装Linux系统"></a>第1章部署虚拟环境安装Linux系统</h1><ul>
+<li><p>Linux 系统内核指的是一个由 Linus Torvalds 负责维护,提供硬件抽象层、硬盘及文件系统控制及多任务功能的系统核心程序。</p>
+</li>
+<li><p>Linux 发行套件系统是我们常说的 Linux 操作系统,也即是由 Linux 内核与各种常用软件的集合产品。</p>
+</li>
+</ul>
+<h1 id="安装Linux"><a href="#安装Linux" class="headerlink" title="安装Linux"></a>安装Linux</h1><p>安装过程不在累赘，主要记录一下一些易错点</p>
+<ul>
+<li>安装的时候不要选择最小安装，最小安装会将一些功能给去掉</li>
+<li></li>
+</ul>
+<h3 id="网络模式"><a href="#网络模式" class="headerlink" title="网络模式"></a>网络模式</h3><ul>
+<li>桥接模式：相当于在物理主机与虚拟机网卡之间架设了一座桥梁，从而可以通过物理 主机的网卡访问外网。 </li>
+<li>NAT 模式：让 VM 虚拟机的网络服务发挥路由器的作用，使得通过虚拟机软件模拟 的主机可以通过物理主机访问外网，在真机中 NAT 虚拟机网卡对应的物理网卡是 VMnet8。 </li>
+<li>仅主机模式：仅让虚拟机内的主机与物理主机通信，不能访问外网，在真机中仅主机 模式模拟网卡对应的物理网卡是 VMnet1。</li>
+</ul>
+<h3 id="RPM-红帽软件包管理器"><a href="#RPM-红帽软件包管理器" class="headerlink" title="RPM 红帽软件包管理器"></a>RPM 红帽软件包管理器</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625736547771-67a38f05-adca-4c47-9268-793ba0fb0578.png#clientId=u97d146b8-d0b8-4&from=paste&height=152&id=ua26fcd55&name=image.png&originHeight=152&originWidth=539&originalType=binary&ratio=1&rotation=0&showTitle=false&size=35349&status=done&style=none&taskId=u8e0a4426-af9b-4a79-b6a5-1f16ec5989e&title=&width=539" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="YUM-软件仓库"><a href="#YUM-软件仓库" class="headerlink" title="YUM 软件仓库"></a>YUM 软件仓库</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625736612248-a5b112c9-b03f-4ff6-8ec2-35a9d2ee191b.png#clientId=u97d146b8-d0b8-4&from=paste&height=302&id=uaa98003a&name=image.png&originHeight=302&originWidth=539&originalType=binary&ratio=1&rotation=0&showTitle=false&size=65827&status=done&style=none&taskId=ud7315c58-9352-42d6-bea1-26b4be1415f&title=&width=539" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="systemd初始化进程"><a href="#systemd初始化进程" class="headerlink" title="systemd初始化进程"></a>systemd初始化进程</h3><p> Linux 操作系统的开机过程是这样的，即从 BIOS 开始，然后进入 Boot Loader，再加 载系统内核，然后内核进行初始化，最后启动初始化进程。初始化进程作为 Linux 系统的 第一个进程，它需要完成 Linux 系统中相关的初始化工作，为用户提供合适的工作环境。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625759705224-84af7dd3-89f3-4705-b950-8622ce6b1cad.png#clientId=ubccd7e7f-34e4-4&from=paste&height=213&id=u0e44b6ec&name=image.png&originHeight=213&originWidth=552&originalType=binary&ratio=1&rotation=0&showTitle=false&size=44036&status=done&style=none&taskId=uca78c688-7eda-49cd-8a98-d4abb6a6bec&title=&width=552" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625760337494-8fa8c39c-504b-4853-a9df-84710b77d35b.png#clientId=ubccd7e7f-34e4-4&from=paste&height=378&id=u7928fc04&name=image.png&originHeight=378&originWidth=550&originalType=binary&ratio=1&rotation=0&showTitle=false&size=85563&status=done&style=none&taskId=u5189418d-6454-4775-95e7-7baf916c785&title=&width=550" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="第2章新手必须掌握的Linux命令"><a href="#第2章新手必须掌握的Linux命令" class="headerlink" title="第2章新手必须掌握的Linux命令"></a>第2章新手必须掌握的Linux命令</h1><h2 id="强大好用的-Shell"><a href="#强大好用的-Shell" class="headerlink" title="强大好用的 Shell"></a>强大好用的 Shell</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626186714232-2e63a3c7-d96b-490d-b2b0-c3f2434ea4a4.png#clientId=u6aaa1de9-f580-4&from=paste&height=116&id=u4aab2d2d&name=image.png&originHeight=232&originWidth=544&originalType=binary&ratio=1&rotation=0&showTitle=false&size=24072&status=done&style=none&taskId=u0ad5ef04-22f6-45e8-8016-52bff00b3f0&title=&width=272" srcset="/img/loading.gif" lazyload alt="image.png"><br>Shell 就是这样的一个命令行工具。Shell(也称为终端或壳)充当的是人与内核(硬件)之间的翻译官,用户把一些命令“告诉”终端,它就会调用相应的程序服务去完成某些工作。</p>
+<h2 id="执行帮助文档命令"><a href="#执行帮助文档命令" class="headerlink" title="执行帮助文档命令"></a>执行帮助文档命令</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment">#长格式</span><br><span class="hljs-built_in">man</span> <span class="hljs-literal">--help</span><br><span class="hljs-comment">#短格式</span><br><span class="hljs-built_in">man</span> <span class="hljs-literal">-h</span><br><span class="hljs-built_in">man</span> -?<br></code></pre></td></tr></table></figure>
+
+<h2 id="常用系统工作命令"><a href="#常用系统工作命令" class="headerlink" title="常用系统工作命令"></a>常用系统工作命令</h2><h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><p>用于在终端输出字符串或变量提取后的值．格式为“echo [字符串|$变量]”</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">例子<br><span class="hljs-built_in">echo</span> hello<br><span class="hljs-comment">#输出</span><br>hello<br><span class="hljs-comment">#输出变量值</span><br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$var1</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="date"><a href="#date" class="headerlink" title="date"></a>date</h3><p>date 命令用于显示及设置系统的时间或日期,格式为“date [选项] [+指定的格式]”。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626188019434-b157061a-1eb4-43b9-8dc9-a327566942f7.png#clientId=u6aaa1de9-f580-4&from=paste&height=139&id=ucbe7a11e&name=image.png&originHeight=277&originWidth=700&originalType=binary&ratio=1&rotation=0&showTitle=false&size=23886&status=done&style=none&taskId=uc27c7f3f-e80e-47cc-ba59-c8398f94bf7&title=&width=350" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs perl">date<br><span class="hljs-comment">#2021年 07月 13日 星期二 22:52:58 CST</span><br>date <span class="hljs-string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span><br><span class="hljs-comment">#2021-07-13 22:52:44</span><br>date -s <span class="hljs-string">&quot;20170901 8:30:00&quot;</span><br><span class="hljs-number">2017</span>年 09月 <span class="hljs-number">01</span>日 星期五 08:<span class="hljs-number">30</span>:<span class="hljs-number">00</span> CST<br><span class="hljs-comment">#date 命令中的参数%j 可用来查看今天是当年中的第几天。这个参数能够很好地区分备份时间的新旧,即数字越大,越靠近当前时间。该参数的使用方式以及显示结果如下所示。</span><br>date <span class="hljs-string">&quot;+%j&quot;</span><br><span class="hljs-comment">#输出194</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="reboot"><a href="#reboot" class="headerlink" title="reboot"></a>reboot</h3><p>reboot 命令用于重启系统,其格式为 reboot。</p>
+<h3 id="poweroff-shutdown"><a href="#poweroff-shutdown" class="headerlink" title="poweroff/shutdown"></a>poweroff/shutdown</h3><p>poweroff 命令用于关闭系统,其格式为 poweroff。该命令与 reboot 命令相同,都会涉及硬件资源的管理权限<br>shutdown命令表示关机</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">shutdown</span> <span class="hljs-params">--help</span><br><span class="hljs-keyword">shutdown</span> [OPTIONS.<span class="hljs-string">..</span>] [TIME] [WALL.<span class="hljs-string">..</span>]<br><br>Shut down the system.<br><br>     <span class="hljs-params">--help</span>      Show this <span class="hljs-keyword">help</span><br>  -H <span class="hljs-params">--halt</span>      Halt the machine<br>  -P <span class="hljs-params">--poweroff</span>  Power-off the machine<br>  -r <span class="hljs-params">--reboot</span>    Reboot the machine<br>  -h             Equivalent to <span class="hljs-params">--poweroff</span>, overridden by <span class="hljs-params">--halt</span><br>  -k             Don&#x27;t halt/power-off/reboot, just send warnings<br>     <span class="hljs-params">--no-wall</span>   Don&#x27;t send wall message before halt/power-off/reboot<br>  -c             Cancel a pending <span class="hljs-keyword">shutdown</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><p>wget 命令用于在终端中下载网络文件,格式为“wget [参数] 下载地址”。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626188416691-b10e9c3f-9aa0-412b-9d74-b67900712146.png#clientId=u6aaa1de9-f580-4&from=paste&height=117&id=uc27bd32d&name=image.png&originHeight=233&originWidth=674&originalType=binary&ratio=1&rotation=0&showTitle=false&size=22442&status=done&style=none&taskId=u59cdb595-509b-4697-bafd-54fcd178b86&title=&width=337" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget https:<span class="hljs-regexp">//mi</span>keygithub.github.io<span class="hljs-regexp">/2021/</span><span class="hljs-number">07</span><span class="hljs-regexp">/07/yu</span>que<span class="hljs-regexp">/hmar21/</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p>ps 命令用于查看系统中的进程状态,格式为“ps [参数]”。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626189201821-bf235e19-d127-42e9-ae39-f22a5c9320b7.png#clientId=u6aaa1de9-f580-4&from=paste&height=62&id=u5d0f80e7&name=image.png&originHeight=123&originWidth=686&originalType=binary&ratio=1&rotation=0&showTitle=false&size=16073&status=done&style=none&taskId=uf2b487f4-d52f-4e53-9a07-7b3d1296283&title=&width=343" srcset="/img/loading.gif" lazyload alt="image.png"><br>Linux 系统中时刻运行着许多进程,如果能够合理地管理它们,则可以优化系统的性能。在Linux 系统中,有 5 种常见的进程状态,分别为运行、中断、不可中断、僵死与停止,其各自含义如下所示。</p>
+<ul>
+<li>R(运行):进程正在运行或在运行队列中等待。</li>
+<li>S(中断):进程处于休眠中,当某个条件形成后或者接收到信号时,则脱离该状态。</li>
+<li>D(不可中断):进程不响应系统异步信号,即便用 kill 命令也不能将其中断。</li>
+<li>Z(僵死):进程已经终止,但进程描述符依然存在, 直到父进程调用 wait4()系统函数后将进程释放。</li>
+<li>T(停止):进程收到停止信号后停止运行。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626189351178-eb5dc0dc-422a-4374-8312-04da467536dc.png#clientId=u6aaa1de9-f580-4&from=paste&height=147&id=u7042546c&name=image.png&originHeight=294&originWidth=682&originalType=binary&ratio=1&rotation=0&showTitle=false&size=50891&status=done&style=none&taskId=u52b525d7-4d80-43ba-a83f-94d558c81d6&title=&width=341" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="top"><a href="#top" class="headerlink" title="top"></a>top</h3><p>top 命令用于动态地监视进程活动与系统负载等信息,其格式为 top。</p>
+<blockquote>
+<p>个人更加推荐安装htop其可视化度更高</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626189462028-349de3e1-f706-42ce-b80f-eb3b488c21c4.png#clientId=u6aaa1de9-f580-4&from=paste&height=244&id=uf61ba769&name=image.png&originHeight=488&originWidth=732&originalType=binary&ratio=1&rotation=0&showTitle=false&size=110911&status=done&style=none&taskId=u6ae0b27c-5d2f-4744-bf77-b310a4a4322&title=&width=366" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<ul>
+<li><p>第 1 行:系统时间、运行时间、登录终端数、系统负载(三个数值分别为 1 分钟、5分钟、15 分钟内的平均值,数值越小意味着负载越低)。</p>
+</li>
+<li><p>第 2 行:进程总数、运行中的进程数、睡眠中的进程数、停止的进程数、僵死的进程数。</p>
+</li>
+<li><p>第 3 行:用户占用资源百分比、系统内核占用资源百分比、改变过优先级的进程资源百分比、空闲的资源百分比等。</p>
+<blockquote>
+<p>注:第 3 行中的数据均为 CPU 数据并以百分比格式显示,例如“97.1 id”意味着有 97.1%的 CPU 处理器资源处于空闲。</p>
+</blockquote>
+</li>
+<li><p>第 4 行:物理内存总量、内存使用量、内存空闲量、作为内核缓存的内存量。</p>
+</li>
+<li><p>第 5 行:虚拟内存总量、虚拟内存使用量、虚拟内存空闲量、已被提前加载的内存量。</p>
+</li>
+</ul>
+<h3 id="pidof"><a href="#pidof" class="headerlink" title="pidof"></a>pidof</h3><p>pidof 命令用于查询某个指定服务进程的 PID 值,格式为“pidof [参数] [服务名称]”。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">pidof</span> mysqld<br><span class="hljs-comment">#输出</span><br><span class="hljs-number">1625</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h3><p>kill 命令用于终止某个指定 PID 的服务进程,格式为“kill [参数] [进程 PID]”</p>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs vhdl">kill: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... <span class="hljs-keyword">or</span> kill -l [sigspec]<br>    Send a <span class="hljs-keyword">signal</span> <span class="hljs-keyword">to</span> a job.<br>    <br>    Send the processes identified by PID <span class="hljs-keyword">or</span> JOBSPEC the <span class="hljs-keyword">signal</span> named by<br>    SIGSPEC <span class="hljs-keyword">or</span> SIGNUM.  <span class="hljs-keyword">If</span> neither SIGSPEC <span class="hljs-keyword">nor</span> SIGNUM <span class="hljs-keyword">is</span> present, <span class="hljs-keyword">then</span><br>    SIGTERM <span class="hljs-keyword">is</span> assumed.<br>    <br>    Options:<br>      -s sig	SIG <span class="hljs-keyword">is</span> a <span class="hljs-keyword">signal</span> name<br>      -n sig	SIG <span class="hljs-keyword">is</span> a <span class="hljs-keyword">signal</span> number<br>      -l	list the <span class="hljs-keyword">signal</span> names; <span class="hljs-keyword">if</span> arguments follow `-l&#x27; they are<br>    		assumed <span class="hljs-keyword">to</span> be <span class="hljs-keyword">signal</span> numbers <span class="hljs-keyword">for</span> which names should be listed<br>      -L	synonym <span class="hljs-keyword">for</span> -l<br>    <br>    Kill <span class="hljs-keyword">is</span> a shell builtin <span class="hljs-keyword">for</span> two reasons: it allows job IDs <span class="hljs-keyword">to</span> be used<br>    instead <span class="hljs-keyword">of</span> <span class="hljs-keyword">process</span> IDs, <span class="hljs-keyword">and</span> allows processes <span class="hljs-keyword">to</span> be killed <span class="hljs-keyword">if</span> the limit<br>    <span class="hljs-keyword">on</span> processes that you can create <span class="hljs-keyword">is</span> reached.<br>    <br>    <span class="hljs-keyword">Exit</span> Status:<br>    Returns success unless an invalid option <span class="hljs-keyword">is</span> given <span class="hljs-keyword">or</span> an <span class="hljs-literal">error</span> occurs.<br></code></pre></td></tr></table></figure>
+<p>例子</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">kill</span> -<span class="hljs-number">9</span> <span class="hljs-number">12131</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="killall"><a href="#killall" class="headerlink" title="killall"></a>killall</h3><p>命令killall 命令用于终止某个指定名称的服务所对应的全部进程,格式为:“killall [参数] [进程名称]”。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs elixir">mikey<span class="hljs-variable">@mikey</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span>pidof httpd<br><span class="hljs-number">13581</span> <span class="hljs-number">13580</span> <span class="hljs-number">13579</span> <span class="hljs-number">13578</span> <span class="hljs-number">13577</span> <span class="hljs-number">13576</span><br>mikey<span class="hljs-variable">@mikey</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span>killall httpd<br>mikey<span class="hljs-variable">@mikey</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span>pidof httpd<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>如果我们在系统终端中执行一个命令后想立即停止它,可以同时按下 Ctrl + C 组合键(生产环境中比较常用的一个快捷键),这样将立即终止该命令的进程。或者,如果有些命令在执行时不断地在屏幕上输出信息,影响到后续命令的输入,则可以在执行命令时在末尾添加上一个&amp;符号,这样命令将进入系统后台来执行。</p>
+</blockquote>
+<h3 id="lsof"><a href="#lsof" class="headerlink" title="lsof"></a>lsof</h3><p>lsof（list open files）是一个列出当前系统打开文件的工具。在linux环境下，任何事物都以文件的形式存在，通过文件不仅仅可以访问常规数据，还可以访问网络连接和硬件。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">mikey@mikey:~$ lsof <span class="hljs-comment">--help</span><br>lsof: illegal <span class="hljs-keyword">option</span> <span class="hljs-type">character</span>: -<br>lsof: -e <span class="hljs-keyword">not</span> followed <span class="hljs-keyword">by</span> a file <span class="hljs-keyword">system</span> <span class="hljs-type">path</span>: &quot;lp&quot;<br>lsof <span class="hljs-number">4.89</span><br> latest revision: ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/<br> latest FAQ: ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/FAQ<br> latest man page: ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_man<br> <span class="hljs-keyword">usage</span>: [-?abhKlnNoOPRtUvVX] [+|-c c] [+|-d s] [+D D] [+|-E] [+|-e s] [+|-f[gG]]<br> [-F [f]] [-g [s]] [-i [i]] [+|-L [l]] [+m [m]] [+|-M] [-o [o]] [-p s]<br> [+|-r [t]] [-s [p:s]] [-S [t]] [-T [t]] [-u s] [+|-w] [-x [fl]] [<span class="hljs-comment">--] [names]</span><br>Defaults <span class="hljs-keyword">in</span> parentheses; comma-separated <span class="hljs-keyword">set</span> (s) items; dash-separated ranges.<br>  -?|-h list help          -a <span class="hljs-keyword">AND</span> selections (<span class="hljs-keyword">OR</span>)     -b avoid kernel blocks<br>  -c c  cmd c ^c /c/[bix]  +c w  COMMAND width (<span class="hljs-number">9</span>)    +d s  dir s files<br>  -d s  <span class="hljs-keyword">select</span> <span class="hljs-keyword">by</span> FD <span class="hljs-keyword">set</span>   +D D  dir D tree *SLOW?*   +|-e s  exempt s *RISKY*<br>  -i <span class="hljs-keyword">select</span> IPv[<span class="hljs-number">46</span>] files  -K list tasKs (threads)    -l list UID numbers<br>  -n <span class="hljs-keyword">no</span> host names         -N <span class="hljs-keyword">select</span> NFS files        -o list file <span class="hljs-keyword">offset</span><br>  -O <span class="hljs-keyword">no</span> overhead *RISKY*   -P <span class="hljs-keyword">no</span> port names           -R list paRent PID<br>  -s list file size        -t terse listing           -T <span class="hljs-keyword">disable</span> TCP/TPI <span class="hljs-keyword">info</span><br>  -U <span class="hljs-keyword">select</span> Unix socket    -v list <span class="hljs-keyword">version</span> <span class="hljs-keyword">info</span>       -V <span class="hljs-keyword">verbose</span> <span class="hljs-keyword">search</span><br>  +|-w  Warnings (+)       -X skip TCP&amp;UDP* files     -Z Z  context [Z]<br>  <span class="hljs-comment">-- end option scan     </span><br>  -E display endpoint <span class="hljs-keyword">info</span>              +E display endpoint <span class="hljs-keyword">info</span> <span class="hljs-keyword">and</span> files<br>  +f|-f  +filesystem <span class="hljs-keyword">or</span> -file names     +|-f[gG] flaGs <br>  -F [f] <span class="hljs-keyword">select</span> fields; -F? <span class="hljs-keyword">for</span> help  <br>  +|-L [l] list (+) suppress (-) link counts &lt; l (<span class="hljs-number">0</span> = <span class="hljs-keyword">all</span>; default = <span class="hljs-number">0</span>)<br>                                        +m [m] use|<span class="hljs-keyword">create</span> mount supplement<br>  +|-M   portMap registration (-)       -o o   o <span class="hljs-number">0</span>t <span class="hljs-keyword">offset</span> digits (<span class="hljs-number">8</span>)<br>  -p s   <span class="hljs-keyword">exclude</span>(^)|<span class="hljs-keyword">select</span> PIDs         -S [t] t second stat timeout (<span class="hljs-number">15</span>)<br>  -T qs TCP/TPI Q,St (s) <span class="hljs-keyword">info</span><br>  -g [s] <span class="hljs-keyword">exclude</span>(^)|<span class="hljs-keyword">select</span> <span class="hljs-keyword">and</span> print process <span class="hljs-keyword">group</span> IDs<br>  -i i   <span class="hljs-keyword">select</span> <span class="hljs-keyword">by</span> IPv[<span class="hljs-number">46</span>] address: [<span class="hljs-number">46</span>][proto][@host|addr][:svc_list|port_list]<br>  +|-r [t[m&lt;fmt&gt;]] repeat every t seconds (<span class="hljs-number">15</span>);  + <span class="hljs-keyword">until</span> <span class="hljs-keyword">no</span> files, - forever.<br>       An optional suffix <span class="hljs-keyword">to</span> t <span class="hljs-keyword">is</span> m&lt;fmt&gt;; m must separate t <span class="hljs-keyword">from</span> &lt;fmt&gt; <span class="hljs-keyword">and</span><br>      &lt;fmt&gt; <span class="hljs-keyword">is</span> an strftime(<span class="hljs-number">3</span>) <span class="hljs-keyword">format</span> <span class="hljs-keyword">for</span> the marker <span class="hljs-type">line</span>.<br>  -s p:s  <span class="hljs-keyword">exclude</span>(^)|<span class="hljs-keyword">select</span> protocol (p = TCP|UDP) states <span class="hljs-keyword">by</span> <span class="hljs-type">name</span>(s).<br>  -u s   <span class="hljs-keyword">exclude</span>(^)|<span class="hljs-keyword">select</span> <span class="hljs-keyword">login</span>|UID <span class="hljs-keyword">set</span> s<br>  -x [fl] <span class="hljs-keyword">cross</span> <span class="hljs-keyword">over</span> +d|+D File systems <span class="hljs-keyword">or</span> symbolic Links<br>  names  <span class="hljs-keyword">select</span> named files <span class="hljs-keyword">or</span> files <span class="hljs-keyword">on</span> named file systems<br>Anyone can list <span class="hljs-keyword">all</span> files; /dev warnings disabled; kernel ID <span class="hljs-keyword">check</span> disabled.<br></code></pre></td></tr></table></figure>
+<p>例子</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">mikey</span>@mikey:~$ lsof -i:<span class="hljs-number">33922</span><br><span class="hljs-attribute">COMMAND</span>  PID  USER   FD   TYPE   DEVICE SIZE/<span class="hljs-literal">OFF</span> NODE NAME<br><span class="hljs-attribute">chrome</span>  <span class="hljs-number">8805</span> mikey  <span class="hljs-number">112</span>u  IPv4 <span class="hljs-number">12262340</span>      <span class="hljs-number">0</span>t0  UDP *:<span class="hljs-number">33922</span> <br></code></pre></td></tr></table></figure>
+
+
+<h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><p>Linux netstat 命令用于显示网络状态。</p>
+<ul>
+<li>-a或–all 显示所有连线中的Socket。</li>
+<li>-A&lt;网络类型&gt;或–&lt;网络类型&gt; 列出该网络类型连线中的相关地址。</li>
+<li>-c或–continuous 持续列出网络状态。</li>
+<li>-C或–cache 显示路由器配置的快取信息。</li>
+<li>-e或–extend 显示网络其他相关信息。</li>
+<li>-F或–fib 显示路由缓存。</li>
+<li>-g或–groups 显示多重广播功能群组组员名单。</li>
+<li>-h或–help 在线帮助。</li>
+<li>-i或–interfaces 显示网络界面信息表单。</li>
+<li>-l或–listening 显示监控中的服务器的Socket。</li>
+<li>-M或–masquerade 显示伪装的网络连线。</li>
+<li>-n或–numeric 直接使用IP地址，而不通过域名服务器。</li>
+<li>-N或–netlink或–symbolic 显示网络硬件外围设备的符号连接名称。</li>
+<li>-o或–timers 显示计时器。</li>
+<li>-p或–programs 显示正在使用Socket的程序识别码和程序名称。</li>
+<li>-r或–route 显示Routing Table。</li>
+<li>-s或–statistics 显示网络工作信息统计表。</li>
+<li>-t或–tcp 显示TCP传输协议的连线状况。</li>
+<li>-u或–udp 显示UDP传输协议的连线状况。</li>
+<li>-v或–verbose 显示指令执行过程。</li>
+<li>-V或–version 显示版本信息。</li>
+<li>-w或–raw 显示RAW传输协议的连线状况。</li>
+<li>-x或–unix 此参数的效果和指定”-A unix”参数相同。</li>
+<li>–ip或–inet 此参数的效果和指定”-A inet”参数相同。<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">mikey@mikey:~$ netstat <span class="hljs-comment">--help</span><br><span class="hljs-name">usage</span>: netstat [-vWeenNcCF] [&lt;Af&gt;] -r         netstat &#123;-V|<span class="hljs-comment">--version|-h|--help&#125;</span><br>       netstat [-vWnNcaeol] [&lt;Socket&gt; ...]<br>       netstat &#123; [-vWeenNac] -i | [-cnNe] -M | -s [<span class="hljs-number">-6</span>tuw] &#125;<br><br>        -r, <span class="hljs-comment">--route              display routing table</span><br>        -i, <span class="hljs-comment">--interfaces         display interface table</span><br>        -g, <span class="hljs-comment">--groups             display multicast group memberships</span><br>        -s, <span class="hljs-comment">--statistics         display networking statistics (like SNMP)</span><br>        -M, <span class="hljs-comment">--masquerade         display masqueraded connections</span><br><br>        -v, <span class="hljs-comment">--verbose            be verbose</span><br>        -W, <span class="hljs-comment">--wide               don&#x27;t truncate IP addresses</span><br>        -n, <span class="hljs-comment">--numeric            don&#x27;t resolve names</span><br>        <span class="hljs-comment">--numeric-hosts          don&#x27;t resolve host names</span><br>        <span class="hljs-comment">--numeric-ports          don&#x27;t resolve port names</span><br>        <span class="hljs-comment">--numeric-users          don&#x27;t resolve user names</span><br>        -N, <span class="hljs-comment">--symbolic           resolve hardware names</span><br>        -e, <span class="hljs-comment">--extend             display other/more information</span><br>        -p, <span class="hljs-comment">--programs           display PID/Program name for sockets</span><br>        -o, <span class="hljs-comment">--timers             display timers</span><br>        -c, <span class="hljs-comment">--continuous         continuous listing</span><br><br>        -l, <span class="hljs-comment">--listening          display listening server sockets</span><br>        -a, <span class="hljs-comment">--all                display all sockets (default: connected)</span><br>        -F, <span class="hljs-comment">--fib                display Forwarding Information Base (default)</span><br>        -C, <span class="hljs-comment">--cache              display routing cache instead of FIB</span><br>        -Z, <span class="hljs-comment">--context            display SELinux security context for sockets</span><br><br>  &lt;Socket&gt;=&#123;-t|<span class="hljs-comment">--tcp&#125; &#123;-u|--udp&#125; &#123;-U|--udplite&#125; &#123;-S|--sctp&#125; &#123;-w|--raw&#125;</span><br>           &#123;-x|<span class="hljs-comment">--unix&#125; --ax25 --ipx --netrom</span><br>  &lt;AF&gt;=Use <span class="hljs-string">&#x27;-6|-4&#x27;</span> <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;-A &lt;af&gt;&#x27;</span> <span class="hljs-keyword">or</span> <span class="hljs-string">&#x27;--&lt;af&gt;&#x27;</span>; <span class="hljs-name">default</span>: inet<br>  List of possible address families (which support routing):<br>    inet (DARPA Internet) inet6 (IPv6) ax25 (AMPR AX<span class="hljs-number">.25</span>) <br>    netrom (AMPR NET/ROM) ipx (Novell IPX) ddp (Appletalk DDP) <br>    x25 (CCITT X<span class="hljs-number">.25</span>) <br></code></pre></td></tr></table></figure>
+例子<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs css">显示详细的网络状况<br>netstat -<span class="hljs-selector-tag">a</span><br>显示当前户籍UDP连接状况<br>netstat -nu<br>显示UDP端口号的使用情况<br>netstat -apu<br>显示网卡列表<br>netstat -<span class="hljs-selector-tag">i</span><br>显示组播组的关系<br>netstat -g<br>显示网络统计信息<br>netstat -s<br>显示监听的套接口<br>netstat -l<br></code></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="系统状态检测命令"><a href="#系统状态检测命令" class="headerlink" title="系统状态检测命令"></a>系统状态检测命令</h2><h3 id="uname"><a href="#uname" class="headerlink" title="uname"></a>uname</h3><p>uname 命令用于查看系统内核与系统版本等信息,格式为“uname [-a]”。<br>如果要查看当前系统版本的详细信息,则需要查看 redhat-release 文件,其命令以及相应的结果如下:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">cat <span class="hljs-regexp">/etc/</span>redhat-release<br></code></pre></td></tr></table></figure>
+
+<h3 id="uptime"><a href="#uptime" class="headerlink" title="uptime"></a>uptime</h3><p>uptime 用于查看系统的负载信息,格式为 uptime。</p>
+<h3 id="free"><a href="#free" class="headerlink" title="free"></a>free</h3><p>free 用于显示当前系统中内存的使用量信息,格式为“free [-h]”。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">mikey</span>@mikey:~$ free -h<br>              <span class="hljs-attribute">total</span>        used        free      shared  buff/cache   available<br><span class="hljs-attribute">Mem</span>:            <span class="hljs-number">15</span>G        <span class="hljs-number">4</span>.<span class="hljs-number">8</span>G        <span class="hljs-number">994</span>M        <span class="hljs-number">153</span>M        <span class="hljs-number">9</span>.<span class="hljs-number">7</span>G         <span class="hljs-number">10</span>G<br><span class="hljs-attribute">Swap</span>:            <span class="hljs-number">0</span>B          <span class="hljs-number">0</span>B          <span class="hljs-number">0</span>B<br><span class="hljs-attribute">mikey</span>@<br></code></pre></td></tr></table></figure>
+
+<h3 id="who"><a href="#who" class="headerlink" title="who"></a>who</h3><p>who 用于查看当前登入主机的用户终端信息,格式为“who [参数]”。<br>这三个简单的字母可以快速显示出所有正在登录本机的用户的名称以及他们正在开启的终端信息。</p>
+<h3 id="last"><a href="#last" class="headerlink" title="last"></a>last</h3><p>last 命令用于查看所有系统的登录记录,格式为“last [参数]”。</p>
+<h3 id="history"><a href="#history" class="headerlink" title="history"></a>history</h3><p>history 命令用于显示历史执行过的命令,格式为“history [-c]”。</p>
+<h3 id="sosreport"><a href="#sosreport" class="headerlink" title="sosreport"></a>sosreport</h3><p>sosreport 命令用于收集系统配置及架构信息并输出诊断文档,格式为 sosreport。</p>
+<h2 id="工作目录切换命令"><a href="#工作目录切换命令" class="headerlink" title="工作目录切换命令"></a>工作目录切换命令</h2><h3 id="pwd-命令"><a href="#pwd-命令" class="headerlink" title="pwd 命令"></a>pwd 命令</h3><p>pwd 命令用于显示用户当前所处的工作目录,格式为“pwd [选项]”。</p>
+<h3 id="cd-命令"><a href="#cd-命令" class="headerlink" title="cd 命令"></a>cd 命令</h3><p>cd 命令用于切换工作路径,格式为“cd [目录名称]”。</p>
+<h3 id="ls-命令"><a href="#ls-命令" class="headerlink" title="ls 命令"></a>ls 命令</h3><p>ls 命令用于显示目录中的文件信息,格式为“ls [选项] [文件] ”。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">ls</span> -<span class="hljs-keyword">l</span><br><span class="hljs-keyword">ls</span> -h<br><span class="hljs-keyword">ls</span> -<span class="hljs-keyword">al</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="文本文件编辑命令"><a href="#文本文件编辑命令" class="headerlink" title="文本文件编辑命令"></a>文本文件编辑命令</h2><h3 id="cat-命令"><a href="#cat-命令" class="headerlink" title="cat 命令"></a>cat 命令</h3><p>cat 命令用于查看纯文本文件(内容较少的),格式为“cat [选项] [文件]”。</p>
+<h3 id="more-命令"><a href="#more-命令" class="headerlink" title="more 命令"></a>more 命令</h3><p>more 命令用于查看纯文本文件(内容较多的),格式为“more [选项]文件”。</p>
+<h3 id="head-命令"><a href="#head-命令" class="headerlink" title="head 命令"></a>head 命令</h3><p>head 命令用于查看纯文本文档的前 N 行,格式为“head [选项] [文件]”。</p>
+<h3 id="tail-命令"><a href="#tail-命令" class="headerlink" title="tail 命令"></a>tail 命令</h3><p>tail 命令用于查看纯文本文档的后 N 行或持续刷新内容,格式为“tail [选项] [文件]”。<br>tailf 是tail -f的缩写监听当前文件的变化内容</p>
+<h3 id="tr-命令"><a href="#tr-命令" class="headerlink" title="tr 命令"></a>tr 命令</h3><p>tr 命令用于替换文本文件中的字符,格式为“tr [原始字符] [目标字符]”。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-selector-tag">cat</span> <span class="hljs-selector-tag">anaconda-ks</span><span class="hljs-selector-class">.cfg</span> | <span class="hljs-selector-tag">tr</span> <span class="hljs-selector-attr">[a-z]</span> <span class="hljs-selector-attr">[A-Z]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="wc-命令"><a href="#wc-命令" class="headerlink" title="wc 命令"></a>wc 命令</h3><p>wc 命令用于统计指定文本的行数、字数、字节数,格式为“wc [参数] 文本”。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stata">mikey@mikey:~$ wc <span class="hljs-keyword">shell</span>.<span class="hljs-keyword">sh</span> <br> 6 10 70 <span class="hljs-keyword">shell</span>.<span class="hljs-keyword">sh</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="stat-命令"><a href="#stat-命令" class="headerlink" title="stat 命令"></a>stat 命令</h3><p>stat 命令用于查看文件的具体存储信息和时间等信息,格式为“stat 文件名称”。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">mikey</span>@mikey:~$ stat shell.sh <br>  <span class="hljs-attribute">File</span>: shell.sh<br>  <span class="hljs-attribute">Size</span>: <span class="hljs-number">70</span>        	Blocks: <span class="hljs-number">8</span>          IO Block: <span class="hljs-number">4096</span>   regular file<br><span class="hljs-attribute">Device</span>: <span class="hljs-number">10302</span>h/<span class="hljs-number">66306</span>d	Inode: <span class="hljs-number">11944410</span>    Links: <span class="hljs-number">1</span><br><span class="hljs-attribute">Access</span>: (<span class="hljs-number">0775</span>/-rwxrwxr-x)  Uid: ( <span class="hljs-number">1000</span>/   mikey)   Gid: ( <span class="hljs-number">1000</span>/   mikey)<br><span class="hljs-attribute">Access</span>: <span class="hljs-number">2021</span>-<span class="hljs-number">07</span>-<span class="hljs-number">14</span> <span class="hljs-number">23</span>:<span class="hljs-number">00</span>:<span class="hljs-number">53</span>.<span class="hljs-number">289730038</span> +<span class="hljs-number">0800</span><br><span class="hljs-attribute">Modify</span>: <span class="hljs-number">2021</span>-<span class="hljs-number">04</span>-<span class="hljs-number">17</span> <span class="hljs-number">10</span>:<span class="hljs-number">24</span>:<span class="hljs-number">53</span>.<span class="hljs-number">819388827</span> +<span class="hljs-number">0800</span><br><span class="hljs-attribute">Change</span>: <span class="hljs-number">2021</span>-<span class="hljs-number">04</span>-<span class="hljs-number">17</span> <span class="hljs-number">10</span>:<span class="hljs-number">24</span>:<span class="hljs-number">53</span>.<span class="hljs-number">819388827</span> +<span class="hljs-number">0800</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="cut-命令"><a href="#cut-命令" class="headerlink" title="cut 命令"></a>cut 命令</h3><p>cut 命令用于按“列”提取文本字符,格式为“cut [参数] 文本”。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">mikey@mikey:~$ <span class="hljs-built_in">cut</span> -d: -f1 /etc/passwd<br>root<br>daemon<br>bin<br>sys<br><span class="hljs-built_in">sync</span><br>games<br>man<br>lp<br></code></pre></td></tr></table></figure>
+
+<h3 id="diff-命令"><a href="#diff-命令" class="headerlink" title="diff 命令"></a>diff 命令</h3><p>diff 命令用于比较多个文本文件的差异,格式为“diff [参数] 文件”。</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">mikey@mikey:~$ <span class="hljs-keyword">diff </span><span class="hljs-keyword">shell.sh </span><span class="hljs-keyword">shell_backup.sh </span><br><span class="hljs-number">6</span><span class="hljs-built_in">a7</span><br>&gt; echo <span class="hljs-string">&quot;backup file&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="文件目录管理命令"><a href="#文件目录管理命令" class="headerlink" title="文件目录管理命令"></a>文件目录管理命令</h2><h3 id="touch-命令"><a href="#touch-命令" class="headerlink" title="touch 命令"></a>touch 命令</h3><p>touch 命令用于创建空白文件或设置文件的时间,格式为“touch [选项] [文件]”。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626275575452-1971abfb-626c-46b1-8b5f-8412c76aeb35.png#clientId=u2b4003f9-6b08-4&from=paste&height=60&id=uce5d7b91&name=image.png&originHeight=119&originWidth=683&originalType=binary&ratio=1&rotation=0&showTitle=false&size=13705&status=done&style=none&taskId=u07d372e5-0dc2-4c5d-bee2-1a202a34ae4&title=&width=341.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="mkdir-命令"><a href="#mkdir-命令" class="headerlink" title="mkdir 命令"></a>mkdir 命令</h3><p>mkdir 命令用于创建空白的目录,格式为“mkdir [选项] 目录”。</p>
+<h3 id="cp-命令"><a href="#cp-命令" class="headerlink" title="cp 命令"></a>cp 命令</h3><p>cp 命令用于复制文件或目录,格式为“cp [选项] 源文件 目标文件”。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626275818377-6dc0157e-e8e7-4c65-845a-3497de2aee60.png#clientId=u2b4003f9-6b08-4&from=paste&height=85&id=uf4cb0615&name=image.png&originHeight=170&originWidth=677&originalType=binary&ratio=1&rotation=0&showTitle=false&size=25951&status=done&style=none&taskId=u17214b85-85c1-476b-bf8c-84b4ab7823f&title=&width=338.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="mv-命令"><a href="#mv-命令" class="headerlink" title="mv 命令"></a>mv 命令</h3><p>mv 命令用于剪切文件或将文件重命名,格式为“mv [选项] 源文件 [目标路径|目标文件名]”。</p>
+<h3 id="rm-命令"><a href="#rm-命令" class="headerlink" title="rm 命令"></a>rm 命令</h3><p>rm 命令用于删除文件或目录,格式为“rm [选项] 文件”。</p>
+<h3 id="dd-命令"><a href="#dd-命令" class="headerlink" title="dd 命令"></a>dd 命令</h3><p>dd 命令用于按照指定大小和个数的数据块来复制文件或转换文件,格式为“dd [参数]”。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626276593716-2dcb98cf-a207-46ce-9934-10d091482eba.png#clientId=u2b4003f9-6b08-4&from=paste&height=77&id=uc57df5a5&name=image.png&originHeight=153&originWidth=689&originalType=binary&ratio=1&rotation=0&showTitle=false&size=17560&status=done&style=none&taskId=u11545b67-4fc1-426d-aef1-25417d5bf4f&title=&width=344.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="file-命令"><a href="#file-命令" class="headerlink" title="file 命令"></a>file 命令</h3><p>file 命令用于查看文件的类型,格式为“file 文件名”。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stata">mikey@mikey:~$ <span class="hljs-keyword">file</span> <span class="hljs-keyword">shell</span>.<span class="hljs-keyword">sh</span> <br><span class="hljs-keyword">shell</span>.<span class="hljs-keyword">sh</span>: ASCII text<br></code></pre></td></tr></table></figure>
+
+<h2 id="打包压缩与搜索命令"><a href="#打包压缩与搜索命令" class="headerlink" title="打包压缩与搜索命令"></a>打包压缩与搜索命令</h2><h3 id="tar-命令"><a href="#tar-命令" class="headerlink" title="tar 命令"></a>tar 命令</h3><p>用于对文件进行打包压缩或解压,格式为“tar [选项] [文件]”。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626276751591-6db15cf9-5216-4784-b4fa-a91f7efdf23c.png#clientId=u2b4003f9-6b08-4&from=paste&height=150&id=u9fda7528&name=image.png&originHeight=300&originWidth=681&originalType=binary&ratio=1&rotation=0&showTitle=false&size=35832&status=done&style=none&taskId=ud227928d-32f1-487b-9df2-7b50475d39f&title=&width=340.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="grep-命令"><a href="#grep-命令" class="headerlink" title="grep 命令"></a>grep 命令</h3><p>grep 命令用于在文本中执行关键词搜索,并显示匹配的结果,格式为“grep [选项] [文件]”。<br>grep 命令的参数及其作用如表<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626276799395-30542961-1cb8-49ee-b570-a0e4c0543794.png#clientId=u2b4003f9-6b08-4&from=paste&height=87&id=u0a04d340&name=image.png&originHeight=174&originWidth=679&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21675&status=done&style=none&taskId=u7db4a1d0-3fd3-4f52-8baa-936d135d502&title=&width=339.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="find-命令"><a href="#find-命令" class="headerlink" title="find 命令"></a>find 命令</h3><p>find 命令用于按照指定条件来查找文件,格式为“find [查找路径] 寻找条件 操作”。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626276826373-cccc5009-0508-4406-806b-9fa792836c87.png#clientId=u2b4003f9-6b08-4&from=paste&height=262&id=ue8f9d7d5&name=image.png&originHeight=523&originWidth=679&originalType=binary&ratio=1&rotation=0&showTitle=false&size=83698&status=done&style=none&taskId=u66d7f02a-c26f-4284-ba58-895e4556dd3&title=&width=339.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="第3章管道符、重定向与环境变量"><a href="#第3章管道符、重定向与环境变量" class="headerlink" title="第3章管道符、重定向与环境变量"></a>第3章管道符、重定向与环境变量</h1><ul>
+<li><strong>标准输入重定向(STDIN,文件描述符为 0):默认从键盘输入,也可从其他文件或命令中输入。</strong></li>
+<li><strong>标准输出重定向(STDOUT,文件描述符为 1):默认输出到屏幕。</strong></li>
+<li><strong>错误输出重定向(STDERR,文件描述符为 2):默认输出到屏幕。</strong></li>
+</ul>
+<h2 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h2><p>1.输入<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626278256398-f1e53363-b743-4695-bfe2-307106c15d45.png#clientId=u2b4003f9-6b08-4&from=paste&height=80&id=u5b410ac1&name=image.png&originHeight=159&originWidth=687&originalType=binary&ratio=1&rotation=0&showTitle=false&size=25902&status=done&style=none&taskId=u5a8959bd-5659-4317-9a53-22161f89960&title=&width=343.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>2.输出<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626278272126-ca61ae5c-65e0-4f16-b033-2201364c8440.png#clientId=u2b4003f9-6b08-4&from=paste&height=128&id=uccb84889&name=image.png&originHeight=256&originWidth=681&originalType=binary&ratio=1&rotation=0&showTitle=false&size=53878&status=done&style=none&taskId=ucb2930b0-a723-403e-80fe-456d9525f2a&title=&width=340.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="管道命令符"><a href="#管道命令符" class="headerlink" title="管道命令符"></a>管道命令符</h2><blockquote>
+<p>把前一个命令原本要输出到屏幕的数据当作是后一个命令的标准输入</p>
+</blockquote>
+<ul>
+<li>找出被限制登录用户的命令是 grep “/sbin/nologin” /etc/passwd;</li>
+<li>统计文本行数的命令则是 wc -l。</li>
+</ul>
+<p>“命令 A | 命令 B | 命令 C”</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">ls <span class="hljs-regexp">/etc/</span> | more<br></code></pre></td></tr></table></figure>
+
+<h2 id="命令行的通配符"><a href="#命令行的通配符" class="headerlink" title="命令行的通配符"></a>命令行的通配符</h2><ul>
+<li>“*”表示匹配所有</li>
+<li>“?”表示匹配一个字符</li>
+</ul>
+<h2 id="常用的转义字符"><a href="#常用的转义字符" class="headerlink" title="常用的转义字符"></a>常用的转义字符</h2><ul>
+<li>反斜杠():使反斜杠后面的一个变量变为单纯的字符串。</li>
+<li>单引号(‘’):转义其中所有的变量为单纯的字符串。</li>
+<li> 双引号(“”):保留其中的变量属性,不进行转义处理。</li>
+<li> 反引号(``):把其中的命令执行后返回结果。</li>
+</ul>
+<h2 id="重要的环境变量"><a href="#重要的环境变量" class="headerlink" title="重要的环境变量"></a>重要的环境变量</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626360379274-bae34ba7-bdfa-41bb-9e97-90911c78e426.png#clientId=u2b4003f9-6b08-4&from=paste&height=169&id=u6776c0c8&name=image.png&originHeight=338&originWidth=704&originalType=binary&ratio=1&rotation=0&showTitle=false&size=53430&status=done&style=none&taskId=u8d713b43-39ab-4409-a9e7-ac512c62704&title=&width=352" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="第4章Vim编辑器与Shell-命令脚本"><a href="#第4章Vim编辑器与Shell-命令脚本" class="headerlink" title="第4章Vim编辑器与Shell 命令脚本"></a>第4章Vim编辑器与Shell 命令脚本</h1><h2 id="Vim-文本编辑器"><a href="#Vim-文本编辑器" class="headerlink" title="Vim 文本编辑器"></a>Vim 文本编辑器</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626360677205-c5acbf71-b25b-4577-8017-a551d36a71b4.png#clientId=u2b4003f9-6b08-4&from=paste&height=136&id=u431e2cc3&name=image.png&originHeight=272&originWidth=684&originalType=binary&ratio=1&rotation=0&showTitle=false&size=42588&status=done&style=none&taskId=u4fd22de7-f57c-4d20-8de9-ea5559eac2f&title=&width=342" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626360696904-1fd7f654-27bf-4f54-accc-c730310077dc.png#clientId=u2b4003f9-6b08-4&from=paste&height=154&id=u9bbd9d59&name=image.png&originHeight=307&originWidth=690&originalType=binary&ratio=1&rotation=0&showTitle=false&size=30521&status=done&style=none&taskId=ud560608b-5c0a-4bc1-8afd-e1d53c618c7&title=&width=345" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626360714719-1318c719-c9d2-4100-a0f8-6abd8f329a58.png#clientId=u2b4003f9-6b08-4&from=paste&height=101&id=u5d86d960&name=image.png&originHeight=202&originWidth=680&originalType=binary&ratio=1&rotation=0&showTitle=false&size=32954&status=done&style=none&taskId=u1a590359-2e99-4745-8d17-d96be25027e&title=&width=340" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="编写-Shell-脚本"><a href="#编写-Shell-脚本" class="headerlink" title="编写 Shell 脚本"></a>编写 Shell 脚本</h2><ul>
+<li>交互式(Interactive):用户每输入一条命令就立即执行。</li>
+<li>批处理(Batch):由用户事先编写好一个完整的 Shell 脚本,Shell 会一次性执行脚本中诸多的命令。</li>
+</ul>
+<h3 id="接收用户的参数"><a href="#接收用户的参数" class="headerlink" title="接收用户的参数"></a>接收用户的参数</h3><p>$#对应的是总共有几个参数,$*对应的是所有位置的参数值,$?对应的是显示上一次命令的执行返回值,而<br>$1、$2、$3……则分别对应着第 N 个位置的参数值</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626361152190-2833b830-336d-4992-90d2-38262427483b.png#clientId=u2b4003f9-6b08-4&from=paste&height=115&id=u9ed39714&name=image.png&originHeight=230&originWidth=692&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21074&status=done&style=none&taskId=ubb5457d3-3711-480c-8137-407471f3c76&title=&width=346" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626362599368-811e026f-69a5-4ada-98a4-3d5759d3cf41.png#clientId=u2b4003f9-6b08-4&from=paste&height=52&id=u0e40a4fa&name=image.png&originHeight=104&originWidth=425&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21379&status=done&style=none&taskId=u1ba3083e-a84f-4652-bbf6-9577d8ecbf0&title=&width=212.5" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626362611139-adcb70c3-651a-44f5-baf6-67c352a123bb.png#clientId=u2b4003f9-6b08-4&from=paste&height=62&id=u507178c3&name=image.png&originHeight=123&originWidth=443&originalType=binary&ratio=1&rotation=0&showTitle=false&size=31024&status=done&style=none&taskId=u71812d58-be37-450e-892e-3a0a8434463&title=&width=221.5" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626362624317-376a8934-c812-4b69-9b08-1935f353d3de.png#clientId=u2b4003f9-6b08-4&from=paste&height=86&id=u9782684c&name=image.png&originHeight=171&originWidth=444&originalType=binary&ratio=1&rotation=0&showTitle=false&size=41169&status=done&style=none&taskId=u46cd5614-2c69-4bed-829e-5b7c4c07045&title=&width=222" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626362637616-d73daec0-da9e-42f4-bd56-ee8aade97dca.png#clientId=u2b4003f9-6b08-4&from=paste&height=56&id=ucf5fc28f&name=image.png&originHeight=112&originWidth=432&originalType=binary&ratio=1&rotation=0&showTitle=false&size=26503&status=done&style=none&taskId=u01180a5e-5b1f-4a37-9394-1437c936826&title=&width=216" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626362653576-a1f1335e-8d79-4b25-8b5c-9b72653d508f.png#clientId=u2b4003f9-6b08-4&from=paste&height=57&id=u916395ea&name=image.png&originHeight=113&originWidth=450&originalType=binary&ratio=1&rotation=0&showTitle=false&size=25768&status=done&style=none&taskId=ufe07436b-1418-48b5-860f-5aca1bcc75e&title=&width=225" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626362665932-ac5974b0-6cb5-4d6b-9b04-d9167beab6ee.png#clientId=u2b4003f9-6b08-4&from=paste&height=102&id=ub40162ff&name=image.png&originHeight=204&originWidth=458&originalType=binary&ratio=1&rotation=0&showTitle=false&size=44764&status=done&style=none&taskId=uefac6435-6260-4593-901f-1c187e92b93&title=&width=229" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="计划任务服务程序"><a href="#计划任务服务程序" class="headerlink" title="计划任务服务程序"></a>计划任务服务程序</h2><p>安装</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">sudo apt <span class="hljs-keyword">install </span><span class="hljs-built_in">at</span><br></code></pre></td></tr></table></figure>
+<p>设置定时</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">mikey</span>@mikey:~$ at <span class="hljs-number">23</span>:<span class="hljs-number">30</span><br><span class="hljs-attribute">at</span> &gt; systemctl restart httpd<br><span class="hljs-attribute">at</span> &gt; 此处请同时按下 Ctrl + D 组合键来结束编写计划任务<br><span class="hljs-attribute">job</span> <span class="hljs-number">3</span> at Mon Apr <span class="hljs-number">27</span> <span class="hljs-number">23</span>:<span class="hljs-number">30</span>:<span class="hljs-number">00</span> <span class="hljs-number">2017</span><br><span class="hljs-attribute">mikey</span>@mikey:~$ at -l<br><span class="hljs-attribute">3</span> Mon Apr <span class="hljs-number">27</span> <span class="hljs-number">23</span>:<span class="hljs-number">30</span>:<span class="hljs-number">00</span> <span class="hljs-number">2017</span> a root<br><br><span class="hljs-attribute">mikey</span>@mikey:~$ echo <span class="hljs-string">&quot;systemctl restart httpd&quot;</span> | at <span class="hljs-number">23</span>:<span class="hljs-number">30</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626362999984-3da59c2d-e7a5-4b92-a027-f837454ccae8.png#clientId=u2b4003f9-6b08-4&from=paste&height=182&id=u7dbdf9aa&name=image.png&originHeight=364&originWidth=724&originalType=binary&ratio=1&rotation=0&showTitle=false&size=70059&status=done&style=none&taskId=u8a42a2b4-086a-41a1-b077-176e20934d7&title=&width=362" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="第5章用户身份与文件权限"><a href="#第5章用户身份与文件权限" class="headerlink" title="第5章用户身份与文件权限"></a>第5章用户身份与文件权限</h1><h2 id="用户身份与能力"><a href="#用户身份与能力" class="headerlink" title="用户身份与能力"></a>用户身份与能力</h2><p>在 RHEL 7 系统中,用户身份有下面这些。</p>
+<ul>
+<li>管理员 UID 为 0:系统的管理员用户。</li>
+<li>系统用户 UID 为 1~999: Linux 系统为了避免因某个服务程序出现漏洞而被黑客提权至整台服务器,默认服务程序会有独立的系统用户负责运行,进而有效控制被破坏范围。</li>
+<li>普通用户 UID 从 1000 开始:是由管理员创建的用于日常工作的用户。</li>
+</ul>
+<p>需要注意的是,UID 是不能冲突的,而且管理员创建的普通用户的 UID 默认是从 1000开始的(即使前面有闲置的号码)。</p>
+<h3 id="useradd-命令"><a href="#useradd-命令" class="headerlink" title="useradd 命令"></a>useradd 命令</h3><p>useradd 命令用于创建新的用户,格式为“useradd [选项] 用户名”。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626365147561-fdcfeb4b-b667-41d1-bff7-65a06754d783.png#clientId=u2b4003f9-6b08-4&from=paste&height=135&id=ue26b1575&name=image.png&originHeight=269&originWidth=697&originalType=binary&ratio=1&rotation=0&showTitle=false&size=42065&status=done&style=none&taskId=udd9321bf-5c0f-4b3f-adda-d540ee4946c&title=&width=348.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="groupadd-命令"><a href="#groupadd-命令" class="headerlink" title="groupadd 命令"></a>groupadd 命令</h3><p>groupadd 命令用于创建用户组,格式为“groupadd [选项] 群组名”。</p>
+<h3 id="usermod-命令"><a href="#usermod-命令" class="headerlink" title="usermod 命令"></a>usermod 命令</h3><p>用于修改用户的属性,格式为“usermod [选项] 用户名”。Linux 系统中的一切都是文件,因此在系统中创建用户也就是修改配置文件的过程。用户的信息保存在/etc/passwd 文件中,可以直接用文本编辑器来修改其中的用户参数项目,也可以用 usermod 命令修改已经创建的用户信息,诸如用户的 UID、基本/扩展用户组、默认终端等。usermod 命令的参数以及作用如表<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626365321088-a4e4b95f-ed0f-4d01-be49-da9e70b7f8c6.png#clientId=u2b4003f9-6b08-4&from=paste&height=303&id=u650e3a7d&name=image.png&originHeight=606&originWidth=686&originalType=binary&ratio=1&rotation=0&showTitle=false&size=56775&status=done&style=none&taskId=u3713ab44-659b-43d4-8c47-55c33545a5e&title=&width=343" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="passwd-命令"><a href="#passwd-命令" class="headerlink" title="passwd 命令"></a>passwd 命令</h3><p>passwd 命令用于修改用户密码、过期时间、认证信息等,格式为“passwd [选项] [用户名]”。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626445750482-4d4c5346-3ea7-476d-aee0-2254ca13842f.png#clientId=u397c1c6d-9f7c-4&from=paste&height=123&id=u34b7dd6c&name=image.png&originHeight=246&originWidth=699&originalType=binary&ratio=1&rotation=0&showTitle=false&size=42708&status=done&style=none&taskId=ud0e57bf5-fbc0-404b-997a-ff88a9fc6ae&title=&width=349.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="userdel-命令"><a href="#userdel-命令" class="headerlink" title="userdel 命令"></a>userdel 命令</h3><p>userdel 命令用于删除用户,格式为“userdel [选项] 用户名”。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626445866952-07d591d8-201e-4fbd-9433-0708c4a306ee.png#clientId=u397c1c6d-9f7c-4&from=paste&height=70&id=uf3f1d26e&name=image.png&originHeight=140&originWidth=696&originalType=binary&ratio=1&rotation=0&showTitle=false&size=14954&status=done&style=none&taskId=u2ac549e7-418b-4755-b3f6-4a122f03b81&title=&width=348" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="文件权限与归属"><a href="#文件权限与归属" class="headerlink" title="文件权限与归属"></a>文件权限与归属</h2><p>尽管在 Linux 系统中一切都是文件,但是每个文件的类型不尽相同,因此 Linux 系统使用了不同的字符来加以区分,常见的字符如下所示。</p>
+<ul>
+<li> -:普通文件。</li>
+<li> d:目录文件。</li>
+<li> l:链接文件。</li>
+<li> b:块设备文件。</li>
+<li> c:字符设备文件。</li>
+<li> p:管道文件。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626446178808-a93fc9e6-24bc-4b6c-9dfd-5e7274cfe881.png#clientId=u397c1c6d-9f7c-4&from=paste&height=81&id=u3f661c1e&name=image.png&originHeight=162&originWidth=693&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21164&status=done&style=none&taskId=u71dbad19-24e8-45ea-8083-65f89177e49&title=&width=346.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>文件权限的数字法表示基于字符表示(rwx)的权限计算而来,其目的是简化权限的表示。</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626446615144-5cbd541d-4974-46e0-bdc3-bd20f0237d80.png#clientId=u397c1c6d-9f7c-4&from=paste&height=58&id=uf60e4306&name=image.png&originHeight=116&originWidth=525&originalType=binary&ratio=1&rotation=0&showTitle=false&size=34953&status=done&style=none&taskId=uc9396b76-fca5-4211-a7bc-433f438ec32&title=&width=262.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="文件的特殊权限"><a href="#文件的特殊权限" class="headerlink" title="文件的特殊权限"></a>文件的特殊权限</h2><h3 id="SUID"><a href="#SUID" class="headerlink" title="SUID"></a>SUID</h3><p>SUID 是一种对二进制程序进行设置的特殊权限,可以让二进制程序的执行者临时拥有属主的权限(仅对拥有执行权限的二进制程序有效)。例如,所有用户都可以执行 passwd 命令来修改自己的用户密码,而用户密码保存在/etc/shadow 文件中。仔细查看这个文件就会发现它的默认权限是 000,也就是说除了 root 管理员以外,所有用户都没有查看或编辑该文件的权限。但是,在使用 passwd 命令时如果加上 SUID 特殊权限位,就可让普通用户临时获得程序所有者的身份,把变更的密码信息写入到 shadow 文件中。</p>
+<h3 id="SGID"><a href="#SGID" class="headerlink" title="SGID"></a>SGID</h3><p>SGID 主要实现如下两种功能:</p>
+<ul>
+<li>让执行者临时拥有属组的权限(对拥有执行权限的二进制程序进行设置);</li>
+<li>在某个目录中创建的文件自动继承该目录的用户组(只可以对目录进行设置)。</li>
+</ul>
+<h3 id="SGID-1"><a href="#SGID-1" class="headerlink" title="SGID"></a>SGID</h3><p>SBIT现在,大学里的很多老师都要求学生将作业上传到服务器的特定共享目录中,但总是有几个“破坏分子”喜欢删除其他同学的作业,这时就要设置 SBIT(Sticky Bit)特殊权限位了(也可以称之为特殊权限位之粘滞位)。SBIT 特殊权限位可确保用户只能删除自己的文件,而不能删除其他用户的文件。换句话说,当对某个目录设置了 SBIT 粘滞位权限后,那么该目录中的文件就只能被其所有者执行删除操作了。</p>
+<h2 id="文件的隐藏权限"><a href="#文件的隐藏权限" class="headerlink" title="文件的隐藏权限"></a>文件的隐藏权限</h2><h3 id="chattr-命令"><a href="#chattr-命令" class="headerlink" title="chattr 命令"></a>chattr 命令</h3><p>chattr 命令用于设置文件的隐藏权限,格式为“chattr [参数] 文件”。如果想要把某个隐藏功能添加到文件上,则需要在命令后面追加“+参数”,如果想要把某个隐藏功能移出文件,则需要追加“-参数”。chattr 命令中可供选择的隐藏权限参数非常丰富,具体如下表所示。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626448595404-811c17d9-81fd-4cb3-880b-fee40bac1d79.png#clientId=u397c1c6d-9f7c-4&from=paste&height=382&id=ube2c907a&name=image.png&originHeight=764&originWidth=701&originalType=binary&ratio=1&rotation=0&showTitle=false&size=104407&status=done&style=none&taskId=udbbab7c0-111a-458f-94ca-96a15706d4d&title=&width=350.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="lsattr-命令"><a href="#lsattr-命令" class="headerlink" title="lsattr 命令"></a>lsattr 命令</h3><p>lsattr 命令用于显示文件的隐藏权限,格式为“lsattr [参数] 文件”。在 Linux 系统中,文件的隐藏权限必须使用 lsattr 命令来查看,平时使用的 ls 之类的命令则看不出端倪:</p>
+<h2 id="文件访问控制列表"><a href="#文件访问控制列表" class="headerlink" title="文件访问控制列表"></a>文件访问控制列表</h2><h3 id="setfacl-命令"><a href="#setfacl-命令" class="headerlink" title="setfacl 命令"></a>setfacl 命令</h3><p>setfacl 命令用于管理文件的 ACL 规则,格式为“setfacl [参数] 文件名称”。文件的 ACL提供的是在所有者、所属组、其他人的读/写/执行权限之外的特殊权限控制,使用 setfacl 命令可以针对单一用户或用户组、单一文件或目录来进行读/写/执行权限的控制。其中,针对目录文件需要使用-R 递归参数;针对普通文件则使用-m 参数;如果想要删除某个文件的 ACL,则可以使用-b 参数。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#设置用户在/root 目录上的权限</span><br>[root@mikey ~]<span class="hljs-comment"># setfacl -Rm u:mikey:rwx /root</span><br>[root@mikey ~]<span class="hljs-comment"># su - mikey</span><br>Last login: Sat Mar <span class="hljs-number">21</span> <span class="hljs-number">15</span>:<span class="hljs-number">45</span>:<span class="hljs-number">03</span> CST <span class="hljs-number">2017</span> on pts/<span class="hljs-number">1</span><br>[mikey@mikey ~]$ cd /root<br>[mikey@mikey root]$ ls<br>anaconda-ks.cfg Downloads Pictures Public<br>[mikey@mikey root]$ cat anaconda-ks.cfg<br>[mikey@mikey root]$ <span class="hljs-keyword">exit</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="getfacl-命令"><a href="#getfacl-命令" class="headerlink" title="getfacl 命令"></a>getfacl 命令</h3><p>getfacl 命令用于显示文件上设置的 ACL 信息,格式为“getfacl 文件名称”。Linux 系统用户身份与文件权限<br>中的命令就是这么好记。想要设置 ACL,用的是 setfacl 命令;要想查看 ACL,则用的是 getfacl 命令。下面使用 getfacl 命令显示在 root 管理员家目录上设置的所有 ACL 信息。</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs elixir">mikey<span class="hljs-variable">@mikey</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$ </span>getfacl ./<br><span class="hljs-comment"># file: .</span><br><span class="hljs-comment"># owner: mikey</span><br><span class="hljs-comment"># group: mikey</span><br>user::rwx<br>group::r-x<br>other::r-x<br></code></pre></td></tr></table></figure>
+
+<h2 id="su-命令与-sudo-服务"><a href="#su-命令与-sudo-服务" class="headerlink" title="su 命令与 sudo 服务"></a>su 命令与 sudo 服务</h2><h3 id="SU命令"><a href="#SU命令" class="headerlink" title="SU命令"></a>SU命令</h3><p>su 命令可以解决切换用户身份的需求,使得当前用户在不退出登录的情况下,顺畅地切换到其他用户,比如从 root 管理员切换至普通用户</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">su - mikey</span><br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>上面的 su 命令与用户名之间有一个减号(-),这意味着完全切换到新的用户,即把环境变量信息也变更为新用户的相应信息,而不是保留原始的信息。强烈建议在切换用户身份时添加这个减号(-)。</p>
+</blockquote>
+<h3 id="SUDO命令"><a href="#SUDO命令" class="headerlink" title="SUDO命令"></a>SUDO命令</h3><p>sudo 命令用于给普通用户提供额外的权限来完成原本 root 管理员才能完成的任务,格式为“sudo [参数] 命令名称”。sudo 服务中可用的参数以及相应的作用如表<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626449475790-11cac716-5de2-4d34-a6b7-c591853614bc.png#clientId=u397c1c6d-9f7c-4&from=paste&height=118&id=ub3961ce2&name=image.png&originHeight=235&originWidth=705&originalType=binary&ratio=1&rotation=0&showTitle=false&size=36832&status=done&style=none&taskId=u11339bd9-911f-4fd5-ae79-1a515b834a1&title=&width=352.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>总结来说,sudo 命令具有如下功能:</p>
+<ul>
+<li>限制用户执行指定的命令:</li>
+<li>记录用户执行的每一条命令;</li>
+<li>配置文件(/etc/sudoers)提供集中的用户管理、权限与主机等参数;</li>
+<li>验证密码的后 5 分钟内(默认值)无须再让用户再次验证密码。</li>
+</ul>
+<p>当然,如果担心直接修改配置文件会出现问题,则可以使用 sudo 命令提供的 visudo 命令来配置用户权限。这条命令在配置用户权限时将禁止多个用户同时修改 sudoers 配置文件,还可以对配置文件内的参数进行语法检查,并在发现参数错误时进行报错。</p>
+<blockquote>
+<p>只有 root 管理员才可以使用 visudo 命令编辑 sudo 服务的配置文件。</p>
+</blockquote>
+<blockquote>
+<p>root ALL=(ALL) ALL<br>谁可以使用 允许使用的主机=(以谁的身份) 可执行命令的列表</p>
+</blockquote>
+<h1 id="第6章存储结构与磁盘划分"><a href="#第6章存储结构与磁盘划分" class="headerlink" title="第6章存储结构与磁盘划分"></a>第6章存储结构与磁盘划分</h1><h2 id="一切从“-”开始"><a href="#一切从“-”开始" class="headerlink" title="一切从“/”开始;"></a>一切从“/”开始;</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626449810888-0d5d6d1c-b909-4dfb-87f9-2f600b62a711.png#clientId=u397c1c6d-9f7c-4&from=paste&height=256&id=u0080eb1c&name=image.png&originHeight=511&originWidth=693&originalType=binary&ratio=1&rotation=0&showTitle=false&size=102992&status=done&style=none&taskId=u52079752-9685-4f44-9cb5-72716509dd4&title=&width=346.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="物理设备的命名规则"><a href="#物理设备的命名规则" class="headerlink" title="物理设备的命名规则"></a>物理设备的命名规则</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626449932767-d819f3a5-6b2a-401f-bb04-7b5c72af64b4.png#clientId=u397c1c6d-9f7c-4&from=paste&height=111&id=uad6784e8&name=image.png&originHeight=222&originWidth=686&originalType=binary&ratio=1&rotation=0&showTitle=false&size=24465&status=done&style=none&taskId=u7a9c9ed0-0cab-4e17-bcea-6a3540cee2a&title=&width=343" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="物理设备的命名规则-1"><a href="#物理设备的命名规则-1" class="headerlink" title="物理设备的命名规则"></a>物理设备的命名规则</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626449952595-2598ad39-eb96-44fb-9246-4433a065ae7b.png#clientId=u397c1c6d-9f7c-4&from=paste&height=78&id=ub81c9d33&name=image.png&originHeight=155&originWidth=376&originalType=binary&ratio=1&rotation=0&showTitle=false&size=39388&status=done&style=none&taskId=u69dcecfc-90df-4042-9ead-fac23709d01&title=&width=188" srcset="/img/loading.gif" lazyload alt="image.png"><br>首先，/dev/目录中保存的应当是硬件设备文件；其次，sd 表示是存储设备；然后，a 表示系统中同类接口中第一个被识别到的设备，最后，5 表示这个设备是一个逻辑分区。一言以蔽之，“/dev/sda5”表示的就是“这是系统中第一块被识别到的硬件设备中分区编号为 5 的逻辑分区的设备文件”。考虑到我们的很多读者完全没有 Linux 基础，不太容易理解前面所说的主分区、扩展分区和逻辑分区的概念，因此接下来简单科普一下硬盘相关的知识。<br>正是因为计算机有了硬盘设备，我们才可以在玩游戏的过程中或游戏通关之后随时存档， 而不用每次重头开始。硬盘设备是由大量的扇区组成的，每个扇区的容量为 512 字节。其中第一个扇区最重要，它里面保存着主引导记录与分区表信息。就第一个扇区来讲，主引导记录需要占用 446 字节，分区表为 64 字节，结束符占用 2 字节；其中分区表中每记录一个分区信息就需要 16 字节，这样一来最多只有 4 个分区信息可以写到第一个扇区中，这 4 个分区就是 4 个主分区。第一个扇区中的数据信息如下图所示。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626622326074-34a07456-72f5-4fa2-8f57-96e7f5d35df1.png#clientId=u113f4642-3e32-4&from=paste&height=132&id=u0992236d&name=image.png&originHeight=132&originWidth=311&originalType=binary&ratio=1&rotation=0&showTitle=false&size=9005&status=done&style=none&taskId=u70a10c58-cc2e-4474-bfe6-40175eb6d9e&title=&width=311" srcset="/img/loading.gif" lazyload alt="image.png"><br>现在，问题来了—第一个扇区最多只能创建出 4 个分区？于是为了解决分区个数不够的问题，可以将第一个扇区的分区表中 16 字节（原本要写入主分区信息）的空间（称之为扩展分区）拿出来指向另外一个分区。也就是说，扩展分区其实并不是一个真正的分区，而更像是一个占用 16 字节分区表空间的指针—一个指向另外一个分区的指针。这样一来，用户一般会选择使用 3 个主分区加 1 个扩展分区的方法，然后在扩展分区中创建出数个逻辑分区，从而来满足多分区（大于 4 个）的需求。当然，就目前来讲大家只要明白为什么主分区不能超过 4 个就足够了。主分区、扩展分区、逻辑分区可以像下图那样来规划。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626622707526-ab35b1da-88f6-484b-9894-a2f4f3c31db5.png#clientId=u113f4642-3e32-4&from=paste&height=141&id=ud5110490&name=image.png&originHeight=141&originWidth=412&originalType=binary&ratio=1&rotation=0&showTitle=false&size=28020&status=done&style=none&taskId=u53e27667-811e-4be3-9c96-48ffb429aa4&title=&width=412" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="文件系统与数据资料"><a href="#文件系统与数据资料" class="headerlink" title="文件系统与数据资料"></a>文件系统与数据资料</h2><p>用户在硬件存储设备中执行的文件建立、写入、读取、修改、转存与控制等操作都是依靠文件系统来完成的。文件系统的作用是合理规划硬盘,以保证用户正常的使用需求。Linux系统支持数十种的文件系统,而最常见的文件系统如下所示。</p>
+<ul>
+<li><p>Ext3:是一款日志文件系统,能够在系统异常宕机时避免文件系统资料丢失,并能自动修复数据的不一致与错误。然而,当硬盘容量较大时,所需的修复时间也会很长,而且也不能百分之百地保证资料不会丢失。它会把整个磁盘的每个写入动作的细节都预先记录下来,以便在发生异常宕机后能回溯追踪到被中断的部分,然后尝试进行修复。</p>
+</li>
+<li><p>Ext4:Ext3 的改进版本,作为 RHEL 6 系统中的默认文件管理系统,它支持的存储容量高达1EB(1EB=1,073,741,824GB),且能够有无限多的子目录。另外,Ext4 文件系统能够批量分配 block 块,从而极大地提高了读写效率。</p>
+</li>
+<li><p>XFS:是一种高性能的日志文件系统,而且是 RHEL 7 中默认的文件管理系统,它的优势在发生意外宕机后尤其明显,即可以快速地恢复可能被破坏的文件,而且强大的日志功能只用花费极低的计算和存储性能。并且它最大可支持的存储容量为 18EB,这几乎满足了所有需求。</p>
+</li>
+</ul>
+<p>日常在硬盘需要保存的数据实在太多了,因此 Linux 系统中有一个名为 super block 的“硬盘地图”。Linux 并不是把文件内容直接写入到这个“硬盘地图”里面,而是在里面记录着整个文件系统的信息。因为如果把所有的文件内容都写入到这里面,它的体积将变得非常大,而且文件内容的查询与写入速度也会变得很慢。Linux 只是把每个文件的权限与属性记录在inode 中,而且每个文件占用一个独立的 inode 表格,该表格的大小默认为 128 字节,里面记录着如下信息:</p>
+<ul>
+<li>该文件的访问权限(read、write、execute);</li>
+<li>该文件的所有者与所属组(owner、group);</li>
+<li>该文件的大小(size);</li>
+<li>该文件的创建或内容修改时间(ctime);</li>
+<li>该文件的最后一次访问时间(atime);</li>
+<li>该文件的修改时间(mtime);</li>
+<li>文件的特殊权限(SUID、SGID、SBIT);</li>
+<li>该文件的真实数据地址(point)。</li>
+</ul>
+<p>而文件的实际内容则保存在 block 块中(大小可以是 1KB、2KB 或 4KB),一个 inode 的默认大小仅为 128B(Ext3)<br>,记录一个 block 则消耗 4B。当文件的 inode 被写满后,Linux 系统会自动分配出一个 block 块,专门用于像 inode 那样记录其他 block 块的信息,这样把各个block 块的内容串到一起,就能够让用户读到完整的文件内容了。对于存储文件内容的 block块,有下面两种常见情况(以 4KB 的 block 大小为例进行说明)。</p>
+<ul>
+<li>情况 1:文件很小(1KB),但依然会占用一个 block,因此会潜在地浪费 3KB。</li>
+<li>情况 2:文件很大(5KB),那么会占用两个 block(5KB-4KB 后剩下的 1KB 也要占用一个 block)。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626705964771-cdeffa93-3cb4-4dcc-92ad-21d6949e589f.png#clientId=ubbef49e8-69e5-4&from=paste&height=244&id=udbc0662a&name=image.png&originHeight=487&originWidth=622&originalType=binary&ratio=1&rotation=0&showTitle=false&size=79803&status=done&style=none&taskId=ube08daac-64f2-4c3f-82a4-6ad1b4d2472&title=&width=311" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="挂载硬件设备"><a href="#挂载硬件设备" class="headerlink" title="挂载硬件设备"></a>挂载硬件设备</h2><h3 id="mount-命令"><a href="#mount-命令" class="headerlink" title="mount 命令"></a>mount 命令</h3><p>mount 命令用于挂载文件系统,格式为“mount 文件系统 挂载目录”。</p>
+<ul>
+<li>-a 挂载所有在/etc/fstab 中定义的文件系统</li>
+<li>-t 指定文件系统的类型</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626706112164-6bd05ab6-6581-46f0-9f85-62d8fd9b2522.png#clientId=ubbef49e8-69e5-4&from=paste&height=113&id=u8ee0fe0f&name=image.png&originHeight=226&originWidth=703&originalType=binary&ratio=1&rotation=0&showTitle=false&size=55622&status=done&style=none&taskId=u4ebb4487-ccbd-47df-8f66-92c75480242&title=&width=351.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="umount-命令"><a href="#umount-命令" class="headerlink" title="umount 命令"></a>umount 命令</h3><p>umount 命令用于撤销已经挂载的设备文件,格式为“umount [挂载点/设备文件]”</p>
+<h2 id="添加硬件设备"><a href="#添加硬件设备" class="headerlink" title="添加硬件设备"></a>添加硬件设备</h2><h3 id="fdisk-命令"><a href="#fdisk-命令" class="headerlink" title="fdisk 命令"></a>fdisk 命令</h3><p>在 Linux 系统中,管理硬盘设备最常用的方法就当属 fdisk 命令了。fdisk 命令用于管理磁盘分区,格式为“fdisk [磁盘名称]”,它提供了集添加、删除、转换分区等功能于一身的“一站式分区服务”。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626706900637-0b677112-294c-4da9-a6a6-2735eba0aea4.png#clientId=ubbef49e8-69e5-4&from=paste&height=128&id=u4f938dd0&name=image.png&originHeight=255&originWidth=692&originalType=binary&ratio=1&rotation=0&showTitle=false&size=28765&status=done&style=none&taskId=ua7e63a8c-abf1-4c6e-beab-788e2bf57da&title=&width=346" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="du-命令"><a href="#du-命令" class="headerlink" title="du 命令"></a>du 命令</h3><p>既然存储设备已经顺利挂载,接下来就可以尝试通过挂载点目录向存储设备中写入文件了。在写入文件之前,先介绍一个用于查看文件数据占用量的 du 命令,其格式为“du [选项][文件]”。简单来说,该命令就是用来查看一个或多个文件占用了多大的硬盘空间。我们还可以使用 du -sh /*命令来查看在 Linux 系统根目录下所有一级目录分别占用的空间大小。</p>
+<h2 id="添加交换分区"><a href="#添加交换分区" class="headerlink" title="添加交换分区"></a>添加交换分区</h2><blockquote>
+<p>SWAP(交换)分区是一种通过在硬盘中预先划分一定的空间,然后将把内存中暂时不常用的数据临时存放到硬盘中,以便腾出物理内存空间让更活跃的程序服务来使用的技术,其设计目的是为了解决真实物理内存不足的问题。</p>
+</blockquote>
+<p><code>在生产环境中,交换分区的大小一般为真实物理内存的 1.5~2 倍</code></p>
+<h2 id="磁盘容量配额"><a href="#磁盘容量配额" class="headerlink" title="磁盘容量配额"></a>磁盘容量配额</h2><p>Linux 系统的设计初衷就是让许多人一起使用并执行各自的任务,从而成为多用户、多任务的操作系统。但是,硬件资源是固定且有限的,如果某些用户不断地在 Linux 系统上创建文件或者存放电影,硬盘空间总有一天会被占满。针对这种情况,root管理员就需要使用磁盘容量配额服务来限制某位用户或某个用户组针对特定文件夹可以使用的最大硬盘空间或最大文件个数,一旦达到这个最大值就不再允许继续使用。可以使用 quota命令进行磁盘容量配额管理,从而限制用户的硬盘可用容量或所能创建的最大文件个数。 quota命令还有软限制和硬限制的功能。</p>
+<ul>
+<li>软限制:当达到软限制时会提示用户,但仍允许用户在限定的额度内继续使用。</li>
+<li>硬限制:当达到硬限制时会提示用户,且强制终止用户的操作。</li>
+</ul>
+<h3 id="xfs-quota-命令"><a href="#xfs-quota-命令" class="headerlink" title="xfs_quota 命令"></a>xfs_quota 命令</h3><p>xfs_quota 命令是一个专门针对 XFS 文件系统来管理 quota 磁盘容量配额服务而设计的命令,格式为“quota [参数] 配额 文件系统”。其中,-c 参数用于以参数的形式设置要执行的命令;-x参数是专家模式,让运维人员能够对 quota 服务进行更多复杂的配置。</p>
+<h3 id="edquota-命令"><a href="#edquota-命令" class="headerlink" title="edquota 命令"></a>edquota 命令</h3><p>edquota 命令用于编辑用户的 quota 配额限制,格式为“edquota [参数] [用户] ”。在为用户设置了 quota 磁盘容量配额限制后,可以使用 edquota 命令按需修改限额的数值。其中,-u参数表示要针对哪个用户进行设置;-g 参数表示要针对哪个用户组进行设置。</p>
+<h2 id="软硬方式链接"><a href="#软硬方式链接" class="headerlink" title="软硬方式链接"></a>软硬方式链接</h2><p>在 Linux 系统中存在硬链接和软连接两种文件。</p>
+<ul>
+<li><p>硬链接(hard link):可以将它理解为一个“指向原始文件 inode 的指针”,系统不为它分配独立的 inode 和文件。所以,硬链接文件与原始文件其实是同一个文件,只是名字不同。我们每添加一个硬链接,该文件的 inode 连接数就会增加 1;而且只有当该文件的 inode 连接数为 0 时,才算彻底将它删除。换言之,由于硬链接实际上是指向原文件 inode 的指针,因此即便原始文件被删除,依然可以通过硬链接文件来访问。需要注意的是,由于技术的局限性,我们不能跨分区对目录文件进行链接。</p>
+</li>
+<li><p>软链接(也称为符号链接[symbolic link]):仅仅包含所链接文件的路径名,因此能链接目录文件,也可以跨越文件系统进行链接。但是,当原始文件被删除后,链接文件也将失效,从这一点上来说与 Windows 系统中的“快捷方式”具有一样的性质。</p>
+</li>
+</ul>
+<h3 id="ln-命令"><a href="#ln-命令" class="headerlink" title="ln 命令"></a>ln 命令</h3><p>ln 命令用于创建链接文件,格式为“ln [选项] 目标”<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626707434189-6e634c9a-0e46-4c7f-8126-1658bb0ef2f0.png#clientId=ubbef49e8-69e5-4&from=paste&height=74&id=udacf90fe&name=image.png&originHeight=147&originWidth=690&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21762&status=done&style=none&taskId=uda0d65c7-53a6-458c-8bd8-18742a486e1&title=&width=345" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="第7章使用RAID与LVM磁盘阵列技术"><a href="#第7章使用RAID与LVM磁盘阵列技术" class="headerlink" title="第7章使用RAID与LVM磁盘阵列技术"></a>第7章使用RAID与LVM磁盘阵列技术</h1><h2 id="RAID-独立冗余磁盘阵列"><a href="#RAID-独立冗余磁盘阵列" class="headerlink" title="RAID(独立冗余磁盘阵列)"></a>RAID(独立冗余磁盘阵列)</h2><p>RAID 技术通过把多个硬盘设备组合成一个容量更大、安全性更好的磁盘阵列,并把数据切割成多个区<br>段后分别存放在各个不同的物理硬盘设备上,然后利用分散读写技术来提升磁盘阵列整体的性能,同时把多个重要数据的副本同步到不同的物理硬盘设备上,从而起到了非常好的数据冗余备份效果。</p>
+<blockquote>
+<p>任何事物都有它的两面性。RAID 技术确实具有非常好的数据冗余备份功能,但是它也相应地提高了成本支出。就像原本我们只有一个电话本,但是为了避免遗失,我们将联系人号码信息写成了两份,自然要为此多买一个电话本,这也就相应地提升了成本支出。RAID 技术的设计初衷是减少因为采购硬盘设备带来的费用支出,但是与数据本身的价值相比较,现代企业更看重的则是 RAID 技术所具备的冗余备份机制以及带来的硬盘吞吐量的提升。也就是说,RAID 不仅降低了硬盘设备损坏后丢失数据的几率,还提升了硬盘设备的读写速度,所以它在绝大多数运营商或大中型企业中得以广泛部署和应用。</p>
+</blockquote>
+<p>目前已有的 RAID 磁盘阵列的方案至少有十几种,接下来会详细讲解 RAID 0、RAID 1、RAID 5 与 RAID 10 这 4 种最常见的方案。</p>
+<h3 id="RAID-0"><a href="#RAID-0" class="headerlink" title="RAID 0"></a>RAID 0</h3><p>RAID 0 技术把多块物理硬盘设备(至少两块)通过硬件或软件的方式串联在一起,组成一个大的卷组,并将数据依次写入到各个物理硬盘中。这样一来,在最理想的状态下,硬盘设备的读写性能会提升数倍,但是若任意一块硬盘发生故障将导致整个系统的数据都受到破坏。通俗来说,RAID 0 技术能够有效地提升硬盘数据的吞吐速度,但是不具备数据备份和错误修复能力。如图所示,数据被分别写入到不同的硬盘设备中,即 disk1 和 disk2 硬盘设备会分别保存数据资料,最终实现分开写入、读取的效果。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626792089340-5860c625-7039-4176-a778-bab11021c9a5.png#clientId=ubbef49e8-69e5-4&from=paste&height=93&id=u9e1f530a&name=image.png&originHeight=186&originWidth=232&originalType=binary&ratio=1&rotation=0&showTitle=false&size=30786&status=done&style=none&taskId=u064c2ca4-168e-40e0-bd3c-f0bb786a5cb&title=&width=116" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="RAID-1"><a href="#RAID-1" class="headerlink" title="RAID 1"></a>RAID 1</h3><p>尽管 RAID 0 技术提升了硬盘设备的读写速度,但是它是将数据依次写入到各个物理硬盘中,也就是说,它的数据是分开存放的,其中任何一块硬盘发生故障都会损坏整个系统的数据。因此,如果生产环境对硬盘设备的读写速度没有要求,而是希望增加数据的安全性时,就需要用到 RAID 1 技术了。</p>
+<p>在图 7-2 所示的 RAID 1 技术示意图中可以看到,它是把两块以上的硬盘设备进行绑定,在写入数据时,是将数据同时写入到多块硬盘设备上(可以将其视为数据的镜像或备份)。当其中某一块硬盘发生故障后,一般会立即自动以热交换的方式来恢复数据的正常使用。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626792200146-8f3b9d07-da7c-41b7-a8bb-f2aae23f162b.png#clientId=ubbef49e8-69e5-4&from=paste&height=125&id=uf16771c0&name=image.png&originHeight=249&originWidth=370&originalType=binary&ratio=1&rotation=0&showTitle=false&size=38024&status=done&style=none&taskId=ufe228101-caae-4878-9a5f-cc395244721&title=&width=185" srcset="/img/loading.gif" lazyload alt="image.png"><br>RAID 1 技术虽然十分注重数据的安全性,但是因为是在多块硬盘设备中写入了相同的数据,因此硬盘设备的利用率得以下降,从理论上来说,图 7-2 所示的硬盘空间的真实可用率只有 50%,由三块硬盘设备组成的 RAID 1 磁盘阵列的可用率只有 33%左右,以此类推。而且,由于需要把数据同时写入到两块以上的硬盘设备,这无疑也在一定程度上增大了系统计算功能的负载。</p>
+<h3 id="RAID-5"><a href="#RAID-5" class="headerlink" title="RAID 5"></a>RAID 5</h3><p>如图 7-3 所示,RAID5 技术是把硬盘设备的数据奇偶校验信息保存到其他硬盘设备中。RAID 5 磁盘阵列组中数据的奇偶校验信息并不是单独保存到某一块硬盘设备中,而是存储到除自身以外的其他每一块硬盘设备上,这样的好处是其中任何一设备损坏后不至于出现致命缺陷;图 7-3 中 parity 部分存放的就是数据的奇偶校验信息,换句话说,就是 RAID 5 技术实际上没有备份硬盘中的真实数据信息,而是当硬盘设备出现问题后通过奇偶校验信息来尝试重建损坏的数据。RAID 这样的技术特性“妥协”地兼顾了硬盘设备的读写速度、数据安全性与存储成本问题。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626792971394-9b80a213-7fb9-4890-85d5-c53245ebc2ea.png#clientId=ubbef49e8-69e5-4&from=paste&height=113&id=u9ddba88e&name=image.png&originHeight=225&originWidth=524&originalType=binary&ratio=1&rotation=0&showTitle=false&size=63449&status=done&style=none&taskId=ue176afc9-255e-429c-b3de-9acbb98e5b7&title=&width=262" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="RAID-10"><a href="#RAID-10" class="headerlink" title="RAID 10"></a>RAID 10</h3><p>鉴于 RAID 5 技术是因为硬盘设备的成本问题对读写速度和数据的安全性能而有了一定的妥协,但是大部分企业更在乎的是数据本身的价值而非硬盘价格,因此生产环境中主要使用 RAID 10 技术。</p>
+<p>顾名思义,RAID 10 技术是 RAID 1+RAID 0 技术的一个“组合体”。如图 7-4 所示,RAID 10 技术需要至少 4 块硬盘来组建,其中先分别两两制作成 RAID 1 磁盘阵列,以保证数据的安全性;然后再对两个 RAID 1 磁盘阵列实施 RAID 0 技术,进一步提高硬盘设备的读写速度。这样从理论上来讲,只要坏的不是同一组中的所有硬盘,那么最多可以损坏 50%的硬盘设备而不丢失数据。由于 RAID 10 技术继承了 RAID 0 的高读写速度和 RAID1 的数据安全性,在不考虑成本的情况下 RAID 10 的性能都超过了 RAID 5,因此当前成为广泛使用的一种存储技术。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626793136196-c2136054-6cb0-492a-8c5e-a3e27b6d892b.png#clientId=ubbef49e8-69e5-4&from=paste&height=125&id=u27cdb6fc&name=image.png&originHeight=250&originWidth=503&originalType=binary&ratio=1&rotation=0&showTitle=false&size=75489&status=done&style=none&taskId=u98595073-36f1-4bee-8ccd-9c3e415f84d&title=&width=251.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="部署磁盘阵列"><a href="#部署磁盘阵列" class="headerlink" title="部署磁盘阵列"></a>部署磁盘阵列</h3><p>mdadm 命令用于管理 Linux 系统中的软件 RAID 硬盘阵列,格式为“mdadm [模式] &lt;RAID设备名称&gt; [选项] [成员设备名称]”。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">mdadm <span class="hljs-selector-attr">[模式]</span> &lt;RAID设备名称&gt; <span class="hljs-selector-attr">[选项]</span> <span class="hljs-selector-attr">[成员设备名称]</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626793669173-1daeab8a-338b-4312-af2a-254327a44363.png#clientId=ubbef49e8-69e5-4&from=paste&height=170&id=u35d14547&name=image.png&originHeight=339&originWidth=720&originalType=binary&ratio=1&rotation=0&showTitle=false&size=34612&status=done&style=none&taskId=ud81f54ff-7cac-4370-a362-17e2243fdaf&title=&width=360" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="损坏磁盘阵列及修复"><a href="#损坏磁盘阵列及修复" class="headerlink" title="损坏磁盘阵列及修复"></a>损坏磁盘阵列及修复</h3><p>之所以在生产环境中部署 RAID 10 磁盘阵列,是为了提高硬盘存储设备的读写速度及数据的安全性,但由于我们的硬盘设备是在虚拟机中模拟出来的,因此对读写速度的改善可能并不直观。</p>
+<p>在确认有一块物理硬盘设备出现损坏而不能继续正常使用后,应该使用 mdadm 命令将其移除,然后查看 RAID 磁盘阵列的状态,可以发现状态已经改变。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626793883093-ff74855a-f3fc-48e9-8f96-c149a3ee1986.png#clientId=ubbef49e8-69e5-4&from=paste&height=279&id=u23e44d80&name=image.png&originHeight=558&originWidth=722&originalType=binary&ratio=1&rotation=0&showTitle=false&size=65915&status=done&style=none&taskId=u849de729-a43f-45e4-9869-21dc467960e&title=&width=361" srcset="/img/loading.gif" lazyload alt="image.png"><br>在 RAID 10 级别的磁盘阵列中,当 RAID 1 磁盘阵列中存在一个故障盘时并不影响 RAID10 磁盘阵列的使用。当购买了新的硬盘设备后再使用 mdadm 命令来予以替换即可,在此期间我们可以在/RAID 目录中正常地创建或删除文件。由于我们是在虚拟机中模拟硬盘,所以先重启系统,然后再把新的硬盘添加到 RAID 磁盘阵列中。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626793916428-338b8475-081d-4fe6-95aa-60c49c066735.png#clientId=ubbef49e8-69e5-4&from=paste&height=276&id=ub0738f35&name=image.png&originHeight=551&originWidth=734&originalType=binary&ratio=1&rotation=0&showTitle=false&size=68720&status=done&style=none&taskId=u79ae6333-73ab-4453-a161-5ba46c49dc6&title=&width=367" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="LVM-逻辑卷管理器"><a href="#LVM-逻辑卷管理器" class="headerlink" title="LVM(逻辑卷管理器)"></a>LVM(逻辑卷管理器)</h2><p>在硬盘分好区或者部署为 RAID 磁盘阵列之后,再想修改硬盘分区大小就不容易了。换句话说,当用户想要随着实际需求的变化调整硬盘分区的大小时,会受到硬盘“灵活性”的限制。这时就需要用到另外一项非常普及的硬盘设备资源管理技术了—LVM(逻辑卷管理器)。LVM 可以允许用户对硬盘资源进行动态调整。</p>
+<p>逻辑卷管理器是 Linux 系统用于对硬盘分区进行管理的一种机制,理论性较强,其创建初衷是为了解决硬盘设备在创建分区后不易修改分区大小的缺陷。尽管对传统的硬盘分区进行强制扩容或缩容从理论上来讲是可行的,但是却可能造成数据的丢失。而 LVM 技术是在硬盘分区和文件系统之间添加了一个逻辑层,它提供了一个抽象的卷组,可以把多块硬盘进行卷组合并。这样一来,用户不必关心物理硬盘设备的低层架构和布局,就可以实现对硬盘分区的动态调整。LVM 的技术架构如图 7-7 所示。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626794492205-b41ec747-048a-4fcf-b3db-68ce8ec8c2d1.png#clientId=ubbef49e8-69e5-4&from=paste&height=100&id=u68e04fd9&name=image.png&originHeight=199&originWidth=612&originalType=binary&ratio=1&rotation=0&showTitle=false&size=46104&status=done&style=none&taskId=u5d226c5a-2991-4977-b871-2cbf77a3367&title=&width=306" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>比如小明家里想吃馒头但是面粉不够了,于是妈妈从隔壁老王家、老李家、老张家分别借来一些面粉,准备蒸馒头吃。首先需要把这些面粉(物理卷[PV,Physical Volume])揉成一个大面团(卷组[VG,Volume Group]),然后再把这个大团面分割成一个个小馒头(逻辑卷[LV,Logical Volume]),而且每个小馒头的重量必须是每勺面粉(基本单元[PE,Physical Extent])的倍数。</p>
+</blockquote>
+<p>物理卷处于 LVM 中的最底层,可以将其理解为物理硬盘、硬盘分区或者 RAID 磁盘阵列,这都可以。卷组建立在物理卷之上,一个卷组可以包含多个物理卷,而且在卷组创建之后也可以继续向其中添加新的物理卷。逻辑卷是用卷组中空闲的资源建立的,并且逻辑卷在建立后可以动态地扩展或缩小空间。这就是 LVM 的核心理念。</p>
+<h3 id="部署逻辑卷"><a href="#部署逻辑卷" class="headerlink" title="部署逻辑卷"></a>部署逻辑卷</h3><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626795341628-522eb3b5-ab33-4d36-916e-51f36b7c1ea9.png#clientId=ubbef49e8-69e5-4&from=paste&height=115&id=u867f4104&name=image.png&originHeight=230&originWidth=700&originalType=binary&ratio=1&rotation=0&showTitle=false&size=27228&status=done&style=none&taskId=ud1ce7d6d-7edf-4147-a392-2c0bb9ca1cc&title=&width=350" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="扩容逻辑卷"><a href="#扩容逻辑卷" class="headerlink" title="扩容逻辑卷"></a>扩容逻辑卷</h3><p>在前面的实验中,卷组是由两块硬盘设备共同组成的。用户在使用存储设备时感知不到设备底层的架构和布局,更不用关心底层是由多少块硬盘组成的,只要卷组中有足够的资源,就可以一直为逻辑卷扩容。扩展前请一定要记得卸载设备和挂载点的关联。</p>
+<h3 id="缩小逻辑卷"><a href="#缩小逻辑卷" class="headerlink" title="缩小逻辑卷"></a>缩小逻辑卷</h3><p>相较于扩容逻辑卷,在对逻辑卷进行缩容操作时,其丢失数据的风险更大。所以在生产环境中执行相应操作时,一定要提前备份好数据。另外 Linux 系统规定,在对 LVM 逻辑卷进行缩容操作之前,要先检查文件系统的完整性(当然这也是为了保证我们的数据安全)。在执行缩容操作前记得先把文件系统卸载掉。</p>
+<h3 id="逻辑卷快照"><a href="#逻辑卷快照" class="headerlink" title="逻辑卷快照"></a>逻辑卷快照</h3><p>LVM 还具备有“快照卷”功能,该功能类似于虚拟机软件的还原时间点功能。例如,可以对某一个逻辑卷设备做一次快照,如果日后发现数据被改错了,就可以利用之前做好的快照卷进行覆盖还原。LVM 的快照卷功能有两个特点:</p>
+<ul>
+<li>快照卷的容量必须等同于逻辑卷的容量;</li>
+<li>快照卷仅一次有效,一旦执行还原操作后则会被立即自动删除。</li>
+</ul>
+<p>首先查看卷组的信息。</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">vgdisplay</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="删除逻辑卷"><a href="#删除逻辑卷" class="headerlink" title="删除逻辑卷"></a>删除逻辑卷</h3><p>当生产环境中想要重新部署 LVM 或者不再需要使用 LVM 时,则需要执行 LVM 的删除操作。为此,需要提前备份好重要的数据信息,然后依次删除逻辑卷、卷组、物理卷设备,这个顺序不可颠倒。<br>第 1 步:取消逻辑卷与目录的挂载关联,删除配置文件中永久生效的设备参数。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">umount /linuxprobe<br>vim <span class="hljs-regexp">/etc/</span>fstab<br></code></pre></td></tr></table></figure>
+<p>第 2 步:删除逻辑卷设备,需要输入 y 来确认操作。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">lvremove <span class="hljs-regexp">/dev/</span>storage/vo<br></code></pre></td></tr></table></figure>
+<p>第 3 步:删除卷组,此处只写卷组名称即可,不需要设备的绝对路径。</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">vgremove storage</span><br></code></pre></td></tr></table></figure>
+<p>第 4 步:删除物理卷设备。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">pvremove <span class="hljs-regexp">/dev/</span>sdb <span class="hljs-regexp">/dev/</span>sdc<br></code></pre></td></tr></table></figure>
+
+<h1 id="第8章iptables与frewalld防火墙"><a href="#第8章iptables与frewalld防火墙" class="headerlink" title="第8章iptables与frewalld防火墙"></a>第8章iptables与frewalld防火墙</h1><h2 id="防火墙管理工具"><a href="#防火墙管理工具" class="headerlink" title="防火墙管理工具"></a>防火墙管理工具</h2><p>防火墙策略可以基于流量的源目地址、端口号、协议、应 用等信息来定制，然后防火墙使用预先定制的策略规则监控出入的流量，若流量与某一条策 略规则相匹配，则执行相应的处理，反之则丢弃。这样一来，就可以保证仅有合法的流量在 企业内网和外部公网之间流动了。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626796904905-705c8240-ff3f-4714-896e-a5b5b012f011.png#clientId=ubbef49e8-69e5-4&from=paste&height=65&id=ud1ef4277&name=image.png&originHeight=129&originWidth=501&originalType=binary&ratio=1&rotation=0&showTitle=false&size=37034&status=done&style=none&taskId=ue9cd8cd7-7c1b-4157-809d-1ec0b35ca65&title=&width=250.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<blockquote>
+<p>在 RHEL 7 系统中，firewalld 防火墙取代了 iptables 防火墙。</p>
+</blockquote>
+<h2 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h2><p>在早期的 Linux 系统中，默认使用的是 iptables 防火墙管理服务来配置防火墙。尽管新型 的 firewalld 防火墙管理服务已经被投入使用多年，但是大量的企业在生产环境中依然出于各 种原因而继续使用 iptables。</p>
+<h3 id="策略与规则链"><a href="#策略与规则链" class="headerlink" title="策略与规则链"></a>策略与规则链</h3><p>防火墙会从上至下的顺序来读取配置的策略规则，在找到匹配项后就立即结束匹配工作 并去执行匹配项中定义的行为（即放行或阻止）。如果在读取完所有的策略规则之后没有匹配 项，就去执行默认的策略。一般而言，防火墙策略规则的设置有两种：一种是“通”（即放行）， 一种是“堵”（即阻止）。当防火墙的默认策略为拒绝时（堵），就要设置允许规则（通），否 则谁都进不来；如果防火墙的默认策略为允许时，就要设置拒绝规则，否则谁都能进来，防 火墙也就失去了防范的作用。 iptables 服务把用于处理或过滤流量的策略条目称之为规则，多条规则可以组成一个规则 链，而规则链则依据数据包处理位置的不同进行分类，具体如下： </p>
+<ul>
+<li>**在进行路由选择前处理数据包（PREROUTING）； **</li>
+<li>**处理流入的数据包（INPUT）； **</li>
+<li>**处理流出的数据包（OUTPUT）； **</li>
+<li>**处理转发的数据包（FORWARD）； **</li>
+<li><strong>在进行路由选择后处理数据包（POSTROUTING）。</strong> </li>
+</ul>
+<p>一般来说，从内网向外网发送的流量一般都是可控且良性的，因此我们使用最多的就是 INPUT 规则链，该规则链可以增大黑客人员从外网入侵内网的难度。 </p>
+<p>比如在您居住的社区内，物业管理公司有两条规定：禁止小商小贩进入社区；各种车辆 在进入社区时都要登记。显而易见，这两条规定应该是用于社区的正门的（流量必须经过的 地方），而不是每家每户的防盗门上。根据前面提到的防火墙策略的匹配顺序，可能会存在多 种情况。比如，来访人员是小商小贩，则直接会被物业公司的保安拒之门外，也就无需再对车辆进行登记。如果来访人员乘坐一辆汽车进入社区正门，则“禁止小商小贩进入社区”的 第一条规则就没有被匹配到，因此按照顺序匹配第二条策略，即需要对车辆进行登记。如果 是社区居民要进入正门，则这两条规定都不会匹配到，因此会执行默认的放行策略。</p>
+<h2 id="firewalld"><a href="#firewalld" class="headerlink" title="firewalld"></a>firewalld</h2><blockquote>
+<p>RHEL 7 系统中集成了多款防火墙管理工具，其中 firewalld（Dynamic Firewall Manager of Linux<br>systems，Linux 系统的动态防火墙管理器）服务是默认的防火墙配置管理工具，它拥有基于 CLI（命<br>令行界面）和基于 GUI（图形用户界面）的两种管理方式。</p>
+</blockquote>
+<p>相较于传统的防火墙管理配置工具，firewalld 支持动态更新技术并加入了区域（zone）的概念。简单来说，区域就是 firewalld 预先准备了几套防火墙策略集合（策略模板），用户可以根据生产场景的不同而选择合适的策略集合，从而实现防火墙策略之间的快速切换。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627568291630-8b244ae5-426d-4df3-afbb-d1b0b18b65eb.png#clientId=u94be3a80-480b-4&from=paste&height=323&id=u0d035f5c&name=image.png&originHeight=323&originWidth=581&originalType=binary&ratio=1&rotation=0&showTitle=false&size=65270&status=done&style=none&taskId=u7360c440-5872-4471-b024-26e9c1d0ef5&title=&width=581" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="终端管理工具"><a href="#终端管理工具" class="headerlink" title="终端管理工具"></a>终端管理工具</h3><p>firewall-cmd<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627568647137-27f51c08-a4f1-48a4-9bfa-bf803782bd24.png#clientId=u94be3a80-480b-4&from=paste&height=442&id=ud70fbdd4&name=image.png&originHeight=442&originWidth=594&originalType=binary&ratio=1&rotation=0&showTitle=false&size=96844&status=done&style=none&taskId=uab10b6f9-a02b-4de0-b749-cb516a45ac4&title=&width=594" srcset="/img/loading.gif" lazyload alt="image.png"><br>流量转发命令格式为 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">firewall-cmd --permanent --zone=&lt;区域&gt; --add-forward-port=port=&lt;源端口号&gt;:proto=&lt;协议&gt;:toport=&lt;目标端口号&gt;:toaddr=&lt;目标 IP 地址&gt; <br></code></pre></td></tr></table></figure>
+
+<h3 id="图形管理工具"><a href="#图形管理工具" class="headerlink" title="图形管理工具"></a>图形管理工具</h3><p>firewall-config它是 firewalld 防火墙配置管理工具的 GUI（图形用户界面）版本，几乎可以实现所有以命令行来执行的操作。毫不夸张的说，即使读者没有扎实的 Linux 命令基础，也完全可以通过它来妥善配置 RHEL 7 中的防火墙策略。<br>其功能具体如下。 </p>
+<ul>
+<li>选择运行时（Runtime）模式或永久（Permanent）模式的配置。 </li>
+<li>选的策略集合区域列表。 </li>
+<li>常用的系统服务列表。 </li>
+<li>当前正在使用的区域。 </li>
+<li>管理当前被选中区域中的服务。 </li>
+<li>管理当前被选中区域中的端口。 </li>
+<li>开启或关闭 SNAT（源地址转换协议）技术。 </li>
+<li>设置端口转发策略。 </li>
+<li>控制请求 icmp 服务的流量。 </li>
+<li>管理防火墙的富规则。 </li>
+<li>管理网卡设备。 </li>
+<li>被选中区域的服务，若勾选了相应服务前面的复选框，则表示允许与之相关的流量。 </li>
+<li>firewall-config 工具的运行状态。</li>
+</ul>
+<h2 id="服务的访问控制列表。"><a href="#服务的访问控制列表。" class="headerlink" title="服务的访问控制列表。"></a>服务的访问控制列表。</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627570300054-6e075760-43fe-4bbd-96cf-00c47b58d3ab.png#clientId=u94be3a80-480b-4&from=paste&height=195&id=u94e91476&name=image.png&originHeight=195&originWidth=582&originalType=binary&ratio=1&rotation=0&showTitle=false&size=41471&status=done&style=none&taskId=u793d4c33-f3ba-41ca-9537-306a2363977&title=&width=582" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="第9章使用ssh服务管理远程主机"><a href="#第9章使用ssh服务管理远程主机" class="headerlink" title="第9章使用ssh服务管理远程主机"></a>第9章使用ssh服务管理远程主机</h1><p>RHEL 和 CentOS 系统默认使用 NetworkManager 来提供网络服务，这是一种动态管理网络配置的守护进程，能够让网络设备保持连接状态。可以使用 nmcli 命令来管理 Network Manager 服务。nmcli 是一款基于命令行的网络配置工具，功能丰富，参数众多。它可以轻松地查看网络信息或网络状态：<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627571091241-7f4909e0-73ff-44ee-bd5e-ac60b9215356.png#clientId=u2a74c66f-9cdc-4&from=paste&height=241&id=u23eb25d4&name=image.png&originHeight=482&originWidth=984&originalType=binary&ratio=1&rotation=0&showTitle=false&size=93966&status=done&style=none&taskId=ua0b0d274-def8-497d-965a-e6a80d8531b&title=&width=492" srcset="/img/loading.gif" lazyload alt="image.png"><br>另外，RHEL7 系统支持网络会话功能，允许用户在多个配置文件中快速切换（非常类似于 firewalld 防火墙服务中的区域技术）。</p>
+<h2 id="配置-sshd-服务"><a href="#配置-sshd-服务" class="headerlink" title="配置 sshd 服务"></a>配置 sshd 服务</h2><p>SSH（Secure Shell）是一种能够以安全的方式提供远程登录的协议，也是目前远程管理 Linux 系统的首选方式。在此之前，一般使用 FTP 或 Telnet 来进行远程登录。但是因为它们以明文的形式在网络中传输账户密码和数据信息，因此很不安全，很容易受到黑客发起的中间人攻击，这轻则篡改传输的数据信息，重则直接抓取服务器的账户密码。<br>想要使用 SSH 协议来远程管理 Linux 系统，则需要部署配置 sshd 服务程序。sshd 是基于 SSH<br>协议开发的一款远程管理服务程序，不仅使用起来方便快捷，而且能够提供两种安全验证的方法： </p>
+<ul>
+<li>基于口令的验证—用账户和密码来验证登录； </li>
+<li>基于密钥的验证—需要在本地生成密钥对，然后把密钥对中的公钥上传至服务器，并与服务器中的公钥进行比较；该方式相较来说更安全。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627571530192-3b796f70-b018-429b-a147-596b31dd07a7.png#clientId=u94be3a80-480b-4&from=paste&height=322&id=u6c925533&name=image.png&originHeight=322&originWidth=576&originalType=binary&ratio=1&rotation=0&showTitle=false&size=63830&status=done&style=none&taskId=ubaf82afc-1591-4b44-ab93-b36adb7c5fc&title=&width=576" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="远程传输命令"><a href="#远程传输命令" class="headerlink" title="远程传输命令"></a>远程传输命令</h2><p>scp（secure copy）是一个基于 SSH 协议在网络之间进行安全传输的命令，其格式为“scp [参数] 本地文件 远程帐户@远程 IP 地址:远程目录”。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">scp [参数] 本地文件 远程帐户@远程 IP 地址:远程目录<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627571981839-4fdd4240-6318-4562-9974-a44996b9ff1c.png#clientId=u94be3a80-480b-4&from=paste&height=148&id=ued166961&name=image.png&originHeight=148&originWidth=583&originalType=binary&ratio=1&rotation=0&showTitle=false&size=20117&status=done&style=none&taskId=udf475efc-d45a-4a5b-9f4e-8610994e8e3&title=&width=583" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="不间断会话服务"><a href="#不间断会话服务" class="headerlink" title="不间断会话服务"></a>不间断会话服务</h2><p>大家在学习 sshd 服务时，不知有没有注意到这样一个事情：当与远程主机的会话被关闭时，在远程主机上运行的命令也随之被中断。<br>如果我们正在使用命令来打包文件，或者正在使用脚本安装某个服务程序，中途是绝对不能关闭在本地打开的终端窗口或断开网络链接的，甚至是网速的波动都有可能导致任务中断，此时只能重新进行远程链接并重新开始任务。还有些时候，我们正在执行文件打包操作，同时又想用脚本来安装某个服务程序，这时会因为打包操作的输出信息占满用户的屏幕界面，而只能再打开一个执行远程会话的终端窗口，时间久了，难免会忘记这些打开的终端窗口是做什么用的了。</p>
+<p><strong>screen</strong> 是一款能够实现多窗口远程控制的开源服务程序，简单来说就是为了解决网络异<br>常中断或为了同时控制多个远程终端窗口而设计的程序。用户还可以使用 screen 服务程序同<br>时在多个远程会话中自由切换，能够做到实现如下功能。 </p>
+<ul>
+<li> 会话恢复：即便网络中断，也可让会话随时恢复，确保用户不会失去对远程会话的控制。 </li>
+<li> 多窗口：每个会话都是独立运行的，拥有各自独立的输入输出终端窗口，终端窗口内显示过的信息也将被分开隔离保存，以便下次使用时依然能看到之前的操作记录。 </li>
+<li> 会话共享：当多个用户同时登录到远程服务器时，便可以使用会话共享功能让用户之 间的输入输出信息共享。 </li>
+</ul>
+<p>在 RHEL 7 系统中，没有默认安装 screen 服务程序，因此需要配置 Yum 仓库来安装它。</p>
+<h1 id="第10章使用Apache服务部署静态网站"><a href="#第10章使用Apache服务部署静态网站" class="headerlink" title="第10章使用Apache服务部署静态网站"></a>第10章使用Apache服务部署静态网站</h1><h2 id="网站服务程序"><a href="#网站服务程序" class="headerlink" title="网站服务程序"></a>网站服务程序</h2><p>目前能够提供 Web 网络服务的程序有 IIS、Nginx 和 Apache 等</p>
+<p>安装apache</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">#安装<br>yum install httpd<br>#启动<br>systemctl start httpd<br>#开机自启<br>systemctl enable httpd<br>#浏览器访问<br></code></pre></td></tr></table></figure>
+
+<h2 id="配置服务文件参数"><a href="#配置服务文件参数" class="headerlink" title="配置服务文件参数"></a>配置服务文件参数</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627659391837-91dfaea0-17fc-4ed0-90b4-8b1c630455b1.png#clientId=u948ccd47-2c2a-4&from=paste&height=131&id=u6d4eceff&name=image.png&originHeight=262&originWidth=886&originalType=binary&ratio=1&rotation=0&showTitle=false&size=46658&status=done&style=none&taskId=uc05f0e00-9f50-41bd-941f-b7a9b429a18&title=&width=443" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="SELinux-安全子系统"><a href="#SELinux-安全子系统" class="headerlink" title="SELinux 安全子系统"></a>SELinux 安全子系统</h2><p>SELinux（Security-Enhanced Linux）是美国国家安全局在 Linux 开源社区的帮助下开发 的一个强制访问控制（MAC，Mandatory Access Control）的安全子系统。RHEL 7 系统使用 SELinux 技术的目的是为了让各个服务进程都受到约束，使其仅获取到本应获取的资源。</p>
+<p>SELinux 服务有三种配置模式，具体如下。 </p>
+<ul>
+<li>enforcing：强制启用安全策略模式，将拦截服务的不合法请求。</li>
+<li>permissive：遇到服务越权访问时，只发出警告而不强制拦截。 </li>
+<li>disabled：对于越权的行为不警告也不拦截。</li>
+</ul>
+<h3 id="semanage-命令"><a href="#semanage-命令" class="headerlink" title="semanage 命令"></a>semanage 命令</h3><p>semanage 命令用于管理 SELinux 的策略，格式为“semanage [选项] [文件]”。 SELinux 服务极大地提升了 Linux 系统的安全性，将用户权限牢牢地锁在笼子里。 semanage 命令不仅能够像传统 chcon 命令那样—设置文件、目录的策略，还可以管理网络 端口、消息接口（这些新特性将在本章后文中涵盖）。使用 semanage 命令时，经常用到的几 个参数及其功能如下所示：</p>
+<ul>
+<li> -l 参数用于查询； </li>
+<li> -a 参数用于添加； </li>
+<li> -m 参数用于修改； </li>
+<li> -d 参数用于删除。</li>
+</ul>
+<h2 id="虚拟主机功能"><a href="#虚拟主机功能" class="headerlink" title="虚拟主机功能"></a>虚拟主机功能</h2><p>如果每台运行 Linux 系统的服务器上只能运行一个网站，那么人气低、流量小的草 根站长就要被迫承担着高昂的服务器租赁费用了，这显然也会造成硬件资源的浪费。在 虚拟专用服务器（Virtual Private Sever，VPS）与云计算技术诞生以前，IDC 服务供应商 为了能够更充分地利用服务器资源，同时也为了降低购买门槛，于是纷纷启用了虚拟主 机功能。 利用虚拟主机功能，可以把一台处于运行状态的物理服务器分割成多个“虚拟的服 务器”。但是，该技术无法实现目前云主机技术的硬件资源隔离，让这些虚拟的服务器 共同使用物理服务器的硬件资源，供应商只能限制硬盘的使用空间大小。出于各种考虑 的因素（主要是价格低廉），目前依然有很多企业或个人站长在使用虚拟主机的形式来 部署网站。</p>
+<h1 id="第11章使用vsftpd服务传输文件"><a href="#第11章使用vsftpd服务传输文件" class="headerlink" title="第11章使用vsftpd服务传输文件"></a>第11章使用vsftpd服务传输文件</h1><h2 id="文件传输协议"><a href="#文件传输协议" class="headerlink" title="文件传输协议"></a>文件传输协议</h2><p>FTP 是一种在互联网中进行文件传输的协议，基于客户端/服务器模式，默认使用 20、21 号端口，其中端口 20（数据端口）用于进行数据传输，端口 21（命令端口）用于接受客户端 发出的相关 FTP 命令与参数。FTP 服务器普遍部署于内网中，具有容易搭建、方便管理的特 点。而且有些 FTP 客户端工具还可以支持文件的多点下载以及断点续传技术，因此 FTP 服务 得到了广大用户的青睐。</p>
+<ul>
+<li>主动模式：FTP 服务器主动向客户端发起连接请求。 </li>
+<li>被动模式：FTP 服务器等待客户端发起连接请求（FTP 的默认工作模式）。</li>
+</ul>
+<h2 id="vsftpd-服务程序"><a href="#vsftpd-服务程序" class="headerlink" title="vsftpd 服务程序"></a>vsftpd 服务程序</h2><p>/etc/vsftpd/vsftpd.conf<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627659873524-eef9d6c3-3f44-44c6-a980-e6748db5c8d9.png#clientId=u948ccd47-2c2a-4&from=paste&height=390&id=u92cd2d70&name=image.png&originHeight=779&originWidth=875&originalType=binary&ratio=1&rotation=0&showTitle=false&size=227691&status=done&style=none&taskId=uca24761a-9a59-4797-8bb4-0e3f1d364dd&title=&width=437.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>三种认证模式:</p>
+<ul>
+<li><p>匿名开放模式：是一种最不安全的认证模式，任何人都可以无需密码验证而直接登录 到 FTP 服务器。 </p>
+</li>
+<li><p>本地用户模式：是通过 Linux 系统本地的账户密码信息进行认证的模式，相较于匿名 开放模式更安全，而且配置起来也很简单。但是如果被黑客破解了账户的信息，就可 以畅通无阻地登录 FTP 服务器，从而完全控制整台服务器。 </p>
+</li>
+<li><p>虚拟用户模式：是这三种模式中最安全的一种认证模式，它需要为 FTP 服务单独 建立用户数据库文件，虚拟出用来进行口令验证的账户信息，而这些账户信息在 服务器系统中实际上是不存在的，仅供 FTP 服务程序进行认证使用。这样，即使 黑客破解了账户信息也无法登录服务器，从而有效降低了破坏范围和影响。</p>
+</li>
+</ul>
+<h2 id="简单文件传输协议"><a href="#简单文件传输协议" class="headerlink" title="简单文件传输协议"></a>简单文件传输协议</h2><p>简单文件传输协议（Trivial File Transfer Protocol，TFTP）是一种基于 UDP 协议在客户端 和服务器之间进行简单文件传输的协议。顾名思义，它提供不复杂、开销不大的文件传输服 务（可将其当作 FTP 协议的简化版本）。 TFTP 的命令功能不如 FTP 服务强大，甚至不能遍历目录，在安全性方面也弱于 FTP 服务。而且，由于 TFTP 在传输文件时采用的是 UDP 协议，占用的端口号为 69，因此 文件的传输过程也不像 FTP 协议那样可靠。但是，因为 TFTP 不需要客户端的权限认证， 也就减少了无谓的系统和网络带宽消耗，因此在传输琐碎（trivial）不大的文件时，效率 更高。</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-meta">#安装</span><br>yum install tftp-<span class="hljs-keyword">server</span> tftp -y<br></code></pre></td></tr></table></figure>
+
+<h1 id="第12章使用Samba或NFS实现文件共享"><a href="#第12章使用Samba或NFS实现文件共享" class="headerlink" title="第12章使用Samba或NFS实现文件共享"></a>第12章使用Samba或NFS实现文件共享</h1><h2 id="Samba-文件共享服务"><a href="#Samba-文件共享服务" class="headerlink" title="Samba 文件共享服务"></a>Samba 文件共享服务</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627709402733-3764fec7-49f0-4526-9de5-4d2c2b14499d.png#clientId=u18063a6e-3b8e-4&from=paste&height=342&id=ue9a2e467&name=image.png&originHeight=684&originWidth=733&originalType=binary&ratio=1&rotation=0&showTitle=false&size=173595&status=done&style=none&taskId=ua4af2d21-c464-4ce0-9d81-69982cfd8b2&title=&width=366.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>配置共享资源<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627709417579-790a1f17-8219-481d-bdf2-524cb7c91ea1.png#clientId=u18063a6e-3b8e-4&from=paste&height=114&id=u4503cdbe&name=image.png&originHeight=227&originWidth=708&originalType=binary&ratio=1&rotation=0&showTitle=false&size=41986&status=done&style=none&taskId=ubdc34afe-08fe-41f8-999d-0db28ad7ceb&title=&width=354" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="NFS（网络文件系统）"><a href="#NFS（网络文件系统）" class="headerlink" title="NFS（网络文件系统）"></a>NFS（网络文件系统）</h2><h2 id="autofs-自动挂载服务"><a href="#autofs-自动挂载服务" class="headerlink" title="autofs 自动挂载服务"></a>autofs 自动挂载服务</h2><h1 id="第13章使用BIND提供域名解析服务"><a href="#第13章使用BIND提供域名解析服务" class="headerlink" title="第13章使用BIND提供域名解析服务"></a>第13章使用BIND提供域名解析服务</h1><h1 id="第14章使用DHCP动态管理主机地址"><a href="#第14章使用DHCP动态管理主机地址" class="headerlink" title="第14章使用DHCP动态管理主机地址"></a>第14章使用DHCP动态管理主机地址</h1><h1 id="第15章使用Postifx与Dovecot部署邮件系统"><a href="#第15章使用Postifx与Dovecot部署邮件系统" class="headerlink" title="第15章使用Postifx与Dovecot部署邮件系统"></a>第15章使用Postifx与Dovecot部署邮件系统</h1><h1 id="第16章使用Squid部署代理缓存服务"><a href="#第16章使用Squid部署代理缓存服务" class="headerlink" title="第16章使用Squid部署代理缓存服务"></a>第16章使用Squid部署代理缓存服务</h1><h1 id="第17章使用IsSCSI服务部署网络存储"><a href="#第17章使用IsSCSI服务部署网络存储" class="headerlink" title="第17章使用IsSCSI服务部署网络存储"></a>第17章使用IsSCSI服务部署网络存储</h1><h1 id="第18章使用MariaDB数据库管理系统"><a href="#第18章使用MariaDB数据库管理系统" class="headerlink" title="第18章使用MariaDB数据库管理系统"></a>第18章使用MariaDB数据库管理系统</h1><h1 id="第19章使用PXE-Kickstart无人值守安装服务"><a href="#第19章使用PXE-Kickstart无人值守安装服务" class="headerlink" title="第19章使用PXE+Kickstart无人值守安装服务"></a>第19章使用PXE+Kickstart无人值守安装服务</h1><h1 id="第20章使用LNMP架构部署动态网站环境"><a href="#第20章使用LNMP架构部署动态网站环境" class="headerlink" title="第20章使用LNMP架构部署动态网站环境"></a>第20章使用LNMP架构部署动态网站环境</h1><h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/pdf/2630542/1625580141680-b1889f84-3610-4a0d-92b3-fc6459abbd75.pdf?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2021/pdf/2630542/1625580141680-b1889f84-3610-4a0d-92b3-fc6459abbd75.pdf%22,%22name%22:%22LinuxProbe.pdf%22,%22size%22:17676281,%22type%22:%22application/pdf%22,%22ext%22:%22pdf%22,%22source%22:%22%22,%22status%22:%22done%22,%22mode%22:%22title%22,%22download%22:true,%22taskId%22:%22u6adc8cb1-8e86-443e-a4f3-96c1977a945%22,%22taskType%22:%22upload%22,%22id%22:%22uac9f8d38%22,%22card%22:%22file%22%7D">LinuxProbe.pdf</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="category-chain-item">读书笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux篇-Linux就该这么学</div>
+      <div>https://mikeygithub.github.io/2021/07/07/yuque/hmar21/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年7月7日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/21/yuque/coahg1/" title="笔记篇-浅谈Java Service Porvider Interface (SPI)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记篇-浅谈Java Service Porvider Interface (SPI)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/04/yuque/vn07ha/" title="MySQL篇 -《MySQL是怎样运行的》">
+                        <span class="hidden-mobile">MySQL篇 -《MySQL是怎样运行的》</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
