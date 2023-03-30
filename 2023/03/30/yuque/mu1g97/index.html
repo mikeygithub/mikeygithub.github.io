@@ -17,16 +17,16 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="背景 在  概念 时间戳（Timestamp）：也称为时间标记，是一种表示时间的数字或字符串，通常是一个以某个固定时间点为起点的时间段。在计算机中，时间戳通常是一个整数或浮点数，表示自某个固定时间点（例如 1970 年 1 月 1 日 00:00:00 UTC）以来经过的时间量，可以用来记录事件发生时间或计算时间间隔。 时区（Time Zone）：时区是地球上按经度划分的区域，每个时区都有一个相">
+    <meta name="description" content="背景 最近在项目中遇到了一个关于时间的问题，对这方面了解不是很多，趁着这个机会记录一下。  项目主要的功能是将欧洲站和英国站的数据订单进行缺失检查补充到神X数据分析平台，原有的项目是只有美国站且订单存储的时间也是美国太平洋时间（US&#x2F;Pacific），但是新增了两个站点（欧洲站和英国站）且我们的调度是按照天来调度，因此需要等数据分析平台统计完数据我们才能查询。 由于时区的不同查询的范围也不一致，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习笔记-项目中时间存储的探索与实践">
+<meta property="og:title" content="学习笔记-计算机中时间的探索与实践">
 <meta property="og:url" content="https://mikeygithub.github.io/2023/03/30/yuque/mu1g97/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="背景 在  概念 时间戳（Timestamp）：也称为时间标记，是一种表示时间的数字或字符串，通常是一个以某个固定时间点为起点的时间段。在计算机中，时间戳通常是一个整数或浮点数，表示自某个固定时间点（例如 1970 年 1 月 1 日 00:00:00 UTC）以来经过的时间量，可以用来记录事件发生时间或计算时间间隔。 时区（Time Zone）：时区是地球上按经度划分的区域，每个时区都有一个相">
+<meta property="og:description" content="背景 最近在项目中遇到了一个关于时间的问题，对这方面了解不是很多，趁着这个机会记录一下。  项目主要的功能是将欧洲站和英国站的数据订单进行缺失检查补充到神X数据分析平台，原有的项目是只有美国站且订单存储的时间也是美国太平洋时间（US&#x2F;Pacific），但是新增了两个站点（欧洲站和英国站）且我们的调度是按照天来调度，因此需要等数据分析平台统计完数据我们才能查询。 由于时区的不同查询的范围也不一致，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1680146984311-b24d35fa-e9de-4ef2-889f-910d33dfe034.png">
 <meta property="article:published_time" content="2023-03-30T15:52:52.000Z">
-<meta property="article:modified_time" content="2023-03-30T11:31:36.059Z">
+<meta property="article:modified_time" content="2023-03-30T15:53:13.055Z">
 <meta property="article:author" content="Mikey">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1680146984311-b24d35fa-e9de-4ef2-889f-910d33dfe034.png">
@@ -35,7 +35,7 @@
 <!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
   
   
-  <title>学习笔记-项目中时间存储的探索与实践 - 麦奇</title>
+  <title>学习笔记-计算机中时间的探索与实践 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -251,7 +251,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="学习笔记-项目中时间存储的探索与实践"></span>
+            <span id="subtitle" data-typed-text="学习笔记-计算机中时间的探索与实践"></span>
           
         </div>
 
@@ -280,7 +280,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          869 字
+          1.2k 字
         
       </span>
     
@@ -292,7 +292,7 @@
         
         
           <!-- compatible with older versions-->
-          8 分钟
+          10 分钟
         
       </span>
     
@@ -338,14 +338,16 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">学习笔记-项目中时间存储的探索与实践</h1>
+            <h1 style="display: none">学习笔记-计算机中时间的探索与实践</h1>
             
             <div class="markdown-body">
               
               <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1680146984311-b24d35fa-e9de-4ef2-889f-910d33dfe034.png#averageHue=%23d2d2d2&clientId=uad48ba6d-a17a-4&from=paste&height=237&id=u7c15b412&name=image.png&originHeight=1004&originWidth=1906&originalType=binary&ratio=2&rotation=0&showTitle=false&size=2337552&status=done&style=none&taskId=uec390247-3ccd-42cf-817b-fb6023cff20&title=&width=449" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
-<p>在</p>
+<p>最近在项目中遇到了一个关于时间的问题，对这方面了解不是很多，趁着这个机会记录一下。</p>
 </blockquote>
+<p>项目主要的功能是将欧洲站和英国站的数据订单进行缺失检查补充到神X数据分析平台，原有的项目是只有美国站且订单存储的时间也是美国太平洋时间（US/Pacific），但是新增了两个站点（欧洲站和英国站）且我们的调度是按照天来调度，因此需要等数据分析平台统计完数据我们才能查询。</p>
+<p>由于时区的不同查询的范围也不一致，所以我们查询的范围也是不一样的，以欧洲柏林时间为例（Europe/Berlin），因为要想获取站点当天完整数据，那么该站点当天时间必须已经结束（德国柏林是东一区时区，北京的当地时间是东八区时区，北京时间比柏林时间快6小时，所以我们至少要凌晨六点才能进行调度）</p>
 <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><ol>
 <li>时间戳（Timestamp）：也称为时间标记，是一种表示时间的数字或字符串，通常是一个以某个固定时间点为起点的时间段。在计算机中，时间戳通常是一个整数或浮点数，表示自某个固定时间点（例如 1970 年 1 月 1 日 00:00:00 UTC）以来经过的时间量，可以用来记录事件发生时间或计算时间间隔。</li>
 <li>时区（Time Zone）：时区是地球上按经度划分的区域，每个时区都有一个相对于协调世界时（UTC）的时差。时区可以用来表示本地时间，例如中国标准时间（CST）是 UTC+8，即比 UTC 时间早 8 个小时。</li>
@@ -354,7 +356,8 @@
 <li>时间间隔（Time Duration）：时间间隔是表示时间段的一种概念，通常用来计算两个时间之间的时间差。在计算机中，时间间隔通常是一个持续时间的数字或字符串，例如 1 秒、2 分钟等。</li>
 </ol>
 <p>世界时间</p>
-<h2 id="时区"><a href="#时区" class="headerlink" title="时区"></a>时区</h2><p>在 Go 语言中，使用 time 包来处理日期和时间相关的操作，该包支持多种时区标识符。下面是一些常用的时区标识符：</p>
+<h2 id="时区"><a href="#时区" class="headerlink" title="时区"></a>时区</h2><p>零时区</p>
+<p>在 Go 语言中，使用 time 包来处理日期和时间相关的操作，该包支持多种时区标识符。下面是一些常用的时区标识符：</p>
 <ol>
 <li>“UTC”: 表示协调世界时。</li>
 <li>“Local”: 表示本地时区，具体取决于系统设置。</li>
@@ -365,7 +368,7 @@
 <li>“Asia/Shanghai”: 表示中国标准时间（CST）。</li>
 <li>“Asia/Tokyo”: 表示日本标准时间。</li>
 </ol>
-<p>golang的时区包支持参考 <code>$GOROOT/lib/time/</code></p>
+<h2 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h2><p>golang的时区包支持参考 <code>$GOROOT/lib/time/</code></p>
 <p>数据库时间</p>
 <h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a target="_blank" rel="noopener" href="https://busynose.gitee.io/blog/post/date/">https://busynose.gitee.io/blog/post/date/</a></p>
 
@@ -405,7 +408,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>学习笔记-项目中时间存储的探索与实践</div>
+      <div>学习笔记-计算机中时间的探索与实践</div>
       <div>https://mikeygithub.github.io/2023/03/30/yuque/mu1g97/</div>
     </div>
     <div class="license-meta">
