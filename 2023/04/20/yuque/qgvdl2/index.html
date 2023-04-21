@@ -1,0 +1,980 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言Rust 和 WebAssembly 是当前非常热门的技术，它们都具有非常强大的性能和安全性。Rust 是一种系统级编程语言，具有内存安全、并发性和高效性等特点。WebAssembly 是一种新型的低级字节码，可以在浏览器中运行高性能的应用程序。Rust 与 WebAssembly 的结合可以让我们在 Web 上构建出更高效、更安全的应用程序。 本篇文章将介绍 Rust 和 WebAssem">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rust wasm的探索与实践">
+<meta property="og:url" content="https://mikeygithub.github.io/2023/04/20/yuque/qgvdl2/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="前言Rust 和 WebAssembly 是当前非常热门的技术，它们都具有非常强大的性能和安全性。Rust 是一种系统级编程语言，具有内存安全、并发性和高效性等特点。WebAssembly 是一种新型的低级字节码，可以在浏览器中运行高性能的应用程序。Rust 与 WebAssembly 的结合可以让我们在 Web 上构建出更高效、更安全的应用程序。 本篇文章将介绍 Rust 和 WebAssem">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1681973325424-053404d4-53ae-4914-b46e-185859a15ced.png">
+<meta property="article:published_time" content="2023-04-20T15:24:22.000Z">
+<meta property="article:modified_time" content="2023-04-21T07:50:17.728Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="wasm">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1681973325424-053404d4-53ae-4914-b46e-185859a15ced.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>Rust wasm的探索与实践 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":"G-NCN3Z5PSLJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Rust wasm的探索与实践"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-20 23:24" pubdate>
+          2023年4月20日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          5.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          44 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Rust wasm的探索与实践</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1681973325424-053404d4-53ae-4914-b46e-185859a15ced.png#averageHue=%23bcb6e0&clientId=u253087b4-9a5c-4&from=paste&height=225&id=u986887aa&name=image.png&originHeight=450&originWidth=650&originalType=binary&ratio=2&rotation=0&showTitle=false&size=39372&status=done&style=none&taskId=u7d7be08d-8ad1-4bfc-8995-7b5588faa78&title=&width=325" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Rust 和 WebAssembly 是当前非常热门的技术，它们都具有非常强大的性能和安全性。Rust 是一种系统级编程语言，具有内存安全、并发性和高效性等特点。WebAssembly 是一种新型的低级字节码，可以在浏览器中运行高性能的应用程序。Rust 与 WebAssembly 的结合可以让我们在 Web 上构建出更高效、更安全的应用程序。</p>
+<p>本篇文章将介绍 Rust 和 WebAssembly 的基础知识，包括如何使用 Rust 编写 WebAssembly 模块，如何在 Rust 和 JavaScript 之间进行互操作，以及如何将 Rust wasm 发布到 npm 上。此外，我们还将介绍一些实际的 Rust wasm 项目案例，并对 Rust wasm 的优势和未来展望进行讨论。</p>
+<h2 id="Rust-语言简介"><a href="#Rust-语言简介" class="headerlink" title="Rust 语言简介"></a>Rust 语言简介</h2><p>Rust 是一种由 Mozilla 开发的系统级编程语言，它结合了 C++ 和其他现代编程语言的优点。Rust 具有内存安全、并发性和高效性等特点，可以用于构建高性能的系统级应用程序。<br>Rust 的一大特点是它的所有权系统。所有权系统是 Rust 的一项内存管理功能，它确保内存分配和回收的正确性。在 Rust 中，每个值都有一个所有者，当所有者离开作用域时，值就会被释放。这种内存管理方式可以防止空指针和内存泄漏等问题。</p>
+<h2 id="WebAssembly-简介"><a href="#WebAssembly-简介" class="headerlink" title="WebAssembly 简介"></a>WebAssembly 简介</h2><p>WebAssembly 是一种新型的低级字节码，可以在浏览器中运行高性能的应用程序。它是由 W3C、Mozilla、Google 和 Microsoft 等组织共同开发的，目的是为 Web 应用程序提供更快、更安全的运行环境。<br>WebAssembly 与 JavaScript 不同，它是一种真正的二进制格式，可以直接在浏览器中运行，而不需要像 JavaScript 那样先被解释成字节码。这意味着 WebAssembly 的性能比 JavaScript 更好，并且可以被用于更高效的计算密集型任务。</p>
+<h1 id="Rust-与-WebAssembly"><a href="#Rust-与-WebAssembly" class="headerlink" title="Rust 与 WebAssembly"></a>Rust 与 WebAssembly</h1><p>Rust 与 WebAssembly 的结合可以让我们在 Web 上构建出更高效、更安全的应用程序。Rust 可以编译成 WebAssembly 模块，这些模块可以在浏览器中运行，提供更快、更安全的性能。</p>
+<h2 id="Rust-编译成-WebAssembly"><a href="#Rust-编译成-WebAssembly" class="headerlink" title="Rust 编译成 WebAssembly"></a>Rust 编译成 WebAssembly</h2><p>要将 Rust 编译成 WebAssembly，我们需要使用 Rust 的 wasm32-unknown-unknown 目标。这个目标是为 WebAssembly 设计的，它会将 Rust 代码编译成 WebAssembly 模块。我们可以使用 cargo 工具来编译 Rust 代码，命令如下：<br>n1ql<br>Copy</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">cargo <span class="hljs-keyword">build</span> --target wasm32-<span class="hljs-keyword">unknown</span>-<span class="hljs-keyword">unknown</span><br></code></pre></td></tr></table></figure>
+
+<p>这个命令会将 Rust 代码编译成 WebAssembly 模块，并生成一个 .wasm 文件。</p>
+<h2 id="Rust-的-wasm-bindgen-crate"><a href="#Rust-的-wasm-bindgen-crate" class="headerlink" title="Rust 的 wasm-bindgen crate"></a>Rust 的 wasm-bindgen crate</h2><p>wasm-bindgen 是一个 Rust 的 crate，它提供了 Rust 和 JavaScript 之间的互操作功能。使用 wasm-bindgen，我们可以方便地从 Rust 中调用 JavaScript 函数，也可以让 JavaScript 调用 Rust 函数。</p>
+<h2 id="一个简单的-Rust-wasm-例子-Hello-World"><a href="#一个简单的-Rust-wasm-例子-Hello-World" class="headerlink" title="一个简单的 Rust wasm 例子: Hello World!"></a>一个简单的 Rust wasm 例子: Hello World!</h2><p>下面是一个简单的 Rust wasm 例子：Hello World！该例子使用了 wasm-bindgen，可以让 JavaScript 调用 Rust 函数，并在控制台中打印出 “Hello, World!”。<br>Rust 代码：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">use</span> wasm_bindgen::prelude::*;<br><br><span class="hljs-meta">#[wasm_bindgen]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">hello_world</span>() &#123;<br>    console::<span class="hljs-title function_ invoke__">log_1</span>(&amp;<span class="hljs-string">&quot;Hello, World!&quot;</span>.<span class="hljs-title function_ invoke__">into</span>());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; hello_world &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./hello_world.js&quot;</span>;<br><br><span class="hljs-title function_">hello_world</span>();<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="Rust-wasm-工具链"><a href="#Rust-wasm-工具链" class="headerlink" title="Rust wasm 工具链"></a>Rust wasm 工具链</h1><ul>
+<li>wasm-pack: 打包、测试和发布 Rust generated WebAssembly</li>
+</ul>
+<p>wasm-pack 是一个命令行工具，用于打包、测试和发布 Rust 生成的 WebAssembly。它可以将 Rust 代码编译成 WebAssembly 模块，并生成一个可以发布到 npm 的包。</p>
+<ul>
+<li>wasm-bindgen-test: 测试 Rust wasm 代码</li>
+</ul>
+<p>wasm-bindgen-test 是一个测试框架，用于测试 Rust wasm 代码。它可以将 Rust 函数导出为 JavaScript 函数，并提供了一些辅助函数，使测试变得更加容易。</p>
+<ul>
+<li>wasm-pack-plugin: 与现有的 JS 构建工具集成</li>
+</ul>
+<p>wasm-pack-plugin 是一个可以与现有的 JavaScript 构建工具集成的插件。它可以让我们在构建 JavaScript 应用程序时自动构建 Rust wasm 模块，从而简化构建过程。</p>
+<h1 id="Rust-wasm-与-JavaScript-互操作"><a href="#Rust-wasm-与-JavaScript-互操作" class="headerlink" title="Rust wasm 与 JavaScript 互操作"></a>Rust wasm 与 JavaScript 互操作</h1><ul>
+<li>从 JS 调用 Rust 函数</li>
+</ul>
+<p>要从 JavaScript 中调用 Rust 函数，我们需要使用 wasm-bindgen。首先，在 Rust 函数上添加 #[wasm_bindgen] 属性，这将导出 Rust 函数作为 JavaScript 函数。然后，在 JavaScript 中导入 Rust 函数，并通过 JavaScript 调用它。</p>
+<ul>
+<li>从 Rust 调用 JS 函数</li>
+</ul>
+<p>要从 Rust 中调用 JavaScript 函数，我们需要使用 wasm-bindgen。首先，在 Rust 中使用 #[wasm_bindgen] 属性导入 JavaScript 函数。然后，在 Rust 中调用 JavaScript 函数，并将结果转换为 Rust 类型。</p>
+<ul>
+<li>管理内存</li>
+</ul>
+<p>在 Rust wasm 中，我们需要手动管理内存。Rust 提供了一些功能，如 Box 和 Rc，用于管理内存。我们还可以使用 wasm-bindgen 的内存分配器功能来管理内存。在 JavaScript 中，我们可以使用 TypedArray 和 ArrayBuffer 等功能来管理内存。</p>
+<ul>
+<li>类型转换</li>
+</ul>
+<p>在 Rust wasm 和 JavaScript 之间传递数据时，我们需要进行类型转换。Rust wasm 和 JavaScript 支持的数据类型不完全相同，因此我们需要将数据转换为适当的类型。我们可以使用 wasm-bindgen 的类型转换功能来轻松地进行类型转换。</p>
+<h1 id="Rust-wasm-的实际应用"><a href="#Rust-wasm-的实际应用" class="headerlink" title="Rust wasm 的实际应用"></a>Rust wasm 的实际应用</h1><p>Rust wasm 可以用于构建高效、安全的 Web 应用程序，也可以用于构建跨平台的桌面应用程序。</p>
+<p>通过 wasm-pack 发布你的包到 npm </p>
+<p>要将 Rust wasm 包发布到 npm，我们可以使用 wasm-pack。wasm-pack 可以将 Rust 代码编译成 WebAssembly 模块，并生成一个可以发布到 npm 的包。我们可以使用以下命令来发布 Rust wasm 包到 npm：<br>ebnf</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">wasm-pack publish</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>与 Web 框架集成(如 Vue.js、React)</p>
+<p>Rust wasm 可以与现有的 Web 框架集成，如 Vue.js、React 和 Angular 等。我们可以使用 wasm-bindgen 和 wasm-pack-plugin 将 Rust wasm 模块与现有的 JavaScript 应用程序集成在一起。</p>
+<h2 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h2><p>一些现实的 Rust wasm 项目案例分析</p>
+<p>1.1. Yew<br>Yew 是一个 Rust 编写的现代 Web 框架，它基于 WebAssembly 和 Virtual DOM。它提供了一种高效和安全的方式来编写 Web 应用程序，并且可以通过编译成 WebAssembly 模块在浏览器中运行。<br>Yew 旨在提供与 React 和 Vue 等现代 Web 框架相似的功能，包括组件化、事件处理、状态管理等。它使用 Rust 的所有权系统来确保内存安全，并且可以与 JavaScript 代码无缝交互。<br>1.2. Parity Substrate<br>Parity Substrate 是一个用于构建区块链应用程序的 Rust 框架，它使用 WebAssembly 技术来提高性能和安全性。 Substrate 通过可插拔的模块化架构使得构建自定义区块链变得更加容易。<br>Substrate 提供了一组自定义的 Rust 库，可以轻松地创建和部署智能合约，并且可以在不同的区块链网络之间进行互操作性。使用 WebAssembly 技术，Substrate 可以实现高性能的智能合约执行，同时保证了内存安全性。<br>1.3. xi-editor<br>xi-editor 是一个 Rust 编写的文本编辑器，它使用 WebAssembly 技术来提高性能。xi-editor 的目标是提供一个快速、可扩展和易于定制的文本编辑器，可以在不同的平台上运行。<br>使用 WebAssembly 技术，xi-editor 可以在浏览器中运行，并且可以与 JavaScript 代码无缝交互。此外，Rust 的所有权系统可以确保内存安全，避免了常见的内存安全问题。<br>总之，这些 Rust wasm 项目展示了 WebAssembly 的潜力，它可以为 Web 应用程序提供高性能、安全性和可维护性，并且可以在不同的平台上运行。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="Rust-wasm-的优势"><a href="#Rust-wasm-的优势" class="headerlink" title="Rust wasm 的优势"></a>Rust wasm 的优势</h2><p>Rust wasm 具有以下优势：</p>
+<ol>
+<li>内存安全：Rust 的所有权系统可以保证内存安全，避免了常见的内存安全问题，如空指针和内存泄漏。</li>
+<li>高效性：Rust 是一种高效的语言，可以生成高性能的 WebAssembly 模块，提供了比 JavaScript 更好的性能。</li>
+<li>并发性：Rust 支持并发编程，可以轻松地编写并发应用程序，而不需要担心数据竞争和其他问题。</li>
+<li>可维护性：Rust 是一种可维护的语言，它具有良好的模块化和抽象机制，可以使代码更易于理解和维护。</li>
+<li>跨平台：Rust wasm 可以在任何支持 WebAssembly 的平台上运行，如浏览器、Node.js 和桌面应用程序等。</li>
+</ol>
+<p>Rust wasm 可以用于多种应用场景，如：</p>
+<ol>
+<li>Web 应用程序：Rust wasm 可以用于编写 Web 应用程序的一部分，以提高性能和安全性。</li>
+<li>游戏：Rust wasm 可以用于编写游戏的一部分，以提高性能和安全性，并使游戏更易于移植到不同的平台上。</li>
+<li>数据科学：Rust wasm 可以用于在浏览器中运行数据科学代码，从而使数据科学更易于使用和共享。</li>
+<li>区块链：Rust wasm 可以用于编写智能合约，以提高安全性和性能。</li>
+</ol>
+<h2 id="当前存在的问题"><a href="#当前存在的问题" class="headerlink" title="当前存在的问题"></a>当前存在的问题</h2><p>虽然 Rust wasm 技术有很多优势，但也存在一些问题：<br>1.1. 工具链不完善：Rust wasm 技术目前的工具链还不够完善，使用起来还有一些困难，需要更多的工作来改进工具链的可用性和易用性。<br>1.2. 生态系统不完整：Rust wasm 技术的生态系统还不够完整，需要更多的开发者和社区的参与，来完善 Rust wasm 技术的生态系统。<br>1.3. 学习曲线较陡峭：Rust 是一种相对较新的编程语言，学习曲线相对较陡峭，需要一定的时间和精力来学习和掌握。</p>
+<h1 id="未来展望"><a href="#未来展望" class="headerlink" title="未来展望"></a>未来展望</h1><p>尽管 Rust wasm 技术目前还存在一些问题，但未来它有很大的发展潜力：<br>2.1. 更广泛的应用：随着 Rust wasm 技术的发展，它将在更多的应用场景中得到应用，包括 Web 应用程序、游戏、数据科学和区块链等领域。<br>2.2. 更完整的生态系统：随着 Rust wasm 技术的发展，它的生态系统将变得更加完整，将有更多的开发者和社区参与其中，从而促进技术的发展。<br>2.3. 更好的工具链支持：随着 Rust wasm 技术的发展，工具链的支持将变得更加完善，使得开发者可以更轻松地使用 Rust wasm 技术来构建应用程序。<br>2.4. 更好的性能和安全性：随着 Rust wasm 技术的发展，它将提供更好的性能和安全性，使得 Rust wasm 技术在 Web 应用程序和其他领域中得到更广泛的应用。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li>什么是Rust和WebAssembly，它们为什么能提高Web应用的性能和安全性？</li>
+<li>如何使用Rust和WebAssembly开发Web应用，需要哪些工具和库？</li>
+<li>Rust和WebAssembly如何与JavaScript，HTML和CSS协同工作，如何实现无缝的互操作？</li>
+<li>Rust和WebAssembly在实际项目中的应用案例，如Serverless函数，源码映射，压缩编码等。</li>
+<li>Rust和WebAssembly的优化手段和技巧，如wasm-opt，运行时选择等。</li>
+<li>Rust和WebAssembly的未来发展趋势和挑战。</li>
+</ul>
+<ol>
+<li>Rust和WebAssembly的学习资源和社区，如官方文档，教程，博客，问答网站等。</li>
+<li>Rust和WebAssembly的最佳实践和常见问题，如内存管理，错误处理，调试工具等。</li>
+<li>Rust和WebAssembly的高级主题和新特性，如异步编程，多线程，SIMD等。</li>
+<li>Rust和WebAssembly的创新应用和前沿探索，如Serverless函数，源码映射，压缩编码等。</li>
+<li></li>
+</ol>
+<ol>
+<li>相关资料：<a target="_blank" rel="noopener" href="https://rustwasm.github.io/book/">https://rustwasm.github.io/book/</a></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://blog.chromium.org/2023/04/how-webassembly-is-accelerating-new-web.html">https://blog.chromium.org/2023/04/how-webassembly-is-accelerating-new-web.html</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/wasm/">#wasm</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Rust wasm的探索与实践</div>
+      <div>https://mikeygithub.github.io/2023/04/20/yuque/qgvdl2/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月20日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-NCN3Z5PSLJ', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
