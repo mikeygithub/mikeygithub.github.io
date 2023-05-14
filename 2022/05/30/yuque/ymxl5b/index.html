@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1653885136468-60505fa1-9e6e-48e6-81e4-bde1e31a7795.png">
 <meta property="article:published_time" content="2022-05-30T09:24:22.000Z">
-<meta property="article:modified_time" content="2023-04-21T15:48:17.976Z">
+<meta property="article:modified_time" content="2023-05-14T07:25:30.849Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="JUC">
 <meta name="twitter:card" content="summary_large_image">
@@ -343,10 +343,10 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1653885136468-60505fa1-9e6e-48e6-81e4-bde1e31a7795.png#averageHue=%23060606&clientId=u36a2d392-7826-4&errorMessage=unknown%20error&from=ui&id=u9dcd711d&name=image_%E5%89%AF%E6%9C%AC.png&originHeight=383&originWidth=897&originalType=binary&ratio=1&rotation=0&showTitle=false&size=31833&status=error&style=none&taskId=u692c5d06-0c4e-4b0c-b686-8899eb6c23a&title=" srcset="/img/loading.gif" lazyload alt="image_副本.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1653885136468-60505fa1-9e6e-48e6-81e4-bde1e31a7795.png#averageHue=%23060606&clientId=u36a2d392-7826-4&errorMessage=unknown%20error&from=ui&id=u9dcd711d&originHeight=383&originWidth=897&originalType=binary&ratio=1&rotation=0&showTitle=false&size=31833&status=error&style=none&taskId=u692c5d06-0c4e-4b0c-b686-8899eb6c23a&title=" srcset="/img/loading.gif" lazyload alt="image_副本.png"></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>ThreadPoolExecutor一种ExecutorService，使用可能的多个池线程之一执行每个提交的任务，通常使用Executors工厂方法进行配置。<br>线程池解决了两个不同的问题：它们通常在执行大量异步任务时提供更好的性能，这是因为减少了每个任务的调用开销；它们还提供了一种方法来限制和管理执行任务集合时消耗的资源，包括线程。每个ThreadPoolExecutor还维护一些基本统计信息，例如已完成任务的数量。</p>
 <p>为了在广泛的上下文中有用，这个类提供了许多可调整的参数和可扩展性挂钩。然而，我们敦促程序员使用更方便的Executors工厂方法Executors。newCachedThreadPool（无边界线程池，具有自动线程回收），执行器。newFixedThreadPool（固定大小的线程池）和执行器。newSingleThreadExecutor（单后台线程），为最常见的使用场景预配置设置。否则，在手动配置和调优此类时，请使用以下指南：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654068449775-febb088e-3eac-47cb-91e5-1c407c48e6f1.png#averageHue=%23585841&clientId=u6148baad-c67c-4&errorMessage=unknown%20error&from=paste&height=248&id=u24142e91&name=image.png&originHeight=248&originWidth=301&originalType=binary&ratio=1&rotation=0&showTitle=false&size=8966&status=error&style=none&taskId=ub4f8a59f-720b-41ed-bdb4-78cfeed228d&title=&width=301" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654068449775-febb088e-3eac-47cb-91e5-1c407c48e6f1.png#averageHue=%23585841&clientId=u6148baad-c67c-4&errorMessage=unknown%20error&from=paste&height=248&id=u24142e91&originHeight=248&originWidth=301&originalType=binary&ratio=1&rotation=0&showTitle=false&size=8966&status=error&style=none&taskId=ub4f8a59f-720b-41ed-bdb4-78cfeed228d&title=&width=301" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h2 id="七大核心参数详解"><a href="#七大核心参数详解" class="headerlink" title="七大核心参数详解"></a>七大核心参数详解</h2><ul>
 <li>int corePoolSize,//线程池的核心线程数量                          </li>
 <li>int maximumPoolSize,//线程池的最大线程数                           </li>
@@ -356,7 +356,7 @@
 <li>ThreadFactory threadFactory,//线程工厂，用来创建线程，一般默认即可                           </li>
 <li>RejectedExecutionHandler handler//拒绝策略，当提交的任务过多而不能及时处理时，我们可以定制策略来处理任务</li>
 </ul>
-<h2 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654071840195-90057c3f-d8b1-4036-8a29-c2e5a3578ab5.png#averageHue=%23ececec&clientId=u6148baad-c67c-4&errorMessage=unknown%20error&from=paste&height=764&id=uf63cc774&name=image.png&originHeight=764&originWidth=1694&originalType=binary&ratio=1&rotation=0&showTitle=false&size=294449&status=error&style=none&taskId=uf29be49a-8799-4118-b796-1f90139aff4&title=&width=1694" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654071840195-90057c3f-d8b1-4036-8a29-c2e5a3578ab5.png#averageHue=%23ececec&clientId=u6148baad-c67c-4&errorMessage=unknown%20error&from=paste&height=764&id=uf63cc774&originHeight=764&originWidth=1694&originalType=binary&ratio=1&rotation=0&showTitle=false&size=294449&status=error&style=none&taskId=uf29be49a-8799-4118-b796-1f90139aff4&title=&width=1694" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h2 id="RejectedExecutionHandler"><a href="#RejectedExecutionHandler" class="headerlink" title="RejectedExecutionHandler"></a>RejectedExecutionHandler</h2><h4 id="AbortPolicy（抛出异常）"><a href="#AbortPolicy（抛出异常）" class="headerlink" title="AbortPolicy（抛出异常）"></a>AbortPolicy（抛出异常）</h4><blockquote>
 <p>AbortPolicy，缺省策略，处理程序在拒绝时抛出runtime RejectedExecutionException。</p>
 </blockquote>

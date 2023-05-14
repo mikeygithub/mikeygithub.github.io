@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1666023777304-2d7b7944-531b-42d2-b58a-5b86f350acc1.png">
 <meta property="article:published_time" content="2022-10-18T12:24:22.000Z">
-<meta property="article:modified_time" content="2023-04-21T15:48:17.944Z">
+<meta property="article:modified_time" content="2023-05-14T07:25:30.785Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="性能测试">
 <meta name="twitter:card" content="summary_large_image">
@@ -343,7 +343,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1666023777304-2d7b7944-531b-42d2-b58a-5b86f350acc1.png#clientId=u75ce29a6-991a-4&errorMessage=unknown%20error&from=paste&height=718&id=u5387959f&name=image.png&originHeight=1436&originWidth=2806&originalType=binary&ratio=1&rotation=0&showTitle=false&size=807746&status=error&style=none&taskId=u91672ddf-ef94-4eb2-aba9-10b6e23f566&title=&width=1403" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1666023777304-2d7b7944-531b-42d2-b58a-5b86f350acc1.png#clientId=u75ce29a6-991a-4&errorMessage=unknown%20error&from=paste&height=718&id=u5387959f&originHeight=1436&originWidth=2806&originalType=binary&ratio=1&rotation=0&showTitle=false&size=807746&status=error&style=none&taskId=u91672ddf-ef94-4eb2-aba9-10b6e23f566&title=&width=1403" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h1 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h1><p>本篇测试并非基准测试，相关测试结果仅供参考，如有错误之处还望指出。</p>
 <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>JDK版本</p>
 <blockquote>
@@ -372,8 +372,8 @@
 <ul>
 <li>针对与rust我们需要通过开启其优化才能有性能提升<code>--release</code>，普通开发模式下可能比较慢</li>
 </ul>
-<h2 id="业务场景-计算密集"><a href="#业务场景-计算密集" class="headerlink" title="业务场景:计算密集"></a>业务场景:计算密集</h2><p>执行一百次递归调用计算斐波拉契数时间空间对比<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1666232029818-8ba216be-dd6e-44ef-9d28-28d0a42e1e47.png#clientId=u4aa78f39-5910-4&errorMessage=unknown%20error&from=paste&height=433&id=u5ea7c607&name=image.png&originHeight=866&originWidth=1240&originalType=binary&ratio=1&rotation=0&showTitle=true&size=67337&status=error&style=none&taskId=u98cee718-a178-46f2-98aa-8894a0ba41d&title=%E6%89%A7%E8%A1%8C100%E6%AC%A1%E9%80%92%E5%BD%92%E8%AE%A1%E7%AE%97%E6%96%90%E6%B3%A2%E6%8B%89%E5%A5%91%E6%95%B0&width=620" srcset="/img/loading.gif" lazyload alt="image.png" title="执行100次递归计算斐波拉契数"></p>
-<h2 id="业务场景-多线程"><a href="#业务场景-多线程" class="headerlink" title="业务场景:多线程"></a>业务场景:多线程</h2><p>通过最新的虚拟线程和协程（Rust中没有虚拟线程，直接使用线程）计算斐波拉契数时间空间对比<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1666230519868-e3c5f46a-9fd1-4a66-9065-e456162f0459.png#clientId=u4aa78f39-5910-4&errorMessage=unknown%20error&from=paste&height=434&id=ua506f571&name=image.png&originHeight=868&originWidth=1252&originalType=binary&ratio=1&rotation=0&showTitle=true&size=71449&status=error&style=none&taskId=u26c4a74e-8294-4262-a9b8-1909abebbec&title=%E9%80%9A%E8%BF%87%E5%8D%8F%E7%A8%8B%E6%89%A7%E8%A1%8C100%E4%B8%AA%E4%BB%BB%E5%8A%A1%E9%80%92%E5%BD%92%E8%AE%A1%E7%AE%97%E6%96%90%E6%B3%A2%E6%8B%89%E5%A5%91%E6%95%B0&width=626" srcset="/img/loading.gif" lazyload alt="image.png" title="通过协程执行100个任务递归计算斐波拉契数"></p>
+<h2 id="业务场景-计算密集"><a href="#业务场景-计算密集" class="headerlink" title="业务场景:计算密集"></a>业务场景:计算密集</h2><p>执行一百次递归调用计算斐波拉契数时间空间对比<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1666232029818-8ba216be-dd6e-44ef-9d28-28d0a42e1e47.png#clientId=u4aa78f39-5910-4&errorMessage=unknown%20error&from=paste&height=433&id=u5ea7c607&originHeight=866&originWidth=1240&originalType=binary&ratio=1&rotation=0&showTitle=true&size=67337&status=error&style=none&taskId=u98cee718-a178-46f2-98aa-8894a0ba41d&title=%E6%89%A7%E8%A1%8C100%E6%AC%A1%E9%80%92%E5%BD%92%E8%AE%A1%E7%AE%97%E6%96%90%E6%B3%A2%E6%8B%89%E5%A5%91%E6%95%B0&width=620" srcset="/img/loading.gif" lazyload alt="执行100次递归计算斐波拉契数" title="执行100次递归计算斐波拉契数"></p>
+<h2 id="业务场景-多线程"><a href="#业务场景-多线程" class="headerlink" title="业务场景:多线程"></a>业务场景:多线程</h2><p>通过最新的虚拟线程和协程（Rust中没有虚拟线程，直接使用线程）计算斐波拉契数时间空间对比<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1666230519868-e3c5f46a-9fd1-4a66-9065-e456162f0459.png#clientId=u4aa78f39-5910-4&errorMessage=unknown%20error&from=paste&height=434&id=ua506f571&originHeight=868&originWidth=1252&originalType=binary&ratio=1&rotation=0&showTitle=true&size=71449&status=error&style=none&taskId=u26c4a74e-8294-4262-a9b8-1909abebbec&title=%E9%80%9A%E8%BF%87%E5%8D%8F%E7%A8%8B%E6%89%A7%E8%A1%8C100%E4%B8%AA%E4%BB%BB%E5%8A%A1%E9%80%92%E5%BD%92%E8%AE%A1%E7%AE%97%E6%96%90%E6%B3%A2%E6%8B%89%E5%A5%91%E6%95%B0&width=626" srcset="/img/loading.gif" lazyload alt="通过协程执行100个任务递归计算斐波拉契数" title="通过协程执行100个任务递归计算斐波拉契数"></p>
 <h2 id="业务场景-高并发"><a href="#业务场景-高并发" class="headerlink" title="业务场景:高并发"></a>业务场景:高并发</h2><p>使用各种编写的http服务进行压测，通过使用wrk开启8线程500连接进行请求，其数据结构如下</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">wrk -c500 -t8 -d30s --latency http://147.106.210.183:8000/serial/abcdefghijklmnopqrist<br>wrk -c500 -t8 -d30s --latency http://147.106.210.183:8001/serial/abcdefghijklmnopqrist<br>wrk -c500 -t8 -d30s --latency http://147.106.210.183:8001/serial/abcdefghijklmnopqrist<br></code></pre></td></tr></table></figure>
 

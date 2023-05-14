@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657531239744-1d3e8833-783b-4d38-ab0c-bcf121cfd53a.png">
 <meta property="article:published_time" content="2020-12-27T03:59:22.000Z">
-<meta property="article:modified_time" content="2023-04-21T15:48:17.964Z">
+<meta property="article:modified_time" content="2023-05-14T07:25:30.833Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="B树">
 <meta name="twitter:card" content="summary_large_image">
@@ -343,7 +343,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657531239744-1d3e8833-783b-4d38-ab0c-bcf121cfd53a.png#averageHue=%23b3b3b3&clientId=u9a364bf1-d8e8-4&errorMessage=unknown%20error&from=markdown&id=upzTM&name=image.png&originHeight=246&originWidth=413&originalType=url&ratio=1&rotation=0&showTitle=false&size=78970&status=error&style=none&taskId=u64c1b5f8-3745-4227-a63d-0cd309c5df9&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657531239744-1d3e8833-783b-4d38-ab0c-bcf121cfd53a.png#averageHue=%23b3b3b3&clientId=u9a364bf1-d8e8-4&errorMessage=unknown%20error&from=markdown&id=upzTM&originHeight=246&originWidth=413&originalType=url&ratio=1&rotation=0&showTitle=false&size=78970&status=error&style=none&taskId=u64c1b5f8-3745-4227-a63d-0cd309c5df9&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h1 id="BST"><a href="#BST" class="headerlink" title="BST"></a>BST</h1><blockquote>
 <p>二叉搜索树，左节点小于根节点、右节点大于根节点，其子节点也遵循这个规则</p>
 </blockquote>
@@ -452,7 +452,7 @@
 <blockquote>
 <p>注意：MySQL中的索引部分是B+Tree的，但是和上面的还是有一定的区别，其索引在Tree的同级还有指向前后节点的指针，且叶子节点之间是双向链表。</p>
 </blockquote>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1670815636071-3dab0071-785a-40c5-8b50-f27bf29222d6.png#averageHue=%23fefefd&clientId=u4d33002e-db92-4&from=ui&id=u5a201600&name=image.png&originHeight=443&originWidth=818&originalType=binary&ratio=1&rotation=0&showTitle=false&size=42967&status=done&style=none&taskId=ua62739af-e593-4e35-999b-caff48d327a&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1670815636071-3dab0071-785a-40c5-8b50-f27bf29222d6.png#averageHue=%23fefefd&clientId=u4d33002e-db92-4&from=ui&id=u5a201600&originHeight=443&originWidth=818&originalType=binary&ratio=1&rotation=0&showTitle=false&size=42967&status=done&style=none&taskId=ua62739af-e593-4e35-999b-caff48d327a&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">/** Set next page</span><br><span class="hljs-comment">@param[in]	next_page_no	next page no */</span><br>void PageBulk::<span class="hljs-title function_ invoke__">setNext</span>(page_no_t next_page_no) &#123;<br>  <span class="hljs-title function_ invoke__">btr_page_set_next</span>(m_page, nullptr, next_page_no, m_mtr);<br>&#125;<br><br><span class="hljs-comment">/** Set previous page</span><br><span class="hljs-comment">@param[in]	prev_page_no	previous page no */</span><br>void PageBulk::<span class="hljs-title function_ invoke__">setPrev</span>(page_no_t prev_page_no) &#123;<br>  <span class="hljs-title function_ invoke__">btr_page_set_prev</span>(m_page, nullptr, prev_page_no, m_mtr);<br>&#125;<br></code></pre></td></tr></table></figure>
 
 

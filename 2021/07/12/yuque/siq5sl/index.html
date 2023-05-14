@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626102864268-6afd1be0-6d43-4cd8-8ce0-db84832f19f3.png">
 <meta property="article:published_time" content="2021-07-12T09:24:22.000Z">
-<meta property="article:modified_time" content="2023-04-21T15:48:18.000Z">
+<meta property="article:modified_time" content="2023-05-14T07:25:30.873Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="Flink">
 <meta name="twitter:card" content="summary_large_image">
@@ -343,14 +343,14 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626102864268-6afd1be0-6d43-4cd8-8ce0-db84832f19f3.png#clientId=ud2948ab3-bbc0-4&from=paste&height=200&id=u7ab1ebb7&name=image.png&originHeight=200&originWidth=350&originalType=binary&ratio=1&rotation=0&showTitle=false&size=56072&status=done&style=none&taskId=u60a1c491-21eb-42ce-b6d8-01af1dcd11e&title=&width=350" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626102980465-8c73bf41-206e-4523-ab98-4e5cc61c1b4d.png#clientId=ud2948ab3-bbc0-4&from=paste&height=1054&id=ua6177080&name=image.png&originHeight=1054&originWidth=3212&originalType=binary&ratio=1&rotation=0&showTitle=false&size=465462&status=done&style=none&taskId=u6250c09a-3ed9-4d16-9624-84620453bc3&title=&width=3212" srcset="/img/loading.gif" lazyload alt="image.png"><br>Apache Flink 是一个框架和分布式处理引擎，用于在无边界和有边界数据流上进行有状态的计算。Flink 能在所有常见集群环境中运行，并能以内存速度和任意规模进行计算。</p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626102864268-6afd1be0-6d43-4cd8-8ce0-db84832f19f3.png#clientId=ud2948ab3-bbc0-4&from=paste&height=200&id=u7ab1ebb7&originHeight=200&originWidth=350&originalType=binary&ratio=1&rotation=0&showTitle=false&size=56072&status=done&style=none&taskId=u60a1c491-21eb-42ce-b6d8-01af1dcd11e&title=&width=350" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626102980465-8c73bf41-206e-4523-ab98-4e5cc61c1b4d.png#clientId=ud2948ab3-bbc0-4&from=paste&height=1054&id=ua6177080&originHeight=1054&originWidth=3212&originalType=binary&ratio=1&rotation=0&showTitle=false&size=465462&status=done&style=none&taskId=u6250c09a-3ed9-4d16-9624-84620453bc3&title=&width=3212" srcset="/img/loading.gif" lazyload alt="image.png"><br>Apache Flink 是一个框架和分布式处理引擎，用于在无边界和有边界数据流上进行有状态的计算。Flink 能在所有常见集群环境中运行，并能以内存速度和任意规模进行计算。</p>
 <h2 id="处理无界和有界数据"><a href="#处理无界和有界数据" class="headerlink" title="处理无界和有界数据"></a>处理无界和有界数据</h2><p>任何类型的数据都可以形成一种事件流。信用卡交易、传感器测量、机器日志、网站或移动应用程序上的用户交互记录，所有这些数据都形成一种流。<br>数据可以被作为 <em>无界</em> 或者 <em>有界</em> 流来处理。</p>
 <ol>
 <li><strong>无界流</strong> 有定义流的开始，但没有定义流的结束。它们会无休止地产生数据。无界流的数据必须持续处理，即数据被摄取后需要立刻处理。我们不能等到所有数据都到达再处理，因为输入是无限的，在任何时候输入都不会完成。处理无界数据通常要求以特定顺序摄取事件，例如事件发生的顺序，以便能够推断结果的完整性。</li>
 <li><strong>有界流</strong> 有定义流的开始，也有定义流的结束。有界流可以在摄取所有数据后再进行计算。有界流所有数据可以被排序，所以并不需要有序摄取。有界流处理通常被称为批处理</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626105260786-52393c56-b4c7-4a5e-86fb-70790e98ecd1.png#clientId=ud2948ab3-bbc0-4&from=paste&id=u84451d24&name=image.png&originHeight=526&originWidth=2220&originalType=url&ratio=1&rotation=0&showTitle=false&size=141479&status=done&style=none&taskId=u40ee84ab-250b-414e-99a8-0087befa5ac&title=" srcset="/img/loading.gif" lazyload alt="image.png"><br><strong>Apache Flink 擅长处理无界和有界数据集</strong> 精确的时间控制和状态化使得 Flink 的运行时(runtime)能够运行任何处理无界流的应用。有界流则由一些专为固定大小数据集特殊设计的算法和数据结构进行内部处理，产生了出色的性能。<br>通过探索 Flink 之上构建的 <a target="_blank" rel="noopener" href="https://flink.apache.org/zh/usecases.html">用例</a> 来加深理解。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626105260786-52393c56-b4c7-4a5e-86fb-70790e98ecd1.png#clientId=ud2948ab3-bbc0-4&from=paste&id=u84451d24&originHeight=526&originWidth=2220&originalType=url&ratio=1&rotation=0&showTitle=false&size=141479&status=done&style=none&taskId=u40ee84ab-250b-414e-99a8-0087befa5ac&title=" srcset="/img/loading.gif" lazyload alt="image.png"><br><strong>Apache Flink 擅长处理无界和有界数据集</strong> 精确的时间控制和状态化使得 Flink 的运行时(runtime)能够运行任何处理无界流的应用。有界流则由一些专为固定大小数据集特殊设计的算法和数据结构进行内部处理，产生了出色的性能。<br>通过探索 Flink 之上构建的 <a target="_blank" rel="noopener" href="https://flink.apache.org/zh/usecases.html">用例</a> 来加深理解。</p>
 <h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>官方文档：<a target="_blank" rel="noopener" href="https://flink.apache.org/zh/flink-architecture.html">https://flink.apache.org/zh/flink-architecture.html</a></p>
 
               

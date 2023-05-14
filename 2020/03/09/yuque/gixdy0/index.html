@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655741159781-01f2de1b-f0f8-4237-afd1-b9cbda78ec5b.png">
 <meta property="article:published_time" content="2020-03-09T13:24:22.000Z">
-<meta property="article:modified_time" content="2023-04-21T15:48:17.972Z">
+<meta property="article:modified_time" content="2023-05-14T07:25:30.845Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="TCP&#x2F;IP">
 <meta name="twitter:card" content="summary_large_image">
@@ -343,7 +343,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655741159781-01f2de1b-f0f8-4237-afd1-b9cbda78ec5b.png#averageHue=%234084ad&clientId=uc6dc2ef5-cdf4-4&errorMessage=unknown%20error&from=paste&height=540&id=ub932986f&name=image.png&originHeight=1080&originWidth=1920&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2158764&status=error&style=none&taskId=u7307f2be-2cce-42e4-a0c2-db33dbbe21a&title=&width=960" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655741159781-01f2de1b-f0f8-4237-afd1-b9cbda78ec5b.png#averageHue=%234084ad&clientId=uc6dc2ef5-cdf4-4&errorMessage=unknown%20error&from=paste&height=540&id=ub932986f&originHeight=1080&originWidth=1920&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2158764&status=error&style=none&taskId=u7307f2be-2cce-42e4-a0c2-db33dbbe21a&title=&width=960" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
 <p>这篇文章的目的是为了彻底搞懂TCP/IP的一些相关内容，涉及三次握手、四次挥手、UDP和TCP的异同。</p>
 </blockquote>
@@ -497,7 +497,7 @@
 <h2 id="TCP的可靠性原理"><a href="#TCP的可靠性原理" class="headerlink" title="TCP的可靠性原理"></a>TCP的可靠性原理</h2><h3 id="超时重传"><a href="#超时重传" class="headerlink" title="超时重传"></a>超时重传</h3><p>TCP 采用了一种自适应算法，它记录一个报文段发出的时间，以及收到相应的确认的时间。这两个时间之差就是报文段的往返时间 RTT。TCP 保留了RTT 的一个<strong>加权平均往返时间</strong> RTTs（这又称为平滑的往返时间，S 表示 Smoothed。因为进行的是加权平均，因此得出的结果更加平滑）。每当第一次测量到 RTT 样木时，RTT值就取为所测量到的 RTT 样本值。但以后每测量到一个新的 RTT样本，就按下式重新计算一次RTTs</p>
 <h3 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h3><p>tcp通过窗口滑动来控制流量</p>
 <p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1665743046563-90685217-22af-4f87-8686-ec6cb7f76611.jpeg" srcset="/img/loading.gif" lazyload></p>
-<h3 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1665729002824-4f19c7fc-f426-4e79-ad7e-9508a3063908.png#averageHue=%23fcfbf9&clientId=ubbb222d8-3658-4&from=paste&height=275&id=uc077baee&name=image.png&originHeight=328&originWidth=774&originalType=binary&ratio=1&rotation=0&showTitle=false&size=53065&status=done&style=none&taskId=u61ffd075-3c2d-4743-96a2-97dd4896a5d&title=&width=650" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h3 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1665729002824-4f19c7fc-f426-4e79-ad7e-9508a3063908.png#averageHue=%23fcfbf9&clientId=ubbb222d8-3658-4&from=paste&height=275&id=uc077baee&originHeight=328&originWidth=774&originalType=binary&ratio=1&rotation=0&showTitle=false&size=53065&status=done&style=none&taskId=u61ffd075-3c2d-4743-96a2-97dd4896a5d&title=&width=650" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>1.慢启动：</p>
 <blockquote>
 <p>定义拥塞窗口，由小到大逐渐增大发送窗口。（每次收到确认应答，窗口大小*2）</p>
@@ -518,14 +518,14 @@
 <h1 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h1><blockquote>
 <p>用户数据报协议（UDP，User Datagram Protocol）。UDP 为应用程序提供了一种无需建立连接就可以发送封装的 IP 数据包的方法。</p>
 </blockquote>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655953398772-6822cd3b-0505-4048-9e68-50f8f1934e57.png#averageHue=%23ece8e2&clientId=ua0b91ff4-0320-4&errorMessage=unknown%20error&from=paste&height=143&id=u6bf0c6f7&name=image.png&originHeight=143&originWidth=294&originalType=binary&ratio=1&rotation=0&showTitle=false&size=26363&status=error&style=none&taskId=uedcdeac4-71e7-4071-8747-fcc9123e828&title=&width=294" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655953398772-6822cd3b-0505-4048-9e68-50f8f1934e57.png#averageHue=%23ece8e2&clientId=ua0b91ff4-0320-4&errorMessage=unknown%20error&from=paste&height=143&id=u6bf0c6f7&originHeight=143&originWidth=294&originalType=binary&ratio=1&rotation=0&showTitle=false&size=26363&status=error&style=none&taskId=uedcdeac4-71e7-4071-8747-fcc9123e828&title=&width=294" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h2 id="主要功能-1"><a href="#主要功能-1" class="headerlink" title="主要功能"></a>主要功能</h2><p>为了在给定的主机上能识别多个目的地址，同时允许多个应用程序在同一台主机上工作并能独立地进行数据包的发送和接收，设计用户数据报协议UDP。UDP使用底层的互联网协议来传送报文，同IP一样提供不可靠的无连接数据包传输服务。它不提供报文到达确认、排序、及流量控制等功能。UDP Helper可以实现对指定UDP端口广播报文的中继转发，即将指定UDP端口的广播报文转换为单播报文发送给指定的服务器，起到中继的作用。</p>
 <h2 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h2><p>UDP是一个无连接协议，传输数据之前源端和终端不建立连接，当它想传送时就简单地去抓取来自应用程序的数据，并尽可能快地把它扔到网络上。在发送端，UDP传送数据的速度仅仅是受应用程序生成数据的速度、计算机的能力和传输带宽的限制；在接收端，UDP把每个消息段放在队列中，应用程序每次从队列中读一个消息段。</p>
 <p>由于传输数据不建立连接，因此也就不需要维护连接状态，包括收发状态等，因此一台服务机可同时向多个客户机传输相同的消息。UDP信息包的标题很短，只有8个字节，相对于TCP的20个字节信息包而言UDP的额外开销很小。<br>吞吐量不受拥挤控制算法的调节，只受应用软件生成数据的速率、传输带宽、源端和终端主机性能的限制。</p>
 <p>UDP是面向报文的。发送方的UDP对应用程序交下来的报文，在添加首部后就向下交付给IP层。既不拆分，也不合并，而是保留这些报文的边界，因此，应用程序需要选择合适的报文大小。</p>
 <p>虽然UDP是一个不可靠的协议，但它是分发信息的一个理想协议。例如，在屏幕上报告股票市场、显示航空信息等等。UDP也用在路由信息协议RIP（Routing Information Protocol）中修改路由表。在这些应用场合下，如果有一个消息丢失，在几秒之后另一个新的消息就会替换它。UDP广泛用在多媒体应用中。</p>
-<h2 id="UDP首部"><a href="#UDP首部" class="headerlink" title="UDP首部"></a>UDP首部</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655954331782-6b14b004-658c-4726-bf83-de8cd05b4b06.png#averageHue=%23f1eee9&clientId=ua0b91ff4-0320-4&errorMessage=unknown%20error&from=paste&height=185&id=u47c8a929&name=image.png&originHeight=185&originWidth=480&originalType=binary&ratio=1&rotation=0&showTitle=false&size=41876&status=error&style=none&taskId=u2dc43197-7235-47b0-81f3-28fcfe92443&title=&width=480" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<p>由于 IP层已经把IP数据报分配给TCP或UDP（根据I P首部中协议字段值），因此TCP端口号由TCP来查看，而UDP端口号由UDP来查看。TCP端口号与UDP端口号是相互独立的。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655959292928-1fdd3cb3-f31d-432c-996b-5a995f4e1fa8.png#averageHue=%23f7f7f7&clientId=ua0b91ff4-0320-4&errorMessage=unknown%20error&from=paste&height=303&id=u557c8c7c&name=image.png&originHeight=606&originWidth=984&originalType=binary&ratio=1&rotation=0&showTitle=false&size=103738&status=error&style=none&taskId=ua35ce690-04b1-448c-b1c8-26c50198810&title=&width=492" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="UDP首部"><a href="#UDP首部" class="headerlink" title="UDP首部"></a>UDP首部</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655954331782-6b14b004-658c-4726-bf83-de8cd05b4b06.png#averageHue=%23f1eee9&clientId=ua0b91ff4-0320-4&errorMessage=unknown%20error&from=paste&height=185&id=u47c8a929&originHeight=185&originWidth=480&originalType=binary&ratio=1&rotation=0&showTitle=false&size=41876&status=error&style=none&taskId=u2dc43197-7235-47b0-81f3-28fcfe92443&title=&width=480" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>由于 IP层已经把IP数据报分配给TCP或UDP（根据I P首部中协议字段值），因此TCP端口号由TCP来查看，而UDP端口号由UDP来查看。TCP端口号与UDP端口号是相互独立的。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655959292928-1fdd3cb3-f31d-432c-996b-5a995f4e1fa8.png#averageHue=%23f7f7f7&clientId=ua0b91ff4-0320-4&errorMessage=unknown%20error&from=paste&height=303&id=u557c8c7c&originHeight=606&originWidth=984&originalType=binary&ratio=1&rotation=0&showTitle=false&size=103738&status=error&style=none&taskId=ua35ce690-04b1-448c-b1c8-26c50198810&title=&width=492" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h2 id="抓包案例"><a href="#抓包案例" class="headerlink" title="抓包案例"></a>抓包案例</h2><p>1.监听指定端口</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo tcpdump udp port 90<br></code></pre></td></tr></table></figure>
 <p>2.抓取的日志</p>
@@ -736,7 +736,7 @@
 </tr>
 </tbody></table>
 <p>U D P和TCP在首部中都有覆盖它们首部和数据的检验和。 UDP的检验和是可选的，而TCP 的检验和是必需的。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655775145797-93c52f1c-82d6-429e-a088-e7faebaf1b6a.png#averageHue=%238ba955&clientId=u2496e078-4e50-4&errorMessage=unknown%20error&from=paste&height=794&id=u7bd647fb&name=image.png&originHeight=1587&originWidth=1120&originalType=binary&ratio=1&rotation=0&showTitle=true&size=462794&status=error&style=none&taskId=uf0a52333-d36c-4c8e-ba87-f301938c9e1&title=%E5%9B%BE%E7%89%87%E6%9D%A5%E6%BA%90%EF%BC%9Ahttps%3A%2F%2Fblog.csdn.net%2Fyaopeng_2005%2Farticle%2Fdetails%2F7064869&width=560" srcset="/img/loading.gif" lazyload alt="image.png" title="图片来源：https://blog.csdn.net/yaopeng_2005/article/details/7064869"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1655775145797-93c52f1c-82d6-429e-a088-e7faebaf1b6a.png#averageHue=%238ba955&clientId=u2496e078-4e50-4&errorMessage=unknown%20error&from=paste&height=794&id=u7bd647fb&originHeight=1587&originWidth=1120&originalType=binary&ratio=1&rotation=0&showTitle=true&size=462794&status=error&style=none&taskId=uf0a52333-d36c-4c8e-ba87-f301938c9e1&title=%E5%9B%BE%E7%89%87%E6%9D%A5%E6%BA%90%EF%BC%9Ahttps%3A%2F%2Fblog.csdn.net%2Fyaopeng_2005%2Farticle%2Fdetails%2F7064869&width=560" srcset="/img/loading.gif" lazyload alt="图片来源：https://blog.csdn.net/yaopeng_2005/article/details/7064869" title="图片来源：https://blog.csdn.net/yaopeng_2005/article/details/7064869"></p>
 <p>在浏览器输入网址回车后涉及哪些协议 ？</p>
 <blockquote>
 <p>从 OSI 模型来层层递进说明</p>

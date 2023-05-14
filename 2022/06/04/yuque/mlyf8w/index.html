@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654846640220-851f586e-3ca0-4792-b359-d9c9c15b0fac.png">
 <meta property="article:published_time" content="2022-06-04T09:24:22.000Z">
-<meta property="article:modified_time" content="2023-04-21T15:48:17.976Z">
+<meta property="article:modified_time" content="2023-05-14T07:25:30.845Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="IO模型">
 <meta name="twitter:card" content="summary_large_image">
@@ -343,7 +343,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654846640220-851f586e-3ca0-4792-b359-d9c9c15b0fac.png#averageHue=%238daa98&clientId=u8023efb6-6548-4&from=paste&height=192&id=ufdc9fab0&name=bg.png&originHeight=383&originWidth=900&originalType=binary&ratio=1&rotation=0&showTitle=false&size=282305&status=done&style=none&taskId=u485bf07c-9f94-4457-a86e-b64816632cc&title=&width=450" srcset="/img/loading.gif" lazyload alt="bg.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654846640220-851f586e-3ca0-4792-b359-d9c9c15b0fac.png#averageHue=%238daa98&clientId=u8023efb6-6548-4&from=paste&height=192&id=ufdc9fab0&originHeight=383&originWidth=900&originalType=binary&ratio=1&rotation=0&showTitle=false&size=282305&status=done&style=none&taskId=u485bf07c-9f94-4457-a86e-b64816632cc&title=&width=450" srcset="/img/loading.gif" lazyload alt="bg.png"></p>
 <h1 id="相关背景"><a href="#相关背景" class="headerlink" title="相关背景"></a>相关背景</h1><blockquote>
 <p>理解IO的各种模型需要先了解计算机的运作流程，下面将对其一些专业的名称做一些简单介绍</p>
 </blockquote>
@@ -353,7 +353,7 @@
 <p>在Linux系统中，计算机里面的程序（代码程序）都是作为文件存在硬盘里面的。开机之后，这些程序就会从硬盘加载到内存并经过处理，变成CPU可执行的格式，此时这些程序就变成了进程。<br>kernel（内核）是开机是第一个加载到内存的程序。其他的程序都是有内核帮忙加载进内存的。<strong>内核进程和其他进程都会按照时间片占有CPU并发的运行</strong></p>
 <h2 id="内核kernel"><a href="#内核kernel" class="headerlink" title="内核kernel"></a>内核kernel</h2><p>内核的主要功能是屏蔽硬件的底层操作，封装系统调用（system call）函数，用户进程可以通过请求内核调用内核中的函数完成工作（注意用户进程无法直接调用系统函数，只有内核才可以执行系统调用，系统调用的代码存在内核中）。</p>
 <p><strong>系统调用的作用就是，让其他进程调用内核提供的接口函数，让内核程序帮这些进程去完成这个操作，而不是用户进程自己去做这些事。</strong>如果是用户进程自己去做这些事，就需要他们自己重新实现这些方法，冗余且复杂，所以内核提供的这些系统调用大大减少了用户进程的工作量。</p>
-<p>为了防止其他程序知道内核所在的内存地址修改内核kernel中的指令，Linux提供了一种保护模式，内核进程是处于这种保护模式之下（这种保护模式的作用就是不让其他程序知道内核所在的内存地址，这样其他进程就无法访问内核和修改内核）：当cpu执行内核进程中的指令时，内核可以访问其他进程的内存，但是cpu执行用户进程中的指令时，用户进程不能访问内核和其他用户进程的内存地址，只能访问自己这个进程的内存（也就是说，kernel可以访问和修改其他进程的内容，其他的进程只能访问和修改自己这个进程的内容）。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654701924604-425bb75c-7a51-43fa-b519-32fdd405554a.png#averageHue=%23dcdcdc&clientId=u8d87e328-8d5d-4&from=paste&height=570&id=u5d282c74&name=image.png&originHeight=511&originWidth=688&originalType=binary&ratio=1&rotation=0&showTitle=false&size=141014&status=done&style=none&taskId=uf972d88c-3ea8-41c3-aba8-407e0c99662&title=&width=768" srcset="/img/loading.gif" lazyload alt="image.png"><br>用户进程不能访问到内核又怎么调用到内核提供的系统调用（函数）呢？这个时候就提出了系统中断的概念。</p>
+<p>为了防止其他程序知道内核所在的内存地址修改内核kernel中的指令，Linux提供了一种保护模式，内核进程是处于这种保护模式之下（这种保护模式的作用就是不让其他程序知道内核所在的内存地址，这样其他进程就无法访问内核和修改内核）：当cpu执行内核进程中的指令时，内核可以访问其他进程的内存，但是cpu执行用户进程中的指令时，用户进程不能访问内核和其他用户进程的内存地址，只能访问自己这个进程的内存（也就是说，kernel可以访问和修改其他进程的内容，其他的进程只能访问和修改自己这个进程的内容）。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654701924604-425bb75c-7a51-43fa-b519-32fdd405554a.png#averageHue=%23dcdcdc&clientId=u8d87e328-8d5d-4&from=paste&height=570&id=u5d282c74&originHeight=511&originWidth=688&originalType=binary&ratio=1&rotation=0&showTitle=false&size=141014&status=done&style=none&taskId=uf972d88c-3ea8-41c3-aba8-407e0c99662&title=&width=768" srcset="/img/loading.gif" lazyload alt="image.png"><br>用户进程不能访问到内核又怎么调用到内核提供的系统调用（函数）呢？这个时候就提出了系统中断的概念。</p>
 <h2 id="系统中断"><a href="#系统中断" class="headerlink" title="系统中断"></a>系统中断</h2><p>所谓的中断其实就是告诉CPU停止运行当前的程序去做另一件事情，去做另一件事情有很多种情况中断发生的情况有很多种可能是时间片用完了，cpu就会接受到中断指令，于是cpu就停止当前程序的运行让下一个进程占用进行工作也可能是程序中运行到sleep,yield这样的代码，运行到这样的代码也会发送中断指令给cpu，cpu就也会中断当前程序的运行，让其他进程运行也可能是移动鼠标，鼠标这个硬件设备会发送一个中断指令给cpu，cpu就会中断当前进程的运行，然后发送一个io请求让鼠标移动。</p>
 <p><strong>中断是一个计算机指令</strong>，这个指令后面会跟一个数字，这些数字映射到一个存着回调函数的表中（这个表叫做中断向量表，是存在CPU的寄存器中的，只有当发起中断指令给cpu时，cpu才会往这个表里面查数字对应的回调函数），一个数字代表一个回调函数。所以中断指令后面跟着的数字代表cpu中断程序后，会做些什么操作，是去调度下一个程序还是去发起一个io请求之类的。</p>
 <p>总结：中断就是告诉cpu停下手里的工作去干另一件事，干完这件事之后你可以继续运行刚刚的程序，也可以去运行其他程序。</p>
@@ -428,13 +428,13 @@
 <h2 id="阻塞I-O模型"><a href="#阻塞I-O模型" class="headerlink" title="阻塞I/O模型"></a>阻塞I/O模型</h2><blockquote>
 <p><strong>套接字的默认状态是阻塞的，这就意味着当发出一个不能立即完成的套接字调用时，其进程被投入睡眠，等待相应操作完成才会进行唤醒。</strong></p>
 </blockquote>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654671555135-3a522f50-34ed-47d7-ab57-2b318fe73342.png#averageHue=%23f7f7f7&clientId=u8d87e328-8d5d-4&from=paste&height=320&id=u27ba9ab7&name=image.png&originHeight=320&originWidth=592&originalType=binary&ratio=1&rotation=0&showTitle=false&size=38279&status=done&style=none&taskId=u527a0618-91cb-4e48-aec6-f84f3c09b87&title=&width=592" srcset="/img/loading.gif" lazyload alt="image.png"><br>如上图所示，应用程序通过系统调用（将recvfrom视为系统调用）recvfrom，其系统调用知道数据报大大且被复制到应用进程的缓冲区中或发生错误才返回。最常见的错误是系统调用被信号中断，我们说进程在从调用recvfrom开始到它返回的整段时间内是被阻塞的（进程无法做其他事情）。recvfrom成功返回后，应用程序进程开始处理数据报。</p>
-<h2 id="非阻塞I-O模型"><a href="#非阻塞I-O模型" class="headerlink" title="非阻塞I/O模型"></a>非阻塞I/O模型</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654673515433-59d287ff-8e62-4483-a6e1-63ad1998041b.png#averageHue=%23f3f3f3&clientId=u8d87e328-8d5d-4&from=paste&height=334&id=u9502e905&name=image.png&originHeight=334&originWidth=648&originalType=binary&ratio=1&rotation=0&showTitle=false&size=57173&status=done&style=none&taskId=u46066daa-16e4-44fc-bbfc-93120d3d581&title=&width=648" srcset="/img/loading.gif" lazyload alt="image.png"><br>进程把一个套接字设置成非阻塞再通知内核：当前所请求的I/O操作无需将本进程进行阻塞，而是返回一个错误。如上图前三次的调用recvfrom时没有数据可返回，因此内核转而立即返回一个<strong>EWOULDBLOCK</strong>错误。第四次调用recvfrom时已经有一个数据报准备好，它被复制到应用进程缓冲区，雨水recvfrom成功返回。接着进程继续处理数据。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654671555135-3a522f50-34ed-47d7-ab57-2b318fe73342.png#averageHue=%23f7f7f7&clientId=u8d87e328-8d5d-4&from=paste&height=320&id=u27ba9ab7&originHeight=320&originWidth=592&originalType=binary&ratio=1&rotation=0&showTitle=false&size=38279&status=done&style=none&taskId=u527a0618-91cb-4e48-aec6-f84f3c09b87&title=&width=592" srcset="/img/loading.gif" lazyload alt="image.png"><br>如上图所示，应用程序通过系统调用（将recvfrom视为系统调用）recvfrom，其系统调用知道数据报大大且被复制到应用进程的缓冲区中或发生错误才返回。最常见的错误是系统调用被信号中断，我们说进程在从调用recvfrom开始到它返回的整段时间内是被阻塞的（进程无法做其他事情）。recvfrom成功返回后，应用程序进程开始处理数据报。</p>
+<h2 id="非阻塞I-O模型"><a href="#非阻塞I-O模型" class="headerlink" title="非阻塞I/O模型"></a>非阻塞I/O模型</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654673515433-59d287ff-8e62-4483-a6e1-63ad1998041b.png#averageHue=%23f3f3f3&clientId=u8d87e328-8d5d-4&from=paste&height=334&id=u9502e905&originHeight=334&originWidth=648&originalType=binary&ratio=1&rotation=0&showTitle=false&size=57173&status=done&style=none&taskId=u46066daa-16e4-44fc-bbfc-93120d3d581&title=&width=648" srcset="/img/loading.gif" lazyload alt="image.png"><br>进程把一个套接字设置成非阻塞再通知内核：当前所请求的I/O操作无需将本进程进行阻塞，而是返回一个错误。如上图前三次的调用recvfrom时没有数据可返回，因此内核转而立即返回一个<strong>EWOULDBLOCK</strong>错误。第四次调用recvfrom时已经有一个数据报准备好，它被复制到应用进程缓冲区，雨水recvfrom成功返回。接着进程继续处理数据。</p>
 <p>当一个应用进程像这样对一个非阻寨描述符循环调用recvfrom时，我们称之为轮询（polling）。应用进程持续轮询内核，以查看某个操作是否就绪。这么做往往耗费大量CPU时间，不过这种模型偶尔也会遇到，通常是在专门提供菜一种功能的系统中才有。</p>
 <h2 id="I-O复用模型"><a href="#I-O复用模型" class="headerlink" title="I/O复用模型"></a>I/O复用模型</h2><blockquote>
 <p>Linux 2.6之前是select、poll，2.6之后是epoll，Windows是IOCP</p>
 </blockquote>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654673555130-df32a1ae-a17b-4ad0-9cba-ad45565286cd.png#averageHue=%23f0f0ef&clientId=u8d87e328-8d5d-4&from=paste&height=338&id=u516d00c5&name=image.png&originHeight=338&originWidth=630&originalType=binary&ratio=1&rotation=0&showTitle=false&size=141620&status=done&style=none&taskId=u75d04edc-cc2e-4a0d-96aa-decf8317cf1&title=&width=630" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654673555130-df32a1ae-a17b-4ad0-9cba-ad45565286cd.png#averageHue=%23f0f0ef&clientId=u8d87e328-8d5d-4&from=paste&height=338&id=u516d00c5&originHeight=338&originWidth=630&originalType=binary&ratio=1&rotation=0&showTitle=false&size=141620&status=done&style=none&taskId=u75d04edc-cc2e-4a0d-96aa-decf8317cf1&title=&width=630" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>I/O多路复用（I/O multiplexing）模型下可以调用selec、poll或epoll，阻塞在这两个系统调用中的某一个上，而不是阻塞真正的I/O系统调用上。我们阻塞在select调用，等待数据报套接字变为可读。当select返回套接字可读这一条件时，我们调用recvfrom把所读数据报复制到应用进程缓冲区。</p>
 <p>I/O复用并不显得有什么优势，事实上由于使用select需要两个而不是单个系统调用，I/O复用还稍有劣势。实际上使用select的优势在于我们可以等待多个描述符就绪。</p>
 <blockquote>
@@ -444,19 +444,19 @@
 <h2 id="信号驱动I-O模型"><a href="#信号驱动I-O模型" class="headerlink" title="信号驱动I/O模型"></a>信号驱动I/O模型</h2><blockquote>
 <p>我们也可以用信号，让内核在描述符就绪时发送SIGIO信号通知我们。我们称这种模型为信号驱动式I/O（signal-driven I/O），IO多路复用常用的方法有：select、poll以及epoll三种。IO多路复用的好处就在于单个process就可以同时处理多个网络连接的IO。</p>
 </blockquote>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654673577995-7338afea-42bb-4c27-b0c7-8cccf5b1ed3a.png#averageHue=%23f4f4f3&clientId=u8d87e328-8d5d-4&from=paste&height=359&id=ue6ebf9e6&name=image.png&originHeight=359&originWidth=672&originalType=binary&ratio=1&rotation=0&showTitle=false&size=113323&status=done&style=none&taskId=u5c291cd3-3dc1-4493-9a09-efa0dba653c&title=&width=672" srcset="/img/loading.gif" lazyload alt="image.png"><br>我们首先开启套接字的信号驱动式I/O功能，并通过sigaction系统调用安装一个型号处理函数。该系统调用将立即返回，我们的进程继续工作，也就是说它没有被阻塞。当数据准备好取读时，内核就为该进程产生一个SIGIO信号。我们随后既可以在型号处理函数中调用recvfrom读取数据报，并通知主循环数据已准备好带出来，也可以理解通知主循环，让它读取数据报。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654673577995-7338afea-42bb-4c27-b0c7-8cccf5b1ed3a.png#averageHue=%23f4f4f3&clientId=u8d87e328-8d5d-4&from=paste&height=359&id=ue6ebf9e6&originHeight=359&originWidth=672&originalType=binary&ratio=1&rotation=0&showTitle=false&size=113323&status=done&style=none&taskId=u5c291cd3-3dc1-4493-9a09-efa0dba653c&title=&width=672" srcset="/img/loading.gif" lazyload alt="image.png"><br>我们首先开启套接字的信号驱动式I/O功能，并通过sigaction系统调用安装一个型号处理函数。该系统调用将立即返回，我们的进程继续工作，也就是说它没有被阻塞。当数据准备好取读时，内核就为该进程产生一个SIGIO信号。我们随后既可以在型号处理函数中调用recvfrom读取数据报，并通知主循环数据已准备好带出来，也可以理解通知主循环，让它读取数据报。</p>
 <p>无论如何处理SIGIO信号，这种模型的优势在于等待数据报到达期间进程不会被阻塞。主循环可以继续执行，只有等待来自信号处理函数的通知；既可以是数据已准备好被处理，也可以是数据报已准备好被读取。</p>
 <h2 id="异步I-O模型"><a href="#异步I-O模型" class="headerlink" title="异步I/O模型"></a>异步I/O模型</h2><blockquote>
 <p>异步I/O（asynchronous I/O）由POSIX规范定义。</p>
 </blockquote>
 <p>这些函数的工作机制是：告知内核启动某个操作，并让内核在整个操作（包括将数据冲内核复制到我们自己的缓冲区）完成后通知我们。</p>
 <p>这种模型和信号驱动式模型的区别在于：信号驱动式I/O是由内核通知我们核实可以启动一个I/O操作，而异步I/O模型是由内核通知我们I/O操作何时完成。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654673602649-306a6d93-11e2-494b-8ae0-c460c651e384.png#averageHue=%23f9f9f9&clientId=u8d87e328-8d5d-4&from=paste&height=384&id=u6d226216&name=image.png&originHeight=384&originWidth=664&originalType=binary&ratio=1&rotation=0&showTitle=false&size=41635&status=done&style=none&taskId=u4bc4aa17-3fed-4aba-acd0-1f2491655bf&title=&width=664" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654673602649-306a6d93-11e2-494b-8ae0-c460c651e384.png#averageHue=%23f9f9f9&clientId=u8d87e328-8d5d-4&from=paste&height=384&id=u6d226216&originHeight=384&originWidth=664&originalType=binary&ratio=1&rotation=0&showTitle=false&size=41635&status=done&style=none&taskId=u4bc4aa17-3fed-4aba-acd0-1f2491655bf&title=&width=664" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <p>我们调用aio_read 函数（POSIX异步I/O函数以aio_或lio_开头），给内核传递描述符、缓冲区指针、缓冲区大小（与read相同的三个参数）和文件偏移（与lseek类似），并高手内核当整个操作完成时如何通知我们。该系统调用立即返回，并且在等待IO完成期间，我们的进程不被阻塞。</p>
 <blockquote>
 <p>本例子中我们假设要求内核在操作完成时产生某个信号。该信号直到数据己复制到应用进程缓冲区才产生，这一点不同于信号驱动式VO模型，本书编写至此的时候，支持POSIX异步I0模型的系统仍较罕见。我们不能确定这样的系统是否支持套接宇上的这种模型。这儿我们只是用它作为一个与信号驱动式I/O模型相比照的例子</p>
 </blockquote>
-<h2 id="各种I-O模型的比较"><a href="#各种I-O模型的比较" class="headerlink" title="各种I/O模型的比较"></a>各种I/O模型的比较</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654771839072-6e885e7e-9b51-4e19-b611-de15d1c73333.png#averageHue=%23f1f1f0&clientId=u08dd0957-94db-4&from=paste&height=225&id=ue8419807&name=image.png&originHeight=450&originWidth=963&originalType=binary&ratio=1&rotation=0&showTitle=false&size=215514&status=done&style=none&taskId=u2247b2af-5515-4623-aeef-8e93a5ea34f&title=&width=481.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>根据上述定义，我们的前4种模型。阻塞式I/O模型、非阻塞式I/O模型、I/O复用模型和信号驱动式I/O模型都是同步I/O模型，因为其中真正的I/O操作 (recvfrom）将阻塞进程。只有异步I/O模型与POSIX定义的异步I/O相匹配。</p>
+<h2 id="各种I-O模型的比较"><a href="#各种I-O模型的比较" class="headerlink" title="各种I/O模型的比较"></a>各种I/O模型的比较</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654771839072-6e885e7e-9b51-4e19-b611-de15d1c73333.png#averageHue=%23f1f1f0&clientId=u08dd0957-94db-4&from=paste&height=225&id=ue8419807&originHeight=450&originWidth=963&originalType=binary&ratio=1&rotation=0&showTitle=false&size=215514&status=done&style=none&taskId=u2247b2af-5515-4623-aeef-8e93a5ea34f&title=&width=481.5" srcset="/img/loading.gif" lazyload alt="image.png"><br>根据上述定义，我们的前4种模型。阻塞式I/O模型、非阻塞式I/O模型、I/O复用模型和信号驱动式I/O模型都是同步I/O模型，因为其中真正的I/O操作 (recvfrom）将阻塞进程。只有异步I/O模型与POSIX定义的异步I/O相匹配。</p>
 <h1 id="I-O-模型概念"><a href="#I-O-模型概念" class="headerlink" title="I/O 模型概念"></a>I/O 模型概念</h1><blockquote>
 <p>在了解I/O模型我们先要了解一下几个关键词，阻塞/非阻塞、同步/异步</p>
 </blockquote>
@@ -559,7 +559,7 @@
 <li>FloatBuffer：浮点型缓冲区</li>
 <li>DoubleBuffer：双精度浮点型缓冲区</li>
 </ol>
-<p>缓冲区的类图继承关系如下所示：<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654585132133-9a6444b2-abfd-4651-aa71-8965ca601c10.png#averageHue=%232d2d2d&clientId=u75718de8-7c7f-4&from=ui&id=u525485ee&name=Package%20nio.png&originHeight=780&originWidth=16070&originalType=binary&ratio=1&rotation=0&showTitle=false&size=200421&status=done&style=none&taskId=u90a73e25-2c19-44af-b22f-fed243dd1ed&title=" srcset="/img/loading.gif" lazyload alt="Package nio.png"><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33524158/article/details/78609634">
+<p>缓冲区的类图继承关系如下所示：<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654585132133-9a6444b2-abfd-4651-aa71-8965ca601c10.png#averageHue=%232d2d2d&clientId=u75718de8-7c7f-4&from=ui&id=u525485ee&originHeight=780&originWidth=16070&originalType=binary&ratio=1&rotation=0&showTitle=false&size=200421&status=done&style=none&taskId=u90a73e25-2c19-44af-b22f-fed243dd1ed&title=" srcset="/img/loading.gif" lazyload alt="Package nio.png"><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33524158/article/details/78609634">
 </a></p>
 <h3 id="Channel-管道、通道）"><a href="#Channel-管道、通道）" class="headerlink" title="Channel (管道、通道）"></a>Channel (管道、通道）</h3><blockquote>
 <p>通道(Channel)，它就像自来水管道一样，网络数据通过Channel读取和写入，通道与流不同之处在于通道是双向的，而流只是一个方向上移动（一个流必须是Inputstream或OutputStream的子类），而通道可以用于读、写或者二者同时进行，最关键的是可以与多路复用器结合起来，有多种的状态位，方便多路复用器去识别。</p>
@@ -603,7 +603,7 @@
 <li>在执行异步操作的时候传入一个Java.nio.channels.CompletionHandler接口的实现类作为操作完成的回调。</li>
 </ul>
 <p>NIO2.0 的异步套接字通道是真正的异步非阻塞 IO，它对应 UNIX 网络编程中的事件驱动 IO(AIO)，它不需要通过多路复用器(Selector)对注册的通道进行轮询操作即可实现异步读写，从而简化了 NIO 的编程模型。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654846267918-f6003880-d591-4466-8569-e49d23a1c6e8.png#averageHue=%23507943&clientId=u8023efb6-6548-4&from=paste&height=1023&id=ua3bdc866&name=Package%20channels.png&originHeight=2046&originWidth=4310&originalType=binary&ratio=1&rotation=0&showTitle=false&size=576690&status=done&style=none&taskId=u2033be9d-87cf-4a4c-943c-e476420c8db&title=&width=2155" srcset="/img/loading.gif" lazyload alt="Package channels.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1654846267918-f6003880-d591-4466-8569-e49d23a1c6e8.png#averageHue=%23507943&clientId=u8023efb6-6548-4&from=paste&height=1023&id=ua3bdc866&originHeight=2046&originWidth=4310&originalType=binary&ratio=1&rotation=0&showTitle=false&size=576690&status=done&style=none&taskId=u2033be9d-87cf-4a4c-943c-e476420c8db&title=&width=2155" srcset="/img/loading.gif" lazyload alt="Package channels.png"></p>
 <p>结论：异步 Socket Channel是被动执行对象，我们不需要想NIO编程那样创建一个独立的IO线程来处理读写操作。对于AsynchronousServerSocketChannel和AsynchronousSocketChannel，它们都由 JDK 底层的线程池负责回调并驱动读写操作。正因为如此，基于 NIO2.0 新的异步非阻塞 Channel 进行编程比 NIO 编程更为简单。</p>
 <h2 id="适用场景-2"><a href="#适用场景-2" class="headerlink" title="适用场景"></a>适用场景</h2><p>AIO 适用于<strong>连接数目多且连接比较长（重操作）</strong>的架构，比如相册服务器，充分调用 OS 参与并发操作，编程比较复杂，JDK7 开始支持，在成长中，Netty 曾经使用过，后来放弃。</p>
 <h2 id="优点缺点-2"><a href="#优点缺点-2" class="headerlink" title="优点缺点"></a>优点缺点</h2><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>

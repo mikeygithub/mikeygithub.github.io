@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621318286599-7ebe6375-5f15-42d1-a6bb-81d29e9c9a40.png">
 <meta property="article:published_time" content="2021-02-03T09:24:22.000Z">
-<meta property="article:modified_time" content="2023-04-21T15:48:18.012Z">
+<meta property="article:modified_time" content="2023-05-14T07:25:30.885Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="ServiceMesh">
 <meta name="twitter:card" content="summary_large_image">
@@ -343,7 +343,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621318286599-7ebe6375-5f15-42d1-a6bb-81d29e9c9a40.png#clientId=u7d9aa561-dee9-4&from=paste&height=300&id=ufbaf41ff&name=image.png&originHeight=300&originWidth=563&originalType=binary&ratio=1&rotation=0&showTitle=false&size=32254&status=done&style=none&taskId=u07f0f589-2386-4aba-8a62-0b87adf1456&title=&width=563" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621318286599-7ebe6375-5f15-42d1-a6bb-81d29e9c9a40.png#clientId=u7d9aa561-dee9-4&from=paste&height=300&id=ufbaf41ff&originHeight=300&originWidth=563&originalType=binary&ratio=1&rotation=0&showTitle=false&size=32254&status=done&style=none&taskId=u07f0f589-2386-4aba-8a62-0b87adf1456&title=&width=563" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h1 id="背景简介"><a href="#背景简介" class="headerlink" title="背景简介"></a>背景简介</h1><p>Istio 是一个由谷歌、IBM 与 Lyft 共同开发的开源项目，旨在提供一种统一化的微服务连接、安全保障、管理与监控方式。Istio 项目能够为微服务架构提供流量管理机制，同时亦为其它增值功能（包括安全性、监控、路由、连接管理与策略等）创造了基础。这款软件利用久经考验的 Lyft Envoy 代理进行构建，可在无需对应用程序代码作出任何发动的前提下实现可视性与控制能力。Istio 项目是一款强大的工具，可帮助 CTO/CIO 们立足企业内部实施整体性安全、政策与合规性要求。</p>
 <h1 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h1><p>参考：<a target="_blank" rel="noopener" href="https://istio.io/latest/docs/setup/getting-started/#download">https://istio.io/latest/docs/setup/getting-started/#download</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#下载</span><br>curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.8 TARGET_ARCH=x86_64 sh -<br><span class="hljs-comment">#设置环境变量</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PATH</span>:/root/istio-1.6.8/bin&quot;</span><br><span class="hljs-comment">#进入目录安装</span><br>istioctl install --<span class="hljs-built_in">set</span> profile=demo -y<br><span class="hljs-comment">#命名空间</span><br>kubectl label namespace default istio-injection=enabled<br></code></pre></td></tr></table></figure>

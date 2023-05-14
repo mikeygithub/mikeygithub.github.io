@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1650985358745-04d97447-037b-4fc2-9351-bb6b8c2dbc65.png">
 <meta property="article:published_time" content="2022-08-13T09:24:22.000Z">
-<meta property="article:modified_time" content="2023-04-21T15:48:17.976Z">
+<meta property="article:modified_time" content="2023-05-14T07:25:30.849Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="树状数组">
 <meta name="twitter:card" content="summary_large_image">
@@ -343,7 +343,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1650985358745-04d97447-037b-4fc2-9351-bb6b8c2dbc65.png#averageHue=%2369898e&clientId=uabf22ade-f747-4&errorMessage=unknown%20error&from=ui&id=u5669603b&name=152_0.png&originHeight=1026&originWidth=1992&originalType=binary&ratio=1&rotation=0&showTitle=false&size=163902&status=error&style=none&taskId=uf013c185-45a0-4f1f-8af8-68af0bdbfb9&title=" srcset="/img/loading.gif" lazyload alt="152_0.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1650985358745-04d97447-037b-4fc2-9351-bb6b8c2dbc65.png#averageHue=%2369898e&clientId=uabf22ade-f747-4&errorMessage=unknown%20error&from=ui&id=u5669603b&originHeight=1026&originWidth=1992&originalType=binary&ratio=1&rotation=0&showTitle=false&size=163902&status=error&style=none&taskId=uf013c185-45a0-4f1f-8af8-68af0bdbfb9&title=" srcset="/img/loading.gif" lazyload alt="152_0.png"></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
 <p>树状数组或二叉索引树（英语：Binary Indexed Tree），又以其发明者命名为Fenwick树，最早由Peter M. Fenwick于1994年以A New Data Structure for Cumulative Frequency Tables为题发表在SOFTWARE PRACTICE AND EXPERIENCE。其初衷是解决数据压缩里的<strong>累积频率</strong>（Cumulative Frequency）的计算问题，现多用于高效计算数列的前缀和， 区间和。</p>
 </blockquote>
@@ -353,7 +353,7 @@
 <li><strong>区间查询 query(i)：</strong> 查询序列 [1… i] 区间的区间和，即 i_ _位置的前缀和</li>
 </ul>
 <p>修改和查询的时间代价都是 O(log n)，其中 n_ _为需要维护前缀和的序列的长度。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1650984637862-21ef73a1-fd75-4669-9eb0-cbe11339474e.png#averageHue=%23f1ede9&clientId=uabf22ade-f747-4&errorMessage=unknown%20error&from=paste&height=251&id=u84b66eb7&name=image.png&originHeight=502&originWidth=952&originalType=binary&ratio=1&rotation=0&showTitle=false&size=154011&status=error&style=none&taskId=ub2a7932b-d677-44eb-b906-0ddeeb24257&title=&width=476" srcset="/img/loading.gif" lazyload alt="image.png"><br>树状数组的主要结构就是父节点存储大范围，子节点再进行划分范围，直到节点为一个。<br>c8表示整个数组，其子节点为c4，c6，c7，a8，各自子节点又有自己的子节点。如果要求数组a的区间和，比如说 [a5,a7] 区间，从[0，a7]中求和，然后减去和从[0，a4]中查找和。<br> </p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1650984637862-21ef73a1-fd75-4669-9eb0-cbe11339474e.png#averageHue=%23f1ede9&clientId=uabf22ade-f747-4&errorMessage=unknown%20error&from=paste&height=251&id=u84b66eb7&originHeight=502&originWidth=952&originalType=binary&ratio=1&rotation=0&showTitle=false&size=154011&status=error&style=none&taskId=ub2a7932b-d677-44eb-b906-0ddeeb24257&title=&width=476" srcset="/img/loading.gif" lazyload alt="image.png"><br>树状数组的主要结构就是父节点存储大范围，子节点再进行划分范围，直到节点为一个。<br>c8表示整个数组，其子节点为c4，c6，c7，a8，各自子节点又有自己的子节点。如果要求数组a的区间和，比如说 [a5,a7] 区间，从[0，a7]中求和，然后减去和从[0，a4]中查找和。<br> </p>
 <p>树状数组和线段树具有相似的功能，还有一些区别：</p>
 <blockquote>
 <p>树状数组能有的操作，线段树一定有；线段树有的操作，树状数组不一定有。但是树状数组的代码要比线段树短，思维更清晰，速度也更快，在解决一些单点修改的问题时，树状数组是不二之选。可以理解为树状数组是线段树的精简版。</p>

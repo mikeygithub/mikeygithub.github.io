@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623683509547-3a4bd4da-0a0a-4a07-bda7-c6437abf72e7.png">
 <meta property="article:published_time" content="2021-06-15T09:24:22.000Z">
-<meta property="article:modified_time" content="2023-04-21T15:48:18.004Z">
+<meta property="article:modified_time" content="2023-05-14T07:25:30.881Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="ELK">
 <meta name="twitter:card" content="summary_large_image">
@@ -343,7 +343,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623683509547-3a4bd4da-0a0a-4a07-bda7-c6437abf72e7.png#averageHue=%23f0edd9&clientId=u26bf8ca5-3861-4&from=paste&height=582&id=u35b58cb6&name=image.png&originHeight=582&originWidth=1072&originalType=binary&ratio=1&rotation=0&showTitle=false&size=191476&status=done&style=none&taskId=uc5777002-39a0-420e-9b4f-eee967a4574&title=&width=1072" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623683509547-3a4bd4da-0a0a-4a07-bda7-c6437abf72e7.png#averageHue=%23f0edd9&clientId=u26bf8ca5-3861-4&from=paste&height=582&id=u35b58cb6&originHeight=582&originWidth=1072&originalType=binary&ratio=1&rotation=0&showTitle=false&size=191476&status=done&style=none&taskId=uc5777002-39a0-420e-9b4f-eee967a4574&title=&width=1072" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
 <p>基于ELK搭建一个实时日志分析平台</p>
 </blockquote>
@@ -375,7 +375,7 @@
 <p>3.启动logstash</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> bin/logstash -f config/kafka-logstash-es.conf --path.data=./logs_data_dir 1&gt;/dev/null 2&gt;&amp;1 &amp;<br></code></pre></td></tr></table></figure>
 
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623769167329-b34f3d76-e61c-4eb9-b040-baa9525f217f.png#averageHue=%23f3f6fa&clientId=uc97758be-dec4-4&from=ui&id=ue1b2e2e9&name=index.png&originHeight=441&originWidth=1919&originalType=binary&ratio=1&rotation=0&showTitle=false&size=121528&status=done&style=none&taskId=u489325a8-422c-4e63-a720-c3358d6b7c8&title=" srcset="/img/loading.gif" lazyload alt="index.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623769175483-cd12e635-3dd7-432b-89aa-a05cd0474a6d.png#averageHue=%23f0f4f8&clientId=uc97758be-dec4-4&from=ui&id=u56f361ad&name=data.png&originHeight=783&originWidth=1919&originalType=binary&ratio=1&rotation=0&showTitle=false&size=242991&status=done&style=none&taskId=u477cfaa7-936e-4b4c-b6e4-ab8aba80739&title=" srcset="/img/loading.gif" lazyload alt="data.png"></p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623769167329-b34f3d76-e61c-4eb9-b040-baa9525f217f.png#averageHue=%23f3f6fa&clientId=uc97758be-dec4-4&from=ui&id=ue1b2e2e9&originHeight=441&originWidth=1919&originalType=binary&ratio=1&rotation=0&showTitle=false&size=121528&status=done&style=none&taskId=u489325a8-422c-4e63-a720-c3358d6b7c8&title=" srcset="/img/loading.gif" lazyload alt="index.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623769175483-cd12e635-3dd7-432b-89aa-a05cd0474a6d.png#averageHue=%23f0f4f8&clientId=uc97758be-dec4-4&from=ui&id=u56f361ad&originHeight=783&originWidth=1919&originalType=binary&ratio=1&rotation=0&showTitle=false&size=242991&status=done&style=none&taskId=u477cfaa7-936e-4b4c-b6e4-ab8aba80739&title=" srcset="/img/loading.gif" lazyload alt="data.png"></p>
 <h2 id="整合项目"><a href="#整合项目" class="headerlink" title="整合项目"></a>整合项目</h2><h3 id="整合Java项目"><a href="#整合Java项目" class="headerlink" title="整合Java项目"></a>整合Java项目</h3><p>1.配置logstash.conf(在input添加)接收日志tcp</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">tcp &#123;<br>    # host:port就是上面appender中的 destination，<br>    # 这里其实把logstash作为服务，开启<span class="hljs-number">9250</span>端口接收logback发出的消息<br>    host =&gt; <span class="hljs-string">&quot;0.0.0.0&quot;</span> port =&gt; <span class="hljs-number">9250</span> mode =&gt; <span class="hljs-string">&quot;server&quot;</span> tags =&gt; [<span class="hljs-string">&quot;tags&quot;</span>] codec =&gt; json_lines<br>  &#125;<br></code></pre></td></tr></table></figure>
 <p>2.加入maven依赖</p>

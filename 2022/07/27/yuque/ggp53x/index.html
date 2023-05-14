@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1658921328068-daabda73-ad53-452e-9f95-45fd603f8650.png">
 <meta property="article:published_time" content="2022-07-27T11:24:22.000Z">
-<meta property="article:modified_time" content="2023-04-21T15:48:17.948Z">
+<meta property="article:modified_time" content="2023-05-14T07:25:30.793Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="网络编程">
 <meta name="twitter:card" content="summary_large_image">
@@ -343,7 +343,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1658921328068-daabda73-ad53-452e-9f95-45fd603f8650.png#clientId=ub530df06-9e6b-4&from=paste&height=324&id=uf7e5ccae&name=image.png&originHeight=1400&originWidth=1580&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1387884&status=done&style=none&taskId=u35628116-ca14-400a-81d6-00e56f4cf8e&title=&width=366" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1658921328068-daabda73-ad53-452e-9f95-45fd603f8650.png#clientId=ub530df06-9e6b-4&from=paste&height=324&id=uf7e5ccae&originHeight=1400&originWidth=1580&originalType=binary&ratio=1&rotation=0&showTitle=false&size=1387884&status=done&style=none&taskId=u35628116-ca14-400a-81d6-00e56f4cf8e&title=&width=366" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659348569523-641cc258-a614-4a8b-9ad8-07f4c1e1d3f9.jpeg" srcset="/img/loading.gif" lazyload></p>
 <h1 id="第1章-UNIX基础知识"><a href="#第1章-UNIX基础知识" class="headerlink" title="第1章 UNIX基础知识"></a>第1章 UNIX基础知识</h1><h4 id="进程描述符"><a href="#进程描述符" class="headerlink" title="进程描述符"></a>进程描述符</h4><p>Linux 系统中，把一切都看做是文件，当进程打开现有文件或创建新文件时，内核向进程返回一个文件描述符，文件描述符就是内核为了高效管理已被打开的文件所创建的索引，用来指向被打开的文件，所有执行I/O操作的系统调用都会通过文件描述符。文件描述符可以理解为进程文件描述表这个表的索引，或者把文件描述表看做一个数组的话，文件描述符可以看做是数组的下标。当需要进行I/O操作的时候，会传入fd作为参数，先从进程文件描述符表查找该fd对应的那个条目，取出对应的那个已经打开的文件的句柄，根据文件句柄指向，去系统fd表中查找到该文件指向的inode，从而定位到该文件的真正位置，从而进行I/O操作。</p>
 <p>系统为维护文件描述符，建立了三个表</p>

@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632098366976-70a27b40-4792-4adb-8b07-6db284cdafa9.png">
 <meta property="article:published_time" content="2021-09-20T09:24:22.000Z">
-<meta property="article:modified_time" content="2023-04-21T15:48:17.996Z">
+<meta property="article:modified_time" content="2023-05-14T07:25:30.869Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="领域驱动">
 <meta name="twitter:card" content="summary_large_image">
@@ -343,7 +343,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632098366976-70a27b40-4792-4adb-8b07-6db284cdafa9.png#clientId=ubba613d2-878a-4&from=paste&height=320&id=ubf8d8396&name=image.png&originHeight=320&originWidth=640&originalType=binary&ratio=1&rotation=0&showTitle=false&size=17529&status=done&style=none&taskId=ua30b9375-3a56-440f-8266-6b7eb26ccd8&title=&width=640" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632098366976-70a27b40-4792-4adb-8b07-6db284cdafa9.png#clientId=ubba613d2-878a-4&from=paste&height=320&id=ubf8d8396&originHeight=320&originWidth=640&originalType=binary&ratio=1&rotation=0&showTitle=false&size=17529&status=done&style=none&taskId=ua30b9375-3a56-440f-8266-6b7eb26ccd8&title=&width=640" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><h2 id="何为复杂"><a href="#何为复杂" class="headerlink" title="何为复杂"></a>何为复杂</h2><ul>
 <li>业务复杂不易实现，牵扯的范围广，系统的各个模块非常庞大</li>
 <li>变更复杂，耦合度高一旦变更将会影响整个系统，同时带了的风险高，时间成本高</li>
@@ -356,7 +356,7 @@
 <li><strong>充血模型</strong>：认为，绝大多业务逻辑都应该被放在domain object里面(包括持久化逻辑)，而Service层应该是很薄的一层，仅仅封装事务和少量逻辑，不和DAO层打交道。Service(事务封装) —&gt; domain object &lt;—&gt; DAO</li>
 <li><strong>胀血模型</strong><br>基于充血模型的缺点，有同学提出，干脆取消Service层，只剩下domain object和DAO两层，在domain object的domain logic上面封装事务。domain object(事务封装，业务逻辑) &lt;—&gt; DAO<br>似乎ruby on rails就是这种模型，他甚至把domain object和DAO都合并了。</li>
 </ul>
-<h1 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h1><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632293512930-a4d438f2-8d28-4110-b3e4-8891e8d363ef.png#clientId=uf71e455b-c7a7-4&from=paste&height=384&id=u2c05c331&name=image.png&originHeight=384&originWidth=640&originalType=binary&ratio=1&rotation=0&showTitle=false&size=46077&status=done&style=none&taskId=u1cec5d04-ca03-424c-ad5a-b5ef1aa4919&title=&width=640" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h1><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632293512930-a4d438f2-8d28-4110-b3e4-8891e8d363ef.png#clientId=uf71e455b-c7a7-4&from=paste&height=384&id=u2c05c331&originHeight=384&originWidth=640&originalType=binary&ratio=1&rotation=0&showTitle=false&size=46077&status=done&style=none&taskId=u1cec5d04-ca03-424c-ad5a-b5ef1aa4919&title=&width=640" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h2 id="用户界面-展现层"><a href="#用户界面-展现层" class="headerlink" title="用户界面/展现层"></a>用户界面/展现层</h2><p>负责向用户展现信息以及解释用户命令。更细的方面来讲就是：</p>
 <ol>
 <li>请求应用层以获取用户所需要展现的数据；</li>
@@ -365,7 +365,7 @@
 <h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><p>很薄的一层，定义软件要完成的所有任务。对外为展现层提供各种应用功能（包括查询或命令），对内调用领域层（领域对象或领域服务）完成各种业务逻辑，应用层不包含业务逻辑。</p>
 <h2 id="领域层"><a href="#领域层" class="headerlink" title="领域层"></a>领域层</h2><p>负责表达业务概念，业务状态信息以及业务规则，领域模型处于这一层，是业务软件的核心。</p>
 <h2 id="基础设施层"><a href="#基础设施层" class="headerlink" title="基础设施层"></a>基础设施层</h2><p>本层为其他层提供通用的技术能力；提供了层间的通信；为领域层实现持久化机制；总之，基础设施层可以通过架构和框架来支持其他层的技术需求；</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632293627502-8f6960ff-d0b7-4909-90c5-0a74599ff415.png#clientId=uf71e455b-c7a7-4&from=paste&height=943&id=ued5c2b6c&name=image.png&originHeight=943&originWidth=1051&originalType=binary&ratio=1&rotation=0&showTitle=false&size=119373&status=done&style=none&taskId=u568e163b-4d40-4fb7-9c9e-913cf96305e&title=&width=1051" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632293627502-8f6960ff-d0b7-4909-90c5-0a74599ff415.png#clientId=uf71e455b-c7a7-4&from=paste&height=943&id=ued5c2b6c&originHeight=943&originWidth=1051&originalType=binary&ratio=1&rotation=0&showTitle=false&size=119373&status=done&style=none&taskId=u568e163b-4d40-4fb7-9c9e-913cf96305e&title=&width=1051" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h1 id="细分"><a href="#细分" class="headerlink" title="细分"></a>细分</h1><table>
 <thead>
 <tr>

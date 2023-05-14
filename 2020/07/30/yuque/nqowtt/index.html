@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550961784-9fb81b1f-e0a3-4fa0-9093-514f80efca08.png">
 <meta property="article:published_time" content="2020-07-30T03:21:56.000Z">
-<meta property="article:modified_time" content="2023-04-21T15:48:17.952Z">
+<meta property="article:modified_time" content="2023-05-14T07:25:30.805Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="微服务">
 <meta name="twitter:card" content="summary_large_image">
@@ -343,7 +343,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550961784-9fb81b1f-e0a3-4fa0-9093-514f80efca08.png#clientId=ub8d85664-b10e-4&from=markdown&id=qsjs2&name=image.png&originHeight=395&originWidth=755&originalType=url&ratio=1&rotation=0&showTitle=false&size=93169&status=done&style=none&taskId=uce27e5b2-7787-4a78-aac2-649c24f5b97&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550961784-9fb81b1f-e0a3-4fa0-9093-514f80efca08.png#clientId=ub8d85664-b10e-4&from=markdown&id=qsjs2&originHeight=395&originWidth=755&originalType=url&ratio=1&rotation=0&showTitle=false&size=93169&status=done&style=none&taskId=uce27e5b2-7787-4a78-aac2-649c24f5b97&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
 <h1 id="服务注册发现"><a href="#服务注册发现" class="headerlink" title="服务注册发现"></a>服务注册发现</h1><p>服务注册就是维护一个登记簿,它管理系统内所有的服务地址。当新的服务启动后,它会向登记<br>簿交待自己的地址信息。服务的依赖方直接向登记簿要 Service Provider 地址就行了。当下用于服<br>务注册的工具非常多 ZooKeeper,Consul,Etcd, 还有 Netflix 家的 eureka 等。服务注册有两种<br>形式:客户端注册和第三方注册。</p>
 <h1 id="客户端注册-zookeeper"><a href="#客户端注册-zookeeper" class="headerlink" title="客户端注册(zookeeper)"></a>客户端注册(zookeeper)</h1><p>客户端注册是服务自身要负责注册与注销的工作。当服务启动后向注册中心注册自身,当服务下<br>线时注销自己。期间还需要和注册中心保持心跳。心跳不一定要客户端来做,也可以由注册中心<br>负责(这个过程叫探活)。这种方式的缺点是注册工作与服务耦合在一起,不同语言都要实现一<br>套注册逻辑。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/service-discovery.png#id=fYKdy&originHeight=401&originWidth=687&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
