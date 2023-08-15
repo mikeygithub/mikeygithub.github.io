@@ -17,16 +17,16 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介LDAP是 Lightweight Directory Access Protocol的缩写,称为“轻量级目录访问协议”。它是一种在IP网络上访问和维护目录信息服务的应用层网络协议。 LDAP的一些基本概念:  LDAP目录: 按一定的规则组织的数据结构,用于存储共享信息。它包含了对象的集合以及对象的属性信息。  LDAP条目: LDAP目录中的一个对象,通常表示一个实体如人、组织等。每个条">
+    <meta name="description" content="简介LDAP是 Lightweight Directory Access Protocol的缩写,称为“轻量级目录访问协议”。它是一种在IP网络上访问和维护目录信息服务的应用层网络协议。 LDAP的一些基本概念:  LDAP目录（）:  按一定的规则组织的数据结构,用于存储共享信息。它包含了对象的集合以及对象的属性信息。  LDAP条目（Entry）:  LDAP目录中的一个对象,通常表示一个实">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LDAP-轻量目录访问协议">
 <meta property="og:url" content="https://mikeygithub.github.io/2023/08/12/yuque/ecirzd/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="简介LDAP是 Lightweight Directory Access Protocol的缩写,称为“轻量级目录访问协议”。它是一种在IP网络上访问和维护目录信息服务的应用层网络协议。 LDAP的一些基本概念:  LDAP目录: 按一定的规则组织的数据结构,用于存储共享信息。它包含了对象的集合以及对象的属性信息。  LDAP条目: LDAP目录中的一个对象,通常表示一个实体如人、组织等。每个条">
+<meta property="og:description" content="简介LDAP是 Lightweight Directory Access Protocol的缩写,称为“轻量级目录访问协议”。它是一种在IP网络上访问和维护目录信息服务的应用层网络协议。 LDAP的一些基本概念:  LDAP目录（）:  按一定的规则组织的数据结构,用于存储共享信息。它包含了对象的集合以及对象的属性信息。  LDAP条目（Entry）:  LDAP目录中的一个对象,通常表示一个实">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1691855798763-074b0417-3843-4f29-8f87-022d59d95d39.png">
 <meta property="article:published_time" content="2023-08-12T12:24:22.000Z">
-<meta property="article:modified_time" content="2023-08-12T16:59:05.838Z">
+<meta property="article:modified_time" content="2023-08-15T01:55:28.181Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="LDAP">
 <meta name="twitter:card" content="summary_large_image">
@@ -281,7 +281,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          627 字
+          1.6k 字
         
       </span>
     
@@ -293,7 +293,7 @@
         
         
           <!-- compatible with older versions-->
-          6 分钟
+          14 分钟
         
       </span>
     
@@ -347,20 +347,52 @@
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>LDAP是 <strong>Lightweight Directory Access Protocol</strong>的缩写,称为“轻量级目录访问协议”。它是一种在IP网络上访问和维护目录信息服务的应用层网络协议。</p>
 <p>LDAP的一些基本概念:</p>
 <ul>
-<li><p>LDAP目录: 按一定的规则组织的数据结构,用于存储共享信息。它包含了对象的集合以及对象的属性信息。</p>
+<li><p>LDAP目录（）:  按一定的规则组织的数据结构,用于存储共享信息。它包含了对象的集合以及对象的属性信息。</p>
 </li>
-<li><p>LDAP条目: LDAP目录中的一个对象,通常表示一个实体如人、组织等。每个条目有一个独特的名称(DN),包含一组属性。</p>
+<li><p>LDAP条目（Entry）:  LDAP目录中的一个对象,通常表示一个实体如人、组织等。每个条目有一个独特的名称(DN),包含一组属性。</p>
 </li>
 <li><p>DN:Distinguished Name,用于唯一标识一个LDAP条目。它由一系列属性构成,按层次从上到下。</p>
 </li>
-<li><p>LDAP Schema:定义LDAP目录的一组规则,包括对象类、属性类型、语法及匹配规则等。标准schema有core schema、coschema等。</p>
+<li><p>LDAP Schema: 定义LDAP目录的一组规则,包括对象类、属性类型、语法及匹配规则等。标准schema有core schema、coschema等。</p>
 </li>
 <li><p>LDAP操作:用于访问和维护LDAP目录,基本操作包括绑定、搜索、添加、删除、修改、比价、修改DN等。</p>
 </li>
 </ul>
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><ol>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><blockquote>
+<p>LDAP的开源实现</p>
+</blockquote>
+<ul>
+<li><p>OpenLDAP:开源、跨平台的LDAP实现,支持LDAP v2和v3,是最流行的开源LDAP项目之一。</p>
+</li>
+<li><p>389 Directory Server:由Red Hat发起的开源LDAP目录服务,性能好,适合大规模部署。</p>
+</li>
+<li><p>Apache Directory Server:Apache软件基金会的纯Java LDAP目录服务。</p>
+</li>
+<li><p>OpenDJ:由Sun开发,后来移交到ForgeRock。支持LDAP和X.500协议。</p>
+</li>
+</ul>
+<p>互联网公司使用最多的开源LDAP实现是OpenLDAP。例如Google就是使用OpenLDAP来存储账户信息的。OpenLDAP稳定、性能好、文档丰富,社区活跃是其被广泛采用的主要原因。</p>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><h2 id="安装OpenLDAP"><a href="#安装OpenLDAP" class="headerlink" title="安装OpenLDAP"></a>安装OpenLDAP</h2><blockquote>
+<p>Docker镜像：<a target="_blank" rel="noopener" href="https://github.com/osixia/docker-openldap">https://github.com/osixia/docker-openldap</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d \  <br>    -p 389:389 -p 636:636 \<br>    --name openldap-container \<br>    --<span class="hljs-built_in">env</span> LDAP_ORGANISATION=<span class="hljs-string">&quot;ldap&quot;</span> \      <br>    --<span class="hljs-built_in">env</span> LDAP_DOMAIN=<span class="hljs-string">&quot;example.com&quot;</span> \   <br>    --<span class="hljs-built_in">env</span> LDAP_ADMIN_PASSWORD=<span class="hljs-string">&quot;123456&quot;</span> \             <br>    osixia/openldap<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">Login DN: cn=admin,dc=example,dc=com<br>Password: 123456<br></code></pre></td></tr></table></figure>
+
+<h2 id="安装phpLDAPadmin"><a href="#安装phpLDAPadmin" class="headerlink" title="安装phpLDAPadmin"></a>安装phpLDAPadmin</h2><blockquote>
+<p>phpLDAPadmin ：<a target="_blank" rel="noopener" href="https://github.com/osixia/docker-phpLDAPadmin">https://github.com/osixia/docker-phpLDAPadmin</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -d \<br>    -p 80:80 \  <br>    -p 443:443 \ <br>    --name phpldapadmin-service \<br>    --hostname phpldapadmin-service \<br>    --<span class="hljs-built_in">link</span> openldap-container:ldap-host \<br>    --<span class="hljs-built_in">env</span> PHPLDAPADMIN_LDAP_HOSTS=ldap-host \<br>    osixia/phpldapadmin<br></code></pre></td></tr></table></figure>
+
+<p>访问：<a href="">https://localhost/</a>  进行登录</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1692064314865-f7f45b73-acd4-4917-aa60-07fdcde7c08d.png#averageHue=%239cb08e&clientId=ua6747770-8d5c-4&from=paste&height=920&id=uef197de3&originHeight=1840&originWidth=2940&originalType=binary&ratio=2&rotation=0&showTitle=false&size=356891&status=done&style=none&taskId=u1a33519a-0ad1-4d38-87cd-837e37ddb46&title=&width=1470" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="初始化和创建用户"><a href="#初始化和创建用户" class="headerlink" title="初始化和创建用户"></a>初始化和创建用户</h2><p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1692064190562-30a0de64-27bd-4792-abf8-a591f649ab4a.png#averageHue=%23557056&clientId=ua6747770-8d5c-4&from=paste&height=920&id=u481e4a9c&originHeight=1840&originWidth=2940&originalType=binary&ratio=2&rotation=0&showTitle=false&size=513629&status=done&style=none&taskId=u595b81eb-5963-4815-8a21-ca572eeb120&title=&width=1470" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="系统接入OpenLDAP"><a href="#系统接入OpenLDAP" class="headerlink" title="系统接入OpenLDAP"></a>系统接入OpenLDAP</h2><blockquote>
+<p>以Rancher为例</p>
+</blockquote>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><ol>
 <li>wiki：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%BD%BB%E5%9E%8B%E7%9B%AE%E5%BD%95%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE">https://zh.wikipedia.org/wiki/%E8%BD%BB%E5%9E%8B%E7%9B%AE%E5%BD%95%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE</a></li>
 <li>Understanding LDAP - Design and Implementation ：<a target="_blank" rel="noopener" href="https://www.redbooks.ibm.com/Redbooks.nsf/RedbookAbstracts/sg244986.html?OpenDocument">https://www.redbooks.ibm.com/Redbooks.nsf/RedbookAbstracts/sg244986.html?OpenDocument</a></li>
+<li>openLDAP：<a target="_blank" rel="noopener" href="https://www.openldap.org/">https://www.openldap.org/</a></li>
 </ol>
 
               
