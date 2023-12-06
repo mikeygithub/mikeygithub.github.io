@@ -26,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657545155001-2ab8e47f-920d-4d93-b94d-3586eebc50f1.png">
 <meta property="article:published_time" content="2021-01-22T11:27:12.000Z">
-<meta property="article:modified_time" content="2023-08-16T02:04:18.661Z">
+<meta property="article:modified_time" content="2023-12-06T14:31:15.862Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="Dubbo">
 <meta name="twitter:card" content="summary_large_image">
@@ -384,7 +384,7 @@
 <p>Dubbo提供了用于服务管理和维护的丰富工具，例如查询服务元数据，运行状况和统计信息。</p>
 </blockquote>
 <h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><p> 下载源码 </p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/apache/</span>dubbo.git dubbo<br>cd dubbo<span class="hljs-regexp">/dubbo-demo/</span>dubbo-demo-xml<br>mvn clean install<br></code></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/apache/dubbo.git dubbo<br>cd dubbo/dubbo-demo/dubbo-demo-<span class="hljs-keyword">xml</span><br><span class="hljs-title">mvn</span> clean install<br></code></pre></td></tr></table></figure>
 
 <p> 运行Zookeeper </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://downloads.apache.org/zookeeper/zookeeper-3.6.2/apache-zookeeper-3.6.2-bin.tar.gz<br>tar -zxvf apache-zookeeper-3.6.2-bin.tar.gz<br><span class="hljs-built_in">cd</span> apache-zookeeper-3.6.2-bin/bin<br>./zkServer.sh start<br></code></pre></td></tr></table></figure>
@@ -463,7 +463,7 @@
 <li>采用 Microkernel + Plugin 模式，Microkernel 只负责组装 Plugin，Dubbo 自身的功能也是通过扩展点实现的，也就是 Dubbo 的所有功能点都可被用户自定义扩展所替换。</li>
 <li>采用 URL 作为配置信息的统一格式，所有扩展点都通过传递 URL 携带配置信息。</li>
 </ul>
-<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/apache/</span>dubbo.git dubbo<br></code></pre></td></tr></table></figure>
+<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/apache/dubbo.git dubbo<br></code></pre></td></tr></table></figure>
 
 
 <h2 id="简单用例分析"><a href="#简单用例分析" class="headerlink" title="简单用例分析"></a>简单用例分析</h2><p> provider端 </p>
@@ -522,11 +522,11 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">dubbo-admin-server/src/main/resources/application.properties<br></code></pre></td></tr></table></figure>
 
 <p>主要的配置有：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">admin.config-center=zookeeper:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">2181</span><br>admin.registry.address=zookeeper:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">2181</span><br>admin.metadata-report.address=zookeeper:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">2181</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">admin.config-center</span>=zookeeper://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">2181</span><br><span class="hljs-attr">admin.registry.address</span>=zookeeper://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">2181</span><br><span class="hljs-attr">admin.metadata-report.address</span>=zookeeper://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">2181</span><br></code></pre></td></tr></table></figure>
 
 <p>三个配置项分别指定了配置中心，注册中心和元数据中心的地址，关于这三个中心的详细说明，可以参考<a target="_blank" rel="noopener" href="https://dubbo.apache.org/zh/docs/v2.7/user/configuration/config-center">这里</a>。</p>
 <p>也可以和 Dubbo 2.7 一样，在配置中心指定元数据和注册中心的地址，以 zookeeper 为例，配置的路径和内容如下:</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gradle"># <span class="hljs-regexp">/dubbo/</span>config<span class="hljs-regexp">/dubbo/</span>dubbo.properties<br>dubbo.registry.address=zookeeper:<span class="hljs-comment">//127.0.0.1:2181</span><br>dubbo.metadata-report.address=zookeeper:<span class="hljs-comment">//127.0.0.1:2181</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># /dubbo/config/dubbo/dubbo.properties</span><br><span class="hljs-attr">dubbo.registry.address</span>=zookeeper://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">2181</span><br><span class="hljs-attr">dubbo.metadata-report.address</span>=zookeeper://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">2181</span><br></code></pre></td></tr></table></figure>
 
 <p>配置中心里的地址会覆盖掉本地 <code>application.properties</code> 的配置</p>
 <p>其他配置请访问 github 中的文档:</p>
@@ -632,9 +632,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/01/27/yuque/vpbpvp/" title="资料篇-计算机相关书籍">
+                      <a href="/2021/02/01/yuque/ir54qb/" title="Linux篇-Linux操作系统教程">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">资料篇-计算机相关书籍</span>
+                        <span class="hidden-mobile">Linux篇-Linux操作系统教程</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -642,8 +642,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/18/yuque/ghyttm/" title="算法笔记-模拟法">
-                        <span class="hidden-mobile">算法笔记-模拟法</span>
+                      <a href="/2021/01/09/yuque/gklabh/" title="网络篇-Wireshark使用教程">
+                        <span class="hidden-mobile">网络篇-Wireshark使用教程</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
