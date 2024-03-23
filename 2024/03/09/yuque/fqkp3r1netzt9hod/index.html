@@ -17,26 +17,26 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="环境准备 github账号 dockerhub账号 Travis-CI账号  开启服务进入Travis-CI官网开启服务  安装Travis12345678910sudo apt-get -y updatesudo apt-get -y install build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-devcd &#x2F;tm">
+    <meta name="description" content="背景本文主要是记录在使用 istio 作为 servicemesh 的环境中需要对某些应用进行基准测试。 环境 Kubernetes 1.26 Istio 1.18.2 压测工具 wrk（）  本次压测工具使用 wrk 进行压测  wrk基准测试工具的输出报告，解释如下：   Running 30s test @ https:&#x2F;&#x2F;pipeline-dev.ddd.com&#x2F;healthz：这表示正">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DevOps篇-Travis-CI环境搭建">
-<meta property="og:url" content="https://mikeygithub.github.io/2020/12/06/yuque/unuzw3/index.html">
+<meta property="og:title" content="云原生-Istio 性能测试">
+<meta property="og:url" content="https://mikeygithub.github.io/2024/03/09/yuque/fqkp3r1netzt9hod/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="环境准备 github账号 dockerhub账号 Travis-CI账号  开启服务进入Travis-CI官网开启服务  安装Travis12345678910sudo apt-get -y updatesudo apt-get -y install build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-devcd &#x2F;tm">
+<meta property="og:description" content="背景本文主要是记录在使用 istio 作为 servicemesh 的环境中需要对某些应用进行基准测试。 环境 Kubernetes 1.26 Istio 1.18.2 压测工具 wrk（）  本次压测工具使用 wrk 进行压测  wrk基准测试工具的输出报告，解释如下：   Running 30s test @ https:&#x2F;&#x2F;pipeline-dev.ddd.com&#x2F;healthz：这表示正">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550451550-4a0929d8-8bf9-4cb7-9199-5b44c5372497.png">
-<meta property="article:published_time" content="2020-12-06T02:30:26.000Z">
-<meta property="article:modified_time" content="2023-12-06T14:31:15.866Z">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/2630542/1711208800346-046bd192-06d1-4414-9e3b-b15040e9fd1c.png?x-oss-process=image%2Fformat%2Cwebp">
+<meta property="article:published_time" content="2024-03-09T12:24:22.000Z">
+<meta property="article:modified_time" content="2024-03-23T15:52:14.075Z">
 <meta property="article:author" content="Mikey">
-<meta property="article:tag" content="CI&#x2F;CD">
+<meta property="article:tag" content="Istio">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550451550-4a0929d8-8bf9-4cb7-9199-5b44c5372497.png">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2024/png/2630542/1711208800346-046bd192-06d1-4414-9e3b-b15040e9fd1c.png?x-oss-process=image%2Fformat%2Cwebp">
   
   
 <!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
   
   
-  <title>DevOps篇-Travis-CI环境搭建 - 麦奇</title>
+  <title>云原生-Istio 性能测试 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -252,7 +252,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="DevOps篇-Travis-CI环境搭建"></span>
+            <span id="subtitle" data-typed-text="云原生-Istio 性能测试"></span>
           
         </div>
 
@@ -268,8 +268,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-12-06 10:30" pubdate>
-          2020年12月6日 上午
+        <time datetime="2024-03-09 20:24" pubdate>
+          2024年3月9日 晚上
         </time>
       </span>
     
@@ -281,7 +281,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          4k 字
+          1k 字
         
       </span>
     
@@ -293,7 +293,7 @@
         
         
           <!-- compatible with older versions-->
-          34 分钟
+          9 分钟
         
       </span>
     
@@ -339,100 +339,55 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">DevOps篇-Travis-CI环境搭建</h1>
+            <h1 style="display: none">云原生-Istio 性能测试</h1>
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550451550-4a0929d8-8bf9-4cb7-9199-5b44c5372497.png#clientId=ua2d04a55-9581-4&from=markdown&id=wbXsa&originHeight=512&originWidth=1108&originalType=url&ratio=1&rotation=0&showTitle=false&size=136329&status=done&style=none&taskId=uaf74957c-8e4c-4c2a-b433-86063147a84&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/">github账号</a></li>
-<li><a target="_blank" rel="noopener" href="https://hub.docker.com/">dockerhub账号</a></li>
-<li><a href="travis-ci.org">Travis-CI账号</a></li>
+              <p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1711208800346-046bd192-06d1-4414-9e3b-b15040e9fd1c.png#averageHue=%233e579b&clientId=u7839b57e-777d-4&from=ui&id=u83643790&originHeight=688&originWidth=1380&originalType=binary&ratio=2&rotation=0&showTitle=false&size=59209&status=done&style=none&taskId=u42770a42-e8da-42fa-b4d1-04a4f8d75a2&title=" srcset="/img/loading.gif" lazyload alt="439aa25d52255816f7296454fe4df24b893f7aaa_2_1380x688.png"></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>本文主要是记录在使用 istio 作为 servicemesh 的环境中需要对某些应用进行基准测试。</p>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li>Kubernetes 1.26</li>
+<li>Istio 1.18.2</li>
+<li>压测工具 wrk（）</li>
 </ul>
-<h1 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h1><p>进入<a href="travis-ci.org">Travis-CI官网</a>开启服务</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/travis-ci-open-service.png#id=EXiT0&originHeight=1015&originWidth=1919&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
-<h1 id="安装Travis"><a href="#安装Travis" class="headerlink" title="安装Travis"></a>安装Travis</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get -y update<br>sudo apt-get -y install build-essential zlib1g-dev libssl-dev libreadline6-dev libyaml-dev<br><span class="hljs-built_in">cd</span> /tmp<br><span class="hljs-comment"># 由于众所周知的网络原因，此处可能需要使用到http_proxy</span><br>wget http://ftp.ruby-lang.org/pub/ruby/2.1/ruby-2.1.5.tar.gz <br>tar -xvzf ruby-2.1.5.tar.gz<br><span class="hljs-built_in">cd</span> ruby-2.1.5/<br>./configure --prefix=/usr/local<br>make<br>sudo make install<br></code></pre></td></tr></table></figure>
-
-<p>安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gem install travis<br></code></pre></td></tr></table></figure>
-
-<p>如果网络实在太差，可以使用RubyGems 镜像</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">gem sources --add https://gems.ruby-china.org/<br>gem sources --remove https://rubygems.org/<br>gem sources --remove http://rubygems.org/<br>gem sources -l<br></code></pre></td></tr></table></figure>
-
-
-<h1 id="客户端登入"><a href="#客户端登入" class="headerlink" title="客户端登入"></a>客户端登入</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">travis login --org<br></code></pre></td></tr></table></figure>
-
+<p>本次压测工具使用 wrk 进行压测</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1711203269267-75535b77-6ceb-416d-81f8-933fd37e4bb3.png#averageHue=%23303030&clientId=udde4c0bf-27ae-4&from=paste&height=228&id=ubeb916c3&originHeight=456&originWidth=1536&originalType=binary&ratio=2&rotation=0&showTitle=false&size=93216&status=done&style=none&taskId=u2574a4b6-712c-4859-ae96-28e03bdd51c&title=&width=768" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><code>wrk</code>基准测试工具的输出报告，解释如下：</p>
 <ul>
-<li>登入失败</li>
+<li> <code>Running 30s test @ https://pipeline-dev.ddd.com/healthz</code>：这表示正在对<code>https://pipeline-dev.ddd.com/healthz</code>进行30秒的压力测试。 </li>
+<li> <code>10 threads and 1000 connections</code>：这表示使用10个线程和1000个并发连接进行测试。 </li>
+<li><code>Thread Stats</code>：这是每个线程的统计信息。 <ul>
+<li> <code>Avg</code>：平均延迟，即每个请求的平均响应时间。在这个例子中，平均延迟是692.61毫秒。 </li>
+<li> <code>Stdev</code>：延迟的标准偏差，表示延迟的波动程度。在这个例子中，标准偏差是451.37毫秒。 </li>
+<li> <code>Max</code>：最大延迟，即所有请求中响应时间最长的一个。在这个例子中，最大延迟是2.00秒。 </li>
+<li> <code>+/- Stdev</code>：延迟在平均值加减一个标准偏差范围内的请求的百分比。在这个例子中，67.17%的请求的延迟在平均值的一个标准偏差范围内。 </li>
 </ul>
-<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs latex">root@mikey:/home/mikey<span class="hljs-params">#</span> travis login<br>Outdated CLI version, run `gem install travis`.<br>Shell completion not installed. Would you like to install it now? |y| y<br>We need your GitHub login to identify you.<br>This information will not be sent to Travis CI, only to api.github.com.<br>The password will not be displayed.<br><br>Try running with --github-token or --auto if you don&#x27;t want to enter your password anyway.<br><br>Username: hhufu     <br>Password for hhufu: ********<br>Bad credentials. The API can&#x27;t be accessed using username/password authentication. Please create a personal access token to access this endpoint: http://github.com/settings/tokens<br>for a full error report, run travis report<br></code></pre></td></tr></table></figure>
-
-<p>解决方法: 可以使用Token进行登入</p>
-<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs latex">root@mikey:/home/mikey<span class="hljs-params">#</span> travis login --org --github-token 6534404071f94d2be86d6e3e16d691<br>Outdated CLI version, run `gem install travis`.<br>Successfully logged in as hhufu!<br></code></pre></td></tr></table></figure>
-
-
-<h1 id="公钥配置"><a href="#公钥配置" class="headerlink" title="公钥配置"></a>公钥配置</h1><p>本地服务生成公钥,一路回车</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh-keygen<br></code></pre></td></tr></table></figure>
-
-<p>将公钥上传致部署服务器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh-copy-id -i ~/.ssh/id_rsa.pub root@47.106.210.184<br></code></pre></td></tr></table></figure>
-
-<p>免密登入测试</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh root@47.106.210.184<br></code></pre></td></tr></table></figure>
-
-
-<h1 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h1><p>进入项目目录中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">travis init --org<br></code></pre></td></tr></table></figure>
-
-<p>输出</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vim">/var/lib/gems/<span class="hljs-number">2.5</span>.<span class="hljs-number">0</span>/gems/travis-<span class="hljs-number">1.9</span>.<span class="hljs-number">1</span>/lib/travis/tools/<span class="hljs-built_in">system</span>.r<span class="hljs-variable">b:79</span>: warning: Insecure world writable dir /home/mikey/Devtools in PATH, <span class="hljs-keyword">mode</span> <span class="hljs-number">040777</span><br>Outdated CLI <span class="hljs-keyword">version</span>, run `gem install travis`.<br>Detected repository <span class="hljs-keyword">as</span> hhufu/innovate, <span class="hljs-keyword">is</span> this correct? |yes| yes<br>Main programming <span class="hljs-keyword">language</span> used: |Ruby| <br>.travis.yml <span class="hljs-keyword">file</span> created!<br>not allowed <span class="hljs-keyword">to</span> <span class="hljs-keyword">update</span> service hook <span class="hljs-keyword">for</span> hhufu/innovate<br></code></pre></td></tr></table></figure>
-
-<p>添加秘钥</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">travis encrypt-file ~/.ssh/id_rsa --add<br></code></pre></td></tr></table></figure>
-
-<p>当在官网查看到有秘钥存在就表示成功了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/travis-ci-key-success.png#id=kWqGj&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
-<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p>配置文件</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">matrix:</span><br>  <span class="hljs-attr">include:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">language:</span> <span class="hljs-string">node_js</span><br>    <span class="hljs-attr">node_js:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">10.16</span><span class="hljs-number">.1</span><br>    <span class="hljs-attr">branches:</span><br>      <span class="hljs-attr">only:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">master</span><br>    <span class="hljs-attr">install:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">npm</span> <span class="hljs-string">install</span><br>    <span class="hljs-attr">script:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">npm</span> <span class="hljs-string">run</span> <span class="hljs-string">build</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">docker</span> <span class="hljs-string">build</span> <span class="hljs-string">.</span> <span class="hljs-string">-t</span> <span class="hljs-string">&quot;$DOCKER_NAME/innovate-admin-vue:latest&quot;</span><br>    <span class="hljs-attr">addons:</span><br>      <span class="hljs-attr">ssh_known_hosts:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;$SERVER_IP&quot;</span><br>    <span class="hljs-attr">after_success:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">docker</span> <span class="hljs-string">login</span> <span class="hljs-string">-u=$DOCKER_NAME</span> <span class="hljs-string">-p=&quot;$DOCKER_PWD&quot;</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">docker</span> <span class="hljs-string">push</span> <span class="hljs-string">$DOCKER_NAME/innovate-admin-vue:latest</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">chmod</span> <span class="hljs-number">600</span> <span class="hljs-string">~/.ssh/id_rsa</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">rsync</span> <span class="hljs-string">-az</span> <span class="hljs-string">--delete</span> <span class="hljs-string">./docker-compose.yml</span> <span class="hljs-string">root@$SERVER_IP:$DOCKER_NAME/innovate-admin-vue/</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">ssh</span> <span class="hljs-string">-o</span> <span class="hljs-string">&quot;StrictHostKeyChecking no&quot;</span> <span class="hljs-string">-i</span> <span class="hljs-string">id_rsa</span> <span class="hljs-string">root@$SERVER_IP</span> <span class="hljs-string">&quot;cd $DOCKER_NAME/innovate-admin-vue/;docker-compose</span><br><span class="hljs-string">      -f docker-compose.yml pull;docker-compose -f docker-compose.yml up -d;exit&quot;</span><br>    <span class="hljs-attr">before_install:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">openssl</span> <span class="hljs-string">aes-256-cbc</span> <span class="hljs-string">-K</span> <span class="hljs-string">$encrypted_1687bb340939_key</span> <span class="hljs-string">-iv</span> <span class="hljs-string">$encrypted_1687bb340939_iv</span>  <span class="hljs-string">-in</span><br>      <span class="hljs-string">id_rsa.enc</span> <span class="hljs-string">-out</span> <span class="hljs-string">~/.ssh/id_rsa</span> <span class="hljs-string">-d</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">chmod</span> <span class="hljs-number">600</span> <span class="hljs-string">~/.ssh/id_rsa</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">echo</span> <span class="hljs-string">-e</span> <span class="hljs-string">&quot;Host $SERVER_IP\n\tStrictHostKeyChecking no\n&quot;</span> <span class="hljs-string">&gt;&gt;</span> <span class="hljs-string">~/.ssh/config</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">cd</span> <span class="hljs-string">$DOCKER_NAME/innovate-admin-vue</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">language:</span> <span class="hljs-string">java</span><br>    <span class="hljs-attr">services:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">docker</span><br>    <span class="hljs-attr">sudo:</span> <span class="hljs-string">required</span><br>    <span class="hljs-attr">branches:</span><br>      <span class="hljs-attr">only:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">master</span><br>    <span class="hljs-attr">script:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">mvn</span> <span class="hljs-string">install</span> <span class="hljs-string">-DskipTests=true</span> <span class="hljs-string">-Dmaven.javadoc.skip=true</span> <span class="hljs-string">-B</span> <span class="hljs-string">-V</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">docker</span> <span class="hljs-string">build</span> <span class="hljs-string">.</span> <span class="hljs-string">-t</span> <span class="hljs-string">&quot;$DOCKER_NAME/innovate-admin:latest&quot;</span><br>    <span class="hljs-attr">before_install:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">openssl</span> <span class="hljs-string">aes-256-cbc</span> <span class="hljs-string">-K</span> <span class="hljs-string">$encrypted_1687bb340939_key</span> <span class="hljs-string">-iv</span> <span class="hljs-string">$encrypted_1687bb340939_iv</span><br>      <span class="hljs-string">-in</span> <span class="hljs-string">id_rsa.enc</span> <span class="hljs-string">-out</span> <span class="hljs-string">~/.ssh/id_rsa</span> <span class="hljs-string">-d</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">chmod</span> <span class="hljs-number">600</span> <span class="hljs-string">~/.ssh/id_rsa</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">echo</span> <span class="hljs-string">-e</span> <span class="hljs-string">&quot;Host $SERVER_IP\n\tStrictHostKeyChecking no\n&quot;</span> <span class="hljs-string">&gt;&gt;</span> <span class="hljs-string">~/.ssh/config</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">cd</span> <span class="hljs-string">$DOCKER_NAME/innovate-admin</span><br>    <span class="hljs-attr">after_success:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">docker</span> <span class="hljs-string">login</span> <span class="hljs-string">-u=$DOCKER_NAME</span> <span class="hljs-string">-p=&quot;$DOCKER_PWD&quot;</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">docker</span> <span class="hljs-string">push</span> <span class="hljs-string">$DOCKER_NAME/innovate-admin:latest</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">chmod</span> <span class="hljs-number">600</span> <span class="hljs-string">~/.ssh/id_rsa</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">rsync</span> <span class="hljs-string">-az</span> <span class="hljs-string">--delete</span> <span class="hljs-string">./docker-compose.yml</span> <span class="hljs-string">root@$SERVER_IP:$DOCKER_NAME/innovate-admin/</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">ssh</span> <span class="hljs-string">-o</span> <span class="hljs-string">&quot;StrictHostKeyChecking no&quot;</span> <span class="hljs-string">-i</span> <span class="hljs-string">id_rsa</span> <span class="hljs-string">root@$SERVER_IP</span> <span class="hljs-string">&quot;cd $DOCKER_NAME/innovate-admin/;docker-compose</span><br><span class="hljs-string">      -f docker-compose.yml pull;docker-compose -f docker-compose.yml up -d;exit&quot;</span><br><span class="hljs-attr">notifications:</span><br>  <span class="hljs-attr">email:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">biaogejiushibiao@outlook.com</span><br>  <span class="hljs-attr">on_success:</span> <span class="hljs-string">change</span><br>  <span class="hljs-attr">on_failure:</span> <span class="hljs-string">always</span><br><span class="hljs-attr">before_install:</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">openssl</span> <span class="hljs-string">aes-256-cbc</span> <span class="hljs-string">-K</span> <span class="hljs-string">$encrypted_1687bb340939_key</span> <span class="hljs-string">-iv</span> <span class="hljs-string">$encrypted_1687bb340939_iv</span><br>  <span class="hljs-string">-in</span> <span class="hljs-string">id_rsa.enc</span> <span class="hljs-string">-out</span> <span class="hljs-string">~\/.ssh/id_rsa</span> <span class="hljs-string">-d</span><br></code></pre></td></tr></table></figure>
-
-
-<p>根据自己项目需要来进行编写，更多选项参考<a target="_blank" rel="noopener" href="https://docs.travis-ci.com/user/tutorial/">官方文档</a></p>
-<h1 id="提交部署"><a href="#提交部署" class="headerlink" title="提交部署"></a>提交部署</h1><p>提交代码即可完成自动部署工作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/travis-ci-run-success.png#id=ytvje&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://docs.travis-ci.com/">官方文档</a><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html">持续集成服务 Travis CI 教程</a></p>
-
+</li>
+<li><code>Req/Sec</code>：每秒的请求次数。 <ul>
+<li> <code>Avg</code>：平均每秒请求次数。在这个例子中，平均每秒请求次数是120.72。 </li>
+<li> <code>Stdev</code>：每秒请求次数的标准偏差。在这个例子中，标准偏差是74.64。 </li>
+<li> <code>Max</code>：最大每秒请求次数。在这个例子中，最大每秒请求次数是454.00。 </li>
+<li> <code>+/- Stdev</code>：每秒请求次数在平均值加减一个标准偏差范围内的百分比。在这个例子中，69.57%的每秒请求次数在平均值的一个标准偏差范围内。 </li>
+</ul>
+</li>
+<li> <code>31473 requests in 30.04s, 16.78MB read</code>：在30.04秒内，发送了31473个请求，读取了16.78MB的数据。 </li>
+<li> <code>Socket errors: connect 0, read 0, write 0, timeout 2667</code>：这是套接字错误的统计，包括连接错误、读取错误、写入错误和超时错误的数量。在这个例子中，有2667个请求超时。 </li>
+<li> <code>Requests/sec: 1047.85</code>：平均每秒的请求次数(QPS)。在这个例子中，平均每秒的请求次数是1047.85。 </li>
+<li> <code>Transfer/sec: 572.17KB</code>：平均每秒传输的数据量。在这个例子中，平均每秒传输的数据量是572.17KB。 </li>
+</ul>
+<h1 id="压测"><a href="#压测" class="headerlink" title="压测"></a>压测</h1><p><a target="_blank" rel="noopener" href="https://pipeline-dev.makeblock.com/healthz">https://pipeline-dev.xxxx.com/healthz</a></p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1>
               
             </div>
             <hr/>
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/DevOps/" class="category-chain-item">DevOps</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/CI-CD/">#CI/CD</a>
+        <a href="/tags/Istio/">#Istio</a>
       
     </div>
   
@@ -444,8 +399,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>DevOps篇-Travis-CI环境搭建</div>
-      <div>https://mikeygithub.github.io/2020/12/06/yuque/unuzw3/</div>
+      <div>云原生-Istio 性能测试</div>
+      <div>https://mikeygithub.github.io/2024/03/09/yuque/fqkp3r1netzt9hod/</div>
     </div>
     <div class="license-meta">
       
@@ -457,7 +412,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2020年12月6日</div>
+          <div>2024年3月9日</div>
         </div>
       
       
@@ -487,18 +442,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/12/07/yuque/cliduo/" title="工具篇-Mermaid使用教程">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">工具篇-Mermaid使用教程</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/12/03/yuque/xzqx4t/" title="Linux篇-select/poll/epoll源码分析">
-                        <span class="hidden-mobile">Linux篇-select/poll/epoll源码分析</span>
+                      <a href="/2023/01/31/yuque/xogp27/" title="Istio 大型微服务系统管理工具">
+                        <span class="hidden-mobile">Istio 大型微服务系统管理工具</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
