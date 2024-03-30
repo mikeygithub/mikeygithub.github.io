@@ -17,25 +17,26 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介wrk是一个HTTP基准测试工具，当在单核CPU上运行时能够产生显著的负载。它将多线程设计与可扩展的事件通知系统（如epoll和kqueue）相结合。 可选的LuaJIT脚本可以执行HTTP请求生成、响应处理和自定义报告。 安装1brew install awk  教程TODO 资料 wrk：https:&#x2F;&#x2F;github.com&#x2F;wg&#x2F;wrk">
+    <meta name="description" content="wrk简介wrk 是一个HTTP基准测试工具，当在单核CPU上运行时能够产生显著的负载。它将多线程设计与可扩展的事件通知系统（如epoll和kqueue）相结合。 可选的LuaJIT脚本可以执行HTTP请求生成、响应处理和自定义报告。 安装mac下安装1brew install awk  linux下安装教程1wrk2 -t8 -c1000 -d30 -R1000 --latency https">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基准测试工具-wrk">
+<meta property="og:title" content="基准测试工具-wrk &#x2F; wrk2 &#x2F; ab">
 <meta property="og:url" content="https://mikeygithub.github.io/2023/05/09/yuque/sk7iwsaphdt260gp/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="简介wrk是一个HTTP基准测试工具，当在单核CPU上运行时能够产生显著的负载。它将多线程设计与可扩展的事件通知系统（如epoll和kqueue）相结合。 可选的LuaJIT脚本可以执行HTTP请求生成、响应处理和自定义报告。 安装1brew install awk  教程TODO 资料 wrk：https:&#x2F;&#x2F;github.com&#x2F;wg&#x2F;wrk">
+<meta property="og:description" content="wrk简介wrk 是一个HTTP基准测试工具，当在单核CPU上运行时能够产生显著的负载。它将多线程设计与可扩展的事件通知系统（如epoll和kqueue）相结合。 可选的LuaJIT脚本可以执行HTTP请求生成、响应处理和自定义报告。 安装mac下安装1brew install awk  linux下安装教程1wrk2 -t8 -c1000 -d30 -R1000 --latency https">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/2630542/1711209665995-7aea9bb3-01a7-4aad-8e9b-ad71bfca5da3.png?x-oss-process=image%2Fformat%2Cwebp">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/2630542/1711635829184-c84e7943-b35c-4bc7-9981-18dc7789c64a.png?x-oss-process=image%2Fformat%2Cwebp">
 <meta property="article:published_time" content="2023-05-09T14:24:22.000Z">
-<meta property="article:modified_time" content="2024-03-24T13:54:08.905Z">
+<meta property="article:modified_time" content="2024-03-30T03:02:08.606Z">
 <meta property="article:author" content="Mikey">
+<meta property="article:tag" content="压力测试">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2024/png/2630542/1711209665995-7aea9bb3-01a7-4aad-8e9b-ad71bfca5da3.png?x-oss-process=image%2Fformat%2Cwebp">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2024/png/2630542/1711635829184-c84e7943-b35c-4bc7-9981-18dc7789c64a.png?x-oss-process=image%2Fformat%2Cwebp">
   
   
 <!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
   
   
-  <title>基准测试工具-wrk - 麦奇</title>
+  <title>基准测试工具-wrk / wrk2 / ab - 麦奇</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -245,13 +246,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://cdn.nlark.com/yuque/0/2022/png/2630542/1651338804824-c3567992-2841-42e6-85b2-90ff83da2674.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_2276%2Climit_0') no-repeat center center; background-size: cover;">
+     style="background: url('https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="基准测试工具-wrk"></span>
+            <span id="subtitle" data-typed-text="基准测试工具-wrk / wrk2 / ab"></span>
           
         </div>
 
@@ -280,7 +281,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          166 字
+          1.2k 字
         
       </span>
     
@@ -292,7 +293,7 @@
         
         
           <!-- compatible with older versions-->
-          2 分钟
+          10 分钟
         
       </span>
     
@@ -338,18 +339,32 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">基准测试工具-wrk</h1>
+            <h1 style="display: none">基准测试工具-wrk / wrk2 / ab</h1>
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1711209665995-7aea9bb3-01a7-4aad-8e9b-ad71bfca5da3.png#averageHue=%23f7f7f7&clientId=ufa04353a-00e8-4&from=paste&height=447&id=u753cce3a&originHeight=894&originWidth=1620&originalType=binary&ratio=2&rotation=0&showTitle=false&size=40064&status=done&style=none&taskId=u775f8a3f-e9ba-4cdc-81c2-5161cfeb14a&title=&width=810" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>wrk是一个HTTP基准测试工具，当在单核CPU上运行时能够产生显著的负载。它将多线程设计与可扩展的事件通知系统（如epoll和kqueue）相结合。</p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1711635829184-c84e7943-b35c-4bc7-9981-18dc7789c64a.png#averageHue=%23f4f4f4&clientId=u1ba7001a-3f10-4&from=paste&height=314&id=u13d782eb&originHeight=628&originWidth=1548&originalType=binary&ratio=2&rotation=0&showTitle=true&size=54266&status=done&style=none&taskId=u0cea0ba8-0f9a-4d9f-9350-b12f2ffbfca&title=wrk%2Fwrk2%2Fab&width=774" srcset="/img/loading.gif" lazyload alt="wrk/wrk2/ab" title="wrk/wrk2/ab"></p>
+<h1 id="wrk"><a href="#wrk" class="headerlink" title="wrk"></a>wrk</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>wrk 是一个HTTP基准测试工具，当在单核CPU上运行时能够产生显著的负载。它将多线程设计与可扩展的事件通知系统（如epoll和kqueue）相结合。</p>
 <p>可选的LuaJIT脚本可以执行HTTP请求生成、响应处理和自定义报告。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span>awk<br></code></pre></td></tr></table></figure>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="mac下安装"><a href="#mac下安装" class="headerlink" title="mac下安装"></a>mac下安装</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span>awk<br></code></pre></td></tr></table></figure>
 <p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1711207338174-8eab535e-679d-46c2-b28b-fdd08c07f1c9.png#averageHue=%232e2e2e&clientId=u45a64364-7e04-4&from=paste&height=360&id=u21a2bdec&originHeight=720&originWidth=2074&originalType=binary&ratio=2&rotation=0&showTitle=false&size=111801&status=done&style=none&taskId=u3a66a5df-fa25-4b36-bf6d-3dae8b330a6&title=&width=1037" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h1 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h1><p>TODO</p>
+<h3 id="linux下安装"><a href="#linux下安装" class="headerlink" title="linux下安装"></a>linux下安装</h3><h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">wrk2</span> -t8 -c1000 -<span class="hljs-built_in">d30</span> -R1000 --latency https:<span class="hljs-comment">//www.baidu.com/</span><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="测试服务的最大QPS"><a href="#测试服务的最大QPS" class="headerlink" title="测试服务的最大QPS"></a>测试服务的最大QPS</h3><p>通过-R参数获取吞吐量参数    每秒请求量的结果</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">wrk2 -t10 -c50 -d30 -R3000 -H “Host:xxx.com” <span class="hljs-keyword">http</span>://localhost/<span class="hljs-keyword">a</span>/<span class="hljs-keyword">a</span>.mp4 -L	Requests/<span class="hljs-built_in">sec</span>: <span class="hljs-number">3000.12</span><br>wrk2 -t10 -c50 -d30 -R5000 -H “Host:xxx.com” <span class="hljs-keyword">http</span>://localhost/<span class="hljs-keyword">a</span>/<span class="hljs-keyword">a</span>.mp4 -L	Requests/<span class="hljs-built_in">sec</span>: <span class="hljs-number">5000.12</span><br>wrk2 -t10 -c50 -d30 -R10000 -H “Host:xxx.com” <span class="hljs-keyword">http</span>://localhost/<span class="hljs-keyword">a</span>/<span class="hljs-keyword">a</span>.mp4 -L	Requests/<span class="hljs-built_in">sec</span>: <span class="hljs-number">9800.12</span><br>wrk2 -t10 -c50 -d30 -R20000 -H “Host:xxx.com” <span class="hljs-keyword">http</span>://localhost/<span class="hljs-keyword">a</span>/<span class="hljs-keyword">a</span>.mp4 -L	Requests/<span class="hljs-built_in">sec</span>: <span class="hljs-number">12500.12</span><br>wrk2 -t10 -c50 -d30 -R30000 -H “Host:xxx.com” <span class="hljs-keyword">http</span>://localhost/<span class="hljs-keyword">a</span>/<span class="hljs-keyword">a</span>.mp4 -L	Requests/<span class="hljs-built_in">sec</span>: <span class="hljs-number">13000.12</span><br></code></pre></td></tr></table></figure>
+<p> 从以上的测试过程中可以看出，服务最大的每秒请求量为13000，可见性能压测的QPS为1.3万左右，考虑本机测试性能损耗问题，即QPS&gt;1.2万</p>
+<p>TODO</p>
+<h1 id="wrk2"><a href="#wrk2" class="headerlink" title="wrk2"></a>wrk2</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><p>wrk2 是对 wrk 进行了改进，以产生恒定的吞吐量负载，并将延迟细节精确到高9（即，当运行足够长的时间时，可以产生精确的99.9999%）。除了wrk的参数外，wrk2还通过–rate或-R参数（默认值为1000）获取吞吐量参数（以每秒请求总数为单位）。</p>
+<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><h2 id="教程-1"><a href="#教程-1" class="headerlink" title="教程"></a>教程</h2><h1 id="ab-Apache-HTTP-server-benchmarking-tool"><a href="#ab-Apache-HTTP-server-benchmarking-tool" class="headerlink" title="ab - Apache HTTP server benchmarking tool"></a>ab - Apache HTTP server benchmarking tool</h1><h2 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h2><h2 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h2><h2 id="教程-2"><a href="#教程-2" class="headerlink" title="教程"></a>教程</h2><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
+<li>wrk 默认使用的是http1.1，会使用连接复用，其中-c参数并不会每次发请求都会重新进行建立tcp连接，所以测试的数据需要注意这一块。</li>
+<li>ab 缺省会每次都新建请求连接来进行测试，如果需要保持长连接需要加入 -k 参数。</li>
+</ol>
 <h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><ol>
 <li>wrk：<a target="_blank" rel="noopener" href="https://github.com/wg/wrk">https://github.com/wg/wrk</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/giltene/wrk2">https://github.com/giltene/wrk2</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/rakyll/hey">https://github.com/rakyll/hey</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/tsenart/vegeta">https://github.com/tsenart/vegeta</a></li>
 </ol>
 
               
@@ -359,6 +374,13 @@
               <div class="post-metas my-3">
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">#压力测试</a>
+      
+    </div>
+  
 </div>
 
 
@@ -367,7 +389,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>基准测试工具-wrk</div>
+      <div>基准测试工具-wrk / wrk2 / ab</div>
       <div>https://mikeygithub.github.io/2023/05/09/yuque/sk7iwsaphdt260gp/</div>
     </div>
     <div class="license-meta">
