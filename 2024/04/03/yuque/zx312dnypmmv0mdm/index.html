@@ -17,26 +17,25 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="启动 K8s 集群sudo minikube start --vm-driver&#x3D;none --image-repository&#x3D;registry.aliyuncs.com&#x2F;google_containers 启动GUIminikube dashboard K8s 部署应用程序Server.js 123456789var http &#x3D; require(&amp;#x27;http&amp;#x27;);var">
+    <meta name="description" content="背景当一个新Pod创建后，Service就能立即选择到它，并会把请求转发给Pod 。但是通常一个Pod启动是需要时间的，部分应用在启动时需要进行加载上游相关服务连接等，如果Pod还没准备好，这时把请求转给Pod的话，Pod也无法处理，会造成请求失败的情况发生。 简介启动探针（Startup Probe）：用于检查容器中的应用是否已经启动。如果启动探针失败，Kubernetes会等待一段时间，然后">
 <meta property="og:type" content="article">
-<meta property="og:title" content="k8s篇-Minikube使用教程">
-<meta property="og:url" content="https://mikeygithub.github.io/2020/04/02/yuque/np4ni6/index.html">
+<meta property="og:title" content="Kubernetes-启动&#x2F;存活&#x2F;就绪探针">
+<meta property="og:url" content="https://mikeygithub.github.io/2024/04/03/yuque/zx312dnypmmv0mdm/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="启动 K8s 集群sudo minikube start --vm-driver&#x3D;none --image-repository&#x3D;registry.aliyuncs.com&#x2F;google_containers 启动GUIminikube dashboard K8s 部署应用程序Server.js 123456789var http &#x3D; require(&amp;#x27;http&amp;#x27;);var">
+<meta property="og:description" content="背景当一个新Pod创建后，Service就能立即选择到它，并会把请求转发给Pod 。但是通常一个Pod启动是需要时间的，部分应用在启动时需要进行加载上游相关服务连接等，如果Pod还没准备好，这时把请求转给Pod的话，Pod也无法处理，会造成请求失败的情况发生。 简介启动探针（Startup Probe）：用于检查容器中的应用是否已经启动。如果启动探针失败，Kubernetes会等待一段时间，然后">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550762923-0f0efc03-1661-4496-ab22-52650ba4681e.png">
-<meta property="article:published_time" content="2020-04-01T16:35:52.000Z">
-<meta property="article:modified_time" content="2024-04-03T10:23:38.348Z">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/2630542/1712139573476-75cf646c-71a2-42e8-a627-2187be99e919.png?x-oss-process=image%2Fformat%2Cwebp">
+<meta property="article:published_time" content="2024-04-03T10:24:22.000Z">
+<meta property="article:modified_time" content="2024-04-03T10:23:38.332Z">
 <meta property="article:author" content="Mikey">
-<meta property="article:tag" content="Kubernetes">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550762923-0f0efc03-1661-4496-ab22-52650ba4681e.png">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2024/png/2630542/1712139573476-75cf646c-71a2-42e8-a627-2187be99e919.png?x-oss-process=image%2Fformat%2Cwebp">
   
   
 <!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
   
   
-  <title>k8s篇-Minikube使用教程 - 麦奇</title>
+  <title>Kubernetes-启动/存活/就绪探针 - 麦奇</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -252,7 +251,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="k8s篇-Minikube使用教程"></span>
+            <span id="subtitle" data-typed-text="Kubernetes-启动/存活/就绪探针"></span>
           
         </div>
 
@@ -268,8 +267,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2020-04-02 00:35" pubdate>
-          2020年4月2日 凌晨
+        <time datetime="2024-04-03 18:24" pubdate>
+          2024年4月3日 晚上
         </time>
       </span>
     
@@ -281,7 +280,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.7k 字
+          3.7k 字
         
       </span>
     
@@ -293,7 +292,7 @@
         
         
           <!-- compatible with older versions-->
-          15 分钟
+          32 分钟
         
       </span>
     
@@ -339,71 +338,73 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">k8s篇-Minikube使用教程</h1>
+            <h1 style="display: none">Kubernetes-启动/存活/就绪探针</h1>
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550762923-0f0efc03-1661-4496-ab22-52650ba4681e.png#averageHue=%23fbfdf5&clientId=u702860fa-9a2e-4&from=markdown&id=YWE3w&originHeight=146&originWidth=344&originalType=url&ratio=1&rotation=0&showTitle=false&size=59751&status=done&style=none&taskId=u19505980-2d70-4e79-9b7d-2f802e44cd1&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h2 id="启动-K8s-集群"><a href="#启动-K8s-集群" class="headerlink" title="启动 K8s 集群"></a>启动 K8s 集群</h2><p><code>sudo minikube start --vm-driver=none --image-repository=registry.aliyuncs.com/google_containers</code></p>
-<h3 id="启动GUI"><a href="#启动GUI" class="headerlink" title="启动GUI"></a>启动GUI</h3><p><code>minikube dashboard</code></p>
-<h2 id="K8s-部署应用程序"><a href="#K8s-部署应用程序" class="headerlink" title="K8s 部署应用程序"></a>K8s 部署应用程序</h2><p>Server.js</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;http&#x27;</span>);<br><br><span class="hljs-keyword">var</span> handleRequest = <span class="hljs-keyword">function</span>(<span class="hljs-params">request, response</span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Received request for URL: &#x27;</span> + request.<span class="hljs-property">url</span>);<br>  response.<span class="hljs-title function_">writeHead</span>(<span class="hljs-number">200</span>);<br>  response.<span class="hljs-title function_">end</span>(<span class="hljs-string">&#x27;Hello World!&#x27;</span>);<br>&#125;;<br><span class="hljs-keyword">var</span> www = http.<span class="hljs-title function_">createServer</span>(handleRequest);<br>www.<span class="hljs-title function_">listen</span>(<span class="hljs-number">8080</span>);<br></code></pre></td></tr></table></figure>
+              <p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1712139573476-75cf646c-71a2-42e8-a627-2187be99e919.png#averageHue=%23356fe6&clientId=ubd34eeec-8db2-4&from=ui&id=u4cef4e96&originHeight=630&originWidth=1200&originalType=binary&ratio=1&rotation=0&showTitle=false&size=91377&status=done&style=none&taskId=u1e9f854b-5f49-471d-b180-61388c613cd&title=" srcset="/img/loading.gif" lazyload alt="kubernetes-liveness-probes-1687281791644-compressed.png"></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>当一个新Pod创建后，Service就能立即选择到它，并会把请求转发给Pod 。但是通常一个Pod启动是需要时间的，部分应用在启动时需要进行加载上游相关服务连接等，如果Pod还没准备好，这时把请求转给Pod的话，Pod也无法处理，会造成请求失败的情况发生。</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>启动探针（Startup Probe）</strong>：用于检查容器中的应用是否已经启动。如果启动探针失败，Kubernetes会等待一段时间，然后再次进行检查，直到应用启动。这可以用于应用启动时间较长，需要一段时间初始化的场景。如果配置了这类探针，存活探针和就绪探针成功之前不会重启，确保这些探针不会影响应用的启动。 启动探针可以用于对慢启动容器进行存活性检测，避免它们在启动运行之前就被杀掉。</p>
+<p><strong>存活探针（Liveness Probe）</strong>：用于检查容器是否还在运行。如果存活探针失败，Kubernetes会杀掉容器，然后根据我们的部署配置来重启它。可以用于应用自身无法恢复的问题，需要重启来恢复的场景（如死锁）。</p>
+<p><strong>就绪探针（Readiness Probe）</strong>：用于检查容器是否准备好服务请求。如果就绪探针失败，Kubernetes会停止将流量转发到该Pod，直到探针再次成功。这可以用于控制哪些Pod应该接收流量，哪些不应该。 </p>
+<h2 id="探测方式"><a href="#探测方式" class="headerlink" title="探测方式"></a>探测方式</h2><ul>
+<li>支持 存活命令 （命令返回0值则表示存活）</li>
+<li>http接口（返回大于或等于 200 并且小于 400 的任何代码都表示成功）</li>
+<li>tcp探活（如果能建立连接，这个容器就被看作是健康的）</li>
+<li>grpc探活（需要实现监控检查接口）</li>
+</ul>
+<h2 id="相关参数"><a href="#相关参数" class="headerlink" title="相关参数"></a>相关参数</h2><ul>
+<li><p>initialDelaySeconds：容器启动后要等待多少秒后才启动启动、存活和就绪探针。 如果定义了启动探针则存活探针和就绪探针的延迟将在启动探针已成功之后才开始计算。 如果 periodSeconds 的值大于 initialDelaySeconds，则 initialDelaySeconds 将被忽略。默认是 0 秒，最小值是 0。</p>
+</li>
+<li><p>periodSeconds：执行探测的时间间隔（单位是秒）。默认是 10 秒。最小值是 1。</p>
+</li>
+<li><p>timeoutSeconds：探测的超时后等待多少秒。默认值是 1 秒。最小值是 1。</p>
+</li>
+<li><p>successThreshold：探针在失败后，被视为成功的最小连续成功数。默认值是 1。 存活和启动探测的这个值必须是 1。最小值是 1。</p>
+</li>
+<li><p>failureThreshold：探针连续失败了 failureThreshold 次之后， Kubernetes 认为总体上检查已失败：容器状态未就绪、不健康、不活跃。 对于启动探针或存活探针而言，如果至少有 failureThreshold 个探针已失败， Kubernetes 会将容器视为不健康并为这个特定的容器触发重启操作。 kubelet 遵循该容器的 terminationGracePeriodSeconds 设置。 对于失败的就绪探针，kubelet 继续运行检查失败的容器，并继续运行更多探针； 因为检查失败，kubelet 将 Pod 的 Ready 状况 设置为 false。</p>
+</li>
+<li><p>terminationGracePeriodSeconds：为 kubelet 配置从为失败的容器触发终止操作到强制容器运行时停止该容器之前等待的宽限时长。 默认值是继承 Pod 级别的 terminationGracePeriodSeconds 值（如果不设置则为 30 秒），最小值为 1。 </p>
+</li>
+</ul>
+<h2 id="启动探针"><a href="#启动探针" class="headerlink" title="启动探针"></a>启动探针</h2><p>例子：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">ports:</span><br><span class="hljs-attr">name:</span> <span class="hljs-string">liveness-port</span><br>  <span class="hljs-attr">containerPort:</span> <span class="hljs-number">8080</span><br><span class="hljs-comment"># 配置存活探针</span><br><span class="hljs-attr">livenessProbe:</span><br>  <span class="hljs-attr">httpGet:</span><br>    <span class="hljs-attr">path:</span> <span class="hljs-string">/healthz</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-string">liveness-port</span><br>  <span class="hljs-attr">failureThreshold:</span> <span class="hljs-number">1</span> <span class="hljs-comment"># 失败一次就会进行重启</span><br>  <span class="hljs-attr">periodSeconds:</span> <span class="hljs-number">10</span> <span class="hljs-comment"># 每10秒进行一次探活</span><br>  <br><span class="hljs-comment"># 配置启动探针</span><br><span class="hljs-attr">startupProbe:</span><br>  <span class="hljs-attr">httpGet:</span><br>    <span class="hljs-attr">path:</span> <span class="hljs-string">/healthz</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-string">liveness-port</span><br>  <span class="hljs-attr">failureThreshold:</span> <span class="hljs-number">30</span> <span class="hljs-comment"># 最多失败30次（10*30=300s）超过</span><br>  <span class="hljs-attr">periodSeconds:</span> <span class="hljs-number">10</span> <span class="hljs-comment"># 每10秒进行检查一次</span><br></code></pre></td></tr></table></figure>
+<p>应用将会有最多 5 分钟（30 * 10 = 300s）的时间来完成其启动过程。 一旦启动探测成功一次，存活探测任务就会接管对容器的探测，对容器状态作出快速响应。 如果启动探测一直没有成功，容器会在 300 秒后被杀死，并且根据 restartPolicy 来执行进一步处置。</p>
+<h2 id="存活探针"><a href="#存活探针" class="headerlink" title="存活探针"></a>存活探针</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">livenessProbe:</span><br>  <span class="hljs-attr">initialDelaySeconds:</span> <span class="hljs-number">3</span> <span class="hljs-comment"># 执行第一次探测前应该等待 3 秒</span><br>  <span class="hljs-attr">failureThreshold:</span> <span class="hljs-number">1</span> <span class="hljs-comment"># 失败一次就会进行重启</span><br>  <span class="hljs-attr">periodSeconds:</span> <span class="hljs-number">3</span> <span class="hljs-comment"># 每三秒执行一次</span><br>  <span class="hljs-attr">httpGet:</span><br>    <span class="hljs-attr">path:</span> <span class="hljs-string">/healthz</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-number">8080</span><br></code></pre></td></tr></table></figure>
+<p> 在上面的配置中，执行第一次探测前会等待 3 秒，然后每3秒执行一次，如果http接口返回大于或等于 200 并且小于 400 的任何代码则认为容器是健康存活的。 如果处理程序返回失败代码，则 kubelet 会杀死这个容器然后将其重启。</p>
+<h2 id="就绪探针"><a href="#就绪探针" class="headerlink" title="就绪探针"></a>就绪探针</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">readinessProbe:</span> <br>  <span class="hljs-attr">httpGet:</span><br>    <span class="hljs-attr">path:</span> <span class="hljs-string">/healthz</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-number">8080</span><br>  <span class="hljs-attr">periodSeconds:</span> <span class="hljs-number">10</span> <span class="hljs-comment"># 每10秒进行一次检查是否就绪</span><br>  <span class="hljs-attr">initialDelaySeconds:</span> <span class="hljs-number">3</span> <span class="hljs-comment"># 首次执行前先等待3s</span><br></code></pre></td></tr></table></figure>
+<p>就绪探针检查容器是否已经准备好接收请求（流量），如果探测成功则会进行转发请求。就绪探针确保服务中的pod都是可用的，确保客户端只与正常的pod交互并且客户端永远不会知道系统存在问题。<strong>不会像存活探针探测失败会重启pod。</strong></p>
+<blockquote>
+<p><strong>注意：</strong>就绪探针和存活探针在容器的整个生命周期中保持运行状态。</p>
+</blockquote>
+<p>就绪和存活探测可以在同一个容器上并行使用。 两者共同使用，可以确保流量不会发给还未就绪的容器，当这些探测失败时容器会被重新启动。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">livenessProbe:</span><br>  <span class="hljs-attr">initialDelaySeconds:</span> <span class="hljs-number">3</span> <span class="hljs-comment"># 执行第一次探测前应该等待 3 秒</span><br>  <span class="hljs-attr">failureThreshold:</span> <span class="hljs-number">1</span> <span class="hljs-comment"># 失败一次就会进行重启</span><br>  <span class="hljs-attr">periodSeconds:</span> <span class="hljs-number">3</span> <span class="hljs-comment"># 每三秒执行一次</span><br>  <span class="hljs-attr">httpGet:</span><br>    <span class="hljs-attr">path:</span> <span class="hljs-string">/healthz</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-number">8080</span><br><span class="hljs-attr">readinessProbe:</span> <br>  <span class="hljs-attr">httpGet:</span><br>    <span class="hljs-attr">path:</span> <span class="hljs-string">/healthz</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-number">8080</span><br>  <span class="hljs-attr">periodSeconds:</span> <span class="hljs-number">10</span> <span class="hljs-comment"># 每10秒进行一次检查是否就绪</span><br>  <span class="hljs-attr">initialDelaySeconds:</span> <span class="hljs-number">3</span> <span class="hljs-comment"># 首次执行前先等待3s</span><br></code></pre></td></tr></table></figure>
 
-<p>Dockerfile</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">FROM</span> <span class="hljs-string">node:6.9.2</span><br><span class="hljs-string">EXPOSE</span> <span class="hljs-number">8080</span><br><span class="hljs-string">COPY</span> <span class="hljs-string">server.js</span> <span class="hljs-string">.</span><br><span class="hljs-string">CMD</span> <span class="hljs-string">node</span> <span class="hljs-string">Server.js</span><br></code></pre></td></tr></table></figure>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="探针接口日志排除"><a href="#探针接口日志排除" class="headerlink" title="探针接口日志排除"></a>探针接口日志排除</h2><p>因为探测的接口比较频繁，如果都采集到es会导致大量的日志数据都是healthz接口的日志，所以决定不采集该接口的日志。</p>
+<ol>
+<li><p>fluentd配置文件新增过滤器排除掉healthz接口（end filter）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">&lt;filter kubernetes.**&gt;<br>      @<span class="hljs-built_in">type</span> grep<br>      &lt;exclude&gt;<br>        key message<br>        pattern /.*\/healthz/<br>      &lt;/exclude&gt;<br>    &lt;/filter&gt;<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1712139596527-82baf397-53ff-4d2a-8613-0c4c24e61fce.png#averageHue=%236d7880&clientId=ubd34eeec-8db2-4&from=paste&height=960&id=u145dec2d&originHeight=960&originWidth=1451&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=udb99867f-2b20-4f7b-8648-37a036fb053&title=&width=1451" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>测试访问healthz接口是否还能落库</p>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1712139596426-4b86afef-e4e8-44eb-a4eb-c11dc811549c.png#averageHue=%23f4f6f9&clientId=ubd34eeec-8db2-4&from=paste&id=u97983ca7&originHeight=1102&originWidth=2920&originalType=url&ratio=1&rotation=0&showTitle=false&status=done&style=none&taskId=u006e320b-2a8c-432f-8bf6-8daeac82430&title=" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>可以看到已经没有healthz日志数据入库</li>
+</ol>
+<h2 id="应用模板改造"><a href="#应用模板改造" class="headerlink" title="应用模板改造"></a>应用模板改造</h2><h3 id="HTTP-应用"><a href="#HTTP-应用" class="headerlink" title="HTTP 应用"></a>HTTP 应用</h3><figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="language-xml">- containerPort: </span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">.Port</span>&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml">  name: http # 添加http名字方便直接进行引用</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-meta"># 存活探针</span><br><span class="hljs-symbol">  livenessProbe:</span><br><span class="hljs-symbol">    failureThreshold:</span> <span class="hljs-number">3</span> <span class="hljs-meta">#连续3次探测失败则会根据restartPolicy进行处理</span><br><span class="hljs-symbol">    initialDelaySeconds:</span> <span class="hljs-number">5</span> <span class="hljs-meta"># 首次执行前delay 5秒</span><br><span class="hljs-symbol">    periodSeconds:</span> <span class="hljs-number">5</span> <span class="hljs-meta"># 每5s探测一次</span><br><span class="hljs-symbol">    successThreshold:</span> <span class="hljs-number">1</span> <span class="hljs-meta"># 成功1次即可向该pod发送流量</span><br><span class="hljs-symbol">    timeoutSeconds:</span> <span class="hljs-number">1</span> <span class="hljs-meta"># 探测超时时间(秒)</span><br><span class="hljs-symbol">    httpGet:</span><br><span class="hljs-symbol">      path:</span> /healthz<br><span class="hljs-symbol">      port:</span> http<br>  <span class="hljs-meta"># 就绪探针</span><br><span class="hljs-symbol">  readinessProbe:</span><br><span class="hljs-symbol">    failureThreshold:</span> <span class="hljs-number">3</span> <span class="hljs-meta"># 连续3次探测失败则不向该pod发送流量</span><br><span class="hljs-symbol">    initialDelaySeconds:</span> <span class="hljs-number">5</span> <span class="hljs-meta"># 首次执行前delay 5秒</span><br><span class="hljs-symbol">    periodSeconds:</span> <span class="hljs-number">5</span> <span class="hljs-meta"># 每5s探测一次</span><br><span class="hljs-symbol">    successThreshold:</span> <span class="hljs-number">1</span> <span class="hljs-meta"># 成功1次即可向该pod发送流量</span><br><span class="hljs-symbol">    timeoutSeconds:</span> <span class="hljs-number">1</span> <span class="hljs-meta"># 探测超时时间(秒)</span><br><span class="hljs-symbol">    httpGet:</span><br><span class="hljs-symbol">      path:</span> /healthz<br><span class="hljs-symbol">      port:</span> http<br></code></pre></td></tr></table></figure>
 
-<p>打包镜像</p>
-<p><code>docker build -t hello-node:v1 .</code></p>
-<p>部署应用</p>
-<p><code>kubectl run hello-node --image=hello-node:v1 --port=8080</code></p>
-<p>查看Deployment：</p>
-<p><code>kubectl get deployments</code></p>
-<p>输出：</p>
-<blockquote>
-<p>NAME        DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE<br>hello-node   1         1         1            1           3m</p>
+<h3 id="GRPC-应用"><a href="#GRPC-应用" class="headerlink" title="GRPC 应用"></a>GRPC 应用</h3><blockquote>
+<p>需要实现grpc的healthz标准访问接口</p>
 </blockquote>
-<p>查看Pod：</p>
-<p><code>kubectl get pods</code></p>
-<p>输出：</p>
-<blockquote>
-<p>NAME                        READY     STATUS    RESTARTS   AGE<br>hello-node-714049816-ztzrb   1/1       Running   0          6m</p>
-</blockquote>
-<p>查看群集events：</p>
-<p><code>kubectl get events</code></p>
-<p>查看kubectl配置：</p>
-<p><code>kubectl config view</code></p>
-<p>创建Service</p>
-<blockquote>
-<p>默认情况，这Pod只能通过Kubernetes群集内部IP访问。要使hello-node容器从Kubernetes虚拟网络外部访问，须要使用Kubernetes Service暴露Pod。</p>
-</blockquote>
-<p>我们可以使用kubectl expose命令将Pod暴露到外部环境：</p>
-<p><code>kubectl expose deployment hello-node --type=LoadBalancer</code></p>
-<p>查看刚创建的Service：</p>
-<p><code>kubectl get services</code></p>
-<p>输出：</p>
-<blockquote>
-<p>NAME        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE<br>hello-node   10.0.0.71         8080/TCP   6m<br>kubernetes   10.0.0.1             443/TCP    14d</p>
-</blockquote>
-<blockquote>
-<p>通过–type=LoadBalancer flag来在群集外暴露Service，在支持负载均衡的云提供商上，将配置外部IP地址来访问Service。在Minikube上，该LoadBalancer type使服务可以通过minikube Service 命令访问。</p>
-</blockquote>
-<p><code>minikube service hello-node</code></p>
-<p>将打开浏览器，在本地IP地址为应用提供服务，显示“Hello World”的消息。</p>
-<p>最后可以查看到一些日志</p>
-<p><code>kubectl logs &lt;POD-NAME&gt;</code></p>
-<h2 id="K8s-更新应用程序"><a href="#K8s-更新应用程序" class="headerlink" title="K8s 更新应用程序"></a>K8s 更新应用程序</h2><p>编辑server.js文件以返回新消息：</p>
-<p><code>response.end(&#39;Hello World Again!&#39;);</code></p>
-<p>build新版本镜像</p>
-<p><code>docker build -t hello-node:v2 .</code></p>
-<p>Deployment更新镜像：</p>
-<p><code>kubectl set image deployment/hello-node hello-node=hello-node:v2</code></p>
-<p>再次运行应用以查看新消息：</p>
-<p><code>minikube service hello-node</code></p>
-<h2 id="删除-K8s-集群"><a href="#删除-K8s-集群" class="headerlink" title="删除 K8s 集群"></a>删除 K8s 集群</h2><p>现在可以删除在群集中创建的资源：</p>
-<p><code>kubectl delete service hello-node</code><br><code>kubectl delete deployment hello-node</code></p>
-<p>或者停止Minikube：</p>
-<p><code>minikube stop</code></p>
-<h2 id="K8s-kubectl-命令表"><a href="#K8s-kubectl-命令表" class="headerlink" title="K8s kubectl 命令表"></a>K8s kubectl 命令表</h2><p><a target="_blank" rel="noopener" href="http://docs.kubernetes.org.cn/683.html">kubectl命令列表</a></p>
+<p>TODO</p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><ol>
+<li>Fluentd config：<a target="_blank" rel="noopener" href="https://docs.fluentd.org/configuration/config-file">https://docs.fluentd.org/configuration/config-file</a></li>
+<li>Liveness readiness probes：<a target="_blank" rel="noopener" href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/</a></li>
+<li>Grpc health check：<a target="_blank" rel="noopener" href="https://github.com/grpc/grpc/blob/master/doc/health-checking.md">https://github.com/grpc/grpc/blob/master/doc/health-checking.md</a></li>
+</ol>
 
               
             </div>
@@ -411,24 +412,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Kubernetes/">#Kubernetes</a>
-      
-    </div>
   
 </div>
 
@@ -438,8 +421,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>k8s篇-Minikube使用教程</div>
-      <div>https://mikeygithub.github.io/2020/04/02/yuque/np4ni6/</div>
+      <div>Kubernetes-启动/存活/就绪探针</div>
+      <div>https://mikeygithub.github.io/2024/04/03/yuque/zx312dnypmmv0mdm/</div>
     </div>
     <div class="license-meta">
       
@@ -451,7 +434,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2020年4月2日</div>
+          <div>2024年4月3日</div>
         </div>
       
       
@@ -476,6 +459,23 @@
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/30/yuque/xb7ycvq1sk91kibf/" title="Electron在Windows系统编译问题记录">
+                        <span class="hidden-mobile">Electron在Windows系统编译问题记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
