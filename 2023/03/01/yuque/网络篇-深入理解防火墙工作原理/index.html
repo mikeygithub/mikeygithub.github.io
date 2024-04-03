@@ -1,0 +1,1131 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="背景防火墙这个名词相信我们都不陌生，在现实生活中我们在地下车库经常会看到下面这种防火卷帘门，这就是我们房子的防火墙（门），其作用是当发生火灾时隔绝火的蔓延，降低损失。现实中的防火墙了解了，下面我们来了解了解计算机里的防火墙 计算机防火墙的概述计算机防火墙用于保护计算机和网络免受来自互联网或局域网内部的未经授权的访问、攻击、病毒和恶意软件的侵害。防火墙通过监控网络流量，识别和过滤掉非法或有害的流量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络篇-深入理解防火墙工作原理">
+<meta property="og:url" content="https://mikeygithub.github.io/2023/03/01/yuque/%E7%BD%91%E7%BB%9C%E7%AF%87-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E9%98%B2%E7%81%AB%E5%A2%99%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="背景防火墙这个名词相信我们都不陌生，在现实生活中我们在地下车库经常会看到下面这种防火卷帘门，这就是我们房子的防火墙（门），其作用是当发生火灾时隔绝火的蔓延，降低损失。现实中的防火墙了解了，下面我们来了解了解计算机里的防火墙 计算机防火墙的概述计算机防火墙用于保护计算机和网络免受来自互联网或局域网内部的未经授权的访问、攻击、病毒和恶意软件的侵害。防火墙通过监控网络流量，识别和过滤掉非法或有害的流量">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1678005418200-bc31ebc2-f2a6-476c-98d8-9ad28dc97194.png">
+<meta property="article:published_time" content="2023-03-01T15:24:22.000Z">
+<meta property="article:modified_time" content="2023-03-19T15:13:51.000Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="Firewalls">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1678005418200-bc31ebc2-f2a6-476c-98d8-9ad28dc97194.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>网络篇-深入理解防火墙工作原理 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":"G-NCN3Z5PSLJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.nlark.com/yuque/0/2022/png/2630542/1651338804824-c3567992-2841-42e6-85b2-90ff83da2674.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_2276%2Climit_0') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="网络篇-深入理解防火墙工作原理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-01 23:24" pubdate>
+          2023年3月1日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          21k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          174 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">网络篇-深入理解防火墙工作原理</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1678005418200-bc31ebc2-f2a6-476c-98d8-9ad28dc97194.png#averageHue=%23f0d2c5&clientId=u6279a7a0-7732-4&from=paste&height=141&id=u2976df28&originHeight=281&originWidth=474&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=100840&status=done&style=none&taskId=ub70ef191-ad9d-4ffd-9357-971d8587a1a&title=&width=237" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>防火墙这个名词相信我们都不陌生，在现实生活中我们在地下车库经常会看到下面这种防火卷帘门，这就是我们房子的防火墙（门），其作用是当发生火灾时隔绝火的蔓延，降低损失。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1679212934005-7e30d1e1-a2de-4ab5-a6b2-4b0a8201ded8.png#averageHue=%234e6e6d&clientId=uff63f785-17b5-4&from=paste&height=310&id=uf6be403c&originHeight=620&originWidth=844&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=713824&status=done&style=none&taskId=u11e51e15-a261-415a-8a74-9795beaa3a7&title=&width=422" srcset="/img/loading.gif" lazyload alt="image.png"><br>现实中的防火墙了解了，下面我们来了解了解计算机里的防火墙</p>
+<h1 id="计算机防火墙的概述"><a href="#计算机防火墙的概述" class="headerlink" title="计算机防火墙的概述"></a>计算机防火墙的概述</h1><p>计算机防火墙用于保护计算机和网络免受来自互联网或局域网内部的未经授权的访问、攻击、病毒和恶意软件的侵害。防火墙通过监控网络流量，识别和过滤掉非法或有害的流量，从而防止未经授权的访问和攻击。它通常使用规则集来指定哪些流量应该允许通过，哪些流量应该被阻止或拒绝，以及如何响应不同类型的攻击和安全事件。</p>
+<p>防火墙的主要功能包括：</p>
+<ol>
+<li>包过滤：基于IP地址、端口号、协议类型等特定信息，过滤不符合规则的数据包。</li>
+<li>状态检测：对进出网络的连接状态进行检测，以防止恶意攻击。</li>
+<li>NAT（网络地址转换）：将私有IP地址转换为公网IP地址，保护内网不受外部攻击。</li>
+<li>VPN（虚拟专用网络）支持：为远程用户提供安全的访问方式。</li>
+<li>审计日志：记录网络流量和安全事件，以便后续分析和调查。</li>
+</ol>
+<h1 id="为什么需要防火墙"><a href="#为什么需要防火墙" class="headerlink" title="为什么需要防火墙"></a>为什么需要防火墙</h1><ol>
+<li><p>保护网络安全：随着互联网的发展和普及，网络攻击和病毒传播的风险也越来越高。防火墙可以帮助企业和个人用户保护网络安全，避免遭受网络攻击和病毒感染，从而确保业务和个人信息的安全性。</p>
+</li>
+<li><p>控制网络访问：防火墙可以对网络流量进行监控和控制，根据特定的规则来允许或拒绝不同来源的流量，防止未经授权的访问和攻击。</p>
+</li>
+<li><p>网络隔离：防火墙可以将网络分割为不同的安全区域，从而限制内部和外部网络之间的数据交换。这有助于防止内部网络的机密数据被未经授权的用户访问和泄露。</p>
+</li>
+<li><p>提高网络性能：防火墙可以过滤掉无用的流量和恶意流量，从而减少网络拥塞和传输延迟，提高网络性能和稳定性。</p>
+</li>
+</ol>
+<h1 id="防火墙的分类"><a href="#防火墙的分类" class="headerlink" title="防火墙的分类"></a>防火墙的分类</h1><p>防火墙可以分为<strong>软件防火墙</strong>和<strong>硬件防火墙</strong>。软件防火墙运行在操作系统内部，通常作为软件程序安装在计算机上。硬件防火墙是一种独立设备，通常放置在网络边缘或网关位置，用于过滤网络流量和提供更高级别的安全保护。</p>
+<p>根据不同的分类标准，防火墙可以分为以下几种类型：</p>
+<ol>
+<li><p>包过滤型防火墙：包过滤型防火墙是最早的防火墙类型，它基于网络层（OSI模型中的第三层）对数据包进行过滤和控制，通过过滤不合法的数据包来阻止未授权的访问和攻击。包过滤型防火墙可以基于源地址、目标地址、端口号、协议类型等特定信息来判断是否允许数据包通过，但它无法检测应用层的攻击和恶意软件。</p>
+</li>
+<li><p>应用层防火墙：应用层防火墙是基于应用层（OSI模型中的第七层）对数据流进行过滤和控制的防火墙类型。它可以识别和过滤掉应用层的攻击和恶意流量，如SQL注入、跨站点脚本（XSS）等，从而提高网络的安全性。</p>
+</li>
+<li><p>状态检测型防火墙：状态检测型防火墙是基于连接状态对数据流进行检测和控制的防火墙类型。它可以识别并防止来自已建立连接的恶意流量和攻击，从而提高网络的安全性和性能。</p>
+</li>
+<li><p>混合型防火墙：混合型防火墙将包过滤型防火墙、应用层防火墙和状态检测型防火墙相结合，综合了它们的优点，可以提供更全面的安全保护和网络性能优化。</p>
+</li>
+<li><p>下一代防火墙：下一代防火墙（NGFW）是基于深度包检测技术的新一代防火墙，可以识别和过滤掉更复杂的攻击和恶意流量，如嵌入式恶意软件、高级持续性威胁（APTs）等，从而提供更全面和高效的网络安全保护。同时，NGFW还支持网络入侵检测和防御（NIDS）和虚拟专用网络（VPN）等功能。</p>
+</li>
+</ol>
+<h2 id="linux下的防火墙"><a href="#linux下的防火墙" class="headerlink" title="linux下的防火墙"></a>linux下的防火墙</h2><p>Linux下的防火墙有很多种，些常见的有：</p>
+<ol>
+<li>iptables：iptables是Linux中最常用的防火墙程序之一，它基于内核层面实现，可以对数据包进行过滤、转发和修改，同时支持多种网络协议和表达式，具有灵活性和高效性。</li>
+<li>nftables：nftables是iptables的继任者，它提供了更强大的规则语言和数据结构，同时支持多种网络协议和表达式，可以更精确地控制和管理网络流量。</li>
+<li>firewalld：firewalld是Red Hat和CentOS中预安装的防火墙程序，它基于iptables和nftables，提供了基于服务、区域和接口的防火墙规则管理，可以更加简单和安全地配置和管理防火墙。</li>
+<li>ufw：ufw是Ubuntu中预安装的简单防火墙程序，它基于iptables，提供了易于使用的命令行界面，可以轻松地配置和管理基本的防火墙规则。</li>
+<li>Shorewall：Shorewall是一个高级的防火墙管理程序，它基于iptables和nftables，提供了多种规则和策略，可以实现灵活的网络流量控制和安全保护。</li>
+</ol>
+<h1 id="防火墙的工作原理"><a href="#防火墙的工作原理" class="headerlink" title="防火墙的工作原理"></a>防火墙的工作原理</h1><p>防火墙的主要工作原理是通过策略和规则来过滤和控制网络流量，从而防止未授权的访问和攻击。其具体工作过程如下：</p>
+<ol>
+<li>流量过滤：防火墙会监视网络流量，并将数据包与预定义的安全策略进行比较，根据规则对数据包进行过滤和分类，如允许、拒绝或转发。</li>
+<li>策略管理：防火墙管理员可以定义和管理防火墙策略，包括源和目标IP地址、端口号、协议类型等，以及允许或拒绝流量的规则。</li>
+<li>状态管理：防火墙会维护一个状态表来跟踪已建立的连接状态，并根据规则检测和拦截恶意流量和攻击。</li>
+<li>NAT和端口转发：防火墙还可以支持网络地址转换（NAT）和端口转发等功能，以实现内部和外部网络之间的通信。</li>
+<li>日志和报告：防火墙还可以生成日志和报告，记录网络流量和事件，以便管理员对网络安全进行跟踪和分析。</li>
+</ol>
+<h2 id="Iptables"><a href="#Iptables" class="headerlink" title="Iptables"></a>Iptables</h2><h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h3><p>iptables是Linux操作系统上的一种软件工具，用于管理网络中的数据包流动，通过检查每个数据包并根据定义的规则执行相应的操作来控制网络流量。</p>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>查看当前iptables规则：可以使用以下命令来查看当前iptables规则：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">iptables -L</span><br></code></pre></td></tr></table></figure>
+
+<p>清除当前iptables规则：可以使用以下命令来清除当前iptables规则：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">iptables -F</span><br></code></pre></td></tr></table></figure>
+
+<p>设置iptables规则：可以使用以下命令来设置iptables规则，其中<code>-A</code>表示添加规则，<code>-p</code>表示协议，<code>--dport</code>表示目标端口，<code>-j</code>表示动作，<code>ACCEPT</code>表示接受，<code>DROP</code>表示丢弃：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">80</span> -j ACCEPT<br>iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">22</span> -j ACCEPT<br>iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -j DROP<br></code></pre></td></tr></table></figure>
+
+<p>保存iptables规则：可以使用以下命令将当前iptables规则保存到文件中：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">iptables-save &gt; <span class="hljs-regexp">/etc/</span>sysconfig/iptables<br></code></pre></td></tr></table></figure>
+
+<p>加载iptables规则：可以使用以下命令将保存的iptables规则加载到系统中：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">iptables-restore &lt; <span class="hljs-regexp">/etc/</span>sysconfig/iptables<br></code></pre></td></tr></table></figure>
+
+<p>删除iptables规则：可以使用以下命令删除指定的iptables规则，其中<code>-D</code>表示删除规则，<code>INPUT</code>表示链名，<code>1</code>表示规则序号：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">iptables</span> -D INPUT <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<p>修改iptables规则：可以使用以下命令修改指定的iptables规则，其中<code>-R</code>表示替换规则，<code>INPUT</code>表示链名，<code>1</code>表示规则序号，<code>-p</code>表示协议，<code>--dport</code>表示目标端口，<code>-j</code>表示动作，<code>ACCEPT</code>表示接受：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -R <span class="hljs-selector-tag">INPUT</span> <span class="hljs-number">1</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">80</span> -j ACCEPT<br></code></pre></td></tr></table></figure>
+
+<p>暂停iptables规则：可以使用以下命令暂停iptables规则，其中<code>-F</code>表示清空所有规则，<code>-X</code>表示删除所有用户自定义链，<code>-Z</code>表示重置所有计数器：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">r</span><br>iptables <span class="hljs-operator">-F</span><br>iptables <span class="hljs-literal">-X</span><br>iptables <span class="hljs-literal">-Z</span><br></code></pre></td></tr></table></figure>
+
+<p>禁用iptables规则：可以使用以下命令禁用iptables规则，其中<code>-P</code>表示设置默认策略，<code>INPUT</code>表示链名，<code>DROP</code>表示默认动作：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">P</span> <span class="hljs-selector-tag">INPUT</span> DROP<br></code></pre></td></tr></table></figure>
+
+<p>允许回环网络：可以使用以下命令允许回环网络，其中<code>-A</code>表示添加规则，<code>INPUT</code>表示链名，<code>-i</code>表示输入接口，<code>lo</code>表示回环接口，<code>-j</code>表示动作，<code>ACCEPT</code>表示接受：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">i</span> lo -j ACCEPT<br></code></pre></td></tr></table></figure>
+
+<p>限制IP地址范围：可以使用以下命令限制IP地址范围，其中<code>-A</code>表示添加规则，<code>INPUT</code>表示链名，<code>-s</code>表示源地址，<code>192.168.0.0/24</code>表示IP地址范围，<code>-j</code>表示动作，<code>DROP</code>表示丢弃：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">iptables</span> -A INPUT -s <span class="hljs-number">192.168.0.0</span>/<span class="hljs-number">24</span> -j DROP<br></code></pre></td></tr></table></figure>
+
+<p>限制连接数：可以使用以下命令限制连接数，其中<code>-A</code>表示添加规则，<code>INPUT</code>表示链名，<code>-p</code>表示协议，<code>--syn</code>表示只匹配SYN数据包，<code>-m connlimit</code>表示连接数限制模块，<code>--connlimit-above</code>表示连接数超过指定值，<code>3</code>表示连接数上限，<code>-j</code>表示动作，<code>DROP</code>表示丢弃：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--syn</span> -m connlimit <span class="hljs-attr">--connlimit-above</span> <span class="hljs-number">3</span> -j DROP<br></code></pre></td></tr></table></figure>
+
+<p>限制连接速率：可以使用以下命令限制连接速率，其中<code>-A</code>表示添加规则，<code>INPUT</code>表示链名，<code>-p</code>表示协议，<code>--dport</code>表示目标端口，<code>-m limit</code>表示速率限制模块，<code>--limit</code>表示速率上限，<code>10/s</code>表示每秒最多允许10个连接，<code>-j</code>表示动作，<code>ACCEPT</code>表示接受：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">80</span> -m limit <span class="hljs-attr">--limit</span> <span class="hljs-number">10</span>/s -j ACCEPT<br></code></pre></td></tr></table></figure>
+
+<p>使用用户自定义链：可以使用以下命令创建用户自定义链，其中<code>-N</code>表示创建链，<code>LOGDROP</code>表示链名：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">iptables -N LOGDROP</span><br></code></pre></td></tr></table></figure>
+
+<p>然后可以在该链中添加规则，最后将该链添加到INPUT链中：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">iptables -A LOGDROP -<span class="hljs-keyword">j </span>LOG --log-<span class="hljs-keyword">prefix </span><span class="hljs-string">&quot;Dropped by LOGDROP: &quot;</span><br>iptables -A LOGDROP -<span class="hljs-keyword">j </span>DROP<br>iptables -I INPUT -<span class="hljs-keyword">j </span>LOGDROP<br></code></pre></td></tr></table></figure>
+
+<p>这样，当INPUT链中的规则匹配到该链时，将跳转到LOGDROP链中执行相应的规则，从而实现用户自定义的功能。</p>
+<p>使用iptables防DDoS攻击：可以使用以下命令限制每个IP地址的连接数和速率，从而防止DDoS攻击：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -N DDoS<br>iptables -<span class="hljs-selector-tag">A</span> DDoS -m recent <span class="hljs-attr">--name</span> DDoS <span class="hljs-attr">--set</span><br>iptables -<span class="hljs-selector-tag">A</span> DDoS -m recent <span class="hljs-attr">--name</span> DDoS <span class="hljs-attr">--update</span> <span class="hljs-attr">--seconds</span> <span class="hljs-number">60</span> <span class="hljs-attr">--hitcount</span> <span class="hljs-number">50</span> -j DROP<br>iptables -<span class="hljs-selector-tag">I</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">80</span> -m state <span class="hljs-attr">--state</span> NEW -j DDoS<br></code></pre></td></tr></table></figure>
+
+<p>以上命令将创建一个名为DDoS的用户自定义链，用于限制每个IP地址在60秒内最多只能发起50个新连接。如果超过了这个限制，将被DROP动作丢弃。最后将该链添加到INPUT链中。</p>
+<ol>
+<li>保存和恢复规则：可以使用以下命令保存和恢复iptables规则，其中<code>-L</code>表示列出规则，<code>-n</code>表示不解析IP地址和端口号，<code>&gt; rules</code>表示将规则保存到文件中，<code>&lt; rules</code>表示从文件中恢复规则：</li>
+</ol>
+<p>保存规则：</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs excel">iptables -L -<span class="hljs-built_in">n</span> &gt; rules<br></code></pre></td></tr></table></figure>
+
+<p>恢复规则：</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dos">iptables-<span class="hljs-built_in">restore</span> &lt; rules<br></code></pre></td></tr></table></figure>
+
+<p>清除规则：可以使用以下命令清除iptables规则，其中<code>-F</code>表示清空所有规则，<code>-X</code>表示删除所有用户自定义链，<code>-Z</code>表示将所有计数器归零：</p>
+<figure class="highlight tp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs tp">iptables -F<br>iptables -<span class="hljs-keyword">X</span><br>iptables -<span class="hljs-keyword">Z</span><br></code></pre></td></tr></table></figure>
+
+<p>永久保存规则：可以使用以下命令将当前规则保存到永久规则中，以便重启后仍然有效，其中<code>iptables-save</code>命令用于保存规则，<code>iptables-restore</code>命令用于恢复规则：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crystal">iptables-save &gt; <span class="hljs-regexp">/etc/sysconfig</span><span class="hljs-regexp">/iptables</span><br><span class="hljs-regexp">iptables-restore &lt; /etc</span><span class="hljs-regexp">/sysconfig/iptables</span><br></code></pre></td></tr></table></figure>
+
+<p>配置端口转发：可以使用以下命令配置端口转发，其中<code>-t nat</code>表示使用NAT表，<code>-A PREROUTING</code>表示添加PREROUTING链规则，<code>-i eth0</code>表示进入网络接口，<code>--dport 80</code>表示目标端口，<code>-j DNAT</code>表示目标地址转换，<code>--to-destination 192.168.0.2:80</code>表示目标IP地址和端口：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -t nat -<span class="hljs-selector-tag">A</span> PREROUTING -<span class="hljs-selector-tag">i</span> eth0 -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">80</span> -j DNAT <span class="hljs-attr">--to-destination</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">0.2</span>:<span class="hljs-number">80</span><br></code></pre></td></tr></table></figure>
+
+<p>配置源地址转换：可以使用以下命令配置源地址转换，其中<code>-t nat</code>表示使用NAT表，<code>-A POSTROUTING</code>表示添加POSTROUTING链规则，<code>-s 192.168.0.0/24</code>表示源地址，<code>-o eth0</code>表示出去网络接口，<code>-j MASQUERADE</code>表示地址伪装：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">iptables</span> -t nat -A POSTROUTING -s <span class="hljs-number">192.168.0.0</span>/<span class="hljs-number">24</span> -o eth0 -j MASQUERADE<br></code></pre></td></tr></table></figure>
+
+<p>配置多网卡负载均衡：可以使用以下命令配置多网卡负载均衡，其中<code>-t mangle</code>表示使用MANGLE表，<code>-A PREROUTING</code>表示添加PREROUTING链规则，<code>-i eth0</code>表示进入网络接口，<code>-j MARK</code>表示标记数据包，<code>--set-mark 1</code>表示标记为1，<code>-A PREROUTING</code>表示添加PREROUTING链规则，<code>-i eth1</code>表示进入网络接口，<code>-j MARK</code>表示标记数据包，<code>--set-mark 2</code>表示标记为2，<code>-t nat</code>表示使用NAT表，<code>-A POSTROUTING</code>表示添加POSTROUTING链规则，<code>-o eth0</code>表示出去网络接口，<code>-j SNAT</code>表示源地址转换，<code>--to-source 192.168.0.2</code>表示目标IP地址：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -t mangle -<span class="hljs-selector-tag">A</span> PREROUTING -<span class="hljs-selector-tag">i</span> eth0 -j <span class="hljs-selector-tag">MARK</span> <span class="hljs-attr">--set-mark</span> <span class="hljs-number">1</span><br>iptables -t mangle -<span class="hljs-selector-tag">A</span> PREROUTING -<span class="hljs-selector-tag">i</span> eth1 -j <span class="hljs-selector-tag">MARK</span> <span class="hljs-attr">--set-mark</span> <span class="hljs-number">2</span><br>iptables -t nat -<span class="hljs-selector-tag">A</span> POSTROUTING -o eth0 -m <span class="hljs-selector-tag">mark</span> <span class="hljs-attr">--mark</span> <span class="hljs-number">1</span> -j SNAT <span class="hljs-attr">--to-source</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">0.2</span><br>iptables -t nat -<span class="hljs-selector-tag">A</span> POSTROUTING -o eth0 -m <span class="hljs-selector-tag">mark</span> <span class="hljs-attr">--mark</span> <span class="hljs-number">2</span> -j SNAT <span class="hljs-attr">--to-source</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">0.3</span><br></code></pre></td></tr></table></figure>
+
+<p>配置DDoS防护：可以使用以下命令配置DDoS防护，其中<code>-A INPUT</code>表示添加INPUT链规则，<code>-p tcp</code>表示传输层协议为TCP，<code>-m connlimit --connlimit-above 20</code>表示连接数超过20个，<code>--connlimit-mask 32</code>表示对所有源地址生效，<code>-j DROP</code>表示丢弃数据包：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp -m connlimit <span class="hljs-attr">--connlimit-above</span> <span class="hljs-number">20</span> <span class="hljs-attr">--connlimit-mask</span> <span class="hljs-number">32</span> -j DROP<br></code></pre></td></tr></table></figure>
+
+<p>配置SSH远程访问：可以使用以下命令配置SSH远程访问，其中<code>-A INPUT</code>表示添加INPUT链规则，<code>-p tcp</code>表示传输层协议为TCP，<code>--dport 22</code>表示目标端口为22，<code>-j ACCEPT</code>表示允许数据包通过：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">22</span> -j ACCEPT<br></code></pre></td></tr></table></figure>
+
+<p>配置HTTP访问控制：可以使用以下命令配置HTTP访问控制，其中<code>-A INPUT</code>表示添加INPUT链规则，<code>-p tcp</code>表示传输层协议为TCP，<code>--dport 80</code>表示目标端口为80，<code>-m state --state NEW</code>表示只允许新连接，<code>-m limit --limit 100/minute --limit-burst 100</code>表示限制每分钟连接数为100个，<code>-j ACCEPT</code>表示允许数据包通过：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">80</span> -m state <span class="hljs-attr">--state</span> NEW -m limit <span class="hljs-attr">--limit</span> <span class="hljs-number">100</span>/minute <span class="hljs-attr">--limit-burst</span> <span class="hljs-number">100</span> -j ACCEPT<br></code></pre></td></tr></table></figure>
+
+<p>配置反向代理：可以使用以下命令配置反向代理，其中<code>-t nat</code>表示使用NAT表，<code>-A PREROUTING</code>表示添加PREROUTING链规则，<code>-p tcp</code>表示传输层协议为TCP，<code>--dport 80</code>表示目标端口为80，<code>-j REDIRECT --to-port 8080</code>表示将数据包重定向到端口8080：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -t nat -<span class="hljs-selector-tag">A</span> PREROUTING -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">80</span> -j REDIRECT <span class="hljs-attr">--to-port</span> <span class="hljs-number">8080</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>工作原理如下：</p>
+<ol>
+<li>首先，iptables检查接收到的每个数据包，以查看其目标地址和端口号是否与已定义的规则匹配。</li>
+<li>如果数据包匹配了规则，则iptables将根据规则定义的操作执行相应的动作，例如允许或阻止数据包。</li>
+<li>如果数据包未匹配任何规则，则iptables将采取默认操作。默认操作通常是允许或拒绝数据包。</li>
+<li>在iptables中，规则由规则链组成，每个规则链都是一系列规则的集合。规则链可以是系统预定义的，也可以是用户定义的。</li>
+<li>当数据包到达系统时，它将通过规则链顺序进行匹配，直到找到匹配的规则。如果没有匹配的规则，则使用默认规则。</li>
+<li>iptables还支持网络地址转换（NAT）和端口地址转换（PAT）。NAT和PAT可以在不更改数据包内容的情况下修改数据包的源地址和目标地址。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/2630542/1679218463067-7ad591ca-c484-40dd-9a3e-6e590caa58bf.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Netfilter框架"><a href="#Netfilter框架" class="headerlink" title="Netfilter框架"></a>Netfilter框架</h3><p>一个通用的、抽象的框架，提供一整套的hook函数的管理机制，使得诸如数据包过滤、网络地址转换(NAT)和基于协议类型的连接跟踪成为了可能。Netfilter 是一个由Linux 内核提供的框架，可以进行多种网络相关的自定义操作。</p>
+<p><strong>Netfilter 负责在内核中执行各种挂接的规则，运行在内核模式中；而 iptables 是在用户模式下运行的进程，负责协助和维护内核中 Netfilter 的各种规则表 。二者相互配合来实现整个 Linux 网络协议栈中灵活的数据包处理机制。</strong></p>
+<h3 id="调用链路"><a href="#调用链路" class="headerlink" title="调用链路"></a>调用链路</h3><p>iptables 的钩子分为五个阶段：PREROUTING、INPUT、FORWARD、OUTPUT 和 POSTROUTING</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">const</span> <span class="hljs-type">char</span> *<span class="hljs-type">const</span> hooknames[] = &#123;<br>	[NF_INET_PRE_ROUTING]		= <span class="hljs-string">&quot;PREROUTING&quot;</span>,<br>	[NF_INET_LOCAL_IN]		= <span class="hljs-string">&quot;INPUT&quot;</span>,<br>	[NF_INET_FORWARD]		= <span class="hljs-string">&quot;FORWARD&quot;</span>,<br>	[NF_INET_LOCAL_OUT]		= <span class="hljs-string">&quot;OUTPUT&quot;</span>,<br>	[NF_INET_POST_ROUTING]		= <span class="hljs-string">&quot;POSTROUTING&quot;</span>,<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>PREROUTING 链：在数据包到达本机之前，内核会先进入 PREROUTING 链，可以对数据包的目的地地址进行修改或重定向。在这个阶段可以做 DNAT（目标地址转换），例如将外网访问本机的 IP 地址转换为内网机器的 IP 地址，实现端口映射等功能。</li>
+<li>INPUT 链：在数据包到达本机之后，内核会进入 INPUT 链，可以对数据包进行进一步的处理和过滤。在这个阶段可以进行数据包的过滤、连接追踪、一些协议处理等。</li>
+<li>FORWARD 链：当数据包不是本机的目的地地址时，内核会进入 FORWARD 链，可以对数据包进行转发。在这个阶段可以对数据包进行路由、过滤等处理。</li>
+<li>OUTPUT 链：在数据包从本机出去之前，内核会进入 OUTPUT 链，可以对数据包进行修改或重定向。在这个阶段可以做 SNAT（源地址转换），例如将本机的 IP 地址转换为另一个 IP 地址，实现 IP 地址伪装等功能。</li>
+<li>POSTROUTING 链：在数据包从本机出去之后，内核会进入 POSTROUTING 链，可以对数据包的源地址进行修改或重定向。在这个阶段可以做 SNAT（源地址转换）、MASQUERADE（伪装网关地址）、一些连接追踪等。</li>
+</ol>
+<p>从ip_rcv()函数开始分析iptables处理数据包的过程:</p>
+<ol>
+<li>ip_rcv()函数：接收数据包，然后交给网络层进行处理。</li>
+<li>ip_local_deliver_finish()函数：处理数据包的协议头，根据目标IP地址找到对应的网络设备，并将数据包发送到数据链路层进行发送。</li>
+<li>nf_hook_slow()函数：iptables将hook函数注册到内核的网络层中，当数据包经过相应的处理阶段时，hook函数将被调用。</li>
+<li>nf_iterate()函数：当数据包经过hook函数时，内核将调用nf_iterate()函数来依次执行所有注册到该hook的iptables规则。</li>
+<li>do_builtin_nf_hook()函数：nf_iterate()函数会根据iptables规则中的匹配条件和动作来执行相应的操作，其中一部分规则是内置的iptables规则，这些规则由do_builtin_nf_hook()函数来执行。</li>
+<li>ip_local_out()函数：当数据包需要从本地计算机发送到网络上时，iptables将通过OUTPUT链来处理数据包。在OUTPUT链中，数据包会经过ip_local_out()函数进行处理，该函数会将数据包发送到数据链路层进行发送。</li>
+<li>ip_forward()函数：当数据包需要转发到其他计算机时，iptables将通过FORWARD链来处理数据包。在FORWARD链中，数据包会经过ip_forward()函数进行处理，该函数会进行路由选择，并将数据包转发到目标网络设备的数据链路层进行发送。</li>
+<li>ip_output()函数：在数据包经过iptables的处理后，会进入内核的网络层进行进一步的处理，ip_output()函数会负责将数据包发送到数据链路层进行发送。</li>
+</ol>
+<h4 id="ip-rcv"><a href="#ip-rcv" class="headerlink" title="ip_rcv"></a>ip_rcv</h4><ol>
+<li>ip_rcv接收数据函数<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * IP receive entry point</span><br><span class="hljs-comment"> */</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">ip_rcv</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> sk_buff *skb, <span class="hljs-keyword">struct</span> net_device *dev, <span class="hljs-keyword">struct</span> packet_type *pt,<span class="hljs-keyword">struct</span> net_device *orig_dev)</span>&#123;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">net</span> *<span class="hljs-title">net</span> =</span> dev_net(dev);<span class="hljs-comment">// 获取网络设备所在的命名空间；</span><br>	skb = ip_rcv_core(skb, net);<span class="hljs-comment">//IP数据包主处理函数，数据包合法性检测等</span><br>	<span class="hljs-keyword">if</span> (skb == <span class="hljs-literal">NULL</span>)<span class="hljs-keyword">return</span> NET_RX_DROP;<br>	<span class="hljs-comment">//数据包转发之前，先进行netfilter检测，触发NF_INET_PRE_ROUTING，处理完成进入 ip_rcv_finish 交付数据给上层协议</span><br>	<span class="hljs-keyword">return</span> NF_HOOK(NFPROTO_IPV4, NF_INET_PRE_ROUTING,net, <span class="hljs-literal">NULL</span>, skb, dev, <span class="hljs-literal">NULL</span>,ip_rcv_finish);<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>1 处理IP 数据包<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * 	Main IP Receive routine.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-type">static</span> <span class="hljs-keyword">struct</span> sk_buff *<span class="hljs-title function_">ip_rcv_core</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> sk_buff *skb, <span class="hljs-keyword">struct</span> net *net)</span>&#123;<br>	<span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">iphdr</span> *<span class="hljs-title">iph</span>;</span><br>	<span class="hljs-type">int</span> drop_reason;<br>	u32 len;<br><br>	<span class="hljs-comment">/* When the interface is in promisc. mode, drop all the crap</span><br><span class="hljs-comment">	 * that it receives, do not try to analyse it.</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 判断数据包的类型是否为PACKET_OTHERHOST，如果是则增加一个与网络设备相关的统计值，</span><br><span class="hljs-comment">	 * 并且设置drop_reason为SKB_DROP_REASON_OTHERHOST，跳转到drop标签执行相关的清理工作。</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">if</span> (skb-&gt;pkt_type == PACKET_OTHERHOST) &#123;<br>		dev_core_stats_rx_otherhost_dropped_inc(skb-&gt;dev);<br>		drop_reason = SKB_DROP_REASON_OTHERHOST;<br>		<span class="hljs-keyword">goto</span> drop;<br>    &#125;<br>    <span class="hljs-comment">//更新IP层的统计信息，其中net指向网络命名空间，IPSTATS_MIB_IN表示接收到的IP数据包数量，skb-&gt;len表示接收到的数据包的长度。</span><br>	__IP_UPD_PO_STATS(net, IPSTATS_MIB_IN, skb-&gt;len);<br>    <span class="hljs-comment">//检查数据包是否可共享，如果不能共享则丢弃数据包并更新统计信息，跳转到out标签。</span><br>	skb = skb_share_check(skb, GFP_ATOMIC);<br>	<span class="hljs-keyword">if</span> (!skb) &#123;<br>		__IP_INC_STATS(net, IPSTATS_MIB_INDISCARDS);<br>		<span class="hljs-keyword">goto</span> out;<br>	&#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 将drop_reason设置为SKB_DROP_REASON_NOT_SPECIFIED，调用一个内核函数pskb_may_pull检查数据包是否能够正确地提取出IP头部，</span><br><span class="hljs-comment">     * 如果不能，则跳转到inhdr_error标签。</span><br><span class="hljs-comment">     */</span><br>    drop_reason = SKB_DROP_REASON_NOT_SPECIFIED;<br>	<span class="hljs-keyword">if</span> (!pskb_may_pull(skb, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> iphdr)))<br>		<span class="hljs-keyword">goto</span> inhdr_error;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 获取指向IP头部的指针，判断IP头部中的版本号是否为IPv4且头部长度是否大于等于5个32位字（20个字节），如果不符合条件，则跳转到inhdr_error标签。</span><br><span class="hljs-comment">	 */</span><br>	iph = ip_hdr(skb);<br>	<span class="hljs-keyword">if</span> (iph-&gt;ihl &lt; <span class="hljs-number">5</span> || iph-&gt;version != <span class="hljs-number">4</span>)<br>		<span class="hljs-keyword">goto</span> inhdr_error;<br><br>	BUILD_BUG_ON(IPSTATS_MIB_ECT1PKTS != IPSTATS_MIB_NOECTPKTS + INET_ECN_ECT_1);<br>	BUILD_BUG_ON(IPSTATS_MIB_ECT0PKTS != IPSTATS_MIB_NOECTPKTS + INET_ECN_ECT_0);<br>	BUILD_BUG_ON(IPSTATS_MIB_CEPKTS != IPSTATS_MIB_NOECTPKTS + INET_ECN_CE);<br>	__IP_ADD_STATS(net,<br>		       IPSTATS_MIB_NOECTPKTS + (iph-&gt;tos &amp; INET_ECN_MASK),<br>		       <span class="hljs-type">max_t</span>(<span class="hljs-type">unsigned</span> <span class="hljs-type">short</span>, <span class="hljs-number">1</span>, skb_shinfo(skb)-&gt;gso_segs));<br><br>	<span class="hljs-keyword">if</span> (!pskb_may_pull(skb, iph-&gt;ihl*<span class="hljs-number">4</span>))<br>		<span class="hljs-keyword">goto</span> inhdr_error;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * iph 是一个指向 struct iphdr 结构体的指针，用于指向当前传输层数据包中的 IP 头部。</span><br><span class="hljs-comment">	 */</span><br>	iph = ip_hdr(skb);<br><br>	<span class="hljs-keyword">if</span> (unlikely(ip_fast_csum((u8 *)iph, iph-&gt;ihl)))<br>		<span class="hljs-keyword">goto</span> csum_error;<br>    <span class="hljs-comment">//长度</span><br>	len = iph_totlen(skb, iph);<br>	<span class="hljs-keyword">if</span> (skb-&gt;len &lt; len) &#123;<br>		drop_reason = SKB_DROP_REASON_PKT_TOO_SMALL;<br>		__IP_INC_STATS(net, IPSTATS_MIB_INTRUNCATEDPKTS);<br>		<span class="hljs-keyword">goto</span> drop;<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (len &lt; (iph-&gt;ihl*<span class="hljs-number">4</span>))<br>		<span class="hljs-keyword">goto</span> inhdr_error;<br>	<span class="hljs-comment">/* Our transport medium may have padded the buffer out. Now we know it</span><br><span class="hljs-comment">	 * is IP we can trim to the true length of the frame.</span><br><span class="hljs-comment">	 * Note this now means skb-&gt;len holds ntohs(iph-&gt;tot_len).</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-comment">//获取真实长度</span><br>	<span class="hljs-keyword">if</span> (pskb_trim_rcsum(skb, len)) &#123;<br>		__IP_INC_STATS(net, IPSTATS_MIB_INDISCARDS);<br>		<span class="hljs-keyword">goto</span> drop;<br>	&#125;<br><br>	iph = ip_hdr(skb);<br>	skb-&gt;transport_header = skb-&gt;network_header + iph-&gt;ihl*<span class="hljs-number">4</span>;<br><br>	<span class="hljs-comment">/* Remove any debris in the socket control block */</span><br>	<span class="hljs-built_in">memset</span>(IPCB(skb), <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">struct</span> inet_skb_parm));<br>	IPCB(skb)-&gt;iif = skb-&gt;skb_iif;<br><br>	<span class="hljs-comment">/* Must drop socket now because of tproxy. */</span><br>	<span class="hljs-keyword">if</span> (!skb_sk_is_prefetched(skb))<br>		skb_orphan(skb);<br><br>	<span class="hljs-keyword">return</span> skb;<br><br>csum_error:<br>	drop_reason = SKB_DROP_REASON_IP_CSUM;<br>	__IP_INC_STATS(net, IPSTATS_MIB_CSUMERRORS);<br>inhdr_error:<br>	<span class="hljs-keyword">if</span> (drop_reason == SKB_DROP_REASON_NOT_SPECIFIED)<br>		drop_reason = SKB_DROP_REASON_IP_INHDR;<br>	__IP_INC_STATS(net, IPSTATS_MIB_INHDRERRORS);<br>drop:<br>	kfree_skb_reason(skb, drop_reason);<br>out:<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>2 触发 NF_INET_PRE_ROUTING 钩子通过后 执行 ip_rcv_finish<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * (主线1.2：交付数据)  IP 数据包接收完成的函数，它会将接收到的数据包交给上层协议进行处理</span><br><span class="hljs-comment"> * @param net 当前网络命名空间</span><br><span class="hljs-comment"> * @param sk 套接字</span><br><span class="hljs-comment"> * @param skb 数据包缓冲区</span><br><span class="hljs-comment"> * @return</span><br><span class="hljs-comment"> */</span><br><span class="hljs-type">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">ip_rcv_finish</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> net *net, <span class="hljs-keyword">struct</span> sock *sk, <span class="hljs-keyword">struct</span> sk_buff *skb)</span><br>&#123;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">net_device</span> *<span class="hljs-title">dev</span> =</span> skb-&gt;dev;<span class="hljs-comment">//获取网络驱动</span><br>	<span class="hljs-type">int</span> ret;<br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 如果 ingress 设备已被绑定到 L3 主设备，则会将 skb 传递到其处理程序进行处理。</span><br><span class="hljs-comment">	 * 如果 skb 为 NULL，则表示此数据包已经处理完成，直接返回 NET_RX_SUCCESS。</span><br><span class="hljs-comment">	 */</span><br>	skb = l3mdev_ip_rcv(skb);<br>	<span class="hljs-keyword">if</span> (!skb)<span class="hljs-keyword">return</span> NET_RX_SUCCESS;<br>	<span class="hljs-comment">//内核函数，实现了 IP 数据包的核心处理逻辑。</span><br>	ret = ip_rcv_finish_core(net, sk, skb, dev, <span class="hljs-literal">NULL</span>);<br>	<span class="hljs-comment">//如果返回值不是 NET_RX_DROP，则将 skb 传递给目的地址输入路径的处理函数 dst_input() 进行处理。最后返回处理结果。</span><br>	<span class="hljs-keyword">if</span> (ret != NET_RX_DROP)<br>		ret = dst_input(skb);<span class="hljs-comment">//dst_input() 函数是由路由子系统实现的，主要用于将数据包传递给相应的上层协议处理函数。</span><br>	<span class="hljs-keyword">return</span> ret;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>3 调用 ip_rcv_finish_core 处理数据报同时解析路由<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><code class="hljs c"><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 主线： 完成 IP 数据包的处理并将其交付给上层协议进行处理</span><br><span class="hljs-comment"> * @param net 网络命名空间指针</span><br><span class="hljs-comment"> * @param sk 指向套接字缓冲区的指针</span><br><span class="hljs-comment"> * @param skb 指向 sk_buff 结构体的指针，表示接收到的 IP 数据包。</span><br><span class="hljs-comment"> * @param dev 指向网络接口设备的指针。</span><br><span class="hljs-comment"> * @param hint 指向一个用于提示 IP 路由器查找路由信息的数据包</span><br><span class="hljs-comment"> * @return 处理结果</span><br><span class="hljs-comment"> */</span><br><span class="hljs-type">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">ip_rcv_finish_core</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> net *net, <span class="hljs-keyword">struct</span> sock *sk,<span class="hljs-keyword">struct</span> sk_buff *skb, <span class="hljs-keyword">struct</span> net_device *dev,<span class="hljs-type">const</span> <span class="hljs-keyword">struct</span> sk_buff *hint)</span><br>&#123;<br>	<span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">iphdr</span> *<span class="hljs-title">iph</span> =</span> ip_hdr(skb);<br>	<span class="hljs-type">int</span> err, drop_reason;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">rtable</span> *<span class="hljs-title">rt</span>;</span><br><br>	drop_reason = SKB_DROP_REASON_NOT_SPECIFIED;<br><br>	<span class="hljs-comment">//判断hint 是否可以被使用，如果可用则使用 ip_route_use_hint() 函数来获取到一个匹配的路由表项。</span><br>	<span class="hljs-keyword">if</span> (ip_can_use_hint(skb, iph, hint)) &#123;<br>		err = ip_route_use_hint(skb, iph-&gt;daddr, iph-&gt;saddr, iph-&gt;tos,dev, hint);<br>		<span class="hljs-keyword">if</span> (unlikely(err))<span class="hljs-keyword">goto</span> drop_error;<br>	&#125;<br>    <span class="hljs-comment">//判断了内核是否启用了 ip_early_demux 功能，它的作用是对TCP和UDP报文进行早期的协议解析，以便提高网络性能。</span><br>	<span class="hljs-keyword">if</span> (READ_ONCE(net-&gt;ipv4.sysctl_ip_early_demux) &amp;&amp;<br>	    !skb_dst(skb) &amp;&amp;<br>	    !skb-&gt;sk &amp;&amp;<br>	    !ip_is_fragment(iph)) &#123;<br>	    <span class="hljs-comment">//根据协议类型进行早期解析</span><br>		<span class="hljs-keyword">switch</span> (iph-&gt;protocol) &#123;<br>		<span class="hljs-keyword">case</span> IPPROTO_TCP:<br>			<span class="hljs-keyword">if</span> (READ_ONCE(net-&gt;ipv4.sysctl_tcp_early_demux)) &#123;<br>				tcp_v4_early_demux(skb);<br><br>				<span class="hljs-comment">/* must reload iph, skb-&gt;head might have changed */</span><br>				iph = ip_hdr(skb);<br>			&#125;<br>			<span class="hljs-keyword">break</span>;<br>		<span class="hljs-keyword">case</span> IPPROTO_UDP:<br>			<span class="hljs-keyword">if</span> (READ_ONCE(net-&gt;ipv4.sysctl_udp_early_demux)) &#123;<br>				err = udp_v4_early_demux(skb);<br>				<span class="hljs-keyword">if</span> (unlikely(err))<br>					<span class="hljs-keyword">goto</span> drop_error;<br><br>				<span class="hljs-comment">/* must reload iph, skb-&gt;head might have changed */</span><br>				iph = ip_hdr(skb);<br>			&#125;<br>			<span class="hljs-keyword">break</span>;<br>		&#125;<br>	&#125;<br>	<span class="hljs-comment">/*</span><br><span class="hljs-comment">	 *	Initialise the virtual path cache for the packet. It describes</span><br><span class="hljs-comment">	 *	how the packet travels inside Linux networking.</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-comment">//如果当前 skb 没有解析出来的路由信息，就调用 ip_route_input_noref() 函数初始化虚拟路径缓存，并且读取目的</span><br>	<span class="hljs-keyword">if</span> (!skb_valid_dst(skb)) &#123;<br>	    <span class="hljs-comment">//会根据不同的类型进行给 skb_dst(skb)-&gt;input 赋值</span><br>		err = ip_route_input_noref(skb, iph-&gt;daddr, iph-&gt;saddr,iph-&gt;tos, dev);<br>		<span class="hljs-keyword">if</span> (unlikely(err))<br>			<span class="hljs-keyword">goto</span> drop_error;<br>	&#125; <span class="hljs-keyword">else</span> &#123;<span class="hljs-comment">//否则，表示数据包已经被路由过，那么就直接从缓存中获取相应的路由信息。</span><br>		<span class="hljs-keyword">struct</span> in_device *in_dev = __in_dev_get_rcu(dev);<br>		<span class="hljs-keyword">if</span> (in_dev &amp;&amp; IN_DEV_ORCONF(in_dev, NOPOLICY))<br>		    IPCB(skb)-&gt;flags |= IPSKB_NOPOLICY;<br>	&#125;<br><br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 这段代码是一个可选的路由分类器（route classifier），仅当内核编译配置了 CONFIG_IP_ROUTE_CLASSID 选项时才会被编译。</span><br><span class="hljs-comment">	 */</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CONFIG_IP_ROUTE_CLASSID</span><br>	<span class="hljs-keyword">if</span> (unlikely(skb_dst(skb)-&gt;tclassid)) &#123;<br>		<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ip_rt_acct</span> *<span class="hljs-title">st</span> =</span> this_cpu_ptr(ip_rt_acct);<br>		u32 idx = skb_dst(skb)-&gt;tclassid;<br>		st[idx&amp;<span class="hljs-number">0xFF</span>].o_packets++;<br>		st[idx&amp;<span class="hljs-number">0xFF</span>].o_bytes += skb-&gt;len;<br>		st[(idx&gt;&gt;<span class="hljs-number">16</span>)&amp;<span class="hljs-number">0xFF</span>].i_packets++;<br>		st[(idx&gt;&gt;<span class="hljs-number">16</span>)&amp;<span class="hljs-number">0xFF</span>].i_bytes += skb-&gt;len;<br>	&#125;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br>    <span class="hljs-comment">//处理 IP 头部的选项。如果 IP 头部的选项长度大于 5，并且选项处理函数 ip_rcv_options() 返回一个非零值，</span><br>    <span class="hljs-comment">// 则说明该数据包包含无法处理的选项，将该数据包丢弃。</span><br>	<span class="hljs-keyword">if</span> (iph-&gt;ihl &gt; <span class="hljs-number">5</span> &amp;&amp; ip_rcv_options(skb, dev))<br>		<span class="hljs-keyword">goto</span> drop;<br>    <span class="hljs-comment">//获取路由表</span><br>	rt = skb_rtable(skb);<br>	<span class="hljs-comment">/**</span><br><span class="hljs-comment">	 * 这段代码用于处理广播和组播数据包，根据数据包的路由类型和数据链路类型来执行相应的处理操作。</span><br><span class="hljs-comment">	 * 如果数据包是组播数据包，则更新组播接收统计数据；</span><br><span class="hljs-comment">	 * 如果数据包是广播数据包，则更新广播接收统计数据；</span><br><span class="hljs-comment">	 * 如果数据包是数据链路层广播或组播</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-keyword">if</span> (rt-&gt;rt_type == RTN_MULTICAST) &#123;<br>		__IP_UPD_PO_STATS(net, IPSTATS_MIB_INMCAST, skb-&gt;len);<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (rt-&gt;rt_type == RTN_BROADCAST) &#123;<br>		__IP_UPD_PO_STATS(net, IPSTATS_MIB_INBCAST, skb-&gt;len);<br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (skb-&gt;pkt_type == PACKET_BROADCAST ||<br>		   skb-&gt;pkt_type == PACKET_MULTICAST) &#123;<br>		<span class="hljs-keyword">struct</span> in_device *in_dev = __in_dev_get_rcu(dev);<br>		<span class="hljs-keyword">if</span> (in_dev &amp;&amp;<br>		    IN_DEV_ORCONF(in_dev, DROP_UNICAST_IN_L2_MULTICAST)) &#123;<br>			drop_reason = SKB_DROP_REASON_UNICAST_IN_L2_MULTICAST;<br>			<span class="hljs-keyword">goto</span> drop;<br>		&#125;<br>	&#125;<br>    <span class="hljs-comment">//返回处理成功</span><br>	<span class="hljs-keyword">return</span> NET_RX_SUCCESS;<br><br>drop:<br>	kfree_skb_reason(skb, drop_reason);<br>	<span class="hljs-keyword">return</span> NET_RX_DROP;<br><br>drop_error:<br>	<span class="hljs-keyword">if</span> (err == -EXDEV) &#123;<br>		drop_reason = SKB_DROP_REASON_IP_RPFILTER;<br>		__NET_INC_STATS(net, LINUX_MIB_IPRPFILTER);<br>	&#125;<br>	<span class="hljs-keyword">goto</span> drop;<br>&#125;<br></code></pre></td></tr></table></figure>
+通过查询路由表，查找目标 IP 地址的下一跳地址，并返回对应的输入接口。 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">ip_route_input_noref</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> sk_buff *skb, __be32 daddr, __be32 saddr,u8 tos, <span class="hljs-keyword">struct</span> net_device *dev)</span><br>&#123;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">fib_result</span> <span class="hljs-title">res</span>;</span><br>	<span class="hljs-type">int</span> err;<br>	tos &amp;= IPTOS_RT_MASK;<br>	rcu_read_lock();<br>    <span class="hljs-comment">//在查找过程中使用了 RCU（Read-Copy-Update）机制，以保证在路由表更新时不会影响正在进行路由查找的数据包，而不需要使用锁机制。</span><br>	err = ip_route_input_rcu(skb, daddr, saddr, tos, dev, &amp;res);<br>	rcu_read_unlock();<br>	<span class="hljs-keyword">return</span> err;<br>&#125;<br>EXPORT_SYMBOL(ip_route_input_noref);<br></code></pre></td></tr></table></figure>
+调用链路<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xl">ip_route_input_noref<br>-&gt;<br>ip_route_input_mc<br>-&gt;<br><span class="hljs-function"><span class="hljs-title">skb_dst_set</span>(skb, &amp;rth-&gt;</span><span class="hljs-function"><span class="hljs-title">dst</span>);//设置skb的目标路由信息。在执行路由查找后，内核会将路由信息存储在skb的dst字段中。skb_dst_set()将skb-&gt;</span><span class="hljs-function"><span class="hljs-title">dst</span>-&gt;</span>input设置为指向ip_rcv()函数，以便在数据包到达主机后进行进一步的处理。<br><br></code></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="ip-local-deliver"><a href="#ip-local-deliver" class="headerlink" title="ip_local_deliver"></a>ip_local_deliver</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * 	Deliver IP Packets to the higher protocol layers.</span><br><span class="hljs-comment"> * 	将IP数据包传送到更高的协议层</span><br><span class="hljs-comment"> */</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">ip_local_deliver</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> sk_buff *skb)</span>&#123;<br>	<span class="hljs-comment">/*</span><br><span class="hljs-comment">	 *	Reassemble IP fragments.</span><br><span class="hljs-comment">	 */</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">net</span> *<span class="hljs-title">net</span> =</span> dev_net(skb-&gt;dev);<br><br>	<span class="hljs-keyword">if</span> (ip_is_fragment(ip_hdr(skb))) &#123;<br>		<span class="hljs-keyword">if</span> (ip_defrag(net, skb, IP_DEFRAG_LOCAL_DELIVER))<br>			<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>	&#125;<br>    <span class="hljs-comment">//同样，先执行NF_INET_LOCAL_IN的hook，才进行执行ip_local_deliver_finish交付给上层</span><br>	<span class="hljs-keyword">return</span> NF_HOOK(NFPROTO_IPV4, NF_INET_LOCAL_IN,net, <span class="hljs-literal">NULL</span>, skb, skb-&gt;dev, <span class="hljs-literal">NULL</span>,ip_local_deliver_finish);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>进行加锁读取ip_protocol_deliver_rcu</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">ip_local_deliver_finish</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> net *net, <span class="hljs-keyword">struct</span> sock *sk, <span class="hljs-keyword">struct</span> sk_buff *skb)</span><br>&#123;<br>	skb_clear_delivery_time(skb);<br>	__skb_pull(skb, skb_network_header_len(skb));<br><br>	rcu_read_lock();<br>	ip_protocol_deliver_rcu(net, skb, ip_hdr(skb)-&gt;protocol);<br>	rcu_read_unlock();<br><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>主要是负责将收到的 IP 数据包提交给对应的传输层协议处理，以便进行进一步的分发和处理。该函数会首先调用 raw_local_deliver 函数进行本地处理，然后根据 IP 协议号找到对应的协议处理函数，并使用 INDIRECT_CALL_2 宏调用对应的处理函数处理数据包。处理完成后，函数会更新 IP 统计信息。如果没有找到对应的协议处理函数，则会将数据包丢弃，并发送 ICMP 错误消息。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">ip_protocol_deliver_rcu</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> net *net, <span class="hljs-keyword">struct</span> sk_buff *skb, <span class="hljs-type">int</span> protocol)</span><br>&#123;<br>	<span class="hljs-type">const</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">net_protocol</span> *<span class="hljs-title">ipprot</span>;</span><br>	<span class="hljs-type">int</span> raw, ret;<br><br>resubmit:<br>	raw = raw_local_deliver(skb, protocol);<br><br>	ipprot = rcu_dereference(inet_protos[protocol]);<br>	<span class="hljs-keyword">if</span> (ipprot) &#123;<br>		<span class="hljs-keyword">if</span> (!ipprot-&gt;no_policy) &#123;<br>			<span class="hljs-keyword">if</span> (!xfrm4_policy_check(<span class="hljs-literal">NULL</span>, XFRM_POLICY_IN, skb)) &#123;<br>				kfree_skb_reason(skb,<br>						 SKB_DROP_REASON_XFRM_POLICY);<br>				<span class="hljs-keyword">return</span>;<br>			&#125;<br>			nf_reset_ct(skb);<br>		&#125;<br>		ret = INDIRECT_CALL_2(ipprot-&gt;handler, tcp_v4_rcv, udp_rcv,<br>				      skb);<br>		<span class="hljs-keyword">if</span> (ret &lt; <span class="hljs-number">0</span>) &#123;<br>			protocol = -ret;<br>			<span class="hljs-keyword">goto</span> resubmit;<br>		&#125;<br>		__IP_INC_STATS(net, IPSTATS_MIB_INDELIVERS);<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		<span class="hljs-keyword">if</span> (!raw) &#123;<br>			<span class="hljs-keyword">if</span> (xfrm4_policy_check(<span class="hljs-literal">NULL</span>, XFRM_POLICY_IN, skb)) &#123;<br>				__IP_INC_STATS(net, IPSTATS_MIB_INUNKNOWNPROTOS);<br>				icmp_send(skb, ICMP_DEST_UNREACH,<br>					  ICMP_PROT_UNREACH, <span class="hljs-number">0</span>);<br>			&#125;<br>			kfree_skb_reason(skb, SKB_DROP_REASON_IP_NOPROTO);<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			__IP_INC_STATS(net, IPSTATS_MIB_INDELIVERS);<br>			consume_skb(skb);<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="ip-forward"><a href="#ip-forward" class="headerlink" title="ip_forward"></a>ip_forward</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c"><br><span class="hljs-type">int</span> <span class="hljs-title function_">ip_forward</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> sk_buff *skb)</span><br>&#123;<br>    <span class="hljs-comment">//.....省略部分代码</span><br><br>    <span class="hljs-comment">//主线，调用hook NF_INET_FORWARD 后执行 ip_forward_finish</span><br>    <span class="hljs-keyword">return</span> NF_HOOK(NFPROTO_IPV4, NF_INET_FORWARD,<br>                   net, <span class="hljs-literal">NULL</span>, skb, skb-&gt;dev, rt-&gt;dst.dev,<br>                   ip_forward_finish);<br><br>    sr_failed:<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">*	Strict routing permits no gatewaying</span><br><span class="hljs-comment">*/</span><br>    icmp_send(skb, ICMP_DEST_UNREACH, ICMP_SR_FAILED, <span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">goto</span> drop;<br><br>    too_many_hops:<br>    <span class="hljs-comment">/* Tell the sender its packet died... */</span><br>    __IP_INC_STATS(net, IPSTATS_MIB_INHDRERRORS);<br>    icmp_send(skb, ICMP_TIME_EXCEEDED, ICMP_EXC_TTL, <span class="hljs-number">0</span>);<br>    SKB_DR_SET(reason, IP_INHDR);<br>    drop:<br>    kfree_skb_reason(skb, reason);<br>    <span class="hljs-keyword">return</span> NET_RX_DROP;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>ip_forward_finish调用dst_output转发出去</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">ip_forward_finish</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> net *net, <span class="hljs-keyword">struct</span> sock *sk, <span class="hljs-keyword">struct</span> sk_buff *skb)</span><br>&#123;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ip_options</span> *<span class="hljs-title">opt</span>	=</span> &amp;(IPCB(skb)-&gt;opt);<br><br>	__IP_INC_STATS(net, IPSTATS_MIB_OUTFORWDATAGRAMS);<br>	__IP_ADD_STATS(net, IPSTATS_MIB_OUTOCTETS, skb-&gt;len);<br><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> CONFIG_NET_SWITCHDEV</span><br>	<span class="hljs-keyword">if</span> (skb-&gt;offload_l3_fwd_mark) &#123;<br>		consume_skb(skb);<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>	&#125;<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br>	<span class="hljs-keyword">if</span> (unlikely(opt-&gt;optlen))<br>		ip_forward_options(skb);<br><br>	skb_clear_tstamp(skb);<br>	<span class="hljs-keyword">return</span> dst_output(net, sk, skb);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="ip-local-out"><a href="#ip-local-out" class="headerlink" title="ip_local_out"></a>ip_local_out</h4><p>在上层发送数据的时候都会经过ip_local_out，同时在__ip_local_out会触发NF_INET_LOCAL_OUT钩子函数进行检测</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> __ip_local_out(<span class="hljs-keyword">struct</span> net *net, <span class="hljs-keyword">struct</span> sock *sk, <span class="hljs-keyword">struct</span> sk_buff *skb)&#123;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">iphdr</span> *<span class="hljs-title">iph</span> =</span> ip_hdr(skb);<br><br>	iph_set_totlen(iph, skb-&gt;len);<br>	ip_send_check(iph);<br><br>	<span class="hljs-comment">/* if egress device is enslaved to an L3 master device pass the</span><br><span class="hljs-comment">	 * skb to its handler for processing</span><br><span class="hljs-comment">	 */</span><br>	skb = l3mdev_ip_out(sk, skb);<br>	<span class="hljs-keyword">if</span> (unlikely(!skb))<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>	skb-&gt;protocol = htons(ETH_P_IP);<br><br>	<span class="hljs-keyword">return</span> nf_hook(NFPROTO_IPV4, NF_INET_LOCAL_OUT,net, sk, skb, <span class="hljs-literal">NULL</span>, skb_dst(skb)-&gt;dev,dst_output);<br>&#125;<br><span class="hljs-comment">//从本地发出的数据包，会在构造了ip头之后，调用ip_local_out函数，该函数设置数据包的总长度和校验和,触发NF_INET_LOCAL_OUT钩子函数</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">ip_local_out</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> net *net, <span class="hljs-keyword">struct</span> sock *sk, <span class="hljs-keyword">struct</span> sk_buff *skb)</span><br>&#123;<br>	<span class="hljs-type">int</span> err;<br><br>	err = __ip_local_out(net, sk, skb);<br>	<span class="hljs-keyword">if</span> (likely(err == <span class="hljs-number">1</span>))<br>		err = dst_output(net, sk, skb);<br><br>	<span class="hljs-keyword">return</span> err;<br>&#125;<br>EXPORT_SYMBOL_GPL(ip_local_out);<br></code></pre></td></tr></table></figure>
+
+<h2 id="firewalld"><a href="#firewalld" class="headerlink" title="firewalld"></a>firewalld</h2><p>todo</p>
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://www.cisco.com/c/en/us/products/security/firewalls/what-is-a-firewall.html">https://www.cisco.com/c/en/us/products/security/firewalls/what-is-a-firewall.html</a></li>
+</ol>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%BD%91%E7%9B%B8%E5%85%B3/" class="category-chain-item">计网相关</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Firewalls/">#Firewalls</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>网络篇-深入理解防火墙工作原理</div>
+      <div>https://mikeygithub.github.io/2023/03/01/yuque/网络篇-深入理解防火墙工作原理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月1日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/06/yuque/DDD-%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%9C%A8Go%E4%B8%AD%E7%9A%84%E6%8E%A2%E7%B4%A2%E4%B8%8E%E5%AE%9E%E7%8E%B0/" title="DDD-领域驱动设计在Go中的探索与实现">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">DDD-领域驱动设计在Go中的探索与实现</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/13/yuque/Nexus-%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%8D%E8%BD%AF%E4%BB%B6%E5%8C%85/" title="Nexus-搭建私服软件包">
+                        <span class="hidden-mobile">Nexus-搭建私服软件包</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-NCN3Z5PSLJ', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

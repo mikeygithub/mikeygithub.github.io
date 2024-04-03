@@ -1,0 +1,1153 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="ClickHouse背景介绍ClickHouse是俄罗斯第一大搜索引擎Yandex开发的列式储存数据库.令人惊喜的是,这个列式储存数据库的性能大幅超越了很多商业MPP数据库软件,比如Vertica,InfiniDB ClickHouse是一个用于联机分析(OLAP)的列式数据库管理系统(DBMS)。在传统的行式数据库系统中，数据按如下顺序存储：    Row WatchID JavaEnable">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记篇-ClickHouse列式储存数据库">
+<meta property="og:url" content="https://mikeygithub.github.io/2021/06/20/yuque/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AF%87-ClickHouse%E5%88%97%E5%BC%8F%E5%82%A8%E5%AD%98%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="ClickHouse背景介绍ClickHouse是俄罗斯第一大搜索引擎Yandex开发的列式储存数据库.令人惊喜的是,这个列式储存数据库的性能大幅超越了很多商业MPP数据库软件,比如Vertica,InfiniDB ClickHouse是一个用于联机分析(OLAP)的列式数据库管理系统(DBMS)。在传统的行式数据库系统中，数据按如下顺序存储：    Row WatchID JavaEnable">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1684040084739-3de11368-ec4a-4d5d-9399-abe35ae149ad.png">
+<meta property="article:published_time" content="2021-06-20T09:24:22.000Z">
+<meta property="article:modified_time" content="2023-05-14T12:16:41.000Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="ClickHouse">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1684040084739-3de11368-ec4a-4d5d-9399-abe35ae149ad.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>笔记篇-ClickHouse列式储存数据库 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":"G-NCN3Z5PSLJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.nlark.com/yuque/0/2022/png/2630542/1651338804824-c3567992-2841-42e6-85b2-90ff83da2674.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_2276%2Climit_0') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记篇-ClickHouse列式储存数据库"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-06-20 17:24" pubdate>
+          2021年6月20日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          17k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          146 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">笔记篇-ClickHouse列式储存数据库</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1684040084739-3de11368-ec4a-4d5d-9399-abe35ae149ad.png#averageHue=%23fbfbfb&clientId=u2a7d625e-5580-4&from=ui&id=u8d54b023&originHeight=531&originWidth=1322&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=8332&status=done&style=none&taskId=u69d5578c-eda2-464c-bb1f-c8774724303&title=" srcset="/img/loading.gif" lazyload alt="click.png"></p>
+<h1 id="ClickHouse背景介绍"><a href="#ClickHouse背景介绍" class="headerlink" title="ClickHouse背景介绍"></a>ClickHouse背景介绍</h1><p>ClickHouse是俄罗斯第一大搜索引擎Yandex开发的<strong>列式储存数据库</strong>.令人惊喜的是,这个列式储存数据库的性能大幅超越了很多商业MPP数据库软件,比如Vertica,InfiniDB</p>
+<p>ClickHouse是一个用于联机分析(OLAP)的列式数据库管理系统(DBMS)。在传统的行式数据库系统中，数据按如下顺序存储：</p>
+<table>
+<thead>
+<tr>
+<th><strong>Row</strong></th>
+<th><strong>WatchID</strong></th>
+<th><strong>JavaEnable</strong></th>
+<th><strong>Title</strong></th>
+<th><strong>GoodEvent</strong></th>
+<th><strong>EventTime</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>#0</td>
+<td>89354350662</td>
+<td>1</td>
+<td>Investor Relations</td>
+<td>1</td>
+<td>2016-05-18 05:19:20</td>
+</tr>
+<tr>
+<td>#1</td>
+<td>90329509958</td>
+<td>0</td>
+<td>Contact us</td>
+<td>1</td>
+<td>2016-05-18 08:10:20</td>
+</tr>
+<tr>
+<td>#2</td>
+<td>89953706054</td>
+<td>1</td>
+<td>Mission</td>
+<td>1</td>
+<td>2016-05-18 07:38:00</td>
+</tr>
+<tr>
+<td>#N</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody></table>
+<p>处于同一行中的数据总是被物理的存储在一起。常见的行式数据库系统有：<strong>MySQL</strong>、<strong>Postgres</strong>和<strong>MS SQL Server</strong>。</p>
+<p>在列式数据库系统中，数据按如下的顺序存储：</p>
+<table>
+<thead>
+<tr>
+<th><strong>Row:</strong></th>
+<th><strong>#0</strong></th>
+<th><strong>#1</strong></th>
+<th><strong>#2</strong></th>
+<th><strong>#N</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>WatchID:</td>
+<td>89354350662</td>
+<td>90329509958</td>
+<td>89953706054</td>
+<td>…</td>
+</tr>
+<tr>
+<td>JavaEnable:</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>…</td>
+</tr>
+<tr>
+<td>Title:</td>
+<td>Investor Relations</td>
+<td>Contact us</td>
+<td>Mission</td>
+<td>…</td>
+</tr>
+<tr>
+<td>GoodEvent:</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>…</td>
+</tr>
+<tr>
+<td>EventTime:</td>
+<td>2016-05-18 05:19:20</td>
+<td>2016-05-18 08:10:20</td>
+<td>2016-05-18 07:38:00</td>
+<td>…</td>
+</tr>
+</tbody></table>
+<p>这些示例只显示了数据的排列顺序。<strong>来自不同列的值被单独存储，来自同一列的数据被存储在一起</strong>。<br>常见的列式数据库有： **Vertica、 Paraccel (Actian Matrix，Amazon Redshift)、 Sybase IQ、 Exasol、 Infobright、 InfiniDB、 MonetDB (VectorWise， Actian Vector)、 LucidDB、 SAP HANA、 Google Dremel、 Google PowerDrill、 Druid、 kdb+**。</p>
+<p>不同的数据存储方式适用不同的业务场景，数据访问的场景包括：<strong>进行了何种查询、多久查询一次以及各类查询的比例；每种类型的查询(行、列和字节)读取多少数据；读取数据和更新之间的关系；使用的数据集大小以及如何使用本地的数据集；是否使用事务,以及它们是如何进行隔离的；数据的复制机制与数据的完整性要求；每种类型的查询要求的延迟与吞吐量等等</strong>。</p>
+<p>系统负载越高，依据使用场景进行定制化就越重要，并且定制将会变的越精细。没有一个系统能够同时适用所有不同的业务场景。如果系统适用于广泛的场景，在负载高的情况下，要兼顾所有的场景，那么将不得不做出选择。是要平衡还是要效率？</p>
+<h1 id="ClickHouse相关特性"><a href="#ClickHouse相关特性" class="headerlink" title="ClickHouse相关特性"></a>ClickHouse相关特性</h1><h2 id="真正的列式数据库管理系统"><a href="#真正的列式数据库管理系统" class="headerlink" title="真正的列式数据库管理系统"></a>真正的列式数据库管理系统</h2><p>在一个真正的列式数据库管理系统中，除了数据本身外不应该存在其他额外的数据。这意味着为了避免在值旁边存储它们的长度«number»，你必须支持固定长度数值类型。例如，10亿个UInt8类型的数据在未压缩的情况下大约消耗1GB左右的空间，如果不是这样的话，这将对CPU的使用产生强烈影响。即使是在未压缩的情况下，紧凑的存储数据也是非常重要的，因为解压缩的速度主要取决于未压缩数据的大小。<br>这是非常值得注意的，因为在一些其他系统中也可以将不同的列分别进行存储，但由于对其他场景进行的优化，使其无法有效的处理分析查询。例如： HBase，BigTable，Cassandra，HyperTable。在这些系统中，你可以得到每秒数十万的吞吐能力，但是无法得到每秒几亿行的吞吐能力。<br>需要说明的是，ClickHouse不单单是一个数据库， 它是一个数据库管理系统。因为它允许在运行时创建表和数据库、加载数据和运行查询，而无需重新配置或重启服务。</p>
+<h2 id="数据压缩"><a href="#数据压缩" class="headerlink" title="数据压缩"></a>数据压缩</h2><p>在一些列式数据库管理系统中(例如：InfiniDB CE 和 MonetDB) 并没有使用数据压缩。但是, 若想达到比较优异的性能，数据压缩确实起到了至关重要的作用。<br>除了在磁盘空间和CPU消耗之间进行不同权衡的高效通用压缩编解码器之外，ClickHouse还提供针对特定类型数据的<a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/sql-reference/statements/create/#create-query-specialized-codecs">专用编解码器</a>，这使得ClickHouse能够与更小的数据库(如时间序列数据库)竞争并超越它们。</p>
+<h2 id="数据的磁盘存储"><a href="#数据的磁盘存储" class="headerlink" title="数据的磁盘存储"></a>数据的磁盘存储</h2><p>许多的列式数据库(如 SAP HANA, Google PowerDrill)只能在内存中工作，这种方式会造成比实际更多的设备预算。<br>ClickHouse被设计用于工作在传统磁盘上的系统，它提供每GB更低的存储成本，但如果可以使用SSD和内存，它也会合理的利用这些资源。</p>
+<h2 id="多核心并行处理"><a href="#多核心并行处理" class="headerlink" title="多核心并行处理"></a>多核心并行处理</h2><p>ClickHouse会使用服务器上一切可用的资源，从而以最自然的方式并行处理大型查询。</p>
+<h2 id="多服务器分布式处理"><a href="#多服务器分布式处理" class="headerlink" title="多服务器分布式处理"></a>多服务器分布式处理</h2><p>上面提到的列式数据库管理系统中，几乎没有一个支持分布式的查询处理。<br>在ClickHouse中，数据可以保存在不同的shard上，每一个shard都由一组用于容错的replica组成，查询可以并行地在所有shard上进行处理。这些对用户来说是透明的</p>
+<h2 id="支持SQL"><a href="#支持SQL" class="headerlink" title="支持SQL"></a>支持SQL</h2><p>ClickHouse支持一种<a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/sql-reference/">基于SQL的声明式查询语言</a>，它在许多情况下与<a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/sql-reference/ansi/">ANSI SQL标准</a>相同。<br>支持的查询<a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/sql-reference/statements/select/group-by/">GROUP BY</a>, <a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/sql-reference/statements/select/order-by/">ORDER BY</a>, <a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/sql-reference/statements/select/from/">FROM</a>, <a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/sql-reference/statements/select/join/">JOIN</a>, <a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/sql-reference/operators/in/">IN</a>以及非相关子查询。<br>相关(依赖性)子查询和窗口函数暂不受支持，但将来会被实现。</p>
+<h2 id="向量引擎"><a href="#向量引擎" class="headerlink" title="向量引擎"></a>向量引擎</h2><p>为了高效的使用CPU，数据不仅仅按列存储，同时还按向量(列的一部分)进行处理，这样可以更加高效地使用CPU。</p>
+<h2 id="实时的数据更新"><a href="#实时的数据更新" class="headerlink" title="实时的数据更新"></a>实时的数据更新</h2><p>ClickHouse支持在表中定义主键。为了使查询能够快速在主键中进行范围查找，数据总是以增量的方式有序的存储在MergeTree中。因此，数据可以持续不断地高效的写入到表中，并且写入的过程中不会存在任何加锁的行为。</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>按照主键对数据进行排序，这将帮助ClickHouse在几十毫秒以内完成对数据特定值或范围的查找。</p>
+<h2 id="适合在线查询"><a href="#适合在线查询" class="headerlink" title="适合在线查询"></a>适合在线查询</h2><p>在线查询意味着在没有对数据做任何预处理的情况下以极低的延迟处理查询并将结果加载到用户的页面中。</p>
+<h2 id="支持近似计算"><a href="#支持近似计算" class="headerlink" title="支持近似计算"></a>支持近似计算</h2><p>ClickHouse提供各种各样在允许牺牲数据精度的情况下对查询进行加速的方法：</p>
+<ol>
+<li>用于近似计算的各类聚合函数，如：distinct values, medians, quantiles</li>
+<li>基于数据的部分样本进行近似查询。这时，仅会从磁盘检索少部分比例的数据。</li>
+<li>不使用全部的聚合条件，通过随机选择有限个数据聚合条件进行聚合。这在数据聚合条件满足某些分布条件下，在提供相当准确的聚合结果的同时降低了计算资源的使用。</li>
+</ol>
+<h2 id="Adaptive-Join-Algorithm"><a href="#Adaptive-Join-Algorithm" class="headerlink" title="Adaptive Join Algorithm"></a>Adaptive Join Algorithm</h2><p>ClickHouse支持自定义<a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/sql-reference/statements/select/join/">JOIN</a>多个表，它更倾向于散列连接算法，如果有多个大表，则使用合并-连接算法</p>
+<h2 id="支持数据复制和数据完整性"><a href="#支持数据复制和数据完整性" class="headerlink" title="支持数据复制和数据完整性"></a>支持数据复制和数据完整性</h2><p>ClickHouse使用异步的多主复制技术。当数据被写入任何一个可用副本后，系统会在后台将数据分发给其他副本，以保证系统在不同副本上保持相同的数据。在大多数情况下ClickHouse能在故障后自动恢复，在一些少数的复杂情况下需要手动恢复。<br>更多信息，参见 <a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/engines/table-engines/mergetree-family/replication/">数据复制</a>。</p>
+<h2 id="角色的访问控制"><a href="#角色的访问控制" class="headerlink" title="角色的访问控制"></a>角色的访问控制</h2><p>ClickHouse使用SQL查询实现用户帐户管理，并允许<a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/operations/access-rights/">角色的访问控制</a>，类似于ANSI SQL标准和流行的关系数据库管理系统。</p>
+<h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ol>
+<li>没有完整的事务支持。</li>
+<li>缺少高频率，低延迟的修改或删除已存在数据的能力。仅能用于批量删除或修改数据，但这符合 <a target="_blank" rel="noopener" href="https://gdpr-info.eu/">GDPR</a>。</li>
+<li>稀疏索引使得ClickHouse不适合通过其键检索单行的点查询。</li>
+</ol>
+<h1 id="OLAP-联机分析处理"><a href="#OLAP-联机分析处理" class="headerlink" title="OLAP 联机分析处理"></a>OLAP 联机分析处理</h1><blockquote>
+<p>联机分析处理（Online Analytical Processing）</p>
+</blockquote>
+<ul>
+<li>绝大多数是<strong>读请求</strong></li>
+<li>数据以相当大的批次(<strong>&gt; 1000行</strong>)更新，而不是单行更新;或者根本没有更新。</li>
+<li>已添加到数据库的数据不能修改。</li>
+<li>对于读取，从数据库中提取相当多的行，但只提取列的一小部分。</li>
+<li>宽表，即每个表包含着大量的列</li>
+<li>查询相对较少(通常每台服务器每秒查询数百次或更少)</li>
+<li>对于简单查询，允许延迟大约50毫秒</li>
+<li>列中的数据相对较小：数字和短字符串(例如，每个URL 60个字节)</li>
+<li>处理单个查询时需要高吞吐量(每台服务器每秒可达数十亿行)</li>
+<li><strong>事务不是必须的</strong></li>
+<li>对数据一致性要求低</li>
+<li>每个查询有一个大表。除了他以外，其他的都很小。</li>
+<li>查询结果明显小于源数据。换句话说，数据经过过滤或聚合，因此结果适合于单个服务器的RAM中</li>
+</ul>
+<p>很容易可以看出，OLAP场景与其他通常业务场景(例如,OLTP或K/V)有很大的不同， 因此想要使用OLTP或Key-Value数据库去高效的处理分析查询场景，并不是非常完美的适用方案。例如，使用OLAP数据库去处理分析请求通常要优于使用MongoDB或Redis去处理分析请求。</p>
+<h1 id="ClickHouse适用场景"><a href="#ClickHouse适用场景" class="headerlink" title="ClickHouse适用场景"></a>ClickHouse适用场景</h1><blockquote>
+<p>列式数据库更适合OLAP场景的原因</p>
+</blockquote>
+<p>列式数据库更适合于OLAP场景(对于大多数查询而言，处理速度至少提高了100倍)，下面详细解释了原因(通过图片更有利于直观理解)：<br><strong>行式</strong><br><img src="https://cdn.nlark.com/yuque/0/2021/gif/2630542/1625150468336-0c6c555b-c720-4b8e-ade4-101aa96058b5.gif#averageHue=%23fef1c8&clientId=uf189c391-ff9d-4&from=ui&id=ub1bb548f&originHeight=258&originWidth=630&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=39281&status=done&style=none&taskId=u69c1e88d-1eae-495d-bce8-647c0b9c35f&title=" srcset="/img/loading.gif" lazyload alt="row-oriented.gif"><br><strong>列式</strong><br><img src="https://cdn.nlark.com/yuque/0/2021/gif/2630542/1625150477557-2d450318-af81-4430-969a-543a0b168884.gif#averageHue=%23fedc6c&clientId=uf189c391-ff9d-4&from=ui&id=u8c968687&originHeight=258&originWidth=630&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=43771&status=done&style=none&taskId=u7891b5d9-8701-4baf-898d-85620089bd4&title=" srcset="/img/loading.gif" lazyload alt="column-oriented.gif"><br>看到差别了么？下面将详细介绍为什么会发生这种情况。</p>
+<h3 id="输入-输出"><a href="#输入-输出" class="headerlink" title="输入/输出"></a>输入/输出</h3><ol>
+<li>针对分析类查询，通常只需要读取表的一小部分列。在列式数据库中你可以只读取你需要的数据。例如，如果只需要读取100列中的5列，这将帮助你最少减少20倍的I/O消耗。</li>
+<li>由于数据总是打包成批量读取的，所以压缩是非常容易的。同时数据按列分别存储这也更容易压缩。这进一步降低了I/O的体积。</li>
+<li>由于I/O的降低，这将帮助更多的数据被系统缓存。</li>
+</ol>
+<p>例如，查询«统计每个广告平台的记录数量»需要读取«广告平台ID»这一列，它在未压缩的情况下需要1个字节进行存储。如果大部分流量不是来自广告平台，那么这一列至少可以以十倍的压缩率被压缩。当采用快速压缩算法，它的解压速度最少在十亿字节(未压缩数据)每秒。换句话说，这个查询可以在单个服务器上以每秒大约几十亿行的速度进行处理。这实际上是当前实现的速度。</p>
+<h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><p>由于执行一个查询需要处理大量的行，因此在整个向量上执行所有操作将比在每一行上执行所有操作更加高效。同时这将有助于实现一个几乎没有调用成本的查询引擎。如果你不这样做，使用任何一个机械硬盘，查询引擎都不可避免的停止CPU进行等待。所以，在数据按列存储并且按列执行是很有意义的。<br>有两种方法可以做到这一点：</p>
+<ol>
+<li>向量引擎：所有的操作都是为向量而不是为单个值编写的。这意味着多个操作之间的不再需要频繁的调用，并且调用的成本基本可以忽略不计。操作代码包含一个优化的内部循环。</li>
+<li>代码生成：生成一段代码，包含查询中的所有操作。</li>
+</ol>
+<p>这是不应该在一个通用数据库中实现的，因为这在运行简单查询时是没有意义的。但是也有例外，例如，MemSQL使用代码生成来减少处理SQL查询的延迟(只是为了比较，分析型数据库通常需要优化的是吞吐而不是延迟)。<br>请注意，为了提高CPU效率，查询语言必须是声明型的(SQL或MDX)， 或者至少一个向量(J，K)。 查询应该只包含隐式循环，允许进行优化。</p>
+<h1 id="ClickHouse安装步骤"><a href="#ClickHouse安装步骤" class="headerlink" title="ClickHouse安装步骤"></a>ClickHouse安装步骤</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#安装工具</span><br>sudo yum install yum-utils<br><span class="hljs-comment">#导入</span><br>sudo rpm --import https://repo.clickhouse.tech/CLICKHOUSE-KEY.GPG<br><span class="hljs-comment">#设置仓库</span><br>sudo yum-config-manager --add-repo https://repo.clickhouse.tech/rpm/clickhouse.repo<br><span class="hljs-comment">#安装</span><br>sudo yum install clickhouse-server clickhouse-client<br><span class="hljs-comment">#启动</span><br>sudo /etc/init.d/clickhouse-server start<br><span class="hljs-comment">#进入客户端</span><br>clickhouse-client<br></code></pre></td></tr></table></figure>
+
+<h1 id="ClickHouse简单交互"><a href="#ClickHouse简单交互" class="headerlink" title="ClickHouse简单交互"></a>ClickHouse简单交互</h1><p>交互模式:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">clickhouse-client clickhouse-client --host=... --port=... --user=... --password=... <br></code></pre></td></tr></table></figure>
+<p>启用多行查询:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">clickhouse-client -m <br>clickhouse-client --multiline <br></code></pre></td></tr></table></figure>
+<p>以批处理模式运行查询:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">clickhouse-client --query=<span class="hljs-string">&#x27;SELECT 1&#x27;</span> <br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;SELECT 1&#x27;</span> | clickhouse-client <br>clickhouse-client &lt;&lt;&lt; <span class="hljs-string">&#x27;SELECT 1&#x27;</span> <br></code></pre></td></tr></table></figure>
+<p>从指定格式的文件中插入数据:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">clickhouse-client --query=<span class="hljs-string">&#x27;INSERT INTO table VALUES&#x27;</span> &lt; data.txt <br>clickhouse-client --query=<span class="hljs-string">&#x27;INSERT INTO table FORMAT TabSeparated&#x27;</span> &lt; data.tsv<br></code></pre></td></tr></table></figure>
+
+<h1 id="ClickHouse导入数据"><a href="#ClickHouse导入数据" class="headerlink" title="ClickHouse导入数据"></a>ClickHouse导入数据</h1><p>1.下载数据</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><span class="hljs-title">curl https:</span>//datasets.clickhouse.tech/hits/tsv/hits_v1.tsv.xz | unxz --threads=`nproc` &gt; hits_v1.tsv<br><span class="hljs-title">curl https:</span>//datasets.clickhouse.tech/visits/tsv/visits_v1.tsv.xz | unxz --threads=`nproc` &gt; visits_v1.tsv<br></code></pre></td></tr></table></figure>
+<p>2.创建数据库</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">clickhouse-client --query &quot;<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> tutorial<span class="hljs-string">&quot;</span><br></code></pre></td></tr></table></figure>
+<p>3.创建数据表hits_v1</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">CREATE TABLE tutorial.hits_v1 \<br>( \<br>    `WatchID` UInt64, \<br>    `JavaEnable` UInt8, \<br>    `Title` String, \<br>    `GoodEvent` Int16, \<br>    `EventTime` DateTime, \<br>    `EventDate` Date, \<br>    `CounterID` UInt32, \<br>    `ClientIP` UInt32, \<br>    `ClientIP6` FixedString(<span class="hljs-number">16</span>), \<br>    `RegionID` UInt32, \<br>    `UserID` UInt64, \<br>    `CounterClass` Int8, \<br>    `OS` UInt8, \<br>    `UserAgent` UInt8, \<br>    `URL` String, \<br>    `Referer` String, \<br>    `URLDomain` String, \<br>    `RefererDomain` String, \<br>    `Refresh` UInt8, \<br>    `IsRobot` UInt8, \<br>    `RefererCategories` Array(UInt16), \<br>    `URLCategories` Array(UInt16), \<br>    `URLRegions` Array(UInt32), \<br>    `RefererRegions` Array(UInt32), \<br>    `ResolutionWidth` UInt16, \<br>    `ResolutionHeight` UInt16, \<br>    `ResolutionDepth` UInt8, \<br>    `FlashMajor` UInt8, \<br>    `FlashMinor` UInt8, \<br>    `FlashMinor2` String, \<br>    `NetMajor` UInt8, \<br>    `NetMinor` UInt8, \<br>    `UserAgentMajor` UInt16, \<br>    `UserAgentMinor` FixedString(<span class="hljs-number">2</span>), \<br>    `CookieEnable` UInt8, \<br>    `JavascriptEnable` UInt8, \<br>    `IsMobile` UInt8, \<br>    `MobilePhone` UInt8, \<br>    `MobilePhoneModel` String, \<br>    `Params` String, \<br>    `IPNetworkID` UInt32, \<br>    `TraficSourceID` Int8, \<br>    `SearchEngineID` UInt16, \<br>    `SearchPhrase` String, \<br>    `AdvEngineID` UInt8, \<br>    `IsArtifical` UInt8, \<br>    `WindowClientWidth` UInt16, \<br>    `WindowClientHeight` UInt16, \<br>    `ClientTimeZone` Int16, \<br>    `ClientEventTime` DateTime, \<br>    `SilverlightVersion1` UInt8, \<br>    `SilverlightVersion2` UInt8, \<br>    `SilverlightVersion3` UInt32, \<br>    `SilverlightVersion4` UInt16, \<br>    `PageCharset` String, \<br>    `CodeVersion` UInt32, \<br>    `IsLink` UInt8, \<br>    `IsDownload` UInt8, \<br>    `IsNotBounce` UInt8, \<br>    `FUniqID` UInt64, \<br>    `HID` UInt32, \<br>    `IsOldCounter` UInt8, \<br>    `IsEvent` UInt8, \<br>    `IsParameter` UInt8, \<br>    `DontCountHits` UInt8, \<br>    `WithHash` UInt8, \<br>    `HitColor` FixedString(<span class="hljs-number">1</span>), \<br>    `UTCEventTime` DateTime, \<br>    `Age` UInt8, \<br>    `Sex` UInt8, \<br>    `Income` UInt8, \<br>    `Interests` UInt16, \<br>    `Robotness` UInt8, \<br>    `GeneralInterests` Array(UInt16), \<br>    `RemoteIP` UInt32, \<br>    `RemoteIP6` FixedString(<span class="hljs-number">16</span>), \<br>    `WindowName` Int32, \<br>    `OpenerName` Int32, \<br>    `HistoryLength` Int16, \<br>    `BrowserLanguage` FixedString(<span class="hljs-number">2</span>), \<br>    `BrowserCountry` FixedString(<span class="hljs-number">2</span>), \<br>    `SocialNetwork` String, \<br>    `SocialAction` String, \<br>    `HTTPError` UInt16, \<br>    `SendTiming` Int32, \<br>    `DNSTiming` Int32, \<br>    `ConnectTiming` Int32, \<br>    `ResponseStartTiming` Int32, \<br>    `ResponseEndTiming` Int32, \<br>    `FetchTiming` Int32, \<br>    `RedirectTiming` Int32, \<br>    `DOMInteractiveTiming` Int32, \<br>    `DOMContentLoadedTiming` Int32, \<br>    `DOMCompleteTiming` Int32, \<br>    `LoadEventStartTiming` Int32, \<br>    `LoadEventEndTiming` Int32, \<br>    `NSToDOMContentLoadedTiming` Int32, \<br>    `FirstPaintTiming` Int32, \<br>    `RedirectCount` Int8, \<br>    `SocialSourceNetworkID` UInt8, \<br>    `SocialSourcePage` String, \<br>    `ParamPrice` Int64, \<br>    `ParamOrderID` String, \<br>    `ParamCurrency` FixedString(<span class="hljs-number">3</span>), \<br>    `ParamCurrencyID` UInt16, \<br>    `GoalsReached` Array(UInt32), \<br>    `OpenstatServiceName` String, \<br>    `OpenstatCampaignID` String, \<br>    `OpenstatAdID` String, \<br>    `OpenstatSourceID` String, \<br>    `UTMSource` String, \<br>    `UTMMedium` String, \<br>    `UTMCampaign` String, \<br>    `UTMContent` String, \<br>    `UTMTerm` String, \<br>    `FromTag` String, \<br>    `HasGCLID` UInt8, \<br>    `RefererHash` UInt64, \<br>    `URLHash` UInt64, \<br>    `CLID` UInt32, \<br>    `YCLID` UInt64, \<br>    `ShareService` String, \<br>    `ShareURL` String, \<br>    `ShareTitle` String, \<br>    `ParsedParams` Nested( \<br>        Key1 String, \<br>        Key2 String, \<br>        Key3 String, \<br>        Key4 String, \<br>        Key5 String, \<br>        ValueDouble Float64), \<br>    `IslandID` FixedString(<span class="hljs-number">16</span>), \<br>    `RequestNum` UInt32, \<br>    `RequestTry` UInt8 \<br>) \<br>ENGINE = MergeTree() \<br>PARTITION BY toYYYYMM(EventDate) \<br>ORDER BY (CounterID, EventDate, intHash32(UserID)) \<br>SAMPLE BY intHash32(UserID)<br></code></pre></td></tr></table></figure>
+<p>4.创建数据库表visits_v1</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">CREATE TABLE tutorial.visits_v1 \<br>( \<br>    `CounterID` UInt32, \<br>    `StartDate` Date, \<br>    `Sign` Int8, \<br>    `IsNew` UInt8, \<br>    `VisitID` UInt64, \<br>    `UserID` UInt64, \<br>    `StartTime` DateTime, \<br>    `Duration` UInt32, \<br>    `UTCStartTime` DateTime, \<br>    `PageViews` Int32, \<br>    `Hits` Int32, \<br>    `IsBounce` UInt8, \<br>    `Referer` String, \<br>    `StartURL` String, \<br>    `RefererDomain` String, \<br>    `StartURLDomain` String, \<br>    `EndURL` String, \<br>    `LinkURL` String, \<br>    `IsDownload` UInt8, \<br>    `TraficSourceID` Int8, \<br>    `SearchEngineID` UInt16, \<br>    `SearchPhrase` String, \<br>    `AdvEngineID` UInt8, \<br>    `PlaceID` Int32, \<br>    `RefererCategories` Array(UInt16), \<br>    `URLCategories` Array(UInt16), \<br>    `URLRegions` Array(UInt32), \<br>    `RefererRegions` Array(UInt32), \<br>    `IsYandex` UInt8, \<br>    `GoalReachesDepth` Int32, \<br>    `GoalReachesURL` Int32, \<br>    `GoalReachesAny` Int32, \<br>    `SocialSourceNetworkID` UInt8, \<br>    `SocialSourcePage` String, \<br>    `MobilePhoneModel` String, \<br>    `ClientEventTime` DateTime, \<br>    `RegionID` UInt32, \<br>    `ClientIP` UInt32, \<br>    `ClientIP6` FixedString(<span class="hljs-number">16</span>), \<br>    `RemoteIP` UInt32, \<br>    `RemoteIP6` FixedString(<span class="hljs-number">16</span>), \<br>    `IPNetworkID` UInt32, \<br>    `SilverlightVersion3` UInt32, \<br>    `CodeVersion` UInt32, \<br>    `ResolutionWidth` UInt16, \<br>    `ResolutionHeight` UInt16, \<br>    `UserAgentMajor` UInt16, \<br>    `UserAgentMinor` UInt16, \<br>    `WindowClientWidth` UInt16, \<br>    `WindowClientHeight` UInt16, \<br>    `SilverlightVersion2` UInt8, \<br>    `SilverlightVersion4` UInt16, \<br>    `FlashVersion3` UInt16, \<br>    `FlashVersion4` UInt16, \<br>    `ClientTimeZone` Int16, \<br>    `OS` UInt8, \<br>    `UserAgent` UInt8, \<br>    `ResolutionDepth` UInt8, \<br>    `FlashMajor` UInt8, \<br>    `FlashMinor` UInt8, \<br>    `NetMajor` UInt8, \<br>    `NetMinor` UInt8, \<br>    `MobilePhone` UInt8, \<br>    `SilverlightVersion1` UInt8, \<br>    `Age` UInt8, \<br>    `Sex` UInt8, \<br>    `Income` UInt8, \<br>    `JavaEnable` UInt8, \<br>    `CookieEnable` UInt8, \<br>    `JavascriptEnable` UInt8, \<br>    `IsMobile` UInt8, \<br>    `BrowserLanguage` UInt16, \<br>    `BrowserCountry` UInt16, \<br>    `Interests` UInt16, \<br>    `Robotness` UInt8, \<br>    `GeneralInterests` Array(UInt16), \<br>    `Params` Array(String), \<br>    `Goals` Nested( \<br>        ID UInt32, \<br>        Serial UInt32, \<br>        EventTime DateTime, \<br>        Price Int64, \<br>        OrderID String, \<br>        CurrencyID UInt32), \<br>    `WatchIDs` Array(UInt64), \<br>    `ParamSumPrice` Int64, \<br>    `ParamCurrency` FixedString(<span class="hljs-number">3</span>), \<br>    `ParamCurrencyID` UInt16, \<br>    `ClickLogID` UInt64, \<br>    `ClickEventID` Int32, \<br>    `ClickGoodEvent` Int32, \<br>    `ClickEventTime` DateTime, \<br>    `ClickPriorityID` Int32, \<br>    `ClickPhraseID` Int32, \<br>    `ClickPageID` Int32, \<br>    `ClickPlaceID` Int32, \<br>    `ClickTypeID` Int32, \<br>    `ClickResourceID` Int32, \<br>    `ClickCost` UInt32, \<br>    `ClickClientIP` UInt32, \<br>    `ClickDomainID` UInt32, \<br>    `ClickURL` String, \<br>    `ClickAttempt` UInt8, \<br>    `ClickOrderID` UInt32, \<br>    `ClickBannerID` UInt32, \<br>    `ClickMarketCategoryID` UInt32, \<br>    `ClickMarketPP` UInt32, \<br>    `ClickMarketCategoryName` String, \<br>    `ClickMarketPPName` String, \<br>    `ClickAWAPSCampaignName` String, \<br>    `ClickPageName` String, \<br>    `ClickTargetType` UInt16, \<br>    `ClickTargetPhraseID` UInt64, \<br>    `ClickContextType` UInt8, \<br>    `ClickSelectType` Int8, \<br>    `ClickOptions` String, \<br>    `ClickGroupBannerID` Int32, \<br>    `OpenstatServiceName` String, \<br>    `OpenstatCampaignID` String, \<br>    `OpenstatAdID` String, \<br>    `OpenstatSourceID` String, \<br>    `UTMSource` String, \<br>    `UTMMedium` String, \<br>    `UTMCampaign` String, \<br>    `UTMContent` String, \<br>    `UTMTerm` String, \<br>    `FromTag` String, \<br>    `HasGCLID` UInt8, \<br>    `FirstVisit` DateTime, \<br>    `PredLastVisit` Date, \<br>    `LastVisit` Date, \<br>    `TotalVisits` UInt32, \<br>    `TraficSource` Nested( \<br>        ID Int8, \<br>        SearchEngineID UInt16, \<br>        AdvEngineID UInt8, \<br>        PlaceID UInt16, \<br>        SocialSourceNetworkID UInt8, \<br>        Domain String, \<br>        SearchPhrase String, \<br>        SocialSourcePage String), \<br>    `Attendance` FixedString(<span class="hljs-number">16</span>), \<br>    `CLID` UInt32, \<br>    `YCLID` UInt64, \<br>    `NormalizedRefererHash` UInt64, \<br>    `SearchPhraseHash` UInt64, \<br>    `RefererDomainHash` UInt64, \<br>    `NormalizedStartURLHash` UInt64, \<br>    `StartURLDomainHash` UInt64, \<br>    `NormalizedEndURLHash` UInt64, \<br>    `TopLevelDomain` UInt64, \<br>    `URLScheme` UInt64, \<br>    `OpenstatServiceNameHash` UInt64, \<br>    `OpenstatCampaignIDHash` UInt64, \<br>    `OpenstatAdIDHash` UInt64, \<br>    `OpenstatSourceIDHash` UInt64, \<br>    `UTMSourceHash` UInt64, \<br>    `UTMMediumHash` UInt64, \<br>    `UTMCampaignHash` UInt64, \<br>    `UTMContentHash` UInt64, \<br>    `UTMTermHash` UInt64, \<br>    `FromHash` UInt64, \<br>    `WebVisorEnabled` UInt8, \<br>    `WebVisorActivity` UInt32, \<br>    `ParsedParams` Nested( \<br>        Key1 String, \<br>        Key2 String, \<br>        Key3 String, \<br>        Key4 String, \<br>        Key5 String, \<br>        ValueDouble Float64), \<br>    `Market` Nested( \<br>        Type UInt8, \<br>        GoalID UInt32, \<br>        OrderID String, \<br>        OrderPrice Int64, \<br>        PP UInt32, \<br>        DirectPlaceID UInt32, \<br>        DirectOrderID UInt32, \<br>        DirectBannerID UInt32, \<br>        GoodID String, \<br>        GoodName String, \<br>        GoodQuantity Int32, \<br>        GoodPrice Int64), \<br>    `IslandID` FixedString(<span class="hljs-number">16</span>) \<br>) \<br>ENGINE = CollapsingMergeTree(Sign) \<br>PARTITION BY toYYYYMM(StartDate) \<br>ORDER BY (CounterID, StartDate, intHash32(UserID), VisitID) \<br>SAMPLE BY intHash32(UserID) <br></code></pre></td></tr></table></figure>
+<p>5.导入数据</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">clickhouse-client <span class="hljs-attr">--query</span> <span class="hljs-string">&quot;INSERT INTO tutorial.hits_v1 FORMAT TSV&quot;</span> <span class="hljs-attr">--max_insert_block_size</span>=<span class="hljs-number">100000</span> &lt; hits_v1<span class="hljs-selector-class">.tsv</span><br>clickhouse-client <span class="hljs-attr">--query</span> <span class="hljs-string">&quot;INSERT INTO tutorial.visits_v1 FORMAT TSV&quot;</span> <span class="hljs-attr">--max_insert_block_size</span>=<span class="hljs-number">100000</span> &lt; visits_v1.tsv<br></code></pre></td></tr></table></figure>
+<p>6.查看是否导入成功</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">clickhouse-client --query &quot;<span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(*) <span class="hljs-keyword">FROM</span> tutorial.hits_v1<span class="hljs-string">&quot;</span><br><span class="hljs-string">clickhouse-client --query &quot;</span><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(*) <span class="hljs-keyword">FROM</span> tutorial.visits_v1<span class="hljs-string">&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="ClickHouse集群部署"><a href="#ClickHouse集群部署" class="headerlink" title="ClickHouse集群部署"></a>ClickHouse集群部署</h1><p>ClickHouse集群是一个同质集群。 设置步骤:</p>
+<ol>
+<li>在群集的所有机器上安装ClickHouse服务端</li>
+<li>在配置文件中设置群集配置</li>
+<li>在每个实例上创建本地表</li>
+<li>创建一个<a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/engines/table-engines/special/distributed/">分布式表</a></li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/engines/table-engines/special/distributed/">分布式表</a>实际上是一种view，映射到ClickHouse集群的本地表。 从分布式表中执行<strong>SELECT</strong>查询会使用集群所有分片的资源。 您可以为多个集群指定configs，并创建多个分布式表，为不同的集群提供视图。<br>具有三个分片，每个分片一个副本的集群的示例配置:</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">&lt;remote_servers&gt;<br>    &lt;perftest_3shards_1replicas&gt;<br>        &lt;shard&gt;<br>            &lt;<span class="hljs-keyword">replica</span>&gt;<br>                &lt;host&gt;example-perftest01j.yandex.ru&lt;/host&gt;<br>                &lt;port&gt;<span class="hljs-number">9000</span>&lt;/port&gt;<br>            &lt;/<span class="hljs-keyword">replica</span>&gt;<br>        &lt;/shard&gt;<br>        &lt;shard&gt;<br>            &lt;<span class="hljs-keyword">replica</span>&gt;<br>                &lt;host&gt;example-perftest02j.yandex.ru&lt;/host&gt;<br>                &lt;port&gt;<span class="hljs-number">9000</span>&lt;/port&gt;<br>            &lt;/<span class="hljs-keyword">replica</span>&gt;<br>        &lt;/shard&gt;<br>        &lt;shard&gt;<br>            &lt;<span class="hljs-keyword">replica</span>&gt;<br>                &lt;host&gt;example-perftest03j.yandex.ru&lt;/host&gt;<br>                &lt;port&gt;<span class="hljs-number">9000</span>&lt;/port&gt;<br>            &lt;/<span class="hljs-keyword">replica</span>&gt;<br>        &lt;/shard&gt;<br>    &lt;/perftest_3shards_1replicas&gt;<br>&lt;/remote_servers&gt;<br></code></pre></td></tr></table></figure>
+<p>为了进一步演示，让我们使用和创建hits_v1表相同的CREATE TABLE语句创建一个新的本地表，但表名不同:</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams">CREATE <span class="hljs-keyword">TABLE</span> tutorial.hits_local <span class="hljs-comment">(...) ENGINE = MergeTree() ...</span> <br></code></pre></td></tr></table></figure>
+<p>创建提供集群本地表视图的分布式表:</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">CREATE <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">tutorial</span>.hits_all <span class="hljs-keyword">AS</span> <span class="hljs-keyword">tutorial</span>.hits_local ENGINE = Distributed(perftest_3shards_1replicas, <span class="hljs-keyword">tutorial</span>, hits_local, rand()); <br></code></pre></td></tr></table></figure>
+<p>常见的做法是在集群的所有计算机上创建类似的分布式表。 它允许在群集的任何计算机上运行分布式查询。 还有一个替代选项可以使用以下方法为给定的SELECT查询创建临时分布式表<a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/sql-reference/table-functions/remote/">远程</a>表功能。<br>让我们运行<a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/sql-reference/statements/insert-into/">INSERT SELECT</a>将该表传播到多个服务器。</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> tutorial.hits_all <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> tutorial.hits_v1; <br></code></pre></td></tr></table></figure>
+<p>注意:<br>这种方法不适合大型表的分片。 有一个单独的工具 <a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/operations/utilities/clickhouse-copier/">clickhouse-copier</a> 这可以重新分片任意大表。<br>正如您所期望的那样，如果计算量大的查询使用3台服务器而不是一个，则运行速度快N倍。<br>在这种情况下，我们使用了具有3个分片的集群，每个分片都包含一个副本。<br>为了在生产环境中提供弹性，我们建议每个分片应包含分布在多个可用区或数据中心（或至少机架）之间的2-3个副本。 请注意，ClickHouse支持无限数量的副本。<br>包含三个副本的一个分片集群的示例配置:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">remote_servers</span>&gt;</span><br>    ...<br>    <span class="hljs-tag">&lt;<span class="hljs-name">perftest_1shards_3replicas</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">shard</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">replica</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">host</span>&gt;</span>example-perftest01j.yandex.ru<span class="hljs-tag">&lt;/<span class="hljs-name">host</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">port</span>&gt;</span>9000<span class="hljs-tag">&lt;/<span class="hljs-name">port</span>&gt;</span><br>             <span class="hljs-tag">&lt;/<span class="hljs-name">replica</span>&gt;</span><br>             <span class="hljs-tag">&lt;<span class="hljs-name">replica</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">host</span>&gt;</span>example-perftest02j.yandex.ru<span class="hljs-tag">&lt;/<span class="hljs-name">host</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">port</span>&gt;</span>9000<span class="hljs-tag">&lt;/<span class="hljs-name">port</span>&gt;</span><br>             <span class="hljs-tag">&lt;/<span class="hljs-name">replica</span>&gt;</span><br>             <span class="hljs-tag">&lt;<span class="hljs-name">replica</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">host</span>&gt;</span>example-perftest03j.yandex.ru<span class="hljs-tag">&lt;/<span class="hljs-name">host</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">port</span>&gt;</span>9000<span class="hljs-tag">&lt;/<span class="hljs-name">port</span>&gt;</span><br>             <span class="hljs-tag">&lt;/<span class="hljs-name">replica</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">shard</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">perftest_1shards_3replicas</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">remote_servers</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>启用本机复制<a target="_blank" rel="noopener" href="https://zookeeper.apache.org/">Zookeeper</a>是必需的。 ClickHouse负责所有副本的数据一致性，并在失败后自动运行恢复过程。建议将ZooKeeper集群部署在单独的服务器上（其中没有其他进程，包括运行的ClickHouse）。</p>
+<blockquote>
+<p><strong>注意: ZooKeeper不是一个严格的要求：在某些简单的情况下，您可以通过将数据写入应用程序代码中的所有副本来复制数据。 这种方法是不建议的，在这种情况下，ClickHouse将无法保证所有副本上的数据一致性。 因此需要由您的应用来保证这一点。</strong></p>
+</blockquote>
+<p>ZooKeeper位置在配置文件中指定:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">zookeeper</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">node</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">host</span>&gt;</span>zoo01.yandex.ru<span class="hljs-tag">&lt;/<span class="hljs-name">host</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">port</span>&gt;</span>2181<span class="hljs-tag">&lt;/<span class="hljs-name">port</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">node</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">node</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">host</span>&gt;</span>zoo02.yandex.ru<span class="hljs-tag">&lt;/<span class="hljs-name">host</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">port</span>&gt;</span>2181<span class="hljs-tag">&lt;/<span class="hljs-name">port</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">node</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">node</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">host</span>&gt;</span>zoo03.yandex.ru<span class="hljs-tag">&lt;/<span class="hljs-name">host</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">port</span>&gt;</span>2181<span class="hljs-tag">&lt;/<span class="hljs-name">port</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">node</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">zookeeper</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>此外，我们需要设置宏来识别每个用于创建表的分片和副本:</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">&lt;macros&gt;<br>    &lt;shard&gt;<span class="hljs-number">01</span>&lt;/shard&gt;<br>    &lt;<span class="hljs-keyword">replica</span>&gt;<span class="hljs-number">01</span>&lt;/<span class="hljs-keyword">replica</span>&gt;<br>&lt;/macros&gt;<br></code></pre></td></tr></table></figure>
+<p>如果在创建复制表时没有副本，则会实例化新的第一个副本。 如果已有实时副本，则新副本将克隆现有副本中的数据。 您可以选择首先创建所有复制的表，然后向其中插入数据。 另一种选择是创建一些副本，并在数据插入之后或期间添加其他副本。</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams">CREATE <span class="hljs-keyword">TABLE</span> tutorial.hits_replica <span class="hljs-comment">(...) ENGINE = ReplcatedMergeTree(</span>     <span class="hljs-comment">&#x27;/clickhouse_perftest/tables/&#123;shard&#125;/hits&#x27;</span><span class="hljs-comment">,</span>     <span class="hljs-comment">&#x27;&#123;replica&#125;&#x27;</span> <span class="hljs-comment">) ...</span> <br></code></pre></td></tr></table></figure>
+<p>在这里，我们使用<a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/zh/engines/table-engines/mergetree-family/replication/">ReplicatedMergeTree</a>表引擎。 在参数中，我们指定包含分片和副本标识符的ZooKeeper路径。</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> tutorial.hits_replica <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> tutorial.hits_local; <br></code></pre></td></tr></table></figure>
+<p>复制在多主机模式下运行。数据可以加载到任何副本中，然后系统自动将其与其他实例同步。复制是异步的，因此在给定时刻，并非所有副本都可能包含最近插入的数据。至少应该有一个副本允许数据摄入。另一些则会在重新激活后同步数据并修复一致性。请注意，这种方法允许最近插入的数据丢失的可能性很低。</p>
+<h1 id="ClickHouse-可-视-化"><a href="#ClickHouse-可-视-化" class="headerlink" title="ClickHouse 可 视 化"></a>ClickHouse 可 视 化</h1><p><a target="_blank" rel="noopener" href="https://www.jetbrains.com/datagrip/">DataGrip</a> 是JetBrains的数据库IDE，专门支持ClickHouse。 它还嵌入到其他基于IntelliJ的工具中：PyCharm，IntelliJ IDEA，GoLand，PhpStorm等。<br>特征：</p>
+<ul>
+<li>非常快速的代码完成。</li>
+<li>ClickHouse语法高亮显示。</li>
+<li>支持ClickHouse特有的功能，例如嵌套列，表引擎。</li>
+<li>数据编辑器。</li>
+<li>重构。</li>
+<li>搜索和导航。</li>
+</ul>
+<h1 id="ClickHouse参考资料"><a href="#ClickHouse参考资料" class="headerlink" title="ClickHouse参考资料"></a>ClickHouse参考资料</h1><p>官网：<a target="_blank" rel="noopener" href="https://clickhouse.tech/">https://clickhouse.tech/</a><br>ClickHouse 教程：<a target="_blank" rel="noopener" href="https://clickhouse.tech/docs/en/getting-started/tutorial/">https://clickhouse.tech/docs/en/getting-started/tutorial/</a><br>GitHub：<a target="_blank" rel="noopener" href="https://github.com/ClickHouse/ClickHouse">https://github.com/ClickHouse/ClickHouse</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%84/" class="category-chain-item">数据库组</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/ClickHouse/">#ClickHouse</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记篇-ClickHouse列式储存数据库</div>
+      <div>https://mikeygithub.github.io/2021/06/20/yuque/数据库篇-ClickHouse列式储存数据库/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年6月20日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/04/yuque/MySQL%E7%AF%87-%E3%80%8AMySQL%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%E3%80%8B/" title="MySQL篇 -《MySQL是怎样运行的》">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL篇 -《MySQL是怎样运行的》</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/19/yuque/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E7%AF%87-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA/" title="读书笔记篇-深入理解Java虚拟机">
+                        <span class="hidden-mobile">读书笔记篇-深入理解Java虚拟机</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-NCN3Z5PSLJ', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

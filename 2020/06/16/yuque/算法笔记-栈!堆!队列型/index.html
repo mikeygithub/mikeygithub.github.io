@@ -1,0 +1,1041 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="栈结构型基于栈的先进后出特点，在处理某些问题上会更加方便 单调栈 单调递增栈：单调递增栈就是从栈底到栈顶数据是从大到小 单调递减栈：单调递减栈就是从栈底到栈顶数据是从小到大  队列12345Queue&lt;Integer&gt; queue &#x3D; new LinkedList&lt;&gt;()&#x2F;&#x2F;常用方法queue.offer();&#x2F;&#x2F;压入队列queue.peek();&#x2F;&#x2F;获取队头元素queu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法笔记-栈&#x2F;堆&#x2F;队列型">
+<meta property="og:url" content="https://mikeygithub.github.io/2020/06/16/yuque/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0-%E6%A0%88!%E5%A0%86!%E9%98%9F%E5%88%97%E5%9E%8B/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="栈结构型基于栈的先进后出特点，在处理某些问题上会更加方便 单调栈 单调递增栈：单调递增栈就是从栈底到栈顶数据是从大到小 单调递减栈：单调递减栈就是从栈底到栈顶数据是从小到大  队列12345Queue&lt;Integer&gt; queue &#x3D; new LinkedList&lt;&gt;()&#x2F;&#x2F;常用方法queue.offer();&#x2F;&#x2F;压入队列queue.peek();&#x2F;&#x2F;获取队头元素queu">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641449437813-e632e227-4fd4-44b2-81cf-d12d982cf959.png">
+<meta property="article:published_time" content="2020-06-16T02:22:22.000Z">
+<meta property="article:modified_time" content="2023-01-08T06:54:43.000Z">
+<meta property="article:author" content="Mikey">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641449437813-e632e227-4fd4-44b2-81cf-d12d982cf959.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>算法笔记-栈/堆/队列型 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":"G-NCN3Z5PSLJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.nlark.com/yuque/0/2022/png/2630542/1651338804824-c3567992-2841-42e6-85b2-90ff83da2674.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_2276%2Climit_0') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="算法笔记-栈/堆/队列型"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-06-16 10:22" pubdate>
+          2020年6月16日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          24k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          200 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">算法笔记-栈/堆/队列型</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1641449437813-e632e227-4fd4-44b2-81cf-d12d982cf959.png#averageHue=%2376b7a4&clientId=u53833f90-9c86-4&from=paste&height=338&id=u5fb75080&originHeight=675&originWidth=1080&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=265267&status=done&style=none&taskId=ubfae64a6-1ea5-4c50-83e5-9a033c35b33&title=&width=540" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="栈结构型"><a href="#栈结构型" class="headerlink" title="栈结构型"></a>栈结构型</h1><p>基于栈的先进后出特点，在处理某些问题上会更加方便</p>
+<h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><ul>
+<li>单调递增栈：单调递增栈就是从栈底到栈顶数据是从大到小</li>
+<li>单调递减栈：单调递减栈就是从栈底到栈顶数据是从小到大</li>
+</ul>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql">Queue<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> queue <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> LinkedList<span class="hljs-operator">&lt;&gt;</span>()<br><span class="hljs-operator">/</span><span class="hljs-operator">/</span>常用方法<br>queue.offer();<span class="hljs-operator">/</span><span class="hljs-operator">/</span>压入队列<br>queue.peek();<span class="hljs-operator">/</span><span class="hljs-operator">/</span>获取队头元素<br>queue.poll();<span class="hljs-operator">/</span><span class="hljs-operator">/</span>弹出队头<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>优先队列<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">PriorityQueue queue <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> PriorityQueue<span class="hljs-operator">&lt;&gt;</span>()<br></code></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h1><h4 id="有效的括号-简单"><a href="#有效的括号-简单" class="headerlink" title="有效的括号(简单)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-parentheses/">有效的括号(简单)</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isValid</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-keyword">if</span> (s.length() % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        Stack&lt;Character&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-keyword">if</span> (c == <span class="hljs-string">&#x27;(&#x27;</span> || c == <span class="hljs-string">&#x27;[&#x27;</span> || c == <span class="hljs-string">&#x27;&#123;&#x27;</span>) stack.push(c);<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!stack.isEmpty()) &#123;<br>                <span class="hljs-type">Character</span> <span class="hljs-variable">pop</span> <span class="hljs-operator">=</span> stack.pop();<br>                <span class="hljs-keyword">if</span> (check(pop, c)) <span class="hljs-keyword">continue</span>;<br>                <span class="hljs-keyword">else</span> &#123;<br>                    stack.push(pop);<br>                    stack.push(c);<br>                &#125;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> stack.isEmpty();<br>    &#125;<br><br>    <span class="hljs-comment">//检查</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">check</span><span class="hljs-params">(<span class="hljs-type">char</span> a, <span class="hljs-type">char</span> b)</span> &#123;<br>        <span class="hljs-keyword">if</span> ((a == <span class="hljs-string">&#x27;&#123;&#x27;</span> &amp;&amp; b == <span class="hljs-string">&#x27;&#125;&#x27;</span>) || (a == <span class="hljs-string">&#x27;[&#x27;</span> &amp;&amp; b == <span class="hljs-string">&#x27;]&#x27;</span>) || (a == <span class="hljs-string">&#x27;(&#x27;</span> &amp;&amp; b == <span class="hljs-string">&#x27;)&#x27;</span>)) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="柱状图中最大的矩形-困难"><a href="#柱状图中最大的矩形-困难" class="headerlink" title="柱状图中最大的矩形(困难)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">柱状图中最大的矩形(困难)</a></h4><blockquote>
+<p>使用单调栈进行实现</p>
+</blockquote>
+<p>单调栈 单调栈分为单调递增栈和单调递减栈</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 单调递增栈即栈内元素保持单调递增的栈<br><span class="hljs-bullet">2.</span> 同理单调递减栈即栈内元素保持单调递减的栈<br></code></pre></td></tr></table></figure>
+<p>操作规则（下面都以单调递增栈为例）</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 如果新的元素比栈顶元素大，就入栈<br><span class="hljs-bullet">2.</span> 如果新的元素较小，那就一直把栈内元素弹出来，直到栈顶比新元素小<br></code></pre></td></tr></table></figure>
+<p>加入这样一个规则之后，会有什么效果</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 栈内的元素是递增的<br><span class="hljs-bullet">2.</span> 当元素出栈时，说明这个新元素是出栈元素向后找第一个比其小的元素<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>举个例子，配合下图，现在索引在 6 ，栈里是 1 5 6 。 接下来新元素是 2 ，那么 6 需要出栈。 当 6 出栈时，右边 2 代表是 6 右边第一个比 6 小的元素。</p>
+</blockquote>
+<p>当元素出栈后，说明新栈顶元素是出栈元素向前找第一个比其小的元素</p>
+<blockquote>
+<p>当 6 出栈时，5 成为新的栈顶，那么 5 就是 6 左边第一个比 6 小的元素。</p>
+</blockquote>
+<p>代码模板</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-built_in">stack</span>&lt;<span class="hljs-type">int</span>&gt; st;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.size(); i++)<br>&#123;<br>	<span class="hljs-keyword">while</span>(!st.empty() &amp;&amp; st.top() &gt; nums[i])<br>	&#123;<br>		st.pop();<br>	&#125;<br>	st.push(nums[i]);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>画图理解<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/cfx.png#id=H4HW4&originHeight=473&originWidth=990&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload><br>思路</p>
+<blockquote>
+<p>对于一个高度，如果能得到向左和向右的边界 那么就能对每个高度求一次面积 遍历所有高度，即可得出最大面积<br><code>使用单调栈，在出栈操作时得到前后边界并计算面积</code></p>
+</blockquote>
+<p>答题</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">largestRectangleArea</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;&amp; heights)</span><br>&#123;<br>    <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; st;<br>    heights.insert(heights.begin(), <span class="hljs-number">0</span>);<br>    heights.push_back(<span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; heights.size(); i++)<br>    &#123;<br>        <span class="hljs-keyword">while</span> (!st.empty() &amp;&amp; heights[st.back()] &gt; heights[i])<br>        &#123;<br>            <span class="hljs-type">int</span> cur = st.back();<br>            st.pop_back();<br>            <span class="hljs-type">int</span> left = st.back() + <span class="hljs-number">1</span>;<br>            <span class="hljs-type">int</span> right = i - <span class="hljs-number">1</span>;<br>            ans = max(ans, (right - left + <span class="hljs-number">1</span>) * heights[cur]);<br>        &#125;<br>        st.push_back(i);<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">largestRectangleArea</span><span class="hljs-params">(<span class="hljs-type">int</span>[] heights)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> heights.length;<br>        <span class="hljs-type">int</span>[] left = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-type">int</span>[] right = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        Arrays.fill(right, n);<br><br>        Stack&lt;Integer&gt; mono_stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;Integer&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;<br>            <span class="hljs-keyword">while</span> (!mono_stack.isEmpty() &amp;&amp; heights[mono_stack.peek()] &gt;= heights[i]) &#123;<br>                right[mono_stack.peek()] = i;<br>                mono_stack.pop();<br>            &#125;<br>            left[i] = (mono_stack.isEmpty() ? -<span class="hljs-number">1</span> : mono_stack.peek());<br>            mono_stack.push(i);<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;<br>            ans = Math.max(ans, (right[i] - left[i] - <span class="hljs-number">1</span>) * heights[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="接雨水-困难"><a href="#接雨水-困难" class="headerlink" title="接雨水(困难)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water/">接雨水(困难)</a></h4><blockquote>
+<p>暴力解法、优化、双指针、<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-w-8/">单调栈</a></p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/jys.png#id=O67Eq&originHeight=273&originWidth=568&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">trap6</span><span class="hljs-params">(<span class="hljs-type">int</span>[] height)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        Stack&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">current</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (current &lt; height.length) &#123;<br>            <span class="hljs-comment">//如果栈不空并且当前指向的高度大于栈顶高度就一直循环</span><br>            <span class="hljs-keyword">while</span> (!stack.empty() &amp;&amp; height[current] &gt; height[stack.peek()]) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">h</span> <span class="hljs-operator">=</span> height[stack.peek()]; <span class="hljs-comment">//取出要出栈的元素</span><br>                stack.pop(); <span class="hljs-comment">//出栈</span><br>                <span class="hljs-keyword">if</span> (stack.empty()) &#123; <span class="hljs-comment">// 栈空就出去</span><br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">distance</span> <span class="hljs-operator">=</span> current - stack.peek() - <span class="hljs-number">1</span>; <span class="hljs-comment">//两堵墙之前的距离。</span><br>                <span class="hljs-type">int</span> <span class="hljs-variable">min</span> <span class="hljs-operator">=</span> Math.min(height[stack.peek()], height[current]);<br>                sum = sum + distance * (min - h);<br>            &#125;<br>            stack.push(current); <span class="hljs-comment">//当前指向的墙入栈</span><br>            current++; <span class="hljs-comment">//指针后移</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> sum;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="接雨水-II-困难"><a href="#接雨水-II-困难" class="headerlink" title="接雨水 II(困难)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water-ii">接雨水 II(困难)</a></h4><ul>
+<li>该方块不为最外层的方块；</li>
+<li>该方块自身的高度比其上下左右四个相邻的方块接水后的高度都要低；<blockquote>
+<p>我们假设初始时矩阵的每个格子都接满了水，其高度均为maxHeight,其中maxHeight为矩阵中高度最高的格子。我们知道方块接水后的高度为water[i][j],他的求解公式，方块(i,j)的接水的高度为:<br><code>water[i][j]=max(heightMap[i],min(water[i−1][j],water[i+1][j],water[i][j−1],water[i][j+1]))</code><br>我们知道方块 (i,j)(i,j) 实际接水的容量计算公式为 water[i][j] - heightMap[i][j]<br>我们首先假设每个方块 (i,j) 的接水后的高度均为 water[i][j] = maxHeight，首先我们知道最外层的方块的肯定不能接水，所有的多余的水都会从最外层的方块溢出，我们每次发现当前方块 (i,j) 的接水高度 water[i][j] 小于与它相邻的 4 个模块的接水高度时，则我们将进行调整接水高度，我们将其相邻的四个方块的接水高度调整与 (i,j) 的高度保持一致，我们不断重复的进行调整，直到所有的方块的接水高度不再有调整时即为满足要求。</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">trapRainWater</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] heightMap)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> heightMap.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> heightMap[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-comment">//方向数组　把dx和dy压缩成一维来做</span><br>        <span class="hljs-type">int</span>[] dirs = &#123;-<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, -<span class="hljs-number">1</span>&#125;;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">maxHeight</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">//找出最大值</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; ++i) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; ++j) &#123;<br>                maxHeight = Math.max(maxHeight, heightMap[i][j]);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">//全部设置为最大值</span><br>        <span class="hljs-type">int</span>[][] water = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m][n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; ++i) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; ++j)&#123;<br>                water[i][j] = maxHeight;      <br>            &#125;<br>        &#125;  <br>        <span class="hljs-comment">//构建队列</span><br>        Queue&lt;<span class="hljs-type">int</span>[]&gt; qu = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; ++i) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; ++j) &#123;<br>                <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span> || i == m - <span class="hljs-number">1</span> || j == <span class="hljs-number">0</span> || j == n - <span class="hljs-number">1</span>) &#123;<span class="hljs-comment">//最外一圈</span><br>                    <span class="hljs-keyword">if</span> (water[i][j] &gt; heightMap[i][j]) &#123;<br>                        water[i][j] = heightMap[i][j];<br>                        qu.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;i, j&#125;);<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125; <br>        <span class="hljs-comment">//广度优先遍历</span><br>        <span class="hljs-keyword">while</span> (!qu.isEmpty()) &#123;<br>            <span class="hljs-type">int</span>[] curr = qu.poll();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> curr[<span class="hljs-number">0</span>];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> curr[<span class="hljs-number">1</span>];<br>            <span class="hljs-comment">//搜索四个方向</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; ++i) &#123;<br>                <span class="hljs-comment">//四周坐标</span><br>                <span class="hljs-type">int</span> <span class="hljs-variable">nx</span> <span class="hljs-operator">=</span> x + dirs[i], ny = y + dirs[i + <span class="hljs-number">1</span>];<br>                <span class="hljs-comment">//坐标越界</span><br>                <span class="hljs-keyword">if</span> (nx &lt; <span class="hljs-number">0</span> || nx &gt;= m || ny &lt; <span class="hljs-number">0</span> || ny &gt;= n) &#123;<br>                    <span class="hljs-keyword">continue</span>;<br>                &#125;<br>                <span class="hljs-comment">//如果当前坐标水位 &lt; 某一个方向水位　&amp;&amp; 某一个水位 &gt; 矩阵中高度</span><br>                <span class="hljs-keyword">if</span> (water[x][y] &lt; water[nx][ny] &amp;&amp; water[nx][ny] &gt; heightMap[nx][ny]) &#123;<br>                    <span class="hljs-comment">//当前水位还可以进行装</span><br>                    water[nx][ny] = Math.max(water[x][y], heightMap[nx][ny]);<br>                    qu.offer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;nx, ny&#125;);<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; ++i) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; ++j) &#123;<br>                res += water[i][j] - heightMap[i][j];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="每日温度-中等"><a href="#每日温度-中等" class="headerlink" title="每日温度(中等)"></a>每日温度(中等)</h4><blockquote>
+<p>暴力解法 + 单调栈</p>
+</blockquote>
+<h4 id="下一个更大元素-I-easy"><a href="#下一个更大元素-I-easy" class="headerlink" title="下一个更大元素 I (easy)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/next-greater-element-i/">下一个更大元素 I</a> (easy)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-comment">//stack and map</span><br>    <span class="hljs-comment">//单调栈存储nums2的值，栈顶到栈底逐渐增大，当我们查找num1时，肯定是优先比较靠近的，因为栈递增，所以在构建栈的时候我们即可知道当前num的右边第一个大于他的数</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] nextGreaterElement(<span class="hljs-type">int</span>[] nums1, <span class="hljs-type">int</span>[] nums2) &#123;<br>        Map&lt;Integer,Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        Stack&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>        <span class="hljs-comment">//构建单调栈</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=nums2.length-<span class="hljs-number">1</span>;i&gt;=<span class="hljs-number">0</span>;i--)&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> nums2[i];<br>            <span class="hljs-keyword">while</span>(!stack.isEmpty()&amp;#&gt;=stack.peek())stack.pop();<span class="hljs-comment">//栈顶元素小于num弹出</span><br>            map.put(num,stack.isEmpty()?-<span class="hljs-number">1</span>:stack.peek());<span class="hljs-comment">//记录元素num右边第一个大于num数的值</span><br>            stack.push(num);<span class="hljs-comment">//压入当前num</span><br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;nums1.length;i++)&#123;<br>            nums1[i] = map.get(nums1[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> nums1;<br>    &#125;<br>    <span class="hljs-comment">//bf</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] nextGreaterElementByBF(<span class="hljs-type">int</span>[] nums1, <span class="hljs-type">int</span>[] nums2) &#123;<br>        Map&lt;Integer,Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;nums2.length;i++)map.put(nums2[i],i);<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;nums1.length;i++)&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> k=map.get(nums1[i]);k&lt;nums2.length;k++)&#123;<br>                <span class="hljs-keyword">if</span>(nums2[k]&gt;nums1[i])&#123;<br>                    index = nums2[k];<br>                    <span class="hljs-keyword">break</span>;<br>                    &#125;<br>                &#125;<br>            nums1[i] = index;<br>        &#125;<br>        <span class="hljs-keyword">return</span> nums1;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="下一个更大元素-II"><a href="#下一个更大元素-II" class="headerlink" title="下一个更大元素 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/next-greater-element-ii/">下一个更大元素 II</a></h4><blockquote>
+<p>暴力解法、单调栈</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-comment">//单调栈中保存的是下标，从栈底到栈顶的下标在数组 nums 中对应的值是单调不升的(顶小底大)。</span><br>    <span class="hljs-comment">//每次我们移动到数组中的一个新的位置 i，我们就将当前单调栈中所有对应值小于 nums[i] 的下标弹出单调栈，这些值的下一个更大元素即为 nums[i]</span><br>    <span class="hljs-comment">// （证明很简单：如果有更靠前的更大元素，那么这些位置将被提前弹出栈）。随后我们将位置 i 入栈。</span><br>    <span class="hljs-comment">//但是注意到只遍历一次序列是不够的，例如序列 [2,3,1]，最后单调栈中将剩余 [3,1]，其中元素 [1] 的下一个更大元素还是不知道的。</span><br>    <span class="hljs-comment">//一个朴素的思想是，我们可以把这个循环数组「拉直」，即复制该序列的前 n−1 个元素拼接在原序列的后面。这样我们就可以将这个新序列当作普通序列，用上文的方法来处理。</span><br>    <span class="hljs-comment">//而在本题中，我们不需要显性地将该循环数组「拉直」，而只需要在处理时对下标取模即可。</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] nextGreaterElements(<span class="hljs-type">int</span>[] nums) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-type">int</span>[] ret = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        Arrays.fill(ret, -<span class="hljs-number">1</span>);<br>        Stack&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;Integer&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n * <span class="hljs-number">2</span> - <span class="hljs-number">1</span>; i++) &#123;<br>            <span class="hljs-keyword">while</span> (!stack.isEmpty() &amp;&amp; nums[stack.peek()] &lt; nums[i % n]) &#123;<br>                ret[stack.pop()] = nums[i % n];<br>            &#125;<br>            stack.push(i % n);<span class="hljs-comment">//存的是下标</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="下一个更大元素-III"><a href="#下一个更大元素-III" class="headerlink" title="下一个更大元素 III"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/next-greater-element-iii/">下一个更大元素 III</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-comment">//思路: 从右往左找到第一对连续的数字 a[i] 和 a[i−1] 满足 a[i−1]&lt;a[i]。到当前位置，</span><br>    <span class="hljs-comment">//a[i−1] 右边的数字没办法产生一个更大的排列，因为右边的数字是[降序]的。</span><br>    <span class="hljs-comment">//所以我们需要重新排布 a[i−1] 到最右边的数字来得到下一个排列。</span><br>    <br>	<span class="hljs-comment">//那么怎样排布能得到下一个更大的数字呢？</span><br>    <span class="hljs-comment">//我们想得到恰好大于当前数字的下一个排列，所以我们需要用恰好大于 a[i−1] 的数字去替换掉 a[i−1]，比方说我们让这个数字为 a[j]。</span><br>	<span class="hljs-comment">//我们将 a[i−1] 和 a[j] 交换，我们现在在下标为 i−1 的地方得到了正确的数字，但当前的结果还不是一个正确的排列。</span><br>    <span class="hljs-comment">//我们需要用从 i−1 开始到最右边数字剩下来的数字升序排列，来得到它们中的最小排列。</span><br>	<span class="hljs-comment">//我们注意到在从右往左找到第一对 a[i−1]&lt;a[i] 的连续数字前， a[i−1] 右边的数字都是降序排列的，</span><br>    <span class="hljs-comment">//所以交换 a[i−1] 和 a[j] 不会改变下标从 i 开始到最后的顺序。所以我们在交换了 a[i−1] 和 a[j] 以后，</span><br>    <span class="hljs-comment">//只需要反转下标从 i 开始到最后的数字，就可以得到下一个字典序最小的排列。</span><br>    <span class="hljs-comment">//</span><br>    <span class="hljs-comment">//例如</span><br>    <span class="hljs-comment">//158476531</span><br>    <span class="hljs-comment">//1.从右向左查找a[i−1]&lt;a[i]即a[3]&lt;a[4],i=4,即[476531]</span><br>    <span class="hljs-comment">//2.从右向左查找第一个比a[i−1]大的数与它进行交换，即[576431]</span><br>    <span class="hljs-comment">//3.翻转[76431]得[13467]</span><br>    <span class="hljs-comment">//答案即158&#x27;5&#x27;&#x27;13467&#x27;</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">nextGreaterElement</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-type">char</span>[] a = (<span class="hljs-string">&quot;&quot;</span> + n).toCharArray();<span class="hljs-comment">//转为数组进行操作</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> a.length - <span class="hljs-number">2</span>;<span class="hljs-comment">//初始化i长度</span><br>        <span class="hljs-comment">//查找第一对a[i-1]&lt;a[i]的位置</span><br>        <span class="hljs-keyword">while</span> (i &gt;= <span class="hljs-number">0</span> &amp;&amp; a[i + <span class="hljs-number">1</span>] &lt;= a[i]) i--;<br>        <span class="hljs-keyword">if</span> (i &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<span class="hljs-comment">//不存在直接返回-1</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> a.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-comment">//查找比a[i-1]大的数</span><br>        <span class="hljs-keyword">while</span> (j &gt;= <span class="hljs-number">0</span> &amp;&amp; a[j] &lt;= a[i]) j--;<br>        <span class="hljs-comment">//交换i和j的值</span><br>        swap(a, i, j);<br>        <span class="hljs-comment">//翻转i+1-n的数</span><br>        reverse(a, i + <span class="hljs-number">1</span>);<br>        <span class="hljs-comment">//转为整数</span><br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">return</span> Integer.parseInt(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(a));<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">reverse</span><span class="hljs-params">(<span class="hljs-type">char</span>[] a, <span class="hljs-type">int</span> start)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> start, j = a.length - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; j) &#123;<br>            swap(a, i, j);<br>            i++;<br>            j--;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">char</span>[] a, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-type">char</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> a[i];<br>        a[i] = a[j];<br>        a[j] = temp;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+<h4 id="去除重复字母-困难"><a href="#去除重复字母-困难" class="headerlink" title="去除重复字母(困难)"></a>去除重复字母(困难)</h4><blockquote>
+<p>栈 + 哨兵技巧（Java、C++、Python）</p>
+</blockquote>
+<h4 id="股票价格跨度-中等"><a href="#股票价格跨度-中等" class="headerlink" title="股票价格跨度(中等)"></a>股票价格跨度(中等)</h4><blockquote>
+<p>单调栈</p>
+</blockquote>
+<h4 id="最短无序连续子数组"><a href="#最短无序连续子数组" class="headerlink" title="最短无序连续子数组()"></a>最短无序连续子数组()</h4><h4 id="简化路径（中等）"><a href="#简化路径（中等）" class="headerlink" title="简化路径（中等）"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/simplify-path/">简化路径</a>（中等）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//思路：使用‘/’进行分割得到的结果类型有</span><br><span class="hljs-comment">//1.空字符串。例如当出现多个连续的 /，就会分割出空字符串</span><br><span class="hljs-comment">//2.一个点 .</span><br><span class="hljs-comment">//3.两个点 ..</span><br><span class="hljs-comment">//4.只包含英文字母、数字或下划线的目录名。</span><br><span class="hljs-comment">//</span><br><span class="hljs-comment">//当遇到「空字符串」以及「一个点」，无需对它们进行处理</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">simplifyPath</span><span class="hljs-params">(String path)</span> &#123;<br>        String[] names = path.split(<span class="hljs-string">&quot;/&quot;</span>);<br>        Deque&lt;String&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;String&gt;();<br>        <span class="hljs-keyword">for</span> (String name : names) &#123;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;..&quot;</span>.equals(name)) &#123;<span class="hljs-comment">//遇到&#x27;..&#x27;则弹栈，否则不是「空字符串」以及「一个点」压栈</span><br>                <span class="hljs-keyword">if</span> (!stack.isEmpty()) &#123;<br>                    stack.pollLast();<br>                &#125;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (name.length() &gt; <span class="hljs-number">0</span> &amp;&amp; !<span class="hljs-string">&quot;.&quot;</span>.equals(name)) &#123;<br>                stack.offerLast(name);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">//拼接处理</span><br>        <span class="hljs-type">StringBuffer</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>();<br>        <span class="hljs-keyword">if</span> (stack.isEmpty()) &#123;<br>            ans.append(<span class="hljs-string">&#x27;/&#x27;</span>);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">while</span> (!stack.isEmpty()) &#123;<br>                ans.append(<span class="hljs-string">&#x27;/&#x27;</span>);<br>                ans.append(stack.pollFirst());<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="括号的最大嵌套深度（easy）"><a href="#括号的最大嵌套深度（easy）" class="headerlink" title="括号的最大嵌套深度（easy）"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-nesting-depth-of-the-parentheses/">括号的最大嵌套深度</a>（easy）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>	<span class="hljs-comment">//遇到左括号++且比较size，右括号--</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxDepth</span><span class="hljs-params">(String s)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, size = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); ++i) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">ch</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            <span class="hljs-keyword">if</span> (ch == <span class="hljs-string">&#x27;(&#x27;</span>) &#123;<br>                ++size;<br>                ans = Math.max(ans, size);<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ch == <span class="hljs-string">&#x27;)&#x27;</span>) &#123;<br>                --size;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="用栈实现队列（easy）"><a href="#用栈实现队列（easy）" class="headerlink" title="用栈实现队列（easy）"></a>用栈实现队列（easy）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//使用两个栈（输入栈，输出栈），当输出栈为空则将输入栈弹进输出栈</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyQueue</span> &#123;<br>    Stack&lt;Integer&gt; stackA;<br>    Stack&lt;Integer&gt; stackB;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MyQueue</span><span class="hljs-params">()</span> &#123;<br>        stackA = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;Integer&gt;();<br>        stackB = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;Integer&gt;();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">push</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        stackA.push(x);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">pop</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span>(stackB.isEmpty())<br>        <span class="hljs-keyword">while</span>(!<span class="hljs-built_in">this</span>.stackA.isEmpty())&#123;<br>            <span class="hljs-type">Integer</span> <span class="hljs-variable">pop</span> <span class="hljs-operator">=</span> stackA.pop();<br>            stackB.push(pop);<br>        &#125;<br>        <span class="hljs-keyword">return</span> stackB.pop();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">peek</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span>(stackB.isEmpty())<br>        <span class="hljs-keyword">while</span>(!<span class="hljs-built_in">this</span>.stackA.isEmpty())&#123;<br>            <span class="hljs-type">Integer</span> <span class="hljs-variable">pop</span> <span class="hljs-operator">=</span> stackA.pop();<br>            stackB.push(pop);<br>        &#125;<br>        <span class="hljs-keyword">return</span> stackB.peek();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">empty</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.stackA.isEmpty()&amp;&amp;<span class="hljs-built_in">this</span>.stackB.isEmpty();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="用队列实现栈（easy）"><a href="#用队列实现栈（easy）" class="headerlink" title="用队列实现栈（easy）"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/implement-stack-using-queues/">用队列实现栈</a>（easy）</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-operator">/</span><span class="hljs-operator">/</span>两个队列实现<br>class MyStack &#123;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>思路：一个队列存储值，另一个队列作为入栈的辅助队列。进栈先入queueB，在将queueB元素移过来（此时新元素即是队首），交换queueA和QueueB<br>    LinkedList<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> queueA;<br>    LinkedList<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> queueB;<br>    public MyStack() &#123;<br>        queueA <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> LinkedList();<br>        queueB <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> LinkedList();<br>    &#125;<br>    public void push(<span class="hljs-type">int</span> x) &#123;<br>        queueB.push(x);<br>        while(<span class="hljs-operator">!</span>queueA.isEmpty())queueB.offer(queueA.pop());<br>        LinkedList qa <span class="hljs-operator">=</span> queueA;<br>        queueA <span class="hljs-operator">=</span> queueB;<br>        queueB <span class="hljs-operator">=</span> qa;<br>    &#125;<br>    public <span class="hljs-type">int</span> pop() &#123;<br>        <span class="hljs-keyword">return</span> queueA.pop();<br>    &#125;<br>    <br>    public <span class="hljs-type">int</span> top() &#123;<br>        <span class="hljs-keyword">return</span> queueA.peek();<br>    &#125;<br>    <br>    public <span class="hljs-type">boolean</span> <span class="hljs-keyword">empty</span>() &#123;<br>        <span class="hljs-keyword">return</span> queueA.isEmpty();<br>    &#125;<br>&#125;<br><span class="hljs-operator">/</span><span class="hljs-operator">/</span>一个队列实现<br>class MyStack &#123;<br>		<span class="hljs-operator">/</span><span class="hljs-operator">/</span>思路: 通过每次将队列的值旋转到末尾<br>    Queue<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> queue;<br>    public MyStack() &#123;<br>        queue <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> LinkedList<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span>();<br>    &#125;<br>    public void push(<span class="hljs-type">int</span> x) &#123;<br>        <span class="hljs-type">int</span> n <span class="hljs-operator">=</span> queue.size();<br>        queue.offer(x);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i <span class="hljs-operator">&lt;</span> n; i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>) &#123;<br>            queue.offer(queue.poll());<br>        &#125;<br>    &#125;<br>    public <span class="hljs-type">int</span> pop() &#123;<br>        <span class="hljs-keyword">return</span> queue.poll();<br>    &#125;<br>    public <span class="hljs-type">int</span> top() &#123;<br>        <span class="hljs-keyword">return</span> queue.peek();<br>    &#125;<br>    public <span class="hljs-type">boolean</span> <span class="hljs-keyword">empty</span>() &#123;<br>        <span class="hljs-keyword">return</span> queue.isEmpty();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="最小栈（easy）"><a href="#最小栈（easy）" class="headerlink" title="最小栈（easy）"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/min-stack/">最小栈</a>（easy）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MinStack</span> &#123;<br>    <span class="hljs-comment">//一个正在栈，一个单调栈（个数一样）</span><br>    Deque&lt;Integer&gt; xStack;<br>    Deque&lt;Integer&gt; minStack;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MinStack</span><span class="hljs-params">()</span> &#123;<br>        xStack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;Integer&gt;();<br>        minStack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;Integer&gt;();<br>        minStack.push(Integer.MAX_VALUE);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">push</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        xStack.push(x);<br>        minStack.push(Math.min(minStack.peek(), x));<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">pop</span><span class="hljs-params">()</span> &#123;<br>        xStack.pop();<br>        minStack.pop();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">top</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> xStack.peek();<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getMin</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> minStack.peek();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="字符串解码"><a href="#字符串解码" class="headerlink" title="字符串解码"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/decode-string/">字符串解码</a></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><code class="hljs sql">class Solution &#123;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>思路:借助栈<br>    public String decodeString(String s) &#123;<br>        StringBuilder sb <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> StringBuilder();<br>        Stack<span class="hljs-operator">&lt;</span>String<span class="hljs-operator">&gt;</span> stack <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> Stack<span class="hljs-operator">&lt;&gt;</span>();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i<span class="hljs-operator">=</span><span class="hljs-number">0</span>;i<span class="hljs-operator">&lt;</span>s.length();i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)&#123;<br>            <span class="hljs-type">char</span> c <span class="hljs-operator">=</span> s.charAt(i);<br>            if(c<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;[&#x27;</span>)&#123;<span class="hljs-operator">/</span><span class="hljs-operator">/</span>压栈<br>                <span class="hljs-type">int</span> <span class="hljs-keyword">start</span> <span class="hljs-operator">=</span> i, <span class="hljs-keyword">end</span> <span class="hljs-operator">=</span> i;<br>                <span class="hljs-operator">/</span><span class="hljs-operator">/</span>遇到字母和]停止<br>                while(<span class="hljs-keyword">start</span><span class="hljs-operator">&gt;</span><span class="hljs-number">0</span><span class="hljs-operator">&amp;&amp;</span>s.charAt(<span class="hljs-keyword">start</span><span class="hljs-number">-1</span>)<span class="hljs-operator">&gt;=</span><span class="hljs-string">&#x27;0&#x27;</span><span class="hljs-operator">&amp;&amp;</span>s.charAt(<span class="hljs-keyword">start</span><span class="hljs-number">-1</span>)<span class="hljs-operator">&lt;=</span><span class="hljs-string">&#x27;9&#x27;</span>)<span class="hljs-keyword">start</span><span class="hljs-comment">--;</span><br>                while(<span class="hljs-keyword">end</span><span class="hljs-operator">+</span><span class="hljs-number">1</span><span class="hljs-operator">&lt;</span>s.length()<span class="hljs-operator">&amp;&amp;</span>s.charAt(<span class="hljs-keyword">end</span><span class="hljs-operator">+</span><span class="hljs-number">1</span>)<span class="hljs-operator">&gt;=</span><span class="hljs-string">&#x27;a&#x27;</span><span class="hljs-operator">&amp;&amp;</span>s.charAt(<span class="hljs-keyword">end</span><span class="hljs-operator">+</span><span class="hljs-number">1</span>)<span class="hljs-operator">&lt;=</span><span class="hljs-string">&#x27;z&#x27;</span>)<span class="hljs-keyword">end</span><span class="hljs-operator">+</span><span class="hljs-operator">+</span>;<br>                String str <span class="hljs-operator">=</span> s.<span class="hljs-built_in">substring</span>(<span class="hljs-keyword">start</span>,<span class="hljs-keyword">end</span><span class="hljs-operator">+</span><span class="hljs-number">1</span>);<br>                stack.push(str);<br>                i<span class="hljs-operator">=</span><span class="hljs-keyword">end</span>;<br>            &#125;<span class="hljs-keyword">else</span> if(c<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;]&#x27;</span>)&#123;<span class="hljs-operator">/</span><span class="hljs-operator">/</span>弹栈<br>                String p <span class="hljs-operator">=</span> stack.pop();<br>                <span class="hljs-type">int</span> idx <span class="hljs-operator">=</span> p.indexOf(<span class="hljs-string">&#x27;[&#x27;</span>);<br>                <span class="hljs-type">int</span> size <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>                <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j<span class="hljs-operator">=</span><span class="hljs-number">0</span>;j<span class="hljs-operator">&lt;</span>idx;j<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)size<span class="hljs-operator">=</span>size<span class="hljs-operator">*</span><span class="hljs-number">10</span><span class="hljs-operator">+</span>p.charAt(j)<span class="hljs-operator">-</span><span class="hljs-string">&#x27;0&#x27;</span>;<br>                String str <span class="hljs-operator">=</span> p.<span class="hljs-built_in">substring</span>(idx<span class="hljs-operator">+</span><span class="hljs-number">1</span>,p.length());<br>                StringBuilder sbr <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> StringBuilder();<br>                <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j<span class="hljs-operator">=</span><span class="hljs-number">0</span>;j<span class="hljs-operator">&lt;</span>size;j<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)sbr.append(str);<br>                if(<span class="hljs-operator">!</span>stack.isEmpty())&#123;<br>                    String pop <span class="hljs-operator">=</span> stack.pop();<br>                    pop<span class="hljs-operator">+</span><span class="hljs-operator">=</span>sbr.toString();<br>                    stack.push(pop);<br>                &#125;<span class="hljs-keyword">else</span> sb.append(sbr.toString());<br>            &#125;<span class="hljs-keyword">else</span> if(c<span class="hljs-operator">&gt;=</span><span class="hljs-string">&#x27;A&#x27;</span><span class="hljs-operator">&amp;&amp;</span>c<span class="hljs-operator">&lt;=</span><span class="hljs-string">&#x27;z&#x27;</span>)&#123;<br>                if(<span class="hljs-operator">!</span>stack.isEmpty())&#123;<br>                    String pop <span class="hljs-operator">=</span> stack.pop();<br>                    pop<span class="hljs-operator">+</span><span class="hljs-operator">=</span>c;<br>                    stack.push(pop);<br>                &#125;<span class="hljs-keyword">else</span> sb.append(c);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br><span class="hljs-operator">/</span><span class="hljs-operator">/</span>递归<br>class Solution &#123;<br>    String src;<br>    <span class="hljs-type">int</span> ptr;<br>    public String decodeString(String s) &#123;<br>        src <span class="hljs-operator">=</span> s;<br>        ptr <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">return</span> getString();<br>    &#125;<br>    public String getString() &#123;<br>        if (ptr <span class="hljs-operator">=</span><span class="hljs-operator">=</span> src.length() <span class="hljs-operator">||</span> src.charAt(ptr) <span class="hljs-operator">=</span><span class="hljs-operator">=</span> <span class="hljs-string">&#x27;]&#x27;</span>) &#123;<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> String <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> EPS<br>            <span class="hljs-keyword">return</span> &quot;&quot;;<br>        &#125;<br>        <span class="hljs-type">char</span> cur <span class="hljs-operator">=</span> src.charAt(ptr);<br>        <span class="hljs-type">int</span> repTime <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        String ret <span class="hljs-operator">=</span> &quot;&quot;;<br>        if (Character.isDigit(cur)) &#123;<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> String <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> Digits [ String ] String<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 解析 Digits<br>            repTime <span class="hljs-operator">=</span> getDigits(); <br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 过滤左括号<br>            <span class="hljs-operator">+</span><span class="hljs-operator">+</span>ptr;<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 解析 String<br>            String str <span class="hljs-operator">=</span> getString(); <br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 过滤右括号<br>            <span class="hljs-operator">+</span><span class="hljs-operator">+</span>ptr;<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 构造字符串<br>            while (repTime<span class="hljs-comment">-- &gt; 0) &#123;</span><br>                ret <span class="hljs-operator">+</span><span class="hljs-operator">=</span> str;<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> if (Character.isLetter(cur)) &#123;<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> String <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> <span class="hljs-type">Char</span> String<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 解析 <span class="hljs-type">Char</span><br>            ret <span class="hljs-operator">=</span> String.valueOf(src.charAt(ptr<span class="hljs-operator">+</span><span class="hljs-operator">+</span>));<br>        &#125;<br>        <span class="hljs-keyword">return</span> ret <span class="hljs-operator">+</span> getString();<br>    &#125;<br>    public <span class="hljs-type">int</span> getDigits() &#123;<br>        <span class="hljs-type">int</span> ret <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        while (ptr <span class="hljs-operator">&lt;</span> src.length() <span class="hljs-operator">&amp;&amp;</span> Character.isDigit(src.charAt(ptr))) &#123;<br>            ret <span class="hljs-operator">=</span> ret <span class="hljs-operator">*</span> <span class="hljs-number">10</span> <span class="hljs-operator">+</span> src.charAt(ptr<span class="hljs-operator">+</span><span class="hljs-operator">+</span>) <span class="hljs-operator">-</span> <span class="hljs-string">&#x27;0&#x27;</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="基本计算器"><a href="#基本计算器" class="headerlink" title="基本计算器"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/basic-calculator/">基本计算器</a></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs sql">class Solution &#123;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>思路：栈<span class="hljs-operator">+</span>符号位<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>表达式只有加和减，其实开括号影响的是括号前面的数，如果是正数不变，负数括号内的符号取反<br>    public <span class="hljs-type">int</span> calculate(String s) &#123;<br>        Stack<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> stack <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> Stack<span class="hljs-operator">&lt;&gt;</span>();<br>        stack.push(<span class="hljs-number">1</span>);<br>        <span class="hljs-type">int</span> i<span class="hljs-operator">=</span><span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> ans<span class="hljs-operator">=</span><span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> sign <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        while(i<span class="hljs-operator">&lt;</span>s.length())&#123;<br>            <span class="hljs-type">char</span> c <span class="hljs-operator">=</span> s.charAt(i);<br>            if(c<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27; &#x27;</span>)i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>;<br>            <span class="hljs-keyword">else</span> if(c<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;+&#x27;</span>)&#123;<span class="hljs-operator">/</span><span class="hljs-operator">/</span><br>                sign <span class="hljs-operator">=</span> stack.peek();<br>                i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>;<br>            &#125;<span class="hljs-keyword">else</span> if(c<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;-&#x27;</span>)&#123;<span class="hljs-operator">/</span><span class="hljs-operator">/</span>更新sign<br>                sign <span class="hljs-operator">=</span> <span class="hljs-operator">-</span>stack.peek();<br>                i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>;<br>            &#125;<span class="hljs-keyword">else</span> if(c<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;(&#x27;</span>)&#123;<br>                stack.push(sign);<br>                i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>;<br>            &#125;<span class="hljs-keyword">else</span> if(c<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;)&#x27;</span>)&#123;<br>                stack.pop();<br>                i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                long num <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>                while(i<span class="hljs-operator">&lt;</span>s.length()<span class="hljs-operator">&amp;&amp;</span>Character.isDigit(s.charAt(i)))&#123;<br>                    num <span class="hljs-operator">=</span> num <span class="hljs-operator">*</span> <span class="hljs-number">10</span> <span class="hljs-operator">+</span> s.charAt(i)<span class="hljs-operator">-</span><span class="hljs-string">&#x27;0&#x27;</span>;<br>                    i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>;<br>                &#125;<br>                ans<span class="hljs-operator">+</span><span class="hljs-operator">=</span>sign<span class="hljs-operator">*</span>num;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="基本计算器-II"><a href="#基本计算器-II" class="headerlink" title="基本计算器 II"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/basic-calculator-ii/">基本计算器 II</a></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs sql">class Solution &#123;<br>		<span class="hljs-operator">/</span><span class="hljs-operator">/</span>思路：栈来保存每一项，遇到<span class="hljs-operator">*</span>和<span class="hljs-operator">/</span>先与栈顶运算在压，最后全部弹栈求和<br>    public <span class="hljs-type">int</span> calculate(String s) &#123;<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 保存上一个符号，初始为 <span class="hljs-operator">+</span><br>        <span class="hljs-type">char</span> sign <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;+&#x27;</span>;<br>        Stack<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> numStack <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> Stack<span class="hljs-operator">&lt;&gt;</span>();<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 保存当前数字，如：<span class="hljs-number">12</span>是两个字符，需要进位累加<br>        <span class="hljs-type">int</span> num <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-keyword">result</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i <span class="hljs-operator">&lt;</span> s.length(); i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)&#123;<br>            <span class="hljs-type">char</span> cur <span class="hljs-operator">=</span> s.charAt(i);<br>            if(cur <span class="hljs-operator">&gt;=</span> <span class="hljs-string">&#x27;0&#x27;</span>)&#123;<br>                <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 记录当前数字。先减，防溢出<br>                num <span class="hljs-operator">=</span> num<span class="hljs-operator">*</span><span class="hljs-number">10</span> <span class="hljs-operator">-</span> <span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-operator">+</span> cur;<br>            &#125;<br>            if((cur <span class="hljs-operator">&lt;</span> <span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-operator">&amp;&amp;</span> cur <span class="hljs-operator">!=</span><span class="hljs-string">&#x27; &#x27;</span> )<span class="hljs-operator">||</span> i <span class="hljs-operator">=</span><span class="hljs-operator">=</span> s.length()<span class="hljs-number">-1</span>)&#123;<br>                <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 判断上一个符号是什么<br>                switch(sign)&#123;<br>                    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 当前符号前的数字直接压栈<br>                    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;+&#x27;</span>: numStack.push(num);break;<br>                    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 当前符号前的数字取反压栈<br>                    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;-&#x27;</span>: numStack.push(<span class="hljs-operator">-</span>num);break;<br>                    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 数字栈栈顶数字出栈，与当前符号前的数字相乘，结果值压栈<br>                    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;*&#x27;</span>: numStack.push(numStack.pop()<span class="hljs-operator">*</span>num);break;<br>                    <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 数字栈栈顶数字出栈，除于当前符号前的数字，结果值压栈<br>                    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;/&#x27;</span>: numStack.push(numStack.pop()<span class="hljs-operator">/</span>num);break;<br>                &#125;<br>                <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 记录当前符号<br>                sign <span class="hljs-operator">=</span> cur;<br>                <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 数字清零<br>                num <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 将栈内剩余数字累加，即为结果<br>        while(<span class="hljs-operator">!</span>numStack.isEmpty())&#123;<br>            <span class="hljs-keyword">result</span> <span class="hljs-operator">+</span><span class="hljs-operator">=</span> numStack.pop();<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">result</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="移掉-K-位数字"><a href="#移掉-K-位数字" class="headerlink" title="移掉 K 位数字"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-k-digits/">移掉 K 位数字</a></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs sql">思路：<br><span class="hljs-number">1.</span>给定一个长度为n的数字序列D[<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4.</span>..,n<span class="hljs-number">-1</span>]，从左往右找到第一个位置（i<span class="hljs-operator">&gt;</span><span class="hljs-number">0</span>）使得 D[i]<span class="hljs-operator">&lt;</span>D[i−<span class="hljs-number">1</span>]，并删去 D[i−<span class="hljs-number">1</span>]；如果不存在，说明整个数字序列单调不降，删去最后一个数字即可,可以继续使用同样的策略，直至删除 k 次。<br><span class="hljs-number">2.</span>基于<span class="hljs-number">1</span>可知其时间复杂度为O(nk),我们可以加速其维护一个单调递增的栈：当遇到单调递增的进栈，当遇到比当天栈顶小的，弹栈直到<br>  <span class="hljs-number">2.1</span> 栈为空<br>  <span class="hljs-number">2.2</span> 或者新的栈顶元素不大于当前数字<br>  <span class="hljs-number">2.3</span> 或者我们已经删除了 kk 位数字<br>public String removeKdigits(String num, <span class="hljs-type">int</span> k) &#123;<br>        Stack<span class="hljs-operator">&lt;</span><span class="hljs-type">Character</span><span class="hljs-operator">&gt;</span> stack <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> Stack<span class="hljs-operator">&lt;&gt;</span>();<br>        <span class="hljs-type">int</span> n <span class="hljs-operator">=</span> num.length();<br>        if(n<span class="hljs-operator">=</span><span class="hljs-operator">=</span>k)<span class="hljs-keyword">return</span> &quot;0&quot;;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i<span class="hljs-operator">=</span><span class="hljs-number">0</span>;i<span class="hljs-operator">&lt;</span>n;i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)&#123;<br>            <span class="hljs-type">char</span> c <span class="hljs-operator">=</span> num.charAt(i);<br>            while(<span class="hljs-operator">!</span>stack.isEmpty()<span class="hljs-operator">&amp;&amp;</span>k<span class="hljs-operator">&gt;</span><span class="hljs-number">0</span><span class="hljs-operator">&amp;&amp;</span>stack.peek()<span class="hljs-operator">&gt;</span>c)&#123;<br>                stack.pop();<br>                k<span class="hljs-comment">--;</span><br>            &#125;<br>            stack.push(c);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i <span class="hljs-operator">&lt;</span> k; <span class="hljs-operator">+</span><span class="hljs-operator">+</span>i) &#123;<br>            stack.pop();<br>        &#125;<br>        StringBuilder sb <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> StringBuilder();<br>        while(<span class="hljs-operator">!</span>stack.isEmpty())&#123;<br>            sb.append(stack.pop());<br>        &#125;<br>        sb.reverse();<br>        <span class="hljs-type">int</span> l <span class="hljs-operator">=</span> sb.length();<br>        if(sb.charAt(<span class="hljs-number">0</span>)<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;0&#x27;</span><span class="hljs-operator">&amp;&amp;</span>l<span class="hljs-operator">&gt;</span><span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i<span class="hljs-operator">=</span><span class="hljs-number">0</span>;i<span class="hljs-operator">&lt;</span>l;i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)&#123;<br>            if(sb.charAt(<span class="hljs-number">0</span>)<span class="hljs-operator">!=</span><span class="hljs-string">&#x27;0&#x27;</span><span class="hljs-operator">||</span>sb.length()<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-number">1</span>)break;<br>            sb.deleteCharAt(<span class="hljs-number">0</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="有效的括号字符串"><a href="#有效的括号字符串" class="headerlink" title="有效的括号字符串"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-parenthesis-string/">有效的括号字符串</a></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><code class="hljs sql">class Solution &#123;<br>		<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">1.</span>栈实现：通过两个栈分别存储<span class="hljs-string">&#x27;(&#x27;</span>和<span class="hljs-string">&#x27;*&#x27;</span>的下标，如果遇到<span class="hljs-string">&#x27;)&#x27;</span>则优先选择弹出<span class="hljs-string">&#x27;(&#x27;</span>,再考虑弹<span class="hljs-string">&#x27;*&#x27;</span>,最后判断<span class="hljs-string">&#x27;(&#x27;</span>栈剩余的元素是否能被<span class="hljs-string">&#x27;*&#x27;</span>栈都抵消（<span class="hljs-string">&#x27;*&#x27;</span>的下标必须都在<span class="hljs-string">&#x27;(&#x27;</span>之后才可以抵消)<br>		public <span class="hljs-type">boolean</span> checkValidString(String s) &#123;<br>        Stack<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> leftStack <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> Stack<span class="hljs-operator">&lt;&gt;</span>();<br>        Stack<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> asteriskStack <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> Stack<span class="hljs-operator">&lt;&gt;</span>();<br>        <span class="hljs-type">int</span> n <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i<span class="hljs-operator">=</span><span class="hljs-number">0</span>;i<span class="hljs-operator">&lt;</span>n;i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)&#123;<br>            <span class="hljs-type">char</span> c <span class="hljs-operator">=</span> s.charAt(i);<br>            if(c<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;(&#x27;</span>)leftStack.push(i);<br>            <span class="hljs-keyword">else</span> if(c<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;*&#x27;</span>)asteriskStack.push(i);<br>            <span class="hljs-keyword">else</span> &#123;<br>                if(<span class="hljs-operator">!</span>leftStack.isEmpty())leftStack.pop();<br>                <span class="hljs-keyword">else</span> if(<span class="hljs-operator">!</span>asteriskStack.isEmpty())asteriskStack.pop();<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;<br>        while(<span class="hljs-operator">!</span>leftStack.isEmpty()<span class="hljs-operator">&amp;&amp;</span><span class="hljs-operator">!</span>asteriskStack.isEmpty())&#123;<br>            <span class="hljs-type">Integer</span> ai <span class="hljs-operator">=</span> asteriskStack.pop();<br>            <span class="hljs-type">Integer</span> li <span class="hljs-operator">=</span> leftStack.pop();<br>            if(li<span class="hljs-operator">&gt;</span>ai)<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> leftStack.isEmpty();<br>    &#125;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">2.</span>动态规划<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>dp[i][j]表示前 i 个字符（字符下标从 <span class="hljs-number">1</span> 开始），能否与 j 个右括号形成合法括号序列。<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>起始时只有 dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] 为 <span class="hljs-literal">true</span>，最终答案为 dp[n][<span class="hljs-number">0</span>]。<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>dp[i][j] 有以下几种情况<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">1.</span>当前字符为<span class="hljs-string">&#x27;(&#x27;</span>: dp[i][j] <span class="hljs-operator">=</span> dp[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>]<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">2.</span>当前字符为<span class="hljs-string">&#x27;)&#x27;</span>: dp[i][j] <span class="hljs-operator">=</span> dp[i<span class="hljs-number">-1</span>][j<span class="hljs-operator">+</span><span class="hljs-number">1</span>]<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">3.</span>当前字符为<span class="hljs-string">&#x27;*&#x27;</span>: dp[i][j] <span class="hljs-operator">=</span> dp[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>] V dp[i<span class="hljs-number">-1</span>][j<span class="hljs-operator">+</span><span class="hljs-number">1</span>] V dp[i<span class="hljs-number">-1</span>][j]<br>    public <span class="hljs-type">boolean</span> checkValidString(String s) &#123;<br>        <span class="hljs-type">int</span> n <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">boolean</span>[][] f <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-type">boolean</span>[n <span class="hljs-operator">+</span> <span class="hljs-number">1</span>][n <span class="hljs-operator">+</span> <span class="hljs-number">1</span>];<br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i <span class="hljs-operator">&lt;=</span> n; i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>) &#123;<br>            <span class="hljs-type">char</span> c <span class="hljs-operator">=</span> s.charAt(i <span class="hljs-operator">-</span> <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j <span class="hljs-operator">&lt;=</span> i; j<span class="hljs-operator">+</span><span class="hljs-operator">+</span>) &#123;<br>                if (c <span class="hljs-operator">=</span><span class="hljs-operator">=</span> <span class="hljs-string">&#x27;(&#x27;</span>) &#123;<br>                    if (j <span class="hljs-operator">-</span> <span class="hljs-number">1</span> <span class="hljs-operator">&gt;=</span> <span class="hljs-number">0</span>) f[i][j] <span class="hljs-operator">=</span> f[i <span class="hljs-operator">-</span> <span class="hljs-number">1</span>][j <span class="hljs-operator">-</span> <span class="hljs-number">1</span>];<br>                &#125; <span class="hljs-keyword">else</span> if (c <span class="hljs-operator">=</span><span class="hljs-operator">=</span> <span class="hljs-string">&#x27;)&#x27;</span>) &#123;<br>                    if (j <span class="hljs-operator">+</span> <span class="hljs-number">1</span> <span class="hljs-operator">&lt;=</span> i) f[i][j] <span class="hljs-operator">=</span> f[i <span class="hljs-operator">-</span> <span class="hljs-number">1</span>][j <span class="hljs-operator">+</span> <span class="hljs-number">1</span>];<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    f[i][j] <span class="hljs-operator">=</span> f[i <span class="hljs-operator">-</span> <span class="hljs-number">1</span>][j];<br>                    if (j <span class="hljs-operator">-</span> <span class="hljs-number">1</span> <span class="hljs-operator">&gt;=</span> <span class="hljs-number">0</span>) f[i][j] <span class="hljs-operator">|</span><span class="hljs-operator">=</span> f[i <span class="hljs-operator">-</span> <span class="hljs-number">1</span>][j <span class="hljs-operator">-</span> <span class="hljs-number">1</span>];<br>                    if (j <span class="hljs-operator">+</span> <span class="hljs-number">1</span> <span class="hljs-operator">&lt;=</span> i) f[i][j] <span class="hljs-operator">|</span><span class="hljs-operator">=</span> f[i <span class="hljs-operator">-</span> <span class="hljs-number">1</span>][j <span class="hljs-operator">+</span> <span class="hljs-number">1</span>];<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> f[n][<span class="hljs-number">0</span>];<br>    &#125;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">3.</span>模拟<br>    public <span class="hljs-type">boolean</span> checkValidString(String s) &#123;<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> l: 左括号最少可能有多少个<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> r: 左括号最多可能有多少个<br>        <span class="hljs-type">int</span> l <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, r <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : s.toCharArray()) &#123;<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 遇到<span class="hljs-string">&#x27;(&#x27;</span>所有可能性加一<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 遇到<span class="hljs-string">&#x27;)&#x27;</span>所有可能性减一<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 遇到<span class="hljs-string">&#x27;*&#x27;</span>，最少的可能性可以变少，最多的可能性也同样可以变多，这取决于这个星号最终我们看成什么，但是可能性都在<br>            if (c <span class="hljs-operator">=</span><span class="hljs-operator">=</span> <span class="hljs-string">&#x27;(&#x27;</span>) &#123;<br>                l<span class="hljs-operator">+</span><span class="hljs-operator">+</span>; r<span class="hljs-operator">+</span><span class="hljs-operator">+</span>;<br>            &#125; <span class="hljs-keyword">else</span> if (c <span class="hljs-operator">=</span><span class="hljs-operator">=</span> <span class="hljs-string">&#x27;)&#x27;</span>) &#123;<br>                l<span class="hljs-comment">--; r--;</span><br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                l<span class="hljs-comment">--; r++;</span><br>            &#125;<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 当前左括号最少个数不能为负<br>            l <span class="hljs-operator">=</span> Math.<span class="hljs-built_in">max</span>(l, <span class="hljs-number">0</span>);<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 这种情况其实发生在r本身是负数的时候，也就是我们常见的右括号太多了<br>            if (l <span class="hljs-operator">&gt;</span> r) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 能取到<span class="hljs-number">0</span>个左括号才是满足平衡的<br>        <span class="hljs-keyword">return</span> l <span class="hljs-operator">=</span><span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="数据流的中位数"><a href="#数据流的中位数" class="headerlink" title="数据流的中位数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-median-from-data-stream/">数据流的中位数</a></h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs sql">class MedianFinder &#123;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>思路：两个堆，最大堆和最小堆。最大堆存小于中位数的数，最小于堆存大于中位数的数，保证大堆顶元素个数比小堆顶最多只能大<span class="hljs-number">1</span><br>    private PriorityQueue<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> minQue;<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>,<span class="hljs-number">11</span>,<span class="hljs-number">12</span>,<span class="hljs-number">13</span>,<span class="hljs-number">14</span><br>    private PriorityQueue<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> maxQue;<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span><br>    public MedianFinder() &#123;<br>        minQue <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> PriorityQueue<span class="hljs-operator">&lt;&gt;</span>();<span class="hljs-operator">/</span><span class="hljs-operator">/</span>默认小堆顶<br>        maxQue <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> PriorityQueue<span class="hljs-operator">&lt;&gt;</span>((a,b)<span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span>(b<span class="hljs-operator">-</span>a));<span class="hljs-operator">/</span><span class="hljs-operator">/</span>大堆顶<br>    &#125;<br>    public void addNum(<span class="hljs-type">int</span> num) &#123;<br>        if(maxQue.isEmpty()<span class="hljs-operator">||</span>num<span class="hljs-operator">&lt;=</span>maxQue.peek())&#123;<br>            maxQue.offer(num);<br>            if(minQue.size()<span class="hljs-operator">+</span><span class="hljs-number">1</span><span class="hljs-operator">&lt;</span>maxQue.size())<span class="hljs-operator">/</span><span class="hljs-operator">/</span>保证大堆顶元素个数比小堆顶最多只能大<span class="hljs-number">1</span><br>            minQue.offer(maxQue.poll());<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            minQue.offer(num);<br>            if(minQue.size()<span class="hljs-operator">&gt;</span>maxQue.size())<span class="hljs-operator">/</span><span class="hljs-operator">/</span>保证大堆顶元素个数比小堆顶最多只能大<span class="hljs-number">1</span><br>            maxQue.offer(minQue.poll());<br>        &#125;<br>    &#125;<br>    public <span class="hljs-keyword">double</span> findMedian() &#123;<br>        if(maxQue.size()<span class="hljs-operator">&gt;</span>minQue.size())<span class="hljs-keyword">return</span> maxQue.peek();<span class="hljs-operator">/</span><span class="hljs-operator">/</span>此时大堆顶的堆顶为中位数<br>        <span class="hljs-keyword">return</span> (minQue.peek()<span class="hljs-operator">+</span>maxQue.peek())<span class="hljs-operator">/</span><span class="hljs-number">2.0</span>;<span class="hljs-operator">/</span><span class="hljs-operator">/</span>取两个堆队首<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="218-天际线问题（hard"><a href="#218-天际线问题（hard" class="headerlink" title="218. 天际线问题（hard)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/the-skyline-problem/">218. 天际线问题</a>（hard)</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/the-skyline-problem/solution/gong-shui-san-xie-sao-miao-xian-suan-fa-0z6xc/">https://leetcode-cn.com/problems/the-skyline-problem/solution/gong-shui-san-xie-sao-miao-xian-suan-fa-0z6xc/</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-comment">//思路：将相邻的建筑物看作一个整体，可以理解为求相邻两个矩阵最上边的左端点。因此我们需要实时维护一个最大高度，可以使用优先队列（堆）</span><br>    <span class="hljs-comment">//1.按照left排序同事构造可以区分左右端点的列表。</span><br>    <span class="hljs-comment">//2.通过堆存储遍历过的高度，如果是左端点且与前一个高度不一致则记录</span><br>    <span class="hljs-keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">getSkyline</span><span class="hljs-params">(<span class="hljs-type">int</span>[][] bs)</span> &#123;<br>        List&lt;List&lt;Integer&gt;&gt; ret = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-comment">// 预处理所有的点，为了方便排序，对于左端点，令高度为负；对于右端点令高度为正</span><br>        List&lt;<span class="hljs-type">int</span>[]&gt; ps = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] b : bs) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> b[<span class="hljs-number">0</span>], r = b[<span class="hljs-number">1</span>], h = b[<span class="hljs-number">2</span>];<br>            ps.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;l, -h&#125;);<br>            ps.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;r, h&#125;);<br>        &#125;<br>        <span class="hljs-comment">// 先按照横坐标进行排序</span><br>        <span class="hljs-comment">// 如果横坐标相同，则按照左端点排序</span><br>        <span class="hljs-comment">// 如果相同的左/右端点，则按照高度进行排序</span><br>        Collections.sort(ps, (a, b)-&gt;a[<span class="hljs-number">0</span>] != b[<span class="hljs-number">0</span>] ? a[<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>]:a[<span class="hljs-number">1</span>] - b[<span class="hljs-number">1</span>]);<br>        <span class="hljs-comment">// 大根堆存储高度</span><br>        PriorityQueue&lt;Integer&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a,b)-&gt;b-a);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">prev</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        queue.add(prev);<br>        <span class="hljs-comment">//遍历排序后的点</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span>[] p : ps) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">point</span> <span class="hljs-operator">=</span> p[<span class="hljs-number">0</span>], height = p[<span class="hljs-number">1</span>];<br>            <span class="hljs-keyword">if</span> (height &lt; <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-comment">// 如果是左端点，说明存在一条往右延伸的可记录的边，将高度存入优先队列</span><br>                queue.add(-height);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-comment">// 如果是右端点，说明这条边结束了，将当前高度从队列中移除</span><br>                queue.remove(height);<br>            &#125;<br>            <span class="hljs-comment">// 取出最高高度，如果当前不与前一矩形“上边”延展而来的那些边重合，则可以被记录</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">cur</span> <span class="hljs-operator">=</span> queue.peek();<br>            <span class="hljs-keyword">if</span> (cur != prev) &#123;<br>                List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>                list.add(point);<br>                list.add(cur);<br>                ret.add(list);<br>                prev = cur;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="面试题-17-14-最小K个数（mid"><a href="#面试题-17-14-最小K个数（mid" class="headerlink" title="面试题 17.14. 最小K个数（mid)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/smallest-k-lcci/">面试题 17.14. 最小K个数</a>（mid)</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs sql">class Solution &#123;<br>    public <span class="hljs-type">int</span>[] smallestK(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> k) &#123;<br>        <span class="hljs-type">int</span>[] ret <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[k];<br>        if(k<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-number">0</span>)<span class="hljs-keyword">return</span> ret;<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span>大堆顶<br>        PriorityQueue<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> queue <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> PriorityQueue<span class="hljs-operator">&lt;&gt;</span>((o1,o2)<span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span>o2<span class="hljs-operator">-</span>o1); <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> num:arr)&#123;<br>            if(queue.size()<span class="hljs-operator">&lt;</span>k)&#123;<br>                queue.offer(num);<br>            &#125;<span class="hljs-keyword">else</span> if(queue.size()<span class="hljs-operator">=</span><span class="hljs-operator">=</span>k<span class="hljs-operator">&amp;&amp;</span>queue.peek()<span class="hljs-operator">&gt;</span>num)&#123;<br>                queue.poll();<br>                queue.offer(num);<br>            &#125;<br>        &#125;<br>        while(<span class="hljs-operator">!</span>queue.isEmpty())ret[<span class="hljs-comment">--k]=queue.poll();</span><br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="1606-找到处理最多请求的服务器（hard）"><a href="#1606-找到处理最多请求的服务器（hard）" class="headerlink" title="1606. 找到处理最多请求的服务器（hard）"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-servers-that-handled-most-number-of-requests/">1606. 找到处理最多请求的服务器</a>（hard）</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs sql">class Solution &#123;<br>    public List<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> busiestServers(<span class="hljs-type">int</span> k, <span class="hljs-type">int</span>[] arrival, <span class="hljs-type">int</span>[] load) &#123;<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span>k台服务器<br>        <span class="hljs-type">int</span>[] freq <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[k];<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">0</span>表示空闲,<span class="hljs-number">1</span>表示正在使用<br>        TreeSet<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> treeSet <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> TreeSet<span class="hljs-operator">&lt;&gt;</span>();<br>        List<span class="hljs-operator">&lt;</span><span class="hljs-type">Integer</span><span class="hljs-operator">&gt;</span> ret <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> ArrayList<span class="hljs-operator">&lt;&gt;</span>();<br>        <span class="hljs-operator">/</span><span class="hljs-operator">/</span>小堆顶存储结束时间<br>        PriorityQueue<span class="hljs-operator">&lt;</span><span class="hljs-type">int</span>[]<span class="hljs-operator">&gt;</span> queue <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> PriorityQueue<span class="hljs-operator">&lt;&gt;</span>(Comparator.comparingInt(x <span class="hljs-operator">-</span><span class="hljs-operator">&gt;</span> x[<span class="hljs-number">1</span>]));<br>        <span class="hljs-type">int</span> n <span class="hljs-operator">=</span> arrival.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i <span class="hljs-operator">&lt;</span> k; i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>) &#123;<br>            treeSet.add(i);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i <span class="hljs-operator">&lt;</span> n; i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>) &#123;<br>            while (<span class="hljs-operator">!</span>queue.isEmpty() <span class="hljs-operator">&amp;&amp;</span> queue.peek()[<span class="hljs-number">1</span>] <span class="hljs-operator">&lt;=</span> arrival[i]) &#123;<br>                treeSet.add(queue.poll()[<span class="hljs-number">0</span>]);<br>            &#125;<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span>无剩余服务器<br>            if (treeSet.isEmpty()) continue;<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span>获取剩余的可用的服务器（超时）<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span> 如何能获取最靠近i的空闲机器?TreeMap<br>            <span class="hljs-type">Integer</span> ceiling <span class="hljs-operator">=</span> treeSet.<span class="hljs-built_in">ceiling</span>(i <span class="hljs-operator">%</span> k);<br>            if (ceiling<span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-keyword">null</span>)ceiling <span class="hljs-operator">=</span> treeSet.first();<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span>压入堆<br>            queue.offer(<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[]&#123;ceiling, arrival[i] <span class="hljs-operator">+</span> load[i]&#125;);<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span>记录服务器处理次数<br>            treeSet.remove(ceiling);<br>            freq[ceiling]<span class="hljs-operator">+</span><span class="hljs-operator">+</span>;<br>        &#125;<br>        <span class="hljs-type">int</span> maxIndex <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i <span class="hljs-operator">&lt;</span> k; i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)  maxIndex <span class="hljs-operator">=</span> freq[i] <span class="hljs-operator">&gt;</span> freq[maxIndex] ? i : maxIndex;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i <span class="hljs-operator">&lt;</span> k; i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>) if (freq[i] <span class="hljs-operator">=</span><span class="hljs-operator">=</span> freq[maxIndex]) ret.add(i);<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="220-存在重复元素-III（mid"><a href="#220-存在重复元素-III（mid" class="headerlink" title="220. 存在重复元素 III（mid)"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/contains-duplicate-iii/">220. 存在重复元素 III</a>（mid)</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs sql">class Solution &#123;<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">1.</span>bf超时<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">2.</span>基于条件分析:<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-built_in">abs</span>(nums[i] <span class="hljs-operator">-</span> nums[j]) <span class="hljs-operator">&lt;=</span> t<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-built_in">abs</span>(i <span class="hljs-operator">-</span> j) <span class="hljs-operator">&lt;=</span> k<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>可知我们需要控制两个地方,一个是nums的值、另一个是下标<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>BF最耗时的地方,每次都要从[i<span class="hljs-operator">-</span>k,i][i,i<span class="hljs-operator">+</span>k],开始查找并判断大小,因为取的是绝对值nums[i] <span class="hljs-operator">-</span> nums[j]和nums[j] <span class="hljs-operator">-</span> nums[i]一样(i和j同理),所以只需要维护一个方向<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>所以使用大小为k的有序集合TreeSet能有效解决这个问题<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>维护一个大小为k的TreeSet存储nums[i]的值,大小为k是为了控制下标,值有序我们可以快速的取出比当前大的值(不像BF需要一个一个比较)<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>遍历nums计算出当前nums[j]的可取范围,在TreeSet中ceiling出(nums[i]<span class="hljs-operator">-</span>t),就是在TreeSet查找比nums[i]<span class="hljs-operator">-</span>t大的数,<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>如果有比nums[i]<span class="hljs-operator">-</span>t大的,且小于nums[i]<span class="hljs-operator">+</span>t直接返回<span class="hljs-literal">true</span>,在遍历的同时维护TreeSet大小为k<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>nums[j]取值范围：上限nums[i]<span class="hljs-operator">+</span>t,下限nums[i]<span class="hljs-operator">-</span>t,<br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-number">1.</span>为什么nums[j]上限是nums[i]<span class="hljs-operator">+</span>t,下限是nums[i]<span class="hljs-operator">-</span>t,通过解开绝对值就可得出.<br>    public <span class="hljs-type">boolean</span> containsNearbyAlmostDuplicate(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k, <span class="hljs-type">int</span> t) &#123;<br>        <span class="hljs-type">int</span> n <span class="hljs-operator">=</span> nums.length;<br>        TreeSet<span class="hljs-operator">&lt;</span>Long<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">set</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> TreeSet<span class="hljs-operator">&lt;</span>Long<span class="hljs-operator">&gt;</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i <span class="hljs-operator">&lt;</span> n; i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>) &#123;<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span>查找比nums[i]<span class="hljs-operator">-</span>t大的数<br>            Long ceiling <span class="hljs-operator">=</span> set.<span class="hljs-built_in">ceiling</span>((long) nums[i] <span class="hljs-operator">-</span> (long) t);<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span>如果有比nums[i]<span class="hljs-operator">-</span>t大的,且小于nums[i]<span class="hljs-operator">+</span>t直接返回<span class="hljs-literal">true</span><br>            if (ceiling <span class="hljs-operator">!=</span> <span class="hljs-keyword">null</span> <span class="hljs-operator">&amp;&amp;</span> ceiling <span class="hljs-operator">&lt;=</span> (long) nums[i] <span class="hljs-operator">+</span> (long) t) &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            &#125;<br>            <span class="hljs-operator">/</span><span class="hljs-operator">/</span>添加进集合<br>            set.add((long) nums[i]);<br>            if (i <span class="hljs-operator">&gt;=</span> k) &#123;<span class="hljs-operator">/</span><span class="hljs-operator">/</span>维护大小为k的有序集合<br>                set.remove((long) nums[i <span class="hljs-operator">-</span> k]);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    public <span class="hljs-type">boolean</span> containsNearbyAlmostDuplicateBF(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> k, <span class="hljs-type">int</span> t) &#123;<br>        <span class="hljs-type">int</span> n  <span class="hljs-operator">=</span>nums.length;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i<span class="hljs-operator">=</span><span class="hljs-number">0</span>;i<span class="hljs-operator">&lt;</span>n;i<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j<span class="hljs-operator">=</span>i<span class="hljs-operator">+</span><span class="hljs-number">1</span>;j<span class="hljs-operator">&lt;</span>n;j<span class="hljs-operator">+</span><span class="hljs-operator">+</span>)&#123;<br>                if(Math.<span class="hljs-built_in">abs</span>(i<span class="hljs-operator">-</span>j)<span class="hljs-operator">&gt;</span>k)continue;<br>                if(Math.<span class="hljs-built_in">abs</span>(((long)nums[i] <span class="hljs-operator">-</span> (long)nums[j]))<span class="hljs-operator">&lt;=</span>t)<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1>
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" class="category-chain-item">基础算法</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>算法笔记-栈/堆/队列型</div>
+      <div>https://mikeygithub.github.io/2020/06/16/yuque/算法笔记-栈!堆!队列型/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年6月16日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/25/yuque/Linux%E7%AF%87-Ubuntu%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="Linux篇-Ubuntu开发环境配置">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux篇-Ubuntu开发环境配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/09/yuque/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AF%87-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1/" title="数据库篇-数据库事务">
+                        <span class="hidden-mobile">数据库篇-数据库事务</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-NCN3Z5PSLJ', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

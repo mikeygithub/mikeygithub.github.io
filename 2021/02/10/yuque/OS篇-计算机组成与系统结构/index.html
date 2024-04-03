@@ -1,0 +1,1295 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第1章 绪论摩尔定律 1965年4月,《电子学》杂志刊登了戈登•摩尔(Gordon　Moore)撰写的一篇文章。摩尔 当时是仙童半导体公司研发部门的主管。摩尔在该文中讲述了他如何将50个晶体管集成 在一块芯片中,并且预言,到1975年,就可能将6.5万只这样的元件密植在一块芯片上, 制成高度复杂的集成电路。　　摩尔的预言不仅对他本人,而且对整个社会都是意义深远的。后来摩尔与其他人共同 成立了英特">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OS篇-计算机组成与系统结构">
+<meta property="og:url" content="https://mikeygithub.github.io/2021/02/10/yuque/OS%E7%AF%87-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E4%B8%8E%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="第1章 绪论摩尔定律 1965年4月,《电子学》杂志刊登了戈登•摩尔(Gordon　Moore)撰写的一篇文章。摩尔 当时是仙童半导体公司研发部门的主管。摩尔在该文中讲述了他如何将50个晶体管集成 在一块芯片中,并且预言,到1975年,就可能将6.5万只这样的元件密植在一块芯片上, 制成高度复杂的集成电路。　　摩尔的预言不仅对他本人,而且对整个社会都是意义深远的。后来摩尔与其他人共同 成立了英特">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657545910960-03f58aa9-d8e1-486a-974d-ef2bb084d095.png">
+<meta property="article:published_time" content="2021-02-10T01:56:36.000Z">
+<meta property="article:modified_time" content="2022-09-15T15:13:56.000Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="组成原理">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657545910960-03f58aa9-d8e1-486a-974d-ef2bb084d095.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>OS篇-计算机组成与系统结构 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":"G-NCN3Z5PSLJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.nlark.com/yuque/0/2022/png/2630542/1651338804824-c3567992-2841-42e6-85b2-90ff83da2674.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_2276%2Climit_0') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="OS篇-计算机组成与系统结构"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-02-10 09:56" pubdate>
+          2021年2月10日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          90 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">OS篇-计算机组成与系统结构</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657545910960-03f58aa9-d8e1-486a-974d-ef2bb084d095.png#clientId=uf4221234-e8cb-4&from=markdown&id=MmlAB&originHeight=437&originWidth=580&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=339062&status=done&style=none&taskId=uf3cafcb8-e7b8-44c8-928a-c3d42e2692c&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="第1章-绪论"><a href="#第1章-绪论" class="headerlink" title="第1章 绪论"></a>第1章 绪论</h1><h2 id="摩尔定律"><a href="#摩尔定律" class="headerlink" title="摩尔定律"></a>摩尔定律</h2><blockquote>
+<p>1965年4月,《电子学》杂志刊登了戈登•摩尔(Gordon　Moore)撰写的一篇文章。摩尔 当时是仙童半导体公司研发部门的主管。摩尔在该文中讲述了他如何将50个晶体管集成 在一块芯片中,并且预言,到1975年,就可能将6.5万只这样的元件密植在一块芯片上, 制成高度复杂的集成电路。　　摩尔的预言不仅对他本人,而且对整个社会都是意义深远的。后来摩尔与其他人共同 成立了英特尔(Intel)公司,并通过他所开创的技术创造了无数的财富。</p>
+</blockquote>
+<blockquote>
+<p>摩尔定律并不是一个物理定律(物理定律是放之四海皆准的),而是一种预言,它鞭策 着工业界不断地改进,并努力去实现它。从人们认识摩尔定律开始,无论是Intel公司、 AMD公司,还是其他半导体器件公司,无一不是在不断地努力去实现摩尔定律,不断地推 出集成度更高的产品。下图为典型微处理器集成度随时间(年)的增长情况。由图可见,到目前为止,微 处理器芯片的集成度仍然随时间呈指数级增长。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210218230340311.png#id=aUxGZ&originHeight=481&originWidth=728&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>(1)虽然芯片的集成度快速提高,但单个芯片的成本变化不大,这意味着可以用更少 的芯片来实现计算机逻辑电路和存储电路,在相同性能的情况下,价格显著下降;在相同 价格的情况下,新一代的计算机功能更强,性能更好。</li>
+<li>(2)随着芯片集成度的提高,芯片中电路各部分之间的信号传输路径显著缩短,信号 传输延时小,微处理器的主频得以提高,计算机的速度更快。</li>
+<li>(4)通过提高芯片的集成度,降低工作电压,可显著降低芯片的功耗,使得便携式、嵌 入式计算机用电池供电成为可能,也降低了高性能计算机对散热的要求。</li>
+<li>(5)芯片内部电路各部分之间的连接比外部连接更加可靠。随着芯片集成度的增加,构 成计算机所需的芯片数量越来越少,芯片之间所需的连线(焊点)也越来越少,计算机的可 靠性越来越高。</li>
+</ul>
+<h2 id="计算机的基本组成"><a href="#计算机的基本组成" class="headerlink" title="计算机的基本组成"></a>计算机的基本组成</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210218230804565.png#id=UbBU7&originHeight=242&originWidth=684&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>冯·诺依曼计算机工作的基本思想就是:将计算机要处理的问题用指令编成程序,并 将程序存放在存储器中,在控制器的控制下,从存储器中逐条取出指令并执行,通过执行 程序最终解决计算机所要处理的问题。尽管经历了几十年的发展,也出现了新的设计思想, 但冯·诺依曼的这种存储程序控制原理直到今天仍然在广泛地应用。</p>
+</blockquote>
+<p>特点</p>
+<p>(1)计算机由运算器(算术逻辑部件 ALU)、存储器、控制器、输入设备和输出设备五 大部件组成。</p>
+<p>(2)指令和数据以二进制形式表示,以同等地位存放在存储器中,并可按地址访问。用 二进制不仅电路简单,使用方便,而且抗干扰能力强。</p>
+<p>(3)指令由操作码和地址码组成。操作码指明指令的功能,地址码指明操作数与运算 结果的存放位置(地址)。</p>
+<p>(4)将计算机要处理的问题用指令编成程序。</p>
+<p>(5)在控制器的控制下,指令被逐条(顺序)从存储器中取出来执行,产生控制流,在控 制流的驱动下完成指令的功能。在此过程中,数据(流)则是被动地调用。</p>
+<p>(6)在特定条件下,可由跳转类指令根据运算结果或设定的条件改变程序中指令的执 行顺序。</p>
+<p>(7)早期的冯·诺依曼计算机以运算器为中心,输入/输出设备通过运算器与存储器传 送数据。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210218231212735.png#id=tOHLu&originHeight=446&originWidth=574&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="指令集体系结构-ISA-概述"><a href="#指令集体系结构-ISA-概述" class="headerlink" title="指令集体系结构(ISA)概述"></a>指令集体系结构(ISA)概述</h2><blockquote>
+<p>处理器支持的指令和指令的字节级编码称为指令集体系结构(Instruction-SetArchitec- ture,ISA)。ISA 是软件和硬件的分界面,软件(程序)是由ISA 规定的“指令”组成的,指令 通过二进制编码规定其功能、源操作数和目的操作数的位置等信息。计算机中的控制器在 执行指令时,根据上述信息产生相应的控制信号,控制计算机系统各硬件模块完成指令要 求的功能。</p>
+</blockquote>
+<h2 id="典型的ISA"><a href="#典型的ISA" class="headerlink" title="典型的ISA"></a>典型的ISA</h2><ul>
+<li><p>1)x86 </p>
+<blockquote>
+<p>x86由Intel公司推出,于1978年首次用于8086处理器。随着个人计算机的兴起和飞 速发展,x86从最初的16位架构发展到32位、64位架构,越来越多的指令和功能被添加 进来,使得x86越来越臃肿。但是,保持软件的向后兼容远比技术更重要,这使得x86拥有 了广泛的软件资源和越来越多开发基于x86的软件的程序员。如今,x86已成为个人计算 机的标准处理器架构,成为桌面计算机和高性能计算领域最成功的ISA。</p>
+</blockquote>
+</li>
+<li><p>2)ARM </p>
+<blockquote>
+<p>ARM(AdvancedRISC Machines)公司诞生于英国,总部位于英国剑桥,主要业务是设 计 ARM 架构的处理器,同时提供与 ARM 处理器相关的配套软件,以及各种 SOC 系统 IP、GPU、物联网平台等。</p>
+</blockquote>
+</li>
+<li><p>3)POWER </p>
+<blockquote>
+<p>POWER(PerformanceOptimization WithEnhancedRISC,增强 RISC 性能优化)是 IBM 公司设计开发的指令集体系结构,最早于1990年推出,性能卓越。</p>
+</blockquote>
+</li>
+<li><p>4)MIPS </p>
+<blockquote>
+<p>MIPS(MicroprocessorwithoutInterlockedPipedStages,无内部互锁流水线微处理器) 是一款经典的精简指令集架构,由美国斯坦福大学的JohnL.Hennessy教授领导的研究小 组于1981年开始设计。他们在1984年创立了 MIPSComputerSystem 公司,推出了商用 的 MIPS处理器。此后,MIPS指令集体系结构不断扩充与改进,从 MIPS Ⅰ、MIPS Ⅱ、 MIPS Ⅲ、MIPS Ⅳ、MIPS Ⅴ发展到了 MIPS32、MIPS64。</p>
+</blockquote>
+</li>
+<li><p>5)SPARC </p>
+<blockquote>
+<p>从1980年开始,美国加州大学伯克利分校的 DavidA.Patterson教授领导了 RISC-I 的设计与实现工作,这是一台超大规模集成电路精简指令集计算机,为商业 SPARC 体系 结构奠定了基础。</p>
+</blockquote>
+</li>
+<li><p>6)RISC-V </p>
+<blockquote>
+<p>RISC-V 架构是一款袖珍的、开源的ISA,于2011年推出,由美国加州大学伯克利分 校的 KrsteAsanovi’c教授、Andrew Waterman和 YunsupLee等开发人员发明,并得到了 DavidA.Patterson教授的大力支持。“RISC”表示精简指令集,“V”表示伯 克 利 分 校 从 RISC-I开始设计的第五代指令集。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="高级语言程序的执行过程"><a href="#高级语言程序的执行过程" class="headerlink" title="高级语言程序的执行过程"></a>高级语言程序的执行过程</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210218234706451.png#id=cuheK&originHeight=342&originWidth=518&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>该 C语言程序可运行在基于x86处理 器的 Windows操作系统下,使用 MicrosoftVisualC++2017编译,目标平台设置为Intelx86的32位指令集(IA-32),通过设置优化参数以减小输出代码,提高运行速度,同时使生 成的代码更简洁,更容易理解。生成的机器语言代码如表</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210218234849684.png#id=vyXuF&originHeight=610&originWidth=471&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>指令“subeax,4”(上表第21行)的功能为:</p>
+<blockquote>
+<p>寄存器eax的内容与立即数4(符号位扩 展至32位)相减,结果存入寄存器eax。该指令的机器语言代码为三个字节,内容为十六进 制数83E804,其二进制编码各部分含义如下图所示。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210218235116294.png#id=fjv1L&originHeight=145&originWidth=723&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>使用gcc编译器,将目标平台设置为 RISC-V RV32I指令集,通过设置优化参数以减 少输出代码的大小,使得生成的代码更简洁,更容易理解。插入排序的 C 语言源代码经过 gcc编译后,生成的汇编语言及机器语言代码如表</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210218235523430.png#id=xutUd&originHeight=546&originWidth=654&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>指令“addia2,a2,-4”的功能为:源1(a2寄存器的内容)与源2(立即数“-4”,符号位 扩展至32位)相 加,结 果 存 入 目 的 寄 存 器 a2。该 指 令 的 机 器 语 言 代 码 为 十 六 进 制 数 ffc60613,其二进制编码各部分含义如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210218235538463.png#id=xOLTC&originHeight=83&originWidth=629&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>操作码规定指令的基本功能与格式;功能码规定指令具体的操作类型;源1 与目的寄存器编码为“01100”,即寄存器x12,其别名为a2(RISC-V 基础指令集(RV32I)规 定了32个寄存器(x0~x31),因此寄存器编号用5位二进制数进行编码。RISC-V 汇编语言 根据各寄存器的功能和使用方式的不同,规定了相应的别名);源2为立即数“-4”,直接 存储在指令中,用补码表示。</p>
+<h2 id="计算机系统的层次结构"><a href="#计算机系统的层次结构" class="headerlink" title="计算机系统的层次结构"></a>计算机系统的层次结构</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210218235814608.png#id=W1mKl&originHeight=410&originWidth=379&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="计算机属性"><a href="#计算机属性" class="headerlink" title="计算机属性"></a>计算机属性</h2><ul>
+<li>数据的表示形式;</li>
+<li>寻址方式;</li>
+<li>内部寄存器组;</li>
+<li>指令集;</li>
+<li>中断系统;</li>
+<li>处理器工作状态及其切换;</li>
+<li>存储系统结构;</li>
+<li>输入/输出结构;</li>
+<li>信息保护及特权;</li>
+<li>高性能设计等。</li>
+</ul>
+<p><code>吞吐量(Throughput)定义为在给定时间内(并行)完成的总任务数。</code></p>
+<h1 id="第2章-计算机系统中的数据表示"><a href="#第2章-计算机系统中的数据表示" class="headerlink" title="第2章 计算机系统中的数据表示"></a>第2章 计算机系统中的数据表示</h1><ul>
+<li><p>无符号数 </p>
+<blockquote>
+<p>所谓无符号数,即没有符号的数,数中的每一位均用来表示数值。所以8位二进制无符号数所表示的数值范围是0255,而16位无符号数的表示范围为065535。</p>
+</blockquote>
+</li>
+<li><p>有符号数 </p>
+<blockquote>
+<p>由于机器无法直接识别“+”(正)、“-”(负)符号,而“正”“负”恰好是两种截然不同的 状态,因此若用“0”表示“正”,用“1”表示“负”,则符号可被数字化,再按规定将符号放在有 效数字的前面就组成了有符号数。</p>
+</blockquote>
+</li>
+<li><p>定点数 </p>
+<blockquote>
+<p>在机器数表示中,若约定小数点的位置固定不变,则称为定点数。有两种形式的定点 数,即定点整数(纯整数,规定小数点在数据最低有效数位之后)和定点小数(纯小数,规定 小数点在数据最高有效数位之前),如图</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219001340876.png#id=HgHmx&originHeight=178&originWidth=762&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>浮点数 <blockquote>
+<p>基数为2的数F 的浮点表示为 F = M x 2^E</p>
+</blockquote>
+</li>
+</ul>
+<p>其中,M 称为尾数,E 称为阶码。尾数为带符号的纯小数,阶码为带符号的纯整数。按式(2.2)表示的数据既可以是纯整数,也可以是纯小数,还可以是同时含有整数和小 数的数据,其小数点的位置是不固定的,故称为浮点数。计算机中常用的一种浮点数的编 码格式如下图所示,其中数符(即数据的符号)就是尾符(即尾数的符号)。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219001510678.png#id=lnexb&originHeight=96&originWidth=733&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h3 id="原码"><a href="#原码" class="headerlink" title="原码"></a>原码</h3><blockquote>
+<p>原码是机器数中最简单的一种表示形式,其符号位为0表示正数,符号位为1表示负 数,数值位即真值的绝对值。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219144712557.png#id=Q8ZSH&originHeight=92&originWidth=454&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>x=+35时，有[x]原＝00100011</p>
+<p>x=-35时，有[x]原＝10100011</p>
+<h3 id="小数原码的定义"><a href="#小数原码的定义" class="headerlink" title="小数原码的定义"></a>小数原码的定义</h3><p>x=0.46875时，有[x]原＝0.0111100</p>
+<p>x=0.46875时，有[x]原＝1.0111100</p>
+<h3 id="原码的特点"><a href="#原码的特点" class="headerlink" title="原码的特点"></a>原码的特点</h3><p>(1)数值原码表示法简单直观,但加减运算很麻烦。</p>
+<p>(2)对于数值0,用原码表示不是唯一的。以8位原码表示,有</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219151319001.png#id=FaKHT&originHeight=197&originWidth=848&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219151632091.png#id=x7lye&originHeight=92&originWidth=715&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219151408405.png#id=Dl5ik&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219151445153.png#id=VFZE8&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>补码的特点</p>
+<blockquote>
+<p>(1)  n 位补码表示的整数数值范围为-2n-1<del>+(2n-1-1),n 位补码表示的小数数值 范围为-1</del>+(1-2-n+1)。</p>
+<p>(2)  0 的表示是唯一的。以8位小数编码为例,有</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219151601396.png#id=o5rLO&originHeight=106&originWidth=769&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="移码"><a href="#移码" class="headerlink" title="移码"></a>移码</h2><blockquote>
+<p>由于移码多用于浮点数中表示阶码,均为整数,因此这里只介绍定点整数的移码表示。 当用包括符号位在内的n 位字长时,整数移码的定义为</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219151758345.png#id=gJ6Py&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>要获得整数的移码表示,可以利用定义计算,也可以先求出该数的补码后将符号位 取反。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219151808472.png#id=r0jzE&originHeight=307&originWidth=877&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs latex">(1)当真值为正时,原码、补码和反码的表示形式均相同,即符号位用“0”表示,数值 部分与真值相同。<br>(2)当真值为负时,原码、补码和反码的表示形式不同,但其符号位都用“1”表示,而 数值部分的关系为:反码是原码“每位取反”,补码是反码“加1”,补码是原码“求反加1”。<br>(3)移码较为特殊,当符号位为“0”时,表示真值为负数;当符号位为“1”时,表示真值 为正数。移码与补码编码仅符号位相反。<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="浮点数的表示方法"><a href="#浮点数的表示方法" class="headerlink" title="浮点数的表示方法"></a>浮点数的表示方法</h2><blockquote>
+<p>由于计算机 字 长 的 限 制,当 需 要 表 示 的 数 据 有 很 大 的 数 值 范 围 (如 电 子 的 质 量 为 9×10-28克,太阳的质量为2×1033克)时,它们不能直接用定点小数或定点整数表示,而必 须用浮点数表示。由于计算机采用二进制,所以浮点数的一般表示形式为式</p>
+</blockquote>
+<p>例如,二进制数F=11.0101,用浮点数可表示为下列不同形态,即</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219152104392.png#id=q7UnP&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h3 id="浮点数编码的规则"><a href="#浮点数编码的规则" class="headerlink" title="浮点数编码的规则"></a>浮点数编码的规则</h3><p>(1)尾数 M 必须为小数,用n+1位有符号定点小数表示,可以采用的编码有原码、补 码。阶码E 必须为整数,用k+1位有符号定点整数表示,可以采用的编码有原码、补码、 移码。浮点数编码位数为m=(n+1)+(k+1)。</p>
+<p>(2)浮点数编码格式有多种,使用较多的格式如图2.2和图2.5所示,格式的选择可由 计算机设计人员决定。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219152200059.png#id=StoHP&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>注意</p>
+<blockquote>
+<p>(1)阶码是整数,其位数k+1决定了浮点数表示的数值范围,也就是决定了数据的大 小,或小数点在数据中的真实位置。阶符决定阶码的正负。</p>
+<p>(2)尾数是小数,其位数n+1决定了浮点数的精度如果尾数采用小数且位数n 足够长,则当浮点数运算需要对尾数运算结果舍入时,造成的数据精度损失会比较小。</p>
+<p>(3)尾数的符号表示浮点数的正负。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210219152255347.png#id=qI9pf&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="第3章-运算方法与运算器"><a href="#第3章-运算方法与运算器" class="headerlink" title="第3章 运算方法与运算器"></a>第3章 运算方法与运算器</h1><h2 id="加减运算"><a href="#加减运算" class="headerlink" title="加减运算"></a>加减运算</h2><blockquote>
+<p>有符号定点数的编码可以用原码、反码、补码、移码等形式表示。原则上讲,有符号数 的加减运算可以用任何一种编码来实现,但实际中用得最多、最普遍的是补码。</p>
+</blockquote>
+<p><img src="https://g.yuque.com/gr/latex?%E8%A1%A5%E7%A0%81%E5%8A%A0%E6%B3%95%E7%9A%84%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%BA=%5BX+Y%5D_%E8%A1%A5%EF%BC%9D%5BX%5D_%E8%A1%A5+%5BY%5D_%E8%A1%A5%0A#card=math&code=%E8%A1%A5%E7%A0%81%E5%8A%A0%E6%B3%95%E7%9A%84%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%BA%3D%5BX%2BY%5D_%E8%A1%A5%EF%BC%9D%5BX%5D_%E8%A1%A5%2B%5BY%5D_%E8%A1%A5%0A&id=pe7It" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://g.yuque.com/gr/latex?%E8%A1%A5%E7%A0%81%E5%87%8F%E6%B3%95%E7%9A%84%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%BA=%5BX-Y%5D_%E8%A1%A5%EF%BC%9D%5BX%5D_%E8%A1%A5+%5B-Y%5D_%E8%A1%A5=%5BX%5D_%E8%A1%A5%EF%BC%8B%5B%5BY%5D_%E8%A1%A5%5D_%E8%A1%A5%0A#card=math&code=%E8%A1%A5%E7%A0%81%E5%87%8F%E6%B3%95%E7%9A%84%E8%BF%90%E7%AE%97%E6%B3%95%E5%88%99%E4%B8%BA%3D%5BX-Y%5D_%E8%A1%A5%EF%BC%9D%5BX%5D_%E8%A1%A5%2B%5B-Y%5D_%E8%A1%A5%3D%5BX%5D_%E8%A1%A5%EF%BC%8B%5B%5BY%5D_%E8%A1%A5%5D_%E8%A1%A5%0A&id=j4Aox" srcset="/img/loading.gif" lazyload></p>
+<h2 id="一位全加器的实现"><a href="#一位全加器的实现" class="headerlink" title="一位全加器的实现"></a>一位全加器的实现</h2><blockquote>
+<p>设一位全加器的输入分别为 Xi和Yi,低一位对该位的进位为Ci,全加器的结果(和) 为Zi,向高一位的进位为Ci+1,则实现一位全加器的逻辑表达式为</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221130543183.png#id=bZrFB&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>其中,Gi为进位产生函数,Pi为进位传递函数。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221130600459.png#id=jQIpx&originHeight=317&originWidth=590&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="加法-减法器"><a href="#加法-减法器" class="headerlink" title="加法/减法器"></a>加法/减法器</h2><blockquote>
+<p>在下图中,利用异或门和控制信号 M 可实现减法运算。当 M =0时,异或门输出Y, 实现加法 X+Y 的功能;当 M =1时,异或门输出Y,Y与最低进位C0=M =1相加,实现 减数求补(求负),然后与 X 做加法,从而实现减法 X-Y 的功能。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221130723014.png#id=e5w8f&originHeight=281&originWidth=741&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="乘法运算"><a href="#乘法运算" class="headerlink" title="乘法运算"></a>乘法运算</h2><blockquote>
+<p>在一些简单的计算机中,乘法运算可以用软件来实现。利用计算机中设置的加法、移 位等指令,编写一段程序完成两数相乘。若 CPU 硬件结构简单,则这种做法实现乘法所用 的时间较长,速度很慢。另一种情况是在 ALU 等硬件的基础上,适当增加一些硬件构成乘法器。这种乘法器 的硬件要复杂一些,但速度比较快。速度最快的是全部由硬件实现的阵列乘法器,其硬件 更加复杂。可见,可以用硬件来换取速度。</p>
+</blockquote>
+<h3 id="原码乘法运算"><a href="#原码乘法运算" class="headerlink" title="原码乘法运算"></a>原码乘法运算</h3><blockquote>
+<p>1)原码一位乘法规则 假定被乘数 X、乘数Y 和乘积Z 为用原码表示的纯小数(下面的讨论同样适用于纯整 数),分别为</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221131714158.png#id=FY8nA&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>原码一位乘法规则如下:</p>
+<blockquote>
+<p>(1)乘积的符号为被乘数的符号位与乘数的符号位相异或。</p>
+<p>(2)乘积的数值为被乘数的数值与乘数的数值之积,即</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221131757022.png#id=s0msO&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>(3)乘积的原码为</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221131814964.png#id=uGKwk&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h3 id="补码乘法运算"><a href="#补码乘法运算" class="headerlink" title="补码乘法运算"></a>补码乘法运算</h3><blockquote>
+<p>计算机中经常采用补码表示数据,这时用原码进行乘法运算很不方便,因此,较多计 算机采取补码进行乘法运算。一种经典的补码乘法算法为布斯法,它是补码一位乘法中的 一种,是由布斯(Booth)夫妇提出的。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221132007877.png#id=Ns97U&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221132014254.png#id=HbbDo&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>根据以上分析,可将布斯算法描述如下:</p>
+<blockquote>
+<p>(1)乘数与被乘数均用补码表示,连同符号位一起参加运算。</p>
+<p>(2)乘数最低位后增加一个附加位(用 A-1表示),设定初始值为0。</p>
+<p>(3)从附加位开始,依据表3.1所示的操作完成式(3.20)的运算。 实现布斯算法的流程如图3.13所示。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221132055074.png#id=jVeJ7&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="运算器基本结构"><a href="#运算器基本结构" class="headerlink" title="运算器基本结构"></a>运算器基本结构</h2><blockquote>
+<p>运算器内部大多数采用总线互连。根据运算器内部总线的连接方式,可将运算器的基 本结构分为单总线结构、双总线结构及三总线结构,如图</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221132211597.png#id=DebDA&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="第4章-存储系统"><a href="#第4章-存储系统" class="headerlink" title="第4章 存储系统"></a>第4章 存储系统</h1><h2 id="存储系统的层次结构"><a href="#存储系统的层次结构" class="headerlink" title="存储系统的层次结构"></a>存储系统的层次结构</h2><blockquote>
+<p>一台计算机中可能会包括各种存储器,如 CPU 内部的通用寄存器组、一级 Cache、二 级 Cache和三级 Cache,主板上的主存储器(简称主存),主板外的联机(在线)磁盘存储器 以及脱机(离线)的磁带、光盘存储器等。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221132855855.png#id=gkUSk&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="主要的替换算法"><a href="#主要的替换算法" class="headerlink" title="主要的替换算法"></a>主要的替换算法</h2><ul>
+<li>(1)随机替换(RAND)算法。</li>
+<li>(2)先进先出(FirstInFirstOut,FIFO)算法。</li>
+<li>(3)近期最少使用(LeastRecentlyUsed,LRU)算法。</li>
+<li>(4)最不经常使用(LeastFrequentlyUsed,LFU)算法。</li>
+<li>(5)最优替换(OptionalReplacement,OPT)算法</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221134112903.png#id=uPnFO&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h3 id="更新策略"><a href="#更新策略" class="headerlink" title="更新策略"></a>更新策略</h3><blockquote>
+<p>从前述内容可知,Cache的内容是主存部分内容的拷贝,其内容应当与主存的内容保 持一致。很显然,只是从 Cache中读出指令或数据是不会改变 Cache中的内容的,而 CPU 对 Cache单元的写就会改变其内容。为了保证主存与 Cache内容的一致性,主存的内容必 须随着 Cache内容的改变而更新。由于程序 Cache是只读的,不存在一致性问题,所以该 问题只发生在数据 Cache中。在数据 Cache被改写后,如何更新主存的内容,也即如何保 持主存与 Cache内容的一致性,可采取下述的更新策略(也称为写策略)。</p>
+</blockquote>
+<ul>
+<li><p>1.写回法 </p>
+<blockquote>
+<p>写回法是当 CPU 写 Cache命中时,只将数据写入 Cache而不立即写入主存。只有当由 CPU 改写过的块被替换出去时该块才写回到主存中。</p>
+</blockquote>
+</li>
+<li><p>2.写直达法 </p>
+<blockquote>
+<p>写直达法也称作全写法,是当 CPU 写 Cache命中时,在将数据写入 Cache的同时也写 入主存,从而较好地保证了主存与 Cache内容的一致性。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="虚拟存储器"><a href="#虚拟存储器" class="headerlink" title="虚拟存储器"></a>虚拟存储器</h2><blockquote>
+<p>在虚拟存储器(VirtualMemory,VM)出现之前,计算机系统的所有程序共享一个主存 物理地址空间,为了防止冲突,每个机器语言程序必须十分清楚计算机的系统结构,这造 成了没有办法阻止用户程序访问任何计算机资源,从而可 能 给 系 统 运 行 带 来 灾 难 性 的 后果。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221134335788.png#id=Ruzlo&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>实际上,虚拟存储器就是主存与硬盘间的虚拟桥梁,用户与系统实体资源的真实屏障。 这个中间存储层的引入,使主存容量延伸到硬盘,解决了主存容量与成本的矛盾,同时其 屏障效应还带来了其硬件支持现代操作系统三大特征(转换、保护、共享)的好处。</p>
+</blockquote>
+<ul>
+<li><p>(1)转换(Translation)。 </p>
+<blockquote>
+<p>无论实际主存被谁占用,所有程序的主存空间是一致的;多线 程已成为可能,且已大量使用;仅程序中最重要(正在执行)的部分在主存中。</p>
+</blockquote>
+</li>
+<li><p>(2)保护(Protection)。 </p>
+<blockquote>
+<p>不同的线程(或进程)互相保护;不同的页(或段)可以给予特定 的行为(只读、对用户程序不可见等);保护内核数据免受用户程序干扰,最重要的是免受 恶意程序干扰。</p>
+</blockquote>
+</li>
+<li><p>(3)共享(Sharing)。 </p>
+<blockquote>
+<p>可以将同一主存页映射到多个用户,即共享主存。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="虚拟存储器管理"><a href="#虚拟存储器管理" class="headerlink" title="虚拟存储器管理"></a>虚拟存储器管理</h3><ul>
+<li>1.页式虚拟存储器 <blockquote>
+<p>在页式虚拟存储系统中,虚拟地址空间被分成许多固定大小的页,称为虚页或逻辑页。 主存地址空间也被分成若干同样大小的页,称为实页或物理页。页的大小为2的幂指数字 节或字,从几千字节到十几兆字节不等。所以,虚存地址(也称虚拟地址或逻辑地址)和主 存地址(也称实地址或物理地址)都包含两个字段,如图</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221134545104.png#id=XHKMQ&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>1)地址变换 <blockquote>
+<p>在管理页式虚拟存储器时,需要完成虚拟地址到物理地址的变换,该变换是基于全相 联地址映射并通过页表来实现的。在页表中每一条记录都包含虚页号所对应的实页号。如 图4.49所示,页表通常设置在主存中,表的起始地址可通过页表基址寄存器来设定。在页式 虚拟存储器的地址变换中,当程序给出虚拟地址后,CPU 以虚页号为偏移地址查页表,从而 获得相应的实页号。将实页号与虚拟页内地址连接到一起,便构成了主存的物理地址。</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221134626090.png#id=YhslE&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>2)快表与慢表 <blockquote>
+<p>由于页表设置在主存中,页式虚拟存储器工作时,首先要访问主存中的页表,进行地 址变换,获得主存地址。然后,再利用主存地址访问主存,获得指令/数据。显然,即使主存 命中,也需要两次访问主存才能获得主存信息。前面已提到主存速度比较慢,这必然会降 低 CPU 的速度。若是被访问的页不在主存中,那速度就更慢。</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221134653708.png#id=xS4At&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>页式虚拟存储器的主要优点:</p>
+<p>(1)主存的利用率高。由于页的容量较小,每一用户程序只有不到一页的浪费,故形成 的主存碎片小。</p>
+<p>(2)页表的内容比较简单。</p>
+<p>(3)地址映射与地址变换速度比较快。</p>
+<p>页式虚拟存储器的主要缺点:</p>
+<p>(1)程序的模块性差。因为页的大小是固定的,无法与程序模块保持一致。</p>
+<p>(2)页表很长。如前述例子中页表长达16M。</p>
+<h1 id="第5章-指令系统"><a href="#第5章-指令系统" class="headerlink" title="第5章 指令系统"></a>第5章 指令系统</h1><blockquote>
+<p>根据设计者、使用者不同的需求和要求,计算机系统通常采用分层方法构建。图5.1就 是一种通俗的计算机系统抽象分层结构。下图中,下面三层为微体系结构层、指令系统结 构(InstructionSystem Architecture,ISA)层、操作系统层。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221134836240.png#id=JsoL8&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p>对于硬件设计者来说,一个好的指令系统更容易被高效率实现;对于软件设计者来说, 一个好的指令系统更便于编写程序代码。设计、评价指令系统一般从以下方面考虑:</p>
+<p>(1)完备性:常用指令齐全,编程方便。</p>
+<p>(2)高效性:程序占主存空间少,运行速度快。</p>
+<p>(3)规整性:指令和数据使用规则统一简单,易学易记。</p>
+<p>(4)兼容性:同一系列的低档计算机的程序能在高档计算机上直接运行,即向后兼容 (BackwardCompatible)。</p>
+<blockquote>
+<p>指令有两种表现形式:机器指令和助记符指令。在计算机内部,每条指令用一定位数 (指令字长)、特定编码的二进制代码表示,称为机器指令(MachineInstruction)。机器指令 是 CPU 唯一能够识别、可执行的指令。但机器指令不便于人的识别和记忆,于是出现了用 特定英文符号来描述每条机器指令的做法,由此产生了助记符指令。所以,机器指令和助 记符指令是一对一的。下表给出了Intelx86和 RISC-V 指令系统中两条加法指令的示例。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221134946387.png#id=J2TYh&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h3 id="存储模式"><a href="#存储模式" class="headerlink" title="存储模式"></a>存储模式</h3><ul>
+<li>存储器结构</li>
+<li>特殊存储区(如堆栈等)</li>
+<li>数据存储顺序</li>
+<li>边界对齐</li>
+</ul>
+<h2 id="指令类型"><a href="#指令类型" class="headerlink" title="指令类型"></a>指令类型</h2><blockquote>
+<p>指令系统是指令系统结构层的主要特征,它的每一条指令规定了计算机的基本功能, 并可以被 CPU 执行。由指令构成的程序控制了计算机系统的运行,并决定了计算机系统要 完成的任务。</p>
+<p>逻辑运算类指令提供处理用户希望使用的其他类型数据的能力。一般计算机中都设有与、 或、非、异或逻辑运算指令。有些计算机还设有位操作指令,如位测试、位清除、位设置等。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221135125130.png#id=ca8pe&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h2><blockquote>
+<p>    寻址方式就是指令获取操作数的方式。换句话说,寻址方式是规定如何对地址码字段 作出解释以找到所需操作数的方式,或者程序转移时找到跳转地址的方式。<br>    寻址方式的设定决定了每个地址码字段的长度(二进制位数),设计时要考虑两个方 面:一是要能够有效压缩地址码字段长度,二是要能够支持灵活的程序设计。</p>
+</blockquote>
+<ul>
+<li><p>(1)隐式寻址: </p>
+<blockquote>
+<p>由操作码决定其寻址方式。</p>
+</blockquote>
+</li>
+<li><p>(2)显式寻址: </p>
+<blockquote>
+<p>指令中设置寻址方式字段,由寻址方式字段的不同编码来指定操作数 的寻址方式</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="第6章-中央处理器"><a href="#第6章-中央处理器" class="headerlink" title="第6章 中央处理器"></a>第6章 中央处理器</h1><blockquote>
+<p>利用大规模集成电路技术,计算机系统中的控制器、运算器、寄存器组(又称寄存器文 件)被集成在一块芯片上,形成了现在称之为 CPU 的中央处理单元,也称为(微)处理器。 由于控制器是计算机系统工作的控制核心,因此 CPU 成为现代计算机中的核心器件。</p>
+</blockquote>
+<h3 id="CPU的功能"><a href="#CPU的功能" class="headerlink" title="CPU的功能"></a>CPU的功能</h3><blockquote>
+<p>到目前为止,所有商用计算机系统都是按照冯·诺依曼计算机的存储程序控制原理在 运行,所以CPU 是不可缺少的。CPU 的主要功能是执行存储在主存中的指令序列,也即执 行程序,具体操作如下:</p>
+<p>(1)取得指令:CPU 从主存中取得指令,将其暂存在 CPU 内部的指令寄存器中。</p>
+<p>(2)执行指令:CPU 对取得的指令进行译码、执行。</p>
+<p>(3)确定下条指令地址:CPU 依据当前指令信息确定下条指令在主存中的地址(顺序 地址或由分支跳转类指令决定的跳转地址)。</p>
+<p>(4)重复过程(1)~(3),直到将程序中所有指令执行完毕为止。</p>
+<p>计算机的功能要通过 CPU 执行指令来体现,执行指令的核心部件就是控制器。控制器 的作用是为 CPU 内外的所有部件提供指令执行时所需的控制信号。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221174228529.png#id=N18U4&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221174448308.png#id=ozuAP&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="第7章-流水线技术"><a href="#第7章-流水线技术" class="headerlink" title="第7章 流水线技术"></a>第7章 流水线技术</h1><p>流水线的处理方式</p>
+<blockquote>
+<p>流水线在我们日常生活和工厂生产线中经常采用。例如,工厂的自动化生产线均采用 流水作业的方式进行工件的加工处理,原材料每经过一道工序完成一步加工处理,变成半 成品,当半成品经过所有工序加工处理后就成为可用的成品。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221174639346.png#id=Qc1nJ&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="第8章-总线与输入-输出系统"><a href="#第8章-总线与输入-输出系统" class="headerlink" title="第8章 总线与输入/输出系统"></a>第8章 总线与输入/输出系统</h1><h2 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h2><blockquote>
+<p>一台计算机由 CPU、存储器、I/O 设备三类模块组成,它们通过适当的通路进行连接, 连接三类模块的通路的集合称为互连结构(或互连网络)。仅在两个部件之间传递信息的通 路称为专用通路,而在不同时刻传递不同部件之间信息的通路称为共享(公用)总线。更广 义地讲,总线就是计算机系统中多个部件或设备共用的传递信息的数据通路(电子通道)。</p>
+</blockquote>
+<blockquote>
+<p>现代计算机系统的典型互连结构是总线。一个总线结构的计算机是指其内部的各种子 系统和模块通过公用总线相互连接、通信而构成的计算机系统,它的基本架构如图8.1所 示。系统中的所有功能模块均连接在总线上,CPU 利用总线对存储器、I/O 资源进行管理 和操作。</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221180906060.png#id=dr6pC&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="总线特性"><a href="#总线特性" class="headerlink" title="总线特性"></a>总线特性</h2><blockquote>
+<p>总线不是简单的一组连接线,在所有标准化的总线规范中,总线是被全方位加以规 定的。</p>
+</blockquote>
+<blockquote>
+<p>1)总线的特性 通常总线规范中会详细描述总线各方面的特性,如机械特性、电气特性、功能特性和 时间特性。</p>
+</blockquote>
+<p>(1)机械特性:规定了总线的线数,传输线采用的材料,总线插头、插座的形状、尺寸 和信号线的排列等要素。</p>
+<p>(2)电气特性:规定了总线中每条信号线的有效形式、电流或电压的变化范围、信号传 送的方向(输入或输出)、信号采用单端或双端(差动)表示、信号是单向传输或双向传输、 信号上拉电阻阻值、驱动电路等要素。</p>
+<p>(3)功能特性:规定了总线中每条信号线的功能及数据传输协议。总线信号按功能分 为:地址信号、数据信号和控制信号三类,所有地址信号线组成地址总线,所有数据信号线 组成数据总线,所有控制信号线组成控制总线。</p>
+<p>(4)时间特性:规定了总线的工作时序,即在总线上完成各种操作时,相关信号状态变 化与时钟节拍(时间)之间的关系。</p>
+<h2 id="中断处理速度"><a href="#中断处理速度" class="headerlink" title="中断处理速度"></a>中断处理速度</h2><blockquote>
+<p>中断的快速响应特性使其可以应用于实时系统(Real-TimeSystem),但执行中断处理程序会影响中断的效率。一次中断过程需要有响应时间、信息保护与恢复时间,也许还需 要中断源识别时间(非向量中断),这些非实质中断处理时间统称为中断额外开销时间,所 以一次中断过程所需的完整时间是对中断源实质的处理时间与中断额外开销时间之和。因 为中断额外开销时间不会为零,所以中断频率(单位时间内响应中断的次数)受到一定限 制。更快速地响应中断、尽可能地缩短中断处理时间是提高中断处理速度的两个重要环节, 是中断方式实现中的关注点。</p>
+</blockquote>
+<h1 id="第9章-并行体系结构"><a href="#第9章-并行体系结构" class="headerlink" title="第9章 并行体系结构"></a>第9章 并行体系结构</h1><blockquote>
+<p>并行计算是指同时对多个任务、多条指令或多个数据项进行的处理,完成并行计算的 计算机系统称为并行计算机系统,它是将多个处理器、多个计算机通过网络以一定的连接 方式组织起来的大规模系统。</p>
+</blockquote>
+<p>实现并行方式</p>
+<ul>
+<li>(1)时间重叠:运用的是时间并行技术,它通过让多个处理任务或子任务同时使用系 统中的不同功能部件,使系统处理任务的吞吐量增大,从而达到使系统运行速度提高的目 的。</li>
+<li>(2)资源重复:运用的是空间并行技术,它通过大量重复设置硬件资源,使多个处理任 务或子任务同时使用系统中的多个相同功能的部件,使系统处理任务的吞吐量增大,从而 达到使系统运行速度提高的目的。</li>
+<li>(3)时间重叠+资源重复:同时运用时间并行和空间并行技术,这已成为当前并行机 制的主流。</li>
+<li>(4)资源共享:与前三种硬件方式不同,这是一种软件方式,通过操作系统的调度使多 个任务按一定规则(如时间片)轮流使用同一设备。资源共享既可以降低成本,提高设备利 用率,又可以实现多任务分时并行处理。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221181437738.png#id=vIYFh&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="计算机体系结构的分类"><a href="#计算机体系结构的分类" class="headerlink" title="计算机体系结构的分类"></a>计算机体系结构的分类</h2><ul>
+<li>(1)单指令流单数据流(SingleInstruction-streamSingleData-stream,SISD)。这是一 种单处理器系统,传统的冯·诺依曼计算机就是SISD系统。它只有一个指令流和一个数据 流,一个时刻只能做一件事情。</li>
+<li>(2)单 指 令 流 多 数 据 流 (SingleInstruction-stream MultipleData-stream,SIMD)。 SIMD计算机中,同一条指令被多个使用不同数据流的多处理器执行。</li>
+<li>(3)多 指 令 流 单 数 据 流 (MultipleInstruction-stream SingleData-stream,MISD)。 MISD计算机中,多条指令同时在同一数据上进行操作。至今还没有这类的商用机器。</li>
+<li>(4)多指令流多数据流(MultipleInstruction-stream MultipleData-stream,MIMD)。 这是一种同时有多个 CPU 执行不同操作的计算机系统,系统中每个处理器获取自己的指 令并对自己的数据进行操作处理。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210221181922460.png#id=L63DQ&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/ppt/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E4%B8%8E%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84.pptx">计算机组成与系统结构</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">#组成原理</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>OS篇-计算机组成与系统结构</div>
+      <div>https://mikeygithub.github.io/2021/02/10/yuque/OS篇-计算机组成与系统结构/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年2月10日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-NCN3Z5PSLJ', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

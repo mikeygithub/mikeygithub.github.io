@@ -1,0 +1,986 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="必备知识前缀和定义：对前面的数进行求和作为当前项 一维前缀和： 有一个一维数组  和该数组的一维前缀和数组  ，则  和  满足以下关系：二维前缀和： 有一个二维数组  和该数组的二维前缀和数组  （其同样是个二维数组），则  和  满足以下关系： 差分定义：当前项减去前一项，d[i] &#x3D; a[i]-a[i-1] ，差分数组是当前数组项减去数组前一项得出组成新数组。 性质：差分数组求前缀和结果等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法笔记-前缀和&#x2F;差分">
+<meta property="og:url" content="https://mikeygithub.github.io/2021/11/19/yuque/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0-%E5%89%8D%E7%BC%80%E5%92%8C!%E5%B7%AE%E5%88%86/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="必备知识前缀和定义：对前面的数进行求和作为当前项 一维前缀和： 有一个一维数组  和该数组的一维前缀和数组  ，则  和  满足以下关系：二维前缀和： 有一个二维数组  和该数组的二维前缀和数组  （其同样是个二维数组），则  和  满足以下关系： 差分定义：当前项减去前一项，d[i] &#x3D; a[i]-a[i-1] ，差分数组是当前数组项减去数组前一项得出组成新数组。 性质：差分数组求前缀和结果等">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1658212043764-d3dc5da5-16f6-4ceb-b2f6-8bfa5a640dd2.png">
+<meta property="article:published_time" content="2021-11-19T09:24:22.000Z">
+<meta property="article:modified_time" content="2023-02-13T16:06:34.000Z">
+<meta property="article:author" content="Mikey">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1658212043764-d3dc5da5-16f6-4ceb-b2f6-8bfa5a640dd2.png">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>算法笔记-前缀和/差分 - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":"G-NCN3Z5PSLJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/photo/">
+                <i class="iconfont icon-image"></i>
+                照片
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.nlark.com/yuque/0/2022/png/2630542/1651338804824-c3567992-2841-42e6-85b2-90ff83da2674.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_2276%2Climit_0') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="算法笔记-前缀和/差分"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-11-19 17:24" pubdate>
+          2021年11月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">算法笔记-前缀和/差分</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1658212043764-d3dc5da5-16f6-4ceb-b2f6-8bfa5a640dd2.png#averageHue=%23fec106&clientId=ue4976b59-653a-4&from=ui&id=ucb5e8298&originHeight=383&originWidth=900&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=57023&status=done&style=none&taskId=ue9aa4892-d307-4d73-865d-efe4fb0f07d&title=" srcset="/img/loading.gif" lazyload alt="图怪兽_c4d045cff3a13242bf95b0009644f47d_37063.png"></p>
+<h1 id="必备知识"><a href="#必备知识" class="headerlink" title="必备知识"></a>必备知识</h1><h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><p>定义：对前面的数进行求和作为当前项</p>
+<p><strong>一维前缀和：</strong></p>
+<p>有一个一维数组 <img src="https://cdn.nlark.com/yuque/0/2022/svg/2630542/1645111946933-7cb2f339-947e-45fa-8230-4b9f53e0ced7.svg#clientId=u09c33393-275b-4&from=paste&id=u748a09c5&originHeight=13&originWidth=11&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=u6e841970-889c-4565-b9f6-b925f868a5a&title=" srcset="/img/loading.gif" lazyload> 和该数组的一维前缀和数组 <img src="https://cdn.nlark.com/yuque/0/2022/svg/2630542/1645111947032-f85d934d-c831-4113-a3f5-dcc23a520574.svg#clientId=u09c33393-275b-4&from=paste&id=u0d4f3175&originHeight=16&originWidth=9&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=u81e3b013-8bfe-4852-9e14-a70a6800de5&title=" srcset="/img/loading.gif" lazyload> ，则 <img src="https://cdn.nlark.com/yuque/0/2022/svg/2630542/1645111946981-1ac08099-42c8-4ba6-b4fe-3a55c7cb9da0.svg#clientId=u09c33393-275b-4&from=paste&id=uade91280&originHeight=13&originWidth=11&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=ue1615e8f-b3ae-4e35-b2a1-482b43dd3c9&title=" srcset="/img/loading.gif" lazyload> 和 <img src="https://cdn.nlark.com/yuque/0/2022/svg/2630542/1645111946998-73880da4-a7cc-49e1-90df-560ad10827ee.svg#clientId=u09c33393-275b-4&from=paste&id=u8d8551ee&originHeight=16&originWidth=9&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=u15d9eca7-bb03-4e05-8d9e-bf35f40b1ff&title=" srcset="/img/loading.gif" lazyload> 满足以下关系：<br><img src="https://cdn.nlark.com/yuque/0/2022/svg/2630542/1645111946958-d3308103-999c-4390-a648-4500ffab013d.svg#clientId=u09c33393-275b-4&from=paste&id=u197c32e4&originHeight=27&originWidth=660&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=u700b4673-ceb0-4a8e-81ea-168a0440f3c&title=" srcset="/img/loading.gif" lazyload><br><strong>二维前缀和</strong>：</p>
+<p>有一个二维数组 <img src="https://cdn.nlark.com/yuque/0/2022/svg/2630542/1645111947539-ed1f0165-77d6-4414-88ac-3939b782179c.svg#clientId=u09c33393-275b-4&from=paste&id=ua7dd0156&originHeight=13&originWidth=10&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=uf242d4b2-feff-4929-b0a9-f0ccf75e220&title=" srcset="/img/loading.gif" lazyload> 和该数组的二维前缀和数组 <img src="https://cdn.nlark.com/yuque/0/2022/svg/2630542/1645111947552-adbbc4e2-c966-4706-a099-e4d83d5bbb3d.svg#clientId=u09c33393-275b-4&from=paste&id=ue94f7c14&originHeight=17&originWidth=8&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=uf2dddbe8-18c8-4ff0-9a30-4e7295ee47c&title=" srcset="/img/loading.gif" lazyload> （其同样是个二维数组），则 <img src="https://cdn.nlark.com/yuque/0/2022/svg/2630542/1645111947670-745d62de-ac8d-4e77-8317-bf951a4c2a8a.svg#clientId=u09c33393-275b-4&from=paste&id=ub60e7bd9&originHeight=13&originWidth=10&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=u250fb691-54d8-4350-bc6c-ad87b6354de&title=" srcset="/img/loading.gif" lazyload> 和 <img src="https://cdn.nlark.com/yuque/0/2022/svg/2630542/1645111947659-9b049e03-e50c-419e-b0c5-a0e050079775.svg#clientId=u09c33393-275b-4&from=paste&id=ub1c59436&originHeight=17&originWidth=8&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=u083cf444-5976-4579-b7f5-4968d3e93be&title=" srcset="/img/loading.gif" lazyload> 满足以下关系：<br><img src="https://cdn.nlark.com/yuque/0/2022/svg/2630542/1645111947719-ee244e26-3322-4b99-9bdc-7a966e6038bf.svg#clientId=u09c33393-275b-4&from=paste&id=u65fc7dd4&originHeight=27&originWidth=690&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=ua6314b40-e702-41fd-bff1-a5514985ff6&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h2><p>定义：当前项减去前一项，d[i] = a[i]-a[i-1] ，差分数组是当前数组项减去数组前一项得出组成新数组。</p>
+<p>性质：差分数组求前缀和结果等于原数组</p>
+<p>用途：基于差分数组的性质，差分数组最主要用于对数组部分区间进行同时加上或减去一个数。如需要在区间[l,r]同时加上5，只需要在d[l]=d[l]+5，d[r]=d[r]-5即可</p>
+<p>案例：</p>
+<table>
+<thead>
+<tr>
+<th>原数组</th>
+<th>1</th>
+<th>3</th>
+<th>3</th>
+<th>4</th>
+<th>2</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>前缀和</td>
+<td>1</td>
+<td>4</td>
+<td>7</td>
+<td>11</td>
+<td>13</td>
+<td>19</td>
+<td>26</td>
+</tr>
+<tr>
+<td>差分</td>
+<td>1</td>
+<td>（3-1）= 2</td>
+<td>（3-3）= 0</td>
+<td>（4-3）= 1</td>
+<td>（2-4）= -2</td>
+<td>（6-2）= 4</td>
+<td>（7-6）= 1</td>
+</tr>
+</tbody></table>
+<p>两者关系</p>
+<blockquote>
+<p><strong>对差分数组求前缀和，可以得到原数组，同样的，对前缀和数组求差分，也可以得到原数组</strong></p>
+</blockquote>
+<h1 id="相关题目"><a href="#相关题目" class="headerlink" title="相关题目"></a>相关题目</h1><h2 id="前缀和相关题目"><a href="#前缀和相关题目" class="headerlink" title="前缀和相关题目"></a>前缀和相关题目</h2><p>525 连续数组<br>526 连续的子数组和<br>527 元素和为目标值的子矩阵数量<br>528 和为k的子数组<br>529 每个元音包含最长的子字符串<br>530 统计「优美子数组」 LCP 19：秋叶收藏集<br>531 矩形区域不超过 K 的最大数值和</p>
+<h4 id="连续数组"><a href="#连续数组" class="headerlink" title="连续数组"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/contiguous-array/">连续数组</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-comment">//前缀和:使用map存储</span><br>    <span class="hljs-comment">//arr     =    [ 0,1,1,1,0,0,1,0,1]</span><br>    <span class="hljs-comment">//prefix-sum = [-1,0,1,2,1,0,1,0,1]</span><br>    <span class="hljs-comment">//index   =    [ 0,1,2,3,4,5,6,7,8]</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">findMaxLength</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">maxLength</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        Map&lt;Integer, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;Integer, Integer&gt;();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">counter</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<span class="hljs-comment">//记录前缀和</span><br>        map.put(counter, -<span class="hljs-number">1</span>);<span class="hljs-comment">//初始值</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> nums[i];<br>            <span class="hljs-keyword">if</span> (num == <span class="hljs-number">1</span>) &#123;<span class="hljs-comment">//遇到1++</span><br>                counter++;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<span class="hljs-comment">//遇到0--</span><br>                counter--;<br>            &#125;<br>            <span class="hljs-comment">//当counter == 上次出现counter值,下标为[i,j],说明当前区间[i,j]的0和1正好相互抵消了，所以个数=j-i</span><br>            <span class="hljs-keyword">if</span> (map.containsKey(counter)) &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">prevIndex</span> <span class="hljs-operator">=</span> map.get(counter);<br>                maxLength = Math.max(maxLength, i - prevIndex);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                map.put(counter, i);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> maxLength;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2100-适合打劫银行的日子"><a href="#2100-适合打劫银行的日子" class="headerlink" title="2100. 适合打劫银行的日子"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-good-days-to-rob-the-bank/">2100. 适合打劫银行的日子</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-comment">//前缀和,left记录从左向右递减个数，right记录从右向左递增的个数，在判断是否左右满足</span><br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">goodDaysToRobBank</span><span class="hljs-params">(<span class="hljs-type">int</span>[] security, <span class="hljs-type">int</span> time)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> security.length;<br>        <span class="hljs-type">int</span>[] left = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-type">int</span>[] right = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-comment">//记录左右</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-keyword">if</span> (security[i] &lt;= security[i - <span class="hljs-number">1</span>]) &#123;<br>                left[i] = left[i - <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">if</span> (security[n - i - <span class="hljs-number">1</span>] &lt;= security[n - i]) &#123;<br>                right[n - i - <span class="hljs-number">1</span>] = right[n - i] + <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        List&lt;Integer&gt; ans = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-comment">//判断是否满足time</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> time; i &lt; n - time; i++) &#123;<br>            <span class="hljs-keyword">if</span> (left[i] &gt;= time &amp;&amp; right[i] &gt;= time) &#123;<br>                ans.add(i);    <br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="2055-蜡烛之间的盘子"><a href="#2055-蜡烛之间的盘子" class="headerlink" title="2055. 蜡烛之间的盘子"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/plates-between-candles/">2055. 蜡烛之间的盘子</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-comment">//思路：前缀和</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] platesBetweenCandles(String s, <span class="hljs-type">int</span>[][] queries) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> s.length();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> queries.length;<br>        <span class="hljs-type">int</span>[] ret = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m];<br>        <span class="hljs-type">int</span>[] left = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-type">int</span>[] right = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-type">int</span>[] preSum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <br>        <span class="hljs-comment">//当前i离左边蜡烛最近距离</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>,leftIndex = -<span class="hljs-number">1</span>;i&lt;n;i++)&#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            <span class="hljs-keyword">if</span>(c==<span class="hljs-string">&#x27;|&#x27;</span>)leftIndex = i;<br>            left[i] = leftIndex;<br>        &#125;<br>        <span class="hljs-comment">//当前i离右边蜡烛最近距离</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=n-<span class="hljs-number">1</span>,rightIndex = -<span class="hljs-number">1</span>;i&gt;=<span class="hljs-number">0</span>;i--)&#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> s.charAt(i);<br>            <span class="hljs-keyword">if</span>(c==<span class="hljs-string">&#x27;|&#x27;</span>)rightIndex = i;<br>            right[i] = rightIndex;<br>        &#125;<br>        <span class="hljs-comment">//盘子的前缀和</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>,sum=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>            <span class="hljs-keyword">if</span>(s.charAt(i)==<span class="hljs-string">&#x27;*&#x27;</span>)sum++;<br>            preSum[i]=sum;<br>        &#125;<br>        <span class="hljs-comment">//计算每个区间</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;m;i++)&#123;<br>            <span class="hljs-type">int</span>[] arr = queries[i];<br>            <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> arr[<span class="hljs-number">0</span>],r = arr[<span class="hljs-number">1</span>];<br>            <span class="hljs-comment">//left[r]==-1 表示从0左区间到右区间r没有蜡烛</span><br>            <span class="hljs-comment">//right[l]==-1 表示从n-1右区间到左区间l没有蜡烛</span><br>            <span class="hljs-comment">//left[r]&lt;=right[l] </span><br>            <span class="hljs-comment">//因为记录的是下标，所以</span><br>            <span class="hljs-comment">//left[r]表示从0-r到r中最靠近r的蜡烛位置（其实就是我们要求的右区间）</span><br>            <span class="hljs-comment">//right[l]表示从n-1到l最靠近l的蜡烛位置（其实就是我们要求的左区间）</span><br>            <span class="hljs-keyword">if</span>(left[r]==-<span class="hljs-number">1</span>||right[l]==-<span class="hljs-number">1</span>||left[r]&lt;=right[l])ret[i]=<span class="hljs-number">0</span>;<br>            <span class="hljs-comment">//所以个数就是右区间减去左区间的值</span><br>            <span class="hljs-keyword">else</span> ret[i]=preSum[left[r]]-preSum[right[l]];<br>        &#125;<br>        <span class="hljs-keyword">return</span> ret;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="差分相关题目"><a href="#差分相关题目" class="headerlink" title="差分相关题目"></a>差分相关题目</h2><h4 id="731-我的日程安排表-II（mid）"><a href="#731-我的日程安排表-II（mid）" class="headerlink" title="731. 我的日程安排表 II（mid）"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/my-calendar-ii/">731. 我的日程安排表 II</a>（mid）</h4><h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1>
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" class="category-chain-item">基础算法</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">刷题记录</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>算法笔记-前缀和/差分</div>
+      <div>https://mikeygithub.github.io/2021/11/19/yuque/算法笔记-前缀和!差分/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年11月19日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/25/yuque/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Protobuf%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" title="学习笔记-Protobuf快速入门">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">学习笔记-Protobuf快速入门</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/05/yuque/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E6%8E%A5%E5%8F%A3%E9%98%B2%E5%88%B7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="学习笔记-接口防刷解决方案">
+                        <span class="hidden-mobile">学习笔记-接口防刷解决方案</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-NCN3Z5PSLJ', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
