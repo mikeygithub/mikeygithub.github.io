@@ -11,21 +11,22 @@
     "server": "hexo server"
   },
   "hexo": {
-    "version": "5.4.0"
+    "version": "5.4.2"
   },
-  "yuqueConfig": [{
-    "postPath": "source/_posts/yuque",
-    "cachePath": "yuque.json",
-    "mdNameFormat": "slug",
-    "adapter": "markdown",
-    "concurrency": 5,
-    "baseUrl": "https://www.yuque.com/api/v2",
-    "login": "aichihongdouheyumi",
-    "repo": "blog",
-    "onlyPublished": true,
-    "onlyPublic": true,
-    "timeout": "600s"
-  }],
+  "yuqueConfig": {
+    "cache": {
+      "path": "yuque-hexo-lyrics"
+    },
+    "repos": [
+      {
+        "login": "aichihongdouheyumi",
+        "repo": "blog",
+        "postPath": "source/_posts/yuque",
+        "mdNameFormat": "title",
+        "adapter": "hexoMarkdown"
+      }
+    ]
+  },
   "dependencies": {
     "hexo": "^5.0.0",
     "hexo-blog-encrypt": "^3.1.6",
@@ -40,6 +41,6 @@
     "hexo-server": "^2.0.0",
     "hexo-tag-aplayer": "^3.0.4",
     "yuque-hexo": "^1.7.0",
-    "yuque-hexo-lyrics": "1.1.3"
+    "yuque-hexo-lyrics": "1.1.12"
   }
 }
