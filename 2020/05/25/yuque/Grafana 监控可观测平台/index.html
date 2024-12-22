@@ -168,18 +168,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -342,7 +330,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676114757025-d4f6eae4-cebc-45af-9a74-6fea5ec092f8.png#averageHue=%23322b27&clientId=u57fbc4db-d7be-4&from=paste&height=212&id=u5545d3f7&originHeight=424&originWidth=659&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=89884&status=done&style=none&taskId=u5487687b-7f87-478c-98ba-f5ca5b75004&title=&width=329.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676114757025-d4f6eae4-cebc-45af-9a74-6fea5ec092f8.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>grafana是一款集指标监控、可视化、警报一体的平台</p>
 <h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
 <li>可视化：具有多种选项的快速灵活的客户端图形。面板插件提供了许多不同的方法来可视化度量和日志。</li>
@@ -353,57 +341,63 @@
 <li>混合数据源：在同一图表中混合不同的数据源，可以基于每个查询指定数据源。适用于自定义数据源。</li>
 </ul>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ol>
-<li><p>下载granfan</p>
+<li>下载granfan</li>
+</ol>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">wget</span> <span class="hljs-string">https://dl.grafana.com/enterprise/release/grafana-enterprise-9.3.6.linux-arm64.tar.gz</span><br><span class="hljs-comment">#国内源 https://repo.huaweicloud.com/grafana/9.3.6/grafana-enterprise-9.3.6.linux-arm64.tar.gz</span><br><span class="hljs-string">tar</span> <span class="hljs-string">-zxvf</span> <span class="hljs-string">grafana-enterprise-9.3.6.linux-arm64.tar.gz</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>下载Prometheus <a target="_blank" rel="noopener" href="https://prometheus.io/download/">https://prometheus.io/download/</a></p>
+
+<ol start="2">
+<li>下载Prometheus <a target="_blank" rel="noopener" href="https://prometheus.io/download/">https://prometheus.io/download/</a></li>
+</ol>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">wget</span> <span class="hljs-string">https://github.com/prometheus/prometheus/releases/download/v2.42.0/prometheus-2.42.0.linux-arm64.tar.gz</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-arm64.tar.gz</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://github.com/prometheus/alertmanager/releases/download/v0.25.0/alertmanager-0.25.0.linux-arm64.tar.gz</span><br></code></pre></td></tr></table></figure>
 
-</li>
-</ol>
 <h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><ol>
-<li><p>启动 granfan</p>
+<li>启动 granfan</li>
+</ol>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">./granfan-server</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>启动node_exporter</p>
+
+<ol start="2">
+<li>启动node_exporter</li>
+</ol>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">./node_exporter</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>配置并启动Prometheus </p>
+
+<ol start="3">
+<li>配置并启动Prometheus </li>
+</ol>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-bullet">-</span> <span class="hljs-attr">job_name:</span> <span class="hljs-string">&quot;node_exporter&quot;</span><br>    <span class="hljs-attr">static_configs:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">targets:</span> [<span class="hljs-string">&quot;0.0.0.0:9100&quot;</span>]<br></code></pre></td></tr></table></figure>
+
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">./prometheus</span> <span class="hljs-string">--config.file=prometheus.yml</span><br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>需要注意一下服务器的时间，笔者因为这个原因导致grafana一直服务获取prometheus数据，需要删除data目录重新启动即可</p>
 </blockquote>
-</li>
-</ol>
 <h1 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h1><ol>
 <li>configuration</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676340994455-7ff3b49d-abd4-4a3a-aa49-f2efa92da34c.png#averageHue=%231a1c21&clientId=uace567df-16c1-4&from=paste&height=820&id=uc51c66a6&originHeight=1640&originWidth=2876&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=207110&status=done&style=none&taskId=uc413bfd4-94f8-4cee-b008-3d83bb0200e&title=&width=1438" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676340994455-7ff3b49d-abd4-4a3a-aa49-f2efa92da34c.png" srcset="/img/loading.gif" lazyload></p>
 <ol start="2">
 <li>add data source 选择 Prometheus</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676341080419-fe84d1c8-d087-4da1-ad2e-986d81254c54.png#averageHue=%231f2127&clientId=uace567df-16c1-4&from=paste&height=821&id=u2d2d4879&originHeight=1642&originWidth=2874&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=280197&status=done&style=none&taskId=ua9775ecc-bab1-4de2-8f35-343a2b004dc&title=&width=1437" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676341080419-fe84d1c8-d087-4da1-ad2e-986d81254c54.png" srcset="/img/loading.gif" lazyload></p>
 <ol start="3">
 <li>输入url 进行保存和测试</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676341165355-24589cbc-7eb1-4b6b-a271-2a48a4df7a94.png#averageHue=%23191b1f&clientId=uace567df-16c1-4&from=paste&height=821&id=u5fb24893&originHeight=1642&originWidth=2878&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=251287&status=done&style=none&taskId=ub3df225f-c520-44f3-9d25-4ed6c5d2df1&title=&width=1439" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676341165355-24589cbc-7eb1-4b6b-a271-2a48a4df7a94.png" srcset="/img/loading.gif" lazyload></p>
 <ol start="4">
 <li>导入大盘</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676546973951-a98b4ff4-c71b-4166-81f6-06314be7d8fd.png#averageHue=%23171a20&clientId=u4eea8b33-46d4-4&from=paste&height=657&id=u44a7467b&originHeight=1314&originWidth=1500&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=102920&status=done&style=none&taskId=ued55e410-30e5-4575-8372-852424cd6c3&title=&width=750" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676546973951-a98b4ff4-c71b-4166-81f6-06314be7d8fd.png" srcset="/img/loading.gif" lazyload></p>
 <ol start="5">
 <li>查看大盘数据</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676546920708-d359426e-8f39-4de8-92b1-a09b309e97c4.png#averageHue=%231b1d21&clientId=u4eea8b33-46d4-4&from=paste&height=834&id=u5ad990f1&originHeight=1668&originWidth=3014&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=428802&status=done&style=none&taskId=u3423df25-8d9d-4ccb-ac65-39315bebf46&title=&width=1507" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676546920708-d359426e-8f39-4de8-92b1-a09b309e97c4.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="指标"><a href="#指标" class="headerlink" title="指标"></a>指标</h1><h1 id="预警"><a href="#预警" class="headerlink" title="预警"></a>预警</h1><h2 id="创建预警规则"><a href="#创建预警规则" class="headerlink" title="创建预警规则"></a>创建预警规则</h2><ol>
 <li>进入预警菜单创建预警规则</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676133427543-66fbed0c-8433-45c7-9eae-2995fe9a23ba.png#averageHue=%231a1b21&clientId=u57fbc4db-d7be-4&from=paste&height=834&id=u411e71b0&originHeight=1668&originWidth=3020&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=194610&status=done&style=none&taskId=u788bfff8-76ea-47dd-a16c-3b7fd7727f9&title=&width=1510" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676133427543-66fbed0c-8433-45c7-9eae-2995fe9a23ba.png" srcset="/img/loading.gif" lazyload></p>
 <ol start="2">
 <li>配置预警规则</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676133750612-85eca14c-f158-4eb3-9420-561b1f6c318a.png#averageHue=%231e2026&clientId=u57fbc4db-d7be-4&from=paste&height=834&id=u99ff0271&originHeight=1668&originWidth=3016&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=1003406&status=done&style=none&taskId=uda97b86f-82c9-411f-bb28-560e38bf509&title=&width=1508" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676133750612-85eca14c-f158-4eb3-9420-561b1f6c318a.png" srcset="/img/loading.gif" lazyload></p>
 <ol start="3">
 <li>选择对应的数据源、时间范围、监控指标</li>
 </ol>
@@ -979,6 +973,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

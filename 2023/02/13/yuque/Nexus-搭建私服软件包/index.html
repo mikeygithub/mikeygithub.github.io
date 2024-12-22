@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676303205186-01acb811-6403-45a8-b8d4-5ed30152f892.png#averageHue=%23160a07&clientId=u9db2b828-d1c3-4&from=paste&height=250&id=u10aa1d14&originHeight=500&originWidth=881&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=268397&status=done&style=none&taskId=uf2aa4e6a-61a8-4a77-b13d-ae26b15914b&title=&width=440.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676303205186-01acb811-6403-45a8-b8d4-5ed30152f892.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Nexus Repository是一种用于存储和管理软件包、镜像和元数据的仓库系统。它支持多种类型的仓库，如Maven、NPM、Docker等，可以帮助开发人员快速访问和下载所需的软件包，提高了软件开发的效率。Nexus Repository还提供了强大的权限控制和安全管理功能，帮助企业组织保护敏感数据和资产。</p>
 <p>Nexus Repository具有以下几个特点：</p>
 <ol>
@@ -355,25 +343,31 @@
 <li>可扩展性强：提供强大的扩展功能，可以根据不同的业务需求进行扩展，满足多变的开发需求。</li>
 </ol>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
-<li><p>进入官网下载安装包：<a target="_blank" rel="noopener" href="https://www.sonatype.com/products/nexus-repository">https://www.sonatype.com/products/nexus-repository</a></p>
+<li>进入官网下载安装包：<a target="_blank" rel="noopener" href="https://www.sonatype.com/products/nexus-repository">https://www.sonatype.com/products/nexus-repository</a></li>
+</ol>
 <blockquote>
 <p>如果无法下载请尝试使用迅雷下载</p>
 </blockquote>
-</li>
-<li><p>解压</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">tar</span> <span class="hljs-string">zxvf</span> <span class="hljs-string">nexus-3.47.1-01-unix.tar.gz</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>安装 (无需安装可直接启动)</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">./nexus</span> <span class="hljs-string">start</span><br><span class="hljs-comment">#查看状态</span><br><span class="hljs-string">./nexus</span> <span class="hljs-string">status</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>测试</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">访问</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><span class="hljs-string">:8080</span><br></code></pre></td></tr></table></figure>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676337660951-cb826193-b4a6-4e1b-a053-09b69f374e8f.png#averageHue=%23e7e7e6&clientId=ubfddedeb-e629-4&from=paste&height=836&id=uf8d6c74d&originHeight=1672&originWidth=3012&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=911140&status=done&style=none&taskId=ufd52e2a9-dd66-41b8-98a5-1e3d836374d&title=&width=1506" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-</li>
-<li><p>管理员登录（admin/admin123）</p>
-</li>
+<ol start="2">
+<li>解压</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676337959387-69a40558-fe44-40dc-85ac-b0ba625787c2.png#averageHue=%23e2e2e0&clientId=ubfddedeb-e629-4&from=paste&height=836&id=uea4ceed7&originHeight=1672&originWidth=3018&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=875501&status=done&style=none&taskId=uc4414c99-86fd-4e38-b6a0-a0a5e19cfb2&title=&width=1509" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">tar</span> <span class="hljs-string">zxvf</span> <span class="hljs-string">nexus-3.47.1-01-unix.tar.gz</span><br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>安装 (无需安装可直接启动)</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">./nexus</span> <span class="hljs-string">start</span><br><span class="hljs-comment">#查看状态</span><br><span class="hljs-string">./nexus</span> <span class="hljs-string">status</span><br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>测试</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">访问</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><span class="hljs-string">:8080</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676337660951-cb826193-b4a6-4e1b-a053-09b69f374e8f.png" srcset="/img/loading.gif" lazyload></p>
+<ol start="5">
+<li>管理员登录（admin/admin123）</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676337959387-69a40558-fe44-40dc-85ac-b0ba625787c2.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="配置NPM-Repository"><a href="#配置NPM-Repository" class="headerlink" title="配置NPM Repository"></a>配置NPM Repository</h2><ul>
 <li>npm(proxy): 可配置代理的仓库，当此仓库没有相应包时 会从配置的第三方仓库拉取 并缓存到本地proxy仓库</li>
 <li>npm(hosted)：开发自己的包推送到此仓库，需登录才能推送</li>
@@ -382,28 +376,33 @@
 <ol>
 <li>创建proxy</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676337758091-0691a6fd-abae-42df-a997-d6d8f51a7fd0.png#averageHue=%23e8e7e6&clientId=ubfddedeb-e629-4&from=paste&height=836&id=u0f821fb8&originHeight=1672&originWidth=3022&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=483517&status=done&style=none&taskId=ue3ffc94a-fb88-4c1f-ba7c-40884914442&title=&width=1511" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676337758091-0691a6fd-abae-42df-a997-d6d8f51a7fd0.png" srcset="/img/loading.gif" lazyload></p>
 <ol start="2">
 <li>创建npm-hosted</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676337824471-8eb8f3a8-6c6c-4012-b839-80008c251d88.png#averageHue=%23e9e8e8&clientId=ubfddedeb-e629-4&from=paste&height=835&id=ua2afa714&originHeight=1670&originWidth=3018&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=414536&status=done&style=none&taskId=u142cdd83-c2c8-4be2-bf5f-c8f84522570&title=&width=1509" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676337824471-8eb8f3a8-6c6c-4012-b839-80008c251d88.png" srcset="/img/loading.gif" lazyload></p>
 <ol start="3">
 <li>创建npm-group</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676337891055-bac442e8-91a1-47e7-942f-03f1929029c6.png#averageHue=%23e9e9e9&clientId=ubfddedeb-e629-4&from=paste&height=834&id=ufc7b8a8e&originHeight=1668&originWidth=3022&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=380483&status=done&style=none&taskId=u3525c28c-23cd-4540-aa0b-81c3f44d23d&title=&width=1511" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676337891055-bac442e8-91a1-47e7-942f-03f1929029c6.png" srcset="/img/loading.gif" lazyload></p>
 <ol start="4">
 <li>测试拉包</li>
 </ol>
-<p>获取group链接<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676338449680-468124b1-429d-41d7-bb58-b6f82615a541.png#averageHue=%23a2a0a0&clientId=ubfddedeb-e629-4&from=paste&height=833&id=u6bd68e13&originHeight=1666&originWidth=3000&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=469530&status=done&style=none&taskId=u51fe5a48-a9d4-4f57-a792-d682551fda6&title=&width=1500" srcset="/img/loading.gif" lazyload alt="image.png"><br>配置镜像地址</p>
+<p>获取group链接</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1676338449680-468124b1-429d-41d7-bb58-b6f82615a541.png" srcset="/img/loading.gif" lazyload></p>
+<p>配置镜像地址</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">npm</span> <span class="hljs-string">config</span> <span class="hljs-string">set</span> <span class="hljs-string">registry=http://maven.xxxxx.com/repository/npm-group/</span><br></code></pre></td></tr></table></figure>
+
 <p>即可拉取</p>
 <ol start="5">
 <li>测试发包</li>
 </ol>
 <p>npm登录</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">npm</span> <span class="hljs-string">login</span> <span class="hljs-string">--auth-type=legacy</span><br></code></pre></td></tr></table></figure>
+
 <p>发包</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">npm</span> <span class="hljs-string">publish</span> <span class="hljs-string">--registry=http://maven.makeblock.com/repository/npm-hosted/</span><br></code></pre></td></tr></table></figure>
+
 
 
 <h2 id="配置Maven-Repository"><a href="#配置Maven-Repository" class="headerlink" title="配置Maven Repository"></a>配置Maven Repository</h2><h1 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h1><p>nexus的升级只需要将我们的数据目录文件和新版本的nexus连接起来即可（当然你可以复制，最好做好备份，因为这是不可逆的操作），如果版本不能兼容更新一般都会在官网中的更新操作标明，具体以官方的声明为主。如果我们自定义修改了nexus应用的一些配置，那也需要将其同步到新版本中，使用对其做修改时最好有一个记录，方便升级更新时能将其快速应用到新版本中。</p>
@@ -982,6 +981,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

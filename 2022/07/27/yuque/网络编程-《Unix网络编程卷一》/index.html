@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,16 +331,18 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1658921328068-daabda73-ad53-452e-9f95-45fd603f8650.png#clientId=ub530df06-9e6b-4&from=paste&height=324&id=uf7e5ccae&originHeight=1400&originWidth=1580&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=1387884&status=done&style=none&taskId=u35628116-ca14-400a-81d6-00e56f4cf8e&title=&width=366" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659348569523-641cc258-a614-4a8b-9ad8-07f4c1e1d3f9.jpeg" srcset="/img/loading.gif" lazyload></p>
-<h1 id="第1章-UNIX基础知识"><a href="#第1章-UNIX基础知识" class="headerlink" title="第1章 UNIX基础知识"></a>第1章 UNIX基础知识</h1><h4 id="进程描述符"><a href="#进程描述符" class="headerlink" title="进程描述符"></a>进程描述符</h4><p>Linux 系统中，把一切都看做是文件，当进程打开现有文件或创建新文件时，内核向进程返回一个文件描述符，文件描述符就是内核为了高效管理已被打开的文件所创建的索引，用来指向被打开的文件，所有执行I/O操作的系统调用都会通过文件描述符。文件描述符可以理解为进程文件描述表这个表的索引，或者把文件描述表看做一个数组的话，文件描述符可以看做是数组的下标。当需要进行I/O操作的时候，会传入fd作为参数，先从进程文件描述符表查找该fd对应的那个条目，取出对应的那个已经打开的文件的句柄，根据文件句柄指向，去系统fd表中查找到该文件指向的inode，从而定位到该文件的真正位置，从而进行I/O操作。</p>
-<p>系统为维护文件描述符，建立了三个表</p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1658921328068-daabda73-ad53-452e-9f95-45fd603f8650.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1659348569523-641cc258-a614-4a8b-9ad8-07f4c1e1d3f9.jpeg" srcset="/img/loading.gif" lazyload alt="画板"></p>
+<h1 id="第1章-UNIX基础知识"><a href="#第1章-UNIX基础知识" class="headerlink" title="第1章 UNIX基础知识"></a><font style="color:rgb(17, 17, 17);">第1章 UNIX基础知识</font></h1><h4 id="进程描述符"><a href="#进程描述符" class="headerlink" title="进程描述符"></a>进程描述符</h4><p>Linux 系统中，把一切都看做是文件，当进程打开现有文件或创建新文件时，内核向进程返回一个文件描述符，文件描述符就是内核为了高效管理已被打开的文件所创建的索引，用来指向被打开的文件，所有执行I/O操作的系统调用都会通过文件描述符。文件描述符可以理解为进程文件描述表这个表的索引，或者把文件描述表看做一个数组的话，文件描述符可以看做是数组的下标。当需要进行I/O操作的时候，会传入fd作为参数，先从进程文件描述符表查找该fd对应的那个条目，取出对应的那个已经打开的文件的句柄，根据文件句柄指向，去系统fd表中查找到该文件指向的inode，从而定位到该文件的真正位置，从而进行I/O操作。</p>
+<p><font style="color:rgb(18, 18, 18);">系统为维护文件描述符，建立了三个表</font></p>
+<p><font style="color:rgb(18, 18, 18);"></font></p>
 <ul>
-<li>进程级的文件描述符表</li>
-<li>系统级的文件描述符表</li>
-<li>文件系统的i-node表</li>
+<li><font style="color:rgb(18, 18, 18);">进程级的文件描述符表</font></li>
+<li><font style="color:rgb(18, 18, 18);">系统级的文件描述符表</font></li>
+<li><font style="color:rgb(18, 18, 18);">文件系统的i-node表</font></li>
 </ul>
-<h2 id="第2章-UNIX标准及实现"><a href="#第2章-UNIX标准及实现" class="headerlink" title="第2章 UNIX标准及实现"></a>第2章 UNIX标准及实现</h2><h2 id="第3章-文件I-O"><a href="#第3章-文件I-O" class="headerlink" title="第3章 文件I/O"></a>第3章 文件I/O</h2><h2 id="第4章-文件和目录"><a href="#第4章-文件和目录" class="headerlink" title="第4章 文件和目录"></a>第4章 文件和目录</h2><h2 id="第5章-标准I-O库"><a href="#第5章-标准I-O库" class="headerlink" title="第5章 标准I/O库"></a>第5章 标准I/O库</h2><h2 id="第6章-系统数据文件和信息第"><a href="#第6章-系统数据文件和信息第" class="headerlink" title="第6章 系统数据文件和信息第"></a>第6章 系统数据文件和信息第</h2><h2 id="第7章-进程环境"><a href="#第7章-进程环境" class="headerlink" title="第7章 进程环境"></a>第7章 进程环境</h2><h2 id="第8章-进程控制"><a href="#第8章-进程控制" class="headerlink" title="第8章 进程控制"></a>第8章 进程控制</h2><h2 id="第9章-进程关系"><a href="#第9章-进程关系" class="headerlink" title="第9章 进程关系"></a>第9章 进程关系</h2><h2 id="第10章-信号"><a href="#第10章-信号" class="headerlink" title="第10章 信号"></a>第10章 信号</h2><h2 id="第11章-线程"><a href="#第11章-线程" class="headerlink" title="第11章 线程"></a>第11章 线程</h2><h2 id="第12章-线程控制"><a href="#第12章-线程控制" class="headerlink" title="第12章 线程控制"></a>第12章 线程控制</h2><h2 id="第13章-守护进程"><a href="#第13章-守护进程" class="headerlink" title="第13章 守护进程"></a>第13章 守护进程</h2><h2 id="第14章-高级I-O"><a href="#第14章-高级I-O" class="headerlink" title="第14章 高级I/O"></a>第14章 高级I/O</h2><h2 id="第15章-Unix域协议"><a href="#第15章-Unix域协议" class="headerlink" title="第15章 Unix域协议"></a>第15章 Unix域协议</h2><h2 id="第16章-非阻塞式I-O"><a href="#第16章-非阻塞式I-O" class="headerlink" title="第16章 非阻塞式I/O"></a>第16章 非阻塞式I/O</h2><h2 id="第17章-ioctl操作"><a href="#第17章-ioctl操作" class="headerlink" title="第17章 ioctl操作"></a>第17章 ioctl操作</h2><h2 id="第18章-路由套接字"><a href="#第18章-路由套接字" class="headerlink" title="第18章 路由套接字"></a>第18章 路由套接字</h2><h2 id="第19章-密钥管理套接字"><a href="#第19章-密钥管理套接字" class="headerlink" title="第19章 密钥管理套接字"></a>第19章 密钥管理套接字</h2><h2 id="第20章-广播"><a href="#第20章-广播" class="headerlink" title="第20章 广播"></a>第20章 广播</h2><h2 id="第21章-多播"><a href="#第21章-多播" class="headerlink" title="第21章 多播"></a>第21章 多播</h2><h2 id="第22章-高级UDP套接字编程"><a href="#第22章-高级UDP套接字编程" class="headerlink" title="第22章 高级UDP套接字编程"></a>第22章 高级UDP套接字编程</h2><h2 id="第23章-高级SCTP套接字编程"><a href="#第23章-高级SCTP套接字编程" class="headerlink" title="第23章 高级SCTP套接字编程"></a>第23章 高级SCTP套接字编程</h2><h2 id="第24章-带外数据"><a href="#第24章-带外数据" class="headerlink" title="第24章 带外数据"></a>第24章 带外数据</h2><h2 id="第25章-信号驱动式I-O"><a href="#第25章-信号驱动式I-O" class="headerlink" title="第25章 信号驱动式I/O"></a>第25章 信号驱动式I/O</h2><h2 id="第26章-线程"><a href="#第26章-线程" class="headerlink" title="第26章 线程"></a>第26章 线程</h2><h2 id="第27章-IP选项"><a href="#第27章-IP选项" class="headerlink" title="第27章 IP选项"></a>第27章 IP选项</h2><h2 id="第28章-原始套接字"><a href="#第28章-原始套接字" class="headerlink" title="第28章 原始套接字"></a>第28章 原始套接字</h2><h2 id="第29章-数据链路访问"><a href="#第29章-数据链路访问" class="headerlink" title="第29章 数据链路访问"></a>第29章 数据链路访问</h2><h2 id="第30章-客户-服务器程序设计范式"><a href="#第30章-客户-服务器程序设计范式" class="headerlink" title="第30章 客户/服务器程序设计范式"></a>第30章 客户/服务器程序设计范式</h2><h2 id="第31章-流"><a href="#第31章-流" class="headerlink" title="第31章 流"></a>第31章 流</h2><h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/pdf/2630542/1658921290580-fd4172a9-1fed-4803-83a9-4277bcb9d52c.pdf?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2022/pdf/2630542/1658921290580-fd4172a9-1fed-4803-83a9-4277bcb9d52c.pdf%22,%22name%22:%22UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%8D%B71%EF%BC%9A%E5%A5%97%E6%8E%A5%E5%AD%97%E8%81%94%E7%BD%91API%EF%BC%88%E7%AC%AC3%E7%89%88%EF%BC%89.pdf%22,%22size%22:89137995,%22type%22:%22application/pdf%22,%22ext%22:%22pdf%22,%22source%22:%22%22,%22status%22:%22done%22,%22mode%22:%22title%22,%22download%22:true,%22taskId%22:%22ub4b23953-84c1-4a41-9aca-78916cc5db6%22,%22taskType%22:%22upload%22,%22__spacing%22:%22both%22,%22id%22:%22uda6fa298%22,%22margin%22:%7B%22top%22:true,%22bottom%22:true%7D,%22card%22:%22file%22%7D">UNIX网络编程卷1：套接字联网API（第3版）.pdf</a><br><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/pdf/2630542/1658928424501-75e74003-c4c5-40e0-a5d7-0aae603d3dc0.pdf?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2022/pdf/2630542/1658928424501-75e74003-c4c5-40e0-a5d7-0aae603d3dc0.pdf%22,%22name%22:%22UNIX%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%8D%B72%EF%BC%9A%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%EF%BC%88%E7%AC%AC2%E7%89%88%EF%BC%89.pdf%22,%22size%22:44220384,%22type%22:%22application/pdf%22,%22ext%22:%22pdf%22,%22source%22:%22%22,%22status%22:%22done%22,%22mode%22:%22title%22,%22download%22:true,%22taskId%22:%22u5eb6b0e7-8596-4cea-bfef-ccc096c5fa1%22,%22taskType%22:%22upload%22,%22__spacing%22:%22both%22,%22id%22:%22u17eb0c81%22,%22margin%22:%7B%22top%22:true,%22bottom%22:true%7D,%22card%22:%22file%22%7D">UNIX网络编程卷2：进程间通信（第2版）.pdf</a></p>
+<h2 id="第2章-UNIX标准及实现"><a href="#第2章-UNIX标准及实现" class="headerlink" title="第2章 UNIX标准及实现"></a>第2章 UNIX标准及实现</h2><h2 id="第3章-文件I-O"><a href="#第3章-文件I-O" class="headerlink" title="第3章 文件I/O"></a>第3章 文件I/O</h2><h2 id="第4章-文件和目录"><a href="#第4章-文件和目录" class="headerlink" title="第4章 文件和目录"></a>第4章 文件和目录</h2><h2 id="第5章-标准I-O库"><a href="#第5章-标准I-O库" class="headerlink" title="第5章 标准I/O库"></a>第5章 标准I/O库</h2><h2 id="第6章-系统数据文件和信息第"><a href="#第6章-系统数据文件和信息第" class="headerlink" title="第6章 系统数据文件和信息第"></a>第6章 系统数据文件和信息第</h2><h2 id="第7章-进程环境"><a href="#第7章-进程环境" class="headerlink" title="第7章 进程环境"></a>第7章 进程环境</h2><h2 id="第8章-进程控制"><a href="#第8章-进程控制" class="headerlink" title="第8章 进程控制"></a>第8章 进程控制</h2><h2 id="第9章-进程关系"><a href="#第9章-进程关系" class="headerlink" title="第9章 进程关系"></a>第9章 进程关系</h2><h2 id="第10章-信号"><a href="#第10章-信号" class="headerlink" title="第10章 信号"></a>第10章 信号</h2><h2 id="第11章-线程"><a href="#第11章-线程" class="headerlink" title="第11章 线程"></a>第11章 线程</h2><h2 id="第12章-线程控制"><a href="#第12章-线程控制" class="headerlink" title="第12章 线程控制"></a>第12章 线程控制</h2><h2 id="第13章-守护进程"><a href="#第13章-守护进程" class="headerlink" title="第13章 守护进程"></a>第13章 守护进程</h2><h2 id="第14章-高级I-O"><a href="#第14章-高级I-O" class="headerlink" title="第14章 高级I/O"></a>第14章 高级I/O</h2><h2 id="第15章-Unix域协议"><a href="#第15章-Unix域协议" class="headerlink" title="第15章 Unix域协议"></a>第15章 Unix域协议</h2><h2 id="第16章-非阻塞式I-O"><a href="#第16章-非阻塞式I-O" class="headerlink" title="第16章 非阻塞式I/O"></a>第16章 非阻塞式I/O</h2><h2 id="第17章-ioctl操作"><a href="#第17章-ioctl操作" class="headerlink" title="第17章 ioctl操作"></a>第17章 ioctl操作</h2><h2 id="第18章-路由套接字"><a href="#第18章-路由套接字" class="headerlink" title="第18章 路由套接字"></a>第18章 路由套接字</h2><h2 id="第19章-密钥管理套接字"><a href="#第19章-密钥管理套接字" class="headerlink" title="第19章 密钥管理套接字"></a>第19章 密钥管理套接字</h2><h2 id="第20章-广播"><a href="#第20章-广播" class="headerlink" title="第20章 广播"></a>第20章 广播</h2><h2 id="第21章-多播"><a href="#第21章-多播" class="headerlink" title="第21章 多播"></a>第21章 多播</h2><h2 id="第22章-高级UDP套接字编程"><a href="#第22章-高级UDP套接字编程" class="headerlink" title="第22章 高级UDP套接字编程"></a>第22章 高级UDP套接字编程</h2><h2 id="第23章-高级SCTP套接字编程"><a href="#第23章-高级SCTP套接字编程" class="headerlink" title="第23章 高级SCTP套接字编程"></a>第23章 高级SCTP套接字编程</h2><h2 id="第24章-带外数据"><a href="#第24章-带外数据" class="headerlink" title="第24章 带外数据"></a>第24章 带外数据</h2><h2 id="第25章-信号驱动式I-O"><a href="#第25章-信号驱动式I-O" class="headerlink" title="第25章 信号驱动式I/O"></a>第25章 信号驱动式I/O</h2><h2 id="第26章-线程"><a href="#第26章-线程" class="headerlink" title="第26章 线程"></a>第26章 线程</h2><h2 id="第27章-IP选项"><a href="#第27章-IP选项" class="headerlink" title="第27章 IP选项"></a>第27章 IP选项</h2><h2 id="第28章-原始套接字"><a href="#第28章-原始套接字" class="headerlink" title="第28章 原始套接字"></a>第28章 原始套接字</h2><h2 id="第29章-数据链路访问"><a href="#第29章-数据链路访问" class="headerlink" title="第29章 数据链路访问"></a>第29章 数据链路访问</h2><h2 id="第30章-客户-服务器程序设计范式"><a href="#第30章-客户-服务器程序设计范式" class="headerlink" title="第30章 客户/服务器程序设计范式"></a>第30章 客户/服务器程序设计范式</h2><h2 id="第31章-流"><a href="#第31章-流" class="headerlink" title="第31章 流"></a>第31章 流</h2><h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/pdf/2630542/1658921290580-fd4172a9-1fed-4803-83a9-4277bcb9d52c.pdf">UNIX网络编程卷1：套接字联网API（第3版）.pdf</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2022/pdf/2630542/1658928424501-75e74003-c4c5-40e0-a5d7-0aae603d3dc0.pdf">UNIX网络编程卷2：进程间通信（第2版）.pdf</a></p>
 
               
             </div>
@@ -370,8 +360,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%BD%91%E7%9B%B8%E5%85%B3/" class="category-chain-item">计网相关</a>
+  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%AE%A1%E7%BD%91%E7%9B%B8%E5%85%B3/" class="category-chain-item">计网相关</a>
+  
+  
+
   
 
       </span>
@@ -902,6 +899,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

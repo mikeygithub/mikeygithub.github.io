@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550646372-9e3f1884-d365-4540-b626-711115840860.png#clientId=ue6329ae8-36ae-4&from=markdown&id=JyTZY&originHeight=500&originWidth=1200&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=457623&status=done&style=none&taskId=u812dcd41-d6d3-44e1-a21e-534111a0f3c&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550646372-9e3f1884-d365-4540-b626-711115840860.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="什么是K8S"><a href="#什么是K8S" class="headerlink" title="什么是K8S"></a>什么是K8S</h1><p>Kuberneters 具有完备的集群管理能力，包括多层次的安全防护和准入机制、多租户应用支撑能力、透明的服务注册和服务发现机制、内建智能负载均衡器、强大的故障发现和自我修复能力、服务滚动升级和在线扩容能力、可扩展的资源自动调度机制，以及多粒度的资源配额管理能力。同时， Kuberneters 提供了完善的管理工具，这些工具涵盖了包括开发、部署测试、运维监控在内的各个环节。因此，Kuberneters是一个全新的基于容器技术的分布式架构解决方案，并且是一个一站式的完备的分布式系统开发和支撑平台。</p>
 <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="Kubernetes主要由以下几个核心组件组成："><a href="#Kubernetes主要由以下几个核心组件组成：" class="headerlink" title="Kubernetes主要由以下几个核心组件组成："></a>Kubernetes主要由以下几个核心组件组成：</h2><ul>
 <li>etcd保存了整个集群的状态；</li>
@@ -417,7 +405,7 @@
 <h2 id="用户帐户（User-Account）和服务帐户（Service-Account）"><a href="#用户帐户（User-Account）和服务帐户（Service-Account）" class="headerlink" title="用户帐户（User Account）和服务帐户（Service Account）"></a>用户帐户（User Account）和服务帐户（Service Account）</h2><p>顾名思义，用户帐户为人提供账户标识，而服务账户为计算机进程和K8s集群中运行的Pod提供账户标识。用户帐户和服务帐户的一个区别是作用范围；用户帐户对应的是人的身份，人的身份与服务的namespace无关，所以用户账户是跨namespace的；而服务帐户对应的是一个运行中程序的身份，与特定namespace是相关的。</p>
 <h2 id="名字空间（Namespace）"><a href="#名字空间（Namespace）" class="headerlink" title="名字空间（Namespace）"></a>名字空间（Namespace）</h2><p>名字空间为K8s集群提供虚拟的隔离作用，K8s集群初始有两个名字空间，分别是默认名字空间default和系统名字空间kube-system，除此以外，管理员可以创建新的名字空间满足需要。</p>
 <h2 id="RBAC访问授权"><a href="#RBAC访问授权" class="headerlink" title="RBAC访问授权"></a>RBAC访问授权</h2><p>K8s在1.3版本中发布了alpha版的基于角色的访问控制（Role-based Access Control，RBAC）的授权模式。相对于基于属性的访问控制（Attribute-based Access Control，ABAC），RBAC主要是引入了角色（Role）和角色绑定（RoleBinding）的抽象概念。在ABAC中，K8s集群中的访问策略只能跟用户直接关联；而在RBAC中，访问策略可以跟某个角色关联，具体的用户在跟一个或多个角色相关联。显然，RBAC像其他新功能一样，每次引入新功能，都会引入新的API对象，从而引入新的概念抽象，而这一新的概念抽象一定会使集群服务管理和使用更容易扩展和重用。</p>
-<h1 id="详细介绍"><a href="#详细介绍" class="headerlink" title="详细介绍"></a>详细介绍</h1><h2 id="Pods概述"><a href="#Pods概述" class="headerlink" title="Pods概述"></a>Pods概述</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/module_03_pods.ccc5ba54.svg#id=ijoe7&originHeight=124&originWidth=300&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="详细介绍"><a href="#详细介绍" class="headerlink" title="详细介绍"></a>详细介绍</h1><h2 id="Pods概述"><a href="#Pods概述" class="headerlink" title="Pods概述"></a>Pods概述</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/module_03_pods.ccc5ba54.svg" srcset="/img/loading.gif" lazyload></p>
 <p><strong>Pod 容器组</strong> 是一个k8s中一个抽象的概念，用于存放一组 container（可包含一个或多个 container 容器，即图上正方体)，以及这些 container （容器）的一些共享资源。这些资源包括：</p>
 <ul>
 <li>共享存储，称为卷(Volumes)，即图上紫色圆柱</li>
@@ -434,7 +422,7 @@
 <li>Pod 是一组容器（可包含一个或多个应用程序容器），以及共享存储（卷 Volumes）、IP 地址和有关如何运行容器的信息。</li>
 <li>如果多个容器紧密耦合并且需要共享磁盘等资源，则他们应该被部署在同一个Pod（容器组）中。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0IS-AbqyhAACfzxoTgIY518.png#id=jSnkh&originHeight=523&originWidth=800&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0IS-AbqyhAACfzxoTgIY518.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="Master"><a href="#Master" class="headerlink" title="Master"></a>Master</h2><p>Kubernetes里的Master指的是集群控制节点，每个Kubernetes集群里需要有一个Master节点来负责整个集群的管理和控制，基本上Kubernetes的所有控制命令都发给它，它来负责具体的执行过程，我们后面执行的所有命令基本都是在Master节点上运行的。Master节点通常会占据一个独立的服务器（高可用部署建议用3台服务器），其主要原因是它太重要了，是整个集群的“首脑”，如果宕机或者不可用，那么对集群内容器应用的管理都将失效。</p>
 <p>Master节点上运行着以下一组关键进程。</p>
 <ul>
@@ -444,7 +432,7 @@
 </ul>
 <p>另外，在Master节点上还需要启动一个etcd服务，因为Kubernetes里的所有资源对象的数据全部是保存在etcd中的。</p>
 <h2 id="Node（节点）"><a href="#Node（节点）" class="headerlink" title="Node（节点）"></a>Node（节点）</h2><p>下图显示一个 Node（节点）上含有4个 Pod（容器组）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/module_03_nodes.38f0ef71.svg#id=awECT&originHeight=150&originWidth=175&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/module_03_nodes.38f0ef71.svg" srcset="/img/loading.gif" lazyload></p>
 <p>Pod（容器组）总是在 <strong>Node（节点）</strong> 上运行。Node（节点）是 kubernetes 集群中的计算机，可以是虚拟机或物理机。每个 Node（节点）都由 master 管理。一个 Node（节点）可以有多个Pod（容器组），kubernetes master 会根据每个 Node（节点）上可用资源的情况，自动调度 Pod（容器组）到最佳的 Node（节点）上。</p>
 <p>每个 Kubernetes Node（节点）至少运行：</p>
 <ul>
@@ -460,23 +448,29 @@
 <li>用于筛选目标Pod的Label Selector。</li>
 <li>当Pod的副本数量小于预期数量时，用于创建新Pod的Pod模版（template）。</li>
 </ul>
-<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">apiVersion</span><span class="hljs-punctuation">:</span> <span class="hljs-string">v1</span><br><span class="hljs-attribute">kind</span><span class="hljs-punctuation">:</span> <span class="hljs-string">ReplicationController</span><br><span class="hljs-attribute">metadata</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">frontend</span><br><span class="hljs-attribute">spec</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">replicas</span><span class="hljs-punctuation">:</span> <span class="hljs-string">1</span><br>  <span class="hljs-attribute">selector</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">tier</span><span class="hljs-punctuation">:</span> <span class="hljs-string">frontend</span><br><span class="hljs-attribute">template</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">metadata</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">labels</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-attribute">app</span><span class="hljs-punctuation">:</span> <span class="hljs-string">app-demo</span><br>      <span class="hljs-attribute">tier</span><span class="hljs-punctuation">:</span> <span class="hljs-string">frontend</span><br>  <span class="hljs-attribute">spec</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">containers</span><span class="hljs-punctuation">:</span><br>     <span class="hljs-bullet">-</span> <span class="hljs-string">name: tomcat-demo</span><br>       <span class="hljs-attribute">image</span><span class="hljs-punctuation">:</span> <span class="hljs-string">tomcat</span><br>       <span class="hljs-attribute">ports</span><span class="hljs-punctuation">:</span><br>       <span class="hljs-attribute">imagePullPolicy</span><span class="hljs-punctuation">:</span> <span class="hljs-string">IfNotPresent</span><br>       <span class="hljs-attribute">env</span><span class="hljs-punctuation">:</span><br>       <span class="hljs-bullet">-</span> <span class="hljs-string">name: GET_HOSTS_FROM</span><br>         <span class="hljs-attribute">value</span><span class="hljs-punctuation">:</span> <span class="hljs-string">dns</span><br>       <span class="hljs-attribute">ports</span><span class="hljs-punctuation">:</span><br>       <span class="hljs-bullet">-</span> <span class="hljs-string">containerPort: 80</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs plain">apiVersion: v1<br>kind: ReplicationController<br>metadata:<br>  name: frontend<br>spec:<br>  replicas: 1<br>  selector:<br>    tier: frontend<br>template:<br>  metadata:<br>    labels:<br>      app: app-demo<br>      tier: frontend<br>  spec:<br>    containers:<br>     - name: tomcat-demo<br>       image: tomcat<br>       ports:<br>       imagePullPolicy: IfNotPresent<br>       env:<br>       - name: GET_HOSTS_FROM<br>         value: dns<br>       ports:<br>       - containerPort: 80<br></code></pre></td></tr></table></figure>
+
+
 
 <p>当我们定义了一个RC并提交到Kubernetes集群中以后，Master节点上的<strong>Controller Manager组件</strong>就得到通知，定期巡检系统中当前存活的目标Pod，并确保目标Pod实例的数量刚好等于此RC的期望值，如果有过多的Pod副本在运行，系统就会停掉一些Pod，否则系统就会再自动创建一些Pod。可以说，通过RC，Kubernetes实现了用户应用集群的高可用性，并且大大减少了系统管理员在传统IT环境中需要完成的许多手工运维工作（如主机监控脚本、应用监控脚本、故障恢复脚本等）。</p>
 <p>下面我们以3个Node节点的集群为例，说明Kubernetes如何通过RC来实现Pod副本数量自动控制的机制。假如我们的RC里定义redis-slave这个Pod需要保持3个副本，系统将可能在其中的两个Node上创建Pod。图1.9描述了在两个Node上创建redis-slave Pod的情形。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0JRGAXF8nAABNjP-OvJk363.png#id=SWt3q&originHeight=523&originWidth=800&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0JRGAXF8nAABNjP-OvJk363.png" srcset="/img/loading.gif" lazyload></p>
 <p>假设Node2上的Pod2意外终止，根据RC定义的replicas数量2，Kubernetes将会自动创建并启动一个新的Pod，以保住整个集群中始终有两个redis-slave Pod在运行。</p>
 <p>如图所示，系统可能选择Node3或者Node1来创建一个新的Pod。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0JVeASS5FAABYqOWmPjY884.png#id=VmD8R&originHeight=704&originWidth=767&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0JVeASS5FAABYqOWmPjY884.png" srcset="/img/loading.gif" lazyload></p>
 <p>此外，在运行时，我们可以通过修改RC的副本数量，来实现Pod的动态缩放（Scaling）功能，还可以通过执行kubectl scale命令来一键完成：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-variable">$kubectl</span> scale rc redis-slave <span class="hljs-attribute">--replicas</span>=3<br>scaled<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain">$kubectl scale rc redis-slave --replicas=3<br>scaled<br></code></pre></td></tr></table></figure>
+
+
 
 <p>Scaling的执行结果如图所示。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0JYeAJO3MAABdk3EvE_w414.png#id=YGhH2&originHeight=704&originWidth=767&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0JYeAJO3MAABdk3EvE_w414.png" srcset="/img/loading.gif" lazyload></p>
 <p>需要注意的是，删除RC并不会影响通过该RC已创建好的Pod。为了删除所有Pod，可以设置replicas的值为0，然后更新该RC。另外，kubectl提供了stop和delete命令来一次性删除RC和RC控制的全部Pod。</p>
 <p>当我们的应用升级时，通常会通过Build一个新的Docker镜像，并用新的镜像版本来替代旧的版本的方式达到目的，在系统升级的过程中，我们希望是平滑的方式，比如当前系统中10个对应的旧版本的Pod，最佳的方式是旧版本的Pod每次停止一个，同时创建一个新版本的Pod，在整个升级过程中，此消彼长，而运行中的Pod数量始终是10个，几分钟以后，当所有的Pod都已经是最新版本时，升级过程完成。通过RC的机制，Kubernetes很容易就实现了这种高级实用的特性，被称为“滚动升级”（Rolling Update），具体的操作方法详见第四章。</p>
 <p>由于Replication Controller与Kubernetes代码中的模块Replication Controller同名，同时这个词也无法准确表达它的本意，所以在Kubernetes v1.2时，它就升级成了另外一个新的概念–Replica Set，官方解释为“下一代的RC”，它与RC当前存在的唯一区别是：Replica Sets支持基于集合的Label selector（Set-based selector），而RC只支持基于等式的Label Selector（equality-based selector），这使得Replica Set的功能更强，下面是等价于之前RC例子的Replica Set的定义（省去了Pod模版部分的内容）：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">extensions/v1beta1</span><br><span class="hljs-attr">kind:</span> <span class="hljs-string">ReplicaSet</span><br><span class="hljs-string">metadata：</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">frontend</span><br><span class="hljs-attr">spec:</span><br>  <span class="hljs-attr">selector:</span><br>    <span class="hljs-attr">matchLabels:</span><br>      <span class="hljs-attr">tier:</span> <span class="hljs-string">frontend</span><br>    <span class="hljs-attr">matchExpression:</span><br>      <span class="hljs-bullet">-</span> &#123;<span class="hljs-attr">key:</span> <span class="hljs-string">tier</span>, <span class="hljs-attr">operator:</span> <span class="hljs-string">In</span>, <span class="hljs-attr">values:</span> [<span class="hljs-string">frontend</span>]&#125;<br>  <span class="hljs-attr">template:</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs plain">apiVersion: extensions/v1beta1<br>kind: ReplicaSet<br>metadata：<br>  name: frontend<br>spec:<br>  selector:<br>    matchLabels:<br>      tier: frontend<br>    matchExpression:<br>      - &#123;key: tier, operator: In, values: [frontend]&#125;<br>  template:<br></code></pre></td></tr></table></figure>
+
+
 
 <p>kubectl命令工具适用于RC的绝大部分命令都同样适用于Replica Set。此外，当前我们很少单独使用Replica Set，它主要被Deployment这个更高层的资源对象所使用，从而形成一整套Pod创建、删除、更新的编排机制。当我们使用Deployment时，无须关心它是如何创建和维护Replica Set的，这一切都是自动发生的。</p>
 <p>Replica Set与Deployment这两个重要资源对象逐步替换了之前的RC的作用，是Kubernetes v1.3里Pod自动扩容（伸缩）这个告警功能实现的基础，也将继续在Kubernetes未来的版本中发挥重要的作用。</p>
@@ -502,16 +496,24 @@
 <li>清理不再需要的旧版本ReplicaSets。</li>
 </ul>
 <p>Deployment的定义与Replica Set的定义很类似，除了API声明与Kind类型等有所区别：</p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">apiVersion:</span> extensions/v1beta1      apiVersion: v1<br><span class="hljs-symbol">kind:</span> Deployment                    kind: ReplicaSet<br><span class="hljs-symbol">metadata:</span>                           metadata:<br><span class="hljs-symbol">  name:</span> nginx-deployment              name: nginx-repset<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plain">apiVersion: extensions/v1beta1      apiVersion: v1<br>kind: Deployment                    kind: ReplicaSet<br>metadata:                           metadata:<br>  name: nginx-deployment              name: nginx-repset<br></code></pre></td></tr></table></figure>
+
+
 
 <p>下面我们通过运行一些例子来一起直观地感受这个新概念。首先创建一个名为tomcat-deployment.yaml的Deployment描述文件，内容如下：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">extensions/v1beta1</span><br><span class="hljs-attr">kind:</span> <span class="hljs-string">Deployment</span><br><span class="hljs-attr">metadata:</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">frontend</span><br><span class="hljs-attr">spec:</span><br>  <span class="hljs-attr">replicas:</span> <span class="hljs-number">1</span><br>  <span class="hljs-attr">selector:</span><br>    <span class="hljs-attr">matchLabels:</span><br>      <span class="hljs-attr">tier:</span> <span class="hljs-string">frontend</span><br>    <span class="hljs-attr">matchExpressions:</span><br>      <span class="hljs-bullet">-</span> &#123;<span class="hljs-attr">key:</span> <span class="hljs-string">tier</span>, <span class="hljs-attr">operator:</span> <span class="hljs-string">In</span>, <span class="hljs-attr">values:</span> [<span class="hljs-string">frontend</span>]&#125;<br>  <span class="hljs-attr">template:</span><br>    <span class="hljs-attr">metadata:</span><br>      <span class="hljs-attr">labels:</span><br>        <span class="hljs-attr">app:</span> <span class="hljs-string">app-demo</span><br>        <span class="hljs-attr">tier:</span> <span class="hljs-string">frontend</span><br>    <span class="hljs-attr">spec:</span><br>      <span class="hljs-attr">containers:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">tomcat-demo</span><br>        <span class="hljs-attr">image:</span> <span class="hljs-string">tomcat</span><br>        <span class="hljs-attr">imagePullPolicy:</span> <span class="hljs-string">IfNotPresent</span><br>        <span class="hljs-attr">ports:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-attr">containerPort:</span> <span class="hljs-number">8080</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs plain">apiVersion: extensions/v1beta1<br>kind: Deployment<br>metadata:<br>  name: frontend<br>spec:<br>  replicas: 1<br>  selector:<br>    matchLabels:<br>      tier: frontend<br>    matchExpressions:<br>      - &#123;key: tier, operator: In, values: [frontend]&#125;<br>  template:<br>    metadata:<br>      labels:<br>        app: app-demo<br>        tier: frontend<br>    spec:<br>      containers:<br>      - name: tomcat-demo<br>        image: tomcat<br>        imagePullPolicy: IfNotPresent<br>        ports:<br>        - containerPort: 8080<br></code></pre></td></tr></table></figure>
+
+
 
 <p>运行下述命令创建Deploymeny:</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment"># kubectl create -f tomcat-deployment.yaml</span><br><span class="hljs-attribute">deployment</span> <span class="hljs-string">&quot;tomcat-deploy&quot;</span> created<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain"># kubectl create -f tomcat-deployment.yaml<br>deployment &quot;tomcat-deploy&quot; created<br></code></pre></td></tr></table></figure>
+
+
 
 <p>运行下述命令查看Deployment的信息：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># kubectl get deployments</span><br><span class="hljs-attribute">NAME</span>            DESIRED     CURRENT     UP-TO-DATE      AVAILABLE   AGE<br><span class="hljs-attribute">tomcat</span>-deploy   <span class="hljs-number">1</span>           <span class="hljs-number">1</span>           <span class="hljs-number">1</span>               <span class="hljs-number">1</span>           <span class="hljs-number">4</span>m<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain"># kubectl get deployments<br>NAME            DESIRED     CURRENT     UP-TO-DATE      AVAILABLE   AGE<br>tomcat-deploy   1           1           1               1           4m<br></code></pre></td></tr></table></figure>
+
+
 
 <p>对上述输出中涉及的数量解释如下：</p>
 <ul>
@@ -521,10 +523,14 @@
 <li>AVAILABLE：当前集群中可用的Pod副本数量，即集群中当前存活的Pod数量。</li>
 </ul>
 <p>运行下述命令查看对应的Replica Set，我们看到它的命名与Deployment的名字有关系：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># kubectl get rs</span><br><span class="hljs-attribute">NAME</span>                        DESIRED     CURRENT     AGE<br><span class="hljs-attribute">tomcat</span>-deploy-<span class="hljs-number">1640611518</span>    <span class="hljs-number">1</span>           <span class="hljs-number">1</span>           <span class="hljs-number">1</span>m<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain"># kubectl get rs<br>NAME                        DESIRED     CURRENT     AGE<br>tomcat-deploy-1640611518    1           1           1m<br></code></pre></td></tr></table></figure>
+
+
 
 <p>运行下述命令查看创建的Pod，我们发现Pod的命名以Deployment对应的Replica Set的名字为前缀，这种命名很清晰地表明了一个Replica Set创建了哪些Pod，对于滚动升级这种复杂的过程来说，很容易排查错误：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># kubectl get pods</span><br><span class="hljs-attribute">NAME</span>                            READY       STATUS      RESTARTS    AGE<br><span class="hljs-attribute">tomcat</span>-deploy-<span class="hljs-number">1640611518</span>-zhrsc  <span class="hljs-number">1</span>/<span class="hljs-number">1</span>         Running     <span class="hljs-number">0</span>           <span class="hljs-number">3</span>m<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain"># kubectl get pods<br>NAME                            READY       STATUS      RESTARTS    AGE<br>tomcat-deploy-1640611518-zhrsc  1/1         Running     0           3m<br></code></pre></td></tr></table></figure>
+
+
 
 <p>运行kubectl describe deployments，可以清楚地看到Deployment控制的Pod的水平扩展过程，详见第2章的说明，这里不再赘述。</p>
 <p>Pod的管理对象，除了RC和Deployment，还包括ReplicaSet、DaemonSet、StatefulSet、Job等，分别用于不同的应用场景中</p>
@@ -542,20 +548,23 @@
 <p>HPA允许一定范围内的CPU使用量的不稳定，只有avg(CurrentPodsConsumption) / Target小于90%或者大于110%时才会触发扩容或缩容，避免频繁扩容、缩容造成颠簸。</p>
 <h3 id="为什么选择相对比率"><a href="#为什么选择相对比率" class="headerlink" title="为什么选择相对比率"></a>为什么选择相对比率</h3><p>为了简便，选用了相对比率（90%的CPU资源）而不是<code>0.6</code>个<code>CPU core</code>来描述扩容、缩容条件。如果选择使用绝对度量，用户需要保证目标（限额）要比请求使用的低，否则，过载的Pod未必能够消耗那么多，从而自动扩容永远不会被触发：假设设置CPU为1个核，那么这个pod只能使用1个核，可能Pod在过载的情况下也不能完全利用这个核，所以扩容不会发生。在修改申请资源时，还有同时调整扩容的条件，比如将1个core变为1.2core，那么扩容条件应该同步改为1.2core，真是太麻烦了，与自动扩容的目标相悖。</p>
 <p>下面是HPA定义的一个具体例子：</p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">apiVersion:</span> autoscaling/v1<br><span class="hljs-symbol">kind:</span> HorizontalPodAutoscaler<br><span class="hljs-symbol">metadata:</span><br><span class="hljs-symbol">  name:</span> php-apache<br><span class="hljs-symbol">spec:</span><br><span class="hljs-symbol">  scaleTargetRef:</span><br><span class="hljs-symbol">    apiVersion:</span> apps/v1<br><span class="hljs-symbol">    kind:</span> Deployment<br><span class="hljs-symbol">    name:</span> php-apache<br><span class="hljs-symbol">  minReplicas:</span> <span class="hljs-number">1</span><br><span class="hljs-symbol">  maxReplicas:</span> <span class="hljs-number">10</span><br><span class="hljs-symbol">  targetCPUUtilizationPercentage:</span> <span class="hljs-number">50</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs plain">apiVersion: autoscaling/v1<br>kind: HorizontalPodAutoscaler<br>metadata:<br>  name: php-apache<br>spec:<br>  scaleTargetRef:<br>    apiVersion: apps/v1<br>    kind: Deployment<br>    name: php-apache<br>  minReplicas: 1<br>  maxReplicas: 10<br>  targetCPUUtilizationPercentage: 50<br></code></pre></td></tr></table></figure>
+
+
 
 <p>根据上面的定义，我们可以知道，这个HPA控制的目标对象为一个名叫<code>java-apache</code>的<code>Deployment</code>里的Pod副本，当这些Pod副本的<code>CPUUtilizationPercentage</code>的值超过<code>50%</code>时会触发自动动态扩容行为，扩容或缩容时必须满足的一个约束条件是Pod的副本数要介于<code>1</code>与<code>10</code>之间。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">kubectl autoscale deployment java-apache <span class="hljs-attribute">--cpu-percent</span>=90 <span class="hljs-attribute">--min</span>=1 <span class="hljs-attribute">--max</span>=10<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">kubectl autoscale deployment java-apache --cpu-percent=90 --min=1 --max=10<br></code></pre></td></tr></table></figure>
+
 
 
 <h2 id="StatefulSet"><a href="#StatefulSet" class="headerlink" title="StatefulSet"></a>StatefulSet</h2><p>StatefulSet里的每个Pod都有稳定、唯一的网络标识，可以用来发现集群内的其他成员。假设StatefulSet的名字叫kafka，那么第一个Pod叫kafak-0，第二个Pod叫kafak-1，以此类推。</p>
 <p>StatefulSet控制的Pod副本的启停顺序是受控的，操作第n个Pod时，前n-1个Pod已经时运行且准备好的状态。</p>
 <p>StatefulSet里的Pod采用稳定的持久化存储卷，通过PV/PVC来实现，删除Pod时默认不会删除与StatefulSet相关的存储卷（为了保证数据的安全）。</p>
 <h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>Service也是Kubernetes里的最核心的资源对象之一，Kubernetes里的每个Service其实就是我们经常提起的微服务架构中的一个“微服务”，之前我们所说的Pod、RC等资源对象其实都是为这节所说的“服务”——Kubernetes Service作“嫁衣”的。下图显示了Pod、RC与Service的逻辑关系。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0K4eAMuaUAACvvKRWv6A962.png#id=V76vJ&originHeight=383&originWidth=1000&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0K4eAMuaUAACvvKRWv6A962.png" srcset="/img/loading.gif" lazyload></p>
 <p>从图中我们看到，Kubernetes的Service定义了一个服务的访问入口地址，前端的应用（Pod）通过这个入口地址访问其背后的一组由Pod副本组成的集群实例，Service与其后端Pod副本集群之间则是通过Label Selector来实现“无缝对接”的。而RC的作用实际上是保证Service的服务能力和服务质量始终处于预期的标准。</p>
 <p>通过分析、识别并建模系统中的所有服务为微服务—–Kubernetes Service，最终我们的系统由多个提供不同业务能力而又彼此独立的微服务单元所组成，服务之间通过TCP/IP进行通信，从而形成了我们强大而又灵活的弹性网格，拥有了强大的分布式能力、弹性扩展能力、容错能力，于此同时，我们的程序架构也变得简单和直观许多，如图所示。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0K6eANG1RAACEnAcItP4264.png#id=s3Tk8&originHeight=413&originWidth=830&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/dr5oXFv0K6eANG1RAACEnAcItP4264.png" srcset="/img/loading.gif" lazyload></p>
 <p>既然每个Pod都会被分配一个单独的IP地址，而且每个Pod都提供了一个独立的<code>Endpoint(Pod IP+ContainerPort)</code>以被客户端访问，现在多个Pod副本组成了一个集群来提供服务，那么客户端如何来访问它们呢？一般的做法是部署一个负载均衡器（软件或硬件），为这组Pod开启一个对外的服务端口如8000端口，并且将这些Pod的Endpoint列表加入8000端口的转发列表中，客户端就可以通过负载均衡器的对外IP地址+服务端口来访问服务，而客户端的请求最后会被转发转发到哪个Pod，则由负载均衡器的算法所决定。</p>
 <p>Kubernetes也遵循了上述常规做法，运行在每个Node上的kube-proxy进程其实就是一个智能的软件负载均衡器，它负责把对Service的请求转发到后端的某个Pod实例上，并在内部实现服务的负载均衡与会话机制。但Kubernetes发明了一种很巧妙又影响深远的设计：<code>Service不是共用一个负载均衡的IP地址，而是每个Service分配了全局唯一的虚拟IP地址，这个虚拟IP地址被称为Cluster IP</code>。这样一来，每个服务就变成了具备唯一IP地址的“通信节点”，服务调用就变成了最基础的TCP网络通信问题。</p>
 <p>我们知道，Pod的Endpoint地址会随着Pod的销毁和重新创建而发生改变，因为新Pod的IP地址与之前旧Pod的不同。而Service一旦被创建，Kubernetes就会自动为它分配一个可用的Cluster IP，而且在Service的整个生命周期内。它的Cluster IP不会发生改变。于是，服务发现这个棘手的问题在Kubernetes的架构里也得到轻松解决：只要用Service的Name与Service的Cluster IP地址做一个DNS域名映射即可完美解决问题。现在想想，这真是一个很棒的设计。</p>
@@ -567,6 +576,8 @@
 <h2 id="Volume"><a href="#Volume" class="headerlink" title="Volume"></a>Volume</h2><p>Volume是Pod中能够被多个容器访问的共享目录。Kubernetes的Volume概念、用途和目的与Docker的Volume比较类似，但两者不能等价。首先，Kubernetes中的Volume定义在Pod上，然后被一个Pod里的多个容器挂载到具体的文件目录下；其次，Kubernetes中的Volume中的数据也不会丢失。最后，Kubernetes支持多种类型的Volume，例如Gluster、Ceph等先进的分布式文件系统。</p>
 <p>Volume的使用也比较简单，在大多数情况下，我们先在Pod上声明一个Volume，然后在容器里引用该Volume并Mount到容器里的某个目录上。举例来说，我们要給之前的Tomcat Pod增加一个名字为datavol的Volume，并且Mount到容器的/mydata-data目录上，则只要对Pod的定义文件做如下修正即可：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">template:</span><br>  <span class="hljs-attr">metadata:</span><br>    <span class="hljs-attr">labels:</span><br>      <span class="hljs-attr">app:</span> <span class="hljs-string">app-demo</span><br>      <span class="hljs-attr">tier:</span> <span class="hljs-string">frontend</span><br>  <span class="hljs-attr">spec:</span><br>    <span class="hljs-attr">volumes:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">datavol</span><br>      <span class="hljs-attr">emptyDir:</span> &#123;&#125;<br>    <span class="hljs-attr">containers:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">tomcat-demo</span><br>      <span class="hljs-attr">image:</span> <span class="hljs-string">tomcat</span><br>      <span class="hljs-attr">volumeMounts:</span><br>       <span class="hljs-bullet">-</span> <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/mydata-data</span><br>         <span class="hljs-attr">name:</span> <span class="hljs-string">datavol</span><br>      <span class="hljs-attr">imagePullPolicy:</span> <span class="hljs-string">IfNotPersent</span><br></code></pre></td></tr></table></figure>
+
+
 
 <p>除了可以让一个Pod里的多个容器共享文件、让容器的数据写到宿主机的磁盘上或者写文件到网络存储中，Kubernetes的Volume还扩展出了一种非常有实用价值的功能，即容器配置文件集中化定义与管理，这是通过ConfigMap这个新的资源对象来实现的</p>
 <h2 id="persistent-volumes"><a href="#persistent-volumes" class="headerlink" title="persistent volumes"></a>persistent volumes</h2><p>管理<code>存储</code>和管理<code>计算</code>有着明显的不同。<code>PersistentVolume</code>给用户和管理员提供了一套API，抽象出<code>存储</code>是如何<code>提供和消耗的细节</code>。在这里，我们介绍两种新的API资源：<code>PersistentVolume（简称PV）</code>和<code>PersistentVolumeClaim（简称PVC）</code>。</p>
@@ -603,6 +614,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">[root@virtualbox-centos-1 ~]# kubectl get namespaces<br>NAME              STATUS   AGE<br>calico-system     Active   4d23h<br>default           Active   4d23h<br>kube-node-lease   Active   4d23h<br>kube-public       Active   4d23h<br>kube-system       Active   4d23h<br>kuboard           Active   4d20h<br>nginx-ingress     Active   4d22h<br>tigera-operator   Active   4d23h<br></code></pre></td></tr></table></figure>
 
 
+
 <h2 id="Annotation"><a href="#Annotation" class="headerlink" title="Annotation"></a>Annotation</h2><p>Annotation与Label类似，也使用key/value键值对的形式进行定义。不同的是Label具有严格的命名规则，它定义的是Kubernetes对象的元数据（Metadata），并且用于Label Selector。而Annotation则是用户任意定义的“附加”信息，以便于外部工具进行查找，很多时候，Kubernetes的模块自身会通过Annotation的方式标记资源对象的特殊信息。</p>
 <p>通常来说，用Annotation来记录的信息如下。</p>
 <ul>
@@ -630,13 +642,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/Kubernetes/" class="category-chain-item">Kubernetes</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/Kubernetes/" class="category-chain-item">Kubernetes</a>
+  
+  
+
   
 
   
@@ -1169,6 +1188,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

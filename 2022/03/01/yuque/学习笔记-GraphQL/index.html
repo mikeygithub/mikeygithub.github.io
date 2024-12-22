@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1647349581010-09945aa7-76d5-4e08-8d8d-589ad8ec35bb.png#averageHue=%23181e25&clientId=uca82f1d4-b240-4&from=paste&height=360&id=ua9afcfb3&originHeight=720&originWidth=1182&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=124145&status=done&style=none&taskId=u26ad63b9-4134-4648-8e13-3edf2b6b933&title=&width=591" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1647349581010-09945aa7-76d5-4e08-8d8d-589ad8ec35bb.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
 <p>在开发过程中可能你会遇到这样的情况，打开你的应用主页，需要去加载个人信息，签到记录，你发表的文章列表，文章里面的评论记录，评论里面的用户头像等一系列关联的数据。一次性需要发送很多次请次，你可能会问那我把这些数据全部放在一个接口里不就好了嘛整那么多花里胡哨的干嘛？确实是可以，但是这无疑增加了后端的工作量且降低接口的稳定性，而现有的接口也能满足你的需求。</p>
 </blockquote>
@@ -351,10 +339,10 @@
 <p>官方对GraphQL的解释是“GraphQL是API的查询语言”，API的查询语言到底是什么东西？</p>
 <p>我们可以简单的理解为其实就是前端按需拼接对应查询的查询语句，后端直接一次性返回所需数据，无需像rustful需要请求不同的接口拿到不同的数据</p>
 <h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><ul>
-<li><p>rustful</p>
-</li>
-<li><p>graphql</p>
-</li>
+<li>rustful</li>
+</ul>
+<ul>
+<li>graphql</li>
 </ul>
 <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>graphql的schema拥有自己的一套DDL</p>
 <p><a target="_blank" rel="noopener" href="https://graphql.org/learn/schema/">https://graphql.org/learn/schema/</a></p>
@@ -374,14 +362,20 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs graphql">query findTodosAlias &#123;<br>  one:gets(id:1) &#123;<br>    text<br>    done<br>    user &#123;<br>      name<br>      id<br>    &#125;<br>  &#125;<br>  two:gets(id:2) &#123;<br>    text<br>    done<br>    user &#123;<br>      name<br>      id<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
+
 <h2 id="片段Fragments"><a href="#片段Fragments" class="headerlink" title="片段Fragments"></a>片段Fragments</h2><blockquote>
 <p>片段的作用就是为了提高其复用率</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs graphql">query findTodosAlias &#123;<br>  one:gets(id:1) &#123;<br>    ...todofra<br>  &#125;<br>  two:gets(id:2) &#123;<br>    ...todofra<br>  &#125;<br>&#125;<br><br>fragment todofra on Todo &#123;<br>		text<br>    done<br>    user &#123;<br>      name<br>      id<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>需要参数的片段Fragment</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs graphql"><br></code></pre></td></tr></table></figure>
+
 <h2 id="内联片段Inline-Fragments"><a href="#内联片段Inline-Fragments" class="headerlink" title="内联片段Inline Fragments"></a>内联片段Inline Fragments</h2><blockquote>
 <p>内联片段的应用就是在一个对象里面具体查询，哪个片段里面有值就会返回他对应的fragment，例如我们在查询消息时，普通消息返回文本的fragment，如果是图片则返回url的fragment</p>
 </blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs graphql"><br></code></pre></td></tr></table></figure>
+
 <h2 id="操作名称Operation-Name"><a href="#操作名称Operation-Name" class="headerlink" title="操作名称Operation Name"></a>操作名称Operation Name</h2><blockquote>
 <p>query或者mutations后面紧跟着的就是操作名称</p>
 </blockquote>
@@ -391,7 +385,9 @@
 <p>graphql中支持定义变量然后在查询中进行使用</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs graphql">query findTodosVar($id:Int) &#123;#定义<br>  gets(id:$id) &#123;#使用<br>    text<br>    done<br>    user &#123;<br>      name<br>      id<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs graphql">&#123;&quot;id&quot;:1&#125;<br></code></pre></td></tr></table></figure>
+
 <p>带默认值的</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs graphql">query findTodosVar($id:Int=10) &#123;<br>  gets(id:$id) &#123;<br>    text<br>    done<br>    user &#123;<br>      name<br>      id<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -399,7 +395,9 @@
 <p>该功能主要是用了在Query中做逻辑判断</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs graphql">query findTodosDirectives($id:Int,$withUser:Boolean!) &#123;<br>  gets(id:$id) &#123;<br>    text<br>    done<br>    user @include(if: $withUser)&#123;<br>      name<br>      id<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs graphql">&#123;<br>  &quot;id&quot;:1,<br>  &quot;withUser&quot;:true<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>支持的指令</p>
 <ul>
 <li>@include(if: Boolean) 只有参数为true时才会包含所选择的字段</li>
@@ -409,40 +407,60 @@
 <p>mutation主要是用来对数据进行修改的操作，和查询类似，如果新增或者修改后返回数据对象，我们也可以像query那样进行操作</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs graphql">mutation createTodo &#123;<br>  createTodo(input: &#123; text: &quot;abcdadfadfasdfasa&quot;, userId: &quot;2&quot; &#125;) &#123;<br>    ...todofra<br>  &#125;<br>&#125;<br><br>mutation createTodoVar($text:String!,$id:String!) &#123;<br>  createTodo(input: &#123; text: $text, userId: $id &#125;) &#123;<br>    ...todofra<br>  &#125;<br>&#125;<br><br><br>fragment todofra on Todo &#123;<br>		text<br>    done<br>    user &#123;<br>      name<br>      id<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs graphql">&#123;<br>  &quot;id&quot;:1,<br>  &quot;text&quot;: &quot;some text&quot;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
 
 <p>更多内容参考：<a target="_blank" rel="noopener" href="https://graphql.org/learn/queries/">https://graphql.org/learn/queries/</a></p>
 <h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><blockquote>
-<p>笔者使用的是gqlgen库来实现的具体可以参考文末的资料链接</p>
+<p>笔者使用的是<font style="color:rgb(68, 68, 85);">gqlgen库来实现的具体可以参考文末的资料链接</font></p>
 </blockquote>
 <ol>
-<li><p>获取依赖</p>
+<li>获取依赖</li>
+</ol>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> get -d github.com/<span class="hljs-number">99</span>designs/gqlgen<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>进入我们的项目根目录进行初始化</p>
+
+<ol start="2">
+<li>进入我们的项目根目录进行初始化</li>
+</ol>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> run github.com/<span class="hljs-number">99</span>designs/gqlgen init<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>此时会生成一些配置文件</p>
+
+<ol start="3">
+<li>此时会生成一些配置文件</li>
+</ol>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go">├── <span class="hljs-keyword">go</span>.mod<br>├── <span class="hljs-keyword">go</span>.sum<br>├── gqlgen.yml               - The gqlgen config file, knobs <span class="hljs-keyword">for</span> controlling the generated code.<br>├── graph<br>│   ├── generated            - A <span class="hljs-keyword">package</span> that only contains the generated runtime<br>│   │   └── generated.<span class="hljs-keyword">go</span><br>│   ├── model                - A <span class="hljs-keyword">package</span> <span class="hljs-keyword">for</span> all your graph models, generated or otherwise<br>│   │   └── models_gen.<span class="hljs-keyword">go</span><br>│   ├── resolver.<span class="hljs-keyword">go</span>          - The root graph resolver <span class="hljs-keyword">type</span>. This file wont get regenerated<br>│   ├── schema.graphqls      - Some schema. You can split the schema into as many graphql files as you like<br>│   └── schema.resolvers.<span class="hljs-keyword">go</span>  - the resolver implementation <span class="hljs-keyword">for</span> schema.graphql<br>└── server.<span class="hljs-keyword">go</span>                - The entry point to your app. Customize it however you see fit<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>配置对应的操作接口</p>
+
+<ol start="4">
+<li>配置对应的操作接口</li>
+</ol>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(r *mutationResolver)</span></span> CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, <span class="hljs-type">error</span>) &#123;<br>    todo := &amp;model.Todo&#123;<br>        Text: input.Text,<br>        ID:   fmt.Sprintf(<span class="hljs-string">&quot;T%d&quot;</span>, rand.Intn(<span class="hljs-number">100</span>)),<br>        User: &amp;model.User&#123;ID: input.UserID, Name: <span class="hljs-string">&quot;user &quot;</span> + input.UserID&#125;,<br>    &#125;<br>    r.todos = <span class="hljs-built_in">append</span>(r.todos, todo)<br>    <span class="hljs-keyword">return</span> todo, <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(r *queryResolver)</span></span> Todos(ctx context.Context) ([]*model.Todo, <span class="hljs-type">error</span>) &#123;<br>    <span class="hljs-keyword">return</span> r.todos, <span class="hljs-literal">nil</span><br>&#125;<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>运行服务器</p>
+
+<ol start="5">
+<li>运行服务器</li>
+</ol>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> run server.<span class="hljs-keyword">go</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>打开 GraphQL playground</p>
+
+<ol start="6">
+<li>打开 GraphQL playground</li>
+</ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs graphql">localhost:8080<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>执行简单查询和创建</p>
+
+<ol start="7">
+<li>执行简单查询和创建</li>
+</ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs graphql">mutation createTodo &#123;<br>  createTodo(input: &#123; text: &quot;todo&quot;, userId: &quot;10&quot; &#125;) &#123;<br>    user &#123;<br>      id<br>    &#125;<br>    text<br>    done<br>  &#125;<br>&#125;<br><br>query findTodos &#123;<br>  todos &#123;<br>    text<br>    done<br>    user &#123;<br>      name<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>修改schema.graphqls后重新生成</p>
+
+<ol start="8">
+<li>修改schema.graphqls后重新生成</li>
+</ol>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">go</span> <span class="hljs-string">run</span> <span class="hljs-string">github.com/99designs/gqlgen</span> <span class="hljs-string">generate</span><br></code></pre></td></tr></table></figure>
 
-</li>
-</ol>
-<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>官网 <a target="_blank" rel="noopener" href="https://graphql.org/">https://graphql.org</a><br>案例 <a target="_blank" rel="noopener" href="https://github.com/graphql-java-kickstart/graphql-spring-boot">https://github.com/graphql-java-kickstart/graphql-spring-boot</a><br>案例 <a target="_blank" rel="noopener" href="https://github.com/graphql-go/graphql/tree/master/examples/">https://github.com/graphql-go/graphql/tree/master/examples/</a><br><a target="_blank" rel="noopener" href="https://gqlgen.com/">https://gqlgen.com/</a><br><a target="_blank" rel="noopener" href="https://graphql.org/learn/schema/">https://graphql.org/learn/schema/</a></p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>官网 <a target="_blank" rel="noopener" href="https://graphql.org/">https://graphql.org</a></p>
+<p>案例 <a target="_blank" rel="noopener" href="https://github.com/graphql-java-kickstart/graphql-spring-boot">https://github.com/graphql-java-kickstart/graphql-spring-boot</a></p>
+<p>案例 <a target="_blank" rel="noopener" href="https://github.com/graphql-go/graphql/tree/master/examples/">https://github.com/graphql-go/graphql/tree/master/examples/</a></p>
+<p><a target="_blank" rel="noopener" href="https://gqlgen.com/">https://gqlgen.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://graphql.org/learn/schema/">https://graphql.org/learn/schema/</a></p>
 
               
             </div>
@@ -1015,6 +1033,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

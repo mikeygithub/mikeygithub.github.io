@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657526426143-2dddee8b-91d2-434d-8fa1-6c1b943f6caf.png#clientId=u2fc621d9-2a98-4&from=markdown&id=n4Zh7&originHeight=1679&originWidth=4671&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=343029&status=done&style=none&taskId=u658101df-fefe-4e8f-928d-35e85ba031a&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657526426143-2dddee8b-91d2-434d-8fa1-6c1b943f6caf.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="Hyperledger-Iroha-简介"><a href="#Hyperledger-Iroha-简介" class="headerlink" title="Hyperledger Iroha 简介"></a>Hyperledger Iroha 简介</h1><h2 id="1-1-Iroha的主要特征是什么？"><a href="#1-1-Iroha的主要特征是什么？" class="headerlink" title="1.1 Iroha的主要特征是什么？"></a>1.1 Iroha的主要特征是什么？</h2><ul>
 <li>简单的部署和维护</li>
 <li>面向开发人员的各种库</li>
@@ -420,7 +408,9 @@
 <p>3.2。启动Iroha</p>
 <p>3.2.1。创建一个Docker网络<br>要进行操作，Iroha需要一个PostgreSQL数据库。让我们从创建Docker网络开始，以便Postgres和Iroha的容器可以在同一虚拟网络上运行并成功通信。在本指南中，我们将其称为iroha-network，但您可以使用任何名称。在您的终端中输入以下命令：</p>
 <p>泊坞窗网络创建iroha-network<br>3.2.2。启动PostgreSQL容器<br>现在，我们需要PostgreSQL在容器中运行，将其附加到之前创建的网络，并公开用于通信的端口：</p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker--name some-postgres<span class="hljs-string">\</span> <br>-e POSTGRES_USER = postgres<span class="hljs-string">\</span> <br>-e POSTGRES_PASSWORD = mysecretpassword <span class="hljs-string">\</span> <br>-p <span class="hljs-number">5432</span>：<span class="hljs-number">5432</span> <span class="hljs-string">\</span> <br>--network =iroha-network<span class="hljs-string">\</span> <br>-d postgres：<span class="hljs-number">9.5</span> <span class="hljs-string">\</span> <br>-c <span class="hljs-string">&#x27;max_prepared_transactions = 100&#x27;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plain">docker--name some-postgres\ <br>-e POSTGRES_USER = postgres\ <br>-e POSTGRES_PASSWORD = mysecretpassword \ <br>-p 5432：5432 \ <br>--network =iroha-network\ <br>-d postgres：9.5 \ <br>-c &#x27;max_prepared_transactions = 100&#x27;<br></code></pre></td></tr></table></figure>
+
+
 
 <p>注意</p>
 <p>如果已经在主机系统上的默认端口（5432）上运行了Postgres，则应选择另一个将被占用的空闲端口。例如5433：-p 5433:5432</p>
@@ -435,11 +425,15 @@
 <p>关于如何设置参数以及如何根据您的环境和负载期望对其进行调整的指南：配置。目前我们不需要这样做。</p>
 <p>3.2.5。启动Iroha容器<br>我们几乎准备启动我们的Iroha集装箱。您只需要知道配置文件的路径（从上述步骤开始）。</p>
 <p>让我们使用以下命令在Docker容器中启动Iroha节点：</p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run --name iroha <span class="hljs-string">\</span> <br>-d <span class="hljs-string">\</span> <br>-p <span class="hljs-number">50051</span>：<span class="hljs-number">50051</span> <span class="hljs-string">\</span> <br>-v $ &#123; pwd ） / iroha / example：/ opt / iroha_data <span class="hljs-string">\</span> <br>-v blockstore：/ tmp / block_store <span class="hljs-string">\</span> <br>--network = iroha-network <span class="hljs-string">\</span> <br>- e KEY = <span class="hljs-string">&#x27;node0&#x27;</span>  <span class="hljs-string">\</span><br>hyperledger / iroha：latest<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plain">docker run --name iroha \ <br>-d \ <br>-p 50051：50051 \ <br>-v $ &#123; pwd ） / iroha / example：/ opt / iroha_data \ <br>-v blockstore：/ tmp / block_store \ <br>--network = iroha-network \ <br>- e KEY = &#x27;node0&#x27;  \<br>hyperledger / iroha：latest<br></code></pre></td></tr></table></figure>
+
+
 
 <p>如果成功启动节点，您将在启动容器的同一控制台中看到容器ID。</p>
 <p>让我们详细了解一下此命令的作用：</p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run --name iroha <span class="hljs-string">\</span> 创建一个容器 iroha<br>-d <span class="hljs-string">\</span> 在后台运行容器<br>-p <span class="hljs-number">50051</span>:<span class="hljs-number">50051</span> <span class="hljs-string">\</span> 公开用于与客户端通信的端口（我们将在以后使用）<br>-v YOUR_PATH_TO_CONF_FILES:/opt/iroha_data <span class="hljs-string">\这就是我们如何将配置文件传递到docker容器的方法。示例目录在上面的代码块中指示。</span><br>-v blockstore:/tmp/block_store <span class="hljs-string">\</span> 将持久性块存储（Docker卷）添加到容器中，以便在我们停止容器后不会丢失块<br>--network=iroha-network <span class="hljs-string">\将我们的容器添加到先前创建的iroha-network</span> 用于与PostgreSQL服务器通信的容器<br>-e KEY=<span class="hljs-string">&#x27;node0&#x27;</span> <span class="hljs-string">\-在此请指出一个密钥名称，该名称将标识允许其确认操作的节点。密钥应与上述配置文件一起放在目录中。</span><br>hyperledger/iroha:latest是指向最新版本的图像的引用<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs plain">docker run --name iroha \ 创建一个容器 iroha<br>-d \ 在后台运行容器<br>-p 50051:50051 \ 公开用于与客户端通信的端口（我们将在以后使用）<br>-v YOUR_PATH_TO_CONF_FILES:/opt/iroha_data \这就是我们如何将配置文件传递到docker容器的方法。示例目录在上面的代码块中指示。<br>-v blockstore:/tmp/block_store \ 将持久性块存储（Docker卷）添加到容器中，以便在我们停止容器后不会丢失块<br>--network=iroha-network \将我们的容器添加到先前创建的iroha-network 用于与PostgreSQL服务器通信的容器<br>-e KEY=&#x27;node0&#x27; \-在此请指出一个密钥名称，该名称将标识允许其确认操作的节点。密钥应与上述配置文件一起放在目录中。<br>hyperledger/iroha:latest是指向最新版本的图像的引用<br></code></pre></td></tr></table></figure>
+
+
 
 <p>您可以通过运行查看日志。docker logs iroha</p>
 <p>您可以尝试使用示例指南之一，以便将一些事务发送到Iroha并查询其状态。</p>
@@ -482,7 +476,9 @@
 <p>5.1.2. Linux<br>To build Iroha, you will need the following packages:</p>
 <p>build-essential git ca-certificates tar ninja-build curl unzip cmake</p>
 <p>Use this code to install environment dependencies on Debian-based Linux distro.</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">apt-get update<span class="hljs-comment">; \</span><br>apt-get -y --no-<span class="hljs-keyword">install-recommends </span><span class="hljs-keyword">install </span>\<br><span class="hljs-keyword">build-essential </span>ninja-<span class="hljs-keyword">build </span>\<br>git ca-certificates tar curl unzip cmake<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plain">apt-get update; \<br>apt-get -y --no-install-recommends install \<br>build-essential ninja-build \<br>git ca-certificates tar curl unzip cmake<br></code></pre></td></tr></table></figure>
+
+
 
 <p>Note</p>
 <p>If you are willing to actively develop Iroha and to build shared libraries, please consider installing the latest release of CMake.</p>
@@ -536,7 +532,8 @@
 <blockquote>
 <p>Some of the tests will fail without PostgreSQL storage running, so if you are not using scripts/run-iroha-dev.sh script please run Docker container or create a local connection with following parameters:</p>
 </blockquote>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros">docker <span class="hljs-built_in">run</span> --name some-postgres \<br>-e <span class="hljs-attribute">POSTGRES_USER</span>=postgres \<br>-e <span class="hljs-attribute">POSTGRES_PASSWORD</span>=mysecretpassword \<br>-p 5432:5432 \<br>-d postgres:9.5 \<br>-c <span class="hljs-string">&#x27;max_prepared_transactions=100&#x27;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plain">docker run --name some-postgres \<br>-e POSTGRES_USER=postgres \<br>-e POSTGRES_PASSWORD=mysecretpassword \<br>-p 5432:5432 \<br>-d postgres:9.5 \<br>-c &#x27;max_prepared_transactions=100&#x27;<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="Hyperledger-Iroha-相关资料"><a href="#Hyperledger-Iroha-相关资料" class="headerlink" title="Hyperledger Iroha 相关资料"></a>Hyperledger Iroha 相关资料</h1><p><a target="_blank" rel="noopener" href="https://iroha.readthedocs.io/en/latest/">官方文档</a></p>
@@ -1089,6 +1086,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

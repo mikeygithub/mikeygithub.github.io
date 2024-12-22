@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657549227818-4acd3ae2-1aab-424a-80ad-70952dfa0505.png#clientId=u4c895fcc-003b-4&from=markdown&id=Fc8JH&originHeight=296&originWidth=556&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=50344&status=done&style=none&taskId=ub1b9a38a-08c2-40f2-9f02-c0c768ae1d6&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657549227818-4acd3ae2-1aab-424a-80ad-70952dfa0505.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="软件简介"><a href="#软件简介" class="headerlink" title="软件简介"></a>软件简介</h1><blockquote>
 <p>Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎，能够解决不断涌现出的各种用例。 作为 Elastic Stack 的核心。其底层是基于Lucene</p>
 </blockquote>
@@ -370,121 +358,213 @@
 <p>实现方法很简单，为每个分片创建冗余的副本，处理查询时可以把这些副本当做最初的主分片（primary shard）使用。</p>
 <p>如果主分片所在的主机宕机了，ElasticSearch会自动从该分片的副本中选出一个当做新的主分片，不会中断索引和搜索服务，并且可以在任意时间节点添加或删除副本，可随时调整副本的数量。</p>
 <h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/downloads/elasticsearch">下载软件</a></p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">curl</span> <span class="hljs-literal">-L</span> <span class="hljs-literal">-O</span> https://artifacts.elastic.co/downloads/elasticsearch/elastic<span class="hljs-built_in">search-7</span>.<span class="hljs-number">10.2</span><span class="hljs-literal">-linux-x86_64</span>.tar.gz<br>tar <span class="hljs-literal">-xzvf</span> elastic<span class="hljs-built_in">search-7</span>.<span class="hljs-number">10.2</span><span class="hljs-literal">-linux-x86_64</span>.tar.gz<br><span class="hljs-built_in">cd</span> elastic<span class="hljs-built_in">search-7</span>.<span class="hljs-number">10.2</span><br>./bin/elasticsearch<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs plain">curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.10.2-linux-x86_64.tar.gz<br>tar -xzvf elasticsearch-7.10.2-linux-x86_64.tar.gz<br>cd elasticsearch-7.10.2<br>./bin/elasticsearch<br></code></pre></td></tr></table></figure>
+
+
 
 <p>华为云加速<code>wget https://mirrors.huaweicloud.com/elasticsearch/7.9.3/elasticsearch-7.9.3-linux-x86_64.tar.gz</code></p>
 <p> 无法使用root启动 </p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex">can not run elasticsearch as root<br></code></pre></td></tr></table></figure>
 
+
+
 <p>1、创建用户：elasticsearch</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">adduser elasticsearch</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">adduser elasticsearch<br></code></pre></td></tr></table></figure>
+
+
 
 <p>2、创建用户密码，需要输入两次</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">passwd elasticsearch</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">passwd elasticsearch<br></code></pre></td></tr></table></figure>
+
+
 
 <p>3、将对应的文件夹权限赋给该用户</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">chown</span> -R elasticsearch elasticsearch-<span class="hljs-number">6</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">chown -R elasticsearch elasticsearch-6.0.0<br></code></pre></td></tr></table></figure>
+
+
 
 <p>4、切换至elasticsearch用户</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">su elasticsearch</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">su elasticsearch<br></code></pre></td></tr></table></figure>
+
+
 
 <p>5、进入启动目录启动 /usr/local/elasticsearch-6.0.0/bin  使用后台启动方式：./elasticsearch -d</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./elasticsearch -d<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">./elasticsearch -d<br></code></pre></td></tr></table></figure>
+
+
 
 <p>6、启动后测试</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">curl</span> ip:<span class="hljs-number">9200</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">curl ip:9200<br></code></pre></td></tr></table></figure>
+
+
 
 <p>如果返回一个json数据说明启动成功</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;mikey&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;cluster_name&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;elasticsearch&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;cluster_uuid&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;02UVRTOaS7mSdfs2oRc43A&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;version&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;number&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;7.9.3&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;build_flavor&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;build_type&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;tar&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;build_hash&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;c4138e51121ef06a6404866cddc601906fe5c868&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;build_date&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2020-10-16T10:36:16.141335Z&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;build_snapshot&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;lucene_version&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;8.6.2&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;minimum_wire_compatibility_version&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6.8.0&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;minimum_index_compatibility_version&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6.0.0-beta1&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;tagline&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;You Know, for Search&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs plain">&#123;<br>  &quot;name&quot; : &quot;mikey&quot;,<br>  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,<br>  &quot;cluster_uuid&quot; : &quot;02UVRTOaS7mSdfs2oRc43A&quot;,<br>  &quot;version&quot; : &#123;<br>    &quot;number&quot; : &quot;7.9.3&quot;,<br>    &quot;build_flavor&quot; : &quot;default&quot;,<br>    &quot;build_type&quot; : &quot;tar&quot;,<br>    &quot;build_hash&quot; : &quot;c4138e51121ef06a6404866cddc601906fe5c868&quot;,<br>    &quot;build_date&quot; : &quot;2020-10-16T10:36:16.141335Z&quot;,<br>    &quot;build_snapshot&quot; : false,<br>    &quot;lucene_version&quot; : &quot;8.6.2&quot;,<br>    &quot;minimum_wire_compatibility_version&quot; : &quot;6.8.0&quot;,<br>    &quot;minimum_index_compatibility_version&quot; : &quot;6.0.0-beta1&quot;<br>  &#125;,<br>  &quot;tagline&quot; : &quot;You Know, for Search&quot;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h1><blockquote>
 <p>Kibana是一个开源分析和可视化平台，旨在与Elasticsearch合作。您可以使用Kibana来搜索、查看和交互存储在Elasticsearch索引中的数据。您可以轻松地执行高级数据分析，并在各种图表、表格和地图中可视化数据。</p>
 </blockquote>
 <p>下载</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">curl</span> -L -O https://artifacts.elastic.co/downloads/kibana/kibana-<span class="hljs-number">7</span>.<span class="hljs-number">10</span>.<span class="hljs-number">2</span>-linux-x86_64.tar.gz<br><span class="hljs-attribute">tar</span> xzvf kibana-<span class="hljs-number">7</span>.<span class="hljs-number">10</span>.<span class="hljs-number">2</span>-linux-x86_64.tar.gz<br><span class="hljs-attribute">cd</span> kibana-<span class="hljs-number">7</span>.<span class="hljs-number">10</span>.<span class="hljs-number">2</span>-linux-x86_64/<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">curl -L -O https://artifacts.elastic.co/downloads/kibana/kibana-7.10.2-linux-x86_64.tar.gz<br>tar xzvf kibana-7.10.2-linux-x86_64.tar.gz<br>cd kibana-7.10.2-linux-x86_64/<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-meta"># 修改配置文件</span><br>vim config/kibana.yml<br><span class="hljs-meta"># 添加任何ip都可以访问</span><br><span class="hljs-symbol">server.host:</span> <span class="hljs-string">&quot;0.0.0.0&quot;</span><br><span class="hljs-meta"># 默认语言改为中文</span><br><span class="hljs-symbol">i18n.locale:</span> <span class="hljs-string">&quot;zh-CN&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs plain"># 修改配置文件<br>vim config/kibana.yml<br># 添加任何ip都可以访问<br>server.host: &quot;0.0.0.0&quot;<br># 默认语言改为中文<br>i18n.locale: &quot;zh-CN&quot;<br></code></pre></td></tr></table></figure>
+
+
 
 <p>启动</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">.<span class="hljs-regexp">/bin/</span>kibana<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">./bin/kibana<br></code></pre></td></tr></table></figure>
+
+
 
 <p>打开<code>http://localhost:5601/</code>，进入控制台即可对数据进行操作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210318215614354.png#id=fQvQt&originHeight=1080&originWidth=1920&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/image-20210318215614354.png" srcset="/img/loading.gif" lazyload></p>
 <p>华为云加速<code>wget https://mirrors.huaweicloud.com/kibana/7.9.3/kibana-7.9.3-linux-x86_64.tar.gz</code></p>
 <h1 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h1><p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.x/getting-started-index.html">QUICK START</a></p>
 <h2 id="请求格式"><a href="#请求格式" class="headerlink" title="请求格式"></a>请求格式</h2><p><code>curl -X&lt;VERB&gt; &#39;&lt;PROTOCOL&gt;://&lt;HOST&gt;:&lt;PORT&gt;/&lt;PATH&gt;?&lt;QUERY_STRING&gt;&#39; -d &#39;&lt;BODY&gt;&#39;</code></p>
-<p>| <code>VERB</code> | 适当的 HTTP <em>方法</em> 或 <em>谓词</em> : <code>GET</code><br>、 <code>POST</code><br>、 <code>PUT</code><br>、 <code>HEAD</code><br> 或者 <code>DELETE</code><br>。 |<br>| — | — |<br>| <code>PROTOCOL</code> | <code>http</code><br> 或者 <code>https</code><br>（如果你在 Elasticsearch 前面有一个 <code>https</code><br> 代理） |<br>| <code>HOST</code> | Elasticsearch 集群中任意节点的主机名，或者用 <code>localhost</code><br> 代表本地机器上的节点。 |<br>| <code>PORT</code> | 运行 Elasticsearch HTTP 服务的端口号，默认是 <code>9200</code><br> 。 |<br>| <code>PATH</code> | API 的终端路径（例如 <code>_count</code><br> 将返回集群中文档数量）。Path 可能包含多个组件，例如：<code>_cluster/stats</code><br> 和 <code>_nodes/stats/jvm</code><br> 。 |<br>| <code>QUERY_STRING</code> | 任意可选的查询字符串参数 (例如 <code>?pretty</code><br> 将格式化地输出 JSON 返回值，使其更容易阅读) |<br>| <code>BODY</code> | 一个 JSON 格式的请求体 (如果请求需要的话) |</p>
+<table>
+<thead>
+<tr>
+<th><code>VERB</code></th>
+<th>适当的 HTTP <em>方法</em> 或 <em>谓词</em> : <code>GET</code><br/>、 <code>POST</code><br/>、 <code>PUT</code><br/>、 <code>HEAD</code><br/> 或者 <code>DELETE</code><br/>。</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>PROTOCOL</code></td>
+<td><code>http</code><br/> 或者 <code>https</code><br/>（如果你在 Elasticsearch 前面有一个 <code>https</code><br/> 代理）</td>
+</tr>
+<tr>
+<td><code>HOST</code></td>
+<td>Elasticsearch 集群中任意节点的主机名，或者用 <code>localhost</code><br/> 代表本地机器上的节点。</td>
+</tr>
+<tr>
+<td><code>PORT</code></td>
+<td>运行 Elasticsearch HTTP 服务的端口号，默认是 <code>9200</code><br/> 。</td>
+</tr>
+<tr>
+<td><code>PATH</code></td>
+<td>API 的终端路径（例如 <code>_count</code><br/> 将返回集群中文档数量）。Path 可能包含多个组件，例如：<code>_cluster/stats</code><br/> 和 <code>_nodes/stats/jvm</code><br/> 。</td>
+</tr>
+<tr>
+<td><code>QUERY_STRING</code></td>
+<td>任意可选的查询字符串参数 (例如 <code>?pretty</code><br/> 将格式化地输出 JSON 返回值，使其更容易阅读)</td>
+</tr>
+<tr>
+<td><code>BODY</code></td>
+<td>一个 JSON 格式的请求体 (如果请求需要的话)</td>
+</tr>
+</tbody></table>
 <h2 id="创建Mapping"><a href="#创建Mapping" class="headerlink" title="创建Mapping"></a>创建Mapping</h2><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs http">PUT /post<br>&#123;<br>  &quot;settings&quot;:&#123;<br>    &quot;number_of_shards&quot;:3,<br>    &quot;number_of_replicas&quot;:2<br>  &#125;,<br>  &quot;mappings&quot;:&#123;<br>    &quot;properties&quot;:&#123;<br>      &quot;id&quot;:&#123;&quot;type&quot;:&quot;long&quot;&#125;,<br>      &quot;title&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;,<br>      &quot;context&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;<br>    &#125;<br>  &#125;<br> <br>&#125;<br></code></pre></td></tr></table></figure>
+
 
 
 <h2 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h2><p>格式</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable constant_">PUT</span> /&#123;index&#125;/&#123;type&#125;/&#123;id&#125;<br>&#123;<br>  <span class="hljs-string">&quot;field&quot;</span>: <span class="hljs-string">&quot;value&quot;</span>,<br>  ...<br>&#125;<br></code></pre></td></tr></table></figure>
 
+
+
 <p>实例</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">PUT <span class="hljs-regexp">/post/</span>_doc/<span class="hljs-number">1</span><br>&#123;<br>  <span class="hljs-string">&quot;id&quot;</span>:<span class="hljs-string">&quot;1&quot;</span>,<br>  <span class="hljs-string">&quot;title&quot;</span>:<span class="hljs-string">&quot;麦奇的文章&quot;</span>,<br>  <span class="hljs-string">&quot;conttext&quot;</span>:<span class="hljs-string">&quot;按价格卡机是发动机案件发到付件阿里山的房间爱看书的积分&quot;</span><br>&#125;<br><span class="hljs-string">&#x27;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plain">PUT /post/_doc/1<br>&#123;<br>  &quot;id&quot;:&quot;1&quot;,<br>  &quot;title&quot;:&quot;麦奇的文章&quot;,<br>  &quot;conttext&quot;:&quot;按价格卡机是发动机案件发到付件阿里山的房间爱看书的积分&quot;<br>&#125;<br>&#x27;<br></code></pre></td></tr></table></figure>
+
 
 
 <h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">GET /post/_doc/1<br></code></pre></td></tr></table></figure>
 
+
+
 <p>返回数据</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;_index&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;post&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;_type&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;_doc&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;_id&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;_version&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;_seq_no&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;_primary_term&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;found&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;_source&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;id&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;title&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;麦奇的文章&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;conttext&quot;</span> <span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;按价格卡机是发动机案件发到付件阿里山的房间爱看书的积分&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+
 
 <p>curl参考</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">curl -X <span class="hljs-variable constant_">GET</span> <span class="hljs-string">&quot;localhost:9200/customer/doc/1?pretty&amp;pretty&quot;</span> -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> -d<span class="hljs-string">&#x27;</span><br></code></pre></td></tr></table></figure>
 
 
+
 <h2 id="过滤查询"><a href="#过滤查询" class="headerlink" title="过滤查询"></a>过滤查询</h2><p>查询last_name=Leo的记录</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">GET /employee/_search?q=last_name:Leo<br></code></pre></td></tr></table></figure>
+
+
 
 <p>表达式查询</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match&quot; : &#123;<br>            &quot;last_name&quot; : &quot;Smith&quot;<br>        &#125;<br>    &#125;<br>&#125;<br>&#x27;<br></code></pre></td></tr></table></figure>
 
+
+
 <p>过滤查询</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;bool&quot;: &#123;<br>            &quot;must&quot;: &#123;<br>                &quot;match&quot; : &#123;<br>                    &quot;last_name&quot; : &quot;smith&quot; <br>                &#125;<br>            &#125;,<br>            &quot;filter&quot;: &#123;<br>                &quot;range&quot; : &#123;<br>                    &quot;age&quot; : &#123; &quot;gt&quot; : 30 &#125; <br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br>&#x27;<br></code></pre></td></tr></table></figure>
+
+
 
 <p>全文搜索</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match&quot; : &#123;<br>            &quot;about&quot; : &quot;rock climbing&quot;<br>        &#125;<br>    &#125;<br>&#125;<br>&#x27;<br></code></pre></td></tr></table></figure>
 
+
+
 <p>精确查询</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match_phrase&quot; : &#123;<br>            &quot;about&quot; : &quot;rock climbing&quot;<br>        &#125;<br>    &#125;<br>&#125;&#x27;<br></code></pre></td></tr></table></figure>
+
+
 
 <p>高亮搜索</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>    &quot;query&quot; : &#123;<br>        &quot;match_phrase&quot; : &#123;<br>            &quot;about&quot; : &quot;rock climbing&quot;<br>        &#125;<br>    &#125;,<br>    &quot;highlight&quot;: &#123;<br>        &quot;fields&quot; : &#123;<br>            &quot;about&quot; : &#123;&#125;<br>        &#125;<br>    &#125;<br>&#125;&#x27;<br></code></pre></td></tr></table></figure>
 
 
+
 <h2 id="统计查询"><a href="#统计查询" class="headerlink" title="统计查询"></a>统计查询</h2><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs http">curl -X GET &quot;localhost:9200/megacorp/employee/_search?pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>  &quot;aggs&quot;: &#123;<br>    &quot;all_interests&quot;: &#123;<br>      &quot;terms&quot;: &#123; &quot;field&quot;: &quot;interests&quot; &#125;<br>    &#125;<br>  &#125;<br>&#125;&#x27;<br></code></pre></td></tr></table></figure>
 
 
+
 <h2 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h2><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs http">PUT /blog/_doc/123<br>&#123;<br>  &quot;title&quot;: &quot;My first blog entry update&quot;,<br>  &quot;text&quot;:  &quot;I am starting to get the hang of this...&quot;,<br>  &quot;date&quot;:  &quot;2014/01/02&quot;,<br>  &quot;remark&quot;: &quot;hhhhhhhhhhhhhhhhhh&quot;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
 
 <p>CURL</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs latex">curl -X POST &quot;localhost:9200/customer/doc/1/<span class="hljs-built_in">_</span>update?pretty<span class="hljs-built_in">&amp;</span>pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;<br>  &quot;doc&quot;: &#123; &quot;name&quot;: &quot;Jane Doe&quot; &#125;<br>&#125;<br>&#x27;<br></code></pre></td></tr></table></figure>
 
 
+
 <h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">DELETE /blog/_doc/123<br></code></pre></td></tr></table></figure>
+
+
 
 <p>CURL</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex">curl -X DELETE &quot;localhost:9200/customer/doc/2?pretty<span class="hljs-built_in">&amp;</span>pretty&quot;<br></code></pre></td></tr></table></figure>
+
+
 
 <p>批处理</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs latex">curl -X POST &quot;localhost:9200/customer/doc/<span class="hljs-built_in">_</span>bulk?pretty<span class="hljs-built_in">&amp;</span>pretty&quot; -H &#x27;Content-Type: application/json&#x27; -d&#x27;<br>&#123;&quot;index&quot;:&#123;&quot;<span class="hljs-built_in">_</span>id&quot;:&quot;1&quot;&#125;&#125;<br>&#123;&quot;name&quot;: &quot;John Doe&quot; &#125;<br>&#123;&quot;index&quot;:&#123;&quot;<span class="hljs-built_in">_</span>id&quot;:&quot;2&quot;&#125;&#125;<br>&#123;&quot;name&quot;: &quot;Jane Doe&quot; &#125;<br>&#x27;<br></code></pre></td></tr></table></figure>
 
 
+
 <h1 id="代码实操"><a href="#代码实操" class="headerlink" title="代码实操"></a>代码实操</h1><p>依赖添加</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.elasticsearch.client<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>elasticsearch-rest-client<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>7.11.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
 
 <p>在使用前先创建其对应的<a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/7.x/mapping.html">Mapping</a></p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs http">PUT /consumer<br>&#123;<br>  &quot;settings&quot;:&#123;<br>    &quot;number_of_shards&quot;:3,<br>    &quot;number_of_replicas&quot;:2<br>  &#125;,<br>  &quot;mappings&quot;:&#123;<br>    &quot;properties&quot;:&#123;<br>      &quot;first_name&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;,<br>      &quot;last_name&quot;:&#123;&quot;type&quot;:&quot;text&quot;&#125;,<br>      &quot;age&quot;:&#123;&quot;type&quot;:&quot;long&quot;&#125;,<br>      &quot;about&quot;:&#123;&quot;type&quot;: &quot;text&quot;&#125;,<br>      &quot;interests&quot;:&#123;&quot;type&quot;: &quot;text&quot;&#125;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+
+
 <p>初始化</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">RestClient</span> <span class="hljs-variable">restClient</span> <span class="hljs-operator">=</span> RestClient.builder(<span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpHost</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">9200</span>, <span class="hljs-string">&quot;http&quot;</span>)).build();<br></code></pre></td></tr></table></figure>
+
+
 
 <p>简单查询操作</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Elasticsearch</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception&#123;<br>        <span class="hljs-type">RestClient</span> <span class="hljs-variable">restClient</span> <span class="hljs-operator">=</span> RestClient.builder(<span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpHost</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">9200</span>, <span class="hljs-string">&quot;http&quot;</span>)).build();<br>        <span class="hljs-type">Response</span> <span class="hljs-variable">response</span> <span class="hljs-operator">=</span> restClient.performRequest(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<span class="hljs-string">&quot;GET&quot;</span>, <span class="hljs-string">&quot;/customer/_doc/1&quot;</span>));<br>        <span class="hljs-type">RequestLine</span> <span class="hljs-variable">requestLine</span> <span class="hljs-operator">=</span> response.getRequestLine();<br>        <span class="hljs-type">HttpHost</span> <span class="hljs-variable">host</span> <span class="hljs-operator">=</span> response.getHost();<br>        <span class="hljs-type">int</span> <span class="hljs-variable">statusCode</span> <span class="hljs-operator">=</span> response.getStatusLine().getStatusCode();<br>        Header[] headers = response.getHeaders();<br>        <span class="hljs-type">String</span> <span class="hljs-variable">responseBody</span> <span class="hljs-operator">=</span> EntityUtils.toString(response.getEntity());<br>        System.out.println(responseBody.toString());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+
+
 <p>异步调用</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">get</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception&#123;<br>    <span class="hljs-type">RestClient</span> <span class="hljs-variable">restClient</span> <span class="hljs-operator">=</span> RestClient.builder(<span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpHost</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">9200</span>, <span class="hljs-string">&quot;http&quot;</span>)).build();<br>    <span class="hljs-type">Request</span> <span class="hljs-variable">request</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(<br>            <span class="hljs-string">&quot;GET&quot;</span>,<br>            <span class="hljs-string">&quot;/customer/_doc/1&quot;</span>);<br>    <span class="hljs-type">Cancellable</span> <span class="hljs-variable">cancellable</span> <span class="hljs-operator">=</span> restClient.performRequestAsync(request,<br>            <span class="hljs-keyword">new</span> <span class="hljs-title class_">ResponseListener</span>() &#123;<br>                <span class="hljs-meta">@Override</span><br>                <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onSuccess</span><span class="hljs-params">(Response response)</span> &#123;<br>                    <span class="hljs-keyword">try</span> &#123;<br>                        System.out.println(<span class="hljs-string">&quot;请求成功：&quot;</span>+ EntityUtils.toString(response.getEntity()).toString());<br>                    &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>                        e.printStackTrace();<br>                    &#125;<br>                &#125;<br><br>                <span class="hljs-meta">@Override</span><br>                <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onFailure</span><span class="hljs-params">(Exception exception)</span> &#123;<br>                    System.out.println(<span class="hljs-string">&quot;请求异常：&quot;</span>+exception.getStackTrace());<br>                &#125;<br>            &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="详细介绍"><a href="#详细介绍" class="headerlink" title="详细介绍"></a>详细介绍</h1><p><strong>Index Versus Index Versus Index</strong></p>
@@ -596,8 +676,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/" class="category-chain-item">中间件篇</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/" class="category-chain-item">中间件篇</a>
+  
+  
+
   
 
       </span>
@@ -1128,6 +1215,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,32 +331,45 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627999976942-372252f5-bdad-4b2c-9803-09407c074f73.png#clientId=u47608758-2984-4&from=paste&height=549&id=uf196eac5&originHeight=549&originWidth=900&originalType=binary%E2%88%B6=1&size=290253&status=done&style=none&taskId=u2b33679c-0716-47e7-9a5a-fd897db909a&width=900" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627999976942-372252f5-bdad-4b2c-9803-09407c074f73.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>近期在做一个关于业务预警监控的项目，类似普罗米修斯，但是鉴于客户的要求，极大程度的降低机器的需求，所以写了一个基于C/S架构的监控，C端主要打点采集数据，S端主要负责对数据进行预警监控，但是要求C/S都能同时嵌入其它项目中使用，达到通用的效果，目前的想法是将其打成Starter，跟随项目的启动而运行。</p>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>SpringBoot的Stater是可插拔的，得益于它的自动配置。</p>
 <h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>1.创建自定义Stater项目**alert-spring-boot-starter **添加以下依赖</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;dependencies&gt;<br>    &lt;dependency&gt;<br>        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>        &lt;artifactId&gt;spring-boot-actuator-autoconfigure&lt;/artifactId&gt;<br>        &lt;version&gt;<span class="hljs-number">2.4</span><span class="hljs-number">.2</span>&lt;/version&gt;<br>    &lt;/dependency&gt;<br>    &lt;dependency&gt;<br>        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;<br>        &lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;<br>        &lt;optional&gt;<span class="hljs-literal">true</span>&lt;/optional&gt;<br>    &lt;/dependency&gt;<br>&lt;/dependencies&gt;<br></code></pre></td></tr></table></figure>
+
 <p>2.如果是使用Spring Initializer创建的把主类，Resource文件夹下的所以文件删除掉．</p>
 <p>3.编写配置类.可使用的配置项如下</p>
 <blockquote>
-<p>@ConditionalOnBean：当容器里有指定的bean的条件下。<br>@ConditionalOnMissingBean：当容器里不存在指定bean的条件下。<br>@ConditionalOnClass：当类路径下有指定类的条件下。<br>@ConditionalOnMissingClass：当类路径下不存在指定类的条件下。<br>@ConditionalOnProperty：指定的属性是否有指定的值，比如@ConditionalOnProperties(prefix=”xxx.xxx”, value=”enable”, matchIfMissing=true)，代表当xxx.xxx为enable时条件的布尔值为true，如果没有设置的情况下也为true。</p>
+<p>@ConditionalOnBean：当容器里有指定的bean的条件下。</p>
+<p>@ConditionalOnMissingBean：当容器里不存在指定bean的条件下。</p>
+<p>@ConditionalOnClass：当类路径下有指定类的条件下。</p>
+<p>@ConditionalOnMissingClass：当类路径下不存在指定类的条件下。</p>
+<p>@ConditionalOnProperty：指定的属性是否有指定的值，比如@ConditionalOnProperties(prefix=”xxx.xxx”, value=”enable”, matchIfMissing=true)，代表当xxx.xxx为enable时条件的布尔值为true，如果没有设置的情况下也为true。</p>
 </blockquote>
 <p>配置文件</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.alert.alertspringbootstarter.conf;<br><br><span class="hljs-keyword">import</span> com.alert.alertspringbootstarter.service.AlertServiceImpl;<br><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><br><span class="hljs-meta">@ConditionalOnProperty(</span><br><span class="hljs-meta">        name = &#123;&quot;alert.enable&quot;&#125;,</span><br><span class="hljs-meta">        havingValue = &quot;true&quot;,</span><br><span class="hljs-meta">        matchIfMissing = true</span><br><span class="hljs-meta">)</span><br><span class="hljs-meta">@ComponentScan(basePackages = &#123;&quot;com.alert.alertspringbootstarter&quot;&#125;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AlertAutoConfig</span> &#123;<br><br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> AlertServiceImpl <span class="hljs-title function_">alertService</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AlertServiceImpl</span>();<br>    &#125;<br><br><br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>4.编写实现的方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.alert.alertspringbootstarter.service;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AlertServiceImpl</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Runnable</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>                <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)&#123;<br>                    System.out.println(<span class="hljs-string">&quot;alert running......&quot;</span>);<br>                    <span class="hljs-keyword">try</span> &#123;<br>                        Thread.sleep(<span class="hljs-number">1000</span>);<br>                    &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                        e.printStackTrace();<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;).start();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>或者也可以在starter里编写控制器(但是宿主项目想用的话，必须扫描对应的包路径)</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AlertController</span> &#123;<br>    <span class="hljs-meta">@RequestMapping(&quot;/alert&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">alert</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;alert&quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>5.在resource下创建META-INF文件夹和spring.factories文件</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.alert.alertspringbootstarter.conf.AlertAutoConfig<br></code></pre></td></tr></table></figure>
+
 <p>6.执行mvn clean install在本地仓库安装</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">mvn clean install<br></code></pre></td></tr></table></figure>
+
 <p>7.宿主项目引用，创建一个项目测试我们的自定义starter，引入依赖</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;dependency&gt;<br>    &lt;groupId&gt;com.alert&lt;/groupId&gt;<br>    &lt;artifactId&gt;alert-spring-boot-starter&lt;/artifactId&gt;<br>    &lt;version&gt;<span class="hljs-number">0.0</span><span class="hljs-number">.1</span>-SNAPSHOT&lt;/version&gt;<br>    &lt;scope&gt;compile&lt;/scope&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
+
 <p>8.编写一个控制器进行测试</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UseAlertController</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> AlertServiceImpl alertService;<br><br>    <span class="hljs-meta">@RequestMapping(&quot;/start&quot;)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span>&#123;<br>        alertService.start();<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>How Spring Boot’s Autoconfigurations Work: <a target="_blank" rel="noopener" href="https://www.marcobehler.com/guides/spring-boot">https://www.marcobehler.com/guides/spring-boot</a><br>Creating a Custom Starter with Spring Boot: <a target="_blank" rel="noopener" href="https://www.baeldung.com/spring-boot-custom-starter">https://www.baeldung.com/spring-boot-custom-starter</a><br>Create a Custom Auto-Configuration with Spring Boot: <a target="_blank" rel="noopener" href="https://www.baeldung.com/spring-boot-custom-auto-configuration#:~:text=Create%20a%20Custom%20Auto-Configuration%20with%20Spring%20Boot%201,Creating%20a%20Custom%20Auto-Configuration.%20...%20More%20items...%20">https://www.baeldung.com/spring-boot-custom-auto-configuration</a></p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>How Spring Boot’s Autoconfigurations Work: <a target="_blank" rel="noopener" href="https://www.marcobehler.com/guides/spring-boot">https://www.marcobehler.com/guides/spring-boot</a></p>
+<p>Creating a Custom Starter with Spring Boot: <a target="_blank" rel="noopener" href="https://www.baeldung.com/spring-boot-custom-starter">https://www.baeldung.com/spring-boot-custom-starter</a></p>
+<p>Create a Custom Auto-Configuration with Spring Boot: <a target="_blank" rel="noopener" href="https://www.baeldung.com/spring-boot-custom-auto-configuration#:~:text=Create%20a%20Custom%20Auto-Configuration%20with%20Spring%20Boot%201,Creating%20a%20Custom%20Auto-Configuration.%20...%20More%20items...%20">https://www.baeldung.com/spring-boot-custom-auto-configuration</a></p>
 
               
             </div>
@@ -955,6 +956,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

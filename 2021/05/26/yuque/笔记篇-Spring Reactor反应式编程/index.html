@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,22 +331,27 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1621761119650-279bb03f-24a8-461f-a73f-3c0f51cea78f.jpeg#clientId=ue5d89b07-d469-4&from=ui&id=uf52f7ff5&originHeight=359&originWidth=638&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=19941&status=done&style=none&taskId=uf0078d7e-259a-4d5e-b060-e415dcbc380&title=" srcset="/img/loading.gif" lazyload alt="1_pnS_nI1HFt1W1EaEuwBKrQ.jpeg"></p>
-<h1 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h1><p>作为反应式编程方向的第一步，微软在.NET生态系统中创建了反应式扩展（Rx）库。然后RxJava在JVM上实现了反应式编程。随着时间的推移，通过Reactive Streams的工作，Java标准化应运而生，这个规范为JVM上的Reactive库定义了一组接口和交互规则。它的接口已经在Flow类下集成到java9中。反应式编程范式通常是作为观察者设计模式的扩展而用面向对象语言提出的。您还可以将主要的反应流模式与熟悉的迭代器设计模式进行比较，因为在所有这些库中，Iterable迭代器对具有双重性。一个主要的区别是，迭代器是基于pull的，而反应流是基于push的。<br>使用迭代器是一种必需的编程模式，即使访问值的方法完全由Iterable负责。实际上，何时访问序列中的next（）项由开发人员来选择。在反应流中，上述对的等价物是Publisher-Subscriber。但是发布者会在新的可用值出现时通知订阅者，这一推送特性是被动响应的关键。此外，应用于推送值的操作是以声明方式而不是强制方式表示的：程序员表示计算的逻辑，而不是描述其确切的控制流。<br>除了推送值之外，错误处理和完成方面也以定义良好的方式进行了讨论。发布者可以将新值推送到订阅服务器（通过调用onNext），但也可以发出错误信号（通过调用onError）或完成信号（通过调用onComplete）。错误和完成都会终止序列。这可以概括如下：</p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1621761119650-279bb03f-24a8-461f-a73f-3c0f51cea78f.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h1><p>作为反应式编程方向的第一步，微软在.NET生态系统中创建了反应式扩展（Rx）库。然后RxJava在JVM上实现了反应式编程。随着时间的推移，通过Reactive Streams的工作，Java标准化应运而生，这个规范为JVM上的Reactive库定义了一组接口和交互规则。它的接口已经在Flow类下集成到java9中。反应式编程范式通常是作为<font style="color:#F5222D;">观察者设计模式</font>的扩展而用面向对象语言提出的。您还可以将主要的反应流模式与熟悉的迭代器设计模式进行比较，因为在所有这些库中，Iterable迭代器对具有双重性。一个主要的区别是，迭代器是基于pull的，而反应流是基于push的。</p>
+<p>使用迭代器是一种必需的编程模式，即使访问值的方法完全由Iterable负责。实际上，何时访问序列中的next（）项由开发人员来选择。在反应流中，上述对的等价物是<font style="color:#F5222D;">Publisher-Subscriber</font>。但是发布者会在新的可用值出现时通知订阅者，这一推送特性是<font style="color:#F5222D;">被动响应</font>的关键。此外，应用于推送值的操作是以声明方式而不是强制方式表示的：程序员表示计算的逻辑，而不是描述其确切的控制流。</p>
+<p>除了推送值之外，错误处理和完成方面也以定义良好的方式进行了讨论。发布者可以将新值推送到订阅服务器（通过调用onNext），但也可以发出错误信号（通过调用onError）或完成信号（通过调用onComplete）。错误和完成都会终止序列。这可以概括如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">onNext x <span class="hljs-number">0.</span>.N[一个错误|一个完成]<br></code></pre></td></tr></table></figure>
-<p>这种方法非常灵活。该模式支持没有值、一个值或n个值（包括无限的值序列，例如时钟的连续滴答声）的用例。<br>但是为什么我们首先需要这样一个异步反应库呢？</p>
+
+<p>这种方法非常灵活。该模式支持没有值、一个值或n个值（包括无限的值序列，例如时钟的连续滴答声）的用例。</p>
+<p>但是为什么我们首先需要这样一个异步反应库呢？</p>
 <h2 id="1-阻塞可能是浪费资源"><a href="#1-阻塞可能是浪费资源" class="headerlink" title="1. 阻塞可能是浪费资源"></a>1. 阻塞可能是浪费资源</h2><p>现代应用程序可以覆盖大量的并发用户，尽管现代硬件的性能不断提高，但现代软件的性能仍然是一个关键问题。大体上，有两种方法可以提高程序的性能：</p>
 <ul>
 <li>并行化以使用更多的线程和硬件资源。</li>
 <li>寻求更有效地利用现有资源。</li>
 </ul>
 <p>通常，Java开发人员使用块代码编写程序。在出现性能瓶颈之前，这种做法很好。然后是时候引入额外的线程，运行类似的阻塞代码了。但是这种资源利用率的扩展会很快引入争用和并发问题。更糟糕的是，封锁浪费了资源。如果仔细观察，只要程序涉及一些延迟（特别是I/O，如数据库请求或网络调用），就会浪费资源，因为线程（可能有许多线程）现在处于空闲状态，等待数据。因此，并行化方法不是万能的。充分利用硬件的能力是必要的，但这也很复杂，而且容易造成资源浪费。</p>
-<h2 id="2-托付于异步性？"><a href="#2-托付于异步性？" class="headerlink" title="2.托付于异步性？"></a>2.托付于异步性？</h2><p>前面提到的第二种方法，寻求更高的效率，可以解决资源浪费问题。通过编写异步、非阻塞代码，您可以让执行切换到另一个使用相同底层资源的活动任务，然后在异步处理完成后返回到当前进程。<br>但是如何在JVM上生成异步代码呢？Java提供了两种异步编程模式：</p>
+<h2 id="2-托付于异步性？"><a href="#2-托付于异步性？" class="headerlink" title="2.托付于异步性？"></a>2.托付于异步性？</h2><p>前面提到的第二种方法，寻求更高的效率，可以解决资源浪费问题。通过编写异步、非阻塞代码，您可以让执行切换到另一个使用相同底层资源的活动任务，然后在异步处理完成后返回到当前进程。</p>
+<p>但是如何在JVM上生成异步代码呢？Java提供了两种异步编程模式：</p>
 <ul>
-<li><strong>Callbacks</strong>：异步方法没有返回值，但使用一个额外的回调参数（lambda或匿名类），当结果可用时调用该参数。一个著名的例子是Swing的EventListener层次结构。</li>
-<li><strong>Futures</strong>：异步方法立即返回<strong>Futures</strong><T>。异步进程计算一个T值，但是未来的对象包装对它的访问。值不是立即可用的，在值可用之前可以轮询对象。例如，运行Callable<T>任务的ExecutorService使用未来对象。</li>
+<li>**<font style="color:rgb(52, 48, 45);">Callbacks</font>**：异步方法没有返回值，但使用一个额外的回调参数（lambda或匿名类），当结果可用时调用该参数。一个著名的例子是Swing的EventListener层次结构。</li>
+<li><strong><font style="color:rgb(52, 48, 45);">Futures</font>**：异步方法立即返回</strong><font style="color:rgb(52, 48, 45);">Futures</font>**<T>。异步进程计算一个T值，但是未来的对象包装对它的访问。值不是立即可用的，在值可用之前可以轮询对象。例如，运行Callable<T>任务的ExecutorService使用未来对象。</li>
 </ul>
-<p>这些技巧够好吗？不是每个用例都适用，而且这两种方法都有局限性。回调很难组合在一起，很快导致代码难以读取和维护（称为“回调地狱”）。</p>
+<p>这些技巧够好吗？不是每个用例都适用，而且这两种方法都有局限性。回调很难组合在一起，很快导致代码难以读取和维护（称为“<font style="color:#F5222D;">回调地狱</font>”）。</p>
 <p>举个例子：在用户界面上显示用户的前五个收藏夹，如果用户没有收藏夹，则显示建议。这需要三个服务（一个提供收藏夹ID，第二个获取收藏夹详细信息，第三个提供带有详细信息的建议），如下所示：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java">userService.getFavorites(userId, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Callback</span>&lt;List&lt;String&gt;&gt;() &#123; <br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onSuccess</span><span class="hljs-params">(List&lt;String&gt; list)</span> &#123; <br>    <span class="hljs-keyword">if</span> (list.isEmpty()) &#123; <br>      suggestionService.getSuggestions(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Callback</span>&lt;List&lt;Favorite&gt;&gt;() &#123;<br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onSuccess</span><span class="hljs-params">(List&lt;Favorite&gt; list)</span> &#123; <br>          UiUtils.submitOnUiThread(() -&gt; &#123; <br>            list.stream()<br>                .limit(<span class="hljs-number">5</span>)<br>                .forEach(uiList::show); <br>            &#125;);<br>        &#125;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onError</span><span class="hljs-params">(Throwable error)</span> &#123; <br>          UiUtils.errorPopup(error);<br>        &#125;<br>      &#125;);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      list.stream() <br>          .limit(<span class="hljs-number">5</span>)<br>          .forEach(favId -&gt; favoriteService.getDetails(favId, <br>            <span class="hljs-keyword">new</span> <span class="hljs-title class_">Callback</span>&lt;Favorite&gt;() &#123;<br>              <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onSuccess</span><span class="hljs-params">(Favorite details)</span> &#123;<br>                UiUtils.submitOnUiThread(() -&gt; uiList.show(details));<br>              &#125;<br><br>              <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onError</span><span class="hljs-params">(Throwable error)</span> &#123;<br>                UiUtils.errorPopup(error);<br>              &#125;<br>            &#125;<br>          ));<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onError</span><span class="hljs-params">(Throwable error)</span> &#123;<br>    UiUtils.errorPopup(error);<br>  &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
 
@@ -374,37 +367,55 @@
 <blockquote>
 <p>Reactor提供了丰富的组合选项，其中代码反映了抽象过程的组织，所有内容通常保持在同一级别（嵌套最小化）。</p>
 </blockquote>
-<h3 id="装配线类比"><a href="#装配线类比" class="headerlink" title="装配线类比"></a>装配线类比</h3><p>您可以将被动应用程序处理的数据视为在装配线中移动。反应器既是传送带又是工作站。原材料从一个来源（原始出版商）倾泻而出，最终成为成品，准备推送到消费者（或订阅者）手中。<br>原材料可以经过各种转换和其他中间步骤，也可以是将中间件聚集在一起的大型装配线的一部分。如果在某一点出现故障或堵塞（可能装箱产品花费的时间太长），受影响的工作站可以向上游发出信号，限制原材料的流动。</p>
-<h3 id="操作员"><a href="#操作员" class="headerlink" title="操作员"></a>操作员</h3><p>在Reactor中，操作员是装配模拟中的工作站。每个操作符向发布者添加行为，并将上一步的发布者包装到新实例中。因此，整个链是链接的，因此数据源于第一个发布者，并沿着链向下移动，通过每个链接进行转换。最终，订户完成了这个过程。请记住，在订阅者订阅发布者之前什么都不会发生，我们很快就会看到。<br>理解操作符创建新实例可以帮助您避免一个常见的错误，该错误会导致您认为您在链中使用的操作符没有被应用。请参见常见问题解答中的此项。<br>虽然reactivestreams规范根本没有指定操作符，但是Reactor等Reactive库的最佳附加值之一是它们提供了丰富的操作符词汇表。从简单的转换和过滤到复杂的编排和错误处理，这些都涉及很多方面。</p>
-<h3 id="在订阅之前不会发生任何事情"><a href="#在订阅之前不会发生任何事情" class="headerlink" title="在订阅之前不会发生任何事情"></a>在订阅之前不会发生任何事情</h3><p>在Reactor中，当您编写发布者链时，默认情况下数据不会开始泵入其中。相反，您可以创建异步过程的抽象描述（这有助于重用和组合）。<br>通过订阅，您可以将发布者绑定到订阅者，从而触发整个链中的数据流。这是通过来自订阅者的单个请求信号在内部实现的，该信号向上游传播，一直传回源发布者。</p>
-<h3 id="背压"><a href="#背压" class="headerlink" title="背压"></a>背压</h3><p>上游传播信号也用于实现背压，我们在装配线中描述了当工作站处理比上游工作站慢时向上发送的反馈信号。<br>由反应流规范定义的真正机制与类比非常接近：订户可以在无限制模式下工作，并让源以最快的可实现速率推送所有数据，或者它可以使用请求机制向源发出信号，它准备处理最多n个元素。</p>
+<h3 id="装配线类比"><a href="#装配线类比" class="headerlink" title="装配线类比"></a>装配线类比</h3><p>您可以将被动应用程序处理的数据视为在装配线中移动。反应器既是传送带又是工作站。原材料从一个来源（原始出版商）倾泻而出，最终成为成品，准备推送到消费者（或订阅者）手中。</p>
+<p>原材料可以经过各种转换和其他中间步骤，也可以是将中间件聚集在一起的大型装配线的一部分。如果在某一点出现故障或堵塞（可能装箱产品花费的时间太长），受影响的工作站可以向上游发出信号，限制原材料的流动。</p>
+<h3 id="操作员"><a href="#操作员" class="headerlink" title="操作员"></a>操作员</h3><p>在Reactor中，操作员是装配模拟中的工作站。每个操作符向发布者添加行为，并将上一步的发布者包装到新实例中。因此，整个链是链接的，因此数据源于第一个发布者，并沿着链向下移动，通过每个链接进行转换。最终，订户完成了这个过程。请记住，在订阅者订阅发布者之前什么都不会发生，我们很快就会看到。</p>
+<p>理解操作符创建新实例可以帮助您避免一个常见的错误，该错误会导致您认为您在链中使用的操作符没有被应用。请参见常见问题解答中的此项。</p>
+<p>虽然reactivestreams规范根本没有指定操作符，但是Reactor等Reactive库的最佳附加值之一是它们提供了丰富的操作符词汇表。从简单的转换和过滤到复杂的编排和错误处理，这些都涉及很多方面。</p>
+<h3 id="在订阅之前不会发生任何事情"><a href="#在订阅之前不会发生任何事情" class="headerlink" title="在订阅之前不会发生任何事情"></a>在订阅之前不会发生任何事情</h3><p>在Reactor中，当您编写发布者链时，默认情况下数据不会开始泵入其中。相反，您可以创建异步过程的抽象描述（这有助于重用和组合）。</p>
+<p>通过订阅，您可以将发布者绑定到订阅者，从而触发整个链中的数据流。这是通过来自订阅者的单个请求信号在内部实现的，该信号向上游传播，一直传回源发布者。</p>
+<h3 id="背压"><a href="#背压" class="headerlink" title="背压"></a>背压</h3><p>上游传播信号也用于实现背压，我们在装配线中描述了当工作站处理比上游工作站慢时向上发送的反馈信号。</p>
+<p>由反应流规范定义的真正机制与类比非常接近：订户可以在无限制模式下工作，并让源以最快的可实现速率推送所有数据，或者它可以使用请求机制向源发出信号，它准备处理最多n个元素。</p>
 <p>中间操作员也可以更改中转请求。想象一个缓冲区操作符，它将元素分组为10个批次。如果订阅者请求一个缓冲区，则源可以产生10个元素。一些操作员还实施预取策略，这避免了请求（1）往返，如果在请求之前生成元素并不太昂贵，则有益。</p>
 <p>这将推送模型转换为推拉混合动力，如果下游可以随时可用，则下游可以从上游拉动n个元件。但是如果元素还没有准备好，那么它们就会在生产时被上游推。</p>
-<h3 id="热与冷"><a href="#热与冷" class="headerlink" title="热与冷"></a>热与冷</h3><p>Rx系列反应库区分了两大类反应序列：热反应序列和冷反应序列。这种区别主要与反应流对订户的反应有关：<br>对于每个订阅者，包括在数据源处，冷序列重新开始。例如，如果源代码包装了一个HTTP调用，则会为每个订阅发出一个新的HTTP请求。<br>对于每个订户，热序列不是从头开始的。更确切地说，迟来的订阅者接收他们订阅之后发出的信号。然而，请注意，一些热反应流可以缓存或重放全部或部分排放的历史。从一般的角度来看，热序列甚至可以在没有订阅者在侦听时发出（“订阅之前什么都不会发生”规则的一个例外）。</p>
+<h3 id="热与冷"><a href="#热与冷" class="headerlink" title="热与冷"></a>热与冷</h3><p>Rx系列反应库区分了两大类反应序列：热反应序列和冷反应序列。这种区别主要与反应流对订户的反应有关：</p>
+<p>对于每个订阅者，包括在数据源处，冷序列重新开始。例如，如果源代码包装了一个HTTP调用，则会为每个订阅发出一个新的HTTP请求。</p>
+<p>对于每个订户，热序列不是从头开始的。更确切地说，迟来的订阅者接收他们订阅之后发出的信号。然而，请注意，一些热反应流可以缓存或重放全部或部分排放的历史。从一般的角度来看，热序列甚至可以在没有订阅者在侦听时发出（“订阅之前什么都不会发生”规则的一个例外）。</p>
 <h1 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h1><blockquote>
-<p>Reactor是JVM的完全无阻塞的反应式编程基础，具有高效的需求管理（以管理“背压”的形式）。它直接与Java8功能API集成，特别是CompletableFuture、Stream和Duration。它提供了可组合的异步序列api — 通量（对于[N]元素）和单（对于[0 | 1]元素） — 广泛实现了反应流规范。Reactor还支持与Reactor netty项目的非阻塞进程间通信。Reactor Netty适合于微服务体系结构，它为HTTP（包括Websockets）、TCP和UDP提供了支持背压的网络引擎。完全支持反应式编码和解码。</p>
+<p><font style="color:rgb(52, 48, 45);">Reactor</font>是JVM的完全无阻塞的反应式编程基础，具有高效的需求管理（以管理“背压”的形式）。它直接与Java8功能API集成，特别是CompletableFuture、Stream和Duration。它提供了可组合的异步序列api — 通量（对于[N]元素）和单（对于[0 | 1]元素） — 广泛实现了反应流规范。Reactor还支持与Reactor netty项目的非阻塞进程间通信。Reactor Netty适合于微服务体系结构，它为HTTP（包括Websockets）、TCP和UDP提供了支持背压的网络引擎。完全支持反应式编码和解码。</p>
 </blockquote>
 <blockquote>
-<p>Reactor（反应式）编程是一种异步编程范式，与数据流和变化的传播有关。这意味着可以通过所使用的编程语言轻松地表示静态（例如阵列）或动态（例如事件发射器）数据流。</p>
+<p><font style="color:rgb(52, 48, 45);">Reactor（反应式）</font>编程是一种异步编程范式，与数据流和变化的传播有关。这意味着可以通过所使用的编程语言轻松地表示静态（例如阵列）或动态（例如事件发射器）数据流。</p>
 </blockquote>
 <h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><p>直接使用官方的demo</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">git clone https:<span class="hljs-comment">//github.com/reactor/projectreactor.io.git</span><br></code></pre></td></tr></table></figure>
 
+
+
 <p>或者自己建一个应用</p>
 <p>1.安装依赖</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;dependencies&gt;<br>    &lt;dependency&gt;<br>        &lt;groupId&gt;io.projectreactor&lt;/groupId&gt;<br>        &lt;artifactId&gt;reactor-core&lt;/artifactId&gt; <br>    &lt;/dependency&gt;<br>    &lt;dependency&gt;<br>        &lt;groupId&gt;io.projectreactor&lt;/groupId&gt;<br>        &lt;artifactId&gt;reactor-test&lt;/artifactId&gt; <br>        &lt;scope&gt;test&lt;/scope&gt;<br>    &lt;/dependency&gt;<br>&lt;/dependencies&gt;<br></code></pre></td></tr></table></figure>
+
 <p>2.简单应用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><br></code></pre></td></tr></table></figure>
+
 <h1 id="Reactor特性"><a href="#Reactor特性" class="headerlink" title="Reactor特性"></a>Reactor特性</h1><p>Reactor项目的主要工件是Reactor core，它是一个Reactor库，关注于反应流规范并以java8为目标。Reactor引入了可组合的反应式类型，这些类型实现了Publisher，但也提供了丰富的操作符词汇表：Flux和Mono。Flux对象表示0..N项的反应序列，而Mono对象表示单个值或空（0..1）结果。</p>
 <p>这种区别在类型中携带了一些语义信息，表示异步处理的粗略基数。例如，一个HTTP请求只产生一个响应，因此执行计数操作没有多大意义。因此，将这种HTTP调用的结果表示为Mono<HttpResponse>比将其表示为Flux<HttpResponse>更有意义，因为它只提供与零项或一项上下文相关的运算符。更改处理的最大基数的运算符也会切换到相关类型。例如，count操作符存在于Flux中，但它返回一个Mono<Long>。</p>
-<h2 id="Flux，0-N项的异步序列"><a href="#Flux，0-N项的异步序列" class="headerlink" title="Flux，0-N项的异步序列"></a>Flux，0-N项的异步序列</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621910072310-1e7310cb-38f2-499f-a40e-331a5e5720a2.png#clientId=u960800f8-e5f7-4&from=paste&height=417&id=u7078b960&originHeight=417&originWidth=907&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=59435&status=done&style=none&taskId=u7bd46946-db39-4c08-b306-b47c3ca4af6&title=&width=907" srcset="/img/loading.gif" lazyload alt="image.png"><br>Flux<T>是一个标准发布器<T>，它表示由0到N个发出的项组成的异步序列，可以选择由完成信号或错误终止。在reactivestreams规范中，这三种类型的信号转换为对下游用户的onNext、onComplete和onError方法的调用。在这种大范围的可能信号下，磁通是通用的无功类型。请注意，所有事件，甚至终止的事件，都是可选的：没有onNext事件，但onComplete事件表示一个空的有限序列，但是如果删除onComplete，则会有一个无限的空序列（不是特别有用，除了围绕取消的测试）。类似地，无限序列不一定是空的。例如，Flux.interval（Duration）产生一个无限大的Flux<Long>，并从时钟发出规则的滴答声。</p>
-<h2 id="Mono，异步0-1结果"><a href="#Mono，异步0-1结果" class="headerlink" title="Mono，异步0-1结果"></a>Mono，异步0-1结果</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621911568161-70758361-bf9d-4240-b432-5744e4d3471f.png#clientId=u960800f8-e5f7-4&from=paste&height=445&id=ude8f0208&originHeight=445&originWidth=851&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=57376&status=done&style=none&taskId=u45c4e529-52f7-4c19-8c91-7d26eb3182b&title=&width=851" srcset="/img/loading.gif" lazyload alt="image.png"><br>Mono<T>是一种专门的发布器，它通过onNext信号最多发出一个项目，然后以onComplete信号终止（成功的Mono，有值或无值），或者只发出一个onError信号（失败的Mono）。大多数Mono实现在调用onNext之后，都会立即在其订户上调用onComplete。never（）是一个异常值：它不发出任何信号，这在技术上是不被禁止的，尽管在测试之外不是非常有用。另一方面，明确禁止onNext和onError的组合。<br>Mono只提供了可用于流的操作符的子集，并且一些操作符（特别是那些将Mono与另一个发布者相结合的操作符）切换到流。例如，Mono#concatWith（Publisher）返回一个通量，而Mono#then（Mono）返回另一个单声道。<br>请注意，可以使用Mono表示只有完成概念的无值异步进程（类似于Runnable）。要创建一个，可以使用空的Mono<Void>。</p>
+<h2 id="Flux，0-N项的异步序列"><a href="#Flux，0-N项的异步序列" class="headerlink" title="Flux，0-N项的异步序列"></a>Flux，0-N项的异步序列</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621910072310-1e7310cb-38f2-499f-a40e-331a5e5720a2.png" srcset="/img/loading.gif" lazyload></p>
+<p>Flux<T>是一个标准发布器<T>，它表示由0到N个发出的项组成的异步序列，可以选择由完成信号或错误终止。在reactivestreams规范中，这三种类型的信号转换为对下游用户的onNext、onComplete和onError方法的调用。在这种大范围的可能信号下，磁通是通用的无功类型。请注意，所有事件，甚至终止的事件，都是可选的：没有onNext事件，但onComplete事件表示一个空的有限序列，但是如果删除onComplete，则会有一个无限的空序列（不是特别有用，除了围绕取消的测试）。类似地，无限序列不一定是空的。例如，Flux.interval（Duration）产生一个无限大的Flux<Long>，并从时钟发出规则的滴答声。</p>
+<h2 id="Mono，异步0-1结果"><a href="#Mono，异步0-1结果" class="headerlink" title="Mono，异步0-1结果"></a>Mono，异步0-1结果</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621911568161-70758361-bf9d-4240-b432-5744e4d3471f.png" srcset="/img/loading.gif" lazyload></p>
+<p>Mono<T>是一种专门的发布器，它通过onNext信号最多发出一个项目，然后以onComplete信号终止（成功的Mono，有值或无值），或者只发出一个onError信号（失败的Mono）。大多数Mono实现在调用onNext之后，都会立即在其订户上调用onComplete。never（）是一个异常值：它不发出任何信号，这在技术上是不被禁止的，尽管在测试之外不是非常有用。另一方面，明确禁止onNext和onError的组合。</p>
+<p>Mono只提供了可用于流的操作符的子集，并且一些操作符（特别是那些将Mono与另一个发布者相结合的操作符）切换到流。例如，Mono#concatWith（Publisher）返回一个通量，而Mono#then（Mono）返回另一个单声道。</p>
+<p>请注意，可以使用Mono表示只有完成概念的无值异步进程（类似于Runnable）。要创建一个，可以使用空的Mono<Void>。</p>
 <h2 id="创建Flux或Mono并订阅它的简单方法"><a href="#创建Flux或Mono并订阅它的简单方法" class="headerlink" title="创建Flux或Mono并订阅它的简单方法"></a>创建Flux或Mono并订阅它的简单方法</h2><blockquote>
 <p>开始使用Flux和Mono最简单的方法是使用它们各自类中的众多工厂方法之一。</p>
 </blockquote>
 <p>例如，要创建一个字符串序列，可以枚举它们，也可以将它们放入集合中，并从中创建通量，如下所示：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Flux&lt;String&gt; seq1 = Flux.just(<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;bar&quot;</span>, <span class="hljs-string">&quot;foobar&quot;</span>);<br>List&lt;String&gt; iterable = Arrays.asList(<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;bar&quot;</span>, <span class="hljs-string">&quot;foobar&quot;</span>);<br>Flux&lt;String&gt; seq2 = Flux.fromIterable(iterable);<br></code></pre></td></tr></table></figure>
+
 <p>工厂方法的其他示例包括：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Mono&lt;String&gt; noData = Mono.empty(); <br>Mono&lt;String&gt; data = Mono.just(<span class="hljs-string">&quot;foo&quot;</span>);<br>Flux&lt;Integer&gt; numbersFromFiveToSeven = Flux.range(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>);<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p><a target="_blank" rel="noopener" href="https://projectreactor.io/docs/core/release/reference/index.html#about-doc">官方文档</a></p>
@@ -975,6 +986,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

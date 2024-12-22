@@ -17,12 +17,12 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介水库抽样是一系列随机算法，用于从 n 个项目的列表中随机选择k个样本，其中n是一个非常大或未知的数字。通常n足够大，以至于列表不适合主内存。例如，Google 和 Facebook 中的搜索查询列表。所以我们得到了一个大的数字数组（或流），我们需要编写一个有效的函数来随机选择k个数字，其中1 &lt;&#x3D; k &lt;&#x3D; n。让输入数组为stream[]。 一个简单的解决方案是创建一个最大大小">
+    <meta name="description" content="简介水库抽样是一系列随机算法，用于从 n 个项目的列表中随机选择k个样本，其中n是一个非常大或未知的数字。通常n足够大，以至于列表不适合主内存。例如，Google 和 Facebook 中的搜索查询列表。所以我们得到了一个大的数字数组（或流），我们需要编写一个有效的函数来随机选择k个数字，其中1 &lt;&#x3D; k &lt;&#x3D; n。让输入数组为stream[]。   一个简单的解决方案是创建一个最大">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法篇-Reservoir Sampling 蓄水池抽样">
 <meta property="og:url" content="https://mikeygithub.github.io/2022/04/25/yuque/%E7%AE%97%E6%B3%95%E7%AF%87-Reservoir%20Sampling%20%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="简介水库抽样是一系列随机算法，用于从 n 个项目的列表中随机选择k个样本，其中n是一个非常大或未知的数字。通常n足够大，以至于列表不适合主内存。例如，Google 和 Facebook 中的搜索查询列表。所以我们得到了一个大的数字数组（或流），我们需要编写一个有效的函数来随机选择k个数字，其中1 &lt;&#x3D; k &lt;&#x3D; n。让输入数组为stream[]。 一个简单的解决方案是创建一个最大大小">
+<meta property="og:description" content="简介水库抽样是一系列随机算法，用于从 n 个项目的列表中随机选择k个样本，其中n是一个非常大或未知的数字。通常n足够大，以至于列表不适合主内存。例如，Google 和 Facebook 中的搜索查询列表。所以我们得到了一个大的数字数组（或流），我们需要编写一个有效的函数来随机选择k个数字，其中1 &lt;&#x3D; k &lt;&#x3D; n。让输入数组为stream[]。   一个简单的解决方案是创建一个最大">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1650903047314-ba915f30-5005-409a-908e-3c9e3b45faeb.png">
 <meta property="article:published_time" content="2022-04-25T09:24:22.000Z">
@@ -160,18 +160,6 @@
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
               </a>
             </li>
           
@@ -343,10 +331,11 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1650903047314-ba915f30-5005-409a-908e-3c9e3b45faeb.png#clientId=uc636a7bb-1c0e-4&from=ui&id=uc4b112d0&originHeight=383&originWidth=900&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=26599&status=done&style=none&taskId=ufa21be4a-c42a-4073-8f1d-ecbffe9b729&title=" srcset="/img/loading.gif" lazyload alt="图怪兽_6ff1432973cdf4490f96ad825947d576_31280.png"></p>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>水库抽样是一系列随机算法，用于从 n 个项目的列表中随机选择k个样本，其中n是一个非常大或未知的数字。通常n足够大，以至于列表不适合主内存。例如，Google 和 Facebook 中的搜索查询列表。所以我们得到了一个大的数字数组（或流），我们需要编写一个有效的函数来随机选择k个数字，其中1 &lt;= k &lt;= n。让输入数组为stream[]。</p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1650903047314-ba915f30-5005-409a-908e-3c9e3b45faeb.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>水库抽样是一系列随机算法，用于从 n 个项目的列表中随机选择k个样本，其中n是一个非常大或未知的数字。通常n足够大，以至于列表不适合主内存。例如，Google 和 Facebook 中的搜索查询列表。所以我们得到了一个大的数字数组（或流），我们需要编写一个有效的函数来随机选择k个数字，其中1 &lt;= k &lt;= n。让输入数组为stream[]。  </p>
 <p>一个简单的解决方案是创建一个最大大小为k的数组存储库[]。一个一个地从stream[0..n-1]中随机选择一个项目。如果选中的项目之前没有被选中，则将其放入水库[]。要检查一个项目是否先前被选中，我们需要在水库[]中搜索该项目。该算法的时间复杂度为O(k^2)。如果k很大，效率可能会低。此外，如果输入是流的形式，这也不是有效的。 </p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>它可以在O(n)时间内解决。该解决方案也非常适合流形式的输入。以下是步骤。<br>1）创建一个数组reservoir[0..k-1]并将stream[]的前k个项目复制到它。<br>2）现在一个一个地考虑从第（k+1）个项目到第n个项目的所有项目。 </p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>它可以在O(n)时间内解决。该解决方案也非常适合流形式的输入。以下是步骤。<br>1）创建一个数组reservoir[0..k-1]并将stream[]的前k个项目复制到它。 </p>
+<p>2）现在一个一个地考虑从第（k+1）个项目到第n个项目的所有项目。 </p>
 <ul>
 <li> a)生成一个从 0 到i的随机数，其中i是stream[]中当前项目的索引。令生成的随机数为j。 </li>
 <li> b)如果j在 0 到k-1的范围内，则用流[i]替换数组 [j]</li>
@@ -354,7 +343,7 @@
 <h1 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h1><ul>
 <li>假设当前是第 M+1 个元素, 它被丢弃的概率是 1/(M+1), 留下的概率就是 M/(M+1). 对于已经在集合中的M个元素, 每个以 1/(M+1) 的概率被丢弃, 留下的概率也是 M/(M+1).</li>
 <li>假设当前是第 M+2 个元素, 它被丢弃的概率是 2/(M+2), 留下的概率是 M/(M+2). 对于前 M+1 个元素, 它们在集合中的概率是 M/(M+1). 这一次, 它们每个被以1/(M+2)的概率被丢弃, 留下的概率就是 M/(M+1)  (M+1)/(M+2) = M/(M+2)</li>
-<li>依次类推, 到接受第N个元素时, 每个元素被抽取的概率就是<strong>M/N</strong></li>
+<li>依次类推, 到接受第N个元素时, 每个元素被抽取的概率就是**<font style="color:#E8323C;">M/N</font>**</li>
 </ul>
 <h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReservoirSampling</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">selectKItems</span><span class="hljs-params">(<span class="hljs-type">int</span> stream[], <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-type">int</span> i; <span class="hljs-comment">//流中元素的索引</span><br>        <span class="hljs-comment">//需要返回的k个样本</span><br>        <span class="hljs-type">int</span> reservoir[] = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[k];<br>        <span class="hljs-comment">//样本小于k直接返回</span><br>        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; k; i++) reservoir[i] = stream[i];<br>        <span class="hljs-type">Random</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();<br>        <span class="hljs-comment">// 从第（k+1）个元素迭代到第n个元素</span><br>        <span class="hljs-keyword">for</span> (; i &lt; n; i++) &#123;<br>            <span class="hljs-comment">// 随机获取[0,i]的一个数</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> r.nextInt(i + <span class="hljs-number">1</span>);<br>            <span class="hljs-comment">//如果随机选取的索引小于k，然后替换获取的随机数</span><br>            <span class="hljs-keyword">if</span> (j &lt; k) reservoir[j] = stream[i];<br>        &#125;<br>        System.out.println(<span class="hljs-string">&quot;Following are k randomly selected items&quot;</span>);<br>        System.out.println(Arrays.toString(reservoir));<br>    &#125;<br>    <span class="hljs-comment">//测试</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">int</span> stream[] = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>&#125;;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> stream.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">5</span>;<br>        selectKItems(stream, n, k);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -363,7 +352,8 @@
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><br>    <span class="hljs-type">int</span>[] nums;<br>    Random random;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Solution</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-built_in">this</span>.nums = nums;<br>        random = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 遍历 nums，当我们第 i 次遇到值为 target 的元素时，随机选择区间 [0,i) 内的一个整数，如果其等于 0，则将返回值置为该元素的下标，否则返回值不变。</span><br><span class="hljs-comment">     * 设 nums 中有 k 个值为 target 的元素，该算法会保证这 k 个元素的下标成为最终返回值的概率均为 1/k</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * 第1次遇到,在[0,1)中获取随机数,其必定为0 0概率=1</span><br><span class="hljs-comment">     * 第2次遇到,在[0,2)中获取随机数,其必定为0,1 0概率=1/2</span><br><span class="hljs-comment">     * 第3次遇到,在[0,3)中获取随机数,其必定为0,1,2 0概率=1/3</span><br><span class="hljs-comment">     * 第k次遇到,在[0,k)中获取随机数,其必定为0,1,2,...k-1 0概率=1/k (关键) 所以最后一次获取的随机数就是1/k</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">pick</span><span class="hljs-params">(<span class="hljs-type">int</span> target)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>, cnt = <span class="hljs-number">0</span>; i &lt; nums.length; ++i) &#123;<br>            <span class="hljs-keyword">if</span> (nums[i] == target) &#123;<br>                ++cnt; <span class="hljs-comment">// 第 cnt 次遇到 target</span><br>                <span class="hljs-keyword">if</span> (random.nextInt(cnt) == <span class="hljs-number">0</span>) &#123;<br>                    ans = i;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/reservoir-sampling/?ref=gcse">https://www.geeksforgeeks.org/reservoir-sampling/?ref=gcse</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/random-pick-index/">https://leetcode-cn.com/problems/random-pick-index</a></p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/reservoir-sampling/?ref=gcse">https://www.geeksforgeeks.org/reservoir-sampling/?ref=gcse</a></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/random-pick-index/">https://leetcode-cn.com/problems/random-pick-index</a></p>
 
               
             </div>
@@ -458,9 +448,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/27/yuque/%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B0-%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E4%B9%8BJUC%E5%8C%85/" title="并发笔记- 并发工具之JUC包">
+                      <a href="/2022/04/27/yuque/%E5%B9%B6%E5%8F%91%E7%AC%94%E8%AE%B0-%E5%B9%B6%E5%8F%91%E5%B7%A5%E5%85%B7%E4%B9%8BJUC%E5%8C%85/" title="并发笔记- &lt;font style=&#34;color:rgb(38, 38, 38);&#34;&gt;并发工具之JUC包&lt;/font&gt;">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">并发笔记- 并发工具之JUC包</span>
+                        <span class="hidden-mobile">并发笔记- &lt;font style=&#34;color:rgb(38, 38, 38);&#34;&gt;并发工具之JUC包&lt;/font&gt;</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -943,6 +933,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

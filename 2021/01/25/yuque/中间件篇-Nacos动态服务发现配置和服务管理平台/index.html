@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657549114980-2272a58b-279d-4c54-8d18-b88f58343ad1.png#clientId=ucc0dd50f-3e0e-4&from=markdown&id=GWjIR&originHeight=300&originWidth=546&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=169747&status=done&style=none&taskId=u41711d96-b518-4040-bc72-931122236e9&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657549114980-2272a58b-279d-4c54-8d18-b88f58343ad1.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="什么是-Nacos"><a href="#什么是-Nacos" class="headerlink" title="什么是 Nacos"></a>什么是 Nacos</h1><p>服务（Service）是 Nacos 世界的一等公民。Nacos 支持几乎所有主流类型的服务的发现、配置和管理：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/services-networking/service/">Kubernetes Service</a></li>
@@ -371,32 +359,47 @@
 <li><strong>服务及其元数据管理</strong></li>
 </ul>
 <p>Nacos 能让您从微服务平台建设的视角管理数据中心的所有服务及元数据，包括管理服务的描述、生命周期、服务的静态依赖分析、服务的健康状态、服务的流量管理、路由及安全策略、服务的 SLA 以及最首要的 Metrics 统计数据。</p>
-<h1 id="Nacos-全景图"><a href="#Nacos-全景图" class="headerlink" title="Nacos 全景图"></a>Nacos 全景图</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/29102804_XygY.png#id=PHUya&originHeight=902&originWidth=1396&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="Nacos-全景图"><a href="#Nacos-全景图" class="headerlink" title="Nacos 全景图"></a>Nacos 全景图</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/29102804_XygY.png" srcset="/img/loading.gif" lazyload></p>
 <p>如 Nacos 全景图所示，Nacos 无缝支持一些主流的开源生态，例如 <a target="_blank" rel="noopener" href="https://nacos.io/zh-cn/docs/xx">Dubbo and Dubbo Mesh TODO</a>、<a target="_blank" rel="noopener" href="https://nacos.io/zh-cn/docs/xx">Spring Cloud TODO</a>、<a target="_blank" rel="noopener" href="https://nacos.io/zh-cn/docs/xx">Kubernetes and CNCF TODO</a>。</p>
 <p>使用 Nacos 简化服务发现、配置管理、服务治理及管理的解决方案，让微服务管理、共享、组合更加容易。</p>
 <h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><p> 方式一通过下载源码 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/alibaba/nacos.git<br><span class="hljs-built_in">cd</span> nacos/<br>mvn -Prelease-nacos -Dmaven.test.skip=<span class="hljs-literal">true</span> clean install -U <br><span class="hljs-built_in">ls</span> -al distribution/target/<br><br>// change the <span class="hljs-variable">$version</span> to your actual path<br><span class="hljs-built_in">cd</span> distribution/target/nacos-server-<span class="hljs-variable">$version</span>/nacos/bin<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plain">git clone https://github.com/alibaba/nacos.git<br>cd nacos/<br>mvn -Prelease-nacos -Dmaven.test.skip=true clean install -U <br>ls -al distribution/target/<br><br>// change the $version to your actual path<br>cd distribution/target/nacos-server-$version/nacos/bin<br></code></pre></td></tr></table></figure>
+
+
 
 <p> 方式二下载可运行包 </p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">unzip nacos-server-<span class="hljs-variable">$version</span><span class="hljs-selector-class">.zip</span>  OR tar -xvf nacos-server-<span class="hljs-variable">$version</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.gz</span><br>cd nacos/bin<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain">unzip nacos-server-$version.zip  OR tar -xvf nacos-server-$version.tar.gz<br>cd nacos/bin<br></code></pre></td></tr></table></figure>
+
+
 
 <p> 启动服务 </p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">bash </span>startup.<span class="hljs-keyword">sh </span>-m standalone<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">bash startup.sh -m standalone<br></code></pre></td></tr></table></figure>
+
+
 
 <p> 服务注册 </p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">curl <span class="hljs-punctuation">-</span>X POST &#x27;http://127.0.0.1:<span class="hljs-number">8848</span>/nacos/v1/ns/instance?serviceName=nacos.naming.serviceName&amp;ip=20.18.7.10&amp;port=<span class="hljs-number">8080</span>&#x27;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">curl -X POST &#x27;http://127.0.0.1:8848/nacos/v1/ns/instance?serviceName=nacos.naming.serviceName&amp;ip=20.18.7.10&amp;port=8080&#x27;<br></code></pre></td></tr></table></figure>
+
+
 
 <p> 服务发现 </p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">curl -X <span class="hljs-built_in">GET</span> <span class="hljs-string">&#x27;http://127.0.0.1:8848/nacos/v1/ns/instance/list?serviceName=nacos.naming.serviceName&#x27;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">curl -X GET &#x27;http://127.0.0.1:8848/nacos/v1/ns/instance/list?serviceName=nacos.naming.serviceName&#x27;<br></code></pre></td></tr></table></figure>
+
+
 
 <p> 发布配置 </p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">curl</span> -X POST <span class="hljs-string">&quot;http://127.0.0.1:8848/nacos/v1/cs/configs?dataId=nacos.cfg.dataId&amp;group=test&amp;content=helloWorld&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">curl -X POST &quot;http://127.0.0.1:8848/nacos/v1/cs/configs?dataId=nacos.cfg.dataId&amp;group=test&amp;content=helloWorld&quot;<br></code></pre></td></tr></table></figure>
+
+
 
 <p> 获取配置 </p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">curl -X <span class="hljs-built_in">GET</span> <span class="hljs-string">&quot;http://127.0.0.1:8848/nacos/v1/cs/configs?dataId=nacos.cfg.dataId&amp;group=test&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">curl -X GET &quot;http://127.0.0.1:8848/nacos/v1/cs/configs?dataId=nacos.cfg.dataId&amp;group=test&quot;<br></code></pre></td></tr></table></figure>
+
+
 
 <p> 关闭服务 </p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">sh</span> shutdown.<span class="hljs-keyword">sh</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">sh shutdown.sh<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://nacos.io/en-us/docs/quick-start.html">官方文档</a></p>
@@ -417,8 +420,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/" class="category-chain-item">中间件篇</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/" class="category-chain-item">中间件篇</a>
+  
+  
+
   
 
       </span>
@@ -949,6 +959,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

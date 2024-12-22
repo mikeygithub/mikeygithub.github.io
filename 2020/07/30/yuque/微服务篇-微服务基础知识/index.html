@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,19 +331,19 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550961784-9fb81b1f-e0a3-4fa0-9093-514f80efca08.png#clientId=ub8d85664-b10e-4&from=markdown&id=qsjs2&originHeight=395&originWidth=755&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=93169&status=done&style=none&taskId=uce27e5b2-7787-4a78-aac2-649c24f5b97&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550961784-9fb81b1f-e0a3-4fa0-9093-514f80efca08.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="服务注册发现"><a href="#服务注册发现" class="headerlink" title="服务注册发现"></a>服务注册发现</h1><p>服务注册就是维护一个登记簿,它管理系统内所有的服务地址。当新的服务启动后,它会向登记<br>簿交待自己的地址信息。服务的依赖方直接向登记簿要 Service Provider 地址就行了。当下用于服<br>务注册的工具非常多 ZooKeeper,Consul,Etcd, 还有 Netflix 家的 eureka 等。服务注册有两种<br>形式:客户端注册和第三方注册。</p>
 <h1 id="客户端注册-zookeeper"><a href="#客户端注册-zookeeper" class="headerlink" title="客户端注册(zookeeper)"></a>客户端注册(zookeeper)</h1><p>客户端注册是服务自身要负责注册与注销的工作。当服务启动后向注册中心注册自身,当服务下<br>线时注销自己。期间还需要和注册中心保持心跳。心跳不一定要客户端来做,也可以由注册中心<br>负责(这个过程叫探活)。这种方式的缺点是注册工作与服务耦合在一起,不同语言都要实现一<br>套注册逻辑。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/service-discovery.png#id=fYKdy&originHeight=401&originWidth=687&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/service-discovery.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="第三方注册-独立的服务-Registrar"><a href="#第三方注册-独立的服务-Registrar" class="headerlink" title="第三方注册( 独立的服务 Registrar )"></a>第三方注册( 独立的服务 Registrar )</h3><p>第三方注册由一个独立的服务 Registrar 负责注册与注销。当服务启动后以某种方式通知 Registrar,<br>然后 Registrar 负责向注册中心发起注册工作。同时注册中心要维护与服务之间的心跳,当服务不<br>可用时,向注册中心注销服务。这种方式的缺点是 Registrar 必须是一个高可用的系统,否则注册<br>工作没法进展。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/simple-register.png#id=MGt8I&originHeight=423&originWidth=695&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/simple-register.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="客户端发现"><a href="#客户端发现" class="headerlink" title="客户端发现"></a>客户端发现</h3><p>客户端发现是指客户端负责查询可用服务地址,以及负载均衡的工作。这种方式最方便直接,而<br>且也方便做负载均衡。再者一旦发现某个服务不可用立即换另外一个,非常直接。缺点也在于多<br>语言时的重复工作,每个语言实现相同的逻辑。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/client-discovery.png#id=TK92d&originHeight=634&originWidth=700&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/client-discovery.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="服务端发现"><a href="#服务端发现" class="headerlink" title="服务端发现"></a>服务端发现</h3><p>服务端发现需要额外的 Router 服务,请求先打到 Router,然后 Router 负责查询服务与负载均衡。<br>这种方式虽然没有客户端发现的缺点,但是它的缺点是保证 Router 的高可用。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/server-discovery.png#id=f7bWd&originHeight=437&originWidth=707&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/server-discovery.png" srcset="/img/loading.gif" lazyload></p>
 <p>7.1.1.5. Consul<br>7.1.1.6. Eureka<br>7.1.1.7. SmartStack<br>7.1.1.8. Etcd</p>
 <h2 id="Api-网关"><a href="#Api-网关" class="headerlink" title="Api 网关"></a>Api 网关</h2><p>API Gateway 是一个服务器,也可以说是进入系统的唯一节点。这跟面向对象设计模式中的<br>Facade 模式很像。API Gateway 封装内部系统的架构,并且提供 API 给各个客户端。它还可能有<br>其他功能,如授权、监控、负载均衡、缓存、请求分片和管理、静态响应处理等。下图展示了一<br>个适应当前架构的 API Gateway。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/gateway.png#id=PW8yi&originHeight=480&originWidth=484&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/gateway.png" srcset="/img/loading.gif" lazyload></p>
 <p><code>API Gateway 负责请求转发、合成和协议转换。</code>所有来自客户端的请求都要先经过 API Gateway,然后路由这些请求到对应的微服务。API Gateway 将经常通过调用多个微服务来处理一个请求以及聚合多个服务的结果。它可以在 web 协议与内部使用的非 Web 友好型协议间进行转换,如HTTP 协议、WebSocket 协议。</p>
 <p>请求转发</p>
 <blockquote>
@@ -384,8 +372,8 @@
 </blockquote>
 <h1 id="配置中心"><a href="#配置中心" class="headerlink" title="配置中心"></a>配置中心</h1><p>配置中心一般用作系统的参数配置,它需要满足如下几个要求:高效获取、实时感知、分布式访问。</p>
 <h2 id="zookeeper-配置中心"><a href="#zookeeper-配置中心" class="headerlink" title="zookeeper 配置中心"></a>zookeeper 配置中心</h2><p>实现的架构图如下所示,采取数据加载到内存方式解决高效获取的问题,借助 zookeeper 的节点监听机制来实现实时感知。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/zookeeper.png#id=FRY3s&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
-<p>配置中心数据分类<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/config-center-data-type.png#id=QVCg7&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/zookeeper.png" srcset="/img/loading.gif" lazyload></p>
+<p>配置中心数据分类<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/config-center-data-type.png" srcset="/img/loading.gif" lazyload></p>
 <p>事件调度(kafka)</p>
 <blockquote>
 <p>消息服务和事件的统一调度,常用用 kafka ,activemq 等。</p>
@@ -400,7 +388,7 @@
 <p>为了实现请求跟踪,当请求发送到分布式系统的入口端点时,只需要服务跟踪框架为该请求<br>创建一个唯一的跟踪标识,同时在分布式系统内部流转的时候,框架始终保持传递该唯一标<br>识,直到返回给请求方为止,这个唯一标识就是前文中提到的 Trace ID。通过 Trace ID 的记<br>录,我们就能将所有请求过程日志关联起来。<br>2.<br>为了统计各处理单元的时间延迟,当请求达到各个服务组件时,或是处理逻辑到达某个状态<br>时,也通过一个唯一标识来标记它的开始、具体过程以及结束,该标识就是我们前文中提到<br>的 Span ID,对于每个 Span 来说,它必须有开始和结束两个节点,通过记录开始 Span 和结<br>束 Span 的时间戳,就能统计出该 Span 的时间延迟,除了时间戳记录之外,它还可以包含一<br>些其他元数据,比如:事件名称、请求信息等。<br>3.<br>在快速入门示例中,我们轻松实现了日志级别的跟踪信息接入,这完全归功于 spring-cloud-<br>starter-sleuth 组件的实现。在 Spring Boot 应用中,通过在工程中引入 spring-cloud-<br>starter-sleuth 依赖之后, 它会自动的为当前应用构建起各通信通道的跟踪机制,比如:<br>通过诸如 RabbitMQ、Kafka(或者其他任何 Spring Cloud Stream 绑定器实现的消息<br>中间件)传递的请求。<br>通过 Zuul 代理传递的请求。<br>通过 RestTemplate 发起的请求。</p>
 <h1 id="服务熔断-Hystrix"><a href="#服务熔断-Hystrix" class="headerlink" title="服务熔断(Hystrix)"></a>服务熔断(Hystrix)</h1><p>在微服务架构中通常会有多个服务层调用,基础服务的故障可能会导致级联故障,进而造成整个<br>系统不可用的情况,这种现象被称为服务雪崩效应。服务雪崩效应是一种因“服务提供者”的不<br>可用导致“服务消费者”的不可用,并将不可用逐渐放大的过程。</p>
 <p>熔断器的原理很简单,如同电力过载保护器。它可以实现快速失败,如果它在一段时间内侦测到<br>许多类似的错误,会强迫其以后的多个调用快速失败,不再访问远程服务器,从而防止应用程序<br>不断地尝试执行可能会失败的操作,使得应用程序继续执行而不用等待修正错误,或者浪费 CPU<br>时间去等到长时间的超时产生。熔断器也可以使应用程序能够诊断错误是否已经修正,如果已经<br>修正,应用程序会再次尝试调用操作。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/config.png#id=OAe9u&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/config.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="Hystrix-断路器机制"><a href="#Hystrix-断路器机制" class="headerlink" title="Hystrix 断路器机制"></a>Hystrix 断路器机制</h2><p>断路器很好理解, 当 Hystrix Command 请求后端服务失败数量超过一定比例(默认 50%), 断路器会<br>切换到开路状态(Open). 这时所有请求会直接失败而不会发送到后端服务. 断路器保持在开路状态<br>一段时间后(默认 5 秒), 自动切换到半开路状态(HALF-OPEN). 这时会判断下一次请求的返回情况,<br>如果请求成功, 断路器切回闭路状态(CLOSED), 否则重新切换到开路状态(OPEN). Hystrix 的断路器<br>就像我们家庭电路中的保险丝, 一旦后端服务不可用, 断路器会直接切断请求链, 避免发送大量无效<br>请求影响系统吞吐量, 并且断路器有自我检测并恢复的能力。</p>
 <h2 id="API-管理"><a href="#API-管理" class="headerlink" title="API 管理"></a>API 管理</h2><p>SwaggerAPI 管理工具。</p>
 
@@ -420,8 +408,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
+  
+  
+
   
 
       </span>
@@ -975,6 +970,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

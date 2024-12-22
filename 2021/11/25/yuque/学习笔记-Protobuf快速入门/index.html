@@ -168,18 +168,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -342,7 +330,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1637811765938-e62b40fe-6c2e-41ac-a84b-45dc557b47bb.jpeg#clientId=u3717e190-5c3c-4&from=paste&id=u241f45db&originHeight=400&originWidth=744&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=ua81bd83f-63af-46c3-b020-71fc616ef9e&title=" srcset="/img/loading.gif" lazyload></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1637811765938-e62b40fe-6c2e-41ac-a84b-45dc557b47bb.jpeg" srcset="/img/loading.gif" lazyload></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>protocol是谷歌的语言中立、平台中立、可扩展的结构化数据序列化机制——比XML，但更小、更快、更简单。您可以一次定义数据的结构化方式，然后可以使用特殊生成的源代码轻松地使用各种语言在各种数据流中写入和读取结构化数据。</p>
 <h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><p>1.下载protoc：<a target="_blank" rel="noopener" href="https://github.com/protocolbuffers/protobuf/releases">下载地址</a></p>
 <blockquote>
@@ -350,17 +338,22 @@
 </blockquote>
 <p>2.编写.protoc文件</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql">syntax <span class="hljs-operator">=</span> &quot;proto2&quot;;<br>option java_generic_services <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>option java_package <span class="hljs-operator">=</span> &quot;io.demo.proto&quot;;<br>option java_outer_classname <span class="hljs-operator">=</span> &quot;ProtoUser&quot;;<br><br>message <span class="hljs-keyword">User</span> &#123;<br>  required int32 id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>  optional string name <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;<br>  optional string mail <span class="hljs-operator">=</span> <span class="hljs-number">3</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>3.生成Java文件</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">protoc <span class="hljs-comment">--java_out=../java user.proto</span><br></code></pre></td></tr></table></figure>
+
 <p>4.引入依赖</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-operator">&lt;</span>dependencies<span class="hljs-operator">&gt;</span><br>    <span class="hljs-operator">&lt;</span><span class="hljs-operator">!</span><span class="hljs-comment">-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java --&gt;</span><br>    <span class="hljs-operator">&lt;</span>dependency<span class="hljs-operator">&gt;</span><br>        <span class="hljs-operator">&lt;</span>groupId<span class="hljs-operator">&gt;</span>com.google.protobuf<span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>groupId<span class="hljs-operator">&gt;</span><br>        <span class="hljs-operator">&lt;</span>artifactId<span class="hljs-operator">&gt;</span>protobuf<span class="hljs-operator">-</span>java<span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>artifactId<span class="hljs-operator">&gt;</span><br>        <span class="hljs-operator">&lt;</span>version<span class="hljs-operator">&gt;</span><span class="hljs-number">3.17</span><span class="hljs-number">.3</span><span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>version<span class="hljs-operator">&gt;</span><br>    <span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>dependency<span class="hljs-operator">&gt;</span><br><span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>dependencies<span class="hljs-operator">&gt;</span><br></code></pre></td></tr></table></figure>
+
 <p>5.测试序列化和发序列化</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sql">public class UserTest &#123;<br>    public <span class="hljs-keyword">static</span> void main(String[] args) &#123;<br>        ProtoUser.User <span class="hljs-keyword">user</span> <span class="hljs-operator">=</span> ProtoUser.User.newBuilder()<br>                .setId(<span class="hljs-number">1</span>)<br>                .setName(&quot;麦奇&quot;)<br>                .setMail(&quot;mikey@outlook.com&quot;).build();<br>        System.out.println(<span class="hljs-keyword">user</span>);<br><br>        byte[] bytes <span class="hljs-operator">=</span> user.toByteArray();<br>        try &#123;<br>            ProtoUser.User parseFrom <span class="hljs-operator">=</span> ProtoUser.User.parseFrom(bytes);<br>            System.out.println(parseFrom);<br>        &#125;catch (Exception e)&#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><p>protoman：一款http上protobuf的API客户端</p>
 <p>官网：<a target="_blank" rel="noopener" href="http://www.electronjs.org/apps/protoman">http://www.electronjs.org/apps/protoman</a></p>
-<p>添加对应的proto文件即可进行发送请求，其Content-Type设置为application/x-protobuf<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1638773522736-8525ac7c-62b9-4df1-b992-d52baaf1b74a.png#clientId=ue97ab3e1-7d35-4&from=paste&height=600&id=u5e43bc82&originHeight=1200&originWidth=1600&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=530656&status=done&style=none&taskId=u576e68b2-4c00-4a87-a0f3-a4e7e5800e6&title=&width=800" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>java教程：<a target="_blank" rel="noopener" href="https://developers.google.com/protocol-buffers/docs/javatutorial">https://developers.google.com/protocol-buffers/docs/javatutorial</a><br>java代码生成：<a target="_blank" rel="noopener" href="https://developers.google.com/protocol-buffers/docs/reference/java-generated">https://developers.google.com/protocol-buffers/docs/reference/java-generated</a></p>
+<p>添加对应的proto文件即可进行发送请求，其Content-Type设置为application/x-protobuf</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1638773522736-8525ac7c-62b9-4df1-b992-d52baaf1b74a.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>java教程：<a target="_blank" rel="noopener" href="https://developers.google.com/protocol-buffers/docs/javatutorial">https://developers.google.com/protocol-buffers/docs/javatutorial</a></p>
+<p>java代码生成：<a target="_blank" rel="noopener" href="https://developers.google.com/protocol-buffers/docs/reference/java-generated">https://developers.google.com/protocol-buffers/docs/reference/java-generated</a></p>
 
               
             </div>
@@ -926,6 +919,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

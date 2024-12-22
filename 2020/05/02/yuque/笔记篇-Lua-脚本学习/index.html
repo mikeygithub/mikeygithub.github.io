@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657529660873-485aa644-29fc-4bff-804c-35da0e5ac41a.png#clientId=u6b214626-5133-4&from=paste&height=254&id=uf32771c7&originHeight=254&originWidth=254&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=48069&status=done&style=none&taskId=udc2797fe-2d83-489b-af61-efb8c0e0e74&title=&width=254" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657529660873-485aa644-29fc-4bff-804c-35da0e5ac41a.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
 <p>Lua is free software distributed in source code. It may be used for any purpose, including commercial purposes, at absolutely no cost.<br>Lua 是一种轻量小巧的脚本语言，用标准C语言编写并以源代码形式开放， 其设计目的是为了嵌入应用程序中，从而为应用程序提供灵活的扩展和定制功能。</p>
 </blockquote>
@@ -368,17 +356,25 @@
 </ul>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz<br>tar zxf lua-5.3.5.tar.gz<br><span class="hljs-built_in">cd</span> lua-5.3.5<br>make linux <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
 
-<p>编译出错<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/complie-error.png#id=lvppB&originHeight=342&originWidth=790&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload><br>解决方法<br><code>sudo apt-get install libreadline7 libreadline-dev</code><br>重新编译<br><code>make linux test</code><br>创建软连接<br><code>sudo ln -s /home/mikey/DATA/DevTools/lua-5.3.5/src/lua /usr/bin/lua</code><br>测试</p>
-<figure class="highlight node-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs node-repl">mikey@localhost: lua<br>Lua 5.3.5  Copyright (C) 1994-2018 Lua.org, PUC-Rio<br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript"><span class="hljs-title function_">print</span>(<span class="hljs-string">&quot;Hello Mikey&quot;</span>)</span><br>Hello Mikey<br><span class="hljs-meta prompt_">&gt;</span> <span class="language-javascript"><span class="hljs-string">``</span><span class="hljs-string">`  </span></span><br><br># Lua 数据库访问<br><br>Lua 数据库的操作库：LuaSQL。开源，支持的数据库有：ODBC, ADO, Oracle, MySQL, SQLite 和 PostgreSQL。  <br><br>LuaSQL 可以使用 LuaRocks 来安装可以根据需要安装你需要的数据库驱动。  <br><br>LuaRocks 安装方法：<br></code></pre></td></tr></table></figure>
+
+
+<p>编译出错<br><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/complie-error.png" srcset="/img/loading.gif" lazyload><br>解决方法<br><code>sudo apt-get install libreadline7 libreadline-dev</code><br>重新编译<br><code>make linux test</code><br>创建软连接<br><code>sudo ln -s /home/mikey/DATA/DevTools/lua-5.3.5/src/lua /usr/bin/lua</code><br>测试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs plain">mikey@localhost: lua<br>Lua 5.3.5  Copyright (C) 1994-2018 Lua.org, PUC-Rio<br>&gt; print(&quot;Hello Mikey&quot;)<br>Hello Mikey<br>&gt; ```  <br><br># Lua 数据库访问<br><br>Lua 数据库的操作库：LuaSQL。开源，支持的数据库有：ODBC, ADO, Oracle, MySQL, SQLite 和 PostgreSQL。  <br><br>LuaSQL 可以使用 LuaRocks 来安装可以根据需要安装你需要的数据库驱动。  <br><br>LuaRocks 安装方法：<br></code></pre></td></tr></table></figure>
+
+
 
 <p>$ wget <a target="_blank" rel="noopener" href="http://luarocks.org/releases/luarocks-2.2.1.tar.gz">http://luarocks.org/releases/luarocks-2.2.1.tar.gz</a><br>$ tar zxpf luarocks-2.2.1.tar.gz<br>$ cd luarocks-2.2.1<br>$ ./configure; sudo make bootstrap<br>$ sudo luarocks install luasocket<br>$ lua<br>Lua 5.3.0 Copyright (C) 1994-2015 Lua.org, PUC-Rio</p>
 <blockquote>
 <p>require “socket”<br>Window 下安装 LuaRocks：<code>https://github.com/keplerproject/luarocks/wiki/Installation-instructions-for-Windows</code></p>
 </blockquote>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs"><br><br>安装不同数据库驱动：<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain"><br><br>安装不同数据库驱动：<br></code></pre></td></tr></table></figure>
+
+
 
 <p>luarocks install luasql-sqlite3<br>luarocks install luasql-postgres<br>luarocks install luasql-mysql<br>luarocks install luasql-sqlite<br>luarocks install luasql-odbc</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">你也可以使用源码安装方式，Lua Github 源码地址：`https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/keplerproject/</span>luasql`<br><br>Lua 连接MySql 数据库：<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">你也可以使用源码安装方式，Lua Github 源码地址：`https://github.com/keplerproject/luasql`<br><br>Lua 连接MySql 数据库：<br></code></pre></td></tr></table></figure>
+
+
 
 <p>实例<br>require “luasql.mysql”</p>
 <p>–创建环境对象<br>env = luasql.mysql()</p>
@@ -388,11 +384,14 @@
 <p>row = cur:fetch({},”a”)</p>
 <p>–文件对象的创建<br>file = io.open(“role.txt”,”w+”);</p>
 <p>while row do<br>var = string.format(“%d %s\n”, row.id, row.name)</p>
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><span class="hljs-built_in">print</span>(<span class="hljs-built_in">var</span>)<br><br>file:write(<span class="hljs-built_in">var</span>)<br><br><span class="hljs-built_in">row</span> = cur:fetch(<span class="hljs-built_in">row</span>,<span class="hljs-string">&quot;a&quot;</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">print(var)<br><br>file:write(var)<br><br>row = cur:fetch(row,&quot;a&quot;)<br></code></pre></td></tr></table></figure>
+
+
 
 <p>end</p>
 <p>file:close()  –关闭文件对象<br>conn:close()  –关闭数据库连接<br>env:close()   –关闭数据库环境</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br><br><br><span class="hljs-comment"># 参考资料</span><br><br>[菜鸟教程](https:<span class="hljs-regexp">//</span>www.runoob.com<span class="hljs-regexp">/lua/</span>lua-tutorial.html)<br>[官方手册](https:<span class="hljs-regexp">//</span>www.runoob.com<span class="hljs-regexp">/manual/</span>lua53doc/)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plain"><br><br><br># 参考资料<br><br>[菜鸟教程](https://www.runoob.com/lua/lua-tutorial.html)<br>[官方手册](https://www.runoob.com/manual/lua53doc/)<br></code></pre></td></tr></table></figure>
+
 
               
             </div>
@@ -942,6 +941,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

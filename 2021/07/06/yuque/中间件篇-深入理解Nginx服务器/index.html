@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,15 +331,20 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625539150213-8fb086e6-8282-41bf-a518-14da1e139712.png#clientId=uead21445-1ec9-4&from=paste&height=306&id=u498353c6&originHeight=306&originWidth=582&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=58218&status=done&style=none&taskId=u05ae5cc7-74f1-4774-b6ca-38f4a22d53c&title=&width=582" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h1 id="第1章-研究Nginx前的准备工作"><a href="#第1章-研究Nginx前的准备工作" class="headerlink" title="第1章 研究Nginx前的准备工作"></a>第1章 研究Nginx前的准备工作</h1><h2 id="1-1-Nginx是什么"><a href="#1-1-Nginx是什么" class="headerlink" title="1.1 Nginx是什么"></a>1.1 Nginx是什么</h2><p>Nginx的竞争对手——Apache、Lighttpd、Tomcat、Jetty、IIS，它们都是Web服务器，或者叫做WWW（World Wide Web）服务器，相应地也都具备Web服务器的基本功能：基于REST架构风格，以统一资源描述符（Uniform Resource Identifier，URI）或者统一资源定位符（Uniform Resource Locator，URL）作为沟通依据，通过HTTP为浏览器等客户端程序提供各种网络服务。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626015849643-a80891d1-b217-423e-84a2-84f05ef0518d.png#clientId=u8437d656-9f25-4&from=paste&height=436&id=u596aa93e&originHeight=436&originWidth=641&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=108301&status=done&style=none&taskId=uffd1de86-1b73-4e5d-8f93-a35a358cb0a&title=&width=641" srcset="/img/loading.gif" lazyload alt="image.png"><br>Apache有许多优点，如稳定、开源、跨平台等，但它出现的时间太长了，在它兴起的年代，互联网的产业规模远远比不上今天，所以它被设计成了一个重量级的、不支持高并发的Web服务器。在Apache服务器上，如果有数以万计的并发HTTP请求同时访问，就会导致服务器上消耗大量内存，操作系统内核对成百上千的Apache进程做进程间切换也会消耗大量 CPU资源，并导致HTTP请求的平均响应速度降低，这些都决定了Apache不可能成为高性能Web服务器，这也促使了Lighttpd和Nginx的出现。观察图1-1中Nginx成长的曲线，体会一下Nginx抢占市场时的“咄咄逼人”吧。 </p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1625539150213-8fb086e6-8282-41bf-a518-14da1e139712.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="第1章-研究Nginx前的准备工作"><a href="#第1章-研究Nginx前的准备工作" class="headerlink" title="第1章 研究Nginx前的准备工作"></a>第1章 研究Nginx前的准备工作</h1><h2 id="1-1-Nginx是什么"><a href="#1-1-Nginx是什么" class="headerlink" title="1.1 Nginx是什么"></a>1.1 Nginx是什么</h2><p>Nginx的竞争对手——Apache、Lighttpd、Tomcat、Jetty、IIS，它们都是Web服务器，或者叫做WWW（World Wide Web）服务器，相应地也都具备Web服务器的基本功能：基于REST架构风格，以统一资源描述符（Uniform Resource Identifier，URI）或者统一资源定位符（Uniform Resource Locator，URL）作为沟通依据，通过HTTP为浏览器等客户端程序提供各种网络服务。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626015849643-a80891d1-b217-423e-84a2-84f05ef0518d.png" srcset="/img/loading.gif" lazyload></p>
+<p>Apache有许多优点，如稳定、开源、跨平台等，但它出现的时间太长了，在它兴起的年代，互联网的产业规模远远比不上今天，所以它被设计成了一个重量级的、不支持高并发的Web服务器。在Apache服务器上，如果有数以万计的并发HTTP请求同时访问，就会导致服务器上消耗大量内存，操作系统内核对成百上千的Apache进程做进程间切换也会消耗大量 CPU资源，并导致HTTP请求的平均响应速度降低，这些都决定了Apache不可能成为高性能Web服务器，这也促使了Lighttpd和Nginx的出现。观察图1-1中Nginx成长的曲线，体会一下Nginx抢占市场时的“咄咄逼人”吧。 </p>
 <blockquote>
 <p>Lighttpd和Nginx一样，都是轻量级、高性能的Web服务器，欧美的业界开发者比较钟爱Lighttpd，而国内的公司更青睐Nginx，Lighttpd使用得比较少。</p>
 </blockquote>
+<p><font style="color:rgb(0,0,0);"></font></p>
 <p>Nginx使用基于事件驱动的架构能够并发处理百万级别的TCP连接，高度模块化的设计和自由的许可证使得扩展Nginx功能的第三方模块层出不穷，而且优秀的设计带来了极佳的稳定性，因此其作为Web服务器被广泛应用到大流量的网站上，包括腾讯、新浪、网易、淘宝等访问量巨大的网站。 </p>
-<p>Nginx是一个跨平台的Web服务器，可运行在Linux、FreeBSD、Solaris、AIX、Mac OS、Windows等操作系统上，并且它还可以使用当前操作系统特有的一些高效API来提高自己的性能。</p>
-<p>例如，对于高效处理大规模并发连接，它支持Linux上的epoll（epoll是Linux上处理大并发网络连接的利器）、Solaris上的event ports和 FreeBSD上的kqueue等。 </p>
-<p>又如，对于Linux，Nginx支持其独有的sendfile系统调用，这个系统调用可以高效地把硬盘中的数据发送到网络上（不需要先把硬盘数据复制到用户态内存上再发送），这极大地减少了内核态与用户态数据间的复制动作。</p>
+<p><font style="color:rgb(0,0,0);">Nginx是一个跨平台的Web服务器，可运行在Linux、FreeBSD、Solaris、AIX、Mac OS、Windows等操作系统上，并且它还可以使用当前操作系统特有的一些高效API来提高自己的性能。</font></p>
+<p><font style="color:rgb(0,0,0);"></font></p>
+<p><font style="color:rgb(0,0,0);">例如，对于高效处理大规模并发连接，它支持Linux上的epoll（epoll是Linux上处理大并发网络连接的利器）、Solaris上的event ports和 FreeBSD上的kqueue等。 </font></p>
+<p><font style="color:rgb(0,0,0);"></font></p>
+<p><font style="color:rgb(0,0,0);">又如，对于Linux，Nginx支持其独有的sendfile系统调用，这个系统调用可以高效地把硬盘中的数据发送到网络上（不需要先把硬盘数据复制到用户态内存上再发送），这极大地减少了内核态与用户态数据间的复制动作。</font></p>
 <h2 id="1-2-为什么选择Nginx"><a href="#1-2-为什么选择Nginx" class="headerlink" title="1.2 为什么选择Nginx"></a>1.2 为什么选择Nginx</h2><ul>
 <li>快</li>
 <li>高拓展性</li>
@@ -362,62 +355,212 @@
 <li>最自由的BSD许可协议</li>
 </ul>
 <h2 id="1-3-准备工作"><a href="#1-3-准备工作" class="headerlink" title="1.3 准备工作"></a>1.3 准备工作</h2><ul>
-<li><p>Linux操作系统</p>
+<li>Linux操作系统</li>
+</ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#查看内核版本</span><br><span class="hljs-built_in">uname</span> -a<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>GCC编译器</p>
+
+<ul>
+<li>GCC编译器</li>
+</ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yum install -y gcc gcc-c++<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>PCRE库</p>
+
+<ul>
+<li>PCRE库</li>
+</ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yum install -y pcre pcre-devel<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>zlib库</p>
+
+<ul>
+<li>zlib库</li>
+</ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yum install -y zlib zlib-devel<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>OpenSSL开发库</p>
+
+<ul>
+<li>OpenSSL开发库</li>
+</ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">yum install -y openssl openssl-devel<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>Linux内核参数的优化</p>
-</li>
+
+<ul>
+<li>Linux内核参数的优化</li>
 </ul>
 <blockquote>
-<p>在优化内核时，可以做的事情很多，不过，我们通常会根据业务特点来进行调整，当Nginx作为静态Web内容服务器、反向代理服务器或是提供图片缩略图功能（实时压缩图片）的服务器时，其内核参数的调整都是不同的。这里只针对最通用的、使Nginx支持更多并发请求的TCP网络参数做简单说明。</p>
+<p><font style="color:rgb(0,0,0);">在优化内核时，可以做的事情很多，不过，我们通常会根据业务特点来进行调整，当Nginx作为静态Web内容服务器、反向代理服务器或是提供图片缩略图功能（实时压缩图片）的服务器时，其内核参数的调整都是不同的。这里只针对最通用的、使Nginx支持更多并发请求的TCP网络参数做简单说明。</font></p>
 </blockquote>
-<p>首先，需要修改/etc/sysctl.conf来更改内核参数。例如，最常用的配置：<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626018721247-851de97b-1e07-44d2-9c66-d54884816ae3.png#clientId=ue837997d-d723-4&from=paste&height=199&id=uba49c958&originHeight=199&originWidth=293&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=15499&status=done&style=none&taskId=u42e19834-e272-4555-89b3-493fe18b02b&title=&width=293" srcset="/img/loading.gif" lazyload alt="image.png"><br>然后执行sysctl-p命令，使上述修改生效。 </p>
-<p>上面的参数意义解释如下： </p>
+<p>首先，需要修改/etc/sysctl.conf来更改内核参数。例如，最常用的配置： </p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626018721247-851de97b-1e07-44d2-9c66-d54884816ae3.png" srcset="/img/loading.gif" lazyload></p>
+<p><font style="color:rgb(0,0,0);">然后执行sysctl-p命令，使上述修改生效。 </font></p>
+<p><font style="color:rgb(0,0,0);"></font></p>
+<p><font style="color:rgb(0,0,0);">上面的参数意义解释如下： </font></p>
 <ul>
-<li>file-max：这个参数表示进程（比如一个worker进程）可以同时打开的最大句柄数，这个参数直接限制最大并发连接数，需根据实际情况配置。 </li>
-<li>tcp_tw_reuse：这个参数设置为1，表示允许将TIME-WAIT状态的socket重新用于新的TCP连接，这对于服务器来说很有意义，因为服务器上总会有大量TIME-WAIT状态的连接。 </li>
-<li>tcp_keepalive_time：这个参数表示当keepalive启用时，TCP发送keepalive消息的频度。 默认是2小时，若将其设置得小一些，可以更快地清理无效的连接。 </li>
-<li>tcp_fin_timeout：这个参数表示当服务器主动关闭连接时，socket保持在FIN-WAIT-2状态的最大时间。 </li>
-<li>tcp_max_tw_buckets：这个参数表示操作系统允许TIME_WAIT套接字数量的最大值，如果超过这个数字，TIME_WAIT套接字将立刻被清除并打印警告信息。该参数默认为180000，过多的TIME_WAIT套接字会使Web服务器变慢。 </li>
-<li>tcp_max_syn_backlog：这个参数表示TCP三次握手建立阶段接收SYN请求队列的最大长度，默认为1024，将其设置得大一些可以使出现Nginx繁忙来不及accept新连接的情况时，Linux不至于丢失客户端发起的连接请求。</li>
-<li>ip_local_port_range：这个参数定义了在UDP和TCP连接中本地（不包括连接的远端）端口的取值范围。 </li>
-<li>net.ipv4.tcp_rmem：这个参数定义了TCP接收缓存（用于TCP接收滑动窗口）的最小值、默认值、最大值。 </li>
-<li>net.ipv4.tcp_wmem：这个参数定义了TCP发送缓存（用于TCP发送滑动窗口）的最小值、默认值、最大值。 </li>
-<li>netdev_max_backlog：当网卡接收数据包的速度大于内核处理的速度时，会有一个队列保存这些数据包。这个参数表示该队列的最大值。 </li>
-<li>rmem_default：这个参数表示内核套接字接收缓存区默认的大小。 </li>
-<li>wmem_default：这个参数表示内核套接字发送缓存区默认的大小。 </li>
-<li>rmem_max：这个参数表示内核套接字接收缓存区的最大大小。 </li>
-<li>wmem_max：这个参数表示内核套接字发送缓存区的最大大小。</li>
+<li><font style="color:rgb(0,0,0);">file-max：这个参数表示进程（比如一个worker进程）可以同时打开的最大句柄数，这个参数直接限制最大并发连接数，需根据实际情况配置。 </font></li>
+<li><font style="color:rgb(0,0,0);">tcp_tw_reuse：这个参数设置为1，表示允许将TIME-WAIT状态的socket重新用于新的TCP连接，这对于服务器来说很有意义，因为服务器上总会有大量TIME-WAIT状态的连接。 </font></li>
+<li><font style="color:rgb(0,0,0);">tcp_keepalive_time：这个参数表示当keepalive启用时，TCP发送keepalive消息的频度。 默认是2小时，若将其设置得小一些，可以更快地清理无效的连接。 </font></li>
+<li><font style="color:rgb(0,0,0);">tcp_fin_timeout：这个参数表示当服务器主动关闭连接时，socket保持在FIN-WAIT-2状态的最大时间。 </font></li>
+<li><font style="color:rgb(0,0,0);">tcp_max_tw_buckets：这个参数表示操作系统允许TIME_WAIT套接字数量的最大值，如果超过这个数字，TIME_WAIT套接字将立刻被清除并打印警告信息。该参数默认为180000，过多的TIME_WAIT套接字会使Web服务器变慢。 </font></li>
+<li><font style="color:rgb(0,0,0);">tcp_max_syn_backlog：这个参数表示TCP三次握手建立阶段接收SYN请求队列的最大长度，默认为1024，将其设置得大一些可以使出现Nginx繁忙来不及accept新连接的情况时，Linux不至于丢失客户端发起的连接请求。</font></li>
+<li><font style="color:rgb(0,0,0);">ip_local_port_range：这个参数定义了在UDP和TCP连接中本地（不包括连接的远端）端口的取值范围。 </font></li>
+<li><font style="color:rgb(0,0,0);">net.ipv4.tcp_rmem：这个参数定义了TCP接收缓存（用于TCP接收滑动窗口）的最小值、默认值、最大值。 </font></li>
+<li><font style="color:rgb(0,0,0);">net.ipv4.tcp_wmem：这个参数定义了TCP发送缓存（用于TCP发送滑动窗口）的最小值、默认值、最大值。 </font></li>
+<li><font style="color:rgb(0,0,0);">netdev_max_backlog：当网卡接收数据包的速度大于内核处理的速度时，会有一个队列保存这些数据包。这个参数表示该队列的最大值。 </font></li>
+<li><font style="color:rgb(0,0,0);">rmem_default：这个参数表示内核套接字接收缓存区默认的大小。 </font></li>
+<li><font style="color:rgb(0,0,0);">wmem_default：这个参数表示内核套接字发送缓存区默认的大小。 </font></li>
+<li><font style="color:rgb(0,0,0);">rmem_max：这个参数表示内核套接字接收缓存区的最大大小。 </font></li>
+<li><font style="color:rgb(0,0,0);">wmem_max：这个参数表示内核套接字发送缓存区的最大大小。</font></li>
 </ul>
 <h2 id="1-4-编译安装Nginx"><a href="#1-4-编译安装Nginx" class="headerlink" title="1.4 编译安装Nginx"></a>1.4 编译安装Nginx</h2><p>1.获取源码：<a target="_blank" rel="noopener" href="http://nginx.org/en/download.html">http://nginx.org/en/download.html</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget http://nginx.org/download/nginx-1.20.1.tar.gz<br></code></pre></td></tr></table></figure>
+
 <p>2.解压</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar zxvf nginx-1.20.1.tar.gz<br></code></pre></td></tr></table></figure>
+
 <p>3.进入目录编译</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure <br>make <br>make install<br></code></pre></td></tr></table></figure>
 
-<h2 id="1-5-configure详解"><a href="#1-5-configure详解" class="headerlink" title="1.5 configure详解"></a>1.5 configure详解</h2><p>1.路径相关的参数<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626019927668-11eee6fe-2dd4-4878-9d05-b497f84f6eea.png#clientId=ue837997d-d723-4&from=paste&height=777&id=ub0df29d7&originHeight=777&originWidth=656&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=272806&status=done&style=none&taskId=u1a6fd1c2-ad90-479f-bce7-5ee37a0d4fa&title=&width=656" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626019952612-0cec0927-706f-47c9-9e51-4878cb85ab66.png#clientId=ue837997d-d723-4&from=paste&height=136&id=u651c16e8&originHeight=136&originWidth=652&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=38420&status=done&style=none&taskId=u8807015e-e1e5-4133-bcca-636abac5b35&title=&width=652" srcset="/img/loading.gif" lazyload alt="image.png"><br>2.编译相关的参数<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626020207584-fed573ad-08ff-4111-8622-ca5a78d30001.png#clientId=ue837997d-d723-4&from=paste&height=276&id=u2351be38&originHeight=276&originWidth=655&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=93712&status=done&style=none&taskId=uffcd572a-bdd6-4b42-bf1f-d6dd67bac63&title=&width=655" srcset="/img/loading.gif" lazyload alt="image.png"><br>3.依赖软件的相关参数<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626105798233-9c04a6ad-a745-43a0-9817-a4a319fcbe4e.png#clientId=u4de7a0d8-1649-4&from=paste&height=542&id=uff77b7e6&originHeight=542&originWidth=654&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=149599&status=done&style=none&taskId=u3d44868e-8dc6-448f-bf03-36317b22cc5&title=&width=654" srcset="/img/loading.gif" lazyload alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626105826785-292c6f26-717c-4d8f-95e5-37b4d6d1a881.png#clientId=u4de7a0d8-1649-4&from=paste&height=453&id=u8317d045&originHeight=453&originWidth=650&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=155225&status=done&style=none&taskId=u52b01f5f-1904-4eb2-a925-04672a636e7&title=&width=650" srcset="/img/loading.gif" lazyload alt="image.png"><br>4.模块相关的参数</p>
+<h2 id="1-5-configure详解"><a href="#1-5-configure详解" class="headerlink" title="1.5 configure详解"></a>1.5 configure详解</h2><p>1.路径相关的参数</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626019927668-11eee6fe-2dd4-4878-9d05-b497f84f6eea.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626019952612-0cec0927-706f-47c9-9e51-4878cb85ab66.png" srcset="/img/loading.gif" lazyload></p>
+<p>2.编译相关的参数</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626020207584-fed573ad-08ff-4111-8622-ca5a78d30001.png" srcset="/img/loading.gif" lazyload></p>
+<p>3.依赖软件的相关参数<font style="color:rgb(4,104,187);"> </font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626105798233-9c04a6ad-a745-43a0-9817-a4a319fcbe4e.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1626105826785-292c6f26-717c-4d8f-95e5-37b4d6d1a881.png" srcset="/img/loading.gif" lazyload></p>
+<p>4.模块相关的参数</p>
 <ul>
-<li>事件模块。 </li>
-<li>默认即编译进入Nginx的HTTP模块。 </li>
-<li>默认不会编译进入Nginx的HTTP模块。 </li>
-<li>邮件代理服务器相关的mail模块。 </li>
-<li>其他模块。 </li>
+<li><font style="color:rgb(0,0,0);">事件模块。 </font></li>
+<li><font style="color:rgb(0,0,0);">默认即编译进入Nginx的HTTP模块。 </font></li>
+<li><font style="color:rgb(0,0,0);">默认不会编译进入Nginx的HTTP模块。 </font></li>
+<li><font style="color:rgb(0,0,0);">邮件代理服务器相关的mail模块。 </font></li>
+<li><font style="color:rgb(0,0,0);">其他模块。 </font></li>
 </ul>
-<h2 id="1-6-Nginx的命令行控制"><a href="#1-6-Nginx的命令行控制" class="headerlink" title="1.6 Nginx的命令行控制"></a>1.6 Nginx的命令行控制</h2><h2 id="1-7-小结"><a href="#1-7-小结" class="headerlink" title="1.7 小结"></a>1.7 小结</h2><h1 id="第2章-Nginx的配置"><a href="#第2章-Nginx的配置" class="headerlink" title="第2章 Nginx的配置"></a>第2章 Nginx的配置</h1><p>2.1 运行中的Nginx进程间的关系<br>2.2 Nginx配置的通用语法<br>2.3 Nginx服务的基本配置<br>2.4 用HTTP核心模块配置一个静态Web服务器<br>2.5 用HTTP proxy module配置一个反向代理服务器<br>2.6 小结<br>第二部分 如何编写HTTP模块<br>第3章 开发一个简单的HTTP模块<br>3.1 如何调用HTTP模块<br>3.2 准备工作<br>3.3 如何将自己的HTTP模块编译进Nginx<br>3.4 HTTP模块的数据结构<br>3.5 定义自己的HTTP模块3.6 处理用户请求<br>3.7 发送响应<br>3.8 将磁盘文件作为包体发送<br>3.9 用C++语言编写HTTP模块<br>3.10 小结<br>第4章 配置、error日志和请求上下文<br>4.1 http配置项的使用场景<br>4.2 怎样使用http配置<br>4.3 HTTP配置模型<br>4.4 error日志的用法<br>4.5 请求的上下文<br>4.6 小结<br>第5章 访问第三方服务<br>5.1 upstream的使用方式<br>5.2 回调方法的执行场景<br>5.3 使用upstream的示例<br>5.4 subrequest的使用方式<br>5.5 subrequest执行过程中的主要场景<br>5.6 subrequest使用的例子<br>5.7 小结<br>第6章 开发一个简单的HTTP过滤模块<br>6.1 过滤模块的意义<br>6.2 过滤模块的调用顺序<br>6.3 HTTP过滤模块的开发步骤<br>6.4 HTTP过滤模块的简单例子<br>6.5 小结第7章 Nginx提供的高级数据结构<br>7.1 Nginx提供的高级数据结构概述<br>7.2 ngx_queue_t双向链表<br>7.3 ngx_array_t动态数组<br>7.4 ngx_list_t单向链表<br>7.5 ngx_rbtree_t红黑树<br>7.6 ngx_radix_tree_t基数树<br>7.7 支持通配符的散列表<br>7.8 小结<br>第三部分 深入Nginx<br>第8章 Nginx基础架构<br>8.1 Web服务器设计中的关键约束<br>8.2 Nginx的架构设计<br>8.3 Nginx框架中的核心结构体ngx_cycle_t<br>8.4 Nginx启动时框架的处理流程<br>8.5 worker进程是如何工作的<br>8.6 master进程是如何工作的<br>8.7 ngx_pool_t内存池<br>8.8 小结<br>第9章 事件模块<br>9.1 事件处理框架概述<br>9.2 Nginx事件的定义<br>9.3 Nginx连接的定义<br>9.4 ngx_events_module核心模块<br>9.5 ngx_event_core_module事件模块<br>9.6 epoll事件驱动模块9.7 定时器事件<br>9.8 事件驱动框架的处理流程<br>9.9 文件的异步I/O<br>9.10 TCP协议与Nginx<br>9.11 小结<br>第10章 HTTP框架的初始化<br>10.1 HTTP框架概述<br>10.2 管理HTTP模块的配置项<br>10.3 监听端口的管理<br>10.4 server的快速检索<br>10.5 location的快速检索<br>10.6 HTTP请求的11个处理阶段<br>10.7 HTTP框架的初始化流程<br>10.8 小结<br>第11章 HTTP框架的执行流程<br>11.1 HTTP框架执行流程概述<br>11.2 新连接建立时的行为<br>11.3 第一次可读事件的处理<br>11.4 接收HTTP请求行<br>11.5 接收HTTP头部<br>11.6 处理HTTP请求<br>11.7 subrequest与post请求<br>11.8 处理HTTP包体<br>11.9 发送HTTP响应<br>11.10 结束HTTP请求<br>11.11 小结第12章 upstream机制的设计与实现<br>12.1 upstream机制概述<br>12.2 启动upstream<br>12.3 与上游服务器建立连接<br>12.4 发送请求到上游服务器<br>12.5 接收上游服务器的响应头部<br>12.6 不转发响应时的处理流程<br>12.7 以下游网速优先来转发响应<br>12.8 以上游网速优先来转发响应<br>12.9 结束upstream请求<br>12.10 小结<br>第13章 邮件代理模块<br>13.1 邮件代理服务器的功能<br>13.2 邮件模块的处理框架<br>13.3 初始化请求<br>13.4 接收并解析客户端请求<br>13.5 邮件认证<br>13.6 与上游邮件服务器间的认证交互<br>13.7 透传上游邮件服务器与客户端间的流<br>13.8 小结<br>第14章 进程间的通信机制<br>14.1 概述<br>14.2 共享内存<br>14.3 原子操作<br>14.4 Nginx频道<br>14.5 信号14.6 信号量<br>14.7 文件锁<br>14.8 互斥锁<br>14.9 小结<br>第15章 变量<br>15.1 使用内部变量开发模块<br>15.2 内部变量工作原理<br>15.3 定义内部变量<br>15.4 外部变量与脚本引擎<br>15.5 小结<br>第16章 slab共享内存<br>16.1 操作slab共享内存的方法<br>16.2 使用slab共享内存池的例子<br>16.3 slab内存管理的实现原理<br>16.4 小结</p>
-<h1 id="第17章-资料"><a href="#第17章-资料" class="headerlink" title="第17章 资料"></a>第17章 资料</h1><p><a target="_blank" rel="noopener" href="https://github.com/nginx/nginx">https://github.com/nginx/nginx</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kevingrace/p/9364404.html">Nginx中保持长连接的配置 - 运维记录</a><br><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/pdf/2630542/1626012626312-6380526a-9128-4077-accd-c0c5fb76c6a2.pdf?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2021/pdf/2630542/1626012626312-6380526a-9128-4077-accd-c0c5fb76c6a2.pdf%22,%22name%22:%22%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Nginx%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%A7%A3%E6%9E%90%E7%AC%AC2%E7%89%88LinuxUnix%E6%8A%80%E6%9C%AF%E4%B8%9B%E4%B9%A6.pdf%22,%22size%22:37429747,%22type%22:%22application/pdf%22,%22ext%22:%22pdf%22,%22source%22:%22%22,%22status%22:%22done%22,%22mode%22:%22title%22,%22download%22:true,%22taskId%22:%22u876a23b9-b2f2-447a-a8df-e6ade8e83a1%22,%22taskType%22:%22upload%22,%22id%22:%22ua9e9a144%22,%22card%22:%22file%22%7D">深入理解Nginx模块开发与架构解析第2版LinuxUnix技术丛书.pdf</a></p>
+<h2 id="1-6-Nginx的命令行控制"><a href="#1-6-Nginx的命令行控制" class="headerlink" title="1.6 Nginx的命令行控制"></a>1.6 Nginx的命令行控制</h2><h2 id="1-7-小结"><a href="#1-7-小结" class="headerlink" title="1.7 小结"></a>1.7 小结</h2><h1 id="第2章-Nginx的配置"><a href="#第2章-Nginx的配置" class="headerlink" title="第2章 Nginx的配置"></a>第2章 Nginx的配置</h1><p>2.1 运行中的Nginx进程间的关系 </p>
+<p>2.2 Nginx配置的通用语法 </p>
+<p>2.3 Nginx服务的基本配置 </p>
+<p>2.4 用HTTP核心模块配置一个静态Web服务器 </p>
+<p>2.5 用HTTP proxy module配置一个反向代理服务器 </p>
+<p>2.6 小结 </p>
+<p>第二部分 如何编写HTTP模块 </p>
+<p>第3章 开发一个简单的HTTP模块 </p>
+<p>3.1 如何调用HTTP模块 </p>
+<p>3.2 准备工作 </p>
+<p>3.3 如何将自己的HTTP模块编译进Nginx </p>
+<p>3.4 HTTP模块的数据结构 </p>
+<p>3.5 定义自己的HTTP模块3.6 处理用户请求 </p>
+<p>3.7 发送响应 </p>
+<p>3.8 将磁盘文件作为包体发送 </p>
+<p>3.9 用C++语言编写HTTP模块 </p>
+<p>3.10 小结 </p>
+<p>第4章 配置、error日志和请求上下文 </p>
+<p>4.1 http配置项的使用场景 </p>
+<p>4.2 怎样使用http配置 </p>
+<p>4.3 HTTP配置模型 </p>
+<p>4.4 error日志的用法 </p>
+<p>4.5 请求的上下文 </p>
+<p>4.6 小结 </p>
+<p>第5章 访问第三方服务 </p>
+<p>5.1 upstream的使用方式 </p>
+<p>5.2 回调方法的执行场景 </p>
+<p>5.3 使用upstream的示例 </p>
+<p>5.4 subrequest的使用方式 </p>
+<p>5.5 subrequest执行过程中的主要场景 </p>
+<p>5.6 subrequest使用的例子 </p>
+<p>5.7 小结 </p>
+<p>第6章 开发一个简单的HTTP过滤模块 </p>
+<p>6.1 过滤模块的意义 </p>
+<p>6.2 过滤模块的调用顺序 </p>
+<p>6.3 HTTP过滤模块的开发步骤 </p>
+<p>6.4 HTTP过滤模块的简单例子 </p>
+<p>6.5 小结第7章 Nginx提供的高级数据结构 </p>
+<p>7.1 Nginx提供的高级数据结构概述 </p>
+<p>7.2 ngx_queue_t双向链表 </p>
+<p>7.3 ngx_array_t动态数组 </p>
+<p>7.4 ngx_list_t单向链表 </p>
+<p>7.5 ngx_rbtree_t红黑树 </p>
+<p>7.6 ngx_radix_tree_t基数树 </p>
+<p>7.7 支持通配符的散列表 </p>
+<p>7.8 小结 </p>
+<p>第三部分 深入Nginx </p>
+<p>第8章 Nginx基础架构 </p>
+<p>8.1 Web服务器设计中的关键约束 </p>
+<p>8.2 Nginx的架构设计 </p>
+<p>8.3 Nginx框架中的核心结构体ngx_cycle_t </p>
+<p>8.4 Nginx启动时框架的处理流程 </p>
+<p>8.5 worker进程是如何工作的 </p>
+<p>8.6 master进程是如何工作的 </p>
+<p>8.7 ngx_pool_t内存池 </p>
+<p>8.8 小结 </p>
+<p>第9章 事件模块 </p>
+<p>9.1 事件处理框架概述 </p>
+<p>9.2 Nginx事件的定义 </p>
+<p>9.3 Nginx连接的定义 </p>
+<p>9.4 ngx_events_module核心模块 </p>
+<p>9.5 ngx_event_core_module事件模块 </p>
+<p>9.6 epoll事件驱动模块9.7 定时器事件 </p>
+<p>9.8 事件驱动框架的处理流程 </p>
+<p>9.9 文件的异步I/O </p>
+<p>9.10 TCP协议与Nginx </p>
+<p>9.11 小结 </p>
+<p>第10章 HTTP框架的初始化 </p>
+<p>10.1 HTTP框架概述 </p>
+<p>10.2 管理HTTP模块的配置项 </p>
+<p>10.3 监听端口的管理 </p>
+<p>10.4 server的快速检索 </p>
+<p>10.5 location的快速检索 </p>
+<p>10.6 HTTP请求的11个处理阶段 </p>
+<p>10.7 HTTP框架的初始化流程 </p>
+<p>10.8 小结 </p>
+<p>第11章 HTTP框架的执行流程 </p>
+<p>11.1 HTTP框架执行流程概述 </p>
+<p>11.2 新连接建立时的行为 </p>
+<p>11.3 第一次可读事件的处理 </p>
+<p>11.4 接收HTTP请求行 </p>
+<p>11.5 接收HTTP头部 </p>
+<p>11.6 处理HTTP请求 </p>
+<p>11.7 subrequest与post请求 </p>
+<p>11.8 处理HTTP包体 </p>
+<p>11.9 发送HTTP响应 </p>
+<p>11.10 结束HTTP请求 </p>
+<p>11.11 小结第12章 upstream机制的设计与实现 </p>
+<p>12.1 upstream机制概述 </p>
+<p>12.2 启动upstream </p>
+<p>12.3 与上游服务器建立连接 </p>
+<p>12.4 发送请求到上游服务器 </p>
+<p>12.5 接收上游服务器的响应头部 </p>
+<p>12.6 不转发响应时的处理流程 </p>
+<p>12.7 以下游网速优先来转发响应 </p>
+<p>12.8 以上游网速优先来转发响应 </p>
+<p>12.9 结束upstream请求 </p>
+<p>12.10 小结 </p>
+<p>第13章 邮件代理模块 </p>
+<p>13.1 邮件代理服务器的功能 </p>
+<p>13.2 邮件模块的处理框架 </p>
+<p>13.3 初始化请求 </p>
+<p>13.4 接收并解析客户端请求 </p>
+<p>13.5 邮件认证 </p>
+<p>13.6 与上游邮件服务器间的认证交互 </p>
+<p>13.7 透传上游邮件服务器与客户端间的流 </p>
+<p>13.8 小结 </p>
+<p>第14章 进程间的通信机制 </p>
+<p>14.1 概述 </p>
+<p>14.2 共享内存 </p>
+<p>14.3 原子操作 </p>
+<p>14.4 Nginx频道 </p>
+<p>14.5 信号14.6 信号量 </p>
+<p>14.7 文件锁 </p>
+<p>14.8 互斥锁 </p>
+<p>14.9 小结 </p>
+<p>第15章 变量 </p>
+<p>15.1 使用内部变量开发模块 </p>
+<p>15.2 内部变量工作原理 </p>
+<p>15.3 定义内部变量 </p>
+<p>15.4 外部变量与脚本引擎 </p>
+<p>15.5 小结 </p>
+<p>第16章 slab共享内存 </p>
+<p>16.1 操作slab共享内存的方法 </p>
+<p>16.2 使用slab共享内存池的例子 </p>
+<p>16.3 slab内存管理的实现原理 </p>
+<p>16.4 小结</p>
+<h1 id="第17章-资料"><a href="#第17章-资料" class="headerlink" title="第17章 资料"></a>第17章 资料</h1><p><a target="_blank" rel="noopener" href="https://github.com/nginx/nginx">https://github.com/nginx/nginx</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kevingrace/p/9364404.html">Nginx中保持长连接的配置 - 运维记录</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/pdf/2630542/1626012626312-6380526a-9128-4077-accd-c0c5fb76c6a2.pdf">深入理解Nginx模块开发与架构解析第2版LinuxUnix技术丛书.pdf</a></p>
 
               
             </div>
@@ -435,8 +578,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/" class="category-chain-item">中间件篇</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/" class="category-chain-item">中间件篇</a>
+  
+  
+
   
 
       </span>
@@ -967,6 +1117,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

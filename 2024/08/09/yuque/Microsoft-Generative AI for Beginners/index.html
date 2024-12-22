@@ -1,0 +1,975 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mikey">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Course Setup clone代码：https:&#x2F;&#x2F;github.com&#x2F;microsoft&#x2F;generative-ai-for-beginners 安装minicoda：https:&#x2F;&#x2F;docs.anaconda.com&#x2F;miniconda&#x2F;  Introduction to Generative AI and LLMs LLM如何工作  分词器，文本到数字：大型语言模型接收文本作为输入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Microsoft-Generative AI for Beginners">
+<meta property="og:url" content="https://mikeygithub.github.io/2024/08/09/yuque/Microsoft-Generative%20AI%20for%20Beginners/index.html">
+<meta property="og:site_name" content="麦奇">
+<meta property="og:description" content="Course Setup clone代码：https:&#x2F;&#x2F;github.com&#x2F;microsoft&#x2F;generative-ai-for-beginners 安装minicoda：https:&#x2F;&#x2F;docs.anaconda.com&#x2F;miniconda&#x2F;  Introduction to Generative AI and LLMs LLM如何工作  分词器，文本到数字：大型语言模型接收文本作为输入">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/2630542/1723883070379-c4aa323e-4c9a-47c4-ac15-e4820899a952.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_1564%2Climit_0">
+<meta property="article:published_time" content="2024-08-09T12:24:22.000Z">
+<meta property="article:modified_time" content="2024-12-22T02:47:40.000Z">
+<meta property="article:author" content="Mikey">
+<meta property="article:tag" content="Generative AI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2024/png/2630542/1723883070379-c4aa323e-4c9a-47c4-ac15-e4820899a952.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_1564%2Climit_0">
+  
+  
+<!--    <meta name="referrer" content="no-referrer-when-downgrade">-->
+  
+  
+  <title>Microsoft-Generative AI for Beginners - 麦奇</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mikeygithub.github.io","root":"/","version":"1.9.1","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":200}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"74301a15e5497361e93588eeee69f4b2","google":"G-NCN3Z5PSLJ","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="麦奇" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>麦奇</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/music/">
+                <i class="iconfont icon-music"></i>
+                音乐
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://cdn.nlark.com/yuque/0/2022/png/2630542/1651338804824-c3567992-2841-42e6-85b2-90ff83da2674.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_2276%2Climit_0') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Microsoft-Generative AI for Beginners"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mikey
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-09 20:24" pubdate>
+          2024年8月9日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Microsoft-Generative AI for Beginners</h1>
+            
+            <div class="markdown-body">
+              
+              <p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1723883070379-c4aa323e-4c9a-47c4-ac15-e4820899a952.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Course-Setup"><a href="#Course-Setup" class="headerlink" title="Course Setup"></a>Course Setup</h2><ol>
+<li>clone代码：<a target="_blank" rel="noopener" href="https://github.com/microsoft/generative-ai-for-beginners">https://github.com/microsoft/generative-ai-for-beginners</a></li>
+<li>安装minicoda：<a target="_blank" rel="noopener" href="https://docs.anaconda.com/miniconda/">https://docs.anaconda.com/miniconda/</a></li>
+</ol>
+<h2 id="Introduction-to-Generative-AI-and-LLMs"><a href="#Introduction-to-Generative-AI-and-LLMs" class="headerlink" title="Introduction to Generative AI and LLMs"></a>Introduction to Generative AI and LLMs</h2><p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1725412954273-e22b2397-a641-4d4b-a03e-bd93e2f01e32.png" srcset="/img/loading.gif" lazyload></p>
+<p>LLM如何工作</p>
+<ul>
+<li>分词器，文本到数字：大型语言模型接收文本作为输入并生成文本作为输出。 然而，作为统计模型，它们对数字的处理效果对比起文本序列的处理效果要好得多。 这就是为什么模型的每个输入在被核心模型使用之前都由分词器处理。 标记是一段文本——由可变数量的字符组成，因此标记器的主要任务是将输入分割成标记数组。 然后，每个令牌都映射有一个令牌索引，该索引是原始文本块的整数编码。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1725414689369-8e7f73ec-96ce-438a-858a-95a81dab2242.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>预测输出标记：给定 n 个标记作为输入（最大 n 因模型而异），模型能够预测一个标记作为输出。 然后，该标记会以扩展窗口模式合并到下一次迭代的输入中，从而获得一个（或多个）句子作为答案,生成结果有更好的用户体验。 这解释了为什么如果您曾经使用过 ChatGPT，您可能会注意到有时它在生成结果时在句子中间出现停顿。</li>
+</ul>
+<ul>
+<li>选择过程，概率分布：模型根据其在当前文本序列之后出现的概率来选择输出标记。 这是因为该模型预测了根据其训练计算出的所有可能的“下一个标记”的概率分布。 然而，并不总是从结果分布中选择概率最高的标记。 这种选择增加了一定程度的随机性，模型以非确定性方式运行——对于相同的输入，我们不会得到完全相同的输出。 添加这种程度的随机性是为了模拟人类创造性思维的过程，您可以使用称为温度的模型参数进行调整。</li>
+</ul>
+<h2 id="Exploring-and-comparing-different-LLMs"><a href="#Exploring-and-comparing-different-LLMs" class="headerlink" title="Exploring and comparing different LLMs"></a>Exploring and comparing different LLMs</h2><h3 id="Embedding"><a href="#Embedding" class="headerlink" title="Embedding"></a><font style="color:rgb(31, 35, 40);">Embedding</font></h3><p><font style="color:rgb(31, 35, 40);">LLMs 还可以根据其产生的输出进行分类。</font></p>
+<p><font style="color:rgb(31, 35, 40);">嵌入是一组可以将文本转换为数字形式的模型，称为嵌入，它是输入文本的数字表示。 嵌入使机器更容易理解单词或句子之间的关系，并且可以用作其他模型的输入，例如分类模型或对数值数据具有更好性能的聚类模型。 嵌入模型通常用于迁移学习，其中为有大量数据的代理任务构建模型，然后将模型权重（嵌入）重新用于其他下游任务。 此类别的一个示例是 </font><a target="_blank" rel="noopener" href="https://platform.openai.com/docs/models/embeddings?WT.mc_id=academic-105485-koreyst"><font style="color:rgb(31, 35, 40);">OpenAI 嵌入</font></a><font style="color:rgb(31, 35, 40);">。</font></p>
+<p><img src="https://github.com/microsoft/generative-ai-for-beginners/raw/main/02-exploring-and-comparing-different-llms/images/Embedding.png?WT.mc_id=academic-105485-koreyst" srcset="/img/loading.gif" lazyload></p>
+<h3 id="检索增强生成-RAG-Retrieval-Augmented-Generation"><a href="#检索增强生成-RAG-Retrieval-Augmented-Generation" class="headerlink" title="检索增强生成 (RAG, Retrieval Augmented Generation)"></a><font style="color:rgb(31, 35, 40);">检索增强生成 (RAG, </font>Retrieval Augmented Generation<font style="color:rgb(31, 35, 40);">)</font></h3><p><font style="color:rgb(31, 35, 40);">LLMs 有一个限制，即他们只能使用训练期间使用过的数据来生成答案。 这意味着他们对训练过程后发生的事情一无所知，并且无法访问非公开信息（例如公司数据）。 这可以通过 RAG 来克服，</font><strong><font style="color:#DF2A3F;">RAG 是一种考虑提示长度限制的技术，以文档块的形式使用外部数据来增强提示。</font></strong><font style="color:rgb(31, 35, 40);"> </font><em><strong><font style="color:#F38F39;">矢量数据库工具（例如 </font></strong></em><a target="_blank" rel="noopener" href="https://learn.microsoft.com/azure/search/vector-search-overview?WT.mc_id=academic-105485-koreyst"><em><strong><font style="color:#F38F39;">Azure 向量搜索</font></strong></em></a><em><strong><font style="color:#F38F39;">）支持此功能，可检索有用的信息来自各种预定义数据源的块并将它们添加到提示上下文中。</font></strong></em></p>
+<p><font style="color:rgb(31, 35, 40);">当企业没有足够的数据、足够的时间或资源来微调 LLMs，但仍希望提高特定工作负载的性能并减少幻觉的风险（即对现实的神秘化或有害的风险）时，此技术非常有用</font></p>
+<h3 id="微调模型"><a href="#微调模型" class="headerlink" title="微调模型"></a><font style="color:rgb(31, 35, 40);">微调模型</font></h3><p><font style="color:rgb(31, 35, 40);">微调是一个利用迁移学习使模型“适应”下游任务或解决特定问题的过程。 与少样本学习和 RAG 不同，它会生成一个新模型，并更新权重和偏差。 它需要一组训练示例，其中包含单个输入（提示）及其关联的输出（完成）。</font></p>
+<p><font style="color:rgb(31, 35, 40);"></font></p>
+<p><font style="color:rgb(31, 35, 40);">如果出现以下情况，这将是首选方法：</font></p>
+<ul>
+<li><strong><font style="color:rgb(31, 35, 40);">使用微调模型</font></strong><font style="color:rgb(31, 35, 40);">。 企业希望使用经过微调能力较差的模型（例如嵌入模型）而不是高性能模型，从而获得更具成本效益和快速的解决方案。</font></li>
+<li><strong><font style="color:rgb(31, 35, 40);">考虑延迟</font></strong><font style="color:rgb(31, 35, 40);">。 延迟对于特定用例很重要，因此不可能使用很长的提示，或者应该从模型中学习的示例数量不符合提示长度限制。</font></li>
+<li><strong><font style="color:rgb(31, 35, 40);">保持最新状态</font></strong><font style="color:rgb(31, 35, 40);">。 企业拥有大量高质量的数据和真实标签，以及随着时间的推移保持这些数据最新所需的资源。</font></li>
+</ul>
+<p>矢量/向量：基于大小又有方向的量。</p>
+<p><font style="color:rgb(31, 35, 40);"></font></p>
+<p><font style="color:rgb(31, 35, 40);">矢量图：根据数学工时绘制的图像，放大不会失真（不像普通图片是直接由像素点直接组成）。</font></p>
+<h2 id="Using-Generative-AI-Responsibly"><a href="#Using-Generative-AI-Responsibly" class="headerlink" title="Using Generative AI Responsibly"></a>Using Generative AI Responsibly</h2><h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://github.com/microsoft/generative-ai-for-beginners/raw/main/03-using-generative-ai-responsibly/images/mitigation-layers.png?WT.mc_id=academic-105485-koreyst" srcset="/img/loading.gif" lazyload></h2><h2 id="Understanding-Prompt-Engineering-Fundamentals"><a href="#Understanding-Prompt-Engineering-Fundamentals" class="headerlink" title="Understanding Prompt Engineering Fundamentals"></a>Understanding Prompt Engineering Fundamentals</h2><h2 id="Creating-Advanced-Prompts"><a href="#Creating-Advanced-Prompts" class="headerlink" title="Creating Advanced Prompts"></a>Creating Advanced Prompts</h2><h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><h2 id="Building-Text-Generation-Applications"><a href="#Building-Text-Generation-Applications" class="headerlink" title="Building Text Generation Applications"></a>Building Text Generation Applications</h2><h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><h2 id="Building-Chat-Applications"><a href="#Building-Chat-Applications" class="headerlink" title="Building Chat Applications"></a>Building Chat Applications</h2><h2 id="-3"><a href="#-3" class="headerlink" title=""></a></h2><h2 id="Building-Search-Apps-Vector-Databases"><a href="#Building-Search-Apps-Vector-Databases" class="headerlink" title="Building Search Apps Vector Databases"></a>Building Search Apps Vector Databases</h2><ol>
+<li>什么是embedding：</li>
+<li>余弦相似度：余弦相似度是两个向量之间相似度的度量。</li>
+</ol>
+<p>在进行搜索时会对输入文本进行embedding，然后通过对向量数据库中的向量进行按余弦相似度对结果进行排序，余弦相似度最高的文本片段与查询最相似。</p>
+<h2 id="Building-Image-Generation-Applications"><a href="#Building-Image-Generation-Applications" class="headerlink" title="Building Image Generation Applications"></a>Building Image Generation Applications</h2><h2 id="-4"><a href="#-4" class="headerlink" title=""></a></h2><h2 id="Building-Low-Code-AI-Applications"><a href="#Building-Low-Code-AI-Applications" class="headerlink" title="Building Low Code AI Applications"></a>Building Low Code AI Applications</h2><h2 id="-5"><a href="#-5" class="headerlink" title=""></a></h2><h2 id="Integrating-External-Applications-with-Function-Calling"><a href="#Integrating-External-Applications-with-Function-Calling" class="headerlink" title="Integrating External Applications with Function Calling"></a>Integrating External Applications with Function Calling</h2><h2 id="-6"><a href="#-6" class="headerlink" title=""></a></h2><h2 id="Designing-UX-for-AI-Applications"><a href="#Designing-UX-for-AI-Applications" class="headerlink" title="Designing UX for AI Applications"></a>Designing UX for AI Applications</h2><h2 id="-7"><a href="#-7" class="headerlink" title=""></a></h2><h2 id="Securing-Your-Generative-AI-Applications"><a href="#Securing-Your-Generative-AI-Applications" class="headerlink" title="Securing Your Generative AI Applications"></a>Securing Your Generative AI Applications</h2><h2 id="-8"><a href="#-8" class="headerlink" title=""></a></h2><h2 id="The-Generative-AI-Application-Lifecycle"><a href="#The-Generative-AI-Application-Lifecycle" class="headerlink" title="The Generative AI Application Lifecycle"></a>The Generative AI Application Lifecycle</h2><h2 id="-9"><a href="#-9" class="headerlink" title=""></a></h2><h2 id="Retrieval-Augmented-Generation-RAG-and-Vector-Databases"><a href="#Retrieval-Augmented-Generation-RAG-and-Vector-Databases" class="headerlink" title="Retrieval Augmented Generation (RAG) and Vector Databases"></a>Retrieval Augmented Generation (RAG) and Vector Databases</h2><h2 id="-10"><a href="#-10" class="headerlink" title=""></a></h2><h2 id="Open-Source-Models-and-Hugging-Face"><a href="#Open-Source-Models-and-Hugging-Face" class="headerlink" title="Open Source Models and Hugging Face"></a>Open Source Models and Hugging Face</h2><h2 id="AI-Agents"><a href="#AI-Agents" class="headerlink" title="AI Agents"></a>AI Agents</h2><h2 id="-11"><a href="#-11" class="headerlink" title=""></a></h2><h2 id="Fine-Tuning-LLMs"><a href="#Fine-Tuning-LLMs" class="headerlink" title="Fine-Tuning LLMs"></a>Fine-Tuning LLMs</h2><h1 id="Refence"><a href="#Refence" class="headerlink" title="Refence"></a>Refence</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/generative-ai-for-beginners">https://github.com/microsoft/generative-ai-for-beginners</a></li>
+<li><a target="_blank" rel="noopener" href="https://microsoft.github.io/generative-ai-for-beginners/#/translations/cn/">https://microsoft.github.io/generative-ai-for-beginners/#/translations/cn/</a></li>
+</ol>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="category-chain-item">人工智能</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Generative-AI/">#Generative AI</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Microsoft-Generative AI for Beginners</div>
+      <div>https://mikeygithub.github.io/2024/08/09/yuque/Microsoft-Generative AI for Beginners/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mikey</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月9日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/12/21/yuque/Pipeline%E5%B9%B3%E5%8F%B0%E7%9A%84%E8%90%BD%E5%9C%B0%E6%8E%A2%E7%B4%A2%E4%B8%8E%E5%AE%9E%E8%B7%B5/" title="Pipeline平台的落地探索与实践">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Pipeline平台的落地探索与实践</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/17/yuque/MySQL%E8%BF%81%E7%A7%BB%E6%96%B9%E6%A1%88%E7%9A%84%E6%8E%A2%E7%B4%A2%E4%B8%8E%E8%90%BD%E5%9C%B0/" title="MySQL迁移方案的探索与落地">
+                        <span class="hidden-mobile">MySQL迁移方案的探索与落地</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'mikeygithub/commit-utterance');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.13.10/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+  });
+</script>
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       Copyright © 麦奇 Powered by <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> and <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> core on github page 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      桂ICP备2020009931号-1
+    </a>
+  </span>
+  
+    
+      <span>
+        <a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2020009931"
+          rel="nofollow noopener"
+          class="beian-police"
+          target="_blank"
+        >
+          
+            <span style="visibility: hidden; width: 0">|</span>
+            <img src="/img/police_beian.png" srcset="/img/loading.gif" lazyload alt="police-icon"/>
+          
+          <span>桂公网安备2020009931号</span>
+        </a>
+      </span>
+    
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?74301a15e5497361e93588eeee69f4b2";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-NCN3Z5PSLJ', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        MathJax = {
+          tex    : {
+            inlineMath: { '[+]': [['$', '$']] }
+          },
+          loader : {
+            load: ['ui/lazy']
+          },
+          options: {
+            renderActions: {
+              findScript    : [10, doc => {
+                document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                  const display = !!node.type.match(/; *mode=display/);
+                  const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                  const text = document.createTextNode('');
+                  node.parentNode.replaceChild(text, node);
+                  math.start = { node: text, delim: '', n: 0 };
+                  math.end = { node: text, delim: '', n: 0 };
+                  doc.math.push(math);
+                });
+              }, '', false],
+              insertedScript: [200, () => {
+                document.querySelectorAll('mjx-container').forEach(node => {
+                  let target = node.parentNode;
+                  if (target.nodeName.toLowerCase() === 'li') {
+                    target.parentNode.classList.add('has-jax');
+                  }
+                });
+              }, '', false]
+            }
+          }
+        };
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.0/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

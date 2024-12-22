@@ -17,12 +17,12 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介 在了解eBPF前先说一下BPF  伯克利包过滤器（Berkeley Packet Filter，缩写 BPF），是类Unix系统上数据链路层的一种原始接口，提供原始链路层封包的收发。除此之外，如果网卡驱动支持混杂模式，那么它可以让网卡处于此种模式，这样可以收到网络上的所有包，不管他们的目的地是不是所在主机。另外，BPF支持过滤数据包——用户态的进程可以提供一个过滤程序来声明它想收到哪些数据">
+    <meta name="description" content="简介 在了解eBPF前先说一下BPF  伯克利包过滤器（Berkeley Packet Filter，缩写 BPF），是类Unix系统上数据链路层的一种原始接口，提供原始链路层封包的收发。除此之外，如果网卡驱动支持混杂模式，那么它可以让网卡处于此种模式，这样可以收到网络上的所有包，不管他们的目的地是不是所在主机。 另外，BPF支持过滤数据包——用户态的进程可以提供一个过滤程序来声明它想收到哪些数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="云原生-eBPF入门与探索">
 <meta property="og:url" content="https://mikeygithub.github.io/2023/08/01/yuque/%E4%BA%91%E5%8E%9F%E7%94%9F-eBPF%E5%85%A5%E9%97%A8%E4%B8%8E%E6%8E%A2%E7%B4%A2/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="简介 在了解eBPF前先说一下BPF  伯克利包过滤器（Berkeley Packet Filter，缩写 BPF），是类Unix系统上数据链路层的一种原始接口，提供原始链路层封包的收发。除此之外，如果网卡驱动支持混杂模式，那么它可以让网卡处于此种模式，这样可以收到网络上的所有包，不管他们的目的地是不是所在主机。另外，BPF支持过滤数据包——用户态的进程可以提供一个过滤程序来声明它想收到哪些数据">
+<meta property="og:description" content="简介 在了解eBPF前先说一下BPF  伯克利包过滤器（Berkeley Packet Filter，缩写 BPF），是类Unix系统上数据链路层的一种原始接口，提供原始链路层封包的收发。除此之外，如果网卡驱动支持混杂模式，那么它可以让网卡处于此种模式，这样可以收到网络上的所有包，不管他们的目的地是不是所在主机。 另外，BPF支持过滤数据包——用户态的进程可以提供一个过滤程序来声明它想收到哪些数">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/2630542/1690853239323-5df87ac9-97ad-47a0-85fd-42ed945d4cfc.png">
 <meta property="article:published_time" content="2023-08-01T00:24:22.000Z">
@@ -160,18 +160,6 @@
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
               </a>
             </li>
           
@@ -343,11 +331,15 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1690853239323-5df87ac9-97ad-47a0-85fd-42ed945d4cfc.png#averageHue=%23050400&clientId=ue30d2c05-c331-4&from=paste&height=296&id=uabe5167b&originHeight=296&originWidth=850&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=31235&status=done&style=none&taskId=ua443b90a-8d18-43a6-a670-6ec99b20172&title=&width=850" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1690853239323-5df87ac9-97ad-47a0-85fd-42ed945d4cfc.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
 <p>在了解eBPF前先说一下BPF</p>
 </blockquote>
-<p><strong>伯克利包过滤器</strong>（Berkeley Packet Filter，缩写 BPF），是类Unix系统上数据链路层的一种原始接口，提供原始链路层封包的收发。除此之外，如果网卡驱动支持混杂模式，那么它可以让网卡处于此种模式，这样可以收到网络上的所有包，不管他们的目的地是不是所在主机。<br>另外，BPF支持过滤数据包——用户态的进程可以提供一个过滤程序来声明它想收到哪些数据包。通过这种过滤可以避免从操作系统内核向用户态复制其他对用户态程序无用的数据包，从而极大地提高性能。<br>BPF有时也只表示过滤机制，而不是整个接口。一些系统，比如Linux和Tru64 Unix，提供了数据链路层的原始接口，而不是BPF的接口，但使用了BPF的过滤机制。<br>BSD 内核实现例程如 bpf_mtap()和 bpf_tap()，以BPF_MTAP()和 BPF_TAP()等宏定义的形式进行包裹由网卡驱动(以及伪驱动pseudo-drivers) 向BPF机制发送进出的封包。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1690852818630-4d76e095-b795-49cc-a128-7099190fd490.png#averageHue=%23e5e4e1&clientId=ue30d2c05-c331-4&from=paste&height=627&id=uc5976619&originHeight=627&originWidth=1342&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=110053&status=done&style=none&taskId=u68ab9f92-0d2a-4ba4-ade1-46a32152ff0&title=&width=1342" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p><strong><font style="color:rgb(32, 33, 34);">伯克利包过滤器</font></strong><font style="color:rgb(32, 33, 34);">（Berkeley Packet Filter，缩写 BPF），是</font>类Unix<font style="color:rgb(32, 33, 34);">系统上</font>数据链路层<font style="color:rgb(32, 33, 34);">的一种原始接口，提供原始链路层</font>封包<font style="color:rgb(32, 33, 34);">的收发。除此之外，如果网卡驱动支持</font>混杂模式<font style="color:rgb(32, 33, 34);">，那么它可以让网卡处于此种模式，这样可以收到</font>网络<font style="color:rgb(32, 33, 34);">上的所有包，不管他们的目的地是不是所在</font>主机<font style="color:rgb(32, 33, 34);">。</font></p>
+<p><font style="color:rgb(32, 33, 34);">另外，BPF支持过滤数据包——用户态的进程可以提供一个过滤程序来声明它想收到哪些数据包。通过这种过滤可以避免从</font>操作系统内核<font style="color:rgb(32, 33, 34);">向用户态复制其他对用户态程序无用的数据包，从而极大地提高性能。</font></p>
+<p><font style="color:rgb(32, 33, 34);">BPF有时也只表示过滤机制，而不是整个接口。一些系统，比如</font>Linux<font style="color:rgb(32, 33, 34);">和Tru64 Unix，提供了数据链路层的原始接口，而不是BPF的接口，但使用了BPF的过滤机制。</font></p>
+<p><font style="color:rgb(32, 33, 34);">BSD 内核实现例程如 </font><font style="color:rgb(0, 0, 0);background-color:rgb(248, 249, 250);">bpf_mtap()</font><font style="color:rgb(32, 33, 34);">和 </font><font style="color:rgb(0, 0, 0);background-color:rgb(248, 249, 250);">bpf_tap()</font><font style="color:rgb(32, 33, 34);">，以</font><font style="color:rgb(0, 0, 0);background-color:rgb(248, 249, 250);">BPF_MTAP()</font><font style="color:rgb(32, 33, 34);">和 </font><font style="color:rgb(0, 0, 0);background-color:rgb(248, 249, 250);">BPF_TAP()</font><font style="color:rgb(32, 33, 34);">等</font>宏定义<font style="color:rgb(32, 33, 34);">的形式进行包裹由网卡驱动(以及伪驱动pseudo-drivers) 向BPF机制发送进出的封包。</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1690852818630-4d76e095-b795-49cc-a128-7099190fd490.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><ol>
 <li><a target="_blank" rel="noopener" href="https://ebpf.io/">https://ebpf.io/</a></li>
 <li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/BPF#eBPF">https://zh.wikipedia.org/zh-hans/BPF#eBPF</a></li>
@@ -369,13 +361,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/%E5%86%85%E6%A0%B8%E5%BC%80%E5%8F%91/" class="category-chain-item">内核开发</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/%E5%86%85%E6%A0%B8%E5%BC%80%E5%8F%91/" class="category-chain-item">内核开发</a>
+  
+  
+
   
 
   
@@ -931,6 +930,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

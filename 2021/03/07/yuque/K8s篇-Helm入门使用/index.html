@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550679253-f2949152-3201-4757-8f8c-9589251fac72.png#clientId=u44a432d2-46e8-4&from=markdown&id=Yzbii&originHeight=480&originWidth=800&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=257219&status=done&style=none&taskId=u61dbcd7f-c3ee-4ea1-a6fe-ab7e02e72b3&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550679253-f2949152-3201-4757-8f8c-9589251fac72.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="Helm-简介"><a href="#Helm-简介" class="headerlink" title="Helm 简介"></a>Helm 简介</h1><p><strong>Helm</strong> 帮助您管理 Kubernetes 应用程序——Helm Charts 帮助您定义、安装和升级最复杂的 Kubernetes 应用程序。</p>
 <p>Helm 可以使用 Charts 启动 Kubernetes 集群，提供可用的工作流：</p>
 <ul>
@@ -362,26 +350,38 @@
 <p>Chart 是 Kubernetes 的单元，Helm 的架构参考 Homebrew。</p>
 <h1 id="安装-Helm"><a href="#安装-Helm" class="headerlink" title="安装 Helm"></a>安装 Helm</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo snap install helm --classic<br></code></pre></td></tr></table></figure>
 
+
+
 <p>初始化</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">helm repo add stable https://charts.helm.sh/stable<br></code></pre></td></tr></table></figure>
 
+
+
 <p>查看列表</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">helm <span class="hljs-keyword">search</span> repo <span class="hljs-keyword">stable</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">helm search repo stable<br></code></pre></td></tr></table></figure>
+
+
 
 <p>查看版本</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">helm version<br></code></pre></td></tr></table></figure>
+
+
 
 <p>输出</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex">version.BuildInfo&#123;Version:&quot;v3.5.2&quot;, GitCommit:&quot;167aac70832d3a384f65f9745335e9fb40169dc2&quot;, GitTreeState:&quot;dirty&quot;, GoVersion:&quot;go1.15.7&quot;&#125;<br></code></pre></td></tr></table></figure>
 
 
-<h1 id="helm命令"><a href="#helm命令" class="headerlink" title="helm命令"></a>helm命令</h1><h2 id="Charts"><a href="#Charts" class="headerlink" title="Charts"></a>Charts</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql">helm <span class="hljs-keyword">search</span> 查找可用的Charts<br>helm inspect 查看指定Chart的基本信息<br>helm install 根据指定的Chart 部署一个<span class="hljs-keyword">Release</span>到K8s<br>helm <span class="hljs-keyword">create</span> 创建自己的Chart<br>helm package 打包Chart，一般是一个压缩包文件<br></code></pre></td></tr></table></figure>
+
+<h1 id="helm命令"><a href="#helm命令" class="headerlink" title="helm命令"></a>helm命令</h1><h2 id="Charts"><a href="#Charts" class="headerlink" title="Charts"></a>Charts</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">helm search 查找可用的Charts<br>helm inspect 查看指定Chart的基本信息<br>helm install 根据指定的Chart 部署一个Release到K8s<br>helm create 创建自己的Chart<br>helm package 打包Chart，一般是一个压缩包文件<br></code></pre></td></tr></table></figure>
 
 
-<h2 id="release"><a href="#release" class="headerlink" title="release"></a>release</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql">helm list 列出已经部署的<span class="hljs-keyword">Release</span><br>helm <span class="hljs-keyword">delete</span> [<span class="hljs-keyword">RELEASE</span>] 删除一个Release. 并没有物理删除， 出于审计需要，历史可查。<br>helm status [<span class="hljs-keyword">RELEASE</span>] 查看指定的<span class="hljs-keyword">Release</span>信息，即使使用helm <span class="hljs-keyword">delete</span>命令删除的Release.<br>helm upgrade 升级某个<span class="hljs-keyword">Release</span><br>helm <span class="hljs-keyword">rollback</span> [<span class="hljs-keyword">RELEASE</span>] [REVISION] 回滚<span class="hljs-keyword">Release</span>到指定发布版本<br>helm <span class="hljs-keyword">get</span> <span class="hljs-keyword">values</span> [<span class="hljs-keyword">RELEASE</span>] 查看<span class="hljs-keyword">Release</span>的配置文件值<br>helm ls –deleted 列出已经删除的<span class="hljs-keyword">Release</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="release"><a href="#release" class="headerlink" title="release"></a>release</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plain">helm list 列出已经部署的Release<br>helm delete [RELEASE] 删除一个Release. 并没有物理删除， 出于审计需要，历史可查。<br>helm status [RELEASE] 查看指定的Release信息，即使使用helm delete命令删除的Release.<br>helm upgrade 升级某个Release<br>helm rollback [RELEASE] [REVISION] 回滚Release到指定发布版本<br>helm get values [RELEASE] 查看Release的配置文件值<br>helm ls –deleted 列出已经删除的Release<br></code></pre></td></tr></table></figure>
 
 
-<h2 id="repo"><a href="#repo" class="headerlink" title="repo"></a>repo</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">helm repo list<br>helm repo add <span class="hljs-selector-attr">[RepoName]</span> <span class="hljs-selector-attr">[RepoUrl]</span><br>helm repo update<br></code></pre></td></tr></table></figure>
+
+<h2 id="repo"><a href="#repo" class="headerlink" title="repo"></a>repo</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">helm repo list<br>helm repo add [RepoName] [RepoUrl]<br>helm repo update<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://helm.sh/zh/docs/intro/quickstart/">快速开始</a><br><a target="_blank" rel="noopener" href="https://www.orchome.com/1910">安装教程</a></p>
@@ -402,13 +402,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/Kubernetes/" class="category-chain-item">Kubernetes</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/Kubernetes/" class="category-chain-item">Kubernetes</a>
+  
+  
+
   
 
   
@@ -941,6 +948,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

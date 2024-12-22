@@ -168,18 +168,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -342,20 +330,23 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1717819338502-5b98bcb9-b9e9-4211-8f96-de7f9186dd2b.png#averageHue=%23fdfdfc&clientId=u6bdafc40-3869-4&from=paste&height=273&id=uef363136&originHeight=546&originWidth=1288&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=48594&status=done&style=none&taskId=u85248e58-c16b-485b-8e12-3bf444a5f81&title=&width=644" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1717819338502-5b98bcb9-b9e9-4211-8f96-de7f9186dd2b.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>近期因为监管原因，国内网络无法拉取dockerhub镜像，而且各大高校和厂商的镜像加速地址也相继下线，导致直接使用dockerhub镜像的服务都无法拉取，所以需要将dockerhub上的镜像都迁移到阿里云容器镜像服务中。</p>
 <p>在镜像仓库中我们有的进行是多平台架构的，而使用docker进行直接拉取的话只能指定单个容器架构，这样子的话得想要迁移全部就变得很麻烦。</p>
 <p>在同事的推荐下使用了skopeo，效果很不错，在这里记录一下使用的一些记录。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="mac下安装"><a href="#mac下安装" class="headerlink" title="mac下安装"></a>mac下安装</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span>skopoe<br></code></pre></td></tr></table></figure>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="mac下安装"><a href="#mac下安装" class="headerlink" title="mac下安装"></a>mac下安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">brew install skopoe<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><blockquote>
 <p>类似docker login</p>
 </blockquote>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">skopeo login xx-hangzhou-registry<span class="hljs-selector-class">.cn-hangzhou</span><span class="hljs-selector-class">.cr</span><span class="hljs-selector-class">.aliyuncs</span><span class="hljs-selector-class">.com</span> <span class="hljs-attr">--username</span>=xx <span class="hljs-attr">--password</span>=xx<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">skopeo login xx-hangzhou-registry.cn-hangzhou.cr.aliyuncs.com --username=xx --password=xx<br></code></pre></td></tr></table></figure>
 
 
-<h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">skopeo</span> copy docker://golang:<span class="hljs-number">1</span>.<span class="hljs-number">18</span>.<span class="hljs-number">10</span>-alpine3.<span class="hljs-number">17</span> docker://xx-hangzhou-registry.cn-hangzhou.cr.aliyuncs.com/xx/golang:<span class="hljs-number">1</span>.<span class="hljs-number">18</span>.<span class="hljs-number">10</span>-alpine3.<span class="hljs-number">17</span> --multi-arch=<span class="hljs-literal">all</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">skopeo copy docker://golang:1.18.10-alpine3.17 docker://xx-hangzhou-registry.cn-hangzhou.cr.aliyuncs.com/xx/golang:1.18.10-alpine3.17 --multi-arch=all<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><ol>
@@ -378,13 +369,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/%E5%AE%B9%E5%99%A8%E5%BC%80%E5%8F%91/" class="category-chain-item">容器开发</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/%E5%AE%B9%E5%99%A8%E5%BC%80%E5%8F%91/" class="category-chain-item">容器开发</a>
+  
+  
+
   
 
   
@@ -447,6 +445,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/07/17/yuque/MySQL%E8%BF%81%E7%A7%BB%E6%96%B9%E6%A1%88%E7%9A%84%E6%8E%A2%E7%B4%A2%E4%B8%8E%E8%90%BD%E5%9C%B0/" title="MySQL迁移方案的探索与落地">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL迁移方案的探索与落地</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -927,6 +931,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

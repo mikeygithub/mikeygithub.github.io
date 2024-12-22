@@ -17,12 +17,12 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="背景函数式接口为 lambda 表达式和方法引用提供目标类型。每个函数式接口都有一个抽象方法，称为该函数式接口的函数式方法，lambda 表达式的参数和返回类型与之匹配或适应。 Predicate 谓词是根据其变量的值可能为真或为假的陈述。它可以被认为是一个返回真或假值的函数。  123456789101112131415161718192021public class PredicateDem">
+    <meta name="description" content="背景函数式接口为 lambda 表达式和方法引用提供目标类型。每个函数式接口都有一个抽象方法，称为该函数式接口的函数式方法，lambda 表达式的参数和返回类型与之匹配或适应。  Predicate 谓词是根据其变量的值可能为真或为假的陈述。它可以被认为是一个返回真或假值的函数。  123456789101112131415161718192021public class PredicateDe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 8 中Consumer, Supplier, Predicate and Function的应用">
 <meta property="og:url" content="https://mikeygithub.github.io/2021/08/28/yuque/%E7%AC%94%E8%AE%B0%E7%AF%87-Java%20lambda%E7%9A%84%E5%BA%94%E7%94%A8/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="背景函数式接口为 lambda 表达式和方法引用提供目标类型。每个函数式接口都有一个抽象方法，称为该函数式接口的函数式方法，lambda 表达式的参数和返回类型与之匹配或适应。 Predicate 谓词是根据其变量的值可能为真或为假的陈述。它可以被认为是一个返回真或假值的函数。  123456789101112131415161718192021public class PredicateDem">
+<meta property="og:description" content="背景函数式接口为 lambda 表达式和方法引用提供目标类型。每个函数式接口都有一个抽象方法，称为该函数式接口的函数式方法，lambda 表达式的参数和返回类型与之匹配或适应。  Predicate 谓词是根据其变量的值可能为真或为假的陈述。它可以被认为是一个返回真或假值的函数。  123456789101112131415161718192021public class PredicateDe">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1630204664981-057dcdd3-2923-4c08-8718-7484c9db46a4.png">
 <meta property="article:published_time" content="2021-08-28T09:24:22.000Z">
@@ -160,18 +160,6 @@
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
               </a>
             </li>
           
@@ -343,8 +331,9 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1630204664981-057dcdd3-2923-4c08-8718-7484c9db46a4.png#clientId=ueb0f34cf-ba2c-4&from=paste&height=480&id=u91635248&originHeight=480&originWidth=960&originalType=binary%E2%88%B6=1&size=270679&status=done&style=none&taskId=u148b40e2-3632-4b23-9539-6261deff54c&width=960" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>函数式接口为 lambda 表达式和方法引用提供目标类型。每个函数式接口都有一个抽象方法，称为该函数式接口的函数式方法，lambda 表达式的参数和返回类型与之匹配或适应。<br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1630163657124-e595b7bb-5b87-4e01-a5e2-ef126a7aa25c.png#clientId=uc6cdb90a-f32f-4&from=paste&height=447&id=ufd667312&originHeight=447&originWidth=768&originalType=binary%E2%88%B6=1&size=77324&status=done&style=none&taskId=ud1ecb9b5-6b47-4ff8-b060-d24448b7903&width=768" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1630204664981-057dcdd3-2923-4c08-8718-7484c9db46a4.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>函数式接口为 lambda 表达式和方法引用提供目标类型。每个函数式接口都有一个抽象方法，称为该函数式接口的函数式方法，lambda 表达式的参数和返回类型与之匹配或适应。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1630163657124-e595b7bb-5b87-4e01-a5e2-ef126a7aa25c.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="Predicate"><a href="#Predicate" class="headerlink" title="Predicate"></a>Predicate</h1><blockquote>
 <p>谓词是根据其变量的值可能为真或为假的陈述。它可以被认为是一个返回真或假值的函数。</p>
 </blockquote>
@@ -364,6 +353,9 @@
 <p>供应商(Supplier)接口是一个面向供应的接口，其实就是一个容器，可以用来存储数据，然后其他方法也可以使用这样的接口。</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SupplierDemo</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">//使用接口实现方法</span><br>        Supplier&lt;Integer&gt; supplier = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Supplier</span>&lt;Integer&gt;() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> Integer <span class="hljs-title function_">get</span><span class="hljs-params">()</span> &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>().nextInt();<br>            &#125;<br>        &#125;;<br><br>        System.out.println(supplier.get());<br><br>        <span class="hljs-comment">//使用lambda</span><br>        supplier = () -&gt; <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>().nextInt();<br>        System.out.println(supplier.get());<br><br>        <span class="hljs-comment">//使用方法引用</span><br>        Supplier&lt;Double&gt; methodSupplier = Math::random;<br>        System.out.println(methodSupplier.get());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
 
 
 <p>除了上面使用的Function接口外，还可以使用下面的Function接口。IntFunction、DoubleFunction、LongFunction、ToIntFunction、ToDoubleFunction、DoubleToIntFunction等用法同上。</p>
@@ -955,6 +947,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

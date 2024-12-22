@@ -168,18 +168,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -342,12 +330,12 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1680146984311-b24d35fa-e9de-4ef2-889f-910d33dfe034.png#averageHue=%23d2d2d2&clientId=uad48ba6d-a17a-4&from=paste&height=237&id=u7c15b412&originHeight=1004&originWidth=1906&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=2337552&status=done&style=none&taskId=uec390247-3ccd-42cf-817b-fb6023cff20&title=&width=449" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1680146984311-b24d35fa-e9de-4ef2-889f-910d33dfe034.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
 <p>最近在项目中遇到了一个关于时间的问题，对这方面了解不是很多，很多概念都比较模糊，趁着这个机会记录一下。</p>
 </blockquote>
 <p>项目主要的功能是将存储在美国数据库的欧洲站和英国站的数据订单进行缺失检查补充到欧洲和英国神X数据分析平台，原有的项目是只有美国站且<strong>订单存储的时间也是美国太平洋时间</strong>（US/Pacific），欧洲站和英国站的时间订单也是按照美国太平洋时间存储在数据库中，且我们的调度是按照天来调度，因此需要等数据分析平台统计完数据我们才能查询。</p>
-<p>运营同学的要求是统计的是每个站点本地时间的数据量，前面我们提过不同地区的订单量在我们库里统一是美国太平洋时间（历史缘故），基于上面的实际情况，由于时区的不同查询的范围也不一致，所以我们查询的范围也是不一样的，以欧洲柏林时间为例（Europe/Berlin），因为要想获取站点当天完整数据，那么该站点当天时间必须已经结束（德国柏林是东一区时区，北京的当地时间是东八区时区，北京时间比柏林时间快6小时，所以我们至少要北京时间凌晨六点才能进行调度）。</p>
+<p>运营同学的要求是统计的是每个站点本地时间的数据量，前面我们提过不同地区的订单量在我们库里统一是美国太平洋时间（历史缘故），基于上面的实际情况，由于时区的不同查询的范围也不一致，所以我们查询的范围也是不一样的，以欧洲柏林时间为例（Europe/Berlin），因为要想获取站点当天完整数据，那么该站点当天时间必须已经结束（<font style="color:rgb(51, 51, 51);">德国柏林是东一区时区，北京的当地时间是东八区时区，北京时间比柏林时间快6小时，所以我们至少要北京时间凌晨六点才能进行调度</font>）。</p>
 <p>我们在查询的时候要把指定站点查询的时间范围转为<strong>美国太平洋时间</strong>（US/Pacific）去查询才匹配到准确的范围数据。</p>
 <h1 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h1><blockquote>
 <p>时间是一个用于测量和记录事件和持续时间的概念。通常，时间被描述为一种线性的进展，不断向前移动，它可以被划分为不同的单位，如秒、分钟、小时、天、周、月和年等。时间是我们生活中不可避免的一部分，它影响着我们的日常活动和决策，也是物理学、天文学、历史学和其他许多学科的基础。</p>
@@ -356,7 +344,8 @@
 <h1 id="本地时间"><a href="#本地时间" class="headerlink" title="本地时间"></a>本地时间</h1><blockquote>
 <p>本地时间是指一个地区内使用的时间标准，通常是该地区所在的时区的标准时间。每个时区的本地时间都有所不同，因为每个时区的经度不同。例如，在中国，东部标准时间（GMT+8）是中国的本地时间标准，而在美国，东部标准时间（GMT-5）是美国东部地区的本地时间标准。</p>
 </blockquote>
-<p>为什么全世界不统一使用同一个时间呢 ？虽然使用一个全球通用的时间标准可能会方便很多，但实际上全球不采用同一个时间标准是由历史和实际因素决定的。<br>首先，人们根据地球自转的周期来测量时间，但由于地球并非完全规则的球体，其自转周期会受到一些微小的变化。因此，世界各地使用的时间标准是基于当地的地理位置和历史传统而制定的，以便与地球自转保持同步。例如，中国有5个不同的时区，每个时区的标准时间都与该地区的太阳高度角相关联，以确保当地时间与太阳高度角的变化保持一致。</p>
+<p>为什么全世界不统一使用同一个时间呢 ？虽然使用一个全球通用的时间标准可能会方便很多，但实际上全球不采用同一个时间标准是由历史和实际因素决定的。</p>
+<p>首先，人们根据地球自转的周期来测量时间，但由于地球并非完全规则的球体，其自转周期会受到一些微小的变化。因此，世界各地使用的时间标准是基于当地的地理位置和历史传统而制定的，以便与地球自转保持同步。例如，中国有5个不同的时区，每个时区的标准时间都与该地区的太阳高度角相关联，以确保当地时间与太阳高度角的变化保持一致。</p>
 <p>其次，不同国家和地区之间存在政治、文化和经济上的差异，这些差异也会影响到人们对时间的认知和使用。例如，当中国于1949年成立共和国时，它采用了北京时间作为全国统一的时间标准，这是因为北京是中国的政治和文化中心。同样，美国的东海岸和西海岸有3个小时的时间差，这是因为这两个地区的商业和文化活动具有很大的差异。</p>
 <p>最后，人们对时间的使用方式也在不断变化。例如，随着全球贸易和互联网的发展，人们需要更多地在不同的时区之间进行协调和交流。因此，国际组织已经制定了一些全球通用的时间标准，如协调世界时（UTC），以便更好地协调全球事务。</p>
 <h1 id="世界时间"><a href="#世界时间" class="headerlink" title="世界时间"></a>世界时间</h1><p>世界时间，也称为协调世界时（UTC），是一种基于原子钟的时间标准，通常用于协调跨越不同时区的国际事务和计算机网络。世界时间是通过将地球划分为24个时区，并将每个时区的时间差异纳入计算来确定的。例如，北京时间（GMT+8）比世界时间（UTC）早8个小时。在某些情况下，世界时间也被称为格林威治标准时间（GMT），这是因为在过去，格林威治天文台曾是世界时间的参考点。</p>
@@ -365,9 +354,13 @@
 <h1 id="时区"><a href="#时区" class="headerlink" title="时区"></a>时区</h1><p>时区是地球上按经度划分的区域，每个时区都有一个相对于协调世界时（UTC）的时差。时区可以用来表示本地时间，例如中国标准时间（CST）是 UTC+8，即比 UTC 时间早 8 个小时。</p>
 <p>为什么需要时区 ？</p>
 <blockquote>
-<p>需要时区的主要原因是因为地球是一个球体，而我们使用的时间标准是基于太阳的位置和地球的自转周期。由于地球的自转周期大约为24小时，因此在任何给定的时间，地球上的不同地区都会面临不同的太阳高度角和日出日落时间。<br>为了更好地协调全球事务并使不同地区的人们能够方便地协调和交流，人们需要一种统一的时间标准，即世界时间。然而，由于地球的不同地区面临不同的太阳高度角和日出日落时间，一种全球通用的时间标准并不足以满足人们的需求。因此，人们采用了将地球划分为不同的时区，并为每个时区分配一个本地时间标准的方法。<br>在每个时区内，当地的时间标准都基于当地的地理位置和历史传统而制定，以确保当地时间与太阳高度角的变化保持一致。这使得人们在协调跨越不同时区的国际事务和计算机网络时更加方便，并且有助于避免混淆和误解。因此，时区是为了更好地协调全球事务和使人们更方便地进行交流而发展出来的。</p>
+<p>需要时区的主要原因是因为地球是一个球体，而我们使用的时间标准是基于太阳的位置和地球的自转周期。由于地球的自转周期大约为24小时，因此在任何给定的时间，地球上的不同地区都会面临不同的太阳高度角和日出日落时间。</p>
+<p>为了更好地协调全球事务并使不同地区的人们能够方便地协调和交流，人们需要一种统一的时间标准，即世界时间。然而，由于地球的不同地区面临不同的太阳高度角和日出日落时间，一种全球通用的时间标准并不足以满足人们的需求。因此，人们采用了将地球划分为不同的时区，并为每个时区分配一个本地时间标准的方法。</p>
+<p>在每个时区内，当地的时间标准都基于当地的地理位置和历史传统而制定，以确保当地时间与太阳高度角的变化保持一致。这使得人们在协调跨越不同时区的国际事务和计算机网络时更加方便，并且有助于避免混淆和误解。因此，时区是为了更好地协调全球事务和使人们更方便地进行交流而发展出来的。</p>
 </blockquote>
-<p>正式的时区划分包括24个时区，每一时区由一个英文字母表示。每隔经度15°划分一个时区，有一个例外，每个时区有一条中央子午线；例如，GMT属于“z”区，因此其时间后通常添加后缀“Z”（口语中用后缀“Zulu”）<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1680256151880-09669fe6-1441-4333-870a-9ccc35909218.png#averageHue=%23dfd6ae&clientId=u19e797f2-f4db-4&from=ui&id=ub778708b&originHeight=2157&originWidth=4000&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=3102151&status=done&style=none&taskId=ucf62ae7c-f8af-4136-b296-e060abbe5bb&title=" srcset="/img/loading.gif" lazyload alt="World_Time_Zones_Map.png"><br>零时区，也称为格林威治标准时间（GMT），是地球上的一个标准时间区域，其时间标准为世界协调时间（UTC）。 零时区的经度为本初子午线，即经度0度。 零时区横跨非洲的一部分，欧洲的一部分以及大西洋的一部分。 零时区通常被用作世界时间的参考点，各个时区的时间可以通过与UTC偏差的方式表示。</p>
+<p>正式的时区划分包括24个时区，每一时区由一个英文字母表示。每隔经度15°划分一个时区，有一个例外，每个时区有一条中央子午线；例如，GMT属于“z”区，因此其时间后通常添加后缀“Z”（口语中用后缀“Zulu”）</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1680256151880-09669fe6-1441-4333-870a-9ccc35909218.png" srcset="/img/loading.gif" lazyload></p>
+<p>零时区，也称为格林威治标准时间（GMT），是地球上的一个标准时间区域，其时间标准为世界协调时间（UTC）。 零时区的经度为本初子午线，即经度0度。 零时区横跨非洲的一部分，欧洲的一部分以及大西洋的一部分。 零时区通常被用作世界时间的参考点，各个时区的时间可以通过与UTC偏差的方式表示。</p>
 <p>在 Go 语言中，使用 time 包来处理日期和时间相关的操作，该包支持多种时区标识符。下面是一些常用的时区标识符：</p>
 <ol>
 <li>“UTC”: 表示协调世界时。</li>
@@ -384,10 +377,13 @@
 <p>在计算机中通过 <code>date +%s</code> 命令返回的默认是UTC的时间戳，而非本地时间</p>
 <p>在欧洲的服务器调用</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql">[azure<span class="hljs-variable">@hybrid01</span> <span class="hljs-operator">~</span>]$ <span class="hljs-type">date</span> <span class="hljs-operator">-</span>R<br>Fri, <span class="hljs-number">31</span> Mar <span class="hljs-number">2023</span> <span class="hljs-number">11</span>:<span class="hljs-number">24</span>:<span class="hljs-number">24</span> <span class="hljs-operator">+</span><span class="hljs-number">0200</span><br>[azure<span class="hljs-variable">@hybrid01</span> <span class="hljs-operator">~</span>]$ <span class="hljs-type">date</span> <span class="hljs-operator">+</span><span class="hljs-operator">%</span>s<br><span class="hljs-number">1680254686</span><br>[azure<span class="hljs-variable">@hybrid01</span> <span class="hljs-operator">~</span>]$ <span class="hljs-type">date</span> <span class="hljs-operator">+</span><span class="hljs-operator">%</span>s<br><span class="hljs-number">1680254720</span><br>[azure<span class="hljs-variable">@hybrid01</span> <span class="hljs-operator">~</span>]$<br></code></pre></td></tr></table></figure>
+
 <p>在本地机器调用</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-type">date</span> <span class="hljs-operator">-</span>R<br>Fri, <span class="hljs-number">31</span> Mar <span class="hljs-number">2023</span> <span class="hljs-number">17</span>:<span class="hljs-number">23</span>:<span class="hljs-number">59</span> <span class="hljs-operator">+</span><span class="hljs-number">0800</span><br><span class="hljs-type">date</span> <span class="hljs-operator">+</span><span class="hljs-operator">%</span>s<br><span class="hljs-number">1680254701</span><br><span class="hljs-type">date</span> <span class="hljs-operator">+</span><span class="hljs-operator">%</span>s<br><span class="hljs-number">1680254717</span><br></code></pre></td></tr></table></figure>
 
-<h1 id="日历"><a href="#日历" class="headerlink" title="日历"></a>日历</h1><p>日历（Calendar）：日历是用来测量时间的一种工具，通常按照一定的规则将时间分为较小的单位，如天、周、月、年等。不同的文化和宗教有不同的日历系统，但大多数日历系统都是基于太阳和月亮的运动来测量时间的。<br>世界上最常用的日历系统是公历，也称为格里高利历。公历是一种太阳历，它将一年分为365天或366天（闰年），并将每个月分为几乎相等的时间段。公历起源于古罗马时期，由教皇格里高利十三世在16世纪进行改革，以取代旧的儒略历。公历已成为世界上大多数国家和地区的官方日历系统。<br>除了公历，世界上还有很多其他的日历系统，例如：</p>
+<h1 id="日历"><a href="#日历" class="headerlink" title="日历"></a>日历</h1><p>日历（Calendar）：日历是用来测量时间的一种工具，通常按照一定的规则将时间分为较小的单位，如天、周、月、年等。不同的文化和宗教有不同的日历系统，但大多数日历系统都是基于太阳和月亮的运动来测量时间的。</p>
+<p>世界上最常用的日历系统是公历，也称为格里高利历。公历是一种太阳历，它将一年分为365天或366天（闰年），并将每个月分为几乎相等的时间段。公历起源于古罗马时期，由教皇格里高利十三世在16世纪进行改革，以取代旧的儒略历。公历已成为世界上大多数国家和地区的官方日历系统。</p>
+<p>除了公历，世界上还有很多其他的日历系统，例如：</p>
 <ul>
 <li>阴历：一种基于月亮运动的日历系统，主要在东亚和中东地区使用，如中国农历、伊斯兰历等。</li>
 <li>犹太历：一种基于太阳和月亮运动的日历系统，主要用于犹太教的宗教和文化活动。</li>
@@ -396,27 +392,37 @@
 <p>不同的日历系统可能会在日期、节假日、宗教仪式等方面存在差异。</p>
 <h1 id="时间格式化"><a href="#时间格式化" class="headerlink" title="时间格式化"></a>时间格式化</h1><p>时间格式化（Time Formatting）：时间格式化是将时间转换为字符串的过程，通常用来将时间以一定的格式输出或输入。在计算机中，常用的时间格式化方式包括 RFC3339 格式、ISO 8601 格式、Unix 时间戳等。</p>
 <ul>
-<li><p>RFC3339 格式：RFC3339 是一种互联网标准化的时间格式，它的完整格式如下：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable constant_">YYYY</span>-<span class="hljs-variable constant_">MM</span>-<span class="hljs-variable constant_">DDTHH</span><span class="hljs-symbol">:mm</span><span class="hljs-symbol">:ss</span>.ssssssZ<br></code></pre></td></tr></table></figure>
-<p>其中，YYYY 表示年份，MM 表示月份，DD 表示日期，HH 表示小时，mm 表示分钟，ss 表示秒数，ss.ssssss 表示毫秒数（可选），Z 表示时区。<br>例如，2023 年 4 月 1 日下午 12 点 30 分 45 秒的时间数据在 RFC3339 格式下表示为：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">2023</span>-<span class="hljs-number">04</span>-<span class="hljs-number">01</span>T12:<span class="hljs-number">30</span>:<span class="hljs-number">45</span>Z<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>ISO 8601 格式：ISO 8601 是国际标准化组织发布的时间格式标准，它的完整格式与 RFC3339 相同，如下所示：</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable constant_">YYYY</span>-<span class="hljs-variable constant_">MM</span>-<span class="hljs-variable constant_">DDTHH</span><span class="hljs-symbol">:mm</span><span class="hljs-symbol">:ss</span>.ssssssZ<br></code></pre></td></tr></table></figure>
-<p>其中，YYYY 表示年份，MM 表示月份，DD 表示日期，HH 表示小时，mm 表示分钟，ss 表示秒数，ss.ssssss 表示毫秒数（可选），Z 表示时区。<br>ISO 8601 格式和 RFC3339 格式在表示时间数据时基本一致，通常在互联网应用中可以互换使用。</p>
-</li>
-<li><p>Unix 时间戳：Unix 时间戳是一种表示时间的方式，它表示自 1970 年 1 月 1 日 00:00:00 UTC 起经过的秒数。Unix 时间戳通常是一个整数，例如，2023 年 4 月 1 日下午 12 点 30 分 45 秒的时间数据的 Unix 时间戳表示为：</p>
-<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns"><span class="hljs-number">1680569445</span><br></code></pre></td></tr></table></figure>
-<p>Unix 时间戳通常用于在计算机系统中进行时间运算和时间戳比较等操作。不同的编程语言和框架通常都提供了各自的时间格式化方法和函数，开发者可以根据实际需求选择合适的时间格式化方式进行处理。</p>
-</li>
+<li>RFC3339 格式：RFC3339 是一种互联网标准化的时间格式，它的完整格式如下：</li>
 </ul>
-<h1 id="夏令时"><a href="#夏令时" class="headerlink" title="夏令时"></a>夏令时</h1><p>夏令时（Daylight Saving Time，DST）是一种节约能源的措施，通常在夏季将时间向前调整1小时，以利用更多的日光时间。夏令时的使用时间和具体实行方式因国家而异，但通常是在每年的3月或4月开始，然后在10月或11月结束，因为在这些月份时太阳照射时间较长，可以节约更多的能源。<br>夏令时的起源可以追溯到1916年，当时德国为了节省煤炭资源，在夏季将时间向前调整1小时。这个想法很快被其他国家效仿，例如英国、法国和美国等国家。在美国，夏令时在20世纪初就开始使用，但是在各州的实施时间和方式都不同。在1975年，美国通过了一项联邦法律规定，统一了全国范围内夏令时的开始和结束时间，使其更加标准化。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">YYYY-MM-DDTHH:mm:ss.ssssssZ<br></code></pre></td></tr></table></figure>
+
+<p>其中，YYYY 表示年份，MM 表示月份，DD 表示日期，HH 表示小时，mm 表示分钟，ss 表示秒数，ss.ssssss 表示毫秒数（可选），Z 表示时区。</p>
+<p>例如，2023 年 4 月 1 日下午 12 点 30 分 45 秒的时间数据在 RFC3339 格式下表示为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">2023-04-01T12:30:45Z<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>ISO 8601 格式：ISO 8601 是国际标准化组织发布的时间格式标准，它的完整格式与 RFC3339 相同，如下所示：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">YYYY-MM-DDTHH:mm:ss.ssssssZ<br></code></pre></td></tr></table></figure>
+
+<p>其中，YYYY 表示年份，MM 表示月份，DD 表示日期，HH 表示小时，mm 表示分钟，ss 表示秒数，ss.ssssss 表示毫秒数（可选），Z 表示时区。</p>
+<p>ISO 8601 格式和 RFC3339 格式在表示时间数据时基本一致，通常在互联网应用中可以互换使用。</p>
+<ul>
+<li>Unix 时间戳：Unix 时间戳是一种表示时间的方式，它表示自 1970 年 1 月 1 日 00:00:00 UTC 起经过的秒数。Unix 时间戳通常是一个整数，例如，2023 年 4 月 1 日下午 12 点 30 分 45 秒的时间数据的 Unix 时间戳表示为：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">1680569445<br></code></pre></td></tr></table></figure>
+
+<p>Unix 时间戳通常用于在计算机系统中进行时间运算和时间戳比较等操作。不同的编程语言和框架通常都提供了各自的时间格式化方法和函数，开发者可以根据实际需求选择合适的时间格式化方式进行处理。</p>
+<h1 id="夏令时"><a href="#夏令时" class="headerlink" title="夏令时"></a>夏令时</h1><p>夏令时（Daylight Saving Time，DST）是一种节约能源的措施，通常在夏季将时间向前调整1小时，以利用更多的日光时间。夏令时的使用时间和具体实行方式因国家而异，但通常是在每年的3月或4月开始，然后在10月或11月结束，因为在这些月份时太阳照射时间较长，可以节约更多的能源。</p>
+<p>夏令时的起源可以追溯到1916年，当时德国为了节省煤炭资源，在夏季将时间向前调整1小时。这个想法很快被其他国家效仿，例如英国、法国和美国等国家。在美国，夏令时在20世纪初就开始使用，但是在各州的实施时间和方式都不同。在1975年，美国通过了一项联邦法律规定，统一了全国范围内夏令时的开始和结束时间，使其更加标准化。</p>
 <p>夏令时的使用有一些争议。一方面，夏令时可以节约能源，减少能源消耗，因为人们可以利用更多的日光时间进行户外活动，例如开车、野餐和运动等。此外，夏令时还可以提高安全性，因为在晚间更多的时间保持明亮可以减少犯罪的机会。</p>
-<p>另一方面，夏令时也有一些负面影响。例如，一些人可能会感觉失眠，因为他们的生物钟需要一段时间来适应新的时间表。此外，夏令时也可能会导致一些生产效率下降，因为调整时间可能会对一些人的生产效率产生影响，例如对那些需要在固定时间上班的人员和在不同时区工作的人员等。<br>夏令时的使用在全球范围内都存在，但实际上其效果仍存在争议。</p>
+<p>另一方面，夏令时也有一些负面影响。例如，一些人可能会感觉失眠，因为他们的生物钟需要一段时间来适应新的时间表。此外，夏令时也可能会导致一些生产效率下降，因为调整时间可能会对一些人的生产效率产生影响，例如对那些需要在固定时间上班的人员和在不同时区工作的人员等。</p>
+<p>夏令时的使用在全球范围内都存在，但实际上其效果仍存在争议。</p>
 <h1 id="数据库中的时间"><a href="#数据库中的时间" class="headerlink" title="数据库中的时间"></a>数据库中的时间</h1><p>以MySQL为例，MySQL在存储时间时不会记录时区信息，它只存储日期和时间的值。当您从MySQL中检索时间字段时，MySQL将返回一个表示日期和时间的值，但它并不知道这个值所代表的时区。</p>
 <p>因此，如果您需要处理时区，您需要自己进行时区转换。您可以使用Go语言中的time包来处理时区，或者使用一些ORM库（如GORM）来自动处理时区转换。在处理时区时，您需要注意，如果MySQL中存储的时间是本地时间，那么在进行时区转换时可能会出现问题。</p>
 <p>为了避免时区转换问题，建议在MySQL中存储UTC时间，这样就可以在任何时区下进行正确的时区转换。您可以在创建MySQL表时使用DATETIME或TIMESTAMP类型来存储时间字段。需要注意的是，TIMESTAMP类型支持的范围比DATETIME类型小，但它会自动转换为UTC时间进行存储。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;time&quot;</span><br><br>    <span class="hljs-string">&quot;gorm.io/driver/mysql&quot;</span><br>    <span class="hljs-string">&quot;gorm.io/gorm&quot;</span><br>)<br><br>db, err := gorm.Open(mysql.Open(<span class="hljs-string">&quot;user:password@tcp(127.0.0.1:3306)/database?charset=utf8mb4&amp;parseTime=True&amp;loc=UTC&quot;</span>), &amp;gorm.Config&#123;&#125;)<br></code></pre></td></tr></table></figure>
+
 <p>在这里，我们将Loc设置为UTC，以便将数据库中的时间字段转换为UTC时间。这样，在从数据库中检索时间字段时，GORM会自动将其转换为UTC时间，并将其存储在Go语言中的time.Time类型中。</p>
 <blockquote>
 <p>在项目中如果涉及到多时区时间的系统，个人推荐全部使用UTC统一存储，避免来回转换</p>
@@ -987,6 +993,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

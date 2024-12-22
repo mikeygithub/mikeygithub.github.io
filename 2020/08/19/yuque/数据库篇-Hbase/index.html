@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,18 +331,18 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657548696208-241a6100-86be-4924-bce9-e06da1f1c50a.png#clientId=ud1789b8b-b529-4&from=markdown&id=BphcD&originHeight=287&originWidth=550&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=121958&status=done&style=none&taskId=uc83fc9b4-d6e1-4295-bd63-adb87615e2c&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657548696208-241a6100-86be-4924-bce9-e06da1f1c50a.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>base 是分布式、面向列的开源数据库(其实准确的说是面向列族)。HDFS 为 Hbase 提供可靠的底层数据存储服务,MapReduce 为 Hbase 提供高性能的计算能力,Zookeeper 为 Hbase 提供稳定服务和 Failover 机制,因此我们说 Hbase 是一个通过大量廉价的机器解决海量数据的高速存储和读取的分布式数据库解决方案。</p>
 <h1 id="列式存储"><a href="#列式存储" class="headerlink" title="列式存储"></a>列式存储</h1><p>列方式所带来的重要好处之一就是,由于查询中的选择规则是通过列来定义的,因此整个数据库是自动索引化的。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/column-based.png#id=nsweq&originHeight=407&originWidth=576&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/column-based.png" srcset="/img/loading.gif" lazyload></p>
 <p>这里的列式存储其实说的是列族存储,Hbase 是根据列族来存储数据的。列族下面可以有非常多的列,列族在创建表的时候就必须指定。为了加深对 Hbase 列族的理解,下面是一个简单的关系型数据库的表和 Hbase 数据库的表:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-table.png#id=RHr9o&originHeight=234&originWidth=497&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-table.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="Hbase-核心概念"><a href="#Hbase-核心概念" class="headerlink" title="Hbase 核心概念"></a>Hbase 核心概念</h1><h2 id="Column-Family-列族"><a href="#Column-Family-列族" class="headerlink" title="Column Family 列族"></a>Column Family 列族</h2><p>Column Family 又叫列族,Hbase 通过列族划分数据的存储,列族下面可以包含任意多的列,实现灵活的数据存取。Hbase 表的创建的时候就必须指定列族。就像关系型数据库创建的时候必须指定具体的列是一样的。Hbase 的列族不是越多越好,官方推荐的是列族最好小于或者等于 3。我们使用的场景一般是 1 个列族。</p>
 <h2 id="Rowkey-Rowkey-查询-Rowkey-范围扫描-全表扫描"><a href="#Rowkey-Rowkey-查询-Rowkey-范围扫描-全表扫描" class="headerlink" title="Rowkey( Rowkey 查询,Rowkey 范围扫描,全表扫描)"></a>Rowkey( Rowkey 查询,Rowkey 范围扫描,全表扫描)</h2><p>Rowkey 的概念和 mysql 中的主键是完全一样的,Hbase 使用 Rowkey 来唯一的区分某一行的数据。Hbase 只支持 3 中查询方式:基于 Rowkey 的单行查询,基于 Rowkey 的范围扫描,全表扫描。</p>
 <h2 id="Region-分区"><a href="#Region-分区" class="headerlink" title="Region 分区"></a>Region 分区</h2><p>Region:Region 的概念和关系型数据库的分区或者分片差不多。Hbase 会将一个大表的数据基于 Rowkey 的不同范围分配到不通的 Region 中,每个 Region 负责一定范围的数据访问和存储。这样即使是一张巨大的表,由于被切割到不通的 region,访问起来的时延也很低。</p>
 <h2 id="TimeStamp-多版本"><a href="#TimeStamp-多版本" class="headerlink" title="TimeStamp 多版本"></a>TimeStamp 多版本</h2><p>TimeStamp 是实现 Hbase 多版本的关键。在 Hbase 中使用不同的 timestame 来标识相同rowkey 行对应的不通版本的数据。在写入数据的时候,如果用户没有指定对应的timestamp,Hbase 会自动添加一个 timestamp,timestamp 和服务器时间保持一致。在Hbase 中,相同 rowkey 的数据按照 timestamp 倒序排列。默认查询的是最新的版本,用户可同指定 timestamp 的值来读取旧版本的数据。</p>
 <h1 id="Hbase-核心架构"><a href="#Hbase-核心架构" class="headerlink" title="Hbase 核心架构"></a>Hbase 核心架构</h1><p>Hbase 是由 Client、Zookeeper、Master、HRegionServer、HDFS 等几个组建组成。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-core.png#id=LGroO&originHeight=717&originWidth=1440&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-core.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="Client"><a href="#Client" class="headerlink" title="Client:"></a>Client:</h3><p>Client 包含了访问 Hbase 的接口,另外 Client 还维护了对应的 cache 来加速 Hbase 的访问,比如 cache 的.META.元数据的信息。</p>
 <h3 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper:"></a>Zookeeper:</h3><p>Hbase 通过 Zookeeper 来做 master 的高可用、RegionServer 的监控、元数据的入口以及集群配置的维护等工作。具体工作如下:</p>
 <p>1.通过 Zoopkeeper 来保证集群中只有 1 个 master 在运行,如果 master 异常,会通过竞争机制产生新的 master 提供服务<br>2.通过 Zoopkeeper 来监控 RegionServer 的状态,当 RegionSevrer 有异常的时候,通过回调的形式通知 Master RegionServer 上下限的信息<br>3.通过 Zoopkeeper 存储元数据的统一入口地址。</p>
@@ -373,12 +361,12 @@
 <li> 负责 Storefile 的合并工作 </li>
 </ol>
 <h3 id="Region-寻址方式-通过-zookeeper-META"><a href="#Region-寻址方式-通过-zookeeper-META" class="headerlink" title="Region 寻址方式(通过 zookeeper .META)"></a>Region 寻址方式(通过 zookeeper .META)</h3><p>第 1 步:Client 请求 ZK 获取.META.所在的 RegionServer 的地址。<br>第 2 步:Client 请求.META.所在的 RegionServer 获取访问数据所在的 RegionServer 地址,client 会将.META.的相关信息 cache 下来,以便下一次快速访问。<br>第 3 步:Client 请求数据所在的 RegionServer,获取所需要的数据。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-region.png#id=HdIbW&originHeight=260&originWidth=604&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-region.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h3><p>HDFS 为 Hbase 提供最终的底层数据存储服务,同时为 Hbase 提供高可用(Hlog 存储在HDFS)的支持。</p>
 <h1 id="Hbase-的写逻辑"><a href="#Hbase-的写逻辑" class="headerlink" title="Hbase 的写逻辑"></a>Hbase 的写逻辑</h1><blockquote>
 <p>Hbase 的写入流程</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-write.png#id=yLp9k&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-write.png" srcset="/img/loading.gif" lazyload></p>
 <p>从上图可以看出氛围 3 步骤:</p>
 <p>获取 RegionServer</p>
 <blockquote>
@@ -401,8 +389,8 @@
 <h3 id="手工触发"><a href="#手工触发" class="headerlink" title="手工触发"></a>手工触发</h3><p>4.可以通过 hbase shell 或者 java api 手工触发 flush 的操作。</p>
 <h3 id="关闭-RegionServer-触发"><a href="#关闭-RegionServer-触发" class="headerlink" title="关闭 RegionServer 触发"></a>关闭 RegionServer 触发</h3><p>5.在正常关闭 RegionServer 会触发刷盘的操作,全部数据刷盘后就不需要再使用 Hlog 恢复数据。</p>
 <h3 id="Region-使用-HLOG-恢复完数据后触发"><a href="#Region-使用-HLOG-恢复完数据后触发" class="headerlink" title="Region 使用 HLOG 恢复完数据后触发"></a>Region 使用 HLOG 恢复完数据后触发</h3><p>6.当 RegionServer 出现故障的时候,其上面的 Region 会迁移到其他正常的RegionServer 上,在恢复完 Region 的数据后,会触发刷盘,当刷盘完成后才会提供给业务访问。</p>
-<h1 id="HBase-vs-Cassandra"><a href="#HBase-vs-Cassandra" class="headerlink" title="HBase vs Cassandra"></a>HBase vs Cassandra</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-vs-cassandra-1.png.png#id=MyoSD&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-vs-cassandra-2.png.png#id=gN3TT&originHeight=241&originWidth=790&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="HBase-vs-Cassandra"><a href="#HBase-vs-Cassandra" class="headerlink" title="HBase vs Cassandra"></a>HBase vs Cassandra</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-vs-cassandra-1.png.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/hbase-vs-cassandra-2.png.png" srcset="/img/loading.gif" lazyload></p>
 
               
             </div>
@@ -420,8 +408,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%84/" class="category-chain-item">数据库组</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%84/" class="category-chain-item">数据库组</a>
+  
+  
+
   
 
       </span>
@@ -952,6 +947,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

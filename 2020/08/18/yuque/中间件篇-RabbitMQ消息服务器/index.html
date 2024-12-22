@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657548963126-b755b769-48ef-44dc-b7f8-a3a3b3efc5b5.png#clientId=ua805a9dc-78ee-4&from=markdown&id=MybNV&originHeight=337&originWidth=1211&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=u0a9882e7-28d1-41ae-8e35-7ae78431d0e&title=" srcset="/img/loading.gif" lazyload></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657548963126-b755b769-48ef-44dc-b7f8-a3a3b3efc5b5.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>RabbitMQ 是一个由 Erlang 语言开发的 AMQP 的开源实现。</p>
 <p>AMQP :Advanced Message Queue,高级消息队列协议。它是应用层协议的一个开放标准,为面向消息的中间件设计,基于此协议的客户端与消息中间件可传递消息,并不受产品、开发语言等条件的限制。</p>
 <p>RabbitMQ 最初起源于金融系统,用于在分布式系统中存储转发消息,在易用性、扩展性、高可用性等方面表现不俗。具体特点包括:</p>
@@ -358,7 +346,7 @@
 <p>7.管理界面(Management UI):RabbitMQ 提供了一个易用的用户界面,使得用户可以监控和管理消息 Broker 的许多方面。</p>
 <p>8.跟踪机制(Tracing):如果消息异常,RabbitMQ 提供了消息跟踪机制,使用者可以找出发生了什么。</p>
 <p>9.插件机制(Plugin System):RabbitMQ 提供了许多插件,来从多方面进行扩展,也可以编写自己的插件。</p>
-<h1 id="RabbitMQ-架构"><a href="#RabbitMQ-架构" class="headerlink" title="RabbitMQ 架构"></a>RabbitMQ 架构</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/rabbitmq-sturts.png#id=aN41X&originHeight=158&originWidth=554&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="RabbitMQ-架构"><a href="#RabbitMQ-架构" class="headerlink" title="RabbitMQ 架构"></a>RabbitMQ 架构</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/rabbitmq-sturts.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="Message"><a href="#Message" class="headerlink" title="Message"></a>Message</h1><p>消息,消息是不具名的,它由消息头和消息体组成。消息体是不透明的,而消息头则由一系列的可选属性组成,这些属性包括 routing-key(路由键)、priority(相对于其他消息的优先权)、delivery-mode(指出该消息可能需要持久性存储)等。</p>
 <h1 id="Publisher"><a href="#Publisher" class="headerlink" title="Publisher"></a>Publisher</h1><p>1.消息的生产者,也是一个向交换器发布消息的客户端应用程序。</p>
 <h1 id="Exchange-将消息路由给队列"><a href="#Exchange-将消息路由给队列" class="headerlink" title="Exchange(将消息路由给队列 )"></a>Exchange(将消息路由给队列 )</h1><p>2.交换器,用来接收生产者发送的消息并将这些消息路由给服务器中的队列。</p>
@@ -373,11 +361,11 @@
 <h1 id="Broker"><a href="#Broker" class="headerlink" title="Broker"></a>Broker</h1><p>9.表示消息队列服务器实体。</p>
 <h1 id="Exchange-类型"><a href="#Exchange-类型" class="headerlink" title="Exchange 类型"></a>Exchange 类型</h1><p>Exchange 分发消息时根据类型的不同分发策略有区别,目前共四种类型:direct、fanout、topic、headers 。headers 匹配 AMQP 消息的 header 而不是路由键,此外 headers 交换器和direct 交换器完全一致,但性能差很多,目前几乎用不到了,所以直接看另外三种类型:</p>
 <h1 id="Direct-键-routing-key-分布"><a href="#Direct-键-routing-key-分布" class="headerlink" title="Direct 键(routing key)分布:"></a>Direct 键(routing key)分布:</h1><p>1.Direct:消息中的路由键(routing key)如果和 Binding 中的 binding key 一致,交换器就将消息发到对应的队列中。它是完全匹配、单播的模式。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/direct-exchange.png#id=udeKo&originHeight=298&originWidth=385&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/direct-exchange.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="Fanout-广播分发"><a href="#Fanout-广播分发" class="headerlink" title="Fanout(广播分发)"></a>Fanout(广播分发)</h1><p>2.Fanout:每个发到 fanout 类型交换器的消息都会分到所有绑定的队列上去。很像子网广播,每台子网内的主机都获得了一份复制的消息。fanout 类型转发消息是最快的。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/fanout-exchange.png#id=yV0R0&originHeight=317&originWidth=463&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/fanout-exchange.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="topic-交换器-模式匹配"><a href="#topic-交换器-模式匹配" class="headerlink" title="topic 交换器(模式匹配)"></a>topic 交换器(模式匹配)</h1><p>3.topic 交换器:topic 交换器通过模式匹配分配消息的路由键属性,将路由键和某个模式进行匹配,此时队列需要绑定到一个模式上。它将路由键和绑定键的字符串切分成单词,这些单词之间用点隔开。它同样也会识别两个通配符:符号“#”和符号“”。#匹配 0 个或多个单词,匹配不多不少一个单词。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/topic-exchange.png#id=Jw1Zr&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/topic-exchange.png" srcset="/img/loading.gif" lazyload></p>
 
               
             </div>
@@ -395,8 +383,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/" class="category-chain-item">中间件篇</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/" class="category-chain-item">中间件篇</a>
+  
+  
+
   
 
       </span>
@@ -927,6 +922,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,8 +331,8 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657548990255-acffb7e0-b8ef-4517-917b-683681667a30.png#clientId=u6fa3a4fd-2cf5-4&from=markdown&id=w08A1&originHeight=200&originWidth=400&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=44739&status=done&style=none&taskId=ub5aa7e4a-4d23-46fd-96fe-c4e2a5be91c&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h1 id="Tomcat总体架构"><a href="#Tomcat总体架构" class="headerlink" title="Tomcat总体架构"></a>Tomcat总体架构</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/tomcat-framework.png#id=W2657&originHeight=538&originWidth=678&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657548990255-acffb7e0-b8ef-4517-917b-683681667a30.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="Tomcat总体架构"><a href="#Tomcat总体架构" class="headerlink" title="Tomcat总体架构"></a>Tomcat总体架构</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/tomcat-framework.png" srcset="/img/loading.gif" lazyload></p>
 <table>
 <thead>
 <tr>
@@ -389,9 +377,9 @@
 <td>表示Tomcat组件可以共享的线程池</td>
 </tr>
 </tbody></table>
-<h1 id="Tomcat-应用服务器启动"><a href="#Tomcat-应用服务器启动" class="headerlink" title="Tomcat 应用服务器启动"></a>Tomcat 应用服务器启动</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/tomcat-start.png#id=trexg&originHeight=471&originWidth=970&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
-<h1 id="Tomcat-请求处理"><a href="#Tomcat-请求处理" class="headerlink" title="Tomcat 请求处理"></a>Tomcat 请求处理</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/tomcat-request.png#id=uSK1b&originHeight=857&originWidth=549&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
-<h1 id="Tomcat-类加载器"><a href="#Tomcat-类加载器" class="headerlink" title="Tomcat 类加载器"></a>Tomcat 类加载器</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/tomcat-classloader.png#id=wiVC6&originHeight=376&originWidth=648&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="Tomcat-应用服务器启动"><a href="#Tomcat-应用服务器启动" class="headerlink" title="Tomcat 应用服务器启动"></a>Tomcat 应用服务器启动</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/tomcat-start.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="Tomcat-请求处理"><a href="#Tomcat-请求处理" class="headerlink" title="Tomcat 请求处理"></a>Tomcat 请求处理</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/tomcat-request.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="Tomcat-类加载器"><a href="#Tomcat-类加载器" class="headerlink" title="Tomcat 类加载器"></a>Tomcat 类加载器</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/tomcat-classloader.png" srcset="/img/loading.gif" lazyload></p>
 <p>除每个Web的类加载器外，Tomcat也提供了3个基础的类加载器和Web应用类加载器，而且这三个类加载器指向的路径和包列表均可以由<code>catalina.properties</code>配置。</p>
 <ul>
 <li>Common: 以System为父加载器，是位于Tomcat应用服务器顶层的公用类加载器。其路径为<code>common.loader</code>，默认指向$CATALINA_HOME/lib下的包。</li>
@@ -402,8 +390,12 @@
 <p>Java默认类加载机制</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs latex">从缓存中加载<br>如果缓存中没有，则从父类加载器中加载。<br>如果父类加载器没有，则从当前类加载器加载<br>如果没有则抛出异常<br></code></pre></td></tr></table></figure>
 
+
+
 <p>Tomcat的加载机制稍有不同<code>首先尝试通过当前类加载器加载，然后才进行委派</code></p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs latex">从缓存中加载<br>如果没有，则从JVM的Bootstrap类加载器加载。<br>如果没有，则从当前类加载器加载(按照WEB-INF/classes、WEB-INF/lib的顺序)<br>如果没有，则从父类加载器加载，由于父类加载器采用的默认的委派模式，所以加载顺序为System、Common、Shared<br></code></pre></td></tr></table></figure>
+
+
 
 <p>Tomcat提供了delegate属性用于控制是否启用Java委派模式，默认为false，当为true时启用</p>
 <p><strong>作用</strong></p>
@@ -429,8 +421,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/" class="category-chain-item">中间件篇</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/" class="category-chain-item">中间件篇</a>
+  
+  
+
   
 
       </span>
@@ -961,6 +960,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

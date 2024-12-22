@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,71 +331,89 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1681973325424-053404d4-53ae-4914-b46e-185859a15ced.png#averageHue=%23bcb6e0&clientId=u253087b4-9a5c-4&from=paste&height=225&id=u986887aa&originHeight=450&originWidth=650&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=39372&status=done&style=none&taskId=u7d7be08d-8ad1-4bfc-8995-7b5588faa78&title=&width=325" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1681973325424-053404d4-53ae-4914-b46e-185859a15ced.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Rust 和 WebAssembly 是当前非常热门的技术，它们都具有非常强大的性能和安全性。Rust 是一种系统级编程语言，具有内存安全、并发性和高效性等特点。WebAssembly 是一种新型的低级字节码，可以在浏览器中运行高性能的应用程序。Rust 与 WebAssembly 的结合可以让我们在 Web 上构建出更高效、更安全的应用程序。</p>
 <p>本篇文章将介绍 Rust 和 WebAssembly 的基础知识，包括如何使用 Rust 编写 WebAssembly 模块，如何在 Rust 和 JavaScript 之间进行互操作，以及如何将 Rust wasm 发布到 npm 上。此外，我们还将介绍一些实际的 Rust wasm 项目案例，并对 Rust wasm 的优势和未来展望进行讨论。</p>
 <h2 id="Rust-语言简介"><a href="#Rust-语言简介" class="headerlink" title="Rust 语言简介"></a>Rust 语言简介</h2><p>Rust 是一种由 Mozilla 开发的系统级编程语言，它结合了 C++ 和其他现代编程语言的优点。Rust 具有内存安全、并发性和高效性等特点，可以用于构建高性能的系统级应用程序。Rust 的设计目标是为了提供一个安全、并发和高效的编程语言。Rust 的语法类似于 C 和 C++，但是 Rust 有一些独特的特性，使其比传统的系统编程语言更加安全和可靠。</p>
 <p>以下是 Rust 的一些主要特性：</p>
 <ol>
-<li><p>内存安全：Rust 的内存安全特性可以防止一些常见的内存错误，例如空指针、野指针和数据竞争等问题。Rust 的所有权系统确保内存管理的正确性。</p>
-</li>
-<li><p>零成本抽象：Rust 支持高级抽象，例如泛型和 trait，但是这些抽象在编译时会被完全展开，从而避免了运行时开销。</p>
-</li>
-<li><p>并发安全：Rust 支持线程安全和并发编程。Rust 的所有权系统可以保证多线程程序的正确性。</p>
-</li>
-<li><p>高性能：Rust 的编译器可以生成高效的本机代码，使其在性能方面与 C 和 C++ 相当。</p>
-</li>
-<li><p>开放源代码：Rust 是一个开放源代码项目，任何人都可以参与开发和改进。</p>
-</li>
+<li>内存安全：Rust 的内存安全特性可以防止一些常见的内存错误，例如空指针、野指针和数据竞争等问题。Rust 的所有权系统确保内存管理的正确性。</li>
+</ol>
+<ol start="2">
+<li>零成本抽象：Rust 支持高级抽象，例如泛型和 trait，但是这些抽象在编译时会被完全展开，从而避免了运行时开销。</li>
+</ol>
+<ol start="3">
+<li>并发安全：Rust 支持线程安全和并发编程。Rust 的所有权系统可以保证多线程程序的正确性。</li>
+</ol>
+<ol start="4">
+<li>高性能：Rust 的编译器可以生成高效的本机代码，使其在性能方面与 C 和 C++ 相当。</li>
+</ol>
+<ol start="5">
+<li>开放源代码：Rust 是一个开放源代码项目，任何人都可以参与开发和改进。</li>
 </ol>
 <p>Rust 的应用领域包括操作系统、网络服务器、游戏引擎、嵌入式设备等。Rust 的生态系统非常丰富，拥有许多优秀的库和框架，可以用于各种应用场景。</p>
 <p>Rust 的一大特点是它的<strong>所有权系统</strong>。所有权系统是 Rust 的一项内存管理功能，它确保内存分配和回收的正确性。在 Rust 中，每个值都有一个所有者，当所有者离开作用域时，值就会被释放。这种内存管理方式可以防止空指针和内存泄漏等问题。</p>
-<h2 id="WebAssembly-简介"><a href="#WebAssembly-简介" class="headerlink" title="WebAssembly 简介"></a>WebAssembly 简介</h2><p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1682261587670-66a6ada0-94cb-463b-9326-f49ef9582572.png#averageHue=%23f8f4ef&clientId=ud123310a-0087-4&from=paste&height=288&id=u5afd3697&originHeight=576&originWidth=1209&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=120917&status=done&style=none&taskId=u590b2e3a-39ad-4c93-8a3b-fb332f942ed&title=&width=604.5" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<p><strong>WebAssembly</strong>或称<strong>wasm</strong>是一个<strong>低级编程语言</strong>。WebAssembly是便携式的<strong>抽象语法树</strong>，被设计来提供比JavaScript更快速的编译及执行。WebAssembly将让开发者能运用自己熟悉的编程语言（最初以C/C++作为实现目标）编译，再藉虚拟机引擎在浏览器内执行。WebAssembly的开发团队分别来自Mozilla、Google、Microsoft、Apple，代表着四大网络浏览器Firefox、Chrome、Microsoft Edge、Safari。2017年11月，以上四个浏览器都开始实验性的支持WebAssembly。在 2019 年 12 月 5 日，W3C制定《WebAssembly 核心规范 》，WebAssembly 正式被认证为 <strong>Web 的标准之一</strong>。</p>
-<p>以下是 <strong>WebAssembly</strong> 的一些主要特点：</p>
+<h2 id="WebAssembly-简介"><a href="#WebAssembly-简介" class="headerlink" title="WebAssembly 简介"></a>WebAssembly 简介</h2><p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1682261587670-66a6ada0-94cb-463b-9326-f49ef9582572.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong><font style="color:rgb(32, 33, 34);">WebAssembly</font></strong><font style="color:rgb(32, 33, 34);">或称</font><strong><font style="color:rgb(32, 33, 34);">wasm</font></strong><font style="color:rgb(32, 33, 34);">是一个</font><strong>低级编程语言</strong><font style="color:rgb(32, 33, 34);">。WebAssembly是便携式的</font><strong>抽象语法树</strong><font style="color:rgb(32, 33, 34);">，被设计来提供比</font>JavaScript<font style="color:rgb(32, 33, 34);">更快速的</font>编译<font style="color:rgb(32, 33, 34);">及执行。WebAssembly将让开发者能运用自己熟悉的编程语言（最初以</font>C<font style="color:rgb(32, 33, 34);">/</font>C++<font style="color:rgb(32, 33, 34);">作为实现目标）编译，再藉虚拟机引擎在浏览器内执行。WebAssembly的开发团队分别来自</font>Mozilla<font style="color:rgb(32, 33, 34);">、</font>Google<font style="color:rgb(32, 33, 34);">、</font>Microsoft<font style="color:rgb(32, 33, 34);">、</font>Apple<font style="color:rgb(32, 33, 34);">，代表着四大网络浏览器</font>Firefox<font style="color:rgb(32, 33, 34);">、</font>Chrome<font style="color:rgb(32, 33, 34);">、</font>Microsoft Edge<font style="color:rgb(32, 33, 34);">、</font>Safari<font style="color:rgb(32, 33, 34);">。2017年11月，以上四个浏览器都开始实验性的支持WebAssembly。在 2019 年 12 月 5 日，W3C制定《</font>WebAssembly 核心规范<font style="color:rgb(32, 33, 34);"> 》，WebAssembly 正式被认证为 </font><strong><font style="color:rgb(32, 33, 34);">Web 的标准之一</font></strong><font style="color:rgb(32, 33, 34);">。</font></p>
+<p><font style="color:rgb(32, 33, 34);"></font></p>
+<p>以下是 <strong><font style="color:rgb(32, 33, 34);">WebAssembly</font></strong> 的一些主要特点：</p>
 <ul>
-<li><p><strong>高效且快速</strong>：Wasm 堆栈机器被设计为使用高效的二进制格式进行编码，以实现快速的加载和执行。WebAssembly 旨在利用广泛平台上可用的通用硬件功能，在本机速度下执行。</p>
-</li>
-<li><p><strong>安全：</strong>WebAssembly 提供了内存安全的沙盒执行环境，可以在现有的 JavaScript 虚拟机中实现。当嵌入到 Web 中时，WebAssembly 将遵循浏览器的同源和权限安全策略，确保安全性。</p>
-</li>
-<li><p><strong>开放且可调试：</strong>WebAssembly 旨在以文本格式进行更好的打印，以便用于调试、测试、实验、优化、学习、教学和手动编写程序。在网络上查看 Wasm 模块的源代码时将使用文本格式，使得开发人员可以更轻松地调试和优化代码。</p>
-</li>
-<li><p><strong>开放式 web 平台的一部分：</strong>WebAssembly 旨在保持 web 的无版本、经过功能测试和向后兼容的特性。WebAssembly 模块可以调用和被 JavaScript 上下文调用，并且可以通过可从 JavaScript 访问的相同 Web API 访问浏览器功能。此外，WebAssembly 还支持非网络嵌入，为更广泛的应用场景提供了支持。</p>
-</li>
+<li><strong>高效且快速</strong>：Wasm 堆栈机器被设计为使用高效的二进制格式进行编码，以实现快速的加载和执行。WebAssembly 旨在利用广泛平台上可用的通用硬件功能，在本机速度下执行。</li>
+</ul>
+<ul>
+<li><strong>安全：</strong>WebAssembly 提供了内存安全的沙盒执行环境，可以在现有的 JavaScript 虚拟机中实现。当嵌入到 Web 中时，WebAssembly 将遵循浏览器的同源和权限安全策略，确保安全性。</li>
+</ul>
+<ul>
+<li><strong>开放且可调试：</strong>WebAssembly 旨在以文本格式进行更好的打印，以便用于调试、测试、实验、优化、学习、教学和手动编写程序。在网络上查看 Wasm 模块的源代码时将使用文本格式，使得开发人员可以更轻松地调试和优化代码。</li>
+</ul>
+<ul>
+<li><strong>开放式 web 平台的一部分：</strong>WebAssembly 旨在保持 web 的无版本、经过功能测试和向后兼容的特性。WebAssembly 模块可以调用和被 JavaScript 上下文调用，并且可以通过可从 JavaScript 访问的相同 Web API 访问浏览器功能。此外，WebAssembly 还支持非网络嵌入，为更广泛的应用场景提供了支持。</li>
 </ul>
 <p>WebAssembly 与 JavaScript 不同，它是一种真正的<strong>二进制格式</strong>，可以直接在浏览器中运行，而不需要像 JavaScript 那样先被解释成字节码。这意味着 WebAssembly 的性能比 JavaScript 更好，并且可以被用于更高效的计算密集型任务。</p>
 <h1 id="Rust-与-WebAssembly"><a href="#Rust-与-WebAssembly" class="headerlink" title="Rust 与 WebAssembly"></a>Rust 与 WebAssembly</h1><p>Rust 与 WebAssembly 的结合可以让我们在 Web 上构建出更高效、更安全的应用程序。Rust 可以编译成 WebAssembly 模块，这些模块可以在浏览器中运行，提供更快、更安全的性能。</p>
-<h2 id="安装-Rust-和-WebAssembly-工具"><a href="#安装-Rust-和-WebAssembly-工具" class="headerlink" title="安装 Rust 和 WebAssembly 工具"></a>安装 Rust 和 WebAssembly 工具</h2><p>wasm-pack : <a target="_blank" rel="noopener" href="https://rustwasm.github.io/wasm-pack/installer/">https://rustwasm.github.io/wasm-pack/installer/</a><br>wasm-pack 是一个用于构建、测试和发布 Rust 和 WebAssembly 应用程序的工具，可以让我们快速、简单地将 Rust 代码编译为 WebAssembly 模块。</p>
+<h2 id="安装-Rust-和-WebAssembly-工具"><a href="#安装-Rust-和-WebAssembly-工具" class="headerlink" title="安装 Rust 和 WebAssembly 工具"></a>安装 Rust 和 WebAssembly 工具</h2><p>wasm-pack : <a target="_blank" rel="noopener" href="https://rustwasm.github.io/wasm-pack/installer/">https://rustwasm.github.io/wasm-pack/installer/</a></p>
+<p>wasm-pack 是一个用于构建、测试和发布 Rust 和 WebAssembly 应用程序的工具，可以让我们快速、简单地将 Rust 代码编译为 WebAssembly 模块。</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs rust">curl https:<span class="hljs-comment">//rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="Rust-编写-WebAssembly-代码"><a href="#Rust-编写-WebAssembly-代码" class="headerlink" title="Rust 编写 WebAssembly 代码"></a>Rust 编写 WebAssembly 代码</h2><ol>
-<li><p>创建一个 Rust 应用程序，并将其编写为库（library）。</p>
+<li>创建一个 Rust 应用程序，并将其编写为库（library）。</li>
+</ol>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs rust">cargo new rust-wasm<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>在应用程序的根目录下创建一个名为 Cargo.toml 的文件，并添加以下内容：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment">#这个配置告诉 Rust 的包管理器 Cargo 将应用程序编译为动态链接库（dylib），这是 WebAssembly 模块所需的格式。</span><br><span class="hljs-section">[lib]</span><br><span class="hljs-attr">crate-type</span> = [<span class="hljs-string">&quot;cdylib&quot;</span>]<br><br><span class="hljs-section">[dependencies]</span><br><span class="hljs-comment">#用于将 Rust 代码编译为 WebAssembly 模块的库。</span><br><span class="hljs-attr">wasm-bindgen</span> = <span class="hljs-string">&quot;0.2&quot;</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>在应用程序的根目录下创建一个名为 src/lib.rs 的文件，并在其中编写 Rust 代码。你可以使用 #[wasm_bindgen] 注解将 Rust 函数导出为 JavaScript 函数</p>
+
+<ol start="2">
+<li>在应用程序的根目录下创建一个名为 Cargo.toml 的文件，并添加以下内容：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs plain">#这个配置告诉 Rust 的包管理器 Cargo 将应用程序编译为动态链接库（dylib），这是 WebAssembly 模块所需的格式。<br>[lib]<br>crate-type = [&quot;cdylib&quot;]<br><br>[dependencies]<br>#用于将 Rust 代码编译为 WebAssembly 模块的库。<br>wasm-bindgen = &quot;0.2&quot;<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在应用程序的根目录下创建一个名为 src/lib.rs 的文件，并在其中编写 Rust 代码。你可以使用 #[wasm_bindgen] 注解将 Rust 函数导出为 JavaScript 函数</li>
+</ol>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">use</span> wasm_bindgen::prelude::*;<br><br><span class="hljs-meta">#[wasm_bindgen]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">add</span>(a: <span class="hljs-type">i32</span>, b: <span class="hljs-type">i32</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">i32</span> &#123;<br>    a + b<br>&#125;<br></code></pre></td></tr></table></figure>
 
-</li>
-</ol>
 <h2 id="Rust-编译成-WebAssembly"><a href="#Rust-编译成-WebAssembly" class="headerlink" title="Rust 编译成 WebAssembly"></a>Rust 编译成 WebAssembly</h2><p>rust编译成wasm的方式有两种，一种是通过 wasm-pack，另一种通过 cargo build –target wasm32-unknown-unknown</p>
 <ol>
-<li><p>通过 wasm-pack 进行构造wasm</p>
+<li>通过 wasm-pack 进行构造wasm</li>
+</ol>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs rust">wasm-pack build --target web<br></code></pre></td></tr></table></figure>
+
 <p>生成目标文件</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust">pkg<br>├── README.md<br>├── package.json<br>├── rust_wasm.d.ts<br>├── rust_wasm.js<br>├── rust_wasm_bg.wasm<br>└── rust_wasm_bg.wasm.d.ts<br></code></pre></td></tr></table></figure>
+
 <p>wasm-pack 生成构建后的包相比 cargo 直接构建生成文件的会更丰富，能够方便我们快速的调用wasm</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script type=<span class="hljs-string">&quot;module&quot;</span>&gt;<br>  <span class="hljs-keyword">import</span> init, &#123;calc_fib&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./pkg/rust_wasm.js&quot;</span>;<br><span class="hljs-title function_">init</span>().<span class="hljs-title function_">then</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-comment">// greet(&quot;WebAssembly&quot;);</span><br>  <span class="hljs-comment">// 开始计时</span><br>  <span class="hljs-keyword">const</span> st = performance.<span class="hljs-title function_">now</span>();<br>  <span class="hljs-keyword">const</span> ret = <span class="hljs-title function_">calc_fib</span>(<span class="hljs-number">40</span>)<br>  <span class="hljs-comment">// 结束计时</span><br>  <span class="hljs-keyword">const</span> et = performance.<span class="hljs-title function_">now</span>();<br>  <span class="hljs-comment">// 计算执行时间</span><br>  <span class="hljs-keyword">const</span> edt = et - st;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`rust-wasm 代码执行时间为 <span class="hljs-subst">$&#123;edt&#125;</span> 毫秒 <span class="hljs-subst">$&#123;ret&#125;</span>`</span>);<br><br>&#125;);<br><br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>通过 cargo 指定构建目标为wasm32-unknown-unknown 进行构建，它会将 Rust 代码编译成 WebAssembly 模块。我们可以使用 cargo 工具来编译 Rust 代码，命令如下：</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">cargo <span class="hljs-keyword">build</span> --target wasm32-<span class="hljs-keyword">unknown</span>-<span class="hljs-keyword">unknown</span><br></code></pre></td></tr></table></figure>
 
-</li>
+
+
+<ol start="2">
+<li>通过 cargo 指定构建目标为wasm32-unknown-unknown 进行构建，它会将 Rust 代码编译成 WebAssembly 模块。我们可以使用 cargo 工具来编译 Rust 代码，命令如下：</li>
 </ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">cargo build --target wasm32-unknown-unknown<br></code></pre></td></tr></table></figure>
+
+
+
 <p>这个命令会将 Rust 代码编译成 WebAssembly 模块，并生成一个 .wasm 文件。我们可以在js中进行导入使用</p>
-<h1 id="Rust-wasm-运行原理"><a href="#Rust-wasm-运行原理" class="headerlink" title="Rust wasm 运行原理"></a>Rust wasm 运行原理</h1><p><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/2630542/1682262262837-19c3b49b-8405-4d96-8c71-b1af07e1cb63.jpeg#averageHue=%23f6e9e3&clientId=ud123310a-0087-4&from=ui&height=284&id=uea464ebd&originHeight=1145&originWidth=2048&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=99492&status=done&style=none&taskId=u7de623f3-151d-4157-83bf-550e027d605&title=&width=508" srcset="/img/loading.gif" lazyload alt="a.jpeg"><br>rust编译成wasm主要是通过rust wasm的工具链来实现</p>
+<h1 id="Rust-wasm-运行原理"><a href="#Rust-wasm-运行原理" class="headerlink" title="Rust wasm 运行原理"></a>Rust wasm 运行原理</h1><p><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/2630542/1682262262837-19c3b49b-8405-4d96-8c71-b1af07e1cb63.jpeg" srcset="/img/loading.gif" lazyload></p>
+<p>rust编译成wasm主要是通过rust wasm的工具链来实现</p>
 <h2 id="JavaScript运行原理"><a href="#JavaScript运行原理" class="headerlink" title="JavaScript运行原理"></a>JavaScript运行原理</h2><p>JavaScript引擎是一种实现JavaScript语言的解释器或编译器，它负责解释和执行JavaScript代码，实现网页的动态交互和功能。JavaScript引擎的核心概念和技术：</p>
 <ol>
 <li>解释器和编译器：JavaScript引擎通常包含解释器和编译器两个部分。解释器可以快速解释和执行JavaScript代码，但是性能较低；编译器可以将JavaScript代码编译为机器码，实现更高的性能，但是需要额外的编译时间和空间。</li>
@@ -419,6 +425,7 @@
 <p>常见的JavaScript引擎包括V8、SpiderMonkey、JavaScriptCore等。其中，V8是Google开发的JavaScript引擎，在Chrome浏览器中得到广泛应用，具有高性能和低内存占用的特点。JavaScript引擎是实现JavaScript语言的核心技术之一，它的性能和功能对于网页的交互和用户体验至关重要。</p>
 <p>V8引擎的结构可以分为两个主要部分：解析器和执行引擎。</p>
 <p><strong>解析器</strong></p>
+<hr>
 <p>解析器的主要任务是将JavaScript代码转换成抽象语法树（AST）。解析器包括以下组件：</p>
 <ul>
 <li>词法分析器（tokenizer）：将代码分解成单个的标记（tokens），例如变量名、操作符和关键字。</li>
@@ -426,6 +433,7 @@
 <li>解释器（interpreter）：执行AST并生成字节码，字节码是一种介于AST和机器码之间的中间码。</li>
 </ul>
 <p><strong>执行引擎</strong></p>
+<hr>
 <p>执行引擎的主要任务是执行AST并将其转换成机器码。执行引擎包括以下组件：</p>
 <ul>
 <li>编译器（compiler）：将字节码转换成机器码。</li>
@@ -433,7 +441,7 @@
 <li>最优化编译器（optimizer）：对代码进行优化，以提高执行性能。</li>
 </ul>
 <p><strong>V8引擎</strong>使用了即时编译（JIT）的技术，它可以动态地将解释器生成的字节码转换成机器码，并且在代码执行时进行优化，以提高代码的执行速度</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/2630542/1682225816802-6c2c25df-07f4-401f-b0d0-7e22bae94fa9.jpeg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/2630542/1682225816802-6c2c25df-07f4-401f-b0d0-7e22bae94fa9.jpeg" srcset="/img/loading.gif" lazyload alt="画板"></p>
 <p>代码输入：JavaScript引擎接收JavaScript代码作为输入。</p>
 <p>词法分析：JavaScript引擎将代码分解为一系列的token，每个token表示一个词法单元，例如关键字、运算符、变量名等。</p>
 <p>语法分析：JavaScript引擎将token流转换为抽象语法树（AST），表示代码的语法结构和逻辑。</p>
@@ -442,7 +450,7 @@
 <p>生成机器码：JavaScript引擎将编译后的机器码存储在内存中，用于后续的代码执行。</p>
 <p>代码执行：JavaScript引擎执行机器码，实现代码的动态交互和功能。</p>
 <h2 id="WebAssmbly运行原理"><a href="#WebAssmbly运行原理" class="headerlink" title="WebAssmbly运行原理"></a>WebAssmbly运行原理</h2><p>WebAssembly 之所以比 JavaScript 更高效，是因为它的设计和实现可以更好地利用计算机硬件的特性。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/2630542/1682225818815-1761a2d8-25b7-4b6a-af1f-dfba673eccf7.jpeg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/2630542/1682225818815-1761a2d8-25b7-4b6a-af1f-dfba673eccf7.jpeg" srcset="/img/loading.gif" lazyload alt="画板"></p>
 <p>WebAssembly 是一种低级字节码格式，它的指令集是基于栈的，可以直接映射到底层硬件的指令集，从而实现更好的性能。与之相比，JavaScript 是一种高级语言，其代码需要经过解释器的解释和执行，还需要进行垃圾回收、动态类型检查等操作，这些都会带来一定的性能开销。</p>
 <p>WebAssembly 还提供了一些优化的特性，如本地变量、线性内存等，可以使得代码的性能更加高效。WebAssembly 的线性内存模型允许程序直接访问内存，而不需要通过 JavaScript 中的 ArrayBuffer 对象等中间层，从而避免了不必要的拷贝操作，提高了内存访问的效率。</p>
 <p>WebAssembly 还支持多线程，并提供了原子操作和共享内存等机制，可以更好地利用现代计算机的多核心处理能力，实现并行计算，进一步提高程序的性能。相比之下，JavaScript 的架构主要是基于<strong>事件驱动</strong>的，通过事件驱动机制实现异步编程，避免了阻塞主线程，提高了程序的响应性。但是，由于 JavaScript 是一种高级语言，其代码需要经过解释器的解释和执行，因此在性能上不如 WebAssembly。同时，JavaScript 的内存管理由垃圾回收器负责，会带来一定的运行时开销。此外，JavaScript 并不直接支持多线程，虽然可以通过 Web Workers 等机制实现并发，但是相对来说还是比较复杂和低效的。</p>
@@ -461,25 +469,25 @@
 <li>wasm可以更直接地访问和操作内存，提高了运行时的性能。</li>
 <li>wasm可以使用多种语言编写，充分利用各种语言的优势</li>
 </ul>
-<h2 id="Low-Level-Virtual-Machine"><a href="#Low-Level-Virtual-Machine" class="headerlink" title="Low Level Virtual Machine"></a>Low Level Virtual Machine</h2><p>LLVM（low level virtual machine） 是一个开源的编译器框架，提供了一组模块化的工具和库，可用于构建编译器、调试器、静态分析工具等软件。</p>
+<h2 id="Low-Level-Virtual-Machine"><a href="#Low-Level-Virtual-Machine" class="headerlink" title="Low Level Virtual Machine"></a><font style="color:rgb(77, 77, 77);">Low Level </font>Virtual<font style="color:rgb(77, 77, 77);"> Machine</font></h2><p>LLVM（low level virtual machine） 是一个开源的编译器框架，提供了一组模块化的工具和库，可用于构建编译器、调试器、静态分析工具等软件。</p>
 <p>LLVM 的核心组件是一个面向对象的中间语言 (Intermediate Representation, IR)，称为 LLVM IR。LLVM IR 是一种低级别的汇编语言，可以被转换成多种目标平台的机器码。</p>
 <p>LLVM 可以将 LLVM IR 编译成多种目标平台的机器码，包括 x86、ARM、MIPS 等常见的处理器架构，以及 WebAssembly 等新兴的目标平台。这使得 LLVM 成为一个通用的编译器框架，可以用于构建多种语言和多种目标平台的编译器。</p>
-<p>LLVM 还提供了一组优化工具，可以对 LLVM IR 进行各种优化，从而提高生成的代码的性能和质量。这些优化包括删除无用代码、提取常量、内联函数、循环优化等。<br>Rust 编译器使用 LLVM 作为其后端，将 Rust 代码编译成 LLVM IR，然后将其转换成目标平台的机器码。这使得 Rust 可以跨平台编译，同时也为 Rust 提供了强大的优化能力。</p>
+<p>LLVM 还提供了一组优化工具，可以对 LLVM IR 进行各种优化，从而提高生成的代码的性能和质量。这些优化包括删除无用代码、提取常量、内联函数、循环优化等。</p>
+<p>Rust 编译器使用 LLVM 作为其后端，将 Rust 代码编译成 LLVM IR，然后将其转换成目标平台的机器码。这使得 Rust 可以跨平台编译，同时也为 Rust 提供了强大的优化能力。</p>
 <p>LLVM有两个特点：</p>
-<p>（1）LLVM有一个<strong>特定指令格式</strong>的IR语言，我们可以通过书写Pass来对其IR进行优化。<br>（2）可以作为多种语言的后端，提供与编程语言无关的优化和针对多种CPU的代码生成功能。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1682225147288-664b3bb7-bb68-4baf-9769-24ed86075d67.png#averageHue=%23f8f8f8&clientId=u8a28cd20-937d-4&from=paste&height=242&id=u63904ec0&originHeight=224&originWidth=640&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=66950&status=done&style=none&taskId=u98b2c670-2bd8-4ffd-a480-d0a95106d06&title=&width=692" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<p>（1）LLVM有一个**<font style="color:#DF2A3F;">特定指令格式</font>**的IR语言，我们可以通过书写Pass来对其IR进行优化。</p>
+<p>（2）可以作为多种语言的后端，提供与编程语言无关的优化和针对多种CPU的代码生成功能。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1682225147288-664b3bb7-bb68-4baf-9769-24ed86075d67.png" srcset="/img/loading.gif" lazyload></p>
 <p>Rust 代码被编译成 WebAssembly 代码是通过以下步骤完成的：</p>
 <ol>
-<li><p>Rust 代码被编译成中间语言 LLVM IR<br>Rust 代码首先被编译成中间语言 LLVM IR (Intermediate Representation)，这是一种低级别的汇编语言，可以被转换成多种目标平台的机器码。LLVM 是一个开源的编译器框架，它支持多种语言和多种目标平台。</p>
-</li>
-<li><p>LLVM IR 被编译成 WebAssembly 二进制格式<br>LLVM IR 被编译成 WebAssembly 二进制格式的过程由 LLVM 工具链中的 wasm-llvm 工具完成。这个工具将 LLVM IR 转换成 WebAssembly 二进制格式，同时生成 WebAssembly 模块的导入和导出声明。</p>
-</li>
-<li><p>WebAssembly 模块被优化<br>生成的 WebAssembly 模块可以进行进一步的优化，以提高性能。这可以通过使用工具如 wasm-opt 来进行优化。wasm-opt 可以应用一系列优化，例如删除无用代码、提取常量、缩减代码大小等。</p>
-</li>
-<li><p>WebAssembly 模块与 JavaScript 代码集成<br>WebAssembly 模块本身不能直接在浏览器中运行，需要将其与 JavaScript 代码集成。可以使用 wasm-bindgen 库来自动生成与 WebAssembly 模块进行交互的 JavaScript 代码，从而实现 JavaScript 和 WebAssembly 之间的互操作性。</p>
-</li>
+<li>Rust 代码被编译成中间语言 LLVM IR<br>Rust 代码首先被编译成中间语言 LLVM IR (Intermediate Representation)，这是一种低级别的汇编语言，可以被转换成多种目标平台的机器码。LLVM 是一个开源的编译器框架，它支持多种语言和多种目标平台。</li>
 </ol>
-<h2 id="Rust-wasm的运行原理"><a href="#Rust-wasm的运行原理" class="headerlink" title="Rust wasm的运行原理"></a>Rust wasm的运行原理</h2><p><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/2630542/1682259639216-2af812c0-4747-4bcc-8ed5-38cce41e6f75.jpeg" srcset="/img/loading.gif" lazyload></p>
+<ol start="2">
+<li>LLVM IR 被编译成 WebAssembly 二进制格式<br>LLVM IR 被编译成 WebAssembly 二进制格式的过程由 LLVM 工具链中的 wasm-llvm 工具完成。这个工具将 LLVM IR 转换成 WebAssembly 二进制格式，同时生成 WebAssembly 模块的导入和导出声明。</li>
+<li>WebAssembly 模块被优化<br>生成的 WebAssembly 模块可以进行进一步的优化，以提高性能。这可以通过使用工具如 wasm-opt 来进行优化。wasm-opt 可以应用一系列优化，例如删除无用代码、提取常量、缩减代码大小等。</li>
+<li>WebAssembly 模块与 JavaScript 代码集成<br>WebAssembly 模块本身不能直接在浏览器中运行，需要将其与 JavaScript 代码集成。可以使用 wasm-bindgen 库来自动生成与 WebAssembly 模块进行交互的 JavaScript 代码，从而实现 JavaScript 和 WebAssembly 之间的互操作性。</li>
+</ol>
+<h2 id="Rust-wasm的运行原理"><a href="#Rust-wasm的运行原理" class="headerlink" title="Rust wasm的运行原理"></a>Rust wasm的运行原理</h2><p><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/2630542/1682259639216-2af812c0-4747-4bcc-8ed5-38cce41e6f75.jpeg" srcset="/img/loading.gif" lazyload alt="画板"></p>
 <ol>
 <li>Rust代码编译为Wasm模块：使用Rust编写代码后，可以使用Rust的 <code>wasm32-unknown-unknown</code> 目标来编译Wasm模块。这将生成一个二进制Wasm文件，其中包含了Rust代码的编译结果。</li>
 <li>将Wasm模块嵌入到Web页面中：Wasm模块可以通过Web页面的 <code>&lt;script&gt;</code> 标签嵌入到HTML中，也可以通过JavaScript动态加载。</li>
@@ -489,9 +497,16 @@
 <p>Rust WebAssembly的运行原理是将Rust代码编译为Wasm模块，然后在Web页面中通过JavaScript与Wasm模块通信，最终在WebAssembly虚拟机中执行Wasm模块。这种方式可以使得Rust代码在Web环境中获得更高的性能和更广泛的应用场景。</p>
 <h1 id="Rust-wasm-工具链"><a href="#Rust-wasm-工具链" class="headerlink" title="Rust wasm 工具链"></a>Rust wasm 工具链</h1><h2 id="Rust-的-wasm-bindgen-crate"><a href="#Rust-的-wasm-bindgen-crate" class="headerlink" title="Rust 的 wasm-bindgen crate"></a>Rust 的 wasm-bindgen crate</h2><p>wasm-bindgen是一个Rust库，它提供了一种在Web浏览器中实现WebAssembly模块和JavaScript互操作的方式。它生成Rust代码的JavaScript绑定，可以从JavaScript中调用，也可以从 Rust 中调用 JavaScript 函数。</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">use</span> wasm_bindgen::prelude::*;<br><br><span class="hljs-meta">#[wasm_bindgen]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">hello_world</span>() &#123;<br>    console::<span class="hljs-title function_ invoke__">log_1</span>(&amp;<span class="hljs-string">&quot;Hello, World!&quot;</span>.<span class="hljs-title function_ invoke__">into</span>());<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>使用wasm-bindgen，可以编写可以编译为WebAssembly的Rust代码，并用作Web应用程序中的库。该库负责生成必要的粘合代码，以将Rust函数和类型公开给JavaScript，反之亦然，易于从JavaScript中调用Rust代码，反之亦然。<br>wasm-bindgen还提供了用于在Rust中处理JavaScript对象的工具，包括自动将JavaScript对象转换为Rust类型，反之亦然。这使得Rust代码可以使用在JavaScript中创建的对象，从而使得可以在JavaScript应用程序中使用Rust代码而无需编写大量的样板代码。<br>总的来说，wasm-bindgen是构建结合Rust和JavaScript的优势的高性能Web应用程序的强大工具。</p>
+
+<p>使用wasm-bindgen，可以编写可以编译为WebAssembly的Rust代码，并用作Web应用程序中的库。该库负责生成必要的粘合代码，以将Rust函数和类型公开给JavaScript，反之亦然，易于从JavaScript中调用Rust代码，反之亦然。</p>
+<p>wasm-bindgen还提供了用于在Rust中处理JavaScript对象的工具，包括自动将JavaScript对象转换为Rust类型，反之亦然。这使得Rust代码可以使用在JavaScript中创建的对象，从而使得可以在JavaScript应用程序中使用Rust代码而无需编写大量的样板代码。</p>
+<p>总的来说，wasm-bindgen是构建结合Rust和JavaScript的优势的高性能Web应用程序的强大工具。</p>
 <h2 id="wasm-pack"><a href="#wasm-pack" class="headerlink" title="wasm-pack"></a>wasm-pack</h2><p>wasm-pack: 打包、测试和发布 Rust generated WebAssembly</p>
-<p>wasm-pack 是一个命令行工具，用于打包、测试和发布 Rust 生成的 WebAssembly。它可以将 Rust 代码编译成 WebAssembly 模块，并生成一个可以发布到 npm 的包。</p>
+<font style="color:rgb(5, 14, 23);background-color:rgb(241, 242, 242);">  
+</font>wasm-pack 是一个命令行工具，用于打包、测试和发布 Rust 生成的 WebAssembly。它可以将 Rust 代码编译成 WebAssembly 模块，并生成一个可以发布到 npm 的包。
+
+
+
 <h2 id="wasm-bindgen-test"><a href="#wasm-bindgen-test" class="headerlink" title="wasm-bindgen-test"></a>wasm-bindgen-test</h2><p>wasm-bindgen-test: 测试 Rust wasm 代码</p>
 <p>wasm-bindgen-test 是一个测试框架，用于测试 Rust wasm 代码。它可以将 Rust 函数导出为 JavaScript 函数，并提供了一些辅助函数，使测试变得更加容易。</p>
 <h2 id="wasm-pack-plugin"><a href="#wasm-pack-plugin" class="headerlink" title="wasm-pack-plugin"></a>wasm-pack-plugin</h2><p>wasm-pack-plugin: 与现有的 JS 构建工具集成</p>
@@ -503,34 +518,52 @@
 <h1 id="Rust-wasm-性能测试"><a href="#Rust-wasm-性能测试" class="headerlink" title="Rust wasm 性能测试"></a>Rust wasm 性能测试</h1><p>选择编程语言和技术栈的决策往往是基于项目需求和特点的，因此对于不同的项目，最适合的选择也会有所不同。下面是对不同的WebAssembly语言进行简单的比较，并提供一些测试用例和结果。</p>
 <h2 id="Rust-WebAssembly-vs-Go-WebAssembly"><a href="#Rust-WebAssembly-vs-Go-WebAssembly" class="headerlink" title="Rust WebAssembly vs. Go WebAssembly"></a>Rust WebAssembly vs. Go WebAssembly</h2><p>对于WebAssembly，Rust和Go都是非常流行的语言。Rust在内存安全性和性能方面表现出色，而Go则在并发性和开发速度方面优秀。下面是一个测试用例，比较两种语言在WebAssembly上的性能：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// 将计算斐波那契数列的递归函数暴露给 JavaScript</span><br><span class="hljs-meta">#[wasm_bindgen]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">calc_fib</span>(n: <span class="hljs-type">i32</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">i32</span> &#123;<br>    <span class="hljs-comment">// let start_time = Instant::now();</span><br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">result</span> = <span class="hljs-title function_ invoke__">fib</span>(n);<br>    <span class="hljs-comment">// log_duration(start_time, &amp;format!(&quot;Calculated fib(&#123;&#125;)&quot;, n));</span><br>    result<br>&#125;<br><span class="hljs-comment">// 计算斐波那契数列的递归函数</span><br><span class="hljs-keyword">fn</span> <span class="hljs-title function_">fib</span>(n: <span class="hljs-type">i32</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">i32</span> &#123;<br>    <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">1</span> &#123;<br>        <span class="hljs-keyword">return</span> n;<br>    &#125;<br>    <span class="hljs-title function_ invoke__">fib</span>(n - <span class="hljs-number">1</span>) + <span class="hljs-title function_ invoke__">fib</span>(n - <span class="hljs-number">2</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// Go</span><br><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;syscall/js&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    js.Global().Set(<span class="hljs-string">&quot;fib&quot;</span>, js.FuncOf(fib))<br>    <span class="hljs-keyword">select</span> &#123;&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fib</span><span class="hljs-params">(this js.Value, args []js.Value)</span></span> <span class="hljs-keyword">interface</span>&#123;&#125; &#123;<br>    n := args[<span class="hljs-number">0</span>].Int()<br>    <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> &#123;<br>        <span class="hljs-keyword">return</span> n<br>    &#125;<br>    <span class="hljs-keyword">return</span> fib(<span class="hljs-literal">nil</span>, []js.Value&#123;js.ValueOf(n - <span class="hljs-number">1</span>)&#125;) + fib(<span class="hljs-literal">nil</span>, []js.Value&#123;js.ValueOf(n - <span class="hljs-number">2</span>)&#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>在计算斐波那契数列的情况下，Rust WebAssembly的性能明显优于Go WebAssembly。具体来说，在计算n=40的情况下，Rust WebAssembly需要大约500毫秒钟的时间，而Go WebAssembly需要大约3.5秒钟的时间。</p>
 <h2 id="Rust-WebAssembly-vs-C-C-WebAssembly"><a href="#Rust-WebAssembly-vs-C-C-WebAssembly" class="headerlink" title="Rust WebAssembly vs. C/C++ WebAssembly"></a>Rust WebAssembly vs. C/C++ WebAssembly</h2><p>C/C++是一种非常流行的系统级编程语言，也是WebAssembly的主要目标之一。与Rust类似，C/C++可以提供高性能和内存安全性，但是它的开发速度可能比Rust要慢一些。下面是一个测试用例，比较Rust和C/C++在WebAssembly上的性能：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// Rust</span><br><span class="hljs-meta">#[no_mangle]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">fib</span>(n: <span class="hljs-type">i32</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">i32</span> &#123;<br>    <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> &#123;<br>        n<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-title function_ invoke__">fib</span>(n - <span class="hljs-number">1</span>) + <span class="hljs-title function_ invoke__">fib</span>(n - <span class="hljs-number">2</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// C++</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">2</span>) &#123;<br>        <span class="hljs-keyword">return</span> n;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">fib</span>(n - <span class="hljs-number">1</span>) + <span class="hljs-built_in">fib</span>(n - <span class="hljs-number">2</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
 
 <p>在计算斐波那契数列的情况下，我们可以看到Rust WebAssembly的性能略优于C++ WebAssembly。具体来说，在计算n=40的情况下，Rust WebAssembly需要大约1秒钟的时间，而C++ WebAssembly需要大约1.2秒钟的时间。</p>
 <h2 id="Rust-WebAssembly-vs-WebAssembly-Text-Format"><a href="#Rust-WebAssembly-vs-WebAssembly-Text-Format" class="headerlink" title="Rust WebAssembly vs. WebAssembly Text Format"></a>Rust WebAssembly vs. WebAssembly Text Format</h2><p>WebAssembly Text Format是一种可读的文本格式，可以将其转换为WebAssembly二进制格式。它可以用作WebAssembly的中间表示，但是它的性能可能不如WebAssembly二进制格式。下面是一个测试用例，比较Rust WebAssembly和WebAssembly Text Format的性能：</p>
 <p>在计算斐波那契数列的情况下，我们可以看到Rust WebAssembly的性能远远优于WebAssembly Text Format。具体来说，在计算n=40的情况下，Rust WebAssembly需要大约1秒钟的时间，而WebAssembly Text Format需要大约10秒钟的时间。</p>
 <p>综上所述，选择哪种WebAssembly语言和技术栈取决于项目的具体需求和特点。如果需要高性能和内存安全性，那么Rust可能是更好的选择。如果需要高并发性和开发速度，那么Go可能更适合。如果需要可读性和可调试性，那么WebAssembly Text Format可能是不错的选择。在选择之前，可以通过编写测试用例来比较不同的语言和技术栈的性能和特点。</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// Rust</span><br><span class="hljs-meta">#[no_mangle]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">fib</span>(n: <span class="hljs-type">i32</span>) <span class="hljs-punctuation">-&gt;</span> <span class="hljs-type">i32</span> &#123;<br>    <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">2</span> &#123;<br>        n<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-title function_ invoke__">fib</span>(n - <span class="hljs-number">1</span>) + <span class="hljs-title function_ invoke__">fib</span>(n - <span class="hljs-number">2</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>除了fib对比还有没有其他的对比<br>除了斐波那契数列计算之外，我们可以通过比较不同WebAssembly语言在处理不同类型的计算任务时的性能来更全面地了解它们的优劣。</p>
+
+<p><font style="color:rgb(255, 255, 255);">除了fib对比还有没有其他的对比</font></p>
+<p>除了斐波那契数列计算之外，我们可以通过比较不同WebAssembly语言在处理不同类型的计算任务时的性能来更全面地了解它们的优劣。</p>
 <p><strong>图像处理</strong></p>
 <p>图像处理是一种非常常见的计算密集型任务，可以用于图像过滤、图像增强、图像压缩等。下面是使用Rust和C++分别对一个640x480的图像进行高斯模糊处理的WebAssembly代码：</p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">// Rust</span><br><span class="hljs-meta">#[no_mangle]</span><br><span class="hljs-keyword">pub</span> <span class="hljs-keyword">fn</span> <span class="hljs-title function_">blur</span>(src: &amp;[<span class="hljs-type">u8</span>], dst: &amp;<span class="hljs-keyword">mut</span> [<span class="hljs-type">u8</span>], width: <span class="hljs-type">usize</span>, height: <span class="hljs-type">usize</span>, radius: <span class="hljs-type">usize</span>) &#123;<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">kernel</span> = <span class="hljs-built_in">vec!</span>[<span class="hljs-number">0.0</span>; radius * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">sigma</span> = radius <span class="hljs-keyword">as</span> <span class="hljs-type">f32</span> / <span class="hljs-number">3.0</span>;<br>    <span class="hljs-keyword">let</span> <span class="hljs-variable">scale</span> = <span class="hljs-number">1.0</span> / (sigma * <span class="hljs-number">2.0</span> * std::<span class="hljs-type">f32</span>::consts::PI).<span class="hljs-title function_ invoke__">sqrt</span>();<br>    <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">sum</span> = <span class="hljs-number">0.0</span>;<br><br>    <span class="hljs-keyword">for</span> <span class="hljs-variable">i</span> <span class="hljs-keyword">in</span> <span class="hljs-number">0</span>..kernel.<span class="hljs-title function_ invoke__">len</span>() &#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-variable">x</span> = i <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span> - radius <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span>;<br>        kernel[i] = (scale * (-<span class="hljs-number">0.5</span> * (x <span class="hljs-keyword">as</span> <span class="hljs-type">f32</span> / sigma).<span class="hljs-title function_ invoke__">powi</span>(<span class="hljs-number">2</span>)).<span class="hljs-title function_ invoke__">exp</span>()) <span class="hljs-keyword">as</span> <span class="hljs-type">f64</span>;<br>        sum += kernel[i];<br>    &#125;<br><br>    <span class="hljs-keyword">for</span> <span class="hljs-variable">i</span> <span class="hljs-keyword">in</span> <span class="hljs-number">0</span>..kernel.<span class="hljs-title function_ invoke__">len</span>() &#123;<br>        kernel[i] /= sum;<br>    &#125;<br><br>    <span class="hljs-keyword">for</span> <span class="hljs-variable">y</span> <span class="hljs-keyword">in</span> <span class="hljs-number">0</span>..height &#123;<br>        <span class="hljs-keyword">for</span> <span class="hljs-variable">x</span> <span class="hljs-keyword">in</span> <span class="hljs-number">0</span>..width &#123;<br>            <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">r</span> = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">g</span> = <span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut </span><span class="hljs-variable">b</span> = <span class="hljs-number">0</span>;<br><br>            <span class="hljs-keyword">for</span> <span class="hljs-variable">dy</span> <span class="hljs-keyword">in</span> -radius <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span>..=radius <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span> &#123;<br>                <span class="hljs-keyword">for</span> <span class="hljs-variable">dx</span> <span class="hljs-keyword">in</span> -radius <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span>..=radius <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span> &#123;<br>                    <span class="hljs-keyword">let</span> <span class="hljs-variable">yy</span> = (y <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span> + dy).<span class="hljs-title function_ invoke__">clamp</span>(<span class="hljs-number">0</span>, height <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span> - <span class="hljs-number">1</span>) <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>;<br>                    <span class="hljs-keyword">let</span> <span class="hljs-variable">xx</span> = (x <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span> + dx).<span class="hljs-title function_ invoke__">clamp</span>(<span class="hljs-number">0</span>, width <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span> - <span class="hljs-number">1</span>) <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>;<br>                    <span class="hljs-keyword">let</span> <span class="hljs-variable">p</span> = (yy * width + xx) * <span class="hljs-number">4</span>;<br><br>                    r += (src[p] <span class="hljs-keyword">as</span> <span class="hljs-type">f64</span> * kernel[(dy + radius <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span>) <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>] * kernel[(dx + radius <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span>) <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>]) <span class="hljs-keyword">as</span> <span class="hljs-type">u8</span>;<br>                    g += (src[p + <span class="hljs-number">1</span>] <span class="hljs-keyword">as</span> <span class="hljs-type">f64</span> * kernel[(dy + radius <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span>) <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>] * kernel[(dx + radius <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span>) <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>]) <span class="hljs-keyword">as</span> <span class="hljs-type">u8</span>;<br>                    b += (src[p + <span class="hljs-number">2</span>] <span class="hljs-keyword">as</span> <span class="hljs-type">f64</span> * kernel[(dy + radius <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span>) <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>] * kernel[(dx + radius <span class="hljs-keyword">as</span> <span class="hljs-type">isize</span>) <span class="hljs-keyword">as</span> <span class="hljs-type">usize</span>]) <span class="hljs-keyword">as</span> <span class="hljs-type">u8</span>;<br>                &#125;<br>            &#125;<br><br>            <span class="hljs-keyword">let</span> <span class="hljs-variable">p</span> = (y * width + x) * <span class="hljs-number">4</span>;<br>            dst[p] = r;<br>            dst[p + <span class="hljs-number">1</span>] = g;<br>            dst[p + <span class="hljs-number">2</span>] = b;<br>            dst[p + <span class="hljs-number">3</span>] = src[p + <span class="hljs-number">3</span>];<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs c"><br><span class="hljs-comment">// C++</span><br><span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> &#123;<br>    <span class="hljs-type">void</span> <span class="hljs-title function_">emscripten_memcpy8</span><span class="hljs-params">(<span class="hljs-type">void</span>*, <span class="hljs-type">const</span> <span class="hljs-type">void</span>*, <span class="hljs-type">size_t</span>)</span>;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">clamp</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>    <span class="hljs-keyword">return</span> x &lt; a ? a : (x &gt; b ? b : x);<br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">blur</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>* src, <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>* dst, <span class="hljs-type">int</span> width, <span class="hljs-type">int</span> height, <span class="hljs-type">int</span> radius)</span> &#123;<br>    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">double</span>&gt; <span class="hljs-title function_">kernel</span><span class="hljs-params">(radius * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>)</span>;<br>    <span class="hljs-type">double</span> sigma = radius / <span class="hljs-number">3.0</span>;<br>    <span class="hljs-type">double</span> scale = <span class="hljs-number">1.0</span> / (sigma * <span class="hljs-number">2.0</span> * M_PI);<br>    <span class="hljs-type">double</span> sum = <span class="hljs-number">0.0</span>;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; kernel.size(); i++) &#123;<br>        <span class="hljs-type">int</span> x = i - radius;<br>        kernel[i] = <span class="hljs-built_in">exp</span>(<span class="hljs-number">-0.5</span> * <span class="hljs-built_in">pow</span>(x / sigma, <span class="hljs-number">2</span>)) * scale;<br>        sum += kernel[i];<br>    &#125;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; kernel.size(); i++) &#123;<br>        kernel[i] /= sum;<br>    &#125;<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> y = <span class="hljs-number">0</span>; y &lt; height; y++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> x = <span class="hljs-number">0</span>; x &lt; width; x++) &#123;<br>            <span class="hljs-type">int</span> r = <span class="hljs-number">0</span>;<br>            <span class="hljs-type">int</span> g = <span class="hljs-number">0</span>;<br>            <span class="hljs-type">int</span> b = <span class="hljs-number">0</span>;<br><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> dy = -radius; dy &lt;= radius; dy++) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> dx = -radius; dx &lt;= radius; dx++) &#123;<br>                    <span class="hljs-type">int</span> yy = clamp(y + dy, <span class="hljs-number">0</span>, height - <span class="hljs-number">1</span>);<br>                    <span class="hljs-type">int</span> xx = clamp(x + dx, <span class="hljs-number">0</span>, width - <span class="hljs-number">1</span>);<br>                    <span class="hljs-type">int</span> p = (yy * width + xx) * <span class="hljs-number">4</span>;<br><br>                    r += (<span class="hljs-type">double</span>)src[p] * kernel[dy + radius] * kernel[dx + radius];<br>                    g += (<span class="hljs-type">double</span>)src[p + <span class="hljs-number">1</span>] * kernel[dy + radius] * kernel[dx + radius];<br>                    b += (<span class="hljs-type">double</span>)src[p + <span class="hljs-number">2</span>] * kernel[dy + radius] * kernel[dx + radius];<br>                &#125;<br>            &#125;<br><br>            <span class="hljs-type">int</span> p = (y * width + x) * <span class="hljs-number">4</span>;<br>            dst[p] = r;<br>            dst[p + <span class="hljs-number">1</span>] = g;<br>            dst[p + <span class="hljs-number">2</span>] = b;<br>            dst[p + <span class="hljs-number">3</span>] = src[p + <span class="hljs-number">3</span>];<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>在计算这个图像的高斯模糊处理时，我们可以看到Rust WebAssembly的性能略优于C++ WebAssembly。具体来说，在计算半径为8的高斯模糊时，Rust WebAssembly需要约为84毫秒，而C++ WebAssembly需要约为93毫秒。</p>
 <p><strong>数组操作</strong></p>
+<hr>
 <p>数组操作是另一种常见的计算密集型任务，可以用于排序、查找、搜索等。下面是使用JavaScript和C++分别对一个包含10000个整数的数组进行排序的WebAssembly代码：</p>
-<p>在这个例子中，我们可以看到C++ WebAssembly的性能略优于JavaScript WebAssembly。具体来说，在对包含10000个整数的数组进行排序时，C++ WebAssembly需要约为3.5毫秒，而JavaScript WebAssembly需要约为4.2毫秒。<br>综上所述，我们可以通过比较不同WebAssembly语言在不同类型的计算任务中的性能来更全面地了解它们的优劣。</p>
+<p>在这个例子中，我们可以看到C++ WebAssembly的性能略优于JavaScript WebAssembly。具体来说，在对包含10000个整数的数组进行排序时，C++ WebAssembly需要约为3.5毫秒，而JavaScript WebAssembly需要约为4.2毫秒。</p>
+<p>综上所述，我们可以通过比较不同WebAssembly语言在不同类型的计算任务中的性能来更全面地了解它们的优劣。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// JavaScript</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">sortArray</span>(<span class="hljs-params">array</span>) &#123;<br>  <span class="hljs-keyword">const</span> memory = <span class="hljs-keyword">new</span> <span class="hljs-title class_">WebAssembly</span>.<span class="hljs-title class_">Memory</span>(&#123; <span class="hljs-attr">initial</span>: <span class="hljs-number">256</span> &#125;);<br>  <span class="hljs-keyword">const</span> wasmModule = <span class="hljs-keyword">new</span> <span class="hljs-title class_">WebAssembly</span>.<span class="hljs-title class_">Module</span>(wasmCode);<br>  <span class="hljs-keyword">const</span> wasmInstance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">WebAssembly</span>.<span class="hljs-title class_">Instance</span>(wasmModule, &#123; <span class="hljs-attr">env</span>: &#123; memory &#125; &#125;);<br>  <span class="hljs-keyword">const</span> &#123; sortArray &#125; = wasmInstance.<span class="hljs-property">exports</span>;<br><br>  <span class="hljs-keyword">const</span> arrayPointer = wasmInstance.<span class="hljs-property">exports</span>.<span class="hljs-property">__indirect_function_table</span>.<span class="hljs-title function_">get</span>(array);<br>  <span class="hljs-keyword">const</span> arrayLength = array.<span class="hljs-property">length</span>;<br><br>  <span class="hljs-title function_">sortArray</span>(arrayPointer, arrayLength);<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">// C++</span><br><span class="hljs-keyword">extern</span> <span class="hljs-string">&quot;C&quot;</span> &#123;<br>    <span class="hljs-type">void</span> <span class="hljs-title function_">emscripten_memcpy8</span><span class="hljs-params">(<span class="hljs-type">void</span>*, <span class="hljs-type">const</span> <span class="hljs-type">void</span>*, <span class="hljs-type">size_t</span>)</span>;<br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">sort_array</span><span class="hljs-params">(<span class="hljs-type">int</span>* <span class="hljs-built_in">array</span>, <span class="hljs-type">int</span> length)</span> &#123;<br>    <span class="hljs-built_in">std</span>::sort(<span class="hljs-built_in">array</span>, <span class="hljs-built_in">array</span> + length);<br>&#125;<br></code></pre></td></tr></table></figure>
 
+
+
 <p>测试对比表</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="Rust-wasm-实际应用"><a href="#Rust-wasm-实际应用" class="headerlink" title="Rust wasm 实际应用"></a>Rust wasm 实际应用</h1><p>Rust wasm 可以用于构建高效、安全的 Web 应用程序，也可以用于构建跨平台的桌面应用程序。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="Rust-wasm-实际应用"><a href="#Rust-wasm-实际应用" class="headerlink" title="Rust wasm 实际应用"></a>Rust wasm 实际应用</h1><p><font style="color:rgb(5, 14, 23);background-color:rgb(241, 242, 242);"></font></p>
+<p>Rust wasm 可以用于构建高效、安全的 Web 应用程序，也可以用于构建跨平台的桌面应用程序。</p>
+<p><font style="color:rgb(5, 14, 23);background-color:rgb(241, 242, 242);"></font></p>
 <p>通过 wasm-pack 发布你的包到 npm </p>
 <p>要将 Rust wasm 包发布到 npm，我们可以使用 wasm-pack。wasm-pack 可以将 Rust 代码编译成 WebAssembly 模块，并生成一个可以发布到 npm 的包。我们可以使用以下命令来发布 Rust wasm 包到 npm：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">wasm-pack publish</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">wasm-pack publish<br></code></pre></td></tr></table></figure>
+
+
 
 <p>与 Web 框架集成(如 Vue.js、React)</p>
 <p>Rust wasm 可以与现有的 Web 框架集成，如 Vue.js、React 和 Angular 等。我们可以使用 wasm-bindgen 和 wasm-pack-plugin 将 Rust wasm 模块与现有的 JavaScript 应用程序集成在一起。</p>
@@ -549,9 +582,12 @@
 <li>计算机代数</li>
 </ul>
 <h2 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h2><p>一些现实的 Rust wasm 项目案例分析</p>
-<h3 id="Yew"><a href="#Yew" class="headerlink" title="Yew"></a>Yew</h3><p>Yew 是一个 Rust 编写的现代 Web 框架，它基于 WebAssembly 和 Virtual DOM。它提供了一种高效和安全的方式来编写 Web 应用程序，并且可以通过编译成 WebAssembly 模块在浏览器中运行。<br>Yew 旨在提供与 React 和 Vue 等现代 Web 框架相似的功能，包括组件化、事件处理、状态管理等。它使用 Rust 的所有权系统来确保内存安全，并且可以与 JavaScript 代码无缝交互。</p>
-<h3 id="Parity-Substrate"><a href="#Parity-Substrate" class="headerlink" title="Parity Substrate"></a>Parity Substrate</h3><p>Parity Substrate 是一个用于构建区块链应用程序的 Rust 框架，它使用 WebAssembly 技术来提高性能和安全性。 Substrate 通过可插拔的模块化架构使得构建自定义区块链变得更加容易。<br>Substrate 提供了一组自定义的 Rust 库，可以轻松地创建和部署智能合约，并且可以在不同的区块链网络之间进行互操作性。使用 WebAssembly 技术，Substrate 可以实现高性能的智能合约执行，同时保证了内存安全性。</p>
-<h3 id="xi-editor"><a href="#xi-editor" class="headerlink" title="xi-editor"></a>xi-editor</h3><p>xi-editor 是一个 Rust 编写的文本编辑器，它使用 WebAssembly 技术来提高性能。xi-editor 的目标是提供一个快速、可扩展和易于定制的文本编辑器，可以在不同的平台上运行。<br>使用 WebAssembly 技术，xi-editor 可以在浏览器中运行，并且可以与 JavaScript 代码无缝交互。此外，Rust 的所有权系统可以确保内存安全，避免了常见的内存安全问题。</p>
+<h3 id="Yew"><a href="#Yew" class="headerlink" title="Yew"></a>Yew</h3><p>Yew 是一个 Rust 编写的现代 Web 框架，它基于 WebAssembly 和 Virtual DOM。它提供了一种高效和安全的方式来编写 Web 应用程序，并且可以通过编译成 WebAssembly 模块在浏览器中运行。</p>
+<p>Yew 旨在提供与 React 和 Vue 等现代 Web 框架相似的功能，包括组件化、事件处理、状态管理等。它使用 Rust 的所有权系统来确保内存安全，并且可以与 JavaScript 代码无缝交互。</p>
+<h3 id="Parity-Substrate"><a href="#Parity-Substrate" class="headerlink" title="Parity Substrate"></a>Parity Substrate</h3><p>Parity Substrate 是一个用于构建区块链应用程序的 Rust 框架，它使用 WebAssembly 技术来提高性能和安全性。 Substrate 通过可插拔的模块化架构使得构建自定义区块链变得更加容易。</p>
+<p>Substrate 提供了一组自定义的 Rust 库，可以轻松地创建和部署智能合约，并且可以在不同的区块链网络之间进行互操作性。使用 WebAssembly 技术，Substrate 可以实现高性能的智能合约执行，同时保证了内存安全性。</p>
+<h3 id="xi-editor"><a href="#xi-editor" class="headerlink" title="xi-editor"></a>xi-editor</h3><p>xi-editor 是一个 Rust 编写的文本编辑器，它使用 WebAssembly 技术来提高性能。xi-editor 的目标是提供一个快速、可扩展和易于定制的文本编辑器，可以在不同的平台上运行。</p>
+<p>使用 WebAssembly 技术，xi-editor 可以在浏览器中运行，并且可以与 JavaScript 代码无缝交互。此外，Rust 的所有权系统可以确保内存安全，避免了常见的内存安全问题。</p>
 <p>这些 Rust wasm 项目展示了 WebAssembly 的潜力，它可以为 Web 应用程序提供高性能、安全性和可维护性，并且可以在不同的平台上运行。</p>
 <h2 id="Rust-wasm在shopify里的应用"><a href="#Rust-wasm在shopify里的应用" class="headerlink" title="Rust wasm在shopify里的应用"></a>Rust wasm在shopify里的应用</h2><h3 id="shopify-function"><a href="#shopify-function" class="headerlink" title="shopify function"></a>shopify function</h3><blockquote>
 <p>shopify function 支持商家自定义后端逻辑</p>
@@ -573,27 +609,32 @@
 <li>数据科学：Rust wasm 可以用于在浏览器中运行数据科学代码，从而使数据科学更易于使用和共享。</li>
 <li>区块链：Rust wasm 可以用于编写智能合约，以提高安全性和性能。</li>
 </ol>
+<p><font style="color:rgb(5, 14, 23);background-color:rgb(241, 242, 242);"></font></p>
 <h2 id="当前存在的问题"><a href="#当前存在的问题" class="headerlink" title="当前存在的问题"></a>当前存在的问题</h2><p>虽然 Rust wasm 技术有很多优势，但也存在一些问题：</p>
 <ol>
 <li>工具链不完善：Rust wasm 技术目前的工具链还不够完善，使用起来还有一些困难，需要更多的工作来改进工具链的可用性和易用性。</li>
 <li>生态系统不完整：Rust wasm 技术的生态系统还不够完整，需要更多的开发者和社区的参与，来完善 Rust wasm 技术的生态系统。</li>
 <li>学习曲线较陡峭：Rust 是一种相对较新的编程语言，学习曲线相对较陡峭，需要一定的时间和精力来学习和掌握。</li>
 </ol>
-<h2 id="未来展望"><a href="#未来展望" class="headerlink" title="未来展望"></a>未来展望</h2><p>尽管 Rust wasm 技术目前还存在一些问题，但未来它有很大的发展潜力：<br>2.1. 更广泛的应用：随着 Rust wasm 技术的发展，它将在更多的应用场景中得到应用，包括 Web 应用程序、游戏、数据科学和区块链等领域。<br>2.2. 更完整的生态系统：随着 Rust wasm 技术的发展，它的生态系统将变得更加完整，将有更多的开发者和社区参与其中，从而促进技术的发展。<br>2.3. 更好的工具链支持：随着 Rust wasm 技术的发展，工具链的支持将变得更加完善，使得开发者可以更轻松地使用 Rust wasm 技术来构建应用程序。<br>2.4. 更好的性能和安全性：随着 Rust wasm 技术的发展，它将提供更好的性能和安全性，使得 Rust wasm 技术在 Web 应用程序和其他领域中得到更广泛的应用。</p>
-<h2 id="WebGL-WebGPU"><a href="#WebGL-WebGPU" class="headerlink" title="WebGL/WebGPU"></a>WebGL/WebGPU</h2><p>WebGPU是一种新的标准化的图形硬件接口，它可以让WebAssembly访问GPU的功能和资源。WebAssembly和WebGPU可以结合使用，实现高效的图形渲染和计算</p>
+<h2 id="未来展望"><a href="#未来展望" class="headerlink" title="未来展望"></a>未来展望</h2><p>尽管 Rust wasm 技术目前还存在一些问题，但未来它有很大的发展潜力：</p>
+<p>2.1. 更广泛的应用：随着 Rust wasm 技术的发展，它将在更多的应用场景中得到应用，包括 Web 应用程序、游戏、数据科学和区块链等领域。</p>
+<p>2.2. 更完整的生态系统：随着 Rust wasm 技术的发展，它的生态系统将变得更加完整，将有更多的开发者和社区参与其中，从而促进技术的发展。</p>
+<p>2.3. 更好的工具链支持：随着 Rust wasm 技术的发展，工具链的支持将变得更加完善，使得开发者可以更轻松地使用 Rust wasm 技术来构建应用程序。</p>
+<p>2.4. 更好的性能和安全性：随着 Rust wasm 技术的发展，它将提供更好的性能和安全性，使得 Rust wasm 技术在 Web 应用程序和其他领域中得到更广泛的应用。</p>
+<h2 id="WebGL-WebGPU"><a href="#WebGL-WebGPU" class="headerlink" title="WebGL/WebGPU"></a>WebGL/WebGPU</h2><p><font style="color:rgb(17, 17, 17);">WebGPU是一种新的标准化的图形硬件接口，它可以让WebAssembly访问GPU的功能和资源。</font>WebAssembly和WebGPU可以结合使用，实现高效的图形渲染和计算</p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li>什么是Rust和WebAssembly，它们为什么能提高Web应用的性能和安全性？</li>
-<li>如何使用Rust和WebAssembly开发Web应用，需要哪些工具和库？</li>
-<li>Rust和WebAssembly如何与JavaScript，HTML和CSS协同工作，如何实现无缝的互操作？</li>
-<li>Rust和WebAssembly在实际项目中的应用案例，如Serverless函数，源码映射，压缩编码等。</li>
-<li>Rust和WebAssembly的优化手段和技巧，如wasm-opt，运行时选择等。</li>
-<li>Rust和WebAssembly的未来发展趋势和挑战。</li>
+<li>什么是Rust和WebAssembly，它们为什么能提高Web应用的性能和安全性<font style="color:rgb(17, 17, 17);">？</font></li>
+<li>如何使用Rust和WebAssembly开发Web应用，需要哪些工具和库<font style="color:rgb(17, 17, 17);">？</font></li>
+<li>Rust和WebAssembly如何与JavaScript，HTML和CSS协同工作，如何实现无缝的互操作<font style="color:rgb(17, 17, 17);">？</font></li>
+<li>Rust和WebAssembly在实际项目中的应用案例，如Serverless函数，源码映射，压缩编码<font style="color:rgb(17, 17, 17);">等。</font></li>
+<li>Rust和WebAssembly的优化手段和技巧，如wasm-opt，运行时选择<font style="color:rgb(17, 17, 17);">等。</font></li>
+<li><font style="color:rgb(17, 17, 17);">Rust和WebAssembly的未来发展趋势和挑战。</font></li>
 </ul>
 <ol>
-<li>Rust和WebAssembly的学习资源和社区，如官方文档，教程，博客，问答网站等。</li>
-<li>Rust和WebAssembly的最佳实践和常见问题，如内存管理，错误处理，调试工具等。</li>
-<li>Rust和WebAssembly的高级主题和新特性，如异步编程，多线程，SIMD等。</li>
-<li>Rust和WebAssembly的创新应用和前沿探索，如Serverless函数，源码映射，压缩编码等。</li>
+<li>Rust和WebAssembly的学习资源和社区，如官方文档，教程，博客<font style="color:rgb(17, 17, 17);">，问答网站等。</font></li>
+<li><font style="color:rgb(17, 17, 17);">Rust和WebAssembly的最佳实践和常见问题，如内存管理，错误处理，调试工具等。</font></li>
+<li><font style="color:rgb(17, 17, 17);">Rust和WebAssembly的高级主题和新特性，如异步编程，多线程，SIMD等。</font></li>
+<li>Rust和WebAssembly的创新应用和前沿探索，如Serverless函数，源码映射，压缩编码<font style="color:rgb(17, 17, 17);">等。</font></li>
 </ol>
 <h2 id="相关框架"><a href="#相关框架" class="headerlink" title="相关框架"></a>相关框架</h2><ol>
 <li>相关资料：<a target="_blank" rel="noopener" href="https://rustwasm.github.io/book/">https://rustwasm.github.io/book/</a></li>
@@ -704,8 +745,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/08/yuque/WebAssembly-%E7%8E%B0%E4%BB%A3%E7%BD%91%E7%BB%9C%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E7%9A%84%E6%96%B0%E5%9E%8B%E4%BB%A3%E7%A0%81/" title="WebAssembly-现代网络浏览器中的新型代码">
-                        <span class="hidden-mobile">WebAssembly-现代网络浏览器中的新型代码</span>
+                      <a href="/2023/04/08/yuque/WebAssembly-%E7%8E%B0%E4%BB%A3%E7%BD%91%E7%BB%9C%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E7%9A%84%E6%96%B0%E5%9E%8B%E4%BB%A3%E7%A0%81/" title="&lt;font style=&#34;color:rgb(51, 51, 51);&#34;&gt;WebAssembly-现代网络浏览器中的新型代码&lt;/font&gt;">
+                        <span class="hidden-mobile">&lt;font style=&#34;color:rgb(51, 51, 51);&#34;&gt;WebAssembly-现代网络浏览器中的新型代码&lt;/font&gt;</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -1179,6 +1220,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

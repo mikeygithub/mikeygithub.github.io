@@ -26,9 +26,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657530068495-466100ba-7084-423c-aa6c-2e7070328a9f.png">
 <meta property="article:published_time" content="2021-02-27T03:28:10.000Z">
-<meta property="article:modified_time" content="2022-09-15T14:46:40.000Z">
+<meta property="article:modified_time" content="2024-09-01T14:16:22.000Z">
 <meta property="article:author" content="Mikey">
-<meta property="article:tag" content="Python基础">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657530068495-466100ba-7084-423c-aa6c-2e7070328a9f.png">
   
@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -281,7 +269,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          807 字
+          33k 字
         
       </span>
     
@@ -293,7 +281,7 @@
         
         
           <!-- compatible with older versions-->
-          7 分钟
+          276 分钟
         
       </span>
     
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657530068495-466100ba-7084-423c-aa6c-2e7070328a9f.png#clientId=udce5da6e-e414-4&from=markdown&id=G2JHM&originHeight=422&originWidth=752&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=325798&status=done&style=none&taskId=ufaea1ee1-e3a3-4fe4-80e5-b23d903b5f6&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657530068495-466100ba-7084-423c-aa6c-2e7070328a9f.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Python 是一个高层次的结合了解释性、编译性、互动性和面向对象的脚本语言。</p>
 <p>Python 的设计具有很强的可读性，相比其他语言经常使用英文关键字，其他语言的一些标点符号，它具有比其他语言更有特色语法结构。</p>
 <p>Python 是一种解释型语言： 这意味着开发过程中没有了编译这个环节。类似于PHP和Perl语言。</p>
@@ -360,9 +348,910 @@
 <p>8.数据库：Python提供所有主要的商业数据库的接口。</p>
 <p>9.GUI编程：Python支持GUI可以创建和移植到许多系统调用。</p>
 <p>10.可嵌入: 你可以将Python嵌入到C/C++程序，让你的程序的用户获得”脚本化”的能力。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt install python<br></code></pre></td></tr></table></figure>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt install python<br>python --version<br></code></pre></td></tr></table></figure>
+
+
 
 <p>或者去<a target="_blank" rel="noopener" href="https://www.python.org/downloads/">官网</a>下载</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1723901634300-fff785e4-c60d-471b-a7d0-e8776a8a16c0.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><h2 id="Python-命令行参数"><a href="#Python-命令行参数" class="headerlink" title="Python 命令行参数"></a><font style="color:rgb(51, 51, 51);">Python 命令行参数</font></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><code class="hljs shell">usage: /Users/biaoyang/PycharmProjects/python-awsome/venv/bin/python3 [option] ... [-c cmd | -m mod | file | -] [arg] ...<br>Options and arguments (and corresponding environment variables):<br>-b     : issue warnings about str(bytes_instance), str(bytearray_instance)<br>         and comparing bytes/bytearray with str. (-bb: issue errors)<br>-B     : don&#x27;t write .pyc files on import; also PYTHONDONTWRITEBYTECODE=x<br>-c cmd : program passed in as string (terminates option list)<br>-d     : debug output from parser; also PYTHONDEBUG=x<br>-E     : ignore PYTHON* environment variables (such as PYTHONPATH)<br>-h     : print this help message and exit (also --help)<br>-i     : inspect interactively after running script; forces a prompt even<br>         if stdin does not appear to be a terminal; also PYTHONINSPECT=x<br>-I     : isolate Python from the user&#x27;s environment (implies -E and -s)<br>-m mod : run library module as a script (terminates option list)<br>-O     : remove assert and __debug__-dependent statements; add .opt-1 before<br>         .pyc extension; also PYTHONOPTIMIZE=x<br>-OO    : do -O changes and also discard docstrings; add .opt-2 before<br>         .pyc extension<br>-q     : don&#x27;t print version and copyright messages on interactive startup<br>-s     : don&#x27;t add user site directory to sys.path; also PYTHONNOUSERSITE<br>-S     : don&#x27;t imply &#x27;import site&#x27; on initialization<br>-u     : force the stdout and stderr streams to be unbuffered;<br>         this option has no effect on stdin; also PYTHONUNBUFFERED=x<br>-v     : verbose (trace import statements); also PYTHONVERBOSE=x<br>         can be supplied multiple times to increase verbosity<br>-V     : print the Python version number and exit (also --version)<br>         when given twice, print more information about the build<br>-W arg : warning control; arg is action:message:category:module:lineno<br>         also PYTHONWARNINGS=arg<br>-x     : skip first line of source, allowing use of non-Unix forms of #!cmd<br>-X opt : set implementation-specific option. The following options are available:<br><br>         -X faulthandler: enable faulthandler<br>         -X showrefcount: output the total reference count and number of used<br>             memory blocks when the program finishes or after each statement in the<br>             interactive interpreter. This only works on debug builds<br>         -X tracemalloc: start tracing Python memory allocations using the<br>             tracemalloc module. By default, only the most recent frame is stored in a<br>             traceback of a trace. Use -X tracemalloc=NFRAME to start tracing with a<br>             traceback limit of NFRAME frames<br>         -X showalloccount: output the total count of allocated objects for each<br>             type when the program finishes. This only works when Python was built with<br>             COUNT_ALLOCS defined<br>         -X importtime: show how long each import takes. It shows module name,<br>             cumulative time (including nested imports) and self time (excluding<br>             nested imports). Note that its output may be broken in multi-threaded<br>             application. Typical usage is python3 -X importtime -c &#x27;import asyncio&#x27;<br>         -X dev: enable CPython&#x27;s &quot;development mode&quot;, introducing additional runtime<br>             checks which are too expensive to be enabled by default. Effect of the<br>             developer mode:<br>                * Add default warning filter, as -W default<br>                * Install debug hooks on memory allocators: see the PyMem_SetupDebugHooks() C function<br>                * Enable the faulthandler module to dump the Python traceback on a crash<br>                * Enable asyncio debug mode<br>                * Set the dev_mode attribute of sys.flags to True<br>                * io.IOBase destructor logs close() exceptions<br>         -X utf8: enable UTF-8 mode for operating system interfaces, overriding the default<br>             locale-aware mode. -X utf8=0 explicitly disables UTF-8 mode (even when it would<br>             otherwise activate automatically)<br>         -X pycache_prefix=PATH: enable writing .pyc files to a parallel tree rooted at the<br>             given directory instead of to the code tree<br><br>--check-hash-based-pycs always|default|never:<br>    control how Python invalidates hash-based .pyc files<br>file   : program read from script file<br>-      : program read from stdin (default; interactive mode if a tty)<br>arg ...: arguments passed to program in sys.argv[1:]<br><br>Other environment variables:<br>PYTHONSTARTUP: file executed on interactive startup (no default)<br>PYTHONPATH   : &#x27;:&#x27;-separated list of directories prefixed to the<br>               default module search path.  The result is sys.path.<br>PYTHONHOME   : alternate &lt;prefix&gt; directory (or &lt;prefix&gt;:&lt;exec_prefix&gt;).<br>               The default module search path uses &lt;prefix&gt;/lib/pythonX.X.<br>PYTHONCASEOK : ignore case in &#x27;import&#x27; statements (Windows).<br>PYTHONUTF8: if set to 1, enable the UTF-8 mode.<br>PYTHONIOENCODING: Encoding[:errors] used for stdin/stdout/stderr.<br>PYTHONFAULTHANDLER: dump the Python traceback on fatal errors.<br>PYTHONHASHSEED: if this variable is set to &#x27;random&#x27;, a random value is used<br>   to seed the hashes of str and bytes objects.  It can also be set to an<br>   integer in the range [0,4294967295] to get hash values with a<br>   predictable seed.<br>PYTHONMALLOC: set the Python memory allocators and/or install debug hooks<br>   on Python memory allocators. Use PYTHONMALLOC=debug to install debug<br>   hooks.<br>PYTHONCOERCECLOCALE: if this variable is set to 0, it disables the locale<br>   coercion behavior. Use PYTHONCOERCECLOCALE=warn to request display of<br>   locale coercion and locale compatibility warnings on stderr.<br>PYTHONBREAKPOINT: if this variable is set to 0, it disables the default<br>   debugger. It can be set to the callable of your debugger of choice.<br>PYTHONDEVMODE: enable the development mode.<br>PYTHONPYCACHEPREFIX: root directory for bytecode cache (pyc) files.<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h1><h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a><font style="color:rgb(51, 51, 51);">编码</font></h2><p><font style="color:rgb(51, 51, 51);">默认情况下，Python 3 源码文件以</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">UTF-8</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">编码，所有字符串都是 unicode 字符串。 当然你也可以为源码文件指定不同的编码：</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">-*- coding: cp-1252 -*-</span><br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);">上述定义允许在源文件中使用 Windows-1252 字符集中的字符编码，对应适合语言为保加利亚语、白俄罗斯语、马其顿语、俄语、塞尔维亚语。</font></p>
+<hr>
+<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a><font style="color:rgb(51, 51, 51);">标识符</font></h2><ul>
+<li><font style="color:rgb(51, 51, 51);">第一个字符必须是字母表中字母或下划线</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">_</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">。</font></li>
+<li><font style="color:rgb(51, 51, 51);">标识符的其他的部分由字母、数字和下划线组成。</font></li>
+<li><font style="color:rgb(51, 51, 51);">标识符对大小写敏感。</font></li>
+</ul>
+<p><font style="color:rgb(51, 51, 51);">在 Python 3 中，可以用中文作为变量名，非 ASCII 标识符也是允许的了。</font></p>
+<h2 id="Python-保留字符"><a href="#Python-保留字符" class="headerlink" title="Python 保留字符"></a><font style="color:rgb(51, 51, 51);">Python 保留字符</font></h2><p><font style="color:rgb(51, 51, 51);">下面的列表显示了在Python中的保留字。这些保留字不能用作常数或变数，或任何其他标识符名称。</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">保留字即关键字，我们不能把它们用作任何标识符名称。Python 的标准库提供了一个 keyword 模块，可以输出当前版本的所有关键字：</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; import keyword</span><br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; keyword.kwlist</span><br>[&#x27;False&#x27;, &#x27;None&#x27;, &#x27;True&#x27;, &#x27;and&#x27;, &#x27;as&#x27;, &#x27;assert&#x27;, &#x27;async&#x27;, &#x27;await&#x27;, &#x27;break&#x27;, &#x27;class&#x27;, &#x27;continue&#x27;, &#x27;def&#x27;, &#x27;del&#x27;, &#x27;elif&#x27;, &#x27;else&#x27;, &#x27;except&#x27;, &#x27;finally&#x27;, &#x27;for&#x27;, &#x27;from&#x27;, &#x27;global&#x27;, &#x27;if&#x27;, &#x27;import&#x27;, &#x27;in&#x27;, &#x27;is&#x27;, &#x27;lambda&#x27;, &#x27;nonlocal&#x27;, &#x27;not&#x27;, &#x27;or&#x27;, &#x27;pass&#x27;, &#x27;raise&#x27;, &#x27;return&#x27;, &#x27;try&#x27;, &#x27;while&#x27;, &#x27;with&#x27;, &#x27;yield&#x27;]<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">&gt;&gt;</span> <br><br></code></pre></td></tr></table></figure>
+
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ol>
+<li>单行注释：#</li>
+<li><font style="color:rgb(51, 51, 51);">多行注释可以用多个 </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">#</font></strong><font style="color:rgb(51, 51, 51);"> 号，还有 </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">‘’’</font></strong><font style="color:rgb(51, 51, 51);"> 和 </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">“””</font></strong><font style="color:rgb(51, 51, 51);">：</font></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/python3</span><br><br><span class="hljs-comment"># 第一个注释</span><br><span class="hljs-comment"># 第二个注释</span><br><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">第三注释</span><br><span class="hljs-string">第四注释</span><br><span class="hljs-string">&#x27;&#x27;&#x27;</span><br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">第五注释</span><br><span class="hljs-string">第六注释</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-built_in">print</span> (<span class="hljs-string">&quot;Hello, Python!&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="行和缩进"><a href="#行和缩进" class="headerlink" title="行和缩进"></a><font style="color:rgb(51, 51, 51);">行和缩进</font></h2><p><font style="color:rgb(51, 51, 51);">学习 Python 与其他语言最大的区别就是，Python 的代码块不使用大括号</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">{}</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">来控制类，函数以及其他逻辑判断。python 最具特色的就是用缩进来写模块。</font></p>
+<p><font style="color:rgb(51, 51, 51);">缩进的空白数量是可变的，但是所有代码块语句必须包含相同的缩进空白数量，这个必须严格执行。</font></p>
+<p><font style="color:rgb(51, 51, 51);">以下实例缩进为四个空格:</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-keyword">if</span> <span class="hljs-literal">True</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;True&quot;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;False&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);">Python 可以在同一行中使用多条语句，语句之间使用分号 </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">;</font></strong><font style="color:rgb(51, 51, 51);"> 分割，以下是一个简单的实例：</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys; x = <span class="hljs-string">&#x27;runoob&#x27;</span>; sys.stdout.write(x + <span class="hljs-string">&#x27;\n&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="多行语句"><a href="#多行语句" class="headerlink" title="多行语句"></a>多行语句</h2><p><font style="color:rgb(51, 51, 51);">Python 通常是一行写完一条语句，但如果语句很长，我们可以使用反斜杠</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">&lt;/font&gt;</strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">来实现多行语句，例如：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs plain">total = item_one + \<br>        item_two + \<br>        item_three<br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);">在 [], {}, 或 () 中的多行语句，不需要使用反斜杠</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">&lt;/font&gt;</strong><font style="color:rgb(51, 51, 51);">，例如：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plain">total = [&#x27;item_one&#x27;, &#x27;item_two&#x27;, &#x27;item_three&#x27;,<br>        &#x27;item_four&#x27;, &#x27;item_five&#x27;]<br></code></pre></td></tr></table></figure>
+
+<h2 id="用户输入"><a href="#用户输入" class="headerlink" title="用户输入"></a>用户输入</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># 用户输入</span><br>    name = <span class="hljs-built_in">input</span>(<span class="hljs-string">&#x27;Please enter your name: &#x27;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Hello,&#x27;</span>, name)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h2><p><font style="color:rgb(51, 51, 51);">在 python 用</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">import</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">或者</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">from…import</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">来导入相应的模块。</font></p>
+<p><font style="color:rgb(51, 51, 51);">将整个模块(somemodule)导入，格式为：</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">import somemodule</font></strong></p>
+<p><font style="color:rgb(51, 51, 51);">从某个模块中导入某个函数,格式为：</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">from somemodule import somefunction</font></strong></p>
+<p><font style="color:rgb(51, 51, 51);">从某个模块中导入多个函数,格式为：</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">from somemodule import firstfunc, secondfunc, thirdfunc</font></strong></p>
+<p><font style="color:rgb(51, 51, 51);">将某个模块中的全部函数导入，格式为： </font>*<em><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">from somemodule import <em></font></em></em></p>
+<p><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);"></font></strong></p>
+<ol>
+<li>导入模块</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;================Python import mode==========================&#x27;</span>)<br><span class="hljs-built_in">print</span> (<span class="hljs-string">&#x27;命令行参数为:&#x27;</span>)<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> sys.argv:<br>    <span class="hljs-built_in">print</span> (i)<br><span class="hljs-built_in">print</span> (<span class="hljs-string">&#x27;\n python 路径为&#x27;</span>,sys.path)<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>导入模块中的指定成员</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sys <span class="hljs-keyword">import</span> argv,path  <span class="hljs-comment">#  导入特定的成员</span><br> <br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;================python from import===================================&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;path:&#x27;</span>,path) <span class="hljs-comment"># 因为已经导入path成员，所以此处引用时不需要加sys.path</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><h3 id="标准数据类型"><a href="#标准数据类型" class="headerlink" title="标准数据类型"></a><font style="color:rgb(51, 51, 51);">标准数据类型</font></h3><p><font style="color:rgb(51, 51, 51);">Python3 中常见的数据类型有：</font></p>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">Number（数字）</font></li>
+<li><font style="color:rgb(51, 51, 51);">String（字符串）</font></li>
+<li><font style="color:rgb(51, 51, 51);">bool（布尔类型）</font></li>
+<li><font style="color:rgb(51, 51, 51);">List（列表）</font></li>
+<li><font style="color:rgb(51, 51, 51);">Tuple（元组）</font></li>
+<li><font style="color:rgb(51, 51, 51);">Set（集合）</font></li>
+<li><font style="color:rgb(51, 51, 51);">Dictionary（字典）</font></li>
+</ul>
+<p><font style="color:rgb(51, 51, 51);">Python3 的六个标准数据类型中：</font></p>
+<ul>
+<li><strong><font style="color:rgb(51, 51, 51);">不可变数据（3 个）：</font></strong><font style="color:rgb(51, 51, 51);">Number（数字）、String（字符串）、Tuple（元组）；</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">可变数据（3 个）：</font></strong><font style="color:rgb(51, 51, 51);">List（列表）、Dictionary（字典）、Set（集合）。</font></li>
+</ul>
+<p><font style="color:rgb(51, 51, 51);">此外还有一些高级的数据类型，如: 字节数组类型(bytes)。</font></p>
+<h3 id="数字-Number-类型"><a href="#数字-Number-类型" class="headerlink" title="数字(Number)类型"></a>数字(Number)类型</h3><p><font style="color:rgb(51, 51, 51);">python中数字有四种类型：整数、布尔型、浮点数和复数。</font></p>
+<ul>
+<li><strong><font style="color:rgb(51, 51, 51);">int</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">(整数), 如 1, 只有一种整数类型 int，表示为长整型，没有 python2 中的 Long。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">bool</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">(布尔), 如 True。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">float</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">(浮点数), 如 1.23、3E-2</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">complex</font></strong><font style="color:rgb(51, 51, 51);"> (复数) - 复数由实部和虚部组成，形式为 a + bj，其中 a 是实部，b 是虚部，j 表示虚数单位。如 1 + 2j、 1.1 + 2.2j</font></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># 整数</span><br>    integer_number = <span class="hljs-number">10</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Integer Number:&#x27;</span>, integer_number)<br>    <span class="hljs-comment"># 布尔类型</span><br>    boolean = <span class="hljs-literal">True</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Boolean:&#x27;</span>, boolean)<br>    <span class="hljs-comment"># 浮点数</span><br>    float_number = <span class="hljs-number">10.5</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Float Number:&#x27;</span>, float_number)<br>    <span class="hljs-comment"># 复数</span><br>    complex_number = <span class="hljs-number">1</span> + <span class="hljs-number">2j</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Real Part:&#x27;</span>, complex_number.real)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Imaginary Part:&#x27;</span>, complex_number.imag)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Complex Number:&#x27;</span>, complex_number)<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="字符串-String"><a href="#字符串-String" class="headerlink" title="字符串(String)"></a>字符串(String)</h3><ul>
+<li><font style="color:rgb(51, 51, 51);">Python 中单引号</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">‘</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">和双引号</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">“</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">使用完全相同。</font></li>
+<li><font style="color:rgb(51, 51, 51);">使用三引号(</font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">‘’’</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">或</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">“””</font></strong><font style="color:rgb(51, 51, 51);">)可以指定一个多行字符串。</font></li>
+<li><font style="color:rgb(51, 51, 51);">转义符</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">&lt;/font&gt;</strong><font style="color:rgb(51, 51, 51);">。</font></li>
+<li><font style="color:rgb(51, 51, 51);">反斜杠可以用来转义，使用</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">r</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">可以让反斜杠不发生转义。 如</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">r”this is a line with \n”</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">则</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">\n</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">会显示，并不是换行。</font></li>
+<li><font style="color:rgb(51, 51, 51);">按字面意义级联字符串，如</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">“this “ “is “ “string”</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">会被自动转换为</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">this is string</font></strong><font style="color:rgb(51, 51, 51);">。</font></li>
+<li><font style="color:rgb(51, 51, 51);">字符串可以用</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">+</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">运算符连接在一起，用</font><font style="color:rgb(51, 51, 51);"> </font>*<em><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);"></em></font>**<font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">运算符重复。</font></li>
+<li><font style="color:rgb(51, 51, 51);">Python 中的字符串有两种索引方式，从左往右以</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">0</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">开始，从右往左以</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">-1</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">开始。</font></li>
+<li><font style="color:rgb(51, 51, 51);">Python 中的字符串不能改变。</font></li>
+<li><font style="color:rgb(51, 51, 51);">Python 没有单独的字符类型，一个字符就是长度为 1 的字符串。</font></li>
+<li><font style="color:rgb(51, 51, 51);">字符串切片</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">str[start:end]</font></strong><font style="color:rgb(51, 51, 51);">，其中 start（包含）是切片开始的索引，end（不包含）是切片结束的索引。</font></li>
+<li><font style="color:rgb(51, 51, 51);">字符串的切片可以加上步长参数 step，语法格式如下：</font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">str[start:end:step]</font></strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># 字符串</span><br>    string = <span class="hljs-string">&#x27;Hello, Python!&#x27;</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;String:&#x27;</span>, string)<br>    <span class="hljs-comment"># 字符串长度</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;String Length:&#x27;</span>, <span class="hljs-built_in">len</span>(string))<br>    <span class="hljs-comment"># 字符串索引</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;String Index:&#x27;</span>, string[<span class="hljs-number">0</span>])<br>    <span class="hljs-comment"># 字符串切片</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;String Slice:&#x27;</span>, string[<span class="hljs-number">0</span>:<span class="hljs-number">5</span>])<br>    <span class="hljs-comment"># 指定步长</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;String Slice:&#x27;</span>, string[<span class="hljs-number">0</span>:<span class="hljs-number">5</span>:<span class="hljs-number">2</span>])<br>    <span class="hljs-comment"># 字符串拼接</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;String Concatenation:&#x27;</span>, string + <span class="hljs-string">&#x27; I am learning Python.&#x27;</span>)<br>    <span class="hljs-comment"># 转义</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Escape:&#x27;</span>, <span class="hljs-string">&#x27;I\&#x27;m learning Python.&#x27;</span>)<br>    <span class="hljs-comment"># 原始字符串</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Raw String:&#x27;</span>, <span class="hljs-string">r&#x27;I\&#x27;m learning Python.&#x27;</span>)<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="bool-布尔类型"><a href="#bool-布尔类型" class="headerlink" title="bool(布尔类型)"></a>bool(布尔类型)</h3><p>布尔类型即：True/False</p>
+<ol>
+<li><font style="color:rgb(51, 51, 51);">bool 是 int 的子类，因此布尔值可以被看作整数来使用，其中 True 等价于 1。</font></li>
+</ol>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># 布尔类型的值和类型</span><br>    a = <span class="hljs-literal">True</span><br>    b = <span class="hljs-literal">False</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(a))  <span class="hljs-comment"># &lt;class &#x27;bool&#x27;&gt;</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(b))  <span class="hljs-comment"># &lt;class &#x27;bool&#x27;&gt;</span><br><br>    <span class="hljs-comment"># 布尔类型的整数表现</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">int</span>(<span class="hljs-literal">True</span>))  <span class="hljs-comment"># 1</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">int</span>(<span class="hljs-literal">False</span>))  <span class="hljs-comment"># 0</span><br><br>    <span class="hljs-comment"># 使用 bool() 函数进行转换</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>(<span class="hljs-number">0</span>))  <span class="hljs-comment"># False</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>(<span class="hljs-number">42</span>))  <span class="hljs-comment"># True</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>(<span class="hljs-string">&#x27;&#x27;</span>))  <span class="hljs-comment"># False</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>(<span class="hljs-string">&#x27;Python&#x27;</span>))  <span class="hljs-comment"># True</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>([]))  <span class="hljs-comment"># False</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]))  <span class="hljs-comment"># True</span><br><br>    <span class="hljs-comment"># 布尔逻辑运算</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-literal">True</span> <span class="hljs-keyword">and</span> <span class="hljs-literal">False</span>)  <span class="hljs-comment"># False</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-literal">True</span> <span class="hljs-keyword">or</span> <span class="hljs-literal">False</span>)  <span class="hljs-comment"># True</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-keyword">not</span> <span class="hljs-literal">True</span>)  <span class="hljs-comment"># False</span><br><br>    <span class="hljs-comment"># 布尔比较运算</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-number">5</span> &gt; <span class="hljs-number">3</span>)  <span class="hljs-comment"># True</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-number">2</span> == <span class="hljs-number">2</span>)  <span class="hljs-comment"># True</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-number">7</span> &lt; <span class="hljs-number">4</span>)  <span class="hljs-comment"># False</span><br><br>    <span class="hljs-comment"># 布尔值在控制流中的应用</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-literal">True</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;This will always print&quot;</span>)<br><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">False</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;This will also always print&quot;</span>)<br><br>    x = <span class="hljs-number">10</span><br>    <span class="hljs-keyword">if</span> x:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;x is non-zero and thus True in a boolean context&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="List-列表"><a href="#List-列表" class="headerlink" title="List(列表)"></a>List(列表)</h3><p><font style="color:rgb(51, 51, 51);">列表可以完成大多数集合类的数据结构实现。列表中元素的类型可以不相同，它支持数字，字符串甚至可以包含列表（所谓嵌套）。</font></p>
+<p><font style="color:rgb(51, 51, 51);">列表是写在方括号</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">[]</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">之间、用逗号分隔开的元素列表。</font></p>
+<p><font style="color:rgb(51, 51, 51);">和字符串一样，列表同样可以被索引和截取，列表被截取后返回一个包含所需元素的新列表。</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">加号 </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">+</font></strong><font style="color:rgb(51, 51, 51);"> 是列表连接运算符，星号 </font>*<em><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);"></em></font>**<font style="color:rgb(51, 51, 51);"> 是重复操作。</font></p>
+<p><font style="color:rgb(51, 51, 51);">List 内置了有很多方法，例如 append()、pop() 等等</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># !/usr/bin/python3</span><br><br>    <span class="hljs-built_in">list</span> = [<span class="hljs-string">&#x27;abcd&#x27;</span>, <span class="hljs-number">786</span>, <span class="hljs-number">2.23</span>, <span class="hljs-string">&#x27;runoob&#x27;</span>, <span class="hljs-number">70.2</span>]  <span class="hljs-comment"># 定义一个列表</span><br>    tinylist = [<span class="hljs-number">123</span>, <span class="hljs-string">&#x27;runoob&#x27;</span>]<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>)  <span class="hljs-comment"># 打印整个列表</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>[<span class="hljs-number">0</span>])  <span class="hljs-comment"># 打印列表的第一个元素</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>[<span class="hljs-number">1</span>:<span class="hljs-number">3</span>])  <span class="hljs-comment"># 打印列表第二到第四个元素（不包含第四个元素）</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>[<span class="hljs-number">2</span>:])  <span class="hljs-comment"># 打印列表从第三个元素开始到末尾</span><br>    <span class="hljs-built_in">print</span>(tinylist * <span class="hljs-number">2</span>)  <span class="hljs-comment"># 打印tinylist列表两次</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span> + tinylist)  <span class="hljs-comment"># 打印两个列表拼接在一起的结果</span><br><br>    <span class="hljs-built_in">list</span>.append(<span class="hljs-string">&#x27;new&#x27;</span>)  <span class="hljs-comment"># 在列表末尾添加一个新元素</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">list</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="Tuple-元组"><a href="#Tuple-元组" class="headerlink" title="Tuple(元组)"></a>Tuple(元组)</h3><p><font style="color:rgb(51, 51, 51);">元组（tuple）与列表类似，不同之处在于元组的元素不能修改。元组写在小括号 </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">()</font></strong><font style="color:rgb(51, 51, 51);"> 里，元素之间用逗号隔开。有点类似常量数组。</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">虽然tuple的元素不可改变，但它可以包含可变的对象，比如list列表。</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">元组中的元素类型也可以不相同：</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-built_in">tuple</span> = (<span class="hljs-string">&#x27;abcd&#x27;</span>, <span class="hljs-number">786</span>, <span class="hljs-number">2.23</span>, <span class="hljs-string">&#x27;runoob&#x27;</span>, <span class="hljs-number">70.2</span>)<br>    tinytuple = (<span class="hljs-number">123</span>, <span class="hljs-string">&#x27;runoob&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">tuple</span>)  <span class="hljs-comment"># 输出完整元组</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">tuple</span>[<span class="hljs-number">0</span>])  <span class="hljs-comment"># 输出元组的第一个元素</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">tuple</span>[<span class="hljs-number">1</span>:<span class="hljs-number">3</span>])  <span class="hljs-comment"># 输出从第二个元素开始到第三个元素</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">tuple</span>[<span class="hljs-number">2</span>:])  <span class="hljs-comment"># 输出从第三个元素开始的所有元素</span><br>    <span class="hljs-built_in">print</span>(tinytuple * <span class="hljs-number">2</span>)  <span class="hljs-comment"># 输出两次元组</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">tuple</span> + tinytuple)  <span class="hljs-comment"># 连接元组</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Set-集合"><a href="#Set-集合" class="headerlink" title="Set(集合)"></a><font style="color:rgb(51, 51, 51);">Set(集合)</font></h3><p><font style="color:rgb(51, 51, 51);">Python 中的集合（Set）是一种无序、可变的数据类型，用于存储唯一的元素。</font></p>
+<p><font style="color:rgb(51, 51, 51);">集合中的元素不会重复，并且可以进行交集、并集、差集等常见的集合操作。</font></p>
+<p><font style="color:rgb(51, 51, 51);">在 Python 中，集合使用大括号</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">{}</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">表示，元素之间用逗号</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">,</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">分隔。</font></p>
+<p><font style="color:rgb(51, 51, 51);">另外，也可以使用</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">set()</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">函数创建集合。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">注意：</font></strong><font style="color:rgb(51, 51, 51);">创建一个空集合必须用</font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);"> </font>**</strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">set()</font><strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">而不是</font><font style="color:rgb(51, 51, 51);"> </font></strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">{ }</font><strong><font style="color:rgb(51, 51, 51);">，因为</font><font style="color:rgb(51, 51, 51);"> </font></strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">{ }</font>**<font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">是用来创建一个空字典。</font></p>
+<p><font style="color:rgb(51, 51, 51);">创建格式：</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">parame = &#123;value01,value02,...&#125;<br>或者<br><span class="hljs-built_in">set</span>(value)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># 集合</span><br>    set1 = &#123;<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>&#125;<br>    set2 = &#123;<span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>&#125;<br>    <span class="hljs-built_in">print</span>(set1)  <span class="hljs-comment"># 输出集合，重复的元素会被自动去掉</span><br>    <span class="hljs-built_in">print</span>(set2)<br>    <span class="hljs-comment"># set可以进行集合运算</span><br>    a = <span class="hljs-built_in">set</span>(<span class="hljs-string">&#x27;abracadabra&#x27;</span>)<br>    b = <span class="hljs-built_in">set</span>(<span class="hljs-string">&#x27;alacazam&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(a)<br>    <span class="hljs-built_in">print</span>(a - b)  <span class="hljs-comment"># a 和 b 的差集</span><br>    <span class="hljs-built_in">print</span>(a | b)  <span class="hljs-comment"># a 和 b 的并集</span><br>    <span class="hljs-built_in">print</span>(a &amp; b)  <span class="hljs-comment"># a 和 b 的交集</span><br>    <span class="hljs-built_in">print</span>(a ^ b)  <span class="hljs-comment"># a 和 b 中不同时存在的元素</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="字典-字典"><a href="#字典-字典" class="headerlink" title="字典(字典)"></a><font style="color:rgb(51, 51, 51);">字典(字典)</font></h3><p><font style="color:rgb(51, 51, 51);">字典是一种映射类型，字典用</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">{ }</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">标识，它是一个无序的</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">键(key) : 值(value)</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">的集合。</font></p>
+<p><font style="color:rgb(51, 51, 51);">键(key)必须使用不可变类型。</font></p>
+<p><font style="color:rgb(51, 51, 51);">在同一个字典中，键(key)必须是唯一的。</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># 字典</span><br>    <span class="hljs-built_in">dict</span> = &#123;&#125;<br>    <span class="hljs-built_in">dict</span>[<span class="hljs-string">&#x27;one&#x27;</span>] = <span class="hljs-string">&#x27;This is one&#x27;</span><br>    <span class="hljs-built_in">dict</span>[<span class="hljs-number">2</span>] = <span class="hljs-string">&#x27;This is two&#x27;</span><br>    tinydict = &#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;mikey&#x27;</span>, <span class="hljs-string">&#x27;code&#x27;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&#x27;site&#x27;</span>: <span class="hljs-string">&#x27;www.biadu.com&#x27;</span>&#125;<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">dict</span>[<span class="hljs-string">&#x27;one&#x27;</span>])  <span class="hljs-comment"># 输出键为&#x27;one&#x27;的值</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">dict</span>[<span class="hljs-number">2</span>])  <span class="hljs-comment"># 输出键为 2 的值</span><br>    <span class="hljs-built_in">print</span>(tinydict)  <span class="hljs-comment"># 输出完整的字典</span><br>    <span class="hljs-built_in">print</span>(tinydict.keys())  <span class="hljs-comment"># 输出所有键</span><br>    <span class="hljs-built_in">print</span>(tinydict.values())  <span class="hljs-comment"># 输出所有值</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="bytes类型"><a href="#bytes类型" class="headerlink" title="bytes类型"></a><font style="color:rgb(51, 51, 51);">bytes类型</font></h3><p><font style="color:rgb(51, 51, 51);">在 Python3 中，bytes 类型表示的是不可变的二进制序列（byte sequence）。</font></p>
+<p><font style="color:rgb(51, 51, 51);">与字符串类型不同的是，bytes 类型中的元素是整数值（0 到 255 之间的整数），而不是 Unicode 字符。</font></p>
+<p><font style="color:rgb(51, 51, 51);">bytes 类型通常用于处理二进制数据，比如图像文件、音频文件、视频文件等等。在网络编程中，也经常使用 bytes 类型来传输二进制数据。</font></p>
+<p><font style="color:rgb(51, 51, 51);">创建 bytes 对象的方式有多种，最常见的方式是使用 b 前缀：</font></p>
+<p><font style="color:rgb(51, 51, 51);">此外，也可以使用 bytes() 函数将其他类型的对象转换为 bytes 类型。bytes() 函数的第一个参数是要转换的对象，第二个参数是编码方式，如果省略第二个参数，则默认使用 UTF-8 编码：</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">x = <span class="hljs-built_in">bytes</span>(<span class="hljs-string">&quot;hello&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);">与字符串类型类似，bytes 类型也支持许多操作和方法，如切片、拼接、查找、替换等等。同时，由于 bytes 类型是不可变的，因此在进行修改操作时需要创建一个新的 bytes 对象。例如：</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">x = <span class="hljs-string">b&quot;hello&quot;</span><br>y = x[<span class="hljs-number">1</span>:<span class="hljs-number">3</span>]  <span class="hljs-comment"># 切片操作，得到 b&quot;el&quot;</span><br>z = x + <span class="hljs-string">b&quot;world&quot;</span>  <span class="hljs-comment"># 拼接操作，得到 b&quot;helloworld&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Python类型转换"><a href="#Python类型转换" class="headerlink" title="Python类型转换"></a><font style="color:rgb(51, 51, 51);">Python类型转换</font></h3><table>
+<thead>
+<tr>
+<th><font style="color:rgb(255, 255, 255);">函数</font></th>
+<th><font style="color:rgb(255, 255, 255);">描述</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-func-int.html"><font style="color:rgb(51, 51, 51);">int(x [,base])</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">将x转换为一个整数</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-func-float.html"><font style="color:rgb(51, 51, 51);">float(x)</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">将x转换到一个浮点数</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-func-complex.html"><font style="color:rgb(51, 51, 51);">complex(real [,imag])</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">创建一个复数</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-func-str.html"><font style="color:rgb(51, 51, 51);">str(x)</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">将对象 x 转换为字符串</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-func-repr.html"><font style="color:rgb(51, 51, 51);">repr(x)</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">将对象 x 转换为表达式字符串</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-func-eval.html"><font style="color:rgb(51, 51, 51);">eval(str)</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">用来计算在字符串中的有效Python表达式,并返回一个对象</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-func-tuple.html"><font style="color:rgb(51, 51, 51);">tuple(s)</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">将序列 s 转换为一个元组</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-att-list-list.html"><font style="color:rgb(51, 51, 51);">list(s)</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">将序列 s 转换为一个列表</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-func-set.html"><font style="color:rgb(51, 51, 51);">set(s)</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">转换为可变集合</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-func-dict.html"><font style="color:rgb(51, 51, 51);">dict(d)</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">创建一个字典。d 必须是一个 (key, value)元组序列。</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-func-frozenset.html"><font style="color:rgb(51, 51, 51);">frozenset(s)</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">转换为不可变集合</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-func-chr.html"><font style="color:rgb(51, 51, 51);">chr(x)</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">将一个整数转换为一个字符</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-func-ord.html"><font style="color:rgb(51, 51, 51);">ord(x)</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">将一个字符转换为它的整数值</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-func-hex.html"><font style="color:rgb(51, 51, 51);">hex(x)</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">将一个整数转换为一个十六进制字符串</font></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-func-oct.html"><font style="color:rgb(51, 51, 51);">oct(x)</font></a></td>
+<td><font style="color:rgb(51, 51, 51);">将一个整数转换为一个八进制字符串</font></td>
+</tr>
+</tbody></table>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a><font style="color:rgb(51, 51, 51);">运算符</font></h2><h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><p><font style="color:rgb(51, 51, 51);">以下假设变量</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">a=10</font></strong><font style="color:rgb(51, 51, 51);">，变量</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">b=21</font></strong><font style="color:rgb(51, 51, 51);">：</font></p>
+<table>
+<thead>
+<tr>
+<th><font style="color:rgb(255, 255, 255);">运算符</font></th>
+<th><font style="color:rgb(255, 255, 255);">描述</font></th>
+<th><font style="color:rgb(255, 255, 255);">实例</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font style="color:rgb(51, 51, 51);">+</font></td>
+<td><font style="color:rgb(51, 51, 51);">加 - 两个对象相加</font></td>
+<td><font style="color:rgb(51, 51, 51);">a + b 输出结果 31</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-</font></td>
+<td><font style="color:rgb(51, 51, 51);">减 - 得到负数或是一个数减去另一个数</font></td>
+<td><font style="color:rgb(51, 51, 51);">a - b 输出结果 -11</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">*</font></td>
+<td><font style="color:rgb(51, 51, 51);">乘 - 两个数相乘或是返回一个被重复若干次的字符串</font></td>
+<td><font style="color:rgb(51, 51, 51);">a * b 输出结果 210</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">/</font></td>
+<td><font style="color:rgb(51, 51, 51);">除 - x 除以 y</font></td>
+<td><font style="color:rgb(51, 51, 51);">b / a 输出结果 2.1</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">%</font></td>
+<td><font style="color:rgb(51, 51, 51);">取模 - 返回除法的余数</font></td>
+<td><font style="color:rgb(51, 51, 51);">b % a 输出结果 1</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">**</font></td>
+<td><font style="color:rgb(51, 51, 51);">幂 - 返回x的y次幂</font></td>
+<td><font style="color:rgb(51, 51, 51);">a**b 为10的21次方</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">//</font></td>
+<td><font style="color:rgb(51, 51, 51);">取整除 - 往小的方向取整数</font></td>
+<td><code>plain &gt;&gt;&gt; 9//2 4 &gt;&gt;&gt; -9//2 -5 </code></td>
+</tr>
+</tbody></table>
+<h3 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h3><p><font style="color:rgb(51, 51, 51);">以下假设变量 a 为 10，变量 b 为20：</font></p>
+<table>
+<thead>
+<tr>
+<th><font style="color:rgb(255, 255, 255);">运算符</font></th>
+<th><font style="color:rgb(255, 255, 255);">描述</font></th>
+<th><font style="color:rgb(255, 255, 255);">实例</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font style="color:rgb(51, 51, 51);">==</font></td>
+<td><font style="color:rgb(51, 51, 51);">等于 - 比较对象是否相等</font></td>
+<td><font style="color:rgb(51, 51, 51);">(a == b) 返回 False。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">!=</font></td>
+<td><font style="color:rgb(51, 51, 51);">不等于 - 比较两个对象是否不相等</font></td>
+<td><font style="color:rgb(51, 51, 51);">(a != b) 返回 True。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">&gt;</font></td>
+<td><font style="color:rgb(51, 51, 51);">大于 - 返回x是否大于y</font></td>
+<td><font style="color:rgb(51, 51, 51);">(a &gt; b) 返回 False。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">&lt;</font></td>
+<td><font style="color:rgb(51, 51, 51);">小于 - 返回x是否小于y。所有比较运算符返回1表示真，返回0表示假。这分别与特殊的变量True和False等价。注意，这些变量名的大写。</font></td>
+<td><font style="color:rgb(51, 51, 51);">(a &lt; b) 返回 True。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">&gt;=</font></td>
+<td><font style="color:rgb(51, 51, 51);">大于等于 - 返回x是否大于等于y。</font></td>
+<td><font style="color:rgb(51, 51, 51);">(a &gt;= b) 返回 False。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">&lt;=</font></td>
+<td><font style="color:rgb(51, 51, 51);">小于等于 - 返回x是否小于等于y。</font></td>
+<td><font style="color:rgb(51, 51, 51);">(a &lt;= b) 返回 True。</font></td>
+</tr>
+</tbody></table>
+<h3 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h3><p><font style="color:rgb(51, 51, 51);">以下假设变量a为10，变量b为20：</font></p>
+<table>
+<thead>
+<tr>
+<th><font style="color:rgb(255, 255, 255);">运算符</font></th>
+<th><font style="color:rgb(255, 255, 255);">描述</font></th>
+<th><font style="color:rgb(255, 255, 255);">实例</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font style="color:rgb(51, 51, 51);">=</font></td>
+<td><font style="color:rgb(51, 51, 51);">简单的赋值运算符</font></td>
+<td><font style="color:rgb(51, 51, 51);">c = a + b 将 a + b 的运算结果赋值为 c</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">+=</font></td>
+<td><font style="color:rgb(51, 51, 51);">加法赋值运算符</font></td>
+<td><font style="color:rgb(51, 51, 51);">c += a 等效于 c = c + a</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-=</font></td>
+<td><font style="color:rgb(51, 51, 51);">减法赋值运算符</font></td>
+<td><font style="color:rgb(51, 51, 51);">c -= a 等效于 c = c - a</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">*=</font></td>
+<td><font style="color:rgb(51, 51, 51);">乘法赋值运算符</font></td>
+<td><font style="color:rgb(51, 51, 51);">c *= a 等效于 c = c * a</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">/=</font></td>
+<td><font style="color:rgb(51, 51, 51);">除法赋值运算符</font></td>
+<td><font style="color:rgb(51, 51, 51);">c /= a 等效于 c = c / a</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">%=</font></td>
+<td><font style="color:rgb(51, 51, 51);">取模赋值运算符</font></td>
+<td><font style="color:rgb(51, 51, 51);">c %= a 等效于 c = c % a</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">**=</font></td>
+<td><font style="color:rgb(51, 51, 51);">幂赋值运算符</font></td>
+<td><font style="color:rgb(51, 51, 51);">c **= a 等效于 c = c ** a</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">//=</font></td>
+<td><font style="color:rgb(51, 51, 51);">取整除赋值运算符</font></td>
+<td><font style="color:rgb(51, 51, 51);">c //= a 等效于 c = c // a</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">:=</font></td>
+<td><font style="color:rgb(51, 51, 51);">海象运算符，这个运算符的主要目的是在表达式中同时进行赋值和返回赋值的值。</font><strong><font style="color:rgb(51, 51, 51);">Python3.8 版本新增运算符</font></strong><font style="color:rgb(51, 51, 51);">。</font></td>
+<td><font style="color:rgb(51, 51, 51);">在这个示例中，赋值表达式可以避免调用 len() 两次:</font><br/><code>plain if (n := len(a)) &gt; 10:     print(f&quot;List is too long (&#123;n&#125; elements, expected &lt;= 10)&quot;) </code></td>
+</tr>
+</tbody></table>
+<h3 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h3><table>
+<thead>
+<tr>
+<th><font style="color:rgb(255, 255, 255);">运算符</font></th>
+<th><font style="color:rgb(255, 255, 255);">描述</font></th>
+<th><font style="color:rgb(255, 255, 255);">实例</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font style="color:rgb(51, 51, 51);">&amp;</font></td>
+<td><font style="color:rgb(51, 51, 51);">按位与运算符：参与运算的两个值,如果两个相应位都为1,则该位的结果为1,否则为0</font></td>
+<td><font style="color:rgb(51, 51, 51);">(a &amp; b) 输出结果 12 ，二进制解释： 0000 1100</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);"></td>
+<td></font></td>
+<td><font style="color:rgb(51, 51, 51);">按位或运算符：只要对应的二个二进位有一个为1时，结果位就为1。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">^</font></td>
+<td><font style="color:rgb(51, 51, 51);">按位异或运算符：当两对应的二进位相异时，结果为1</font></td>
+<td><font style="color:rgb(51, 51, 51);">(a ^ b) 输出结果 49 ，二进制解释： 0011 0001</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">~</font></td>
+<td><font style="color:rgb(51, 51, 51);">按位取反运算符：对数据的每个二进制位取反,即把1变为0,把0变为1。</font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">~x</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">类似于</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">-x-1</font></strong></td>
+<td><font style="color:rgb(51, 51, 51);">(~a ) 输出结果 -61 ，二进制解释： 1100 0011， 在一个有符号二进制数的补码形式。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">&lt;&lt;</font></td>
+<td><font style="color:rgb(51, 51, 51);">左移动运算符：运算数的各二进位全部左移若干位，由”&lt;&lt;”右边的数指定移动的位数，高位丢弃，低位补0。</font></td>
+<td><font style="color:rgb(51, 51, 51);">a &lt;&lt; 2 输出结果 240 ，二进制解释： 1111 0000</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">&gt;&gt;</font></td>
+<td><font style="color:rgb(51, 51, 51);">右移动运算符：把”&gt;&gt;”左边的运算数的各二进位全部右移若干位，”&gt;&gt;”右边的数指定移动的位数</font></td>
+<td><font style="color:rgb(51, 51, 51);">a &gt;&gt; 2 输出结果 15 ，二进制解释： 0000 1111</font></td>
+</tr>
+</tbody></table>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><p><font style="color:rgb(51, 51, 51);">Python语言支持逻辑运算符，以下假设变量 a 为 10, b为 20:</font></p>
+<table>
+<thead>
+<tr>
+<th><font style="color:rgb(255, 255, 255);">运算符</font></th>
+<th><font style="color:rgb(255, 255, 255);">逻辑表达式</font></th>
+<th><font style="color:rgb(255, 255, 255);">描述</font></th>
+<th><font style="color:rgb(255, 255, 255);">实例</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font style="color:rgb(51, 51, 51);">and</font></td>
+<td><font style="color:rgb(51, 51, 51);">x and y</font></td>
+<td><font style="color:rgb(51, 51, 51);">布尔”与” - 如果 x 为 False，x and y 返回 x 的值，否则返回 y 的计算值。</font></td>
+<td><font style="color:rgb(51, 51, 51);">(a and b) 返回 20。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">or</font></td>
+<td><font style="color:rgb(51, 51, 51);">x or y</font></td>
+<td><font style="color:rgb(51, 51, 51);">布尔”或” - 如果 x 是 True，它返回 x 的值，否则它返回 y 的计算值。</font></td>
+<td><font style="color:rgb(51, 51, 51);">(a or b) 返回 10。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">not</font></td>
+<td><font style="color:rgb(51, 51, 51);">not x</font></td>
+<td><font style="color:rgb(51, 51, 51);">布尔”非” - 如果 x 为 True，返回 False 。如果 x 为 False，它返回 True。</font></td>
+<td><font style="color:rgb(51, 51, 51);">not(a and b) 返回 False</font></td>
+</tr>
+</tbody></table>
+<h3 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a>成员运算符</h3><p><font style="color:rgb(51, 51, 51);">除了以上的一些运算符之外，Python还支持成员运算符，测试实例中包含了一系列的成员，包括字符串，列表或元组。</font></p>
+<table>
+<thead>
+<tr>
+<th><font style="color:rgb(255, 255, 255);">运算符</font></th>
+<th><font style="color:rgb(255, 255, 255);">描述</font></th>
+<th><font style="color:rgb(255, 255, 255);">实例</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font style="color:rgb(51, 51, 51);">in</font></td>
+<td><font style="color:rgb(51, 51, 51);">如果在指定的序列中找到值返回 True，否则返回 False。</font></td>
+<td><font style="color:rgb(51, 51, 51);">x 在 y 序列中 , 如果 x 在 y 序列中返回 True。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">not in</font></td>
+<td><font style="color:rgb(51, 51, 51);">如果在指定的序列中没有找到值返回 True，否则返回 False。</font></td>
+<td><font style="color:rgb(51, 51, 51);">x 不在 y 序列中 , 如果 x 不在 y 序列中返回 True。</font></td>
+</tr>
+</tbody></table>
+<h3 id="身份运算符"><a href="#身份运算符" class="headerlink" title="身份运算符"></a><font style="color:rgb(51, 51, 51);">身份运算符</font></h3><p><font style="color:rgb(51, 51, 51);">身份运算符用于比较两个对象的存储单元</font></p>
+<table>
+<thead>
+<tr>
+<th><font style="color:rgb(255, 255, 255);">运算符</font></th>
+<th><font style="color:rgb(255, 255, 255);">描述</font></th>
+<th><font style="color:rgb(255, 255, 255);">实例</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font style="color:rgb(51, 51, 51);">is</font></td>
+<td><font style="color:rgb(51, 51, 51);">is 是判断两个标识符是不是引用自一个对象</font></td>
+<td><strong><font style="color:rgb(51, 51, 51);">x is y</font></strong><font style="color:rgb(51, 51, 51);">, 类似</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">id(x) == id(y)</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">, 如果引用的是同一个对象则返回 True，否则返回 False</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">is not</font></td>
+<td><font style="color:rgb(51, 51, 51);">is not 是判断两个标识符是不是引用自不同对象</font></td>
+<td><strong><font style="color:rgb(51, 51, 51);">x is not y</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">， 类似</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">id(x) != id(y)</font></strong><font style="color:rgb(51, 51, 51);">。如果引用的不是同一个对象则返回结果 True，否则返回 False。</font></td>
+</tr>
+</tbody></table>
+<p><strong><font style="color:rgb(51, 51, 51);">注：</font></strong><font style="color:rgb(51, 51, 51);"> </font><a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-func-id.html"><font style="color:rgb(51, 51, 51);">id()</font></a><font style="color:rgb(51, 51, 51);"> 函数用于获取对象内存地址。</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p>is 与 == 区别：</p>
+<p>is 用于判断两个变量引用对象是否为同一个， == 用于判断引用变量的值是否相等。</p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<h3 id="优先级运算符"><a href="#优先级运算符" class="headerlink" title="优先级运算符"></a><font style="color:rgb(51, 51, 51);">优先级运算符</font></h3><p><font style="color:rgb(51, 51, 51);">以下表格列出了从最高到最低优先级的所有运算符， 相同单元格内的运算符具有相同优先级。 运算符均指二元运算，除非特别指出。 相同单元格内的运算符从左至右分组（除了幂运算是从右至左分组）：</font></p>
+<table>
+<thead>
+<tr>
+<th><font style="color:rgb(255, 255, 255);">运算符</font></th>
+<th><font style="color:rgb(255, 255, 255);">描述</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;(expressions...)&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><br/><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;[expressions...]&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><font style="color:rgb(51, 51, 51);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;&#123;key:&lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt; &lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;value...&#125;&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><font style="color:rgb(51, 51, 51);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;&#123;expressions...&#125;&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">圆括号的表达式</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;x[index]&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><font style="color:rgb(51, 51, 51);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;x[index:index]&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><font style="color:rgb(51, 51, 51);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;x(arguments...)&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><font style="color:rgb(51, 51, 51);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;x.attribute&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">读取，切片，调用，属性引用</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">await</font><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">x</font></td>
+<td><font style="color:rgb(51, 51, 51);">await 表达式</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;**&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">乘方(指数)</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;+x&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><font style="color:rgb(51, 51, 51);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;-x&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><font style="color:rgb(51, 51, 51);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;~x&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">正，负，按位非 NOT</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;*&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><font style="color:rgb(51, 51, 51);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;@&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><font style="color:rgb(51, 51, 51);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;/&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><font style="color:rgb(51, 51, 51);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;//&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><font style="color:rgb(51, 51, 51);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;%&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">乘，矩阵乘，除，整除，取余</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;+&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><font style="color:rgb(51, 51, 51);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;-&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">加和减</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;&lt;&lt;&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">,</font><font style="color:rgb(51, 51, 51);"> </font><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;&gt;&gt;&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">移位</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;&amp;&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">按位与 AND</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;^&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">按位异或 XOR</font></td>
+</tr>
+<tr>
+<td>`<font style="color:rgb(51, 51, 51);"></td>
+<td></font>`</td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;in&lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;,&lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;not&lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt; &lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;in&lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;,&lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt; &lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;is&lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;,&lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;is&lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt; &lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;not&lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;,&lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt; &lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;&lt;&lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;,&lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt; &lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;&lt;=&lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;,&lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt; &lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;&gt;&lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;,&lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt; &lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;&gt;=&lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;,&lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt; &lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;!=&lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;,&lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt; &lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;==&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">比较运算，包括成员检测和标识号检测</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;not&lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt; &lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;x&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">逻辑非 NOT</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;and&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">逻辑与 AND</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;or&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">逻辑或 OR</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;if&lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt; &lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;--&lt;/font&gt;&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt; &lt;/font&gt;``&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;else&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">条件表达式</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;lambda&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">lambda 表达式</font></td>
+</tr>
+<tr>
+<td><code>&lt;font style=&quot;color:rgb(51, 51, 51);&quot;&gt;:=&lt;/font&gt;</code></td>
+<td><font style="color:rgb(51, 51, 51);">赋值表达式</font></td>
+</tr>
+</tbody></table>
+<h2 id="条件控制"><a href="#条件控制" class="headerlink" title="条件控制"></a>条件控制</h2><h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> condition_1:<br>    statement_block_1<br><span class="hljs-keyword">elif</span> condition_2:<br>    statement_block_2<br><span class="hljs-keyword">else</span>:<br>    statement_block_3<br></code></pre></td></tr></table></figure>
+
+<h3 id="match…case"><a href="#match…case" class="headerlink" title="match…case"></a>match…case</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">match</span> subject:<br>    <span class="hljs-keyword">case</span> &lt;pattern_1&gt;:<br>        &lt;action_1&gt;<br>    <span class="hljs-keyword">case</span> &lt;pattern_2&gt;:<br>        &lt;action_2&gt;<br>    <span class="hljs-keyword">case</span> &lt;pattern_3&gt;:<br>        &lt;action_3&gt;<br>    <span class="hljs-keyword">case</span> _:<br>        &lt;action_wildcard&gt;<br></code></pre></td></tr></table></figure>
+
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">while</span> 判断条件(condition)：<br>    执行语句(statements)……<br></code></pre></td></tr></table></figure>
+
+<h3 id="while-else"><a href="#while-else" class="headerlink" title="while-else"></a>while-else</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">while</span> &lt;expr&gt;:<br>    &lt;statement(s)&gt;<br><span class="hljs-keyword">else</span>:<br>    &lt;additional_statement(s)&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> &lt;variable&gt; <span class="hljs-keyword">in</span> &lt;sequence&gt;:<br>    &lt;statements&gt;<br><span class="hljs-keyword">else</span>:<br>    &lt;statements&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="range函数"><a href="#range函数" class="headerlink" title="range函数"></a>range函数</h3><p><font style="color:rgb(51, 51, 51);">如果你需要遍历数字序列，可以使用内置 range() 函数。它会生成数列，例如:</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;&gt;&gt;<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>):<br><span class="hljs-meta">... </span>    <span class="hljs-built_in">print</span>(i)<br>...<br><span class="hljs-number">0</span><br><span class="hljs-number">1</span><br><span class="hljs-number">2</span><br><span class="hljs-number">3</span><br><span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="推导式"><a href="#推导式" class="headerlink" title="推导式"></a>推导式</h2><p><font style="color:rgb(51, 51, 51);">Python 推导式是一种独特的数据处理方式，可以从一个数据序列构建另一个新的数据序列的结构体。</font></p>
+<p><font style="color:rgb(51, 51, 51);">Python 推导式是一种强大且简洁的语法，适用于生成列表、字典、集合和生成器。</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">Python 支持各种数据结构的推导式：</font></p>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">列表(list)推导式</font></li>
+<li><font style="color:rgb(51, 51, 51);">字典(dict)推导式</font></li>
+<li><font style="color:rgb(51, 51, 51);">集合(set)推导式</font></li>
+<li><font style="color:rgb(51, 51, 51);">元组(tuple)推导式</font></li>
+</ul>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<h3 id="列表推导式"><a href="#列表推导式" class="headerlink" title="列表推导式"></a><font style="color:rgb(51, 51, 51);">列表推导式</font></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">[表达式 <span class="hljs-keyword">for</span> 变量 <span class="hljs-keyword">in</span> 列表] <br>[out_exp_res <span class="hljs-keyword">for</span> out_exp <span class="hljs-keyword">in</span> input_list]<br><br>或者 <br><br>[表达式 <span class="hljs-keyword">for</span> 变量 <span class="hljs-keyword">in</span> 列表 <span class="hljs-keyword">if</span> 条件]<br>[out_exp_res <span class="hljs-keyword">for</span> out_exp <span class="hljs-keyword">in</span> input_list <span class="hljs-keyword">if</span> condition]<br></code></pre></td></tr></table></figure>
+
+<p>案例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># 推导式</span><br>    names = [<span class="hljs-string">&#x27;Bob&#x27;</span>, <span class="hljs-string">&#x27;Tom&#x27;</span>, <span class="hljs-string">&#x27;alice&#x27;</span>, <span class="hljs-string">&#x27;Jerry&#x27;</span>, <span class="hljs-string">&#x27;Wendy&#x27;</span>, <span class="hljs-string">&#x27;Smith&#x27;</span>]<br>    new_names = [name.upper() <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> names <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(name) &gt; <span class="hljs-number">3</span>]<br>    <span class="hljs-built_in">print</span>(new_names)<br>    <span class="hljs-comment"># 计算 30 以内可以被 3 整除的整数：</span><br>    numbers = [x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">30</span>) <span class="hljs-keyword">if</span> x % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">print</span>(numbers)<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="字典推导式"><a href="#字典推导式" class="headerlink" title="字典推导式"></a>字典推导式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">&#123; key_expr: value_expr <span class="hljs-keyword">for</span> value <span class="hljs-keyword">in</span> collection &#125;<br>或<br>&#123; key_expr: value_expr <span class="hljs-keyword">for</span> value <span class="hljs-keyword">in</span> collection <span class="hljs-keyword">if</span> condition &#125;<br></code></pre></td></tr></table></figure>
+
+<p>案例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    listdemo = [<span class="hljs-string">&#x27;Google&#x27;</span>, <span class="hljs-string">&#x27;Runoob&#x27;</span>, <span class="hljs-string">&#x27;Taobao&#x27;</span>]<br>    <span class="hljs-comment"># 将列表中各字符串值为键，各字符串的长度为值，组成键值对</span><br>    newdict = &#123;key: <span class="hljs-built_in">len</span>(key) <span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> listdemo&#125;<br>    <span class="hljs-built_in">print</span>(newdict)<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="集合推导式"><a href="#集合推导式" class="headerlink" title="集合推导式"></a>集合推导式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">&#123; expression <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> <span class="hljs-type">Sequence</span> &#125;<br>或<br>&#123; expression <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> <span class="hljs-type">Sequence</span> <span class="hljs-keyword">if</span> conditional &#125;<br></code></pre></td></tr></table></figure>
+
+<p>案例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    a = &#123;x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;abracadabra&#x27;</span> <span class="hljs-keyword">if</span> x <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> <span class="hljs-string">&#x27;abc&#x27;</span>&#125;<br>    <span class="hljs-built_in">print</span>(a)<br></code></pre></td></tr></table></figure>
+
+<h3 id="元组推导式-生成器表达式"><a href="#元组推导式-生成器表达式" class="headerlink" title="元组推导式(生成器表达式)"></a>元组推导式(生成器表达式)</h3><p><font style="color:rgb(51, 51, 51);">元组推导式可以利用 range 区间、元组、列表、字典和集合等数据类型，快速生成一个满足指定需求的元组。</font></p>
+<p><font style="color:rgb(51, 51, 51);">元组推导式基本格式：</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">(expression <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> <span class="hljs-type">Sequence</span> )<br>或<br>(expression <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> <span class="hljs-type">Sequence</span> <span class="hljs-keyword">if</span> conditional )<br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);">元组推导式和列表推导式的用法也完全相同，只是元组推导式是用 </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">()</font></strong><font style="color:rgb(51, 51, 51);"> 圆括号将各部分括起来，而列表推导式用的是中括号 </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">[]</font></strong><font style="color:rgb(51, 51, 51);">，另外元组推导式返回的结果是一个生成器对象。</font></p>
+<p>案例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    a = (x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>))<span class="hljs-comment"># 返回的是生成器对象</span><br>    <span class="hljs-built_in">print</span>(a)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">tuple</span>(a)) <span class="hljs-comment"># 使用 tuple() 函数，可以直接将生成器对象转换成元组</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="迭代器与生成器"><a href="#迭代器与生成器" class="headerlink" title="迭代器与生成器"></a><font style="color:rgb(51, 51, 51);">迭代器与生成器</font></h2><h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><p><font style="color:rgb(51, 51, 51);">迭代器是一个可以记住遍历的位置的对象。</font></p>
+<p><font style="color:rgb(51, 51, 51);">迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。</font></p>
+<p><font style="color:rgb(51, 51, 51);">迭代器有两个基本的方法：</font><strong><font style="color:rgb(51, 51, 51);">iter()</font></strong><font style="color:rgb(51, 51, 51);"> 和 </font><strong><font style="color:rgb(51, 51, 51);">next()</font></strong><font style="color:rgb(51, 51, 51);">。</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># 迭代器</span><br>    <span class="hljs-built_in">list</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]<br>    it = <span class="hljs-built_in">iter</span>(<span class="hljs-built_in">list</span>)  <span class="hljs-comment"># 创建迭代器对象</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(it))  <span class="hljs-comment"># 输出迭代器的下一个元素</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(it))<br>    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> it:<br>        <span class="hljs-built_in">print</span>(x, end=<span class="hljs-string">&#x27; &#x27;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;\n&#x27;</span>)<br>    <span class="hljs-comment"># 也可以使用 next() 函数：</span><br>    <span class="hljs-keyword">import</span> sys<br>    <span class="hljs-built_in">list</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]<br>    it = <span class="hljs-built_in">iter</span>(<span class="hljs-built_in">list</span>)  <span class="hljs-comment"># 创建迭代器对象</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(it))<br>        <span class="hljs-keyword">except</span> StopIteration:<br>            sys.exit()<br><br></code></pre></td></tr></table></figure>
+
+<ol>
+<li>自定义迭代器：<font style="color:rgb(51, 51, 51);">把一个类作为一个迭代器使用需要在类中实现两个方法 <strong>iter</strong>() 与 <strong>next</strong>() 。</font></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyNumbers</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__iter__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-variable language_">self</span>.a = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__next__</span>(<span class="hljs-params">self</span>):<br>        x = <span class="hljs-variable language_">self</span>.a<br>        <span class="hljs-variable language_">self</span>.a += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> x<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    myclass = MyNumbers()<br>    myiter = <span class="hljs-built_in">iter</span>(myclass)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(myiter))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(myiter))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(myiter))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(myiter))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(myiter))<br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);">StopIteration 异常用于标识迭代的完成，防止出现无限循环的情况，在 <strong>next</strong>() 方法中我们可以设置在完成指定循环次数后触发 StopIteration 异常来结束迭代。</font></p>
+<h3 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h3><p><font style="color:rgb(51, 51, 51);">在 Python 中，使用了</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">yield</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">的函数被称为生成器（generator）。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">yield</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">是一个关键字，用于定义生成器函数，生成器函数是一种特殊的函数，可以在迭代过程中逐步产生值，而不是一次性返回所有结果。</font></p>
+<p><font style="color:rgb(51, 51, 51);">跟普通函数不同的是，生成器是一个返回迭代器的函数，只能用于迭代操作，更简单点理解生成器就是一个迭代器。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">当在生成器函数中使用 yield 语句时，函数的执行将会暂停，并将 yield 后面的表达式作为当前迭代的值返回。</font></strong></p>
+<p><font style="color:rgb(51, 51, 51);">然后，每次调用生成器的</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">next()</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">方法或使用</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">for</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">循环进行迭代时，函数会从上次暂停的地方继续执行，直到再次遇到</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">yield</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">语句。这样，生成器函数可以逐步产生值，而不需要一次性计算并返回所有结果。</font></p>
+<p><font style="color:rgb(51, 51, 51);">调用一个生成器函数，返回的是一个迭代器对象。</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">countdown</span>(<span class="hljs-params">n</span>):<br>        <span class="hljs-keyword">while</span> n &gt; <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">yield</span> n<br>            n -= <span class="hljs-number">1</span><br><br><br>    <span class="hljs-comment"># 创建生成器对象</span><br>    generator = countdown(<span class="hljs-number">5</span>)<br><br>    <span class="hljs-comment"># 通过迭代生成器获取值</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(generator))  <span class="hljs-comment"># 输出: 5</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(generator))  <span class="hljs-comment"># 输出: 4</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(generator))  <span class="hljs-comment"># 输出: 3</span><br><br>    <span class="hljs-comment"># 使用 for 循环迭代生成器</span><br>    <span class="hljs-keyword">for</span> value <span class="hljs-keyword">in</span> generator:<br>        <span class="hljs-built_in">print</span>(value)  <span class="hljs-comment"># 输出: 2 1</span><br><br>    <span class="hljs-keyword">import</span> sys<br><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">fibonacci</span>(<span class="hljs-params">n</span>):  <span class="hljs-comment"># 生成器函数 - 斐波那契</span><br>        a, b, counter = <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            <span class="hljs-keyword">if</span> (counter &gt; n):<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">yield</span> a<br>            a, b = b, a + b<br>            counter += <span class="hljs-number">1</span><br><br><br>    f = fibonacci(<span class="hljs-number">10</span>)  <span class="hljs-comment"># f 是一个迭代器，由生成器返回生成</span><br><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(f), end=<span class="hljs-string">&quot; &quot;</span>)<br>        <span class="hljs-keyword">except</span> StopIteration:<br>            sys.exit()<br></code></pre></td></tr></table></figure>
+
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">函数名</span>（参数列表）:<br>    函数体<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h3><p><font style="color:rgb(51, 51, 51);">以下是调用函数时可使用的正式参数类型：</font></p>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">必需参数</font></li>
+<li><font style="color:rgb(51, 51, 51);">关键字参数</font></li>
+<li><font style="color:rgb(51, 51, 51);">默认参数</font></li>
+<li><font style="color:rgb(51, 51, 51);">不定长参数</font></li>
+</ul>
+<h4 id="必须参数"><a href="#必须参数" class="headerlink" title="必须参数"></a>必须参数</h4><p><font style="color:rgb(51, 51, 51);">必需参数须以正确的顺序传入函数。调用时的数量必须和声明时的一样。</font></p>
+<p><font style="color:rgb(51, 51, 51);">调用 printme() 函数，你必须传入一个参数，不然会出现语法错误：</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># 可写函数说明</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">printme</span>(<span class="hljs-params"><span class="hljs-built_in">str</span></span>):<br>        <span class="hljs-string">&quot;打印任何传入的字符串&quot;</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-built_in">str</span>)<br>        <span class="hljs-keyword">return</span><br>    <span class="hljs-comment"># 调用 printme 函数，不加参数会报错</span><br>    printme() <br>    printme(<span class="hljs-built_in">str</span>=<span class="hljs-string">&#x27;abc&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="关键字参数"><a href="#关键字参数" class="headerlink" title="关键字参数"></a>关键字参数</h4><p><font style="color:rgb(51, 51, 51);">关键字参数和函数调用关系紧密，函数调用使用关键字参数来确定传入的参数值。</font></p>
+<p><font style="color:rgb(51, 51, 51);">使用关键字参数允许函数调用时参数的顺序与声明时不一致，因为 Python 解释器能够用参数名匹配参数值。</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># 可写函数说明</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">printme</span>(<span class="hljs-params"><span class="hljs-built_in">str</span></span>):<br>        <span class="hljs-string">&quot;打印任何传入的字符串&quot;</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-built_in">str</span>)<br>        <span class="hljs-keyword">return</span><br>    printme(<span class="hljs-built_in">str</span>=<span class="hljs-string">&#x27;abc&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h4><p><font style="color:rgb(51, 51, 51);">调用函数时，如果没有传递参数，则会使用默认参数。以下实例中如果没有传入 age 参数，则使用默认值：</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 可写函数说明</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">printinfo</span>(<span class="hljs-params">name, age=<span class="hljs-number">35</span></span>):<br>    <span class="hljs-string">&quot;打印任何传入的字符串&quot;</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;名字: &quot;</span>, name)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;年龄: &quot;</span>, age)<br>    <span class="hljs-keyword">return</span><br><br><br><span class="hljs-comment"># 调用printinfo函数</span><br>printinfo(age=<span class="hljs-number">50</span>, name=<span class="hljs-string">&quot;mikey&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;------------------------&quot;</span>)<br>printinfo(name=<span class="hljs-string">&quot;mikey&quot;</span>) <span class="hljs-comment"># 默认打印35</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="不定长参数"><a href="#不定长参数" class="headerlink" title="不定长参数"></a>不定长参数</h4><p><font style="color:rgb(51, 51, 51);">你可能需要一个函数能处理比当初声明时更多的参数。这些参数叫做不定长参数，和上述 2 种参数不同，声明时不会命名。基本语法如下：</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">functionname</span>(<span class="hljs-params">[formal_args,] *var_args_tuple </span>):<br>   <span class="hljs-string">&quot;函数_文档字符串&quot;</span><br>   function_suite<br>   <span class="hljs-keyword">return</span> [expression]<br><br></code></pre></td></tr></table></figure>
+
+<p>案例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python">  <br><span class="hljs-comment"># 可写函数说明</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">printinfo</span>(<span class="hljs-params"> arg1, *vartuple </span>):<br>   <span class="hljs-string">&quot;打印任何传入的参数&quot;</span><br>   <span class="hljs-built_in">print</span> (<span class="hljs-string">&quot;输出: &quot;</span>)<br>   <span class="hljs-built_in">print</span> (arg1)<br>   <span class="hljs-built_in">print</span> (vartuple)<br> <br><span class="hljs-comment"># 调用printinfo 函数</span><br>printinfo( <span class="hljs-number">70</span>, <span class="hljs-number">60</span>, <span class="hljs-number">50</span> )<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><p><font style="color:rgb(51, 51, 51);">Python 使用</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">lambda</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">来创建匿名函数。</font></p>
+<p><font style="color:rgb(51, 51, 51);">所谓匿名，意即不再使用</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">def</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">语句这样标准的形式定义一个函数。</font></p>
+<ul>
+<li><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">lambda</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">只是一个表达式，函数体比</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">def</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">简单很多。</font></li>
+<li><font style="color:rgb(51, 51, 51);">lambda 的主体是一个表达式，而不是一个代码块。仅仅能在 lambda 表达式中封装有限的逻辑进去。</font></li>
+<li><font style="color:rgb(51, 51, 51);">lambda 函数拥有自己的命名空间，且不能访问自己参数列表之外或全局命名空间里的参数。</font></li>
+<li><font style="color:rgb(51, 51, 51);">虽然 lambda 函数看起来只能写一行，却不等同于 C 或 C++ 的内联函数，内联函数的目的是调用小函数时不占用栈内存从而减少函数调用的开销，提高代码的执行速度。</font></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">lambda</span> [arg1 [,arg2,.....argn]]:expression<br><br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);">案例</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">x = <span class="hljs-keyword">lambda</span> a : a + <span class="hljs-number">10</span><br><span class="hljs-built_in">print</span>(x(<span class="hljs-number">5</span>))<br></code></pre></td></tr></table></figure>
+
+<h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a><font style="color:rgb(51, 51, 51);">装饰器</font></h2><blockquote>
+<p>类似于java的AOP</p>
+</blockquote>
+<p><font style="color:rgb(51, 51, 51);">装饰器（decorators）是 Python 中的一种高级功能，它允许你动态地修改函数或类的行为。</font></p>
+<p><font style="color:rgb(51, 51, 51);">装饰器是一种函数，它接受一个函数作为参数，并返回一个新的函数或修改原来的函数。</font></p>
+<p><font style="color:rgb(51, 51, 51);">装饰器的语法使用</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">@decorator_name</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">来应用在函数或方法上。</font></p>
+<p><font style="color:rgb(51, 51, 51);">Python 还提供了一些内置的装饰器，比如</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">@staticmethod</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">和</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">@classmethod</font></strong><font style="color:rgb(51, 51, 51);">，用于定义静态方法和类方法。</font></p>
+<p><strong><font style="color:rgb(51, 51, 51);">装饰器的应用场景：</font></strong></p>
+<ul>
+<li><strong><font style="color:rgb(51, 51, 51);">日志记录</font></strong><font style="color:rgb(51, 51, 51);">: 装饰器可用于记录函数的调用信息、参数和返回值。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">性能分析</font></strong><font style="color:rgb(51, 51, 51);">: 可以使用装饰器来测量函数的执行时间。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">权限控制</font></strong><font style="color:rgb(51, 51, 51);">: 装饰器可用于限制对某些函数的访问权限。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">缓存</font></strong><font style="color:rgb(51, 51, 51);">: 装饰器可用于实现函数结果的缓存，以提高性能。</font></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">decorator_function</span>(<span class="hljs-params">original_function</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">wrapper</span>(<span class="hljs-params">*args, **kwargs</span>):<br>        <span class="hljs-comment"># 这里是在调用原始函数前添加的新功能</span><br>        before_call_code()<br>        <br>        result = original_function(*args, **kwargs)<br>        <br>        <span class="hljs-comment"># 这里是在调用原始函数后添加的新功能</span><br>        after_call_code()<br>        <br>        <span class="hljs-keyword">return</span> result<br>    <span class="hljs-keyword">return</span> wrapper<br><br><span class="hljs-comment"># 使用装饰器</span><br><span class="hljs-meta">@decorator_function</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">target_function</span>(<span class="hljs-params">arg1, arg2</span>):<br>    <span class="hljs-keyword">pass</span>  <span class="hljs-comment"># 原始函数的实现</span><br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);">带参装饰器</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">repeat</span>(<span class="hljs-params">n</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">decorator</span>(<span class="hljs-params">func</span>):<br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">wrapper</span>(<span class="hljs-params">*args, **kwargs</span>):<br>            <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>                result = func(*args, **kwargs)<br>            <span class="hljs-keyword">return</span> result<br>        <span class="hljs-keyword">return</span> wrapper<br>    <span class="hljs-keyword">return</span> decorator<br><br><span class="hljs-meta">@repeat(<span class="hljs-params"><span class="hljs-number">3</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">greet</span>(<span class="hljs-params">name</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Hello, <span class="hljs-subst">&#123;name&#125;</span>!&quot;</span>)<br><br>greet(<span class="hljs-string">&quot;Alice&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);">类装饰器</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">DecoratorClass</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, func</span>):<br>        <span class="hljs-variable language_">self</span>.func = func<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__call__</span>(<span class="hljs-params">self, *args, **kwargs</span>):<br>        <span class="hljs-comment"># 在调用原始函数之前/之后执行的代码</span><br>        result = <span class="hljs-variable language_">self</span>.func(*args, **kwargs)<br>        <span class="hljs-comment"># 在调用原始函数之后执行的代码</span><br>        <span class="hljs-keyword">return</span> result<br><br><span class="hljs-meta">@DecoratorClass</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">my_function</span>():<br>    <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a><font style="color:rgb(51, 51, 51);">数据结构</font></h2><h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p><font style="color:rgb(51, 51, 51);">Python中列表是可变的，这是它区别于字符串和元组的最重要的特点，一句话概括即：列表可以修改，而字符串和元组不能。</font></p>
+<table>
+<thead>
+<tr>
+<th><font style="color:rgb(255, 255, 255);">方法</font></th>
+<th><font style="color:rgb(255, 255, 255);">描述</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font style="color:rgb(51, 51, 51);">list.append(x)</font></td>
+<td><font style="color:rgb(51, 51, 51);">把一个元素添加到列表的结尾，相当于 a[len(a):] = [x]。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">list.extend(L)</font></td>
+<td><font style="color:rgb(51, 51, 51);">通过添加指定列表的所有元素来扩充列表，相当于 a[len(a):] = L。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">list.insert(i, x)</font></td>
+<td><font style="color:rgb(51, 51, 51);">在指定位置插入一个元素。第一个参数是准备插入到其前面的那个元素的索引，例如 a.insert(0, x) 会插入到整个列表之前，而 a.insert(len(a), x) 相当于 a.append(x) 。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">list.remove(x)</font></td>
+<td><font style="color:rgb(51, 51, 51);">删除列表中值为 x 的第一个元素。如果没有这样的元素，就会返回一个错误。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">list.pop([i])</font></td>
+<td><font style="color:rgb(51, 51, 51);">从列表的指定位置移除元素，并将其返回。如果没有指定索引，a.pop()返回最后一个元素。元素随即从列表中被移除。（方法中 i 两边的方括号表示这个参数是可选的，而不是要求你输入一对方括号，你会经常在 Python 库参考手册中遇到这样的标记。）</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">list.clear()</font></td>
+<td><font style="color:rgb(51, 51, 51);">移除列表中的所有项，等于del a[:]。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">list.index(x)</font></td>
+<td><font style="color:rgb(51, 51, 51);">返回列表中第一个值为 x 的元素的索引。如果没有匹配的元素就会返回一个错误。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">list.count(x)</font></td>
+<td><font style="color:rgb(51, 51, 51);">返回 x 在列表中出现的次数。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">list.sort()</font></td>
+<td><font style="color:rgb(51, 51, 51);">对列表中的元素进行排序。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">list.reverse()</font></td>
+<td><font style="color:rgb(51, 51, 51);">倒排列表中的元素。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">list.copy()</font></td>
+<td><font style="color:rgb(51, 51, 51);">返回列表的浅复制，等于a[:]。</font></td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    a = [<span class="hljs-number">66.25</span>, <span class="hljs-number">333</span>, <span class="hljs-number">333</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1234.5</span>]<br>    <span class="hljs-built_in">print</span>(a.count(<span class="hljs-number">333</span>), a.count(<span class="hljs-number">66.25</span>), a.count(<span class="hljs-string">&#x27;x&#x27;</span>))<br>    a.insert(<span class="hljs-number">2</span>, -<span class="hljs-number">1</span>)<br>    a.append(<span class="hljs-number">333</span>)<br>    <span class="hljs-built_in">print</span>(a)<br>    a.index(<span class="hljs-number">333</span>)<br>    <span class="hljs-built_in">print</span>(a)<br>    a.remove(<span class="hljs-number">333</span>)<br>    <span class="hljs-built_in">print</span>(a)<br>    a.reverse()<br>    <span class="hljs-built_in">print</span>(a)<br>    a.sort()<br>    <span class="hljs-built_in">print</span>(a)<br></code></pre></td></tr></table></figure>
+
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p><font style="color:rgb(51, 51, 51);">在 Python 中，可以使用列表（list）来实现栈的功能。栈是一种后进先出（LIFO, Last-In-First-Out）数据结构，意味着最后添加的元素最先被移除。列表提供了一些方法，使其非常适合用于栈操作，特别是</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">append()</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">和</font><font style="color:rgb(51, 51, 51);"> </font><strong><font style="color:rgb(51, 51, 51);">pop()</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">方法。</font></p>
+<p><font style="color:rgb(51, 51, 51);">用 append() 方法可以把一个元素添加到栈顶，用不指定索引的 pop() 方法可以把一个元素从栈顶释放出来。</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">栈操作</font></p>
+<ul>
+<li><strong><font style="color:rgb(51, 51, 51);">压入（Push）</font></strong><font style="color:rgb(51, 51, 51);">: 将一个元素添加到栈的顶端。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">弹出（Pop）</font></strong><font style="color:rgb(51, 51, 51);">: 移除并返回栈顶元素。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">查看栈顶元素（Peek/Top）</font></strong><font style="color:rgb(51, 51, 51);">: 返回栈顶元素而不移除它。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">检查是否为空（IsEmpty）</font></strong><font style="color:rgb(51, 51, 51);">: 检查栈是否为空。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">获取栈的大小（Size）</font></strong><font style="color:rgb(51, 51, 51);">: 获取栈中元素的数量。</font></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    stack = []<br>    stack.append(<span class="hljs-string">&#x27;a&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(stack)<br>    stack.append(<span class="hljs-string">&#x27;b&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(stack)<br>    <span class="hljs-built_in">print</span>(stack.pop())<br>    <span class="hljs-built_in">print</span>(stack)<br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><p><font style="color:rgb(51, 51, 51);">在 Python 中，列表（list）可以用作队列（queue），但由于列表的特点，直接使用列表来实现队列并不是最优的选择。</font></p>
+<p><font style="color:rgb(51, 51, 51);">队列是一种先进先出（FIFO, First-In-First-Out）的数据结构，意味着最早添加的元素最先被移除。</font></p>
+<p><font style="color:rgb(51, 51, 51);">使用列表时，如果频繁地在列表的开头插入或删除元素，性能会受到影响，因为这些操作的时间复杂度是 O(n)。为了解决这个问题，Python 提供了 collections.deque，它是双端队列，可以在两端高效地添加和删除元素。</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">使用 collections.deque 实现队列:</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);">collections.deque 是 Python 标准库的一部分，非常适合用于实现队列。</font></p>
+<p><font style="color:rgb(51, 51, 51);">以下是使用 deque 实现队列的示例：</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> deque<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br><br>    <span class="hljs-comment"># 创建一个空队列</span><br>    queue = deque()<br><br>    <span class="hljs-comment"># 向队尾添加元素</span><br>    queue.append(<span class="hljs-string">&#x27;a&#x27;</span>)<br>    queue.append(<span class="hljs-string">&#x27;b&#x27;</span>)<br>    queue.append(<span class="hljs-string">&#x27;c&#x27;</span>)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;队列状态:&quot;</span>, queue)  <span class="hljs-comment"># 输出: 队列状态: deque([&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;])</span><br><br>    <span class="hljs-comment"># 从队首移除元素</span><br>    first_element = queue.popleft()<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;移除的元素:&quot;</span>, first_element)  <span class="hljs-comment"># 输出: 移除的元素: a</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;队列状态:&quot;</span>, queue)  <span class="hljs-comment"># 输出: 队列状态: deque([&#x27;b&#x27;, &#x27;c&#x27;])</span><br><br>    <span class="hljs-comment"># 查看队首元素（不移除）</span><br>    front_element = queue[<span class="hljs-number">0</span>]<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;队首元素:&quot;</span>, front_element)  <span class="hljs-comment"># 输出: 队首元素: b</span><br><br>    <span class="hljs-comment"># 检查队列是否为空</span><br>    is_empty = <span class="hljs-built_in">len</span>(queue) == <span class="hljs-number">0</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;队列是否为空:&quot;</span>, is_empty)  <span class="hljs-comment"># 输出: 队列是否为空: False</span><br><br>    <span class="hljs-comment"># 获取队列大小</span><br>    size = <span class="hljs-built_in">len</span>(queue)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;队列大小:&quot;</span>, size)  <span class="hljs-comment"># 输出: 队列大小: 2</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><p><font style="color:rgb(51, 51, 51);"></font></p>
+<p>同5.9.7</p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a><font style="color:rgb(51, 51, 51);">字典</font></h3><p>同5.9.8</p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a><font style="color:rgb(51, 51, 51);">模块</font></h2><h3 id="import-语句"><a href="#import-语句" class="headerlink" title="import 语句"></a><font style="color:rgb(51, 51, 51);">import 语句</font></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> module1[, module2[,... moduleN]<br></code></pre></td></tr></table></figure>
+
+<h3 id="from-…-import-语句"><a href="#from-…-import-语句" class="headerlink" title="from … import 语句"></a><font style="color:rgb(51, 51, 51);">from … import 语句</font></h3><p><font style="color:rgb(51, 51, 51);">Python 的 from 语句让你从模块中导入一个指定的部分到当前命名空间中，语法如下：</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> modname <span class="hljs-keyword">import</span> name1[, name2[, ... nameN]]<br></code></pre></td></tr></table></figure>
+
+<h3 id="name-属性"><a href="#name-属性" class="headerlink" title="__name__属性"></a><font style="color:rgb(51, 51, 51);">__name__属性</font></h3><p><font style="color:rgb(51, 51, 51);">一个模块被另一个程序第一次引入时，其主程序将运行。如果我们想在模块被引入时，模块中的某一程序块不执行，我们可以用__name__属性来使该程序块仅在该模块自身运行时执行。</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>   <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;程序自身在运行&#x27;</span>)<br><span class="hljs-keyword">else</span>:<br>   <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;我来自另一模块&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><strong><font style="color:rgb(51, 51, 51);">说明：</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">每个模块都有一个<strong>name__属性，当其值是’__main</strong>‘时，表明该模块自身在运行，否则是被引入。</font></p>
+<p><font style="color:rgb(51, 51, 51);">说明：</font><strong><font style="color:rgb(51, 51, 51);"><strong>name</strong></font></strong><font style="color:rgb(51, 51, 51);"> 与 </font><strong><font style="color:rgb(51, 51, 51);"><strong>main</strong></font></strong><font style="color:rgb(51, 51, 51);"> 底下是双下划线， </font><strong><font style="color:rgb(51, 51, 51);background-color:rgb(236, 234, 230);">_ _</font></strong><font style="color:rgb(51, 51, 51);"> 是这样去掉中间的那个空格。</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<h2 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a><font style="color:rgb(51, 51, 51);">输入和输出</font></h2><h3 id="美化输出"><a href="#美化输出" class="headerlink" title="美化输出"></a>美化输出</h3><p><font style="color:rgb(51, 51, 51);">Python两种输出值的方式: 表达式语句和 print() 函数。</font></p>
+<p><font style="color:rgb(51, 51, 51);">第三种方式是使用文件对象的 write() 方法，标准输出文件可以用 sys.stdout 引用。</font></p>
+<p><font style="color:rgb(51, 51, 51);">如果你希望输出的形式更加多样，可以使用 str.format() 函数来格式化输出值。</font></p>
+<p><font style="color:rgb(51, 51, 51);">如果你希望将输出的值转成字符串，可以使用 repr() 或 str() 函数来实现。</font></p>
+<ul>
+<li><strong><font style="color:rgb(51, 51, 51);">str()：</font></strong><font style="color:rgb(51, 51, 51);"> </font><font style="color:rgb(51, 51, 51);">函数返回一个用户易读的表达形式。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">repr()：</font></strong><font style="color:rgb(51, 51, 51);"> 产生一个解释器易读的表达形式。</font></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> math<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;常量 PI 的值近似为：%5.3f。&#x27;</span> % math.pi)<br>常量 PI 的值近似为：<span class="hljs-number">3.142</span>。<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="读取键盘输入"><a href="#读取键盘输入" class="headerlink" title="读取键盘输入"></a><font style="color:rgb(51, 51, 51);">读取键盘输入</font></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">str</span> = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入：&quot;</span>);<br><span class="hljs-built_in">print</span> (<span class="hljs-string">&quot;你输入的内容是: &quot;</span>, <span class="hljs-built_in">str</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="读写文件"><a href="#读写文件" class="headerlink" title="读写文件"></a><font style="color:rgb(51, 51, 51);">读写文件</font></h3><p><font style="color:rgb(51, 51, 51);">open() 将会返回一个 file 对象，基本语法格式如下:</font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">open</span>(filename, mode)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><font style="color:rgb(51, 51, 51);">filename：包含了你要访问的文件名称的字符串值。</font></li>
+<li><font style="color:rgb(51, 51, 51);">mode：决定了打开文件的模式：只读，写入，追加等。所有可取值见如下的完全列表。这个参数是非强制的，默认文件访问模式为只读(r)。</font></li>
+</ul>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<table>
+<thead>
+<tr>
+<th><font style="color:rgb(255, 255, 255);">模式</font></th>
+<th><font style="color:rgb(255, 255, 255);">描述</font></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font style="color:rgb(51, 51, 51);">r</font></td>
+<td><font style="color:rgb(51, 51, 51);">以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">rb</font></td>
+<td><font style="color:rgb(51, 51, 51);">以二进制格式打开一个文件用于只读。文件指针将会放在文件的开头。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">r+</font></td>
+<td><font style="color:rgb(51, 51, 51);">打开一个文件用于读写。文件指针将会放在文件的开头。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">rb+</font></td>
+<td><font style="color:rgb(51, 51, 51);">以二进制格式打开一个文件用于读写。文件指针将会放在文件的开头。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">w</font></td>
+<td><font style="color:rgb(51, 51, 51);">打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">wb</font></td>
+<td><font style="color:rgb(51, 51, 51);">以二进制格式打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">w+</font></td>
+<td><font style="color:rgb(51, 51, 51);">打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">wb+</font></td>
+<td><font style="color:rgb(51, 51, 51);">以二进制格式打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">a</font></td>
+<td><font style="color:rgb(51, 51, 51);">打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">ab</font></td>
+<td><font style="color:rgb(51, 51, 51);">以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">a+</font></td>
+<td><font style="color:rgb(51, 51, 51);">打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">ab+</font></td>
+<td><font style="color:rgb(51, 51, 51);">以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。如果该文件不存在，创建新文件用于读写。</font></td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 打开一个文件</span><br>f = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;/tmp/foo.txt&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>)<br><br>f.write( <span class="hljs-string">&quot;Python 是一个非常好的语言。\n是的，的确非常好!!\n&quot;</span> )<br><br><span class="hljs-comment"># 关闭打开的文件</span><br>f.close()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="错误和异常"><a href="#错误和异常" class="headerlink" title="错误和异常"></a>错误和异常</h2><p><font style="color:rgb(51, 51, 51);">Python 有两种错误很容易辨认：语法错误和异常。</font></p>
+<p><font style="color:rgb(51, 51, 51);">Python assert（断言）用于判断一个表达式，在表达式条件为 false 的时候触发异常。</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/webp/2630542/1725198153713-fb52cad2-6e2d-44e1-a18a-bacc6f5e1a38.webp" srcset="/img/loading.gif" lazyload></p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a><font style="color:rgb(51, 51, 51);">异常处理</font></h3><h3 id="try-except"><a href="#try-except" class="headerlink" title="try/except"></a><font style="color:rgb(51, 51, 51);">try/except</font></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    <span class="hljs-keyword">try</span>:<br>        x = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入一个数字: &quot;</span>))<br>        <span class="hljs-keyword">break</span><br>    <span class="hljs-keyword">except</span> ValueError:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;您输入的不是数字，请再次尝试输入！&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br><br><span class="hljs-keyword">try</span>:<br>    f = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;myfile.txt&#x27;</span>)<br>    s = f.readline()<br>    i = <span class="hljs-built_in">int</span>(s.strip())<br><span class="hljs-keyword">except</span> OSError <span class="hljs-keyword">as</span> err:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;OS error: &#123;0&#125;&quot;</span>.<span class="hljs-built_in">format</span>(err))<br><span class="hljs-keyword">except</span> ValueError:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Could not convert data to an integer.&quot;</span>)<br><span class="hljs-keyword">except</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Unexpected error:&quot;</span>, sys.exc_info()[<span class="hljs-number">0</span>])<br>    <span class="hljs-keyword">raise</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="try-except…else"><a href="#try-except…else" class="headerlink" title="try/except…else"></a><font style="color:rgb(51, 51, 51);">try/except…else</font></h3><p><font style="color:rgb(51, 51, 51);"></font></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> arg <span class="hljs-keyword">in</span> sys.argv[<span class="hljs-number">1</span>:]:<br>    <span class="hljs-keyword">try</span>:<br>        f = <span class="hljs-built_in">open</span>(arg, <span class="hljs-string">&#x27;r&#x27;</span>)<br>    <span class="hljs-keyword">except</span> IOError:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;cannot open&#x27;</span>, arg)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span>(arg, <span class="hljs-string">&#x27;has&#x27;</span>, <span class="hljs-built_in">len</span>(f.readlines()), <span class="hljs-string">&#x27;lines&#x27;</span>)<br>        f.close()<br></code></pre></td></tr></table></figure>
+
+<h3 id="try-finally"><a href="#try-finally" class="headerlink" title="try-finally"></a><font style="color:rgb(51, 51, 51);">try-finally</font></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:<br>    runoob()<br><span class="hljs-keyword">except</span> AssertionError <span class="hljs-keyword">as</span> error:<br>    <span class="hljs-built_in">print</span>(error)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;file.log&#x27;</span>) <span class="hljs-keyword">as</span> file:<br>            read_data = file.read()<br>    <span class="hljs-keyword">except</span> FileNotFoundError <span class="hljs-keyword">as</span> fnf_error:<br>        <span class="hljs-built_in">print</span>(fnf_error)<br><span class="hljs-keyword">finally</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;这句话，无论异常是否发生都会执行。&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a><font style="color:rgb(51, 51, 51);">抛出异常</font></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">raise</span> [Exception [, args [, traceback]]]<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">x = <span class="hljs-number">10</span><br><span class="hljs-keyword">if</span> x &gt; <span class="hljs-number">5</span>:<br>    <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&#x27;x 不能大于 5。x 的值为: &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(x))<br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<h3 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a><font style="color:rgb(51, 51, 51);">自定义异常</font></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyError</span>(<span class="hljs-title class_ inherited__">Exception</span>):<br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, value</span>):<br>            <span class="hljs-variable language_">self</span>.value = value<br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">__str__</span>(<span class="hljs-params">self</span>):<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">repr</span>(<span class="hljs-variable language_">self</span>.value)<br>   <br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">raise</span> MyError(<span class="hljs-number">2</span>*<span class="hljs-number">2</span>)<br>    <span class="hljs-keyword">except</span> MyError <span class="hljs-keyword">as</span> e:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;My exception occurred, value:&#x27;</span>, e.value)<br>   <br>My exception occurred, value: <span class="hljs-number">4</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">raise</span> MyError(<span class="hljs-string">&#x27;oops!&#x27;</span>)<br>Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;&lt;stdin&gt;&quot;</span>, line <span class="hljs-number">1</span>, <span class="hljs-keyword">in</span> ?<br>__main__.MyError: <span class="hljs-string">&#x27;oops!&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a><font style="color:rgb(51, 51, 51);">面向对象</font></h2><ul>
+<li><strong><font style="color:rgb(51, 51, 51);">类(Class):</font>**</strong><font style="color:rgb(51, 51, 51);"> </font>**<font style="color:rgb(51, 51, 51);">用来描述具有相同的属性和方法的对象的集合。它定义了该集合中每个对象所共有的属性和方法。对象是类的实例。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">方法：</font></strong><font style="color:rgb(51, 51, 51);">类中定义的函数。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">类变量：</font></strong><font style="color:rgb(51, 51, 51);">类变量在整个实例化的对象中是公用的。类变量定义在类中且在函数体之外。类变量通常不作为实例变量使用。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">数据成员：</font></strong><font style="color:rgb(51, 51, 51);">类变量或者实例变量用于处理类及其实例对象的相关的数据。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">方法重写：</font></strong><font style="color:rgb(51, 51, 51);">如果从父类继承的方法不能满足子类的需求，可以对其进行改写，这个过程叫方法的覆盖（override），也称为方法的重写。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">局部变量：</font></strong><font style="color:rgb(51, 51, 51);">定义在方法中的变量，只作用于当前实例的类。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">实例变量：</font></strong><font style="color:rgb(51, 51, 51);">在类的声明中，属性是用变量来表示的，这种变量就称为实例变量，实例变量就是一个用 self 修饰的变量。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">继承：</font></strong><font style="color:rgb(51, 51, 51);">即一个派生类（derived class）继承基类（base class）的字段和方法。继承也允许把一个派生类的对象作为一个基类对象对待。例如，有这样一个设计：一个Dog类型的对象派生自Animal类，这是模拟”是一个（is-a）”关系（例图，Dog是一个Animal）。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">实例化：</font></strong><font style="color:rgb(51, 51, 51);">创建一个类的实例，类的具体对象。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">对象：</font></strong><font style="color:rgb(51, 51, 51);">通过类定义的数据结构实例。对象包括两个数据成员（类变量和实例变量）和方法。</font></li>
+</ul>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+<h1 id="相关类库"><a href="#相关类库" class="headerlink" title="相关类库"></a>相关类库</h1><h2 id="Anaconda-集成环境"><a href="#Anaconda-集成环境" class="headerlink" title="Anaconda 集成环境"></a><font style="color:rgb(51, 51, 51);">Anaconda 集成环境</font></h2><p><font style="color:rgb(51, 51, 51);">Anaconda 发行版包含了 Python。</font></p>
+<p><font style="color:rgb(51, 51, 51);">Anaconda 是一个集成的数据科学和机器学习环境，其中包括了 Python 解释器以及大量常用的数据科学库和工具。</font></p>
+<p><font style="color:rgb(51, 51, 51);">Anaconda 包及其依赖项和环境的管理工具为 conda 命令，文与传统的 Python pip 工具相比 Anaconda 的conda 可以更方便地在不同环境之间进行切换，环境管理较为简单。</font></p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.python.org/">官网</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-tutorial.html">菜鸟教程</a></p>
 
@@ -385,6 +1274,13 @@
   <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" class="category-chain-item">编程语言</a>
   
   
+    <span>></span>
+    
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/" class="category-chain-item">Python</a>
+  
+  
+
+  
 
       </span>
     
@@ -397,7 +1293,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Python%E5%9F%BA%E7%A1%80/">#Python基础</a>
+        <a href="/tags/Python/">#Python</a>
       
     </div>
   
@@ -447,6 +1343,29 @@
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/27/yuque/%E6%BA%90%E7%A0%81%E7%AF%87-SpringBoot%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" title="源码篇-SpringBoot源码分析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">源码篇-SpringBoot源码分析</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/15/yuque/OS%E7%AF%87-Bochs%E5%9C%A8Ubuntu%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" title="OS篇-Bochs在Ubuntu下的安装教程">
+                        <span class="hidden-mobile">OS篇-Bochs在Ubuntu下的安装教程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
@@ -914,6 +1833,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

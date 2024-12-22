@@ -17,12 +17,12 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="背景 基于ELK搭建一个实时日志分析平台  架构 下载filebeat:https:&#x2F;&#x2F;artifacts.elastic.co&#x2F;downloads&#x2F;beats&#x2F;filebeat&#x2F;filebeat-7.13.1-linux-x86_64.tar.gzkafka:https:&#x2F;&#x2F;downloads.apache.org&#x2F;kafka&#x2F;2.8.0&#x2F;kafka_2.12-2.8.0.tgzelastic">
+    <meta name="description" content="背景 基于ELK搭建一个实时日志分析平台  架构 下载filebeat:https:&#x2F;&#x2F;artifacts.elastic.co&#x2F;downloads&#x2F;beats&#x2F;filebeat&#x2F;filebeat-7.13.1-linux-x86_64.tar.gz kafka:https:&#x2F;&#x2F;downloads.apache.org&#x2F;kafka&#x2F;2.8.0&#x2F;kafka_2.12-2.8.0.tgz elast">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记篇-Elasticsearch Lostash Kibana搭建记录">
 <meta property="og:url" content="https://mikeygithub.github.io/2021/06/15/yuque/%E7%AC%94%E8%AE%B0%E7%AF%87-Elasticsearch%20Lostash%20Kibana%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="背景 基于ELK搭建一个实时日志分析平台  架构 下载filebeat:https:&#x2F;&#x2F;artifacts.elastic.co&#x2F;downloads&#x2F;beats&#x2F;filebeat&#x2F;filebeat-7.13.1-linux-x86_64.tar.gzkafka:https:&#x2F;&#x2F;downloads.apache.org&#x2F;kafka&#x2F;2.8.0&#x2F;kafka_2.12-2.8.0.tgzelastic">
+<meta property="og:description" content="背景 基于ELK搭建一个实时日志分析平台  架构 下载filebeat:https:&#x2F;&#x2F;artifacts.elastic.co&#x2F;downloads&#x2F;beats&#x2F;filebeat&#x2F;filebeat-7.13.1-linux-x86_64.tar.gz kafka:https:&#x2F;&#x2F;downloads.apache.org&#x2F;kafka&#x2F;2.8.0&#x2F;kafka_2.12-2.8.0.tgz elast">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623683509547-3a4bd4da-0a0a-4a07-bda7-c6437abf72e7.png">
 <meta property="article:published_time" content="2021-06-15T09:24:22.000Z">
@@ -160,18 +160,6 @@
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
               </a>
             </li>
           
@@ -343,12 +331,16 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623683509547-3a4bd4da-0a0a-4a07-bda7-c6437abf72e7.png#averageHue=%23f0edd9&clientId=u26bf8ca5-3861-4&from=paste&height=582&id=u35b58cb6&originHeight=582&originWidth=1072&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=191476&status=done&style=none&taskId=uc5777002-39a0-420e-9b4f-eee967a4574&title=&width=1072" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623683509547-3a4bd4da-0a0a-4a07-bda7-c6437abf72e7.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
 <p>基于ELK搭建一个实时日志分析平台</p>
 </blockquote>
-<h1 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h1><p><img src="https://cdn.nlark.com/yuque/__mermaid_v3/93dab3463c660a05775008e5f031c575.svg#lake_card_v2=eyJ0eXBlIjoibWVybWFpZCIsImNvZGUiOiJncmFwaCBMUjtcbkEoRmlsZWJlYXQpLS0-RChLYWZrYSlcbkIoRmlsZWJlYXQpLS0-RChLYWZrYSlcbkMoRmlsZWJlYXQpLS0-RChLYWZrYSlcblxuRC0tPkxvZ3N0YXNoLS0-RihFU01hc3RlcilcbkYoRVNNYXN0ZXIpLS0-RShcIkVTIGRhdGEgbm9kZVwiKS0tPktpYmFuYVxuRihFU01hc3RlciktLT5HKFwiRVMgZGF0YSBub2RlXCIpLS0-S2liYW5hXG5GKEVTTWFzdGVyKS0tPkkoXCJFUyBkYXRhIG5vZGVcIiktLT5LaWJhbmEiLCJ1cmwiOiJodHRwczovL2Nkbi5ubGFyay5jb20veXVxdWUvX19tZXJtYWlkX3YzLzkzZGFiMzQ2M2M2NjBhMDU3NzUwMDhlNWYwMzFjNTc1LnN2ZyIsImlkIjoiajk1TmkiLCJtYXJnaW4iOnsidG9wIjp0cnVlLCJib3R0b20iOnRydWV9LCJjYXJkIjoiZGlhZ3JhbSJ9" srcset="/img/loading.gif" lazyload></p>
-<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>filebeat:<a target="_blank" rel="noopener" href="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.13.1-linux-x86_64.tar.gz">https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.13.1-linux-x86_64.tar.gz</a><br>kafka:<a target="_blank" rel="noopener" href="https://downloads.apache.org/kafka/2.8.0/kafka_2.12-2.8.0.tgz">https://downloads.apache.org/kafka/2.8.0/kafka_2.12-2.8.0.tgz</a><br>elasticsearch:<a target="_blank" rel="noopener" href="https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.13.2-linux-x86_64.tar.gz">https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.13.2-linux-x86_64.tar.gz</a><br>logstash:<a target="_blank" rel="noopener" href="https://artifacts.elastic.co/downloads/logstash/logstash-7.13.2-linux-x86_64.tar.gz">https://artifacts.elastic.co/downloads/logstash/logstash-7.13.2-linux-x86_64.tar.gz</a><br>kinba:<a target="_blank" rel="noopener" href="https://artifacts.elastic.co/downloads/kibana/kibana-7.13.2-linux-x86_64.tar.gz">https://artifacts.elastic.co/downloads/kibana/kibana-7.13.2-linux-x86_64.tar.gz</a></p>
+<h1 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h1><p><img src="https://cdn.nlark.com/yuque/__mermaid_v3/93dab3463c660a05775008e5f031c575.svg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>filebeat:<a target="_blank" rel="noopener" href="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.13.1-linux-x86_64.tar.gz">https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.13.1-linux-x86_64.tar.gz</a></p>
+<p>kafka:<a target="_blank" rel="noopener" href="https://downloads.apache.org/kafka/2.8.0/kafka_2.12-2.8.0.tgz">https://downloads.apache.org/kafka/2.8.0/kafka_2.12-2.8.0.tgz</a></p>
+<p>elasticsearch:<a target="_blank" rel="noopener" href="https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.13.2-linux-x86_64.tar.gz">https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.13.2-linux-x86_64.tar.gz</a></p>
+<p>logstash:<a target="_blank" rel="noopener" href="https://artifacts.elastic.co/downloads/logstash/logstash-7.13.2-linux-x86_64.tar.gz">https://artifacts.elastic.co/downloads/logstash/logstash-7.13.2-linux-x86_64.tar.gz</a></p>
+<p>kinba:<a target="_blank" rel="noopener" href="https://artifacts.elastic.co/downloads/kibana/kibana-7.13.2-linux-x86_64.tar.gz">https://artifacts.elastic.co/downloads/kibana/kibana-7.13.2-linux-x86_64.tar.gz</a></p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment">#下载</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.13.1-linux-x86_64.tar.gz</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://downloads.apache.org/kafka/2.8.0/kafka_2.12-2.8.0.tgz</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.13.2-linux-x86_64.tar.gz</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://artifacts.elastic.co/downloads/logstash/logstash-7.13.2-linux-x86_64.tar.gz</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://artifacts.elastic.co/downloads/kibana/kibana-7.13.2-linux-x86_64.tar.gz</span><br><span class="hljs-comment">#解压</span><br><span class="hljs-string">ls</span> <span class="hljs-string">*.tar.gz</span> <span class="hljs-string">|</span> <span class="hljs-string">xargs</span> <span class="hljs-string">-n1</span> <span class="hljs-string">tar</span> <span class="hljs-string">xzvf</span><br><span class="hljs-comment">#将filebeat的用户权限改为root</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">chown</span> <span class="hljs-string">-hR</span> <span class="hljs-string">root</span> <span class="hljs-string">/home/mikey/Downloads/ELK/filebeat-7.13.1-linux-x86_64</span><br></code></pre></td></tr></table></figure>
 
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> ./bin/zookeeper-server-start.sh config/zookeeper.properties &amp;<br><span class="hljs-built_in">nohup</span> ./bin/kafka-server-start.sh config/server.properties &amp;<br></code></pre></td></tr></table></figure>
@@ -359,29 +351,39 @@
 
 <h2 id="Filebeat"><a href="#Filebeat" class="headerlink" title="Filebeat"></a>Filebeat</h2><p>1.查看可用的收集模型</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./filebeat modules list<br></code></pre></td></tr></table></figure>
+
 <p>2.开启需要收集的模型</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./filebeat modules <span class="hljs-built_in">enable</span> system nginx mysql<br></code></pre></td></tr></table></figure>
+
 <p>3.设置日志文件路径，编辑filebeat.yml配置文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#配置输出到kafka</span><br>output.kafka:<br>  <span class="hljs-comment"># initial brokers for reading cluster metadata</span><br>  hosts: [<span class="hljs-string">&quot;kafka1:9092&quot;</span>, <span class="hljs-string">&quot;kafka2:9092&quot;</span>, <span class="hljs-string">&quot;kafka3:9092&quot;</span>]<br><br>  <span class="hljs-comment"># message topic selection + partitioning</span><br>  topic: collect_log_topic<br>  partition.round_robin:<br>    reachable_only: <span class="hljs-literal">false</span><br>  required_acks: 1<br>  compression: gzip<br>  max_message_bytes: 1000000<br></code></pre></td></tr></table></figure>
+
 <p>4.授权启动</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> root filebeat.yml <br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> root modules.d/system.yml <br><span class="hljs-built_in">sudo</span> ./filebeat -e<br></code></pre></td></tr></table></figure>
+
 <p>5.添加大盘</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./filebeat setup --dashboards<br></code></pre></td></tr></table></figure>
 
 <h2 id="logstash"><a href="#logstash" class="headerlink" title="logstash"></a>logstash</h2><p>1.配置文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs bash">input &#123;<br>    kafka &#123;<br>        <span class="hljs-built_in">type</span> =&gt; <span class="hljs-string">&quot;ad&quot;</span><br>        bootstrap_servers =&gt; <span class="hljs-string">&quot;127.0.0.1:9092,114.118.13.66:9093,114.118.13.66:9094&quot;</span><br>        client_id =&gt; <span class="hljs-string">&quot;es_ad&quot;</span><br>        group_id =&gt; <span class="hljs-string">&quot;es_ad&quot;</span><br>        auto_offset_reset =&gt; <span class="hljs-string">&quot;latest&quot;</span> <span class="hljs-comment"># 从最新的偏移量开始消费</span><br>        consumer_threads =&gt; 5<br>        decorate_events =&gt; <span class="hljs-literal">true</span> <span class="hljs-comment"># 此属性会将当前topic、offset、group、partition等信息也带到message中</span><br>        topics =&gt; [<span class="hljs-string">&quot;collect_log_topic&quot;</span>] <span class="hljs-comment"># 数组类型，可配置多个topic</span><br>        tags =&gt; [<span class="hljs-string">&quot;nginx&quot;</span>,]<br>    &#125;<br>&#125;<br>output &#123;<br>        elasticsearch &#123;<br>            hosts =&gt; [<span class="hljs-string">&quot;114.118.10.253:9200&quot;</span>]<br>            index =&gt; <span class="hljs-string">&quot;log-%&#123;+YYYY-MM-dd&#125;&quot;</span><br>            document_type =&gt; <span class="hljs-string">&quot;access_log&quot;</span><br>            <span class="hljs-built_in">timeout</span> =&gt; 300<br>        &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>2.创建目录</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> logs_data_dir<br></code></pre></td></tr></table></figure>
+
 <p>3.启动logstash</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">nohup</span> bin/logstash -f config/kafka-logstash-es.conf --path.data=./logs_data_dir 1&gt;/dev/null 2&gt;&amp;1 &amp;<br></code></pre></td></tr></table></figure>
 
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623769167329-b34f3d76-e61c-4eb9-b040-baa9525f217f.png#averageHue=%23f3f6fa&clientId=uc97758be-dec4-4&from=ui&id=ue1b2e2e9&originHeight=441&originWidth=1919&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=121528&status=done&style=none&taskId=u489325a8-422c-4e63-a720-c3358d6b7c8&title=" srcset="/img/loading.gif" lazyload alt="index.png"><br><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623769175483-cd12e635-3dd7-432b-89aa-a05cd0474a6d.png#averageHue=%23f0f4f8&clientId=uc97758be-dec4-4&from=ui&id=u56f361ad&originHeight=783&originWidth=1919&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=242991&status=done&style=none&taskId=u477cfaa7-936e-4b4c-b6e4-ab8aba80739&title=" srcset="/img/loading.gif" lazyload alt="data.png"></p>
-<h2 id="整合项目"><a href="#整合项目" class="headerlink" title="整合项目"></a>整合项目</h2><h3 id="整合Java项目"><a href="#整合Java项目" class="headerlink" title="整合Java项目"></a>整合Java项目</h3><p>1.配置logstash.conf(在input添加)接收日志tcp</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623769167329-b34f3d76-e61c-4eb9-b040-baa9525f217f.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1623769175483-cd12e635-3dd7-432b-89aa-a05cd0474a6d.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="整合项目"><a href="#整合项目" class="headerlink" title="整合项目"></a>整合项目</h2><h3 id="整合Java项目"><a href="#整合Java项目" class="headerlink" title="整合Java项目"></a>整合Java项目</h3><p>1.配置<font style="color:rgb(77, 77, 77);">logstash.conf(在</font>input<font style="color:rgb(77, 77, 77);">添加)接收日志tcp</font></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">tcp &#123;<br>    # host:port就是上面appender中的 destination，<br>    # 这里其实把logstash作为服务，开启<span class="hljs-number">9250</span>端口接收logback发出的消息<br>    host =&gt; <span class="hljs-string">&quot;0.0.0.0&quot;</span> port =&gt; <span class="hljs-number">9250</span> mode =&gt; <span class="hljs-string">&quot;server&quot;</span> tags =&gt; [<span class="hljs-string">&quot;tags&quot;</span>] codec =&gt; json_lines<br>  &#125;<br></code></pre></td></tr></table></figure>
+
 <p>2.加入maven依赖</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;dependency&gt;<br>    &lt;groupId&gt;net.logstash.logback&lt;/groupId&gt;<br>    &lt;artifactId&gt;logstash-logback-encoder&lt;/artifactId&gt;<br>    &lt;version&gt;<span class="hljs-number">6.1</span>&lt;/version&gt;<br>&lt;/dependency&gt;<br></code></pre></td></tr></table></figure>
-<p>3.配置logback.xml</p>
+
+<p>3.配置<font style="color:rgb(77, 77, 77);">logback.xml</font></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;configuration&gt;<br>	&lt;!-- 项目的appid --&gt;<br>	&lt;property name=<span class="hljs-string">&quot;APP_ID&quot;</span> value=<span class="hljs-string">&quot;my_app&quot;</span>/&gt;<br>	………………<br>	&lt;appender name=<span class="hljs-string">&quot;LOGSTASH&quot;</span> class=<span class="hljs-string">&quot;net.logstash.logback.appender.LogstashTcpSocketAppender&quot;</span>&gt;<br>	    &lt;!--<br>	    destination 是 logstash 服务的 host:port，<br>	    相当于和 logstash 建立了管道，将日志数据定向传输到 logstash<br>	    --&gt;<br>	    &lt;destination&gt;<span class="hljs-number">192.168</span><span class="hljs-number">.91</span><span class="hljs-number">.149</span>:<span class="hljs-number">9250</span>&lt;/destination&gt;<br>	    &lt;encoder charset=<span class="hljs-string">&quot;UTF-8&quot;</span> class=<span class="hljs-string">&quot;net.logstash.logback.encoder.LogstashEncoder&quot;</span>&gt;<br>	        &lt;customFields&gt;&#123;<span class="hljs-string">&quot;appname&quot;</span>:<span class="hljs-string">&quot;$&#123;APP_ID&#125;&quot;</span>&#125;&lt;/customFields&gt;<br>	    &lt;/encoder&gt;<br>	&lt;/appender&gt;<br>	………………<br>&lt;/configuration&gt;<br></code></pre></td></tr></table></figure>
+
 
 
 <h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><p>相关博文: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/zsql/p/13137833.html">一篇文章搞懂filebeat（ELK）</a></p>
@@ -959,6 +961,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

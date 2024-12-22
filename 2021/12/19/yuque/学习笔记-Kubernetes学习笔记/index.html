@@ -17,12 +17,12 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.k8s 基本概念2.搭建k8s集群2.1 基于集群部署工具kubeadm2.2 基于二进制包方式 3.k8s 核心技术 pod 控制器 存储 service 调度器 安全机制rbac 包管理工具helm  4.部署统一日志管理5.部署性能监控平台6.搭建高可用k8s集群7.k8s集群项目部署8.相关资料教学视频：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1GT4y1A">
+    <meta name="description" content="1.k8s 基本概念2.搭建k8s集群2.1 基于集群部署工具kubeadm 2.2 基于二进制包方式 3.k8s 核心技术 pod 控制器 存储 service 调度器 安全机制rbac 包管理工具helm  4.部署统一日志管理5.部署性能监控平台6.搭建高可用k8s集群7.k8s集群项目部署8.相关资料教学视频：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1GT4y1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习笔记-Kubernetes学习笔记">
 <meta property="og:url" content="https://mikeygithub.github.io/2021/12/19/yuque/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Kubernetes%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="1.k8s 基本概念2.搭建k8s集群2.1 基于集群部署工具kubeadm2.2 基于二进制包方式 3.k8s 核心技术 pod 控制器 存储 service 调度器 安全机制rbac 包管理工具helm  4.部署统一日志管理5.部署性能监控平台6.搭建高可用k8s集群7.k8s集群项目部署8.相关资料教学视频：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1GT4y1A">
+<meta property="og:description" content="1.k8s 基本概念2.搭建k8s集群2.1 基于集群部署工具kubeadm 2.2 基于二进制包方式 3.k8s 核心技术 pod 控制器 存储 service 调度器 安全机制rbac 包管理工具helm  4.部署统一日志管理5.部署性能监控平台6.搭建高可用k8s集群7.k8s集群项目部署8.相关资料教学视频：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1GT4y1">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657554015111-2a6cf444-6b43-4acb-bc8e-2fbae3cb0194.png">
 <meta property="article:published_time" content="2021-12-19T09:24:22.000Z">
@@ -160,18 +160,6 @@
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
               </a>
             </li>
           
@@ -343,8 +331,9 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657554015111-2a6cf444-6b43-4acb-bc8e-2fbae3cb0194.png#clientId=u23b8b397-f90d-4&from=markdown&id=Y6uB2&originHeight=258&originWidth=478&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=u43ca2f86-dc7c-4185-bf43-5ef99bd1237&title=" srcset="/img/loading.gif" lazyload></p>
-<h1 id="1-k8s-基本概念"><a href="#1-k8s-基本概念" class="headerlink" title="1.k8s 基本概念"></a>1.k8s 基本概念</h1><h1 id="2-搭建k8s集群"><a href="#2-搭建k8s集群" class="headerlink" title="2.搭建k8s集群"></a>2.搭建k8s集群</h1><p>2.1 基于集群部署工具kubeadm<br>2.2 基于二进制包方式</p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657554015111-2a6cf444-6b43-4acb-bc8e-2fbae3cb0194.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="1-k8s-基本概念"><a href="#1-k8s-基本概念" class="headerlink" title="1.k8s 基本概念"></a>1.k8s 基本概念</h1><h1 id="2-搭建k8s集群"><a href="#2-搭建k8s集群" class="headerlink" title="2.搭建k8s集群"></a>2.搭建k8s集群</h1><p>2.1 基于集群部署工具kubeadm</p>
+<p>2.2 基于二进制包方式</p>
 <h1 id="3-k8s-核心技术"><a href="#3-k8s-核心技术" class="headerlink" title="3.k8s 核心技术"></a>3.k8s 核心技术</h1><ul>
 <li>pod</li>
 <li>控制器</li>
@@ -354,7 +343,8 @@
 <li>安全机制rbac</li>
 <li>包管理工具helm</li>
 </ul>
-<h1 id="4-部署统一日志管理"><a href="#4-部署统一日志管理" class="headerlink" title="4.部署统一日志管理"></a>4.部署统一日志管理</h1><h1 id="5-部署性能监控平台"><a href="#5-部署性能监控平台" class="headerlink" title="5.部署性能监控平台"></a>5.部署性能监控平台</h1><h1 id="6-搭建高可用k8s集群"><a href="#6-搭建高可用k8s集群" class="headerlink" title="6.搭建高可用k8s集群"></a>6.搭建高可用k8s集群</h1><h1 id="7-k8s集群项目部署"><a href="#7-k8s集群项目部署" class="headerlink" title="7.k8s集群项目部署"></a>7.k8s集群项目部署</h1><h1 id="8-相关资料"><a href="#8-相关资料" class="headerlink" title="8.相关资料"></a>8.相关资料</h1><p>教学视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GT4y1A756/?p=2&spm_id_from=pageDriver">https://www.bilibili.com/video/BV1GT4y1A756</a><br>资料： <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1AoA4oyutD5sLc5WA1PjhSw">https://pan.baidu.com/s/1AoA4oyutD5sLc5WA1PjhSw</a> 提取码: i8qs </p>
+<h1 id="4-部署统一日志管理"><a href="#4-部署统一日志管理" class="headerlink" title="4.部署统一日志管理"></a>4.部署统一日志管理</h1><h1 id="5-部署性能监控平台"><a href="#5-部署性能监控平台" class="headerlink" title="5.部署性能监控平台"></a>5.部署性能监控平台</h1><h1 id="6-搭建高可用k8s集群"><a href="#6-搭建高可用k8s集群" class="headerlink" title="6.搭建高可用k8s集群"></a>6.搭建高可用k8s集群</h1><h1 id="7-k8s集群项目部署"><a href="#7-k8s集群项目部署" class="headerlink" title="7.k8s集群项目部署"></a>7.k8s集群项目部署</h1><h1 id="8-相关资料"><a href="#8-相关资料" class="headerlink" title="8.相关资料"></a>8.相关资料</h1><p>教学视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GT4y1A756/?p=2&spm_id_from=pageDriver">https://www.bilibili.com/video/BV1GT4y1A756</a></p>
+<p>资料： <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1AoA4oyutD5sLc5WA1PjhSw">https://pan.baidu.com/s/1AoA4oyutD5sLc5WA1PjhSw</a> 提取码: i8qs </p>
 
               
             </div>
@@ -372,13 +362,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/Kubernetes/" class="category-chain-item">Kubernetes</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/Kubernetes/" class="category-chain-item">Kubernetes</a>
+  
+  
+
   
 
   
@@ -911,6 +908,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

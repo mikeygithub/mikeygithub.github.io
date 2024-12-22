@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,8 +331,8 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621318286599-7ebe6375-5f15-42d1-a6bb-81d29e9c9a40.png#clientId=u7d9aa561-dee9-4&from=paste&height=300&id=ufbaf41ff&originHeight=300&originWidth=563&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=32254&status=done&style=none&taskId=u07f0f589-2386-4aba-8a62-0b87adf1456&title=&width=563" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h1 id="背景简介"><a href="#背景简介" class="headerlink" title="背景简介"></a>背景简介</h1><p>Istio 是一个由谷歌、IBM 与 Lyft 共同开发的开源项目，旨在提供一种统一化的微服务连接、安全保障、管理与监控方式。Istio 项目能够为微服务架构提供流量管理机制，同时亦为其它增值功能（包括安全性、监控、路由、连接管理与策略等）创造了基础。这款软件利用久经考验的 Lyft Envoy 代理进行构建，可在无需对应用程序代码作出任何发动的前提下实现可视性与控制能力。Istio 项目是一款强大的工具，可帮助 CTO/CIO 们立足企业内部实施整体性安全、政策与合规性要求。</p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1621318286599-7ebe6375-5f15-42d1-a6bb-81d29e9c9a40.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="背景简介"><a href="#背景简介" class="headerlink" title="背景简介"></a>背景简介</h1><p><font style="color:rgb(106, 115, 125);">Istio 是一个由谷歌、IBM 与 Lyft 共同开发的开源项目，旨在提供一种统一化的微服务连接、安全保障、管理与监控方式。Istio 项目能够为微服务架构提供流量管理机制，同时亦为其它增值功能（包括安全性、监控、路由、连接管理与策略等）创造了基础。这款软件利用久经考验的 Lyft Envoy 代理进行构建，可在无需对应用程序代码作出任何发动的前提下实现可视性与控制能力。Istio 项目是一款强大的工具，可帮助 CTO/CIO 们立足企业内部实施整体性安全、政策与合规性要求。</font></p>
 <h1 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h1><p>参考：<a target="_blank" rel="noopener" href="https://istio.io/latest/docs/setup/getting-started/#download">https://istio.io/latest/docs/setup/getting-started/#download</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#下载</span><br>curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.8 TARGET_ARCH=x86_64 sh -<br><span class="hljs-comment">#设置环境变量</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PATH</span>:/root/istio-1.6.8/bin&quot;</span><br><span class="hljs-comment">#进入目录安装</span><br>istioctl install --<span class="hljs-built_in">set</span> profile=demo -y<br><span class="hljs-comment">#命名空间</span><br>kubectl label namespace default istio-injection=enabled<br></code></pre></td></tr></table></figure>
 
@@ -352,7 +340,9 @@
 
 
 
-<h1 id="详细教程"><a href="#详细教程" class="headerlink" title="详细教程"></a>详细教程</h1><p>These tasks are a great place for beginners to further evaluate Istio’s features using this demo installation:</p>
+
+
+<h1 id="详细教程"><a href="#详细教程" class="headerlink" title="详细教程"></a>详细教程</h1><p><font style="color:rgb(41, 54, 85);">These tasks are a great place for beginners to further evaluate Istio’s features using this</font><font style="color:rgb(41, 54, 85);"> </font>demo<font style="color:rgb(41, 54, 85);"> </font><font style="color:rgb(41, 54, 85);">installation:</font></p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://istio.io/latest/docs/tasks/traffic-management/request-routing/">Request routing</a></li>
 <li><a target="_blank" rel="noopener" href="https://istio.io/latest/docs/tasks/traffic-management/fault-injection/">Fault injection</a></li>
@@ -362,7 +352,7 @@
 <li><a target="_blank" rel="noopener" href="https://istio.io/latest/docs/tasks/traffic-management/egress/egress-control/">Accessing external services</a></li>
 <li><a target="_blank" rel="noopener" href="https://istio.io/latest/docs/tasks/observability/kiali/">Visualizing your mesh</a></li>
 </ul>
-<p>Before you customize Istio for production use, see these resources:</p>
+<p><font style="color:rgb(41, 54, 85);">Before you customize Istio for production use, see these resources:</font></p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://istio.io/latest/docs/ops/deployment/deployment-models/">Deployment models</a></li>
 <li><a target="_blank" rel="noopener" href="https://istio.io/latest/docs/ops/best-practices/deployment/">Deployment best practices</a></li>
@@ -371,7 +361,10 @@
 </ul>
 <h1 id="卸载软件"><a href="#卸载软件" class="headerlink" title="卸载软件"></a>卸载软件</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#移除</span><br>kubectl delete -f samples/addons <br><span class="hljs-comment">#</span><br>istioctl manifest generate --<span class="hljs-built_in">set</span> profile=demo | kubectl delete --ignore-not-found=<span class="hljs-literal">true</span> -f - <br><span class="hljs-comment">#删除命名空间</span><br>kubectl delete namespace istio-system <br><span class="hljs-comment">#</span><br>kubectl label namespace default istio-injection- <br></code></pre></td></tr></table></figure>
 
-<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p>Istio官网：<a target="_blank" rel="noopener" href="https://istio.io/">https://istio.io/</a><br>官方文档：<a target="_blank" rel="noopener" href="https://istio.io/latest/docs/setup/getting-started/">https://istio.io/latest/docs/setup/getting-started/</a><br>使用Istio治理微服务入门：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/williamjie/p/9442340.html">https://www.cnblogs.com/williamjie/p/9442340.html</a><br>Istio是啥？一文带你彻底了解：<a target="_blank" rel="noopener" href="http://www.uml.org.cn/wfw/201909063.asp">http://www.uml.org.cn/wfw/201909063.asp</a></p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p>Istio官网：<a target="_blank" rel="noopener" href="https://istio.io/">https://istio.io/</a></p>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://istio.io/latest/docs/setup/getting-started/">https://istio.io/latest/docs/setup/getting-started/</a></p>
+<p>使用Istio治理微服务入门：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/williamjie/p/9442340.html">https://www.cnblogs.com/williamjie/p/9442340.html</a></p>
+<p>Istio是啥？一文带你彻底了解：<a target="_blank" rel="noopener" href="http://www.uml.org.cn/wfw/201909063.asp">http://www.uml.org.cn/wfw/201909063.asp</a></p>
 
               
             </div>
@@ -389,13 +382,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/" class="category-chain-item">服务网格</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/" class="category-chain-item">服务网格</a>
+  
+  
+
   
 
   
@@ -928,6 +928,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

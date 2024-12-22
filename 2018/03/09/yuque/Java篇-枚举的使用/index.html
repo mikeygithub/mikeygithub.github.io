@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657546027171-2644179c-96a3-4564-8749-e97dafa2023a.png#clientId=ufbc8e1a8-1927-4&from=markdown&id=ukEQl&originHeight=480&originWidth=840&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=209905&status=done&style=none&taskId=u3700fa8e-f3ed-4cb5-a7dc-360d551140e&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657546027171-2644179c-96a3-4564-8749-e97dafa2023a.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Enum是所有 Java 语言枚举类型的公共基本类（注意Enum是抽象类），以下是它的常见方法：</p>
 <table>
 <thead>
@@ -392,8 +380,11 @@
 <h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><p>定义枚举类型</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.enumdemo;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br><br>        <span class="hljs-type">HttpRequestMethod</span> <span class="hljs-variable">httpRequestMethod</span> <span class="hljs-operator">=</span> HttpRequestMethod.POST;<br><br>        System.out.println(httpRequestMethod.name());<br>        System.out.println(httpRequestMethod.getType());<br>        System.out.println(httpRequestMethod.getDesc());<br><br>        <span class="hljs-type">String</span> <span class="hljs-variable">getHttpRequestMethod</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;GET&quot;</span>;<br><br>        <span class="hljs-keyword">switch</span> (HttpRequestMethod.valueOf(getHttpRequestMethod))&#123;<br>            <span class="hljs-keyword">case</span> GET:<br>                System.out.println(HttpRequestMethod.GET.getDesc());<br>        &#125;<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+
+
 <p>简单使用</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.enumdemo;<br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> *http请求枚举类型</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> <span class="hljs-title class_">HttpRequestMethod</span> &#123;<br>    <span class="hljs-comment">//每个枚举成员实际上是一个枚举实例</span><br>    GET(<span class="hljs-string">&quot;get&quot;</span>,<span class="hljs-string">&quot;这是一个get请求&quot;</span>),<br>    POST(<span class="hljs-string">&quot;post&quot;</span>,<span class="hljs-string">&quot;这是一个post请求&quot;</span>),<br>    PUT(<span class="hljs-string">&quot;put&quot;</span>,<span class="hljs-string">&quot;这是一个put请求&quot;</span>),<br>    DELETE(<span class="hljs-string">&quot;delete&quot;</span>,<span class="hljs-string">&quot;这是一个delete请求&quot;</span>),<br>    OPTIONS(<span class="hljs-string">&quot;option&quot;</span>,<span class="hljs-string">&quot;这是一个option请求&quot;</span>),<br>    PATCH(<span class="hljs-string">&quot;patch&quot;</span>,<span class="hljs-string">&quot;这是一个patch请求&quot;</span>),<br>    TRACE(<span class="hljs-string">&quot;trace&quot;</span>,<span class="hljs-string">&quot;这是一个trace请求&quot;</span>),<br>    CONNECT(<span class="hljs-string">&quot;connect&quot;</span>,<span class="hljs-string">&quot;这是一个connect请求&quot;</span>);<br>    <span class="hljs-comment">//类型</span><br>    <span class="hljs-keyword">private</span> String type;<br>    <span class="hljs-comment">//描述</span><br>    <span class="hljs-keyword">private</span> String desc;<br>    <span class="hljs-comment">//私有化构造函数</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">HttpRequestMethod</span><span class="hljs-params">(String type,String desc)</span>&#123;<br>        <span class="hljs-built_in">this</span>.type=type;<br>        <span class="hljs-built_in">this</span>.desc=desc;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getType</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> type;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setType</span><span class="hljs-params">(String type)</span> &#123;<br>        <span class="hljs-built_in">this</span>.type = type;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getDesc</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> desc;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setDesc</span><span class="hljs-params">(String desc)</span> &#123;<br>        <span class="hljs-built_in">this</span>.desc = desc;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39949109/article/details/80432477">Java 枚举(enum) 详解7种常见的用法</a></p>
@@ -983,6 +974,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

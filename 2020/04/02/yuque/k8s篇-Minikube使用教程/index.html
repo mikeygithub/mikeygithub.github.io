@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,14 +331,18 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550762923-0f0efc03-1661-4496-ab22-52650ba4681e.png#averageHue=%23fbfdf5&clientId=u702860fa-9a2e-4&from=markdown&id=YWE3w&originHeight=146&originWidth=344&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=59751&status=done&style=none&taskId=u19505980-2d70-4e79-9b7d-2f802e44cd1&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550762923-0f0efc03-1661-4496-ab22-52650ba4681e.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="启动-K8s-集群"><a href="#启动-K8s-集群" class="headerlink" title="启动 K8s 集群"></a>启动 K8s 集群</h2><p><code>sudo minikube start --vm-driver=none --image-repository=registry.aliyuncs.com/google_containers</code></p>
 <h3 id="启动GUI"><a href="#启动GUI" class="headerlink" title="启动GUI"></a>启动GUI</h3><p><code>minikube dashboard</code></p>
 <h2 id="K8s-部署应用程序"><a href="#K8s-部署应用程序" class="headerlink" title="K8s 部署应用程序"></a>K8s 部署应用程序</h2><p>Server.js</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;http&#x27;</span>);<br><br><span class="hljs-keyword">var</span> handleRequest = <span class="hljs-keyword">function</span>(<span class="hljs-params">request, response</span>) &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Received request for URL: &#x27;</span> + request.<span class="hljs-property">url</span>);<br>  response.<span class="hljs-title function_">writeHead</span>(<span class="hljs-number">200</span>);<br>  response.<span class="hljs-title function_">end</span>(<span class="hljs-string">&#x27;Hello World!&#x27;</span>);<br>&#125;;<br><span class="hljs-keyword">var</span> www = http.<span class="hljs-title function_">createServer</span>(handleRequest);<br>www.<span class="hljs-title function_">listen</span>(<span class="hljs-number">8080</span>);<br></code></pre></td></tr></table></figure>
 
+
+
 <p>Dockerfile</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">FROM</span> <span class="hljs-string">node:6.9.2</span><br><span class="hljs-string">EXPOSE</span> <span class="hljs-number">8080</span><br><span class="hljs-string">COPY</span> <span class="hljs-string">server.js</span> <span class="hljs-string">.</span><br><span class="hljs-string">CMD</span> <span class="hljs-string">node</span> <span class="hljs-string">Server.js</span><br></code></pre></td></tr></table></figure>
+
+
 
 <p>打包镜像</p>
 <p><code>docker build -t hello-node:v1 .</code></p>
@@ -421,13 +413,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/Kubernetes/" class="category-chain-item">Kubernetes</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/Kubernetes/" class="category-chain-item">Kubernetes</a>
+  
+  
+
   
 
   
@@ -960,6 +959,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

@@ -17,12 +17,12 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="背景ST表（Sparse Table，稀疏表）是一种简单的数据结构，主要用来解决RMQ（Range Maximum&#x2F;Minimum Query，区间最大&#x2F;最小值查询）问题。它主要应用倍增的思想，可以实现 O(nlog⁡n) 预处理、 O(1) 查询。 所谓RMQ问题，以最大值为例，是假如有一个数列 A ，给你一个区间 [l,r] ，要求 maxi∈l,r 。 ST表使用一个二维数组f，对于范围内">
+    <meta name="description" content="背景ST表（Sparse Table，稀疏表）是一种简单的数据结构，主要用来解决RMQ（Range Maximum&#x2F;Minimum Query，区间最大&#x2F;最小值查询）问题。它主要应用倍增的思想，可以实现 O(nlog⁡n) 预处理、 O(1) 查询。  所谓RMQ问题，以最大值为例，是假如有一个数列 A ，给你一个区间 [l,r] ，要求 maxi∈[l,r](Ai) 。  ST表使用一个二维数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构-稀疏表(Sparse Table)">
 <meta property="og:url" content="https://mikeygithub.github.io/2022/05/09/yuque/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%A8%80%E7%96%8F%E8%A1%A8(Sparse%20Table)/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="背景ST表（Sparse Table，稀疏表）是一种简单的数据结构，主要用来解决RMQ（Range Maximum&#x2F;Minimum Query，区间最大&#x2F;最小值查询）问题。它主要应用倍增的思想，可以实现 O(nlog⁡n) 预处理、 O(1) 查询。 所谓RMQ问题，以最大值为例，是假如有一个数列 A ，给你一个区间 [l,r] ，要求 maxi∈l,r 。 ST表使用一个二维数组f，对于范围内">
+<meta property="og:description" content="背景ST表（Sparse Table，稀疏表）是一种简单的数据结构，主要用来解决RMQ（Range Maximum&#x2F;Minimum Query，区间最大&#x2F;最小值查询）问题。它主要应用倍增的思想，可以实现 O(nlog⁡n) 预处理、 O(1) 查询。  所谓RMQ问题，以最大值为例，是假如有一个数列 A ，给你一个区间 [l,r] ，要求 maxi∈[l,r](Ai) 。  ST表使用一个二维数">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1662474656786-bfd034f2-b19b-4b81-859f-cff57fe6494c.png">
 <meta property="article:published_time" content="2022-05-09T12:24:22.000Z">
@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -281,7 +269,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          294 字
+          300 字
         
       </span>
     
@@ -343,10 +331,12 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1662474656786-bfd034f2-b19b-4b81-859f-cff57fe6494c.png#clientId=uea9dc6b9-1e57-4&from=paste&height=385&id=ua9720139&originHeight=770&originWidth=2554&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=66971&status=done&style=none&taskId=ud22835d6-ea4f-495e-b5c8-bce856bf0cf&title=&width=1277" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p><strong>ST表</strong>（Sparse Table，<strong>稀疏表</strong>）是一种简单的数据结构，主要用来解决<strong>RMQ</strong>（Range Maximum/Minimum Query，<strong>区间最大/最小值查询</strong>）问题。它主要应用<strong>倍增</strong>的思想，可以实现 O(nlog⁡n) 预处理、 O(1) 查询。</p>
-<p>所谓RMQ问题，以最大值为例，是假如有一个数列 A ，给你一个区间 [l,r] ，要求 maxi∈<a href="Ai">l,r</a> 。</p>
-<p>ST表使用一个二维数组f，对于范围内的所有f[a][b]，先算出并存储 maxi∈[a,a+2b)(Ai) （本文中的区间都是离散意义下的，只包含整数，所以此区间也可以写成[a,a+2b−1] ），这称为<strong>预处理</strong>。查询时，再利用这些子区间算出待求区间的最大值。</p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1662474656786-bfd034f2-b19b-4b81-859f-cff57fe6494c.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p><strong><font style="color:rgb(18, 18, 18);">ST表</font></strong><font style="color:rgb(18, 18, 18);">（Sparse Table，</font><strong><font style="color:rgb(18, 18, 18);">稀疏表</font></strong><font style="color:rgb(18, 18, 18);">）是一种简单的数据结构，主要用来解决</font><strong><font style="color:rgb(18, 18, 18);">RMQ</font></strong><font style="color:rgb(18, 18, 18);">（Range Maximum/Minimum Query，</font><strong><font style="color:rgb(18, 18, 18);">区间最大/最小值查询</font></strong><font style="color:rgb(18, 18, 18);">）问题。它主要应用</font><strong><font style="color:rgb(18, 18, 18);">倍增</font></strong><font style="color:rgb(18, 18, 18);">的思想，可以实现</font><font style="color:rgb(18, 18, 18);"> </font><font style="color:rgb(18, 18, 18);">O</font><font style="color:rgb(18, 18, 18);">(</font><font style="color:rgb(18, 18, 18);">n</font><font style="color:rgb(18, 18, 18);">log</font><font style="color:rgb(18, 18, 18);">⁡</font><font style="color:rgb(18, 18, 18);">n</font><font style="color:rgb(18, 18, 18);">)</font><font style="color:rgb(18, 18, 18);"> </font><font style="color:rgb(18, 18, 18);">预处理、</font><font style="color:rgb(18, 18, 18);"> </font><font style="color:rgb(18, 18, 18);">O</font><font style="color:rgb(18, 18, 18);">(</font><font style="color:rgb(18, 18, 18);">1</font><font style="color:rgb(18, 18, 18);">)</font><font style="color:rgb(18, 18, 18);"> </font><font style="color:rgb(18, 18, 18);">查询。</font></p>
+<p><font style="color:rgb(18, 18, 18);"></font></p>
+<p><font style="color:rgb(18, 18, 18);">所谓RMQ问题，以最大值为例，是假如有一个数列</font><font style="color:rgb(18, 18, 18);"> </font><font style="color:rgb(18, 18, 18);">A</font><font style="color:rgb(18, 18, 18);"> </font><font style="color:rgb(18, 18, 18);">，给你一个区间</font><font style="color:rgb(18, 18, 18);"> </font><font style="color:rgb(18, 18, 18);">[</font><font style="color:rgb(18, 18, 18);">l</font><font style="color:rgb(18, 18, 18);">,</font><font style="color:rgb(18, 18, 18);">r</font><font style="color:rgb(18, 18, 18);">]</font><font style="color:rgb(18, 18, 18);"> </font><font style="color:rgb(18, 18, 18);">，要求</font><font style="color:rgb(18, 18, 18);"> </font><font style="color:rgb(18, 18, 18);">max</font><font style="color:rgb(18, 18, 18);">i</font><font style="color:rgb(18, 18, 18);">∈</font><font style="color:rgb(18, 18, 18);">[</font><font style="color:rgb(18, 18, 18);">l</font><font style="color:rgb(18, 18, 18);">,</font><font style="color:rgb(18, 18, 18);">r</font><font style="color:rgb(18, 18, 18);">]</font><font style="color:rgb(18, 18, 18);">(</font><font style="color:rgb(18, 18, 18);">A</font><font style="color:rgb(18, 18, 18);">i</font><font style="color:rgb(18, 18, 18);">)</font><font style="color:rgb(18, 18, 18);"> </font><font style="color:rgb(18, 18, 18);">。</font></p>
+<p><font style="color:rgb(18, 18, 18);"></font></p>
+<p><font style="color:rgb(18, 18, 18);">ST表使用一个二维数组f，对于范围内的所有f[a][b]，先算出并存储 </font><font style="color:rgb(18, 18, 18);">maxi∈[a,a+2b)(Ai)</font><font style="color:rgb(18, 18, 18);"> （本文中的区间都是离散意义下的，只包含整数，所以此区间也可以写成</font><font style="color:rgb(18, 18, 18);">[a,a+2b−1]</font><font style="color:rgb(18, 18, 18);"> ），这称为</font><strong><font style="color:rgb(18, 18, 18);">预处理</font></strong><font style="color:rgb(18, 18, 18);">。查询时，再利用这些子区间算出待求区间的最大值。</font></p>
 <h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1>
               
             </div>
@@ -364,8 +354,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" class="category-chain-item">基础算法</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  
+  
+
   
 
       </span>
@@ -896,6 +893,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

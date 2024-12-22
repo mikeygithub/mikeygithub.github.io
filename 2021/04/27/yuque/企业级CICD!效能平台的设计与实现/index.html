@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1657588305250-58d3a45a-5693-4f62-9dfe-7cb0eaa0dd85.jpeg#averageHue=%23365fae&clientId=u10c1c840-421f-4&from=markdown&id=RojJU&originHeight=608&originWidth=1080&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=u07fda2d7-e72e-40e3-bd76-89296cc5f16&title=" srcset="/img/loading.gif" lazyload></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1657588305250-58d3a45a-5693-4f62-9dfe-7cb0eaa0dd85.jpeg" srcset="/img/loading.gif" lazyload></p>
 <h1 id="背景简介"><a href="#背景简介" class="headerlink" title="背景简介"></a>背景简介</h1><blockquote>
 <p>我们知道在企业级产品开发的流程中CI、CD能极大的提高我们的产品发布效率。本篇文章将从真实企业环境出发，介绍CI、CD平台的设计到落地实现。该项目旨意提高企业交付速度</p>
 </blockquote>
@@ -356,7 +344,10 @@
 <li>凭证管理：为代码库、流水线等服务提供不同类型的凭据、证书管理功能</li>
 <li>基建管理：可以接入各类中间件(es、dubbo、kafka、redis)进行基本操作.</li>
 </ul>
-<h1 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h1><p>在CICD的流程中主要分为以下几个节点<br><img src="https://cdn.nlark.com/yuque/__mermaid_v3/8853a18bd1737360b13c0051eeac0986.svg#lake_card_v2=eyJ0eXBlIjoibWVybWFpZCIsImNvZGUiOiJncmFwaCBMUjtcblxu5byA5Y-R6ICFLS0-5byA5Y-R5Yqf6IO9LS0-QSjmj5DkuqTku6PnoIEpLS3miYvliqgv6Ieq5Yqo6Kem5Y-RLS0-Qijku6PnoIHmiavmj48pXG5CLS3mi4nlj5YtLT5DKOaJk-WMhemhueebrilcbkMtLeaehOW7ui0tPkQo57yW6K-R5p6E5bu6KS0t5YiG6YWN6LWE5rqQLS0-RSjpg6jnvbLlupTnlKgpLS0-5ZCv5Yqo5bqU55SoLS3miJDlip8tLT7mtYvor5Xlip_og70tLT7lj5HluIPniYjmnKxcbua1i-ivleWKn-iDvS0t5L-u5aSNQlVHLS0-QVxuXG7lkK_liqjlupTnlKgtLeWksei0pemAmuefpS0tPuW8gOWPkeiAhSIsInVybCI6Imh0dHBzOi8vY2RuLm5sYXJrLmNvbS95dXF1ZS9fX21lcm1haWRfdjMvODg1M2ExOGJkMTczNzM2MGIxM2MwMDUxZWVhYzA5ODYuc3ZnIiwiaWQiOiJTc2ppYiIsImNhcmQiOiJkaWFncmFtIn0=" srcset="/img/loading.gif" lazyload>详细流程图<br><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1639583612883-f12c4e5b-b527-424b-a04f-74b04373f33e.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h1><p>在CICD的流程中主要分为以下几个节点</p>
+<p><img src="https://cdn.nlark.com/yuque/__mermaid_v3/8853a18bd1737360b13c0051eeac0986.svg" srcset="/img/loading.gif" lazyload></p>
+<p>详细流程图</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1639583612883-f12c4e5b-b527-424b-a04f-74b04373f33e.jpeg" srcset="/img/loading.gif" lazyload alt="画板"></p>
 <h1 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h1><blockquote>
 <p>首先我们需要结合企业的实际环境来设定，如项目组件数量是否庞大、组件之间的通信方式是什么、是否有自己机房等。</p>
 </blockquote>
@@ -370,9 +361,9 @@
 </blockquote>
 <p>代码审计</p>
 <blockquote>
-<p>代码审计标准配置为Gerrit+Jenkins+Sonar，整个系统搭建完成后得到的效果为：100% Code Style问题避免入库，80% 设计问题避免入库，40% 逻辑错误避免入库，20% 安全隐患避免入库，100% 人员互备</p>
+<p>代码审计<font style="color:rgb(18, 18, 18);">标准配置为Gerrit+Jenkins+Sonar，整个系统搭建完成后得到的效果为：100% Code Style问题避免入库，80% 设计问题避免入库，40% 逻辑错误避免入库，20% 安全隐患避免入库，100% 人员互备</font></p>
 </blockquote>
-<p>镜像存储</p>
+<p><font style="color:rgb(18, 18, 18);">镜像存储</font></p>
 <blockquote>
 <p>ceph/harbor</p>
 </blockquote>
@@ -380,10 +371,14 @@
 <blockquote>
 <p>服务环境资源的动态分配可以采用k8s进行分配，通过Java Client API调用，具体参考文末链接</p>
 </blockquote>
-<h1 id="总体设计"><a href="#总体设计" class="headerlink" title="总体设计"></a>总体设计</h1><p>系统架构图<br><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1670759598448-53eb3dcf-b74b-4409-8e8c-e67f96f6b5ec.jpeg" srcset="/img/loading.gif" lazyload></p>
-<h1 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h1><p>模型图<br><img src="https://cdn.nlark.com/yuque/__mermaid_v3/76cc34fb676b0f6390af27be25997bae.svg#lake_card_v2=eyJ0eXBlIjoibWVybWFpZCIsImNvZGUiOiJjbGFzc0RpYWdyYW1cbiAgICBHaXRsYWIgPHwtLSBBcHBsaWNhdGlvblxuICAgIEFwcGxpY2F0aW9uIDx8LS0gVmVyc2lvblxuICAgIEFwcGxpY2F0aW9uIDx8LS0gV29ya0xpbmVcbiAgICBBbmltYWwgPHwtLSBXb3JrTGluZVxuICAgIEFuaW1hbCA6ICtpbnQgYWdlXG4gICAgQW5pbWFsIDogK1N0cmluZyBnZW5kZXJcbiAgICBBbmltYWw6ICtpc01hbW1hbCgpXG4gICAgQW5pbWFsOiArbWF0ZSgpXG4gICAgY2xhc3MgVmVyc2lvbntcbiAgICAgICAgK1N0cmluZyBiZWFrQ29sb3JcbiAgICAgICAgK3N3aW0oKVxuICAgICAgICArcXVhY2soKVxuICAgIH1cbiAgICBjbGFzcyBXb3JrTGluZXtcbiAgICAgICAgLWludCBzaXplSW5GZWV0XG4gICAgICAgIC1jYW5FYXQoKVxuICAgIH1cbiAgICBjbGFzcyBaZWJyYXtcbiAgICAgICAgK2Jvb2wgaXNfd2lsZFxuICAgICAgICArcnVuKClcbiAgICB9IiwidXJsIjoiaHR0cHM6Ly9jZG4ubmxhcmsuY29tL3l1cXVlL19fbWVybWFpZF92My83NmNjMzRmYjY3NmIwZjYzOTBhZjI3YmUyNTk5N2JhZS5zdmciLCJpZCI6Im9hdE9yIiwibWFyZ2luIjp7InRvcCI6dHJ1ZSwiYm90dG9tIjp0cnVlfSwiY2FyZCI6ImRpYWdyYW0ifQ==" srcset="/img/loading.gif" lazyload></p>
+<h1 id="总体设计"><a href="#总体设计" class="headerlink" title="总体设计"></a>总体设计</h1><p>系统架构图</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1670759598448-53eb3dcf-b74b-4409-8e8c-e67f96f6b5ec.jpeg" srcset="/img/loading.gif" lazyload alt="画板"></p>
+<h1 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h1><p>模型图</p>
+<p><img src="https://cdn.nlark.com/yuque/__mermaid_v3/76cc34fb676b0f6390af27be25997bae.svg" srcset="/img/loading.gif" lazyload></p>
 <h2 id="权限模块详细设计"><a href="#权限模块详细设计" class="headerlink" title="权限模块详细设计"></a>权限模块详细设计</h2><p>基于JWT结合spirng security来实现基础操作权限控制</p>
-<p>模型图<br><img src="https://cdn.nlark.com/yuque/__mermaid_v3/2a322ce33e0cec57b99175333d0ca430.svg#lake_card_v2=eyJ0eXBlIjoibWVybWFpZCIsImNvZGUiOiJjbGFzc0RpYWdyYW1cbiAgICBVc2VyIDx8LS0gUm9sZVxuICAgIFJvbGUgPHwtLSBQZXJtaXNzaW9uXG5cbiAgICBjbGFzcyBVc2Vye1xuICAgICAgICArU3RyaW5nIGJlYWtDb2xvclxuICAgICAgICArc3dpbSgpXG4gICAgICAgICtxdWFjaygpXG4gICAgfVxuICAgIGNsYXNzIFJvbGV7XG4gICAgICAgIC1pbnQgc2l6ZUluRmVldFxuICAgICAgICAtY2FuRWF0KClcbiAgICB9XG4gICAgY2xhc3MgUGVybWlzc2lvbntcbiAgICAgICAgK2Jvb2wgaXNfd2lsZFxuICAgICAgICArcnVuKClcbiAgICB9IiwidXJsIjoiaHR0cHM6Ly9jZG4ubmxhcmsuY29tL3l1cXVlL19fbWVybWFpZF92My8yYTMyMmNlMzNlMGNlYzU3Yjk5MTc1MzMzZDBjYTQzMC5zdmciLCJpZCI6InJhMTB1IiwibWFyZ2luIjp7InRvcCI6dHJ1ZSwiYm90dG9tIjp0cnVlfSwiY2FyZCI6ImRpYWdyYW0ifQ==" srcset="/img/loading.gif" lazyload>领域图</p>
+<p>模型图</p>
+<p><img src="https://cdn.nlark.com/yuque/__mermaid_v3/2a322ce33e0cec57b99175333d0ca430.svg" srcset="/img/loading.gif" lazyload></p>
+<p>领域图</p>
 <p>序列图</p>
 <p>领域事件</p>
 <h2 id="应用模块详细设计"><a href="#应用模块详细设计" class="headerlink" title="应用模块详细设计"></a>应用模块详细设计</h2><blockquote>
@@ -397,7 +392,7 @@
 <p>研发流程以可视化方式呈现，编译、测试、部署；支持节点重启，支持开发测试生产分支。</p>
 </blockquote>
 <p>流水线前端参考相关画布的实现，文末尾有</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1649525741014-723b3a91-231c-478c-b0a1-61db29fa3b98.jpeg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1649525741014-723b3a91-231c-478c-b0a1-61db29fa3b98.jpeg" srcset="/img/loading.gif" lazyload alt="画板"></p>
 <h2 id="代码检查详细设计"><a href="#代码检查详细设计" class="headerlink" title="代码检查详细设计"></a>代码检查详细设计</h2><blockquote>
 <p>检查缺陷、安全漏洞、规范等多种维度代码问题，为产品质量保驾护航。</p>
 </blockquote>
@@ -413,19 +408,42 @@
 <h2 id="基建模块详细设计"><a href="#基建模块详细设计" class="headerlink" title="基建模块详细设计"></a>基建模块详细设计</h2><blockquote>
 <p>可以接入各类中间件(es、dubbo、kafka、redis)进行基本操作.</p>
 </blockquote>
-<h1 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h1><p>系统的安装流程<br>1.初始数据库脚本，部署并启动cicd-platform<br>2.通过平台引导搭建并初始化k8s集群<br>3.引导初始化Jenkins集群、开发环境、测试环境、预发环境、生产环境</p>
-<p>修改为<br>1.通过提供的脚本创建master k8s集群并部署cicd-platform<br>2.在cicd-platform平台上添加机器节点<br>3.在cicd-platform平台上引导初始化Jenkins集群、开发环境、测试环境、预发环境、生产环境</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>前端代码库：<a target="_blank" rel="noopener" href="https://github.com/ken-xue/cicd-platform-vue">https://github.com/ken-xue/cicd-platform-vue</a><br>后端代码库：<a target="_blank" rel="noopener" href="https://github.com/ken-xue/cicd-platform">https://github.com/ken-xue/cicd-platform</a></p>
-<p>代码扫描：sonar <a target="_blank" rel="noopener" href="https://docs.sonarqube.org/latest/setup/install-server/">https://docs.sonarqube.org/latest/setup/install-server/</a><br>Gerrit 代码评审工具：<a target="_blank" rel="noopener" href="https://www.gerritcodereview.com/">https://www.gerritcodereview.com/</a><br><a target="_blank" rel="noopener" href="https://www.sonarqube.org/">https://www.sonarqube.org/</a></p>
-<p>Docker：<a target="_blank" rel="noopener" href="https://www.docker.com/">https://www.docker.com/</a><br>k8s：<a target="_blank" rel="noopener" href="https://www.kubernetes.org.cn/k8s">https://www.kubernetes.org.cn/k8s</a><br>bk-ci: <a target="_blank" rel="noopener" href="https://gitee.com/Tencent-BlueKing/bk-ci/tree/master">https://gitee.com/Tencent-BlueKing/bk-ci/tree/master</a><br>k8s Java Client : <a target="_blank" rel="noopener" href="https://github.com/kubernetes-client/java">https://github.com/kubernetes-client/java</a><br>kubesphere: <a target="_blank" rel="noopener" href="https://github.com/kubesphere/kubesphere/blob/master/README_zh.md">https://github.com/kubesphere/kubesphere/blob/master/README_zh.md</a><br>kubeoperator: <a target="_blank" rel="noopener" href="https://gitee.com/fit2cloud-feizhiyun/KubeOperator">https://gitee.com/fit2cloud-feizhiyun/KubeOperator</a><br>  <a target="_blank" rel="noopener" href="https://demo.kubeoperator.io/#/clusters">https://demo.kubeoperator.io/#/clusters</a><br>二进制安装k8s集群(1.21.2)，多主多从：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/b02c428950df">https://www.jianshu.com/p/b02c428950df</a><br>三分钟安装一个k8s集群：<a target="_blank" rel="noopener" href="https://github.com/fanux/sealos">https://github.com/fanux/sealos</a></p>
+<h1 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h1><p>系统的安装流程</p>
+<p>1.初始数据库脚本，部署并启动cicd-platform</p>
+<p>2.通过平台引导搭建并初始化k8s集群</p>
+<p>3.引导初始化Jenkins集群、开发环境、测试环境、预发环境、生产环境</p>
+<p>修改为</p>
+<p>1.通过提供的脚本创建master k8s集群并部署cicd-platform </p>
+<p>2.在cicd-platform平台上添加机器节点</p>
+<p>3.在cicd-platform平台上引导初始化Jenkins集群、开发环境、测试环境、预发环境、生产环境</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>前端代码库：<a target="_blank" rel="noopener" href="https://github.com/ken-xue/cicd-platform-vue">https://github.com/ken-xue/cicd-platform-vue</a></p>
+<p>后端代码库：<a target="_blank" rel="noopener" href="https://github.com/ken-xue/cicd-platform">https://github.com/ken-xue/cicd-platform</a></p>
+<p>代码扫描：<font style="color:rgb(18, 18, 18);">sonar </font><a target="_blank" rel="noopener" href="https://docs.sonarqube.org/latest/setup/install-server/">https://docs.sonarqube.org/latest/setup/install-server/</a></p>
+<p>Gerrit 代码评审工具：<a target="_blank" rel="noopener" href="https://www.gerritcodereview.com/">https://www.gerritcodereview.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.sonarqube.org/">https://www.sonarqube.org/</a></p>
+<p>Docker：<a target="_blank" rel="noopener" href="https://www.docker.com/">https://www.docker.com/</a></p>
+<p>k8s：<a target="_blank" rel="noopener" href="https://www.kubernetes.org.cn/k8s">https://www.kubernetes.org.cn/k8s</a></p>
+<p>bk-ci: <a target="_blank" rel="noopener" href="https://gitee.com/Tencent-BlueKing/bk-ci/tree/master">https://gitee.com/Tencent-BlueKing/bk-ci/tree/master</a></p>
+<p>k8s Java Client : <a target="_blank" rel="noopener" href="https://github.com/kubernetes-client/java">https://github.com/kubernetes-client/java</a></p>
+<p>kubesphere: <a target="_blank" rel="noopener" href="https://github.com/kubesphere/kubesphere/blob/master/README_zh.md">https://github.com/kubesphere/kubesphere/blob/master/README_zh.md</a></p>
+<p>kubeoperator: <a target="_blank" rel="noopener" href="https://gitee.com/fit2cloud-feizhiyun/KubeOperator">https://gitee.com/fit2cloud-feizhiyun/KubeOperator</a></p>
+<p>  <a target="_blank" rel="noopener" href="https://demo.kubeoperator.io/#/clusters">https://demo.kubeoperator.io/#/clusters</a></p>
+<p>二进制安装k8s集群(1.21.2)，多主多从：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/b02c428950df">https://www.jianshu.com/p/b02c428950df</a></p>
+<p>三分钟安装一个k8s集群：<a target="_blank" rel="noopener" href="https://github.com/fanux/sealos">https://github.com/fanux/sealos</a></p>
 <p>脚本一键安装k8s: <a target="_blank" rel="noopener" href="https://github.com/lework/kainstall">https://github.com/lework/kainstall</a></p>
-<p>tekton:<br><a target="_blank" rel="noopener" href="https://tekton.dev/">https://tekton.dev/</a><br><a target="_blank" rel="noopener" href="https://github.com/tektoncd">https://github.com/tektoncd</a></p>
-<p>harbor:<br><a target="_blank" rel="noopener" href="https://goharbor.io/docs/2.4.0/install-config/">https://goharbor.io/docs/2.4.0/install-config/</a></p>
+<p>tekton:</p>
+<p><a target="_blank" rel="noopener" href="https://tekton.dev/">https://tekton.dev/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tektoncd">https://github.com/tektoncd</a></p>
+<p>harbor:</p>
+<p><a target="_blank" rel="noopener" href="https://goharbor.io/docs/2.4.0/install-config/">https://goharbor.io/docs/2.4.0/install-config/</a></p>
 <p>rancher：<a target="_blank" rel="noopener" href="https://rancher.com/">https://rancher.com/</a></p>
-<p>流水线画布：<a target="_blank" rel="noopener" href="https://gitee.com/junweizhou/vue-flow-draggable">https://gitee.com/junweizhou/vue-flow-draggable</a><br><a target="_blank" rel="noopener" href="https://docs.jsplumbtoolkit.com/toolkit/5.x/">https://docs.jsplumbtoolkit.com/toolkit/5.x/</a></p>
+<p>流水线画布：<a target="_blank" rel="noopener" href="https://gitee.com/junweizhou/vue-flow-draggable">https://gitee.com/junweizhou/vue-flow-draggable</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.jsplumbtoolkit.com/toolkit/5.x/">https://docs.jsplumbtoolkit.com/toolkit/5.x/</a></p>
 <p>ansible： <a target="_blank" rel="noopener" href="https://docs.ansible.com/">https://docs.ansible.com/</a></p>
-<p>Jenkins：<a target="_blank" rel="noopener" href="https://www.jenkins.io/zh/doc/#doc/book/getting-started#">https://www.jenkins.io/zh/doc/#doc/book/getting-started#</a><br>Jenkins java client：<a target="_blank" rel="noopener" href="https://github.com/jenkinsci/java-client-api">https://github.com/jenkinsci/java-client-api</a></p>
-<p>交互：jsch<br>模拟终端：xterm <a target="_blank" rel="noopener" href="https://xtermjs.org/docs/">https://xtermjs.org/docs/</a></p>
+<p>Jenkins：<a target="_blank" rel="noopener" href="https://www.jenkins.io/zh/doc/#doc/book/getting-started#">https://www.jenkins.io/zh/doc/#doc/book/getting-started#</a></p>
+<p>Jenkins java client：<a target="_blank" rel="noopener" href="https://github.com/jenkinsci/java-client-api">https://github.com/jenkinsci/java-client-api</a></p>
+<p>交互：jsch</p>
+<p>模拟终端：<font style="color:rgb(77, 77, 77);">xterm </font><a target="_blank" rel="noopener" href="https://xtermjs.org/docs/">https://xtermjs.org/docs/</a></p>
 <p>cloud ide：<a target="_blank" rel="noopener" href="https://theia-ide.org/docs/blueprint_download">https://theia-ide.org/docs/blueprint_download</a></p>
 
               
@@ -999,6 +1017,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

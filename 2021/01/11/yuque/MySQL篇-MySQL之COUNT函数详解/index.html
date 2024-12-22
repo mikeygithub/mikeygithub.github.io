@@ -17,12 +17,12 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="COUNT 函数用法 COUNT() 函数返回匹配指定条件的行数。      SQL COUNT(column_name) 语法    COUNT(column_name) 函数返回指定列的值的数目（NULL 不计入）：  1SELECT COUNT(column_name) FROM table_name;      SQL COUNT(*) 语法   COUNT(*) 函数返回表中的记录数：">
+    <meta name="description" content="COUNT 函数用法 COUNT() 函数返回匹配指定条件的行数。      SQL COUNT(column_name) 语法    COUNT(column_name) 函数返回指定列的值的数目（NULL 不计入）：  1SELECT COUNT(column_name) FROM table_name;        SQL COUNT(*) 语法   COUNT(*) 函数返回表中的记录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL篇-MySQL之COUNT函数详解">
 <meta property="og:url" content="https://mikeygithub.github.io/2021/01/11/yuque/MySQL%E7%AF%87-MySQL%E4%B9%8BCOUNT%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="COUNT 函数用法 COUNT() 函数返回匹配指定条件的行数。      SQL COUNT(column_name) 语法    COUNT(column_name) 函数返回指定列的值的数目（NULL 不计入）：  1SELECT COUNT(column_name) FROM table_name;      SQL COUNT(*) 语法   COUNT(*) 函数返回表中的记录数：">
+<meta property="og:description" content="COUNT 函数用法 COUNT() 函数返回匹配指定条件的行数。      SQL COUNT(column_name) 语法    COUNT(column_name) 函数返回指定列的值的数目（NULL 不计入）：  1SELECT COUNT(column_name) FROM table_name;        SQL COUNT(*) 语法   COUNT(*) 函数返回表中的记录">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657548655807-dd90f01c-caeb-4be7-ad8a-933a4bfd50f8.png">
 <meta property="article:published_time" content="2021-01-11T15:46:05.000Z">
@@ -160,18 +160,6 @@
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
               </a>
             </li>
           
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657548655807-dd90f01c-caeb-4be7-ad8a-933a4bfd50f8.png#clientId=u39a86971-3848-4&from=markdown&id=ZvD10&originHeight=383&originWidth=900&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=210040&status=done&style=none&taskId=u518627fc-cdf4-46e4-ade9-d2875b83dfc&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657548655807-dd90f01c-caeb-4be7-ad8a-933a4bfd50f8.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="COUNT-函数用法"><a href="#COUNT-函数用法" class="headerlink" title="COUNT 函数用法"></a>COUNT 函数用法</h1><blockquote>
 <p>COUNT() 函数返回匹配指定条件的行数。</p>
 </blockquote>
@@ -353,11 +341,15 @@
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(column_name) <span class="hljs-keyword">FROM</span> table_name;<br></code></pre></td></tr></table></figure>
 
+
+
 <p>    SQL COUNT(*) 语法 </p>
 <blockquote>
 <p>COUNT(*) 函数返回表中的记录数：</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">FROM</span> table_name;<br></code></pre></td></tr></table></figure>
+
+
 
 <p>    SQL COUNT(DISTINCT column_name) 语法  </p>
 <blockquote>
@@ -365,11 +357,14 @@
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> column_name) <span class="hljs-keyword">FROM</span> table_name;<br></code></pre></td></tr></table></figure>
 
+
+
 <p>注释：<code>COUNT(DISTINCT) 适用于 ORACLE 和 Microsoft SQL Server，但是无法用于 Microsoft Access。</code></p>
 <h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><blockquote>
 <p>COUNT(常量) 和 COUNT(*)表示的是直接查询符合条件的数据库表的行数。而COUNT(列名)表示的是查询符合条件的列的值不为NULL的行数。</p>
 </blockquote>
 <h1 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h1><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs latex">count(*)和count(1)执行的效率是完全一样的。<br>count(*)的执行效率比count(col)高，因此可以用count(*)的时候就不要去用count(col)。<br>count(col)的执行效率比count(distinct col)高，不过这个结论的意义不大，这两种方法也是看需要去用。<br>如果是对特定的列做count的话建立这个列的非聚集索引能对count有很大的帮助。<br>如果经常count(*)的话则可以找一个最小的col建立非聚集索引以避免全表扫描而影响整体性能。<br>在不加WHERE限制条件的情况下，COUNT(*)与COUNT(COL)基本可以认为是等价的；<br>但是在有WHERE限制条件的情况下，COUNT(*)会比COUNT(COL)快非常多；<br>count(0)=count(1)=count(*)<br>1. count(指定的有效值)--执行计划都会转化为count(*)<br>2. 如果指定的是列名，会判断是否有null，null不计算<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="COUNT常见问题"><a href="#COUNT常见问题" class="headerlink" title="COUNT常见问题"></a>COUNT常见问题</h1><p>1、COUNT有几种用法？</p>
@@ -399,13 +394,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%84/" class="category-chain-item">数据库组</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%84/MySQL/" class="category-chain-item">MySQL</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%84/" class="category-chain-item">数据库组</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%84/MySQL/" class="category-chain-item">MySQL</a>
+  
+  
+
   
 
   
@@ -961,6 +963,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

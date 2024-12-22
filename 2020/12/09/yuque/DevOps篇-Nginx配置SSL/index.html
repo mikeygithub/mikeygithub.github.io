@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,19 +331,23 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550288760-9fd719a8-df2b-4e17-a411-aba9d355d770.png#clientId=ua25f44c2-7323-4&from=markdown&id=HGON3&originHeight=358&originWidth=662&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=164225&status=done&style=none&taskId=u46446641-222d-4d36-a452-69f6e9f112f&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h1 id="获取证书"><a href="#获取证书" class="headerlink" title="获取证书"></a>获取证书</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/ssl-nginx-cert.png#id=IChXj&originHeight=761&originWidth=1915&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550288760-9fd719a8-df2b-4e17-a411-aba9d355d770.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="获取证书"><a href="#获取证书" class="headerlink" title="获取证书"></a>获取证书</h1><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/ssl-nginx-cert.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="上传证书"><a href="#上传证书" class="headerlink" title="上传证书"></a>上传证书</h1><p>证书内容</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs latex">./<br>├── Apache<br>│   ├── 1<span class="hljs-built_in">_</span>root<span class="hljs-built_in">_</span>bundle.crt<br>│   ├── 2<span class="hljs-built_in">_</span>yangbiao.ink.crt<br>│   └── 3<span class="hljs-built_in">_</span>yangbiao.ink.key<br>├── IIS<br>│   ├── keystorePass.txt<br>│   └── yangbiao.ink.pfx<br>├── Nginx<br>│   ├── 1<span class="hljs-built_in">_</span>yangbiao.ink<span class="hljs-built_in">_</span>bundle.crt<br>│   └── 2<span class="hljs-built_in">_</span>yangbiao.ink.key<br>├── Tomcat<br>│   ├── keystorePass.txt<br>│   └── yangbiao.ink.jks<br>└── yangbiao.ink.csr<br><br>4 directories, 10 files<br></code></pre></td></tr></table></figure>
 
+
+
 <p>上传证书</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">rsync -r ./Nginx/  root@47.106.210.183:yangbiao.ink/<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><ul>
 <li>配置Nginx文件</li>
 </ul>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs latex">server &#123;<br>        <span class="hljs-params">#</span> 所有请求走https<br>        rewrite <span class="hljs-built_in">^</span>(.*)<span class="hljs-built_in">$</span>  https://<span class="hljs-built_in">$</span>host<span class="hljs-built_in">$</span>1 permanent;<br>        ......<br>&#125;<br>server &#123;<br>        listen       443 ssl http2 default<span class="hljs-built_in">_</span>server;<br>        listen       [::]:443 ssl http2 default<span class="hljs-built_in">_</span>server;<br>        server<span class="hljs-built_in">_</span>name  yangbiao.ink;<br>        root         /usr/share/nginx/html;<br>        <span class="hljs-params">#</span>配置证书<br>        ssl<span class="hljs-built_in">_</span>certificate &quot;/etc/pki/nginx/server.crt&quot;;<br>        ssl<span class="hljs-built_in">_</span>certificate<span class="hljs-built_in">_</span>key &quot;/etc/pki/nginx/server.key&quot;;<br>        ssl<span class="hljs-built_in">_</span>session<span class="hljs-built_in">_</span>cache shared:SSL:1m;<br>        ssl<span class="hljs-built_in">_</span>session<span class="hljs-built_in">_</span>timeout  10m;<br>        ssl<span class="hljs-built_in">_</span>ciphers HIGH:!aNULL:!MD5;<br>        ssl<span class="hljs-built_in">_</span>prefer<span class="hljs-built_in">_</span>server<span class="hljs-built_in">_</span>ciphers on;<br><br>        <span class="hljs-params">#</span> Load configuration files for the default server block.<br>        include /etc/nginx/default.d/*.conf;<br><br>        location / &#123;<br>        &#125;<br><br>        error<span class="hljs-built_in">_</span>page 404 /404.html;<br>        location = /404.html &#123;<br>        &#125;<br><br>        error<span class="hljs-built_in">_</span>page 500 502 503 504 /50x.html;<br>        location = /50x.html &#123;<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="测试访问"><a href="#测试访问" class="headerlink" title="测试访问"></a>测试访问</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1>
@@ -930,6 +922,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

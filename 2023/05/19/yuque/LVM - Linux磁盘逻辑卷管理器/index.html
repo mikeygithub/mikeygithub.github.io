@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1684515346430-071f3f30-8cb4-4699-9e31-ce084698963b.png#averageHue=%23c8d5ec&clientId=u258e4c7e-d460-4&from=paste&height=360&id=ud94f0382&originHeight=720&originWidth=1280&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=32067&status=done&style=none&taskId=u12788ae2-60ba-4112-909d-3fb7321614e&title=&width=640" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1684515346430-071f3f30-8cb4-4699-9e31-ce084698963b.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
 <p>在开发环境中我们通过Kubernetes部署了一个MySQL的Pod供我们进行开发使用，其PVC的大小80G，由于近期开发的一个项目数据量较大，产生需要进行容量扩容的需求，我们的操作步骤是先升级磁盘（阿里云磁盘挂载到Kubernetes节点上，通过亲和性配置Pod到该机器上）大小为256G，修改PVC的存储大小后其MySQL的Pod并没有并未能读取到扩容后的容量大小。</p>
 </blockquote>
@@ -353,7 +341,7 @@
 <blockquote>
 <p>基于个人对这一块了解较少，所以想系统性的学习一下这一块的知识进行记录</p>
 </blockquote>
-<h1 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h1><p><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/2630542/1684682771588-b0d6a484-6a74-4ec6-9b18-41a25249e64b.jpeg#averageHue=%23b4e4e7&clientId=uacca54ae-93a8-4&from=paste&id=ufa1d13a9&originHeight=262&originWidth=800&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=u8e664e35-cccf-416f-adc7-3cdfdd28d12&title=" srcset="/img/loading.gif" lazyload></p>
+<h1 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h1><p><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/2630542/1684682771588-b0d6a484-6a74-4ec6-9b18-41a25249e64b.jpeg" srcset="/img/loading.gif" lazyload></p>
 <p>Linux 支持的不同类型的文件系统：</p>
 <ul>
 <li>传统磁盘文件系统：ext2、ext3、ext4、XFS、Btrfs、JFS、NTFS等。</li>
@@ -361,7 +349,7 @@
 <li>数据库文件系统</li>
 <li>特殊用途的文件系统：procfs、sysfs、tmpfs、squashfs、debugfs 等。</li>
 </ul>
-<h1 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h1><h2 id="物理卷"><a href="#物理卷" class="headerlink" title="物理卷"></a>物理卷</h2><h2 id="逻辑卷"><a href="#逻辑卷" class="headerlink" title="逻辑卷"></a>逻辑卷</h2><p>LVM（Logical Volume Manager）是一种逻辑卷管理器，它可以将物理硬盘的存储空间分割成逻辑卷，以便更加灵活地管理存储空间。使用LVM，可以将多个物理硬盘或分区组合成一个逻辑卷组（Volume Group），然后在逻辑卷组中创建逻辑卷（Logical Volume），并将其格式化为文件系统以供使用。LVM还支持动态扩展和缩小逻辑卷，而无需重新分区或重新格式化磁盘。</p>
+<h1 id="磁盘"><a href="#磁盘" class="headerlink" title="磁盘"></a>磁盘</h1><h2 id="物理卷"><a href="#物理卷" class="headerlink" title="物理卷"></a>物理卷</h2><h2 id="逻辑卷"><a href="#逻辑卷" class="headerlink" title="逻辑卷"></a>逻辑卷</h2><p>LVM（Logical Volume Manager）是一种逻辑卷管理器，它可以将物理硬盘的存储空间分割成逻辑卷，以便更加灵活地管理存储空间。使用LVM，可以将多个物理硬盘或分区组合成一个逻辑卷组（Volume Group），然后在逻辑卷组中创建逻辑卷（Logical Volume），并将其格式化为文件系统以供使用。LVM还支持动态扩展和缩小逻辑卷，而无需重新分区或重新格式化磁盘。  </p>
 <p>下面是LVM的一些核心概念：</p>
 <ol>
 <li>物理卷（Physical Volume）：物理硬盘或分区被称为物理卷，可以使用LVM命令将其添加到逻辑卷组中。</li>
@@ -387,8 +375,10 @@
 <li>pvremove：用于删除物理卷。</li>
 <li>lvresize：用于调整逻辑卷的大小。</li>
 </ol>
-<p>LVM是Linux系统中的磁盘管理技术之一，属于Linux系统中的存储管理技术体系。在Linux系统中，存储管理技术包括磁盘分区、文件系统和磁盘容量管理等方面，而LVM则是其中的一种磁盘容量管理技术。LVM的出现是为了解决磁盘管理的一些问题，如磁盘分区不够灵活、磁盘容量扩展不方便等。<br>除了LVM，Linux系统中还有其他一些存储管理技术，例如RAID（磁盘阵列）、LVM的快照技术、文件系统的加密和压缩等。这些技术都是Linux系统中的存储管理技术的一部分，它们可以相互配合使用，以实现更加灵活、高效、安全的存储管理。</p>
-<h2 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h2><p>在一个区被格式化为一个文件系统之后，它就可以被Linux操作系统使用了，只是这个时候Linux操作系统还找不到它，所以我们还需要把这个文件系统「注册」进Linux操作系统的文件体系里，这个操作就叫「挂载」 (mount)。<br>挂载是利用一个目录当成进入点（类似选一个现成的目录作为代理），将文件系统放置在该目录下，也就是说，进入该目录就可以读取该文件系统的内容，类似整个文件系统只是目录树的一个文件夹（目录）。<br>这个进入点的目录我们称为「挂载点」。<br>由于整个 Linux 系统最重要的是根目录，因此根目录一定需要挂载到某个分区。 而其他的目录则可依用户自己的需求来给予挂载到不同的分去。</p>
+<p>LVM是Linux系统中的磁盘管理技术之一，属于Linux系统中的存储管理技术体系。在Linux系统中，存储管理技术包括磁盘分区、文件系统和磁盘容量管理等方面，而LVM则是其中的一种磁盘容量管理技术。LVM的出现是为了解决磁盘管理的一些问题，如磁盘分区不够灵活、磁盘容量扩展不方便等。</p>
+<p>除了LVM，Linux系统中还有其他一些存储管理技术，例如RAID（磁盘阵列）、LVM的快照技术、文件系统的加密和压缩等。这些技术都是Linux系统中的存储管理技术的一部分，它们可以相互配合使用，以实现更加灵活、高效、安全的存储管理。</p>
+<h2 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a><font style="color:rgb(0, 0, 0);">挂载</font></h2><p>在一个区被格式化为一个文件系统之后，它就可以被Linux操作系统使用了，只是这个时候Linux操作系统还找不到它，所以我们还需要把这个文件系统「注册」进Linux操作系统的文件体系里，这个操作就叫「挂载」 (mount)。<br>挂载是利用一个目录当成进入点（类似选一个现成的目录作为代理），将文件系统放置在该目录下，也就是说，进入该目录就可以读取该文件系统的内容，类似整个文件系统只是目录树的一个文件夹（目录）。<br>这个进入点的目录我们称为「挂载点」。</p>
+<p>由于整个 Linux 系统最重要的是根目录，因此根目录一定需要挂载到某个分区。 而其他的目录则可依用户自己的需求来给予挂载到不同的分去。</p>
 <h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><ol>
 <li><a target="_blank" rel="noopener" href="https://phoenixnap.com/kb/linux-file-system">https://phoenixnap.com/kb/linux-file-system</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#introduction">https://www.kernel.org/doc/html/latest/filesystems/vfs.html#introduction</a></li>
@@ -965,6 +955,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

@@ -17,12 +17,12 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介pprof是一种可视化和分析数据的工具，可以生成类似火焰图、堆栈图，内存分析图等。 应用配置导出数据 导入依赖 12&quot;net&#x2F;http&quot;_ &quot;net&#x2F;http&#x2F;pprof&quot;  开启协程 12345go func() &amp;#123;	runtime.SetBlockProfileRate(1)     &#x2F;&#x2F; 开启对阻塞操作的跟踪，block	runtime">
+    <meta name="description" content="简介pprof是一种可视化和分析数据的工具，可以生成类似火焰图、堆栈图，内存分析图等。 应用配置导出数据 导入依赖  12&quot;net&#x2F;http&quot;_ &quot;net&#x2F;http&#x2F;pprof&quot;   开启协程  12345go func() &amp;#123;	runtime.SetBlockProfileRate(1)     &#x2F;&#x2F; 开启对阻塞操作的跟踪，block	runt">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Golang篇-pprof性能调优工具">
 <meta property="og:url" content="https://mikeygithub.github.io/2022/12/15/yuque/Golang%E7%AF%87-pprof%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E5%B7%A5%E5%85%B7/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="简介pprof是一种可视化和分析数据的工具，可以生成类似火焰图、堆栈图，内存分析图等。 应用配置导出数据 导入依赖 12&quot;net&#x2F;http&quot;_ &quot;net&#x2F;http&#x2F;pprof&quot;  开启协程 12345go func() &amp;#123;	runtime.SetBlockProfileRate(1)     &#x2F;&#x2F; 开启对阻塞操作的跟踪，block	runtime">
+<meta property="og:description" content="简介pprof是一种可视化和分析数据的工具，可以生成类似火焰图、堆栈图，内存分析图等。 应用配置导出数据 导入依赖  12&quot;net&#x2F;http&quot;_ &quot;net&#x2F;http&#x2F;pprof&quot;   开启协程  12345go func() &amp;#123;	runtime.SetBlockProfileRate(1)     &#x2F;&#x2F; 开启对阻塞操作的跟踪，block	runt">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671631521337-10e6faab-9a03-4fdd-af45-6104b15a0b3d.png">
 <meta property="article:published_time" content="2022-12-15T02:43:06.000Z">
@@ -160,18 +160,6 @@
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
               </a>
             </li>
           
@@ -343,17 +331,18 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671631521337-10e6faab-9a03-4fdd-af45-6104b15a0b3d.png#averageHue=%23f8f8f7&clientId=ufb6a6985-60b0-4&from=paste&height=384&id=u73ebeb64&originHeight=768&originWidth=1638&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=221500&status=done&style=none&taskId=u18056f5f-119f-4a03-a265-7545c7161ad&title=&width=819" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>pprof是一种可视化和分析数据的工具，可以生成类似火焰图、堆栈图，内存分析图等。</p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671631521337-10e6faab-9a03-4fdd-af45-6104b15a0b3d.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>pprof是一种可视化和分析数据的工具，<font style="color:rgb(18, 18, 18);">可以生成类似火焰图、堆栈图，内存分析图等。</font></p>
 <h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><h2 id="配置导出数据"><a href="#配置导出数据" class="headerlink" title="配置导出数据"></a>配置导出数据</h2><ul>
-<li><p>导入依赖</p>
+<li>导入依赖</li>
+</ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-string">&quot;net/http&quot;</span><br>_ <span class="hljs-string">&quot;net/http/pprof&quot;</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>开启协程</p>
+
+<ul>
+<li>开启协程</li>
+</ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>	runtime.SetBlockProfileRate(<span class="hljs-number">1</span>)     <span class="hljs-comment">// 开启对阻塞操作的跟踪，block</span><br>	runtime.SetMutexProfileFraction(<span class="hljs-number">1</span>) <span class="hljs-comment">// 开启对锁调用的跟踪，mutex</span><br>	log.Println(http.ListenAndServe(<span class="hljs-string">&quot;:6060&quot;</span>, <span class="hljs-literal">nil</span>))<br>&#125;()<br></code></pre></td></tr></table></figure>
 
-</li>
-</ul>
 <h2 id="导出数据"><a href="#导出数据" class="headerlink" title="导出数据"></a>导出数据</h2><blockquote>
 <p>基于上面的配置后我们可以通过两种方式访问</p>
 </blockquote>
@@ -361,59 +350,60 @@
 <blockquote>
 <p>我们可以通过访问web的方式去查看对应的数据，但其实可读性并不是很好</p>
 </blockquote>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671208671833-0c8810c0-961f-4fd9-8389-b3b32f850021.png#averageHue=%23f1f1f1&clientId=u1346c173-3f26-4&from=paste&height=733&id=tsqGu&originHeight=1466&originWidth=3012&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=397462&status=done&style=none&taskId=u098de179-749c-4fec-a8c0-75b492bec56&title=&width=1506" srcset="/img/loading.gif" lazyload alt="image.png"><br>相关信息详解</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671208671833-0c8810c0-961f-4fd9-8389-b3b32f850021.png" srcset="/img/loading.gif" lazyload></p>
+<p>相关信息详解</p>
 <table>
 <thead>
 <tr>
-<th><strong>Profile项</strong></th>
-<th><strong>说明</strong></th>
-<th><strong>详情</strong></th>
+<th align="left"><strong><font style="color:rgb(51, 51, 51);">Profile项</font></strong></th>
+<th align="left"><strong><font style="color:rgb(51, 51, 51);">说明</font></strong></th>
+<th align="left"><strong><font style="color:rgb(51, 51, 51);">详情</font></strong></th>
 </tr>
 </thead>
 <tbody><tr>
-<td>allocs</td>
-<td><strong>内存分配</strong></td>
-<td>从程序启动开始，分配的全部内存</td>
+<td align="left"><font style="color:rgb(51, 51, 51);">allocs</font></td>
+<td align="left"><strong><font style="color:rgb(51, 51, 51);">内存分配</font></strong></td>
+<td align="left"><font style="color:rgb(51, 51, 51);">从程序启动开始，分配的全部内存</font></td>
 </tr>
 <tr>
-<td>block</td>
-<td><strong>阻塞</strong></td>
-<td>导致同步原语阻塞的堆栈跟踪</td>
+<td align="left"><font style="color:rgb(51, 51, 51);">block</font></td>
+<td align="left"><strong><font style="color:rgb(51, 51, 51);">阻塞</font></strong></td>
+<td align="left"><font style="color:rgb(51, 51, 51);">导致同步原语阻塞的堆栈跟踪</font></td>
 </tr>
 <tr>
-<td>cmdline</td>
-<td>命令行调用</td>
-<td>当前程序的命令行调用</td>
+<td align="left"><font style="color:rgb(51, 51, 51);">cmdline</font></td>
+<td align="left"><font style="color:rgb(51, 51, 51);">命令行调用</font></td>
+<td align="left"><font style="color:rgb(51, 51, 51);">当前程序的命令行调用</font></td>
 </tr>
 <tr>
-<td>goroutine</td>
-<td>gorouting</td>
-<td>所有当前 goroutine 的堆栈跟踪</td>
+<td align="left"><font style="color:rgb(51, 51, 51);">goroutine</font></td>
+<td align="left"><font style="color:rgb(51, 51, 51);">gorouting</font></td>
+<td align="left"><font style="color:rgb(51, 51, 51);">所有当前 goroutine 的堆栈跟踪</font></td>
 </tr>
 <tr>
-<td>heap</td>
-<td><strong>堆</strong></td>
-<td>活动对象的内存分配抽样。您可以指定 gc 参数以在获取堆样本之前运行 GC</td>
+<td align="left"><font style="color:rgb(51, 51, 51);">heap</font></td>
+<td align="left"><strong><font style="color:rgb(51, 51, 51);">堆</font></strong></td>
+<td align="left"><font style="color:rgb(51, 51, 51);">活动对象的内存分配抽样。您可以指定 gc 参数以在获取堆样本之前运行 GC</font></td>
 </tr>
 <tr>
-<td>mutex</td>
-<td><strong>互斥锁</strong></td>
-<td>争用互斥锁持有者的堆栈跟踪</td>
+<td align="left"><font style="color:rgb(51, 51, 51);">mutex</font></td>
+<td align="left"><strong><font style="color:rgb(51, 51, 51);">互斥锁</font></strong></td>
+<td align="left"><font style="color:rgb(51, 51, 51);">争用互斥锁持有者的堆栈跟踪</font></td>
 </tr>
 <tr>
-<td>profile</td>
-<td><strong>CPU分析</strong></td>
-<td>CPU 使用率分析。可以在url中，通过seconds指定持续时间（默认30s）。获取配置文件后，使用 go tool pprof 命令分析CPU使用情况</td>
+<td align="left"><font style="color:rgb(51, 51, 51);">profile</font></td>
+<td align="left"><strong><font style="color:rgb(51, 51, 51);">CPU分析</font></strong></td>
+<td align="left"><font style="color:rgb(51, 51, 51);">CPU 使用率分析。可以在url中，通过seconds指定持续时间（默认30s）。获取配置文件后，使用 go tool pprof 命令分析CPU使用情况</font></td>
 </tr>
 <tr>
-<td>threadcreate</td>
-<td>线程创建</td>
-<td>导致创建新操作系统线程的堆栈跟踪</td>
+<td align="left"><font style="color:rgb(51, 51, 51);">threadcreate</font></td>
+<td align="left"><font style="color:rgb(51, 51, 51);">线程创建</font></td>
+<td align="left"><font style="color:rgb(51, 51, 51);">导致创建新操作系统线程的堆栈跟踪</font></td>
 </tr>
 <tr>
-<td>trace</td>
-<td>追踪</td>
-<td>当前程序的执行轨迹。可以在url中，通过seconds指定持续时间（默认30s）。获取跟踪文件后，使用 go tool trace 命令调查跟踪</td>
+<td align="left"><font style="color:rgb(51, 51, 51);">trace</font></td>
+<td align="left"><font style="color:rgb(51, 51, 51);">追踪</font></td>
+<td align="left"><font style="color:rgb(51, 51, 51);">当前程序的执行轨迹。可以在url中，通过seconds指定持续时间（默认30s）。获取跟踪文件后，使用 go tool trace 命令调查跟踪</font></td>
 </tr>
 </tbody></table>
 <p>2.直接通过命令进行交互（需要安装graphviz）</p>
@@ -421,29 +411,45 @@
 <p>在安装过程中出现依赖安装失败的情况需先独立安装依赖</p>
 </blockquote>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">brew install graphviz<br></code></pre></td></tr></table></figure>
+
 <p>导出数据默认30s</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> tool pprof http:<span class="hljs-comment">//127.0.0.1:6060/debug/pprof/xxx</span><br></code></pre></td></tr></table></figure>
+
 <p>example</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> tool pprof http:<span class="hljs-comment">//127.0.0.1:6060/debug/pprof/allocs</span><br></code></pre></td></tr></table></figure>
+
 <p>进行命令访问后我们可以查看相关帮助文档，键入<code>help</code>查看可以进行哪些操作</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><code class="hljs go">(pprof) help<br>  Commands:<br>    callgrind        Outputs a graph in callgrind format<br>    comments         Output all profile comments<br>    disasm           Output assembly listings annotated with samples<br>    dot              Outputs a graph in DOT format<br>    eog              Visualize graph through eog<br>    evince           Visualize graph through evince<br>    gif              Outputs a graph image in GIF format<br>    gv               Visualize graph through gv<br>    kcachegrind      Visualize report in KCachegrind<br>    list             Output annotated source <span class="hljs-keyword">for</span> functions matching regexp<br>    pdf              Outputs a graph in PDF format<br>    peek             Output callers/callees of functions matching regexp<br>    png              Outputs a graph image in PNG format<br>    proto            Outputs the profile in compressed protobuf format<br>    ps               Outputs a graph in PS format<br>    raw              Outputs a text representation of the raw profile<br>    svg              Outputs a graph in SVG format<br>    tags             Outputs all tags in the profile<br>    text             Outputs top entries in text form<br>    top              Outputs top entries in text form<br>    topproto         Outputs top entries in compressed protobuf format<br>    traces           Outputs all profile samples in text form<br>    tree             Outputs a text rendering of call graph<br>    web              Visualize graph through web browser<br>    weblist          Display annotated source in a web browser<br>    o/options        List options and their current values<br>    q/quit/exit/^D   Exit pprof<br><br>  Options:<br>    call_tree        Create a context-sensitive call tree<br>    compact_labels   Show minimal headers<br>    divide_by        Ratio to divide all samples before visualization<br>    drop_negative    Ignore negative differences<br>    edgefraction     Hide edges below &lt;f&gt;*total<br>    focus            Restricts to samples going through a node matching regexp<br>    hide             Skips nodes matching regexp<br>    ignore           Skips paths going through any nodes matching regexp<br>    intel_syntax     Show assembly in Intel syntax<br>    mean             Average sample value over first value (count)<br>    nodecount        Max number of nodes to show<br>    nodefraction     Hide nodes below &lt;f&gt;*total<br>    noinlines        Ignore inlines.<br>    normalize        Scales profile based on the base profile.<br>    output           Output filename <span class="hljs-keyword">for</span> file-based outputs<br>    prune_from       Drops any functions below the matched frame.<br>    relative_percentages Show percentages relative to focused subgraph<br>    sample_index     Sample value to report (<span class="hljs-number">0</span>-based index or name)<br>    show             Only show nodes matching regexp<br>    show_from        Drops functions above the highest matched frame.<br>    source_path      Search path <span class="hljs-keyword">for</span> source files<br>    tagfocus         Restricts to samples with tags in <span class="hljs-keyword">range</span> or matched by regexp<br>    taghide          Skip tags matching this regexp<br>    tagignore        Discard samples with tags in <span class="hljs-keyword">range</span> or matched by regexp<br>    tagleaf          Adds pseudo stack frames <span class="hljs-keyword">for</span> labels key/value pairs at the callstack leaf.<br>    tagroot          Adds pseudo stack frames <span class="hljs-keyword">for</span> labels key/value pairs at the callstack root.<br>    tagshow          Only consider tags matching this regexp<br>    trim             Honor nodefraction/edgefraction/nodecount defaults<br>    trim_path        Path to trim from source paths before search<br>    unit             Measurement units to display<br><br>  Option groups (only set one per group):<br>    granularity      <br>      functions        Aggregate at the function level.<br>      filefunctions    Aggregate at the function level.<br>      files            Aggregate at the file level.<br>      lines            Aggregate at the source code line level.<br>      addresses        Aggregate at the address level.<br>    sort             <br>      cum              Sort entries based on cumulative weight<br>      flat             Sort entries based on own weight<br>  :   Clear focus/ignore/hide/tagfocus/tagignore<br><br>  <span class="hljs-keyword">type</span> <span class="hljs-string">&quot;help &lt;cmd|option&gt;&quot;</span> <span class="hljs-keyword">for</span> more information<br></code></pre></td></tr></table></figure>
 
-<h2 id="Profile项详解"><a href="#Profile项详解" class="headerlink" title="Profile项详解"></a>Profile项详解</h2><h3 id="allocs"><a href="#allocs" class="headerlink" title="allocs"></a>allocs</h3><blockquote>
-<p><strong>内存分配</strong>从程序启动开始，分配的全部内存</p>
+<h2 id="Profile项详解"><a href="#Profile项详解" class="headerlink" title="Profile项详解"></a><font style="color:rgb(51, 51, 51);">Profile项详解</font></h2><h3 id="allocs"><a href="#allocs" class="headerlink" title="allocs"></a>allocs</h3><blockquote>
+<p><strong><font style="color:rgb(51, 51, 51);">内存分配</font></strong><font style="color:rgb(51, 51, 51);">从程序启动开始，分配的全部内存</font></p>
 </blockquote>
-<p>1.进入控制台</p>
+<p><font style="color:rgb(51, 51, 51);">1.进入控制台</font></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> tool pprof http:<span class="hljs-comment">//127.0.0.1:6060/debug/pprof/allocs</span><br></code></pre></td></tr></table></figure>
-<p>2.先查看帮助文档</p>
+
+<p><font style="color:rgb(51, 51, 51);">2.先查看帮助文档</font></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><code class="hljs go">Type: alloc_space<br>Time: Dec <span class="hljs-number">18</span>, <span class="hljs-number">2022</span> at <span class="hljs-number">2</span>:<span class="hljs-number">01</span>pm (CST)<br>Entering interactive mode (<span class="hljs-keyword">type</span> <span class="hljs-string">&quot;help&quot;</span> <span class="hljs-keyword">for</span> commands, <span class="hljs-string">&quot;o&quot;</span> <span class="hljs-keyword">for</span> options)<br>(pprof) help<br>  Commands:<br>    callgrind        Outputs a graph in callgrind format<br>    comments         Output all profile comments<br>    disasm           Output assembly listings annotated with samples<br>    dot              Outputs a graph in DOT format<br>    eog              Visualize graph through eog<br>    evince           Visualize graph through evince<br>    gif              Outputs a graph image in GIF format<br>    gv               Visualize graph through gv<br>    kcachegrind      Visualize report in KCachegrind<br>    list             Output annotated source <span class="hljs-keyword">for</span> functions matching regexp<br>    pdf              Outputs a graph in PDF format<br>    peek             Output callers/callees of functions matching regexp<br>    png              Outputs a graph image in PNG format<br>    proto            Outputs the profile in compressed protobuf format<br>    ps               Outputs a graph in PS format<br>    raw              Outputs a text representation of the raw profile<br>    svg              Outputs a graph in SVG format<br>    tags             Outputs all tags in the profile<br>    text             Outputs top entries in text form<br>    top              Outputs top entries in text form<br>    topproto         Outputs top entries in compressed protobuf format<br>    traces           Outputs all profile samples in text form<br>    tree             Outputs a text rendering of call graph<br>    web              Visualize graph through web browser<br>    weblist          Display annotated source in a web browser<br>    o/options        List options and their current values<br>    q/quit/exit/^D   Exit pprof<br><br>  Options:<br>    call_tree        Create a context-sensitive call tree<br>    compact_labels   Show minimal headers<br>    divide_by        Ratio to divide all samples before visualization<br>    drop_negative    Ignore negative differences<br>    edgefraction     Hide edges below &lt;f&gt;*total<br>    focus            Restricts to samples going through a node matching regexp<br>    hide             Skips nodes matching regexp<br>    ignore           Skips paths going through any nodes matching regexp<br>    intel_syntax     Show assembly in Intel syntax<br>    mean             Average sample value over first value (count)<br>    nodecount        Max number of nodes to show<br>    nodefraction     Hide nodes below &lt;f&gt;*total<br>    noinlines        Ignore inlines.<br>    normalize        Scales profile based on the base profile.<br>    output           Output filename <span class="hljs-keyword">for</span> file-based outputs<br>    prune_from       Drops any functions below the matched frame.<br>    relative_percentages Show percentages relative to focused subgraph<br>    sample_index     Sample value to report (<span class="hljs-number">0</span>-based index or name)<br>    show             Only show nodes matching regexp<br>    show_from        Drops functions above the highest matched frame.<br>    source_path      Search path <span class="hljs-keyword">for</span> source files<br>    tagfocus         Restricts to samples with tags in <span class="hljs-keyword">range</span> or matched by regexp<br>    taghide          Skip tags matching this regexp<br>    tagignore        Discard samples with tags in <span class="hljs-keyword">range</span> or matched by regexp<br>    tagleaf          Adds pseudo stack frames <span class="hljs-keyword">for</span> labels key/value pairs at the callstack leaf.<br>    tagroot          Adds pseudo stack frames <span class="hljs-keyword">for</span> labels key/value pairs at the callstack root.<br>    tagshow          Only consider tags matching this regexp<br>    trim             Honor nodefraction/edgefraction/nodecount defaults<br>    trim_path        Path to trim from source paths before search<br>    unit             Measurement units to display<br><br>  Option groups (only set one per group):<br>    granularity      <br>      functions        Aggregate at the function level.<br>      filefunctions    Aggregate at the function level.<br>      files            Aggregate at the file level.<br>      lines            Aggregate at the source code line level.<br>      addresses        Aggregate at the address level.<br>    sort             <br>      cum              Sort entries based on cumulative weight<br>      flat             Sort entries based on own weight<br>  :   Clear focus/ignore/hide/tagfocus/tagignore<br><br>  <span class="hljs-keyword">type</span> <span class="hljs-string">&quot;help &lt;cmd|option&gt;&quot;</span> <span class="hljs-keyword">for</span> more information<br></code></pre></td></tr></table></figure>
-<p>3.以gif方式进行导出</p>
+
+<p><font style="color:rgb(51, 51, 51);">3.以gif方式进行导出</font></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">gif<br></code></pre></td></tr></table></figure>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/gif/2630542/1671343686218-574382c4-36f1-449d-b3bb-e52ff20f2e67.gif#averageHue=%23fafaf9&clientId=u488f3e47-9652-4&from=ui&id=WNSxM&originHeight=1661&originWidth=3656&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=208707&status=done&style=none&taskId=u0393061a-fcbc-4b97-ae38-0b8658ba3a2&title=" srcset="/img/loading.gif" lazyload alt="profile001.gif"></p>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/gif/2630542/1671343686218-574382c4-36f1-449d-b3bb-e52ff20f2e67.gif" srcset="/img/loading.gif" lazyload></p>
 <h3 id="block"><a href="#block" class="headerlink" title="block"></a>block</h3><blockquote>
-<p>阻塞，导致同步原语阻塞的堆栈跟踪</p>
+<p><font style="color:rgb(51, 51, 51);">阻塞，导致同步原语阻塞的堆栈跟踪</font></p>
 </blockquote>
-<p>1.以http服务器web页面展示数据</p>
+<p><font style="color:rgb(51, 51, 51);">1.以http服务器web页面展示数据</font></p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> tool pprof -http=:<span class="hljs-number">8000</span> http:<span class="hljs-comment">//127.0.0.1:6060/debug/pprof/block</span><br></code></pre></td></tr></table></figure>
-<p>2.进入web查看,可以选择下拉框查看不同项目的数据，占用情况、连线图、火焰图、窥探数据、结合源码分析、<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671619964077-c6282139-cf25-40c2-8062-5a944e1c6c8b.png#averageHue=%23e8e3de&clientId=u2db1c9bb-eaf5-4&from=paste&height=903&id=eVSwg&originHeight=1806&originWidth=3020&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=1558696&status=done&style=none&taskId=u27ad9aa6-1f54-4f8d-a890-825ac435098&title=&width=1510" srcset="/img/loading.gif" lazyload alt="image.png"><br>3.选择下拉菜单 top 查看占用情况<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671620171420-593de98f-f463-4794-bd80-e2c5023b0715.png#averageHue=%23efefef&clientId=u2db1c9bb-eaf5-4&from=paste&height=903&id=QIF2L&originHeight=1806&originWidth=3018&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=603186&status=done&style=none&taskId=ub9435ecb-695e-4e5c-a4b2-59acd578d83&title=&width=1509" srcset="/img/loading.gif" lazyload alt="image.png"><br>4.查看火焰图<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671620381336-214afceb-bb54-4803-8719-74d2488a151c.png#averageHue=%23e5c2a3&clientId=u2db1c9bb-eaf5-4&from=paste&height=897&id=X4rNM&originHeight=1794&originWidth=3014&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=1179938&status=done&style=none&taskId=u5f04b01d-38c3-4d5d-b0e9-4803dda6480&title=&width=1507" srcset="/img/loading.gif" lazyload alt="image.png"><br>5.窥探耗时<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671626287057-ba2ec2b9-0e7f-473e-8ae2-1ed4ed6c63aa.png#averageHue=%23e7e7e6&clientId=u2db1c9bb-eaf5-4&from=paste&height=460&id=OM6hx&originHeight=920&originWidth=3018&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=997715&status=done&style=none&taskId=u40da2ce6-3a82-4447-b366-ef57f31037d&title=&width=1509" srcset="/img/loading.gif" lazyload alt="image.png"><br>6.结合源码进行分析<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671626354764-edbcb99d-e5d6-4b75-9962-3c2ddd67e1c7.png#averageHue=%23f4f4f3&clientId=u2db1c9bb-eaf5-4&from=paste&height=898&id=mDuIR&originHeight=1796&originWidth=3020&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=1376002&status=done&style=none&taskId=u58a2772a-8607-4bfd-b493-a32547e1b05&title=&width=1510" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+
+<p>2.进入web查看,可以选择下拉框查看不同项目的数据，占用情况、连线图、火焰图、窥探数据、结合源码分析、</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671619964077-c6282139-cf25-40c2-8062-5a944e1c6c8b.png" srcset="/img/loading.gif" lazyload></p>
+<p>3.选择下拉菜单 top 查看占用情况</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671620171420-593de98f-f463-4794-bd80-e2c5023b0715.png" srcset="/img/loading.gif" lazyload></p>
+<p><font style="color:rgb(51, 51, 51);">4.查看火焰图</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671620381336-214afceb-bb54-4803-8719-74d2488a151c.png" srcset="/img/loading.gif" lazyload></p>
+<p>5.窥探耗时</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671626287057-ba2ec2b9-0e7f-473e-8ae2-1ed4ed6c63aa.png" srcset="/img/loading.gif" lazyload></p>
+<p>6.结合源码进行分析</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671626354764-edbcb99d-e5d6-4b75-9962-3c2ddd67e1c7.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="cmdline"><a href="#cmdline" class="headerlink" title="cmdline"></a>cmdline</h3><blockquote>
 <p>命令行调用   当前程序的命令行调用</p>
 </blockquote>
@@ -455,7 +461,9 @@
 </blockquote>
 <p>1.同上操作开启web可视化界面</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> tool pprof -http=:<span class="hljs-number">8000</span> http:<span class="hljs-comment">//127.0.0.1:6060/debug/pprof/heap</span><br></code></pre></td></tr></table></figure>
-<p>2.同样包含各种选项来提供我们查看<br><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671626749721-a7a815da-6a7a-4b76-b276-3fe7914d05df.png#averageHue=%23f8f7f7&clientId=u2db1c9bb-eaf5-4&from=paste&height=832&id=PWNjd&originHeight=1664&originWidth=3014&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=548940&status=done&style=none&taskId=u832fe3a4-47e9-4a8f-9a14-3be2a04dc0c&title=&width=1507" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+
+<p>2.同样包含各种选项来提供我们查看</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1671626749721-a7a815da-6a7a-4b76-b276-3fe7914d05df.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="mutex"><a href="#mutex" class="headerlink" title="mutex"></a>mutex</h3><blockquote>
 <p>互斥锁 争用互斥锁持有者的堆栈跟踪</p>
 </blockquote>
@@ -471,7 +479,8 @@
 <h2 id="帮助文档"><a href="#帮助文档" class="headerlink" title="帮助文档"></a>帮助文档</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">go</span> tool pprof<br>usage:<br><br>Produce output in the specified format.<br><br>   pprof &lt;format&gt; [options] [binary] &lt;source&gt; ...<br><br>Omit the format to get an interactive shell whose commands can be used<br>to generate various views of a profile<br><br>   pprof [options] [binary] &lt;source&gt; ...<br><br>Omit the format and provide the <span class="hljs-string">&quot;-http&quot;</span> flag to get an interactive web<br><span class="hljs-keyword">interface</span> at the specified host:port that can be used to navigate through<br>various views of a profile.<br><br>   pprof -http [host]:[port] [options] [binary] &lt;source&gt; ...<br><br>Details:<br>  Output formats (<span class="hljs-keyword">select</span> at most one):<br>    -callgrind       Outputs a graph in callgrind format<br>    -comments        Output all profile comments<br>    -disasm          Output assembly listings annotated with samples<br>    -dot             Outputs a graph in DOT format<br>    -eog             Visualize graph through eog<br>    -evince          Visualize graph through evince<br>    -gif             Outputs a graph image in GIF format<br>    -gv              Visualize graph through gv<br>    -kcachegrind     Visualize report in KCachegrind<br>    -list            Output annotated source <span class="hljs-keyword">for</span> functions matching regexp<br>    -pdf             Outputs a graph in PDF format<br>    -peek            Output callers/callees of functions matching regexp<br>    -png             Outputs a graph image in PNG format<br>    -proto           Outputs the profile in compressed protobuf format<br>    -ps              Outputs a graph in PS format<br>    -raw             Outputs a text representation of the raw profile<br>    -svg             Outputs a graph in SVG format<br>    -tags            Outputs all tags in the profile<br>    -text            Outputs top entries in text form<br>    -top             Outputs top entries in text form<br>    -topproto        Outputs top entries in compressed protobuf format<br>    -traces          Outputs all profile samples in text form<br>    -tree            Outputs a text rendering of call graph<br>    -web             Visualize graph through web browser<br>    -weblist         Display annotated source in a web browser<br><br>  Options:<br>    -call_tree       Create a context-sensitive call tree<br>    -compact_labels  Show minimal headers<br>    -divide_by       Ratio to divide all samples before visualization<br>    -drop_negative   Ignore negative differences<br>    -edgefraction    Hide edges below &lt;f&gt;*total<br>    -focus           Restricts to samples going through a node matching regexp<br>    -hide            Skips nodes matching regexp<br>    -ignore          Skips paths going through any nodes matching regexp<br>    -intel_syntax    Show assembly in Intel syntax<br>    -mean            Average sample value over first value (count)<br>    -nodecount       Max number of nodes to show<br>    -nodefraction    Hide nodes below &lt;f&gt;*total<br>    -noinlines       Ignore inlines.<br>    -normalize       Scales profile based on the base profile.<br>    -output          Output filename <span class="hljs-keyword">for</span> file-based outputs<br>    -prune_from      Drops any functions below the matched frame.<br>    -relative_percentages Show percentages relative to focused subgraph<br>    -sample_index    Sample value to report (<span class="hljs-number">0</span>-based index or name)<br>    -show            Only show nodes matching regexp<br>    -show_from       Drops functions above the highest matched frame.<br>    -source_path     Search path <span class="hljs-keyword">for</span> source files<br>    -tagfocus        Restricts to samples with tags in <span class="hljs-keyword">range</span> or matched by regexp<br>    -taghide         Skip tags matching this regexp<br>    -tagignore       Discard samples with tags in <span class="hljs-keyword">range</span> or matched by regexp<br>    -tagleaf         Adds pseudo stack frames <span class="hljs-keyword">for</span> labels key/value pairs at the callstack leaf.<br>    -tagroot         Adds pseudo stack frames <span class="hljs-keyword">for</span> labels key/value pairs at the callstack root.<br>    -tagshow         Only consider tags matching this regexp<br>    -trim            Honor nodefraction/edgefraction/nodecount defaults<br>    -trim_path       Path to trim from source paths before search<br>    -unit            Measurement units to display<br><br>  Option groups (only set one per group):<br>    granularity      <br>      -functions       Aggregate at the function level.<br>      -filefunctions   Aggregate at the function level.<br>      -files           Aggregate at the file level.<br>      -lines           Aggregate at the source code line level.<br>      -addresses       Aggregate at the address level.<br>    sort             <br>      -cum             Sort entries based on cumulative weight<br>      -flat            Sort entries based on own weight<br><br>  Source options:<br>    -seconds              Duration <span class="hljs-keyword">for</span> time-based profile collection<br>    -timeout              Timeout in seconds <span class="hljs-keyword">for</span> profile collection<br>    -buildid              Override build id <span class="hljs-keyword">for</span> main binary<br>    -add_comment          Free-form annotation to add to the profile<br>                          Displayed on some reports or with pprof -comments<br>    -diff_base source     Source of base profile <span class="hljs-keyword">for</span> comparison<br>    -base source          Source of base profile <span class="hljs-keyword">for</span> profile subtraction<br>    profile.pb.gz         Profile in compressed protobuf format<br>    legacy_profile        Profile in legacy pprof format<br>    http:<span class="hljs-comment">//host/profile   URL for profile handler to retrieve</span><br>    -symbolize=           Controls source of symbol information<br>      none                  Do not attempt symbolization<br>      local                 Examine only local binaries<br>      fastlocal             Only get function names from local binaries<br>      remote                Do not examine local binaries<br>      force                 Force re-symbolization<br>    Binary                  Local path or build id of binary <span class="hljs-keyword">for</span> symbolization<br>    -tls_cert             TLS client certificate file <span class="hljs-keyword">for</span> fetching profile and symbols<br>    -tls_key              TLS private key file <span class="hljs-keyword">for</span> fetching profile and symbols<br>    -tls_ca               TLS CA certs file <span class="hljs-keyword">for</span> fetching profile and symbols<br><br>  Misc options:<br>   -http              Provide web <span class="hljs-keyword">interface</span> at host:port.<br>                      Host is optional and <span class="hljs-string">&#x27;localhost&#x27;</span> by <span class="hljs-keyword">default</span>.<br>                      Port is optional and a randomly available port by <span class="hljs-keyword">default</span>.<br>   -no_browser        Skip opening a browser <span class="hljs-keyword">for</span> the interactive web UI.<br>   -tools             Search path <span class="hljs-keyword">for</span> object tools<br><br>  Legacy convenience options:<br>   -inuse_space           Same as -sample_index=inuse_space<br>   -inuse_objects         Same as -sample_index=inuse_objects<br>   -alloc_space           Same as -sample_index=alloc_space<br>   -alloc_objects         Same as -sample_index=alloc_objects<br>   -total_delay           Same as -sample_index=delay<br>   -contentions           Same as -sample_index=contentions<br>   -mean_delay            Same as -mean -sample_index=delay<br><br>  Environment Variables:<br>   PPROF_TMPDIR       Location <span class="hljs-keyword">for</span> saved profiles (<span class="hljs-keyword">default</span> $HOME/pprof)<br>   PPROF_TOOLS        Search path <span class="hljs-keyword">for</span> object-level tools<br>   PPROF_BINARY_PATH  Search path <span class="hljs-keyword">for</span> local binary files<br>                      <span class="hljs-keyword">default</span>: $HOME/pprof/binaries<br>                      searches $name, $path, $buildid/$name, $path/$buildid<br>   * On Windows, %USERPROFILE% is used instead of $HOME<br>no profile source specified<br><br></code></pre></td></tr></table></figure>
 
 <h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><p>todo</p>
-<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a target="_blank" rel="noopener" href="https://github.com/google/pprof">https://github.com/google/pprof</a><br><a target="_blank" rel="noopener" href="http://www.graphviz.org/">http://www.graphviz.org/</a></p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a target="_blank" rel="noopener" href="https://github.com/google/pprof">https://github.com/google/pprof</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.graphviz.org/">http://www.graphviz.org/</a></p>
 
               
             </div>
@@ -1058,6 +1067,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

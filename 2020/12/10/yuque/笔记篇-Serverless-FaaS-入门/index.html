@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550863310-032fe8b3-814c-43f4-8344-6b5c58ed942c.png#averageHue=%23fb9766&clientId=ua05f018c-81fe-4&from=markdown&id=GufXv&originHeight=390&originWidth=750&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=41902&status=done&style=none&taskId=u51e224b3-d4d7-401a-8183-40463847dc2&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550863310-032fe8b3-814c-43f4-8344-6b5c58ed942c.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="Serverless"><a href="#Serverless" class="headerlink" title="Serverless"></a>Serverless</h1><p>Serverless由开发者实现的服务端逻辑运行在无状态的计算容器中，它由事件触发， 完全被第三方管理，其业务层面的状态则被开发者使用的数据库和存储资源所记录。Serverless涵盖了很多技术，分为两类：FaaS和BaaS。</p>
 <h1 id="FaaS（Function-as-a-Service，函数即服务）"><a href="#FaaS（Function-as-a-Service，函数即服务）" class="headerlink" title="FaaS（Function as a Service，函数即服务）"></a>FaaS（Function as a Service，函数即服务）</h1><p>FaaS意在无须自行管理服务器系统或自己的服务器应用程序，即可直接运行后端代码。其中所指的服务器应用程序，是该技术与容器和PaaS（平台即服务）等其他现代化架构最大的差异。</p>
 <p>FaaS可以取代一些服务处理服务器（可能是物理计算机，但绝对需要运行某种应用程序），这样不仅不需要自行供应服务器，也不需要全时运行应用程序。</p>
@@ -358,31 +346,35 @@
 <h1 id="创建-FaaS"><a href="#创建-FaaS" class="headerlink" title="创建 FaaS"></a>创建 FaaS</h1><blockquote>
 <p>本文采用鹅厂的FaaS作为测试</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-create.png#id=ATCev&originHeight=910&originWidth=1919&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-create.png" srcset="/img/loading.gif" lazyload></p>
 <p>创建完成</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-finish-create.png#id=L1TPf&originHeight=921&originWidth=1919&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-finish-create.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="编写-FaaS"><a href="#编写-FaaS" class="headerlink" title="编写 FaaS"></a>编写 FaaS</h1><p>展开代码</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;context&quot;</span><br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;github.com/tencentyun/scf-go-lib/cloudfunction&quot;</span><br>)<br><br><span class="hljs-keyword">type</span> DefineEvent <span class="hljs-keyword">struct</span> &#123;<br>    <span class="hljs-comment">// test event define</span><br>    Key1 <span class="hljs-type">string</span> <span class="hljs-string">`json:&quot;key1&quot;`</span><br>    Key2 <span class="hljs-type">string</span> <span class="hljs-string">`json:&quot;key2&quot;`</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">hello</span><span class="hljs-params">(ctx context.Context, event DefineEvent)</span></span> (<span class="hljs-type">string</span>, <span class="hljs-type">error</span>) &#123;<br>    fmt.Println(<span class="hljs-string">&quot;key1:&quot;</span>, event.Key1)<br>    fmt.Println(<span class="hljs-string">&quot;key2:&quot;</span>, event.Key2)<br>    <span class="hljs-keyword">return</span> fmt.Sprintf(<span class="hljs-string">&quot;Hello %s!&quot;</span>, event.Key1), <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">// Make the handler available for Remote Procedure Call by Cloud Function</span><br>    cloudfunction.Start(hello)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
 
 <p>打包函数</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">GOOS=linux GOARCH=amd64 go build -o main main.go<br>zip main.zip main<br></code></pre></td></tr></table></figure>
 
+
+
 <p>部署函数</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-deploy.png#id=dh77v&originHeight=921&originWidth=1917&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-deploy.png" srcset="/img/loading.gif" lazyload></p>
 <p>测试函数</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-test.png#id=HZNOS&originHeight=915&originWidth=1919&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-test.png" srcset="/img/loading.gif" lazyload></p>
 <p>发布函数</p>
 <blockquote>
 <p>先配置好ROLE和Api网关</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-role.png#id=VZrmG&originHeight=914&originWidth=1908&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-role.png" srcset="/img/loading.gif" lazyload></p>
 <p>创建触发器</p>
 <blockquote>
 <p>使用API触发器</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-role.png#id=HBD0A&originHeight=914&originWidth=1908&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-role.png" srcset="/img/loading.gif" lazyload></p>
 <p>调用函数</p>
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-test.png#id=rtLTJ&originHeight=915&originWidth=1919&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/serverless-test.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/583/9199">官方文档</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/cc18868876837/article/details/90672971">看懂 Serverless，这一篇就够了</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e7eb45a10f96">Serverless 入门教程</a></p>
@@ -404,8 +396,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
+  
+  
+
   
 
       </span>
@@ -936,6 +935,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

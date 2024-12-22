@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,74 +331,81 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632098366976-70a27b40-4792-4adb-8b07-6db284cdafa9.png#clientId=ubba613d2-878a-4&from=paste&height=320&id=ubf8d8396&originHeight=320&originWidth=640&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=17529&status=done&style=none&taskId=ua30b9375-3a56-440f-8266-6b7eb26ccd8&title=&width=640" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632098366976-70a27b40-4792-4adb-8b07-6db284cdafa9.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><h2 id="何为复杂"><a href="#何为复杂" class="headerlink" title="何为复杂"></a>何为复杂</h2><ul>
 <li>业务复杂不易实现，牵扯的范围广，系统的各个模块非常庞大</li>
 <li>变更复杂，耦合度高一旦变更将会影响整个系统，同时带了的风险高，时间成本高</li>
 </ul>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><strong>领域模型</strong>是对领域内的概念类或现实世界中对象的可视化表示。又称概念模型、领域对象模型、分析对象模型。它专注于分析问题领域本身，发掘重要的业务领域概念，并建立业务领域概念之间的关系。</p>
-<p><strong>业务对象模型</strong>（也叫领域模型domain model）是描述业务用例实现的对象模型。它是对业务角色和业务实体之间应该如何联系和协作以执行业务的一种抽象。业务对象模型从业务角色内部的观点定义了业务用例。该模型为产生预期效果确定了业务人员以及他们处理和使用的对象（“业务类和对象”）之间应该具有的静态和动态关系。它注重业务中承担的角色及其当前职责。这些模型类的对象组合在一起可以执行所有的业务用例。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><strong><font style="color:rgb(36, 41, 47);">领域模型</font></strong><font style="color:rgb(36, 41, 47);">是</font><font style="color:#F5222D;">对领域内的概念类或现实世界中对象的可视化表示</font><font style="color:rgb(36, 41, 47);">。又称概念模型、领域对象模型、分析对象模型。它专注于分析问题领域本身，发掘重要的业务领域概念，并建立业务领域概念之间的关系。</font></p>
+<p><strong><font style="color:rgb(36, 41, 47);">业务对象模型</font></strong><font style="color:rgb(36, 41, 47);">（也叫领域模型domain model）是</font><font style="color:#F5222D;">描述业务用例实现的对象模型</font><font style="color:rgb(36, 41, 47);">。它是对业务角色和业务实体之间应该如何联系和协作以执行业务的一种抽象。业务对象模型从业务角色内部的观点定义了业务用例。该模型为产生预期效果确定了业务人员以及他们处理和使用的对象（“业务类和对象”）之间应该具有的静态和动态关系。它注重业务中承担的角色及其当前职责。这些模型类的对象组合在一起可以执行所有的业务用例。</font></p>
 <ul>
-<li><strong>失血模型</strong>：简单来说，就是domain object只有属性的getter/setter方法，没有任何业务逻辑。</li>
-<li><strong>贫血模型</strong>：domain ojbect包含了不依赖于持久化的领域逻辑，而那些依赖持久化的领域逻辑被分离到Service层。Service(业务逻辑，事务封装) –&gt; DAO –&gt; domain object</li>
-<li><strong>充血模型</strong>：认为，绝大多业务逻辑都应该被放在domain object里面(包括持久化逻辑)，而Service层应该是很薄的一层，仅仅封装事务和少量逻辑，不和DAO层打交道。Service(事务封装) —&gt; domain object &lt;—&gt; DAO</li>
-<li><strong>胀血模型</strong><br>基于充血模型的缺点，有同学提出，干脆取消Service层，只剩下domain object和DAO两层，在domain object的domain logic上面封装事务。domain object(事务封装，业务逻辑) &lt;—&gt; DAO<br>似乎ruby on rails就是这种模型，他甚至把domain object和DAO都合并了。</li>
+<li><strong><font style="color:rgb(51, 51, 51);">失血模型</font></strong><font style="color:rgb(51, 51, 51);">：简单来说，就是domain object只有属性的getter/setter方法，没有任何业务逻辑。</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">贫血模型</font></strong><font style="color:rgb(51, 51, 51);">：domain ojbect包含了不依赖于持久化的领域逻辑，而那些依赖持久化的领域逻辑被分离到Service层。Service(业务逻辑，事务封装) –&gt; DAO –&gt; domain object</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">充血模型</font></strong><font style="color:rgb(51, 51, 51);">：认为，绝大多业务逻辑都应该被放在domain object里面(包括持久化逻辑)，而Service层应该是很薄的一层，仅仅封装事务和少量逻辑，不和DAO层打交道。Service(事务封装) —&gt; domain object &lt;—&gt; DAO</font></li>
+<li><strong><font style="color:rgb(51, 51, 51);">胀血模型</font></strong><br><font style="color:rgb(51, 51, 51);">基于充血模型的缺点，有同学提出，干脆取消Service层，只剩下domain object和DAO两层，在domain object的domain logic上面封装事务。domain object(事务封装，业务逻辑) &lt;—&gt; DAO</font><br><font style="color:rgb(51, 51, 51);">似乎ruby on rails就是这种模型，他甚至把domain object和DAO都合并了。</font></li>
 </ul>
-<h1 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h1><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632293512930-a4d438f2-8d28-4110-b3e4-8891e8d363ef.png#clientId=uf71e455b-c7a7-4&from=paste&height=384&id=u2c05c331&originHeight=384&originWidth=640&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=46077&status=done&style=none&taskId=u1cec5d04-ca03-424c-ad5a-b5ef1aa4919&title=&width=640" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h2 id="用户界面-展现层"><a href="#用户界面-展现层" class="headerlink" title="用户界面/展现层"></a>用户界面/展现层</h2><p>负责向用户展现信息以及解释用户命令。更细的方面来讲就是：</p>
+<h1 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h1><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632293512930-a4d438f2-8d28-4110-b3e4-8891e8d363ef.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="用户界面-展现层"><a href="#用户界面-展现层" class="headerlink" title="用户界面/展现层"></a><font style="color:#000000;">用户界面/展现层</font></h2><p><font style="color:rgb(0, 0, 0);">负责向用户展现信息以及解释用户命令。更细的方面来讲就是：</font></p>
 <ol>
-<li>请求应用层以获取用户所需要展现的数据；</li>
-<li>发送命令给应用层要求其执行某个用户命令；</li>
+<li><font style="color:rgb(0, 0, 0);">请求应用层以获取用户所需要展现的数据；</font></li>
+<li><font style="color:rgb(0, 0, 0);">发送命令给应用层要求其执行某个用户命令；</font></li>
 </ol>
-<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><p>很薄的一层，定义软件要完成的所有任务。对外为展现层提供各种应用功能（包括查询或命令），对内调用领域层（领域对象或领域服务）完成各种业务逻辑，应用层不包含业务逻辑。</p>
-<h2 id="领域层"><a href="#领域层" class="headerlink" title="领域层"></a>领域层</h2><p>负责表达业务概念，业务状态信息以及业务规则，领域模型处于这一层，是业务软件的核心。</p>
-<h2 id="基础设施层"><a href="#基础设施层" class="headerlink" title="基础设施层"></a>基础设施层</h2><p>本层为其他层提供通用的技术能力；提供了层间的通信；为领域层实现持久化机制；总之，基础设施层可以通过架构和框架来支持其他层的技术需求；</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632293627502-8f6960ff-d0b7-4909-90c5-0a74599ff415.png#clientId=uf71e455b-c7a7-4&from=paste&height=943&id=ued5c2b6c&originHeight=943&originWidth=1051&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=119373&status=done&style=none&taskId=u568e163b-4d40-4fb7-9c9e-913cf96305e&title=&width=1051" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a><font style="color:#000000;">应用层</font></h2><p><font style="color:rgb(0, 0, 0);">很薄的一层，定义软件要完成的所有任务。对外为展现层提供各种应用功能（包括查询或命令），对内调用领域层（领域对象或领域服务）完成各种业务逻辑，应用层不包含业务逻辑。</font></p>
+<h2 id="领域层"><a href="#领域层" class="headerlink" title="领域层"></a><font style="color:#000000;">领域层</font></h2><p><font style="color:rgb(0, 0, 0);">负责表达业务概念，业务状态信息以及业务规则，领域模型处于这一层，是业务软件的核心。</font></p>
+<h2 id="基础设施层"><a href="#基础设施层" class="headerlink" title="基础设施层"></a>基础设施层</h2><p><font style="color:rgb(0, 0, 0);">本层为其他层提供通用的技术能力；提供了层间的通信；为领域层实现持久化机制；总之，基础设施层可以通过架构和框架来支持其他层的技术需求；</font></p>
+<p><font style="color:rgb(0, 0, 0);"></font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1632293627502-8f6960ff-d0b7-4909-90c5-0a74599ff415.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="细分"><a href="#细分" class="headerlink" title="细分"></a>细分</h1><table>
 <thead>
 <tr>
-<th><strong>层次</strong></th>
-<th><strong>说明</strong></th>
+<th><strong><font style="color:rgb(36, 41, 47);">层次</font></strong></th>
+<th><strong><font style="color:rgb(36, 41, 47);">说明</font></strong></th>
 </tr>
 </thead>
 <tbody><tr>
-<td>controller</td>
-<td>提供服务的访问层，目前采用RestController的方式，也做基础数据格式校验的业务。</td>
+<td><font style="color:rgb(36, 41, 47);">controller</font></td>
+<td><font style="color:rgb(36, 41, 47);">提供服务的访问层，目前采用RestController的方式，也做基础数据格式校验的业务。</font></td>
 </tr>
 <tr>
-<td>service</td>
-<td>对应上图中的services部分，主要做4类事情:1、开启事务与事务消息，2、适配并调用Executor层，3、业务拓展，4、多个Executor的编排组装。</td>
+<td><font style="color:rgb(36, 41, 47);">service</font></td>
+<td><font style="color:rgb(36, 41, 47);">对应上图中的services部分，主要做4类事情:1、开启事务与事务消息，2、适配并调用Executor层，3、业务拓展，4、多个Executor的编排组装。</font></td>
 </tr>
 <tr>
-<td>convertor</td>
-<td>适配层，适配层的存在也是为了避免各层次间的强依赖,为了更清新的划分清楚层次，如command对象将不直接依赖vo对象，而是通过convertor或构造数据做适配</td>
+<td><font style="color:rgb(36, 41, 47);">convertor</font></td>
+<td><font style="color:rgb(36, 41, 47);">适配层，适配层的存在也是为了避免各层次间的强依赖,为了更清新的划分清楚层次，如command对象将不直接依赖vo对象，而是通过convertor或构造数据做适配</font></td>
 </tr>
 <tr>
-<td>executor</td>
-<td>具体业务命令的逻辑编排与执行，这是业务逻辑处理的关键地方,遵循CQRS分为Command与Query，executor是资源层的操控者。</td>
+<td><font style="color:rgb(36, 41, 47);">executor</font></td>
+<td><font style="color:rgb(36, 41, 47);">具体业务命令的逻辑编排与执行，这是业务逻辑处理的关键地方,遵循CQRS分为Command与Query，executor是资源层的操控者。</font></td>
 </tr>
 <tr>
-<td>extension</td>
-<td>业务扩展层，可扩展多种业务实现，COLA提供了全局的策略规范。extension会在service层被调用</td>
+<td><font style="color:rgb(36, 41, 47);">extension</font></td>
+<td><font style="color:rgb(36, 41, 47);">业务扩展层，可扩展多种业务实现，COLA提供了全局的策略规范。extension会在service层被调用</font></td>
 </tr>
 <tr>
-<td>domain</td>
-<td>洋葱图的核心部分:领域层，domain领域可细分为model与service(action)</td>
+<td><font style="color:rgb(36, 41, 47);">domain</font></td>
+<td><font style="color:rgb(36, 41, 47);">洋葱图的核心部分:领域层，domain领域可细分为model与service(action)</font></td>
 </tr>
 <tr>
-<td>event</td>
-<td>event在架构图中属于资源层，event作为解耦系统的耦合度起到了非常关键的作用，同时也为解决事务问题提供了标准</td>
+<td><font style="color:rgb(36, 41, 47);">event</font></td>
+<td><font style="color:rgb(36, 41, 47);">event在架构图中属于资源层，event作为解耦系统的耦合度起到了非常关键的作用，同时也为解决事务问题提供了标准</font></td>
 </tr>
 <tr>
-<td>pojo</td>
-<td>数据dto对象，分为command/vo/co/ao… 等不同的dto对象</td>
+<td><font style="color:rgb(36, 41, 47);">pojo</font></td>
+<td><font style="color:rgb(36, 41, 47);">数据dto对象，分为command/vo/co/ao… 等不同的dto对象</font></td>
 </tr>
 <tr>
-<td>repository</td>
-<td>资源层相对来说比较广泛，最基本的是对db的操作，对其他模块的操作(feign)，对搜索引擎或消息队列的操作都属于资源。可细分为:feign、db、search、message</td>
+<td><font style="color:rgb(36, 41, 47);">repository</font></td>
+<td><font style="color:rgb(36, 41, 47);">资源层相对来说比较广泛，最基本的是对db的操作，对其他模块的操作(feign)，对搜索引擎或消息队列的操作都属于资源。可细分为:feign、db、search、message</font></td>
 </tr>
 </tbody></table>
-<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>cola: <a target="_blank" rel="noopener" href="https://github.com/alibaba/COLA">https://github.com/alibaba/COLA</a><br>springboot-ddd-demo: <a target="_blank" rel="noopener" href="https://github.com/1991wangliang/springboot-ddd-demo">https://github.com/1991wangliang/springboot-ddd-demo</a><br>DDD的基础理论: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/netfocus/archive/2011/10/10/2204949.html">https://www.cnblogs.com/netfocus/archive/2011/10/10/2204949.html</a><br>运用四色建模法进行领域分析: <a target="_blank" rel="noopener" href="https://www.infoq.cn/article/xh-four-color-modeling/">https://www.infoq.cn/article/xh-four-color-modeling/</a><br>领域模型的概念：<a target="_blank" rel="noopener" href="https://www.oschina.net/question/12_21641">https://www.oschina.net/question/12_21641</a><br>领域驱动设计和CQRS落地：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/R-jBnPhWJHs7J-4CETV88A">https://mp.weixin.qq.com/s/R-jBnPhWJHs7J-4CETV88A</a><br>领域模型、贫血模型、充血模型概念总结：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/duanxz/p/9922170.html">https://www.cnblogs.com/duanxz/p/9922170.html</a></p>
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>cola: <a target="_blank" rel="noopener" href="https://github.com/alibaba/COLA">https://github.com/alibaba/COLA</a></p>
+<p>springboot-ddd-demo: <a target="_blank" rel="noopener" href="https://github.com/1991wangliang/springboot-ddd-demo">https://github.com/1991wangliang/springboot-ddd-demo</a> </p>
+<p><font style="color:rgba(0, 0, 0, 0.75);">DDD的基础理论</font>: <a target="_blank" rel="noopener" href="https://www.cnblogs.com/netfocus/archive/2011/10/10/2204949.html">https://www.cnblogs.com/netfocus/archive/2011/10/10/2204949.html</a></p>
+<p>运用四色建模法进行领域分析: <a target="_blank" rel="noopener" href="https://www.infoq.cn/article/xh-four-color-modeling/">https://www.infoq.cn/article/xh-four-color-modeling/</a></p>
+<p>领域模型的概念：<a target="_blank" rel="noopener" href="https://www.oschina.net/question/12_21641">https://www.oschina.net/question/12_21641</a></p>
+<p>领域驱动设计和CQRS落地：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/R-jBnPhWJHs7J-4CETV88A">https://mp.weixin.qq.com/s/R-jBnPhWJHs7J-4CETV88A</a></p>
+<p>领域模型、贫血模型、充血模型概念总结：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/duanxz/p/9922170.html">https://www.cnblogs.com/duanxz/p/9922170.html</a></p>
 
               
             </div>
@@ -428,13 +423,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" class="category-chain-item">架构设计</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8/" class="category-chain-item">领域驱动</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" class="category-chain-item">架构设计</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8/" class="category-chain-item">领域驱动</a>
+  
+  
+
   
 
   
@@ -990,6 +992,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

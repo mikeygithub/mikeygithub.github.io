@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1636099878788-daae74f1-8c88-4da0-bf0b-f04e62977894.jpeg#clientId=u69778bd2-8ae6-4&from=paste&id=u859784e2&originHeight=354&originWidth=632&originalType=url%E2%88%B6=1&status=done&style=none&taskId=u180bed55-cf86-487b-9d04-60310446876" srcset="/img/loading.gif" lazyload></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1636099878788-daae74f1-8c88-4da0-bf0b-f04e62977894.jpeg" srcset="/img/loading.gif" lazyload></p>
 <h1 id="应用背景"><a href="#应用背景" class="headerlink" title="应用背景"></a>应用背景</h1><blockquote>
 <p>在后端应用中暴露的对外接口需要考虑爬虫，恶意DDOS，接口防刷等防范。针对不同的系统业务不同，其有的接口需要登入后才能进行访问，有的接口无需。针对不同情况细化其防刷方案。</p>
 </blockquote>
@@ -351,10 +339,16 @@
 <h2 id="如何确定其为恶意用户"><a href="#如何确定其为恶意用户" class="headerlink" title="如何确定其为恶意用户"></a>如何确定其为恶意用户</h2><p>细粒度划分：网页&gt;session&gt;ip</p>
 <h4 id="1、当前网页"><a href="#1、当前网页" class="headerlink" title="1、当前网页"></a>1、当前网页</h4><p>优点：无<br>缺点：没有任何意义，一刷新页面用户的身份就变了</p>
 <h4 id="2、session"><a href="#2、session" class="headerlink" title="2、session"></a>2、session</h4><p>优点：伪造成本一般（可以理解成一个浏览器对应了一个用户）<br>缺点：当用户手动清除 cookie 的时候即失效</p>
-<h4 id="3、ip"><a href="#3、ip" class="headerlink" title="3、ip"></a>3、ip</h4><p>优点：伪造成本高<br>缺点：要考虑一个公司、一个小区的人一般会共享一个 ip，所以适当的要放宽对单一 ip 的请求限制<br>ip 信息是存在请求头里的，而 https 对请求本身做了加密，可以防止 ip 信息被伪造或篡改。所以推荐服务器采用 https 传输。</p>
-<h2 id="确定其盗刷后处理方式"><a href="#确定其盗刷后处理方式" class="headerlink" title="确定其盗刷后处理方式"></a>确定其盗刷后处理方式</h2><p>1.中断处理，直接忽略，返回提示信息<br>2.添加验证码验证，进一步判断是否是而已刷</p>
-<h1 id="落地实现"><a href="#落地实现" class="headerlink" title="落地实现"></a>落地实现</h1><p>基于Redis+SessionId+自定义注解实现<br>注解:<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1636099699152-73a9f070-b20d-4b38-82ee-72b897759659.java?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1636099699152-73a9f070-b20d-4b38-82ee-72b897759659.java%22,%22name%22:%22RequestLimit.java%22,%22size%22:344,%22type%22:%22%22,%22ext%22:%22java%22,%22status%22:%22done%22,%22taskId%22:%22u802ca5d0-5492-4cfe-b3b9-f00184e4605%22,%22taskType%22:%22upload%22,%22id%22:%22u072e2d39%22,%22card%22:%22file%22%7D">RequestLimit.java</a><br>拦截器:<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1636099746620-77242303-1d6d-4774-9681-c053865306cf.java?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1636099746620-77242303-1d6d-4774-9681-c053865306cf.java%22,%22name%22:%22RequestLimitIntercept.java%22,%22size%22:3888,%22type%22:%22%22,%22ext%22:%22java%22,%22status%22:%22done%22,%22taskId%22:%22uac9a31a3-dfb8-4072-b129-6f00014ce0a%22,%22taskType%22:%22upload%22,%22id%22:%22u19dbd930%22,%22card%22:%22file%22%7D">RequestLimitIntercept.java</a><br>Redis配置: <a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1636099765755-ff70f5eb-52bc-4ca3-aa6c-8d8290ca7118.java?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1636099765755-ff70f5eb-52bc-4ca3-aa6c-8d8290ca7118.java%22,%22name%22:%22RedisConfig.java%22,%22size%22:2170,%22type%22:%22%22,%22ext%22:%22java%22,%22status%22:%22done%22,%22taskId%22:%22u0a34539f-4f30-4052-9c6b-2415f4f130d%22,%22taskType%22:%22upload%22,%22id%22:%22uc6b3c09f%22,%22card%22:%22file%22%7D">RedisConfig.java</a></p>
-<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p>相关案例 <a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1753960">https://cloud.tencent.com/developer/article/1753960</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xjnotxj/p/9024962.html">https://www.cnblogs.com/xjnotxj/p/9024962.html</a></p>
+<h4 id="3、ip"><a href="#3、ip" class="headerlink" title="3、ip"></a>3、ip</h4><p>优点：伪造成本高<br>缺点：要考虑一个公司、一个小区的人一般会共享一个 ip，所以适当的要放宽对单一 ip 的请求限制</p>
+<p>ip 信息是存在请求头里的，而 https 对请求本身做了加密，可以防止 ip 信息被伪造或篡改。所以推荐服务器采用 https 传输。</p>
+<h2 id="确定其盗刷后处理方式"><a href="#确定其盗刷后处理方式" class="headerlink" title="确定其盗刷后处理方式"></a>确定其盗刷后处理方式</h2><p>1.中断处理，直接忽略，返回提示信息</p>
+<p>2.添加验证码验证，进一步判断是否是而已刷</p>
+<h1 id="落地实现"><a href="#落地实现" class="headerlink" title="落地实现"></a>落地实现</h1><p>基于Redis+SessionId+自定义注解实现</p>
+<p>注解:<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1636099699152-73a9f070-b20d-4b38-82ee-72b897759659.java">RequestLimit.java</a></p>
+<p>拦截器:<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1636099746620-77242303-1d6d-4774-9681-c053865306cf.java">RequestLimitIntercept.java</a></p>
+<p>Redis配置: <a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1636099765755-ff70f5eb-52bc-4ca3-aa6c-8d8290ca7118.java">RedisConfig.java</a></p>
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p>相关案例 <a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1753960">https://cloud.tencent.com/developer/article/1753960</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xjnotxj/p/9024962.html">https://www.cnblogs.com/xjnotxj/p/9024962.html</a></p>
 
               
             </div>
@@ -927,6 +921,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

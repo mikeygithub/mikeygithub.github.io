@@ -17,12 +17,12 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="wrk简介wrk 是一个HTTP基准测试工具，当在单核CPU上运行时能够产生显著的负载。它将多线程设计与可扩展的事件通知系统（如epoll和kqueue）相结合。 可选的LuaJIT脚本可以执行HTTP请求生成、响应处理和自定义报告。 安装mac下安装1brew install awk  linux下安装教程1wrk2 -t8 -c1000 -d30 -R1000 --latency https">
+    <meta name="description" content="wrk简介wrk 是一个HTTP基准测试工具，当在单核CPU上运行时能够产生显著的负载。它将多线程设计与可扩展的事件通知系统（如epoll和kqueue）相结合。 可选的LuaJIT脚本可以执行HTTP请求生成、响应处理和自定义报告。 安装mac下安装1brew install awk   linux下安装教程1wrk2 -t8 -c1000 -d30 -R1000 --latency http">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基准测试工具-wrk &#x2F; wrk2 &#x2F; ab">
 <meta property="og:url" content="https://mikeygithub.github.io/2024/02/09/yuque/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7-wrk!wrk2!ab/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="wrk简介wrk 是一个HTTP基准测试工具，当在单核CPU上运行时能够产生显著的负载。它将多线程设计与可扩展的事件通知系统（如epoll和kqueue）相结合。 可选的LuaJIT脚本可以执行HTTP请求生成、响应处理和自定义报告。 安装mac下安装1brew install awk  linux下安装教程1wrk2 -t8 -c1000 -d30 -R1000 --latency https">
+<meta property="og:description" content="wrk简介wrk 是一个HTTP基准测试工具，当在单核CPU上运行时能够产生显著的负载。它将多线程设计与可扩展的事件通知系统（如epoll和kqueue）相结合。 可选的LuaJIT脚本可以执行HTTP请求生成、响应处理和自定义报告。 安装mac下安装1brew install awk   linux下安装教程1wrk2 -t8 -c1000 -d30 -R1000 --latency http">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/2630542/1712157842732-8e1e8ec0-3ddf-43f4-b4be-a9611c4a2812.png?x-oss-process=image%2Fformat%2Cwebp">
 <meta property="article:published_time" content="2024-02-09T14:24:22.000Z">
@@ -160,18 +160,6 @@
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
               </a>
             </li>
           
@@ -343,16 +331,19 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1712157842732-8e1e8ec0-3ddf-43f4-b4be-a9611c4a2812.png#averageHue=%23fbfbfb&clientId=u3f7caead-ff06-4&from=paste&height=603&id=ud07bb9cf&originHeight=1206&originWidth=2204&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=85222&status=done&style=none&taskId=u742ee017-a85b-4974-9106-724760e064a&title=&width=1102" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1712157842732-8e1e8ec0-3ddf-43f4-b4be-a9611c4a2812.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="wrk"><a href="#wrk" class="headerlink" title="wrk"></a>wrk</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>wrk 是一个HTTP基准测试工具，当在单核CPU上运行时能够产生显著的负载。它将多线程设计与可扩展的事件通知系统（如epoll和kqueue）相结合。</p>
 <p>可选的LuaJIT脚本可以执行HTTP请求生成、响应处理和自定义报告。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="mac下安装"><a href="#mac下安装" class="headerlink" title="mac下安装"></a>mac下安装</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">brew </span><span class="hljs-keyword">install </span>awk<br></code></pre></td></tr></table></figure>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1711207338174-8eab535e-679d-46c2-b28b-fdd08c07f1c9.png#averageHue=%232e2e2e&clientId=u45a64364-7e04-4&from=paste&height=360&id=u21a2bdec&originHeight=720&originWidth=2074&originalType=binary%E2%88%B6=2&rotation=0&showTitle=false&size=111801&status=done&style=none&taskId=u3a66a5df-fa25-4b36-bf6d-3dae8b330a6&title=&width=1037" srcset="/img/loading.gif" lazyload alt="image.png"></p>
-<h3 id="linux下安装"><a href="#linux下安装" class="headerlink" title="linux下安装"></a>linux下安装</h3><h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">wrk2</span> -t8 -c1000 -<span class="hljs-built_in">d30</span> -R1000 --latency https:<span class="hljs-comment">//www.baidu.com/</span><br></code></pre></td></tr></table></figure>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="mac下安装"><a href="#mac下安装" class="headerlink" title="mac下安装"></a>mac下安装</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">brew install awk<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/2630542/1711207338174-8eab535e-679d-46c2-b28b-fdd08c07f1c9.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="linux下安装"><a href="#linux下安装" class="headerlink" title="linux下安装"></a>linux下安装</h3><h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">wrk2 -t8 -c1000 -d30 -R1000 --latency https://www.baidu.com/<br></code></pre></td></tr></table></figure>
 
 
-<h3 id="测试服务的最大QPS"><a href="#测试服务的最大QPS" class="headerlink" title="测试服务的最大QPS"></a>测试服务的最大QPS</h3><p>通过-R参数获取吞吐量参数    每秒请求量的结果</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">wrk2 -t10 -c50 -d30 -R3000 -H “Host:xxx.com” <span class="hljs-keyword">http</span>://localhost/<span class="hljs-keyword">a</span>/<span class="hljs-keyword">a</span>.mp4 -L	Requests/<span class="hljs-built_in">sec</span>: <span class="hljs-number">3000.12</span><br>wrk2 -t10 -c50 -d30 -R5000 -H “Host:xxx.com” <span class="hljs-keyword">http</span>://localhost/<span class="hljs-keyword">a</span>/<span class="hljs-keyword">a</span>.mp4 -L	Requests/<span class="hljs-built_in">sec</span>: <span class="hljs-number">5000.12</span><br>wrk2 -t10 -c50 -d30 -R10000 -H “Host:xxx.com” <span class="hljs-keyword">http</span>://localhost/<span class="hljs-keyword">a</span>/<span class="hljs-keyword">a</span>.mp4 -L	Requests/<span class="hljs-built_in">sec</span>: <span class="hljs-number">9800.12</span><br>wrk2 -t10 -c50 -d30 -R20000 -H “Host:xxx.com” <span class="hljs-keyword">http</span>://localhost/<span class="hljs-keyword">a</span>/<span class="hljs-keyword">a</span>.mp4 -L	Requests/<span class="hljs-built_in">sec</span>: <span class="hljs-number">12500.12</span><br>wrk2 -t10 -c50 -d30 -R30000 -H “Host:xxx.com” <span class="hljs-keyword">http</span>://localhost/<span class="hljs-keyword">a</span>/<span class="hljs-keyword">a</span>.mp4 -L	Requests/<span class="hljs-built_in">sec</span>: <span class="hljs-number">13000.12</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="测试服务的最大QPS"><a href="#测试服务的最大QPS" class="headerlink" title="测试服务的最大QPS"></a><font style="color:rgb(79, 79, 79);">测试服务的最大QPS</font></h3><p>通过-R参数获取吞吐量参数    每秒请求量的结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plain">wrk2 -t10 -c50 -d30 -R3000 -H “Host:xxx.com” http://localhost/a/a.mp4 -L	Requests/sec: 3000.12<br>wrk2 -t10 -c50 -d30 -R5000 -H “Host:xxx.com” http://localhost/a/a.mp4 -L	Requests/sec: 5000.12<br>wrk2 -t10 -c50 -d30 -R10000 -H “Host:xxx.com” http://localhost/a/a.mp4 -L	Requests/sec: 9800.12<br>wrk2 -t10 -c50 -d30 -R20000 -H “Host:xxx.com” http://localhost/a/a.mp4 -L	Requests/sec: 12500.12<br>wrk2 -t10 -c50 -d30 -R30000 -H “Host:xxx.com” http://localhost/a/a.mp4 -L	Requests/sec: 13000.12<br></code></pre></td></tr></table></figure>
+
 <p> 从以上的测试过程中可以看出，服务最大的每秒请求量为13000，可见性能压测的QPS为1.3万左右，考虑本机测试性能损耗问题，即QPS&gt;1.2万</p>
 <p>TODO</p>
 <h1 id="wrk2"><a href="#wrk2" class="headerlink" title="wrk2"></a>wrk2</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><p>wrk2 是对 wrk 进行了改进，以产生恒定的吞吐量负载，并将延迟细节精确到高9（即，当运行足够长的时间时，可以产生精确的99.9999%）。除了wrk的参数外，wrk2还通过–rate或-R参数（默认值为1000）获取吞吐量参数（以每秒请求总数为单位）。</p>
@@ -383,13 +374,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/" class="category-chain-item">服务器篇</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="category-chain-item">开发工具</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/" class="category-chain-item">服务器篇</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" class="category-chain-item">开发工具</a>
+  
+  
+
   
 
   
@@ -945,6 +943,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550583153-6c25a5cd-ee9c-4191-9d11-c62e414557b2.png#averageHue=%233374de&clientId=u7f863838-fc53-4&from=markdown&id=YUPUF&originHeight=258&originWidth=478&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=61821&status=done&style=none&taskId=u8f35974f-ba9d-4786-933f-1e69e8fe524&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657550583153-6c25a5cd-ee9c-4191-9d11-c62e414557b2.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="Kubernetes-安装-kubeadm"><a href="#Kubernetes-安装-kubeadm" class="headerlink" title="Kubernetes 安装 kubeadm"></a>Kubernetes 安装 kubeadm</h1><ul>
 <li>1 事先准备</li>
 <li>2 检查所需端口</li>
@@ -424,9 +412,13 @@
 <p>SSH登录主机。<br>如果使用的是Ubuntu或HypriotOS，请运行：</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs latex">apt-get update <span class="hljs-built_in">&amp;</span><span class="hljs-built_in">&amp;</span> apt-get install -y apt-transport-https<br>curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -<br>cat &lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list<br>deb http://apt.kubernetes.io/ kubernetes-xenial main<br>EOF<br>apt-get update<br>apt-get install -y kubelet kubeadm<br></code></pre></td></tr></table></figure>
 
+
+
 <p>如果使用的是CentOS，请运行：</p>
 <p><code>cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</code></p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs latex">[kubernetes]<br>name=Kubernetes<br>baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86<span class="hljs-built_in">_</span>64<br>enabled=1<br>gpgcheck=1<br>repo<span class="hljs-built_in">_</span>gpgcheck=1<br>gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg<br>        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg<br>EOF<br>setenforce 0<br>yum install -y kubelet kubeadm<br>systemctl enable kubelet <span class="hljs-built_in">&amp;</span><span class="hljs-built_in">&amp;</span> systemctl start kubelet<br></code></pre></td></tr></table></figure>
+
+
 
 <p>执行完后，kubelet会进入每隔几秒重新启动一次的循环模式，因为kubelet在等待kubeadm发出的命令。</p>
 <p>注意：必须使用运行setenforce 0命令来禁用SELinux，因为需要允许容器访问主机文件系统，这是配置pod网络所要求的。（直到kubelet中对SELinux支持得到改进）</p>
@@ -448,13 +440,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/Kubernetes/" class="category-chain-item">Kubernetes</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/" class="category-chain-item">云原生组</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E4%BA%91%E5%8E%9F%E7%94%9F%E7%BB%84/Kubernetes/" class="category-chain-item">Kubernetes</a>
+  
+  
+
   
 
   
@@ -987,6 +986,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

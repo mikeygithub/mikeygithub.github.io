@@ -17,12 +17,12 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Java Persistence API  应用背景 SpringDataJPA是更大的SpringDataFamily的一部分，它使基于JPA的存储库易于实现。本模块处理对基于JPA的数据访问层的增强支持。它使构建使用数据访问技术的Spring驱动的应用程序变得更加容易。  应用场景JPA：全自动化、面向对象，简单查询无需写SQL，复杂业务下HQL也不一定能满足，不够灵活。结论：当项目业务逻">
+    <meta name="description" content="Java Persistence API  应用背景 SpringDataJPA是更大的SpringDataFamily的一部分，它使基于JPA的存储库易于实现。本模块处理对基于JPA的数据访问层的增强支持。它使构建使用数据访问技术的Spring驱动的应用程序变得更加容易。  应用场景JPA：全自动化、面向对象，简单查询无需写SQL，复杂业务下HQL也不一定能满足，不够灵活。 结论：当项目业务">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习笔记-Spring Data JPA">
 <meta property="og:url" content="https://mikeygithub.github.io/2021/11/03/yuque/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Spring%20Data%20JPA/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="Java Persistence API  应用背景 SpringDataJPA是更大的SpringDataFamily的一部分，它使基于JPA的存储库易于实现。本模块处理对基于JPA的数据访问层的增强支持。它使构建使用数据访问技术的Spring驱动的应用程序变得更加容易。  应用场景JPA：全自动化、面向对象，简单查询无需写SQL，复杂业务下HQL也不一定能满足，不够灵活。结论：当项目业务逻">
+<meta property="og:description" content="Java Persistence API  应用背景 SpringDataJPA是更大的SpringDataFamily的一部分，它使基于JPA的存储库易于实现。本模块处理对基于JPA的数据访问层的增强支持。它使构建使用数据访问技术的Spring驱动的应用程序变得更加容易。  应用场景JPA：全自动化、面向对象，简单查询无需写SQL，复杂业务下HQL也不一定能满足，不够灵活。 结论：当项目业务">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1635925532951-ba6919bd-e084-41a7-a7c5-50f23fb3201b.jpeg">
 <meta property="article:published_time" content="2021-11-03T09:24:22.000Z">
@@ -160,18 +160,6 @@
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
               </a>
             </li>
           
@@ -343,154 +331,165 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1635925532951-ba6919bd-e084-41a7-a7c5-50f23fb3201b.jpeg#clientId=u49e4f164-1854-4&from=paste&id=u04599639&originHeight=300&originWidth=500&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&taskId=uead07b2d-eba7-49e3-8eb2-8b0eaad72bc&title=" srcset="/img/loading.gif" lazyload></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/jpeg/2630542/1635925532951-ba6919bd-e084-41a7-a7c5-50f23fb3201b.jpeg" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
-<p>Java Persistence API</p>
+<p><font style="color:rgb(102, 102, 102);">Java Persistence API</font></p>
 </blockquote>
 <h1 id="应用背景"><a href="#应用背景" class="headerlink" title="应用背景"></a>应用背景</h1><blockquote>
 <p>SpringDataJPA是更大的SpringDataFamily的一部分，它使基于JPA的存储库易于实现。本模块处理对基于JPA的数据访问层的增强支持。它使构建使用数据访问技术的Spring驱动的应用程序变得更加容易。</p>
 </blockquote>
-<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>JPA：全自动化、面向对象，简单查询无需写SQL，复杂业务下HQL也不一定能满足，不够灵活。<br>结论：当项目业务逻辑不复杂，所需要查询关联的表不是很多，且项目稳定时适用JPA。</p>
-<p>Mybatis: 半自动化、代码层面可以使用QBC（简单查询），SQL灵活高效。<br>结论：当项目业务需要迭代速度快，业务复杂性高（涉及到复杂报表，统计）。</p>
-<h1 id="简单案例"><a href="#简单案例" class="headerlink" title="简单案例"></a>简单案例</h1><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/spring-projects/spring-data-examples.git<br></code></pre></td></tr></table></figure>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>JPA：全自动化、面向对象，简单查询无需写SQL，复杂业务下HQL也不一定能满足，不够灵活。</p>
+<p>结论：当项目业务逻辑不复杂，所需要查询关联的表不是很多，且项目稳定时适用JPA。</p>
+<p>Mybatis: 半自动化、代码层面可以使用QBC（简单查询），SQL灵活高效。</p>
+<p>结论：当项目业务需要迭代速度快，业务复杂性高（涉及到复杂报表，统计）。</p>
+<h1 id="简单案例"><a href="#简单案例" class="headerlink" title="简单案例"></a>简单案例</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">git clone https://github.com/spring-projects/spring-data-examples.git<br></code></pre></td></tr></table></figure>
+
+
+
 
 
 <p>支持的关键字、示例及JPQL片段如下表所示：</p>
 <table>
 <thead>
 <tr>
-<th>Keyword</th>
-<th>Sample</th>
-<th>JPQL snippet</th>
+<th align="left">Keyword</th>
+<th align="left">Sample</th>
+<th align="left">JPQL snippet</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>And</td>
-<td>findByLastnameAndFirstname</td>
-<td>… where x.lastname = ?1 and x.firstname = ?2</td>
+<td align="left">And</td>
+<td align="left">findByLastnameAndFirstname</td>
+<td align="left">… where x.lastname = ?1 and x.firstname = ?2</td>
 </tr>
 <tr>
-<td>Or</td>
-<td>findByLastnameOrFirstname</td>
-<td>… where x.lastname = ?1 or x.firstname = ?2</td>
+<td align="left">Or</td>
+<td align="left">findByLastnameOrFirstname</td>
+<td align="left">… where x.lastname = ?1 or x.firstname = ?2</td>
 </tr>
 <tr>
-<td>Is,Equals</td>
-<td>findByFirstname,findByFirstnameIs,findByFirstnameEquals</td>
-<td>… where x.firstname = ?1</td>
+<td align="left">Is,Equals</td>
+<td align="left">findByFirstname,findByFirstnameIs,findByFirstnameEquals</td>
+<td align="left">… where x.firstname = ?1</td>
 </tr>
 <tr>
-<td>Between</td>
-<td>findByStartDateBetween</td>
-<td>… where x.startDate between ?1 and ?2</td>
+<td align="left">Between</td>
+<td align="left">findByStartDateBetween</td>
+<td align="left">… where x.startDate between ?1 and ?2</td>
 </tr>
 <tr>
-<td>LessThan</td>
-<td>findByAgeLessThan</td>
-<td>… where x.age &lt; ?1</td>
+<td align="left">LessThan</td>
+<td align="left">findByAgeLessThan</td>
+<td align="left">… where x.age &lt; ?1</td>
 </tr>
 <tr>
-<td>LessThanEqual</td>
-<td>findByAgeLessThanEqual</td>
-<td>… where x.age &lt;= ?1</td>
+<td align="left">LessThanEqual</td>
+<td align="left">findByAgeLessThanEqual</td>
+<td align="left">… where x.age &lt;= ?1</td>
 </tr>
 <tr>
-<td>GreaterThan</td>
-<td>findByAgeGreaterThan</td>
-<td>… where x.age &gt; ?1</td>
+<td align="left">GreaterThan</td>
+<td align="left">findByAgeGreaterThan</td>
+<td align="left">… where x.age &gt; ?1</td>
 </tr>
 <tr>
-<td>GreaterThanEqual</td>
-<td>findByAgeGreaterThanEqual</td>
-<td>… where x.age &gt;= ?1</td>
+<td align="left">GreaterThanEqual</td>
+<td align="left">findByAgeGreaterThanEqual</td>
+<td align="left">… where x.age &gt;= ?1</td>
 </tr>
 <tr>
-<td>After</td>
-<td>findByStartDateAfter</td>
-<td>… where x.startDate &gt; ?1</td>
+<td align="left">After</td>
+<td align="left">findByStartDateAfter</td>
+<td align="left">… where x.startDate &gt; ?1</td>
 </tr>
 <tr>
-<td>Before</td>
-<td>findByStartDateBefore</td>
-<td>… where x.startDate &lt; ?1</td>
+<td align="left">Before</td>
+<td align="left">findByStartDateBefore</td>
+<td align="left">… where x.startDate &lt; ?1</td>
 </tr>
 <tr>
-<td>IsNull</td>
-<td>findByAgeIsNull</td>
-<td>… where x.age is null</td>
+<td align="left">IsNull</td>
+<td align="left">findByAgeIsNull</td>
+<td align="left">… where x.age is null</td>
 </tr>
 <tr>
-<td>IsNotNull,NotNull</td>
-<td>findByAge(Is)NotNull</td>
-<td>… where x.age not null</td>
+<td align="left">IsNotNull,NotNull</td>
+<td align="left">findByAge(Is)NotNull</td>
+<td align="left">… where x.age not null</td>
 </tr>
 <tr>
-<td>Like</td>
-<td>findByFirstnameLike</td>
-<td>… where x.firstname like ?1</td>
+<td align="left">Like</td>
+<td align="left">findByFirstnameLike</td>
+<td align="left">… where x.firstname like ?1</td>
 </tr>
 <tr>
-<td>NotLike</td>
-<td>findByFirstnameNotLike</td>
-<td>… findByFirstnameNotLike</td>
+<td align="left">NotLike</td>
+<td align="left">findByFirstnameNotLike</td>
+<td align="left">… findByFirstnameNotLike</td>
 </tr>
 <tr>
-<td>StartingWith</td>
-<td>findByFirstnameStartingWith</td>
-<td>… where x.firstname like ?1 (parameter bound with appended %)</td>
+<td align="left">StartingWith</td>
+<td align="left">findByFirstnameStartingWith</td>
+<td align="left">… where x.firstname like ?1 (parameter bound with appended %)</td>
 </tr>
 <tr>
-<td>EndingWith</td>
-<td>findByFirstnameEndingWith</td>
-<td>… where x.firstname like ?1 (parameter bound with prepended %)</td>
+<td align="left">EndingWith</td>
+<td align="left">findByFirstnameEndingWith</td>
+<td align="left">… where x.firstname like ?1 (parameter bound with prepended %)</td>
 </tr>
 <tr>
-<td>Containing</td>
-<td>findByFirstnameContaining</td>
-<td>… where x.firstname like ?1 (parameter bound wrapped in %)</td>
+<td align="left">Containing</td>
+<td align="left">findByFirstnameContaining</td>
+<td align="left">… where x.firstname like ?1 (parameter bound wrapped in %)</td>
 </tr>
 <tr>
-<td>OrderBy</td>
-<td>findByAgeOrderByLastnameDesc</td>
-<td>… where x.age = ?1 order by x.lastname desc</td>
+<td align="left">OrderBy</td>
+<td align="left">findByAgeOrderByLastnameDesc</td>
+<td align="left">… where x.age = ?1 order by x.lastname desc</td>
 </tr>
 <tr>
-<td>Not</td>
-<td>findByLastnameNot</td>
-<td>… where x.lastname &lt;&gt; ?1</td>
+<td align="left">Not</td>
+<td align="left">findByLastnameNot</td>
+<td align="left">… where x.lastname &lt;&gt; ?1</td>
 </tr>
 <tr>
-<td>In</td>
-<td>findByAgeIn(Collection<Age> ages)</td>
-<td>… where x.age in ?1</td>
+<td align="left">In</td>
+<td align="left">findByAgeIn(Collection<Age> ages)</td>
+<td align="left">… where x.age in ?1</td>
 </tr>
 <tr>
-<td>NotIn</td>
-<td>findByAgeNotIn(Collection<Age> ages)</td>
-<td>… where x.age not in ?1</td>
+<td align="left">NotIn</td>
+<td align="left">findByAgeNotIn(Collection<Age> ages)</td>
+<td align="left">… where x.age not in ?1</td>
 </tr>
 <tr>
-<td>True</td>
-<td>findByActiveTrue()</td>
-<td>… where x.active = true</td>
+<td align="left">True</td>
+<td align="left">findByActiveTrue()</td>
+<td align="left">… where x.active = true</td>
 </tr>
 <tr>
-<td>False</td>
-<td>findByActiveFalse()</td>
-<td>… where x.active = false</td>
+<td align="left">False</td>
+<td align="left">findByActiveFalse()</td>
+<td align="left">… where x.active = false</td>
 </tr>
 <tr>
-<td>IgnoreCase</td>
-<td>findByFirstnameIgnoreCase</td>
-<td>… where UPPER(x.firstame) = UPPER(?1)</td>
+<td align="left">IgnoreCase</td>
+<td align="left">findByFirstnameIgnoreCase</td>
+<td align="left">… where UPPER(x.firstame) = UPPER(?1)</td>
 </tr>
 </tbody></table>
 <p>具体Spring Data Jpa对方法名的解析规则可参看<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-property-expressions">官方文档4.4.3. Property Expressions</a></p>
 <h1 id="原生查询"><a href="#原生查询" class="headerlink" title="原生查询"></a>原生查询</h1><blockquote>
 <p>在复杂场景下如果需要数据进行统计，需要自定义原生SQL查询，但是在使用@Query查询的时候如何使用自定义DTO来接受查询回来的数据呢？这时候就需要自定义转换器了。</p>
 </blockquote>
-<p>注册转换器：<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637633259685-6dee7551-9819-49c7-8891-fe5eec9e5e0f.java?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637633259685-6dee7551-9819-49c7-8891-fe5eec9e5e0f.java%22,%22name%22:%22ConverterConfig.java%22,%22size%22:459,%22type%22:%22%22,%22ext%22:%22java%22,%22status%22:%22done%22,%22taskId%22:%22u3ec446f0-acf9-4cec-bf3f-08c9b51cdb7%22,%22taskType%22:%22upload%22,%22id%22:%22u259d5959%22,%22card%22:%22file%22%7D">ConverterConfig.java</a><br>需要自定义转换的标识：<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637633259666-c2bf45e6-49f3-4028-a575-93886ad440b3.java?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637633259666-c2bf45e6-49f3-4028-a575-93886ad440b3.java%22,%22name%22:%22CustomConvertible.java%22,%22size%22:95,%22type%22:%22%22,%22ext%22:%22java%22,%22status%22:%22done%22,%22taskId%22:%22ucb129b6e-0318-4da1-afe6-f58c9f9cfdb%22,%22taskType%22:%22upload%22,%22id%22:%22u34032e66%22,%22card%22:%22file%22%7D">CustomConvertible.java</a><br>转换器：<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637635620658-04a23b50-b19d-46df-a71c-e4406e534a35.java?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637635620658-04a23b50-b19d-46df-a71c-e4406e534a35.java%22,%22name%22:%22CustomEntityConverter.java%22,%22size%22:4662,%22type%22:%22%22,%22ext%22:%22java%22,%22status%22:%22done%22,%22taskId%22:%22u0a47bad8-59d0-40d3-94fc-533db63fe91%22,%22taskType%22:%22upload%22,%22id%22:%22u4e57e573%22,%22card%22:%22file%22%7D">CustomEntityConverter.java</a><br>DTO:<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637633470952-4abca9ba-1adb-4bb0-b5d7-3e3c10f61a1d.java?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637633470952-4abca9ba-1adb-4bb0-b5d7-3e3c10f61a1d.java%22,%22name%22:%22BaseInfoDO.java%22,%22size%22:440,%22type%22:%22%22,%22ext%22:%22java%22,%22status%22:%22done%22,%22taskId%22:%22u7dd3b984-1d8c-47f6-a889-8ed58a7b9b3%22,%22taskType%22:%22upload%22,%22id%22:%22u38cfcd54%22,%22card%22:%22file%22%7D">BaseInfoDO.java</a><br>Responty: <a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637633442006-c334d442-a8e3-4f77-93b1-42f02af235d7.java?_lake_card=%7B%22src%22:%22https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637633442006-c334d442-a8e3-4f77-93b1-42f02af235d7.java%22,%22name%22:%22StatisticsRepository.java%22,%22size%22:1021,%22type%22:%22%22,%22ext%22:%22java%22,%22status%22:%22done%22,%22taskId%22:%22u5b059043-548b-43c1-aa86-487bcaca01b%22,%22taskType%22:%22upload%22,%22id%22:%22u0968b645%22,%22card%22:%22file%22%7D">StatisticsRepository.java</a></p>
-<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p><a target="_blank" rel="noopener" href="https://spring.io/guides/gs/accessing-data-jpa/">https://spring.io/guides/gs/accessing-data-jpa/</a><br><a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-data-examples/tree/main/jpa">https://github.com/spring-projects/spring-data-examples/tree/main/jpa</a><br>官方文档：<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-property-expressions">https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-property-expressions</a></p>
+<p>注册转换器：<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637633259685-6dee7551-9819-49c7-8891-fe5eec9e5e0f.java">ConverterConfig.java</a></p>
+<p>需要自定义转换的标识：<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637633259666-c2bf45e6-49f3-4028-a575-93886ad440b3.java">CustomConvertible.java</a></p>
+<p>转换器：<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637635620658-04a23b50-b19d-46df-a71c-e4406e534a35.java">CustomEntityConverter.java</a></p>
+<p>DTO:<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637633470952-4abca9ba-1adb-4bb0-b5d7-3e3c10f61a1d.java">BaseInfoDO.java</a></p>
+<p>Responty: <a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2021/java/2630542/1637633442006-c334d442-a8e3-4f77-93b1-42f02af235d7.java">StatisticsRepository.java</a></p>
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p><a target="_blank" rel="noopener" href="https://spring.io/guides/gs/accessing-data-jpa/">https://spring.io/guides/gs/accessing-data-jpa/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-data-examples/tree/main/jpa">https://github.com/spring-projects/spring-data-examples/tree/main/jpa</a></p>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-property-expressions">https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-property-expressions</a></p>
 
               
             </div>
@@ -1077,6 +1076,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

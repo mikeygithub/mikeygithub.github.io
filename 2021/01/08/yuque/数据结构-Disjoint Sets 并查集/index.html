@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -281,7 +269,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          5.6k 字
+          5.7k 字
         
       </span>
     
@@ -293,7 +281,7 @@
         
         
           <!-- compatible with older versions-->
-          47 分钟
+          48 分钟
         
       </span>
     
@@ -343,53 +331,55 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1651326837184-8da1f419-dc5d-4b75-ab9b-e63be95dd377.png#clientId=ud37a02e7-c625-4&from=ui&id=u49859644&originHeight=781&originWidth=1500&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=1778611&status=done&style=none&taskId=u0a40e072-8c53-4c9b-b6f6-1bac385a4fe&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1651326837184-8da1f419-dc5d-4b75-ab9b-e63be95dd377.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
-<p>在一些有N个元素的集合应用问题中，我们通常是在开始时让每个元素构成一个单元素的集合，然后按一定顺序将属于同一组的元素所在的集合合并，其间要反复查找一个元素在哪个集合中。这一类问题其特点是看似并不复杂，但数据量极大，若用正常的数据结构来描述的话，往往空间上过大，计算机无法承受；即使在空间上勉强通过，时间复杂度也极高。</p>
+<p><font style="color:rgb(0, 0, 0);">在一些有N个元素的集合应用问题中，我们通常是在开始时让每个元素构成一个单元素的集合，然后按一定顺序将属于同一组的元素所在的集合合并，其间要反复查找一个元素在哪个集合中。这一类问题其特点是看似并不复杂，但数据量极大，若用正常的数据结构来描述的话，往往空间上过大，计算机无法承受；即使在空间上勉强通过，时间复杂度也极高。</font></p>
 </blockquote>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
-<p>并查集（Disjoint Sets ）是一种属性结构（通过数组存储），主要用于处理多个集合求交集问题。集就是让每个元素构成一个单元素的集合，也就是按一定顺序将属于同一组的元素所在的集合合并。主要是通过集合数组+元素数组来进行存储。</p>
+<p>并查集（Disjoint Sets ）是一种属性结构（通过数组存储），主要用于处理多个集合求交集问题。<font style="color:rgb(0, 0, 0);">集就是让每个元素构成一个单元素的集合，也就是按一定顺序将属于同一组的元素所在的集合合并。</font>主要是通过集合数组+元素数组来进行存储。</p>
 </blockquote>
 <p>支持的两种操作</p>
 <ul>
-<li>查找（Find）：确定某个元素处于哪个子集；</li>
-<li>合并（Union）：将两个子集合并成一个集合。</li>
+<li><font style="color:rgba(0, 0, 0, 0.87);">查找（Find）：确定某个元素处于哪个子集；</font></li>
+<li><font style="color:rgba(0, 0, 0, 0.87);">合并（Union）：将两个子集合并成一个集合。</font></li>
 </ul>
-<p><strong>用编号最小的元素标记所在集合</strong>；定义一个数组 set[1..n] ，其中set[i] 表示元素i 所在的集合</p>
-<p><img src="https://cdn.nlark.com/yuque/__latex/ce21114e6916a045157997c14a039b20.svg#card=math&code=%E9%9B%86%E5%90%88%20%3D%20%5C%7B1%2C3%2C5%5C%7D%2C%5C%7B2%5C%7D%2C%5C%7B4%2C9%2C10%5C%7D%2C%5C%7B6%2C7%2C8%5C%7D&id=tB1PV" srcset="/img/loading.gif" lazyload></p>
+<p><font style="color:rgba(0, 0, 0, 0.87);"></font></p>
+<p><strong><font style="color:#E8323C;">用编号最小的元素标记所在集合</font></strong><font style="color:rgb(0, 0, 0);">；定义一个数组 set[1..n] ，其中set[i] 表示元素i 所在的集合</font></p>
+<p><font style="color:rgb(0, 0, 0);"></font></p>
+<p>$ 集合 = {1,3,5},{2},{4,9,10},{6,7,8} $</p>
 <table>
 <thead>
 <tr>
-<th>rank</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-<th>7</th>
-<th>8</th>
-<th>9</th>
-<th>10</th>
+<th align="center">rank</th>
+<th align="center"><font style="color:#E8323C;">1</font></th>
+<th align="center"><font style="color:#40A9FF;">2</font></th>
+<th align="center"><font style="color:#E8323C;">3</font></th>
+<th align="center"><font style="color:#9254DE;">4</font></th>
+<th align="center"><font style="color:#E8323C;">5</font></th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center"><font style="color:#9254DE;">9</font></th>
+<th align="center"><font style="color:#9254DE;">10</font></th>
 </tr>
 </thead>
 <tbody><tr>
-<td>parent</td>
-<td>1</td>
-<td>2</td>
-<td>1</td>
-<td>4</td>
-<td>1</td>
-<td>6</td>
-<td>6</td>
-<td>6</td>
-<td>4</td>
-<td>4</td>
+<td align="center">parent</td>
+<td align="center"><font style="color:#E8323C;">1</font></td>
+<td align="center"><font style="color:#40A9FF;">2</font></td>
+<td align="center"><font style="color:#E8323C;">1</font></td>
+<td align="center"><font style="color:#9254DE;">4</font></td>
+<td align="center"><font style="color:#E8323C;">1</font></td>
+<td align="center">6</td>
+<td align="center">6</td>
+<td align="center">6</td>
+<td align="center"><font style="color:#9254DE;">4</font></td>
+<td align="center"><font style="color:#9254DE;">4</font></td>
 </tr>
 </tbody></table>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1651326045841-5a3a5977-d123-4920-aa7b-e2d57e3f31f0.jpeg" srcset="/img/loading.gif" lazyload></p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p><strong>数组</strong>：一个整数数组，称为parent[]。如果我们处理n个项目，数组的第i个元素代表第i个项目。更准确地说，数组的第i个元素是第i个项的父元素。这些关系创建一个或多个虚拟树。</p>
-<p><strong>树</strong>：这是一个不相交的集合。如果两个元素位于同一棵树中，则它们位于同一集合中。每个树的根节点（或最上面的节点）称为集合的代表。每一组都有一个独特的代表。识别代表的一个简单规则是，如果我是一个集合的代表，那么parent[i]=i。如果我不是他的集合的代表，那么可以沿着树向上移动，直到找到代表。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2630542/1651326045841-5a3a5977-d123-4920-aa7b-e2d57e3f31f0.jpeg" srcset="/img/loading.gif" lazyload alt="画板"></p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>**<font style="color:#F5222D;">数组</font>**：一个整数数组，称为parent[]。如果我们处理n个项目，数组的第i个元素代表第i个项目。更准确地说，数组的第i个元素是第i个项的父元素。这些关系创建一个或多个虚拟树。</p>
+<p>**<font style="color:#F5222D;">树</font>**：这是一个不相交的集合。如果两个元素位于同一棵树中，则它们位于同一集合中。每个树的根节点（或最上面的节点）称为集合的代表。每一组都有一个独特的代表。识别代表的一个简单规则是，如果我是一个集合的代表，那么parent[i]=i。如果我不是他的集合的代表，那么可以沿着树向上移动，直到找到代表。</p>
 <h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><blockquote>
 <p>建立两个数组分别为rank，parent初始化其长度</p>
 </blockquote>
@@ -408,9 +398,12 @@
 <h2 id="完整实现"><a href="#完整实现" class="headerlink" title="完整实现"></a>完整实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> io.example.algorithm.disjointset;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DisjointUnionSets</span> &#123;<br><br>    <span class="hljs-type">int</span>[] rank;<br>    <span class="hljs-type">int</span>[] parent;<br>    <span class="hljs-type">int</span> n;<br><br>    <span class="hljs-comment">// 构建</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">DisjointUnionSets</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        rank = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        parent = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-built_in">this</span>.n = n;<br>        makeSet();<br>    &#125;<br><br>    <span class="hljs-comment">//创建n个集合，每个集合中有一个项目</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">makeSet</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-comment">//初始化，所有元素都在自己的集合中。</span><br>            parent[i] = i;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// 返回x集合的代表</span><br>    <span class="hljs-type">int</span> <span class="hljs-title function_">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> &#123;<br>        <span class="hljs-comment">// 查找x是其元素的集合的代表</span><br>        <span class="hljs-keyword">if</span> (parent[x] != x) &#123;<br>            <span class="hljs-comment">// 如果x不是自己的父，那么x就不是他的集合的代表</span><br>            parent[x] = find(parent[x]);<br>            <span class="hljs-comment">//所以我们递归地调用其父节点上的Find，并将i的节点直接移动到这个集合的代表下</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> parent[x];<br>    &#125;<br><br>    <span class="hljs-comment">// 合并包含x的集合和包含x的集合</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">union</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>        <span class="hljs-comment">// 找到两组的代表集合</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">xRoot</span> <span class="hljs-operator">=</span> find(x), yRoot = find(y);<br>        <span class="hljs-comment">// 元素在同一个集合中，不需要将任何东西联合起来。</span><br>        <span class="hljs-keyword">if</span> (xRoot == yRoot) <span class="hljs-keyword">return</span>;<br>        <span class="hljs-comment">// 如果x的排序小于y的排序</span><br>        <span class="hljs-keyword">if</span> (rank[xRoot] &lt; rank[yRoot])<br>            <span class="hljs-comment">// Then move x under y so that depth  of tree remains less</span><br>            <span class="hljs-comment">//然后将x移动到y下方，使树的深度保持较小</span><br>            parent[xRoot] = yRoot;<br>            <span class="hljs-comment">// 否则如果y的排序小于x的排序</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (rank[yRoot] &lt; rank[xRoot])<br>            <span class="hljs-comment">// 然后将y移到x下，使树的深度保持较小</span><br>            parent[yRoot] = xRoot;<br>        <span class="hljs-keyword">else</span> <span class="hljs-comment">// 如果x和y的排序大小一样</span><br>        &#123;<br>            <span class="hljs-comment">// 然后将y移到x下（无论哪个方向）</span><br>            parent[yRoot] = xRoot;<br>            <span class="hljs-comment">// 并将结果树的秩增加1</span><br>            rank[xRoot] = rank[xRoot] + <span class="hljs-number">1</span>;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">// 假设有5个人的ID为0、1、2、3和4</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> <span class="hljs-number">5</span>;<br>        <span class="hljs-type">DisjointUnionSets</span> <span class="hljs-variable">dus</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DisjointUnionSets</span>(n);<br>        <span class="hljs-comment">// 0是2的朋友</span><br>        dus.union(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>);<br>        <span class="hljs-comment">// 4是2的朋友</span><br>        dus.union(<span class="hljs-number">4</span>, <span class="hljs-number">2</span>);<br>        <span class="hljs-comment">// 3是1的朋友</span><br>        dus.union(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>);<br>        <span class="hljs-comment">// 检查4是否是0的朋友</span><br>        <span class="hljs-keyword">if</span> (dus.find(<span class="hljs-number">4</span>) == dus.find(<span class="hljs-number">0</span>)) System.out.println(<span class="hljs-string">&quot;Yes&quot;</span>);<br>        <span class="hljs-keyword">else</span> System.out.println(<span class="hljs-string">&quot;No&quot;</span>);<br>        <span class="hljs-comment">// 检查1是否是0的朋友</span><br>        <span class="hljs-keyword">if</span> (dus.find(<span class="hljs-number">1</span>) == dus.find(<span class="hljs-number">0</span>)) System.out.println(<span class="hljs-string">&quot;Yes&quot;</span>);<br>        <span class="hljs-keyword">else</span> System.out.println(<span class="hljs-string">&quot;No&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
+
 <h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">UnionFind</span> &#123;<br>        <span class="hljs-type">int</span> count;<br>        <span class="hljs-type">int</span>[] parent;<br>        <span class="hljs-type">int</span>[] rank;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-title function_">UnionFind</span><span class="hljs-params">(<span class="hljs-type">char</span>[][] grid)</span> &#123;<br>            count = <span class="hljs-number">0</span>;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> grid.length;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> grid[<span class="hljs-number">0</span>].length;<br>            parent = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m * n];<br>            rank = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m * n];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; ++i) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; ++j) &#123;<br>                    <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                        parent[i * n + j] = i * n + j;<br>                        ++count;<br>                    &#125;<br>                    rank[i * n + j] = <span class="hljs-number">0</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">find</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span> &#123;<br>            <span class="hljs-keyword">if</span> (parent[i] != i) parent[i] = find(parent[i]);<br>            <span class="hljs-keyword">return</span> parent[i];<br>        &#125;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">union</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">rootx</span> <span class="hljs-operator">=</span> find(x);<br>            <span class="hljs-type">int</span> <span class="hljs-variable">rooty</span> <span class="hljs-operator">=</span> find(y);<br>            <span class="hljs-keyword">if</span> (rootx != rooty) &#123;<br>                <span class="hljs-keyword">if</span> (rank[rootx] &gt; rank[rooty]) &#123;<br>                    parent[rooty] = rootx;<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (rank[rootx] &lt; rank[rooty]) &#123;<br>                    parent[rootx] = rooty;<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    parent[rooty] = rootx;<br>                    rank[rootx] += <span class="hljs-number">1</span>;<br>                &#125;<br>                --count;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getCount</span><span class="hljs-params">()</span> &#123;<br>            <span class="hljs-keyword">return</span> count;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">numIslands</span><span class="hljs-params">(<span class="hljs-type">char</span>[][] grid)</span> &#123;<br>        <span class="hljs-keyword">if</span> (grid == <span class="hljs-literal">null</span> || grid.length == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">nr</span> <span class="hljs-operator">=</span> grid.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">nc</span> <span class="hljs-operator">=</span> grid[<span class="hljs-number">0</span>].length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">num_islands</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">UnionFind</span> <span class="hljs-variable">uf</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UnionFind</span>(grid);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; r &lt; nr; ++r) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; c &lt; nc; ++c) &#123;<br>                <span class="hljs-keyword">if</span> (grid[r][c] == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                    grid[r][c] = <span class="hljs-string">&#x27;0&#x27;</span>;<br>                    <span class="hljs-keyword">if</span> (r - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; grid[r-<span class="hljs-number">1</span>][c] == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                        uf.union(r * nc + c, (r-<span class="hljs-number">1</span>) * nc + c);<br>                    &#125;<br>                    <span class="hljs-keyword">if</span> (r + <span class="hljs-number">1</span> &lt; nr &amp;&amp; grid[r+<span class="hljs-number">1</span>][c] == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                        uf.union(r * nc + c, (r+<span class="hljs-number">1</span>) * nc + c);<br>                    &#125;<br>                    <span class="hljs-keyword">if</span> (c - <span class="hljs-number">1</span> &gt;= <span class="hljs-number">0</span> &amp;&amp; grid[r][c-<span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                        uf.union(r * nc + c, r * nc + c - <span class="hljs-number">1</span>);<br>                    &#125;<br>                    <span class="hljs-keyword">if</span> (c + <span class="hljs-number">1</span> &lt; nc &amp;&amp; grid[r][c+<span class="hljs-number">1</span>] == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                        uf.union(r * nc + c, r * nc + c + <span class="hljs-number">1</span>);<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> uf.getCount();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h4 id="6106-统计无向图中无法互相到达点对数（mid）"><a href="#6106-统计无向图中无法互相到达点对数（mid）" class="headerlink" title="6106. 统计无向图中无法互相到达点对数（mid）"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-unreachable-pairs-of-nodes-in-an-undirected-graph/">6106. 统计无向图中无法互相到达点对数</a>（mid）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-type">int</span>[] parent;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">long</span> <span class="hljs-title function_">countPairs</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span>[][] edges)</span> &#123;<br>        parent = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-comment">//初始化，所有元素都在自己的集合中。</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            parent[i] = i;<br>        &#125;<br>        <span class="hljs-comment">//根据给定的边构建集合</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span>[] edge:edges)&#123;<br>            union(edge[<span class="hljs-number">0</span>],edge[<span class="hljs-number">1</span>]);<br>        &#125;<br>        <span class="hljs-comment">//确定每个集合拥有的元素个数</span><br>        Map&lt;Integer,Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">root</span> <span class="hljs-operator">=</span> find(i);<br>            map.put(root,map.getOrDefault(root,<span class="hljs-number">0</span>)+<span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-comment">//计算结果</span><br>        <span class="hljs-type">long</span> <span class="hljs-variable">ret</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> key:map.keySet())&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">cnt</span> <span class="hljs-operator">=</span> map.get(key);<br>            ret +=(<span class="hljs-type">long</span>)cnt * (n-cnt);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ret &gt;&gt; <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">find</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span> &#123;<br>        <span class="hljs-comment">// 如果 i 是自己的父节点（代表）</span><br>        <span class="hljs-keyword">if</span> (parent[i] == i) &#123;<br>            <span class="hljs-keyword">return</span> i;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-comment">//如果当前parent不是代表继续沿着树向上移动，直到找到代表</span><br>            <span class="hljs-keyword">return</span> find(parent[i]);<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">//将包含i的集合统一起来,还有包括j</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">union</span><span class="hljs-params">(<span class="hljs-type">int</span> i, <span class="hljs-type">int</span> j)</span> &#123;<br>        <span class="hljs-comment">//查找包含i的集合的代表（或根节点）</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">irep</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.find(i);<br>        <span class="hljs-comment">//对包含j的集合也要这样做</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">jrep</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.find(j);<br>        <span class="hljs-comment">//使i的代表的父节点成为j的代表（有效地将所有i的集合移动到j的集合中）</span><br>        <span class="hljs-built_in">this</span>.parent[jrep] = irep;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
 
 
 
@@ -432,8 +425,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" class="category-chain-item">基础算法</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  
+  
+
   
 
       </span>
@@ -987,6 +987,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

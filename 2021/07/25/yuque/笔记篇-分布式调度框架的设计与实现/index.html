@@ -17,12 +17,12 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="背景简介任务调度我们都知道，但是在分布式系统中使用我们需要考虑执行方式的异同，有的业务场景下需要每个节点同时都进行执行任务调度，有的场景只需要有一个节点执行该任务，如何设计才能保证其任务的运行不会重复，以及多个节点同时运行，下面将一一展开。 设计方案查询任务使用一条线程每一秒（最小粒度）去扫描调度任务表，判断是开启状态并且任务的下一次执行时间是否小于等于当前时间，如果是则执行，并更新时间信息。">
+    <meta name="description" content="背景简介任务调度我们都知道，但是在分布式系统中使用我们需要考虑执行方式的异同，有的业务场景下需要每个节点同时都进行执行任务调度，有的场景只需要有一个节点执行该任务，如何设计才能保证其任务的运行不会重复，以及多个节点同时运行，下面将一一展开。 设计方案 查询任务 使用一条线程每一秒（最小粒度）去扫描调度任务表，判断是开启状态并且任务的下一次执行时间是否小于等于当前时间，如果是则执行，并更新时间信息">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记篇-分布式调度框架的设计与实现">
 <meta property="og:url" content="https://mikeygithub.github.io/2021/07/25/yuque/%E7%AC%94%E8%AE%B0%E7%AF%87-%E5%88%86%E5%B8%83%E5%BC%8F%E8%B0%83%E5%BA%A6%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="背景简介任务调度我们都知道，但是在分布式系统中使用我们需要考虑执行方式的异同，有的业务场景下需要每个节点同时都进行执行任务调度，有的场景只需要有一个节点执行该任务，如何设计才能保证其任务的运行不会重复，以及多个节点同时运行，下面将一一展开。 设计方案查询任务使用一条线程每一秒（最小粒度）去扫描调度任务表，判断是开启状态并且任务的下一次执行时间是否小于等于当前时间，如果是则执行，并更新时间信息。">
+<meta property="og:description" content="背景简介任务调度我们都知道，但是在分布式系统中使用我们需要考虑执行方式的异同，有的业务场景下需要每个节点同时都进行执行任务调度，有的场景只需要有一个节点执行该任务，如何设计才能保证其任务的运行不会重复，以及多个节点同时运行，下面将一一展开。 设计方案 查询任务 使用一条线程每一秒（最小粒度）去扫描调度任务表，判断是开启状态并且任务的下一次执行时间是否小于等于当前时间，如果是则执行，并更新时间信息">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627186165577-a5a67ea5-360b-46ad-bd10-49bfbbe7a033.png?x-oss-process=image%2Fresize%2Cw_640">
 <meta property="article:published_time" content="2021-07-25T09:24:22.000Z">
@@ -160,18 +160,6 @@
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
               </a>
             </li>
           
@@ -343,11 +331,15 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627186165577-a5a67ea5-360b-46ad-bd10-49bfbbe7a033.png#averageHue=%23898581&clientId=u64938f0a-e707-4&from=paste&height=384&id=u434072e9&originHeight=384&originWidth=640&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=329803&status=done&style=none&taskId=u14e6e08b-d1df-48a6-ad83-f6adf32fd84&title=&width=640" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627186165577-a5a67ea5-360b-46ad-bd10-49bfbbe7a033.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="背景简介"><a href="#背景简介" class="headerlink" title="背景简介"></a>背景简介</h1><p>任务调度我们都知道，但是在分布式系统中使用我们需要考虑执行方式的异同，有的业务场景下需要每个节点同时都进行执行任务调度，有的场景只需要有一个节点执行该任务，如何设计才能保证其任务的运行不会重复，以及多个节点同时运行，下面将一一展开。</p>
-<h1 id="设计方案"><a href="#设计方案" class="headerlink" title="设计方案"></a>设计方案</h1><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627808121149-2e8cce77-f158-49e4-91ab-77e3fe25fe24.png#averageHue=%23fafaf8&clientId=u750d1109-1d0e-4&from=paste&height=565&id=uac8669e4&originHeight=565&originWidth=1028&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=59863&status=done&style=none&taskId=u39e24dae-ebd9-4a49-a5e7-1f96fe4c917&title=&width=1028" srcset="/img/loading.gif" lazyload alt="image.png"><br><strong>查询任务</strong><br>使用一条线程每一秒（最小粒度）去扫描调度任务表，判断是开启状态并且任务的下一次执行时间是否小于等于当前时间，如果是则执行，并更新时间信息。</p>
-<p><strong>执行任务</strong><br>在执行调度任务的时候，可选择指定的节点来进行执行任务，如果不选则系统使用缺省值。每个节点对应一个执行器，其每个节点启动后注册到管理端。</p>
-<p><strong>分布式场景</strong><br>在分布式的场景下我们肯定会有多个实例，考虑到本身我们的任务量并不会十分庞大，采用数据库的悲观锁作为分布式锁（参考文末的资料），来确保我们同时只有一个实例进行数据库任务的扫描分配节点去执行任务。</p>
+<h1 id="设计方案"><a href="#设计方案" class="headerlink" title="设计方案"></a>设计方案</h1><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627808121149-2e8cce77-f158-49e4-91ab-77e3fe25fe24.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>查询任务</strong></p>
+<p>使用一条线程每一秒（最小粒度）去扫描调度任务表，判断是开启状态并且任务的下一次执行时间是否小于等于当前时间，如果是则执行，并更新时间信息。</p>
+<p><strong>执行任务</strong></p>
+<p>在执行调度任务的时候，可选择指定的节点来进行执行任务，如果不选则系统使用缺省值。每个节点对应一个执行器，其每个节点启动后注册到管理端。</p>
+<p><strong>分布式场景</strong></p>
+<p>在分布式的场景下我们肯定会有多个实例，考虑到本身我们的任务量并不会十分庞大，采用数据库的悲观锁作为分布式锁（参考文末的资料），来确保我们同时只有一个实例进行数据库任务的扫描分配节点去执行任务。</p>
 <h1 id="数据库表"><a href="#数据库表" class="headerlink" title="数据库表"></a>数据库表</h1><p>1.任务表</p>
 <table>
 <thead>
@@ -443,7 +435,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<h1 id="领域模型"><a href="#领域模型" class="headerlink" title="领域模型"></a>领域模型</h1><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627811788478-19eb1480-d91d-43a0-92c3-cd7b656ef023.png#averageHue=%23f6f6f6&clientId=u750d1109-1d0e-4&from=paste&height=652&id=u887f1539&originHeight=652&originWidth=1002&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=101578&status=done&style=none&taskId=uf412356d-f7b2-4768-a47f-b1702810e8b&title=&width=1002" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+<h1 id="领域模型"><a href="#领域模型" class="headerlink" title="领域模型"></a>领域模型</h1><p><img src="https://cdn.nlark.com/yuque/0/2021/png/2630542/1627811788478-19eb1480-d91d-43a0-92c3-cd7b656ef023.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="序列相关"><a href="#序列相关" class="headerlink" title="序列相关"></a>序列相关</h1><p>1.启动任务序列图</p>
 <h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><p>分布式锁：<a href="https://mikeygithub.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">https://mikeygithub.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</a></p>
 
@@ -995,6 +987,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

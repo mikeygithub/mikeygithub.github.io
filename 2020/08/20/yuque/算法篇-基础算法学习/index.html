@@ -169,18 +169,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -281,7 +269,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          10k 字
+          11k 字
         
       </span>
     
@@ -293,7 +281,7 @@
         
         
           <!-- compatible with older versions-->
-          84 分钟
+          93 分钟
         
       </span>
     
@@ -343,7 +331,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657520697552-aaecfb3c-740f-4704-89ca-98a032c10bde.png#averageHue=%23131313&clientId=ufcdd074b-7062-4&from=markdown&id=YbqWu&originHeight=545&originWidth=900&originalType=url%E2%88%B6=1&rotation=0&showTitle=false&size=236250&status=done&style=none&taskId=u2ff19535-b7ee-40cf-95bd-1bdfeb72df6&title=" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2022/png/2630542/1657520697552-aaecfb3c-740f-4704-89ca-98a032c10bde.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><h2 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h2><blockquote>
 <p>动态规划算法通常用于求解具有某种最优性质的问题。在这类问题中，可能会有许多可行解。每一个解都对应于一个值，我们希望找到具有最优值的解。</p>
 </blockquote>
@@ -356,12 +344,15 @@
 <h2 id="算法特点"><a href="#算法特点" class="headerlink" title="算法特点"></a>算法特点</h2><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs latex">这个问题的base case(最简单情况)是什么？  <br>这个问题有什么&quot;状态&quot;？<br>对于每个状态可以做什么选择使得状态发生改变？<br>如何定义dp数组/函数的含义来表现状态和选择？<br></code></pre></td></tr></table></figure>
 
 
+
 <h2 id="关键"><a href="#关键" class="headerlink" title="关键"></a>关键</h2><ul>
 <li>最优子结构 opt[n]=best_of(opt[n-1],opt[n-2])</li>
 <li>存储中间状态: opt[i]</li>
 <li>递推公式(状态转移方程或者DP方程) FIB: opt[i]=opt[n-1]+opt[n-2]   二位路径: opt[i,j]=opt[i-1][j]+opt[i][j+1]</li>
 </ul>
 <h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">初始化base <span class="hljs-keyword">case</span></span><br>dp[0][0][...]=base case<br><span class="hljs-meta prompt_"># </span><span class="language-bash">进行状态转移</span><br>for 状态1 in 状态1所有值:<br>    for 状态2 in 状态2所有值:<br>        for ...<br>            dp[状态1][状态2][...] = 求最值(选择1,选择2,...)<br></code></pre></td></tr></table></figure>
+
+
 
 <blockquote>
 <p>列出动态转移方程，就是在解决“如何穷举”的问题。之所以说它难，一是因为很多穷举需要递归实现，二是因为有的问题本身的解空间复杂，不那么容易穷举完整。</p>
@@ -376,22 +367,29 @@
 </blockquote>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs latex">路径：也就是已经做出的选择。<br>选择列表：也就是你当前可以做的选择。<br>结束条件：也就是到达决策树底层，无法再做选择的条件。<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/back.png#id=PDkLa&originHeight=1332&originWidth=2512&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/back.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="算法框架"><a href="#算法框架" class="headerlink" title="算法框架"></a>算法框架</h2><p>点击展开</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">result = []<br>def backtrack(路径, 选择列表):<br>    if 满足结束条件:<br>        result.add(路径)<br>        return<br><br>    for 选择 in 选择列表:<br>        做选择<br>        backtrack(路径, 选择列表)<br>        撤销选择<br></code></pre></td></tr></table></figure>
 
+
+
 <p>全排列问题</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>&#123;<br>    <span class="hljs-comment">//存储结果</span><br>    List&lt;List&lt;Integer&gt;&gt; res = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>    <span class="hljs-comment">//函数入口</span><br>    List&lt;List&lt;Integer&gt;&gt; <span class="hljs-title function_">permute</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span>&#123;<br>        <span class="hljs-comment">//记录走过的路径</span><br>        LinkedList&lt;Integer&gt; integers = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>        <span class="hljs-comment">//入口</span><br>        backtrack(nums,integers);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>    <span class="hljs-comment">//回溯函数</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">backtrack</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, LinkedList&lt;Integer&gt; track)</span>&#123;<br>        <span class="hljs-comment">//如果走过的路径包含所有的选择则完成一轮</span><br>        <span class="hljs-keyword">if</span> (nums.length==track.size()) &#123;<br>            res.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>(track));<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt;nums.length; i++) &#123;<br>            <span class="hljs-comment">//排除不合法的选择</span><br>            <span class="hljs-keyword">if</span> (track.contains(nums[i]))<span class="hljs-keyword">continue</span>;<br>            <span class="hljs-comment">//做选择</span><br>            track.add(nums[i]);<br>            <span class="hljs-comment">//进入下一层决策树</span><br>            backtrack(nums,track);<br>            <span class="hljs-comment">//撤销选择</span><br>            track.removeLast();<br>        &#125;<br>    &#125;    <br>&#125;<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="广度遍历"><a href="#广度遍历" class="headerlink" title="广度遍历"></a>广度遍历</h1><blockquote>
 <p>BFS 的核心思想应该不难理解的，就是把一些问题抽象成图，从一个点开始，向四周开始扩散。一般来说，我们写 BFS 算法都是用「队列」这种数据结构，每次将一个节点周围的所有节点加入队列。</p>
 </blockquote>
 <h2 id="算法框架-1"><a href="#算法框架-1" class="headerlink" title="算法框架"></a>算法框架</h2><p>点击展开</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">// 计算从起点 start 到终点 target 的最近距离</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">BFS</span><span class="hljs-params">(Node start, Node target)</span> </span>&#123;<br>    Queue&lt;Node&gt; q; <span class="hljs-comment">// 核心数据结构</span><br>    Set&lt;Node&gt; visited; <span class="hljs-comment">// 避免走回头路</span><br><br>    q.<span class="hljs-built_in">offer</span>(start); <span class="hljs-comment">// 将起点加入队列</span><br>    visited.<span class="hljs-built_in">add</span>(start);<br>    <span class="hljs-type">int</span> step = <span class="hljs-number">0</span>; <span class="hljs-comment">// 记录扩散的步数</span><br><br>    <span class="hljs-keyword">while</span> (q <span class="hljs-keyword">not</span> empty) &#123;<br>        <span class="hljs-type">int</span> sz = q.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-comment">/* 将当前队列中的所有节点向四周扩散 */</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; sz; i++) &#123;<br>            Node cur = q.<span class="hljs-built_in">poll</span>();<br>            <span class="hljs-comment">/* 划重点：这里判断是否到达终点 */</span><br>            <span class="hljs-keyword">if</span> (cur is target)<br>                <span class="hljs-keyword">return</span> step;<br>            <span class="hljs-comment">/* 将 cur 的相邻节点加入队列 */</span><br>            <span class="hljs-keyword">for</span> (Node x : cur.<span class="hljs-built_in">adj</span>())<br>                <span class="hljs-keyword">if</span> (x <span class="hljs-keyword">not</span> in visited) &#123;<br>                    q.<span class="hljs-built_in">offer</span>(x);<br>                    visited.<span class="hljs-built_in">add</span>(x);<br>                &#125;<br>        &#125;<br>        <span class="hljs-comment">/* 划重点：更新步数在这里 */</span><br>        step++;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs plain">// 计算从起点 start 到终点 target 的最近距离<br>int BFS(Node start, Node target) &#123;<br>    Queue&lt;Node&gt; q; // 核心数据结构<br>    Set&lt;Node&gt; visited; // 避免走回头路<br><br>    q.offer(start); // 将起点加入队列<br>    visited.add(start);<br>    int step = 0; // 记录扩散的步数<br><br>    while (q not empty) &#123;<br>        int sz = q.size();<br>        /* 将当前队列中的所有节点向四周扩散 */<br>        for (int i = 0; i &lt; sz; i++) &#123;<br>            Node cur = q.poll();<br>            /* 划重点：这里判断是否到达终点 */<br>            if (cur is target)<br>                return step;<br>            /* 将 cur 的相邻节点加入队列 */<br>            for (Node x : cur.adj())<br>                if (x not in visited) &#123;<br>                    q.offer(x);<br>                    visited.add(x);<br>                &#125;<br>        &#125;<br>        /* 划重点：更新步数在这里 */<br>        step++;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="深度遍历"><a href="#深度遍历" class="headerlink" title="深度遍历"></a>深度遍历</h1><h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">DFS</span><span class="hljs-params">(TreeNode root)</span>&#123;<br>        List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        Stack&lt;TreeNode&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>        stack.push(root);<br>        <span class="hljs-keyword">while</span> (!stack.isEmpty())&#123;<br>            <span class="hljs-type">TreeNode</span> <span class="hljs-variable">tmp</span> <span class="hljs-operator">=</span> stack.pop();<br>            list.add(tmp.val);<br>            <span class="hljs-keyword">if</span>(tmp.left!=<span class="hljs-literal">null</span>)stack.push(tmp.left);<br>            <span class="hljs-keyword">if</span>(tmp.right!=<span class="hljs-literal">null</span>)stack.push(tmp.right);<br>        &#125;<br>        <span class="hljs-keyword">return</span> list;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="窗口滑动"><a href="#窗口滑动" class="headerlink" title="窗口滑动"></a>窗口滑动</h1><blockquote>
@@ -399,7 +397,8 @@
 </blockquote>
 <p>时间复杂度:  <code>T(n)=O(n)</code></p>
 <h2 id="算法框架-2"><a href="#算法框架-2" class="headerlink" title="算法框架"></a>算法框架</h2><p>点击展开</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/* 滑动窗口算法框架 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">slidingWindow</span><span class="hljs-params">(string s, string t)</span> </span>&#123;<br>    unordered_map&lt;<span class="hljs-type">char</span>, <span class="hljs-type">int</span>&gt; need, window;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> c : t) need[c]++;<span class="hljs-comment">//初始化</span><br>    <span class="hljs-type">int</span> left = <span class="hljs-number">0</span>, right = <span class="hljs-number">0</span>;<span class="hljs-comment">//左右指针</span><br>    <span class="hljs-type">int</span> valid = <span class="hljs-number">0</span>;<span class="hljs-comment">//</span><br>    <span class="hljs-keyword">while</span> (right &lt; s.<span class="hljs-built_in">size</span>()) &#123;<br>        <span class="hljs-comment">// c 是将移入窗口的字符</span><br>        <span class="hljs-type">char</span> c = s[right];<br>        <span class="hljs-comment">// 右移窗口</span><br>        right++;<br>        <span class="hljs-comment">// 进行窗口内数据的一系列更新</span><br>        ...<br>        <span class="hljs-comment">/*** debug 输出的位置 ***/</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;window: [%d, %d)\n&quot;</span>, left, right);<br>        <span class="hljs-comment">// 判断左侧窗口是否要收缩</span><br>        <span class="hljs-keyword">while</span> (window needs shrink) &#123;<br>            <span class="hljs-comment">// d 是将移出窗口的字符</span><br>            <span class="hljs-type">char</span> d = s[left];<br>            <span class="hljs-comment">// 左移窗口</span><br>            left++;<br>            <span class="hljs-comment">// 进行窗口内数据的一系列更新</span><br>            ...<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs plain">/* 滑动窗口算法框架 */<br>void slidingWindow(string s, string t) &#123;<br>    unordered_map&lt;char, int&gt; need, window;<br>    for (char c : t) need[c]++;//初始化<br>    int left = 0, right = 0;//左右指针<br>    int valid = 0;//<br>    while (right &lt; s.size()) &#123;<br>        // c 是将移入窗口的字符<br>        char c = s[right];<br>        // 右移窗口<br>        right++;<br>        // 进行窗口内数据的一系列更新<br>        ...<br>        /*** debug 输出的位置 ***/<br>        printf(&quot;window: [%d, %d)\n&quot;, left, right);<br>        // 判断左侧窗口是否要收缩<br>        while (window needs shrink) &#123;<br>            // d 是将移出窗口的字符<br>            char d = s[left];<br>            // 左移窗口<br>            left++;<br>            // 进行窗口内数据的一系列更新<br>            ...<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h1><blockquote>
@@ -411,25 +410,43 @@
 <p> 贪心、回溯、动态规划区别 </p>
 <p>贪心算法与动态规划的不同在于他对每个子问题的解决方案都做出选择，不能回退。动态规划会保存以前的运算结果，并根据以前的结果对当前进行选择，有回退功能。</p>
 <p>贪心：<code>当下做局部最优判断</code><br>回溯:<code>能够回退</code><br>动态规划: <code>最优判断+回退</code></p>
-<h2 id="参考例子"><a href="#参考例子" class="headerlink" title="参考例子"></a>参考例子</h2><p>删除k个数后的最小值()<br> 解题思路： 1.从左向右遍历,找到比自己右侧数字大的数字并删除   2.如果没有找到要删除的数字,则删除最后一个数字   3.如果整数的所有数字都被删除了,直接返回0 </p>
+<h2 id="参考例子"><a href="#参考例子" class="headerlink" title="参考例子"></a>参考例子</h2><p>删除k个数后的最小值()</p>
+<p> 解题思路： 1.从左向右遍历,找到比自己右侧数字大的数字并删除   2.如果没有找到要删除的数字,则删除最后一个数字   3.如果整数的所有数字都被删除了,直接返回0 </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>&#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 2. * 删除整数的k个数字,获得删除后的最小值</span><br><span class="hljs-comment">     * 3. * <span class="hljs-doctag">@param</span> num</span><br><span class="hljs-comment">     * 4. * <span class="hljs-doctag">@param</span> k</span><br><span class="hljs-comment">     * 5.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">removeKDigits</span><span class="hljs-params">(String num, <span class="hljs-type">int</span> k)</span> &#123;<br>        <span class="hljs-comment">//新整数的最终长度 =原整数长度-k</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">newLength</span> <span class="hljs-operator">=</span> num.length() - k;<br>        <span class="hljs-comment">//创建一个栈,用于接收所有的数字</span><br>        <span class="hljs-type">char</span>[] stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[num.length()];<br>        <span class="hljs-type">int</span> <span class="hljs-variable">top</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; num.length(); ++i) &#123;<br>            <span class="hljs-comment">//遍历当前数字</span><br>            <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> num.charAt(i);<br>            <span class="hljs-comment">//当栈顶数字大于遍历到的当前数字时,栈顶数字出栈(相当于删除数字</span><br>            <span class="hljs-keyword">while</span> (top &gt; <span class="hljs-number">0</span> &amp;&amp; stack[top - <span class="hljs-number">1</span>] &gt; c &amp;&amp; k &gt; <span class="hljs-number">0</span>) &#123;<br>                top -= <span class="hljs-number">1</span>;<br>                k -= <span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-comment">//遍历到的当前数字入栈</span><br>            stack[top++] = c;<br>        &#125;<br>        <span class="hljs-comment">// 找到栈中第1个非零数字的位置,以此构建新的整数字符串</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">offset</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span> (offset &lt; newLength &amp;&amp; stack[offset] == <span class="hljs-string">&#x27;0&#x27;</span>) &#123;<br>            offset++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> offset == newLength ? <span class="hljs-string">&quot;0&quot;</span> : <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(stack, offset, newLength - offset);<br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        System.out.println(removeKDigits(<span class="hljs-string">&quot;1593212&quot;</span>, <span class="hljs-number">3</span>));<br>        System.out.println(removeKDigits(<span class="hljs-string">&quot;30200&quot;</span>, <span class="hljs-number">1</span>));<br>        System.out.println(removeKDigits(<span class="hljs-string">&quot;10&quot;</span>, <span class="hljs-number">2</span>));<br>        System.out.println(removeKDigits(<span class="hljs-string">&quot;541270936&quot;</span>, <span class="hljs-number">3</span>));<br>    &#125;    <br>&#125;<br></code></pre></td></tr></table></figure>
+
 
 
 <h2 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h2><h1 id="字典算法"><a href="#字典算法" class="headerlink" title="字典算法"></a>字典算法</h1><h2 id="算法定义-1"><a href="#算法定义-1" class="headerlink" title="算法定义"></a>算法定义</h2><p>     字典树，即Trie树，又称单词查找树或键树，是一种树形结构。典型应用是用于统计和排序的字符串（但不仅限于字符串），所以经常被搜索引擎用于文本词频率统计 </p>
 <p>优点:<code>最大限度的减少无谓的字符串比较，查询效率比　哈希表高。</code></p>
+<pre><code class=" mermaid">graph TD
+    T((Trie)) --t--&gt; B((t))
+    T((Trie)) --A--&gt; A((A))
+    T((Trie)) --i--&gt; I((i))
+    
+    B--O--&gt;TO((to))
+    B--e--&gt;TE((te))
+    
+    TE((te))--a--&gt;TEA((tea))
+    TE((te))--d--&gt;TED((ted))
+    TE((te))--n--&gt;TEN((ten))
+    
+    I((i))--n--&gt;IN((in))
+ 
+    IN((in))--n--&gt;INN((inn))
+</code></pre>
+
+
+
 <p> 性质 </p>
 <ul>
-<li><p>节点本身不存在完整单词</p>
-</li>
-<li><p>从根节点到某一节点，路径上经过的字符串连接起来，为该结点对应的字符串</p>
-</li>
-<li><p>每个结点的所有子结点代表的字符都不相同</p>
-<p>核心思想 </p>
-</li>
-<li><p>Trie树的核心思想是空间换时间</p>
-</li>
-<li><p>利用字符串的公共前缀来降低查询时间的开销以达到提高效率的目的</p>
-</li>
+<li>节点本身不存在完整单词</li>
+<li>从根节点到某一节点，路径上经过的字符串连接起来，为该结点对应的字符串</li>
+<li>每个结点的所有子结点代表的字符都不相同</li>
+</ul>
+<p> 核心思想 </p>
+<ul>
+<li>Trie树的核心思想是空间换时间</li>
+<li>利用字符串的公共前缀来降低查询时间的开销以达到提高效率的目的</li>
 </ul>
 <h2 id="参考例子-1"><a href="#参考例子-1" class="headerlink" title="参考例子"></a>参考例子</h2><p>寻找全排列的下一个数()</p>
 <h2 id="参考资料-2"><a href="#参考资料-2" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/darklights/p/5285598.html">字典序算法</a></p>
@@ -448,10 +465,38 @@
 <h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">divide_conquer</span><span class="hljs-params">(Problem problem)</span> &#123;<br>        <span class="hljs-comment">//recursion terminator</span><br>        <span class="hljs-keyword">if</span> (problem == NULL) &#123;    <br>            <span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> process_last_result();    <br>            <span class="hljs-keyword">return</span> res;       <br>        &#125;  <br>        <span class="hljs-comment">//prepare data</span><br>        subProblems = split_problem(problem);<br>        <span class="hljs-comment">//conquer subproblems</span><br>        res0 = divide_conquer(subProblems[<span class="hljs-number">0</span>]);  <br>        res1 = divide_conquer(subProblems[<span class="hljs-number">1</span>]);    <br>        <span class="hljs-comment">//process and generate the final result</span><br>        result = process_result(res0, res1);   <br>        <span class="hljs-comment">//revert the current level states</span><br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
+
 <h1 id="排序类型"><a href="#排序类型" class="headerlink" title="排序类型"></a>排序类型</h1><p><a href="https://mikeygithub.github.io/2020/11/09/algorithm/%E7%AE%97%E6%B3%95%E7%AF%87-%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">算法篇-排序算法</a></p>
 <blockquote>
 <p>nlogn排序: 堆排序、快速排序、归并排序</p>
 </blockquote>
+<pre><code class=" mermaid">graph LR
+A(排序算法)--&gt;B(比较类排序)
+A(排序算法)--&gt;C(非比较类排序)
+
+B--&gt;D(交换排序)
+D--&gt;E(冒泡排序)
+D--&gt;F(快速排序)
+
+B--&gt;G(插入排序)
+G--&gt;H(简单插入排序)
+G--&gt;I(希尔排序)
+
+B--&gt;J(选择排序)
+J--&gt;K(简单选择排序)
+J--&gt;X(堆排序)
+
+B--&gt;L(归并排序)
+L--&gt;M(二路归并排序)
+L--&gt;N(多路归并排序)
+
+C--&gt;O(计数排序)
+O--&gt;P(桶排序)
+O--&gt;Q(基数排序)
+</code></pre>
+
+
+
 <h2 id="初级排序"><a href="#初级排序" class="headerlink" title="初级排序"></a>初级排序</h2><blockquote>
 <p><code>O(n^2)</code></p>
 </blockquote>
@@ -465,7 +510,7 @@
 </blockquote>
 <ul>
 <li>快速排序(Quick Sort)数组取标杆pivot，将小元素放pivot左边，大元素放右边，然后依次对右边和左边的子数组继续快排；以达到整个序列有序</li>
-<li>归并排序(Merge Sort)</li>
+<li>归并排序(Merge Sort)  </li>
 </ul>
 <p>1.把长度为n的输入序列分成两个长度位n/2的子序列;<br>2.把这两个子序列分别采用归并排序;<br>3.将两个排序好的子序列合并成一个最终的排序序列;</p>
 <p><code>归并排序和快速排序具有相似性，但步骤相反</code></p>
@@ -476,7 +521,7 @@
 <p>快排:先调出左右子数组，然后对于左右数组进行排序</p>
 </blockquote>
 <ul>
-<li>对排序(heap Sort)　堆插入O(logN)，取最大最小值O(1)</li>
+<li>对排序(heap Sort)　堆插入O(logN)，取最大最小值O(1)  </li>
 </ul>
 <p>1.数组元素依次建立小堆顶<br>2.依次取堆顶元素，并删除</p>
 <p>(满二叉搜索树进行实现)</p>
@@ -486,35 +531,84 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp">queue&lt;<span class="hljs-type">int</span>&gt;q;<br><span class="hljs-comment">//priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt;&gt;q;</span><br><span class="hljs-comment">//优先队列的话，会按照数值大小有顺序的输出</span><br><span class="hljs-comment">//此处为了理解，暂时就用简单队列</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">topo</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">for</span>(inti=<span class="hljs-number">1</span>;i&lt;=n;i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(indegree[i]==<span class="hljs-number">0</span>)<br>        &#123;<br>            q.<span class="hljs-built_in">push</span>(i);<br>        &#125;<br>    &#125;<br> <br>    <span class="hljs-type">int</span> temp;<br>    <span class="hljs-keyword">while</span>(!q.<span class="hljs-built_in">empty</span>())<br>    &#123;<br>        temp=q.<span class="hljs-built_in">front</span>();<span class="hljs-comment">//如果是优先队列，这里可以是top()</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d-&gt;&quot;</span>,temp);<br>        q.<span class="hljs-built_in">pop</span>();<br>        <span class="hljs-keyword">for</span>(inti=<span class="hljs-number">1</span>;i&lt;=n;i++)<span class="hljs-comment">//遍历从temp出发的每一条边，入度--</span><br>        &#123;<br>            <span class="hljs-keyword">if</span>(map[temp][i])<br>            &#123;<br>                indegree[i]--;<br>                <span class="hljs-keyword">if</span>(indegree[i]==<span class="hljs-number">0</span>)q.<span class="hljs-built_in">push</span>(i);<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
+
 <h3 id="算法定义-3"><a href="#算法定义-3" class="headerlink" title="算法定义"></a>算法定义</h3><h1 id="并查集型"><a href="#并查集型" class="headerlink" title="并查集型"></a>并查集型</h1><p> 定义 </p>
 <blockquote>
 <p>并查集是一种树型的数据结构，用于处理一些不相交集合（disjoint sets）的合并及查询问题。常常在使用中以森林来表示。</p>
 </blockquote>
 <ul>
-<li><p>合并（Union）：把两个不相交的集合合并为一个集合。</p>
-</li>
-<li><p>查询（Find）：查询两个元素是否在同一个集合中。</p>
-<p>适用场景 </p>
-</li>
-<li><p>组团、配对问题</p>
-</li>
-<li><p>Group or not ?</p>
-<p>基本操作 </p>
-</li>
-<li><p>makeSet(s): 建立一个新的并查集，其中包含s个单元素集合。</p>
-</li>
-<li><p>unionSet(x,y): 把元素x和元素y所在的集合合并，要求x和y所在的集合不相交，如果相交则不合并。</p>
-</li>
-<li><p>find(x): 找到元素x所在的集合的代表，该操作也可以用于判断两个元素是否位于同一个集合，只要将他们各自代表比较一下就可以了。</p>
-</li>
+<li>合并（Union）：把两个不相交的集合合并为一个集合。</li>
+<li>查询（Find）：查询两个元素是否在同一个集合中。</li>
+</ul>
+<p> 适用场景 </p>
+<ul>
+<li>组团、配对问题</li>
+<li>Group or not ?</li>
+</ul>
+<p> 基本操作 </p>
+<ul>
+<li>makeSet(s): 建立一个新的并查集，其中包含s个单元素集合。</li>
+<li>unionSet(x,y): 把元素x和元素y所在的集合合并，要求x和y所在的集合不相交，如果相交则不合并。</li>
+<li>find(x): 找到元素x所在的集合的代表，该操作也可以用于判断两个元素是否位于同一个集合，只要将他们各自代表比较一下就可以了。</li>
 </ul>
 <h2 id="图示演示"><a href="#图示演示" class="headerlink" title="图示演示"></a>图示演示</h2><blockquote>
 <p>查询、合并</p>
 </blockquote>
+<pre><code class=" mermaid">graph TD
+
+合并前
+A((A))--&gt;A
+A--&gt;B((B))
+A--&gt;C((C))
+B--&gt;D((D))
+
+E((E))--&gt;E
+E((E))--&gt;F((F))
+F--&gt;G((G))
+
+合并后
+
+A1((A))--&gt;A1
+A1--&gt;B1((B))
+A1--&gt;C1((C))
+B1--&gt;D1((D))
+
+A1--&gt;E1
+
+E1((E))--&gt;1F((F))
+1F--&gt;1G((G))
+</code></pre>
+
+
+
 <blockquote>
 <p>调用find(d)时进行路劲压缩</p>
 </blockquote>
+<pre><code class=" mermaid">graph TD
+
+未压缩前
+A((A))--&gt;A
+A--&gt;B((B))
+A--&gt;&#x27;A右子树没有&#x27;
+
+B--&gt;C((C))
+B--&gt;&#x27;B右子树没有&#x27;
+
+C--&gt;D((D))
+C--&gt;&#x27;C右子树没有&#x27;
+
+路劲压缩
+
+A1((A))--&gt;A1((A))
+A1--&gt;B1((B))
+A1--&gt;C1((C))
+A1--&gt;D1((D))
+</code></pre>
+
+
+
 <h2 id="代码模板-1"><a href="#代码模板-1" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">UnionFind</span> &#123;<br>    <span class="hljs-type">int</span> count;<br>    <span class="hljs-type">int</span>[] parent;<br>    <span class="hljs-type">int</span>[] rank;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">UnionFind</span><span class="hljs-params">(<span class="hljs-type">char</span>[][] grid)</span> &#123;<br>        count = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">m</span> <span class="hljs-operator">=</span> grid.length;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> grid[<span class="hljs-number">0</span>].length;<br>        parent = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m * n];<br>        rank = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[m * n];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; m; ++i) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; n; ++j) &#123;<br>                <span class="hljs-keyword">if</span> (grid[i][j] == <span class="hljs-string">&#x27;1&#x27;</span>) &#123;<br>                    parent[i * n + j] = i * n + j;<br>                    ++count;<br>                &#125;<br>                rank[i * n + j] = <span class="hljs-number">0</span>;<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">find</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span> &#123;<br>        <span class="hljs-keyword">if</span> (parent[i] != i) parent[i] = find(parent[i]);<br>        <span class="hljs-keyword">return</span> parent[i];<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">union</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">rootx</span> <span class="hljs-operator">=</span> find(x);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">rooty</span> <span class="hljs-operator">=</span> find(y);<br>        <span class="hljs-keyword">if</span> (rootx != rooty) &#123;<br>            <span class="hljs-keyword">if</span> (rank[rootx] &gt; rank[rooty]) &#123;<br>                parent[rooty] = rootx;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (rank[rootx] &lt; rank[rooty]) &#123;<br>                parent[rootx] = rooty;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                parent[rooty] = rootx;<br>                rank[rootx] += <span class="hljs-number">1</span>;<br>            &#125;<br>            --count;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getCount</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> count;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
 
 <h2 id="参考例子-2"><a href="#参考例子-2" class="headerlink" title="参考例子"></a>参考例子</h2><ul>
@@ -525,11 +619,13 @@
 <h2 id="算法模板"><a href="#算法模板" class="headerlink" title="算法模板"></a>算法模板</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">recur</span><span class="hljs-params">(<span class="hljs-type">int</span> level,<span class="hljs-type">int</span> param)</span>&#123;<br>       <span class="hljs-comment">//terminator</span><br>        <span class="hljs-keyword">if</span> (level&gt;MAX_LEVEL)&#123;<br>            <span class="hljs-comment">//procesws resutl</span><br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-comment">//process current logic</span><br>        process(level,param);<br>        <span class="hljs-comment">//drill down</span><br>        recur(level:level+<span class="hljs-number">1</span>,newParam);<br>        <span class="hljs-comment">//restore current status</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
+
 <h1 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h1><blockquote>
 <p>有序、上下界、索引访问</p>
 </blockquote>
 <p> 代码模板 </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">BinarySearch</span>&#123;<br>   <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] binarySearch(<span class="hljs-type">int</span>[] nums,<span class="hljs-type">int</span> target)&#123; <br>       <span class="hljs-type">int</span> <span class="hljs-variable">left</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>,right = ...;<br>       <span class="hljs-keyword">while</span> (...)&#123;<br>           <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> left+(right-left)/<span class="hljs-number">2</span>;<br>           <span class="hljs-keyword">if</span> (nums[mid]==target)&#123;<br>               ...<br>           &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nums[mid]&lt;target)&#123;<br>               left = ...;<br>           &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nums[mid]&gt;target)&#123;<br>               right = ...;<br>           &#125;<br>       &#125;<br>       <span class="hljs-keyword">return</span> ...;<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="高级搜索"><a href="#高级搜索" class="headerlink" title="高级搜索"></a>高级搜索</h1><h2 id="初级搜索"><a href="#初级搜索" class="headerlink" title="初级搜索"></a>初级搜索</h2><ul>
@@ -540,7 +636,7 @@
 <h2 id="剪枝"><a href="#剪枝" class="headerlink" title="剪枝"></a>剪枝</h2><ul>
 <li>在回溯中将不满足的条件的直接过滤掉，提供算法的效率。</li>
 </ul>
-<h2 id="双向BFS"><a href="#双向BFS" class="headerlink" title="双向BFS"></a>双向BFS</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/double-bfs.png#id=zhXJW&originHeight=935&originWidth=1298&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&status=done&style=none&title=" srcset="/img/loading.gif" lazyload></p>
+<h2 id="双向BFS"><a href="#双向BFS" class="headerlink" title="双向BFS"></a>双向BFS</h2><p><img src="https://cdn.jsdelivr.net/gh/mikeygithub/jsDeliver@master/resource/img/double-bfs.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="启发式搜索-A"><a href="#启发式搜索-A" class="headerlink" title="启发式搜索(A*)"></a>启发式搜索(A*)</h2><p> 定义 </p>
 <blockquote>
 <p>启发式搜索(Heuristically Search)又称为有信息搜索(Informed Search)，它是利用问题拥有的启发信息来引导搜索，达到减少搜索范围、降低问题复杂度的目的，这种利用启发信息的搜索过程称为启发式搜索。</p>
@@ -603,10 +699,14 @@
 </blockquote>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs latex">x<span class="hljs-built_in">^</span>0=x<br>x<span class="hljs-built_in">^</span>1s=~x //注意1s=~0<br>x<span class="hljs-built_in">^</span>x=0<br>c=a<span class="hljs-built_in">^</span>b -&gt; a<span class="hljs-built_in">^</span>c=b , b<span class="hljs-built_in">^</span>c=a //交换两个数<br>a<span class="hljs-built_in">^</span>b<span class="hljs-built_in">^</span>c=a<span class="hljs-built_in">^</span>(b<span class="hljs-built_in">^</span>c)=(a<span class="hljs-built_in">^</span>b)<span class="hljs-built_in">^</span>c //associative<br></code></pre></td></tr></table></figure>
 
+
+
 <ul>
 <li>算数位移与逻辑位移</li>
 </ul>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs latex">将x最右边的n位清零: x<span class="hljs-built_in">&amp;</span>(~0&lt;&lt;n)<br>获取x的第n位值(0或者1): (x&gt;&gt;n)<span class="hljs-built_in">&amp;</span>1<br>获取x的第n位的幂值: x<span class="hljs-built_in">&amp;</span>(1&lt;&lt;(n-1))<br>仅将第n位置为1: x|(1&lt;&lt;n)<br>仅将第n位置为0: x<span class="hljs-built_in">&amp;</span>(~(1&lt;&lt;n))<br>将x最高位至第n位(含)清零: x<span class="hljs-built_in">&amp;</span>((1&lt;&lt;n)-1)<br>将第n位至第0位(含)清零: x<span class="hljs-built_in">&amp;</span>(~((1&lt;&lt;(n+1))-1))<br></code></pre></td></tr></table></figure>
+
+
 
 <ul>
 <li>位运算的应用</li>
@@ -614,11 +714,16 @@
 <p>判断奇偶性:</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs latex">x<span class="hljs-comment">%2==1 --&gt; (x&amp;1)==1   </span><br>x<span class="hljs-comment">%2==0 --&gt; (x&amp;1)==0</span><br></code></pre></td></tr></table></figure>
 
+
+
 <p>乘除2</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs latex">x&gt;&gt;1 --&gt; x/2<br>x&lt;&lt;1 --&gt; x*2<br></code></pre></td></tr></table></figure>
 
+
+
 <p>清零</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs latex">x=x<span class="hljs-built_in">&amp;</span>(x-1)清零最低位的1<br>x<span class="hljs-built_in">&amp;</span>-x  得到最低位的1<br>x<span class="hljs-built_in">&amp;</span>~x 等于0<br></code></pre></td></tr></table></figure>
+
 
 
 <h1 id="参考资料-3"><a href="#参考资料-3" class="headerlink" title="参考资料"></a>参考资料</h1><p>漫画算法:小灰的算法之旅</p>
@@ -1181,6 +1286,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 

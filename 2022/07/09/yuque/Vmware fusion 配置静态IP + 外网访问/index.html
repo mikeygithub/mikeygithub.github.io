@@ -168,18 +168,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/photo/">
-                <i class="iconfont icon-image"></i>
-                照片
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
                 友链
@@ -342,7 +330,7 @@
             
             <div class="markdown-body">
               
-              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674701335273-be155081-aefb-4e19-9c29-b5c4a208d1b3.png#averageHue=%230d4f80&clientId=uf805615a-4b38-4&from=paste&height=183&id=u7b87c741&originHeight=365&originWidth=640&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=132731&status=done&style=none&taskId=u6ef6fec5-87f0-4623-a53a-142e45f5d05&title=&width=320" srcset="/img/loading.gif" lazyload alt="image.png"></p>
+              <p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674701335273-be155081-aefb-4e19-9c29-b5c4a208d1b3.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>因近期项目需要对Kubernetes进行二开所以在本地搭建一个小集群，但是arm架构下的虚拟化适配还不是很完善，就连Centos的镜像都需要特殊适配，本篇主要是记录在搭建虚拟机实例静态IP，实现切换网络也无需任何更改即可交互访问</p>
 <h1 id="预期效果"><a href="#预期效果" class="headerlink" title="预期效果"></a>预期效果</h1><ul>
 <li>虚拟机拥有一个静态IP，在我们切换WIFI/网络不受影响</li>
@@ -357,19 +345,37 @@
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>通过NAT+桥接两种模式结合，NAT负责进行实现静态IP即使在网络切换的情况下，桥接实现外网访问</p>
 <h1 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h1><p>因为我们的是免费版，直接设置网络的功能被阉割掉了，所以我们需要通过这种方式来配置</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> vim /Library/Preferences/VMware\ Fusion/networking<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>UUID我们无需理会，会自动生成，主要是子网IP和开启NAT</p>
 </blockquote>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700793401-909ddffe-5761-400d-8c65-d72078571ea8.png#averageHue=%23151728&clientId=uf805615a-4b38-4&from=paste&height=417&id=u1c80ea02&originHeight=834&originWidth=1038&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=194441&status=done&style=none&taskId=u6b9bfce7-26ae-4dbc-b3b6-f7b56e9d14d&title=&width=519" srcset="/img/loading.gif" lazyload alt="image-20230119232418957.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700793401-909ddffe-5761-400d-8c65-d72078571ea8.png" srcset="/img/loading.gif" lazyload></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /Library/Preferences/VMware\ Fusion/vmnet2/nat.conf<br></code></pre></td></tr></table></figure>
+
 <blockquote>
 <p>查看生成的IP地址，这个IP地址就是作为我们虚拟机的网关和DNS服务器</p>
 </blockquote>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700805979-25f22cd3-552b-4e03-b33d-f8f0b5ac67a8.png#averageHue=%23151728&clientId=uf805615a-4b38-4&from=paste&height=528&id=ufebf8305&originHeight=1056&originWidth=1272&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=163043&status=done&style=none&taskId=u1fa4c78f-19b5-4f12-924b-4f7d82e9006&title=&width=636" srcset="/img/loading.gif" lazyload alt="image-20230119233234776.png"><br>设置虚拟机实例<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700821450-c0385ffb-a616-41c2-abbc-49b7e7e2eaed.png#averageHue=%239f9f9f&clientId=uf805615a-4b38-4&from=paste&height=439&id=uf7aa283a&originHeight=878&originWidth=1114&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=271775&status=done&style=none&taskId=u51574462-eda0-41ee-b81e-a1e7381e723&title=&width=557" srcset="/img/loading.gif" lazyload alt="image-20230119232849054.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700805979-25f22cd3-552b-4e03-b33d-f8f0b5ac67a8.png" srcset="/img/loading.gif" lazyload></p>
+<p>设置虚拟机实例</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700821450-c0385ffb-a616-41c2-abbc-49b7e7e2eaed.png" srcset="/img/loading.gif" lazyload></p>
 <p>选择 Network Adapter 网络适配器</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700840739-d1798b9f-1f1b-4d60-aa88-f29c8d573bd2.png#averageHue=%23e9e8e7&clientId=uf805615a-4b38-4&from=paste&height=382&id=u334b0b63&originHeight=764&originWidth=1280&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=215756&status=done&style=none&taskId=u7fc77822-fe1e-434e-adbd-3d5321db856&title=&width=640" srcset="/img/loading.gif" lazyload alt="image-20230119231602770.png"><br>选中vmnet2<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700851146-83481275-60fd-4bb5-8a8b-7e2504b56918.png#averageHue=%23eeedec&clientId=uf805615a-4b38-4&from=paste&height=424&id=u27653284&originHeight=848&originWidth=1280&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=136835&status=done&style=none&taskId=u466f51ca-cd89-4e33-ab0e-7a706711d5a&title=&width=640" srcset="/img/loading.gif" lazyload alt="image-20230119231632686.png"><br>点击右上角的Add Device -&gt; Network Adapter<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700862147-e7b9e838-2f24-4a07-a9da-06775e0ee7c3.png#averageHue=%23e9e8e7&clientId=uf805615a-4b38-4&from=paste&height=382&id=uedc77ed9&originHeight=764&originWidth=1280&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=215756&status=done&style=none&taskId=u766064d4-5dd3-4fc5-a55b-b74342b1541&title=&width=640" srcset="/img/loading.gif" lazyload alt="image-20230119231602770.png"><br>配置第二张网卡，选择桥接的自动选择模式<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700872842-3e712444-ac3a-41dc-84d1-5cef0aa5c015.png#averageHue=%23efeae9&clientId=uf805615a-4b38-4&from=paste&height=424&id=ubb69a63d&originHeight=848&originWidth=1280&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=124840&status=done&style=none&taskId=u9929a2b2-d4fa-4bcc-9e98-4a5cb0742b6&title=&width=640" srcset="/img/loading.gif" lazyload alt="image-20230119231115595.png"><br>编辑虚拟机的网卡配置文件，着重关注网关和DNS<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700883436-2bc973aa-fe44-4fb4-a408-7c9cc69dd07a.png#averageHue=%23151728&clientId=uf805615a-4b38-4&from=paste&height=361&id=ucd32b6f7&originHeight=722&originWidth=664&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=97013&status=done&style=none&taskId=u0fbe6eff-2422-48fd-9430-9d32da2cdc8&title=&width=332" srcset="/img/loading.gif" lazyload alt="image-20230119231445430.png"><br>修改后记得重启</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">service network restart</span><br></code></pre></td></tr></table></figure>
-<p>测试访问集群节点、宿主机、外网<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700901942-c44d65a8-6e69-43fd-a081-7ca15ec00fd2.png#averageHue=%23151728&clientId=uf805615a-4b38-4&from=paste&height=568&id=u2f8f81b4&originHeight=1136&originWidth=1198&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=334940&status=done&style=none&taskId=ub591aaa2-2478-43df-8faa-c1b706e0b87&title=&width=599" srcset="/img/loading.gif" lazyload alt="image-20230119232221209.png"><br>测试切换网络访问<br><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700910902-865ec6ee-69a4-43d2-853e-2ddaa90f2de1.png#averageHue=%23151728&clientId=uf805615a-4b38-4&from=paste&height=468&id=u0dacc2b3&originHeight=936&originWidth=1084&originalType=binary%E2%88%B6=1&rotation=0&showTitle=false&size=265860&status=done&style=none&taskId=ue7847bfd-4946-4748-970f-832e98f24a8&title=&width=542" srcset="/img/loading.gif" lazyload alt="image-20230126003000453.png"><br>没问题，搞定</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700840739-d1798b9f-1f1b-4d60-aa88-f29c8d573bd2.png" srcset="/img/loading.gif" lazyload></p>
+<p>选中vmnet2</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700851146-83481275-60fd-4bb5-8a8b-7e2504b56918.png" srcset="/img/loading.gif" lazyload></p>
+<p>点击右上角的Add Device -&gt; Network Adapter</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700862147-e7b9e838-2f24-4a07-a9da-06775e0ee7c3.png" srcset="/img/loading.gif" lazyload></p>
+<p>配置第二张网卡，选择桥接的自动选择模式</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700872842-3e712444-ac3a-41dc-84d1-5cef0aa5c015.png" srcset="/img/loading.gif" lazyload></p>
+<p>编辑虚拟机的网卡配置文件，着重关注网关和DNS</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700883436-2bc973aa-fe44-4fb4-a408-7c9cc69dd07a.png" srcset="/img/loading.gif" lazyload></p>
+<p>修改后记得重启</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">service network restart<br></code></pre></td></tr></table></figure>
+
+<p>测试访问集群节点、宿主机、外网</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700901942-c44d65a8-6e69-43fd-a081-7ca15ec00fd2.png" srcset="/img/loading.gif" lazyload></p>
+<p>测试切换网络访问</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2023/png/2630542/1674700910902-865ec6ee-69a4-43d2-853e-2ddaa90f2de1.png" srcset="/img/loading.gif" lazyload></p>
+<p>没问题，搞定</p>
 <blockquote>
 <p>注意：切换网络后需要重启网络服务<code>service network restart</code>或重启虚拟机实例</p>
 </blockquote>
@@ -391,13 +397,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/" class="category-chain-item">服务器篇</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/" class="category-chain-item">基建相关</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/%E8%99%9A%E6%8B%9F%E6%9C%BA/" class="category-chain-item">虚拟机</a>
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/" class="category-chain-item">服务器篇</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%9F%BA%E5%BB%BA%E7%9B%B8%E5%85%B3/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AF%87/%E8%99%9A%E6%8B%9F%E6%9C%BA/" class="category-chain-item">虚拟机</a>
+  
+  
+
   
 
   
@@ -461,9 +474,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/13/yuque/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-Binary%20Indexed%20Tree%20%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" title="数据结构-Binary Indexed Tree 树状数组">
+                      <a href="/2022/07/11/yuque/%E8%B5%84%E6%96%99%E7%AF%87-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3%E4%B9%A6%E7%B1%8D/" title="资料篇-计算机相关书籍">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">数据结构-Binary Indexed Tree 树状数组</span>
+                        <span class="hidden-mobile">资料篇-计算机相关书籍</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -946,6 +959,12 @@
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
+
+
+  
+<script src="/js/meta.js"></script>
+<script src="/js/anime.js"></script>
+<script src="/js/custom.js"></script>
 
 
 
