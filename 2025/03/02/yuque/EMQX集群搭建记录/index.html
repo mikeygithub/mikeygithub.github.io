@@ -17,16 +17,16 @@
   <meta name="author" content="Mikey">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这是加密文章！">
+    <meta name="description" content="整体架构 依托域Azure LB的高可用搭建集群   环境准备创建节点机器配置：4c16g 12345678910111213# 确认磁盘名称sudo sulsblkexport DISK_NAME&#x3D;sda # 手动确认# 执行脚本mkdir -p &#x2F;mnt&#x2F;datasudo mkdir -p &#x2F;mnt&#x2F;datasudo fdisk -l &#x2F;dev&#x2F;$&amp;#123;DISK_NAME&amp;#125;s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="EMQX集群搭建记录">
 <meta property="og:url" content="https://mikeygithub.github.io/2025/03/02/yuque/EMQX%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="麦奇">
-<meta property="og:description" content="这是加密文章！">
+<meta property="og:description" content="整体架构 依托域Azure LB的高可用搭建集群   环境准备创建节点机器配置：4c16g 12345678910111213# 确认磁盘名称sudo sulsblkexport DISK_NAME&#x3D;sda # 手动确认# 执行脚本mkdir -p &#x2F;mnt&#x2F;datasudo mkdir -p &#x2F;mnt&#x2F;datasudo fdisk -l &#x2F;dev&#x2F;$&amp;#123;DISK_NAME&amp;#125;s">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740985554527-bff7d4cd-ddb8-469d-93cc-ddddb3fa7ca5.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_1643%2Climit_0">
 <meta property="article:published_time" content="2025-03-02T02:24:22.000Z">
-<meta property="article:modified_time" content="2025-03-03T08:03:26.000Z">
+<meta property="article:modified_time" content="2025-03-03T08:11:32.000Z">
 <meta property="article:author" content="Mikey">
 <meta property="article:tag" content="EMQX">
 <meta name="twitter:card" content="summary_large_image">
@@ -269,7 +269,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          7 字
+          4.3k 字
         
       </span>
     
@@ -281,7 +281,7 @@
         
         
           <!-- compatible with older versions-->
-          1 分钟
+          36 分钟
         
       </span>
     
@@ -331,7 +331,121 @@
             
             <div class="markdown-body">
               
-              <div class="yuque-hexo-lyrics-secret">这是加密文章！</div>
+              <p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740985554527-bff7d4cd-ddb8-469d-93cc-ddddb3fa7ca5.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h1><blockquote>
+<p>依托域Azure LB的高可用搭建集群</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/jpeg/2630542/1740881216400-5f5a1e03-15f5-4109-8eed-a85f22a32a91.jpeg" srcset="/img/loading.gif" lazyload alt="画板"></p>
+<h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><h2 id="创建节点机器"><a href="#创建节点机器" class="headerlink" title="创建节点机器"></a>创建节点机器</h2><p>配置：4c16g</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sql"># 确认磁盘名称<br>sudo su<br>lsblk<br>export DISK_NAME<span class="hljs-operator">=</span>sda # 手动确认<br><br># 执行脚本<br>mkdir <span class="hljs-operator">-</span>p <span class="hljs-operator">/</span>mnt<span class="hljs-operator">/</span>data<br>sudo mkdir <span class="hljs-operator">-</span>p <span class="hljs-operator">/</span>mnt<span class="hljs-operator">/</span>data<br>sudo fdisk <span class="hljs-operator">-</span>l <span class="hljs-operator">/</span>dev<span class="hljs-operator">/</span>$&#123;DISK_NAME&#125;<br>sudo mkfs.ext4 <span class="hljs-operator">/</span>dev<span class="hljs-operator">/</span>$&#123;DISK_NAME&#125;<br>sudo mount <span class="hljs-operator">/</span>dev<span class="hljs-operator">/</span>$&#123;DISK_NAME&#125; <span class="hljs-operator">/</span>mnt<span class="hljs-operator">/</span>data<br>echo &quot;/dev/$&#123;DISK_NAME&#125; /mnt/data ext4 defaults 0 0&quot; <span class="hljs-operator">&gt;&gt;</span> <span class="hljs-operator">/</span>etc<span class="hljs-operator">/</span>fstab<br>df <span class="hljs-operator">-</span>h<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs sql"># <span class="hljs-keyword">Add</span> Docker<span class="hljs-string">&#x27;s official GPG key:</span><br><span class="hljs-string">sudo apt-get update</span><br><span class="hljs-string">sudo apt-get install ca-certificates curl</span><br><span class="hljs-string">sudo install -m 0755 -d /etc/apt/keyrings</span><br><span class="hljs-string">sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc</span><br><span class="hljs-string">sudo chmod a+r /etc/apt/keyrings/docker.asc</span><br><span class="hljs-string"></span><br><span class="hljs-string"># Add the repository to Apt sources:</span><br><span class="hljs-string">echo \</span><br><span class="hljs-string">  &quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \</span><br><span class="hljs-string">  $(. /etc/os-release &amp;&amp; echo &quot;$&#123;UBUNTU_CODENAME:-$VERSION_CODENAME&#125;&quot;) stable&quot; | \</span><br><span class="hljs-string">  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br><span class="hljs-string">sudo apt-get update</span><br><span class="hljs-string">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y</span><br><span class="hljs-string">sudo docker run hello-world</span><br><span class="hljs-string">sudo groupadd docker</span><br><span class="hljs-string">sudo usermod -aG docker $USER</span><br><span class="hljs-string">newgrp docker</span><br><span class="hljs-string"></span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="创建负载均衡"><a href="#创建负载均衡" class="headerlink" title="创建负载均衡"></a>创建负载均衡</h2><p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740757970744-53965c16-ef1e-4bf0-853d-829be3b7a210.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740757983444-860f93c6-d498-4cd8-a872-eae4377dadb9.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="集群部署"><a href="#集群部署" class="headerlink" title="集群部署"></a>集群部署</h1><blockquote>
+<p>每个节点中启动</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">vim</span> <span class="hljs-string">docker-compose.yaml</span><br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">emqx:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">emqx/emqx:5.8.5</span><br>    <span class="hljs-attr">environment:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_NODE__NAME=emqx@10.0.0.16&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_CLUSTER__DISCOVERY_STRATEGY=static&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_CLUSTER__STATIC__SEEDS=[emqx@10.0.0.16, emqx@10.0.0.17]&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_AUTHENTICATION__1__ENABLE=true&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_AUTHENTICATION__1__ALGORITHM=hmac-based&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_AUTHENTICATION__1__SECRET=xxxxxx&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_AUTHENTICATION__1__MECHANISM=jwt&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_AUTHENTICATION__1__USE_JWKS=false&quot;</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/mnt/data/emqx/data:/opt/emqx/data</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/mnt/data/emqx/log:/opt/emqx/log</span><br>    <span class="hljs-attr">network_mode:</span> <span class="hljs-string">host</span> <span class="hljs-comment"># 主机模式才能自动连接上</span><br>    <span class="hljs-comment"># ports:</span><br>    <span class="hljs-comment">#   - &quot;1883:1883&quot;</span><br>    <span class="hljs-comment">#   - &quot;8083:8083&quot;</span><br>    <span class="hljs-comment">#   - &quot;8084:8084&quot;</span><br>    <span class="hljs-comment">#   - &quot;8883:8883&quot;</span><br>    <span class="hljs-comment">#   - &quot;18083:18083&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">emqx:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">emqx/emqx:5.8.5</span><br>    <span class="hljs-attr">environment:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_NODE__NAME=emqx@10.0.0.17&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_CLUSTER__DISCOVERY_STRATEGY=static&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_CLUSTER__STATIC__SEEDS=[emqx@10.0.0.16, emqx@10.0.0.17]&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_AUTHENTICATION__1__ENABLE=true&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_AUTHENTICATION__1__ALGORITHM=hmac-based&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_AUTHENTICATION__1__SECRET=xxxxxx&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_AUTHENTICATION__1__MECHANISM=jwt&quot;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;EMQX_AUTHENTICATION__1__USE_JWKS=false&quot;</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/mnt/data/emqx/data:/opt/emqx/data</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/mnt/data/emqx/log:/opt/emqx/log</span><br>    <span class="hljs-attr">network_mode:</span> <span class="hljs-string">host</span><br>    <span class="hljs-comment"># ports:</span><br>    <span class="hljs-comment">#   - &quot;1883:1883&quot;</span><br>    <span class="hljs-comment">#   - &quot;8083:8083&quot;</span><br>    <span class="hljs-comment">#   - &quot;8084:8084&quot;</span><br>    <span class="hljs-comment">#   - &quot;8883:8883&quot;</span><br>    <span class="hljs-comment">#   - &quot;18083:18083&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>查看集群</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">docker</span> <span class="hljs-string">exec</span> <span class="hljs-string">-it</span> <span class="hljs-string">my_emqx_emqx1_1</span> <span class="hljs-string">sh</span> <span class="hljs-string">-c</span> <span class="hljs-string">&quot;emqx ctl cluster status&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p>通过浏览器访问 http://[nodeip]:18083 ，使用默认的用户名和密码 **<font style="color:#DF2A3F;">admin/public </font>**登录EMQX 控制台</p>
+<h1 id="压力测试"><a href="#压力测试" class="headerlink" title="压力测试"></a>压力测试</h1><h2 id="压测工具"><a href="#压测工具" class="headerlink" title="压测工具"></a>压测工具</h2><p>相关压测工具：<a target="_blank" rel="noopener" href="https://docs.emqx.com/zh/emqx/latest/performance/benchmark-emqtt-bench.html">https://docs.emqx.com/zh/emqx/latest/performance/benchmark-emqtt-bench.html</a></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># centos 7</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">yum</span> <span class="hljs-string">install</span> <span class="hljs-string">libatomic</span><br><span class="hljs-comment"># ubuntu 20.04</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">apt</span> <span class="hljs-string">install</span> <span class="hljs-string">libatomic1</span><br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">mkdir</span> <span class="hljs-string">emqtt-bench</span> <span class="hljs-string">&amp;&amp;</span> <span class="hljs-string">cd</span> <span class="hljs-string">emqtt-bench</span><br><span class="hljs-string">wget</span> <span class="hljs-string">https://github.com/emqx/emqtt-bench/releases/download/0.4.34/emqtt-bench-0.4.34-debian11-amd64.tar.gz</span><br><span class="hljs-string">tar</span> <span class="hljs-string">xfz</span> <span class="hljs-string">emqtt-bench-0.4.34-debian11-amd64.tar.gz</span><br><span class="hljs-string">rm</span> <span class="hljs-string">emqtt-bench-0.4.34-debian11-amd64.tar.gz</span><br><span class="hljs-comment"># 测试</span><br><span class="hljs-string">./bin/emqtt_bench</span><br><span class="hljs-attr">Usage:</span> <span class="hljs-string">emqtt_bench</span> <span class="hljs-string">pub</span> <span class="hljs-string">|</span> <span class="hljs-string">sub</span> <span class="hljs-string">|</span> <span class="hljs-string">conn</span> [<span class="hljs-string">--help</span>]<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="内核调优"><a href="#内核调优" class="headerlink" title="内核调优"></a>内核调优</h2><p><a target="_blank" rel="noopener" href="https://emqtt.io/docs/v2/tune.html">https://emqtt.io/docs/v2/tune.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.emqx.com/zh/emqx/latest/performance/tune.html">https://docs.emqx.com/zh/emqx/latest/performance/tune.html</a></p>
+<h2 id="连接数压测"><a href="#连接数压测" class="headerlink" title="连接数压测"></a>连接数压测</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">./bin/emqtt_bench</span> <span class="hljs-string">conn</span> <span class="hljs-string">-c</span> <span class="hljs-number">60000</span> <span class="hljs-string">-h</span> <span class="hljs-number">48.216</span><span class="hljs-number">.130</span><span class="hljs-number">.61</span> <br></code></pre></td></tr></table></figure>
+
+
+
+<p>压测机出现错误</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740732198105-9a2b186f-ceef-4b4a-af0b-36f529c84bd0.png" srcset="/img/loading.gif" lazyload></p>
+<p>解除系统fd和端口限制</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment">#允许当前会话 / 进程打开文件句柄数:</span><br><span class="hljs-string">ulimit</span> <span class="hljs-string">-n</span> <span class="hljs-number">1048576</span><br><br><span class="hljs-comment"># 可用端口范围:</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">sysctl</span> <span class="hljs-string">-w</span> <span class="hljs-string">net.ipv4.ip_local_port_range=&quot;1025</span> <span class="hljs-number">65534</span><span class="hljs-string">&quot;</span><br><span class="hljs-string"></span><br><span class="hljs-string">ulimit -n 1048576 &amp;&amp; sudo sysctl -w net.ipv4.ip_local_port_range=&quot;</span><span class="hljs-number">1025 </span><span class="hljs-number">65534</span><span class="hljs-string">&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="单节点"><a href="#单节点" class="headerlink" title="单节点"></a>单节点</h3><h4 id="10w-连接数"><a href="#10w-连接数" class="headerlink" title="10w 连接数"></a>10w 连接数</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">./bin/emqtt_bench</span> <span class="hljs-string">conn</span> <span class="hljs-string">-c</span> <span class="hljs-number">60000</span> <span class="hljs-string">-h</span> <span class="hljs-number">48.216</span><span class="hljs-number">.130</span><span class="hljs-number">.61</span> <br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740886232645-b0099885-dd11-4f35-adee-afd8dc43029b.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740886189589-be456a14-7c11-41bd-a787-369ee4f95d6a.png" srcset="/img/loading.gif" lazyload></p>
+<p>10万连接内存使用上升1GB左右，系统整体负载还是比较低的。</p>
+<h4 id="20w-连接数"><a href="#20w-连接数" class="headerlink" title="20w 连接数"></a>20w 连接数</h4><p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740893915812-96bf13c2-1c34-4796-b058-938f18b39970.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740893926963-fab433ba-0ad5-46d5-b6fb-ddd66728d599.png" srcset="/img/loading.gif" lazyload></p>
+<p>受限于压测机网卡+端口数量原因，公司内部机器的网络原因，没能把连接量压上去，得需要开新机器来压才行。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740894701767-9b7794fe-fd48-4acb-89ca-89a0fd48b820.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="双节点"><a href="#双节点" class="headerlink" title="双节点"></a>双节点</h3><h4 id="10w-连接数-1"><a href="#10w-连接数-1" class="headerlink" title="10w 连接数"></a>10w 连接数</h4><p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740985282663-60c08bd4-8293-4948-ae45-b4b753f9a5aa.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740985282443-a700aa98-f787-40f7-949b-5003cc8ad1a7.png" srcset="/img/loading.gif" lazyload></p>
+<p>节点负载</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740985282441-a938e498-5f75-4e8b-8006-88a1131e650e.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="20w-连接数-1"><a href="#20w-连接数-1" class="headerlink" title="20w 连接数"></a>20w 连接数</h4><p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740985282455-a76648ce-8e61-493f-adc4-ace0f1471679.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740985282605-335f3952-b984-4307-b1e0-b1a69d76e492.png" srcset="/img/loading.gif" lazyload></p>
+<p>机器负载</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740985283404-0b3d6ccc-3a79-4b7f-bf78-19374780f7e9.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="吞吐测试"><a href="#吞吐测试" class="headerlink" title="吞吐测试"></a>吞吐测试</h2><h3 id="单节点-1"><a href="#单节点-1" class="headerlink" title="单节点"></a>单节点</h3><h4 id="500订阅-200发布消息-秒"><a href="#500订阅-200发布消息-秒" class="headerlink" title="500订阅+200发布消息/秒"></a>500订阅+200发布消息/秒</h4><p><font style="color:rgb(60, 60, 67);">首先启动服 EMQX，然后在 </font><code>bench1</code><font style="color:rgb(60, 60, 67);"> 启动 500 个订阅客户端：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">./bin/emqtt_bench sub -t t -h 48.216.130.61 -c 500<br></code></pre></td></tr></table></figure>
+
+
+
+<p><font style="color:rgb(60, 60, 67);">然后再 </font><code>bench2</code><font style="color:rgb(60, 60, 67);"> 上启动 20 个发布端，并且每个每秒发布 10 条消息，总200消息/秒：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">./bin/emqtt_bench pub -t t -h 48.216.130.61 -c 20 -I 100<br></code></pre></td></tr></table></figure>
+
+
+
+<p><font style="color:rgb(60, 60, 67);">然后，回到 </font><code>bench1</code><font style="color:rgb(60, 60, 67);">上的订阅客户端，可看到当前接收消息的速率，类似于：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">recv total=4731728 rate=81652.00/sec<br></code></pre></td></tr></table></figure>
+
+
+
+<p>吞吐量</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740892450069-683a1f6b-0ff2-43d7-885d-5275fee8a9a7.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740892526702-016bf4e7-5683-4ab9-aa73-f033a802df12.png" srcset="/img/loading.gif" lazyload></p>
+<p>机器负载</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740892472376-5cae4933-e5ec-44b6-9e93-a0f9212ff7d6.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="5000订阅-4000发布消息-秒"><a href="#5000订阅-4000发布消息-秒" class="headerlink" title="5000订阅+4000发布消息/秒"></a>5000订阅+4000发布消息/秒</h4><p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740892818895-bd39f622-6525-4959-ae6b-e5175980bfbc.png" srcset="/img/loading.gif" lazyload></p>
+<p>机器负载</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740892178372-817d9e6e-42b4-40ad-bfd8-3168fa6f3733.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>在并发量大的时候会占用cpu比较高，会对写入有一定的性能影响，可以提高cpu核心数增加其处理能力。</p>
+</blockquote>
+<h3 id="双节点-1"><a href="#双节点-1" class="headerlink" title="双节点"></a>双节点</h3><h4 id="500订阅-200发布消息-秒-1"><a href="#500订阅-200发布消息-秒-1" class="headerlink" title="500订阅+200发布消息/秒"></a>500订阅+200发布消息/秒</h4><p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740985310209-df0a8c74-817a-4be7-8bb7-87328e1ee7a5.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740985310261-1a6e8efe-cc30-48c2-bfea-fc2b192f303a.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="5000订阅-4000发布消息-秒-1"><a href="#5000订阅-4000发布消息-秒-1" class="headerlink" title="5000订阅+4000发布消息/秒"></a>5000订阅+4000发布消息/秒</h4><p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740985310200-9884fe95-c4ae-4291-a208-5192b5bfee1c.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/2630542/1740985310302-68d84a5c-1316-4547-b73a-d5a2d6a0ccdc.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h1><ol>
+<li>EMQX 文档：<a target="_blank" rel="noopener" href="https://docs.emqx.com/zh/emqx/latest/">https://docs.emqx.com/zh/emqx/latest/</a></li>
+<li>性能参考：<a target="_blank" rel="noopener" href="https://docs.emqx.com/zh/emqx/latest/performance/performance-reference.html">https://docs.emqx.com/zh/emqx/latest/performance/performance-reference.html</a></li>
+</ol>
+
               
             </div>
             <hr/>
